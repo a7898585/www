@@ -1,0 +1,23 @@
+1  添加 post
+   /stat/api/add_book.php
+   参数
+   'name' => 书名  必填
+   'user_id' => 用户id  必填 
+   's_page' => 开始页数 必填
+   'e_page' => 结束页数 必填
+   'id'=> 书本id  添加已有书本阅读记录必填
+
+
+2  列表  get
+   /stat/api/book.php?user_id=&p=&limit=
+   参数
+    'user_id' => 用户id  必填
+    p 页码  limit 限制条数
+
+3  书本阅读记录  get
+   /stat/api/log_book.php?user_id=&sid=&start=&limit=
+   参数
+   sid=> 书本id  必填
+   'user_id' => 用户id  必填 
+   start 查询初始值
+   limit 查询天数
