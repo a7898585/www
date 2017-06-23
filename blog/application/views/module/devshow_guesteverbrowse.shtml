@@ -1,0 +1,11 @@
+
+<h3>浏览过该文章的人还浏览过</h3>
+<ul class="CommLst" id="guesteverbrowse">
+    数据加载中...
+    
+</ul>
+<script language="javascript">
+    $(function(){
+        $('#guesteverbrowse').load("<?php echo $baseurl?>/ajaxselfguesteverbrowse/<?php echo $article['ArticleID']; ?>/<?php echo(strtotime($article['AppearTime'])); ?>");
+    })
+</script>

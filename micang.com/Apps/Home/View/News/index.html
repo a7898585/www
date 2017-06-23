@@ -1,0 +1,139 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <i>域名资讯</i>
+</div>
+<!--面包屑 结束-->
+<!--<a href="#"><img src="/Public/Home/images/4353535.png" class="pic_ad"/></a>-->
+<!--主体内容 开始-->
+<div class="wrap">
+    <div class="wrap_l2" style="margin-top:0;">
+        <!--资讯列表 开始-->
+        <div class="asklist_c">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>域名资讯</span>
+                <a class="more_b" href="{:getDoMain()}news/c7/">more</a>
+            </div>
+            {:W('News/index_list',array('7'))}
+
+        </div>
+        <!--资讯列表 结束-->
+        <!--资讯列表 开始-->
+        <div class="asklist_c ml20">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>海外资讯</span><a class="more_b" href="{:getDoMain()}news/c8/">more</a>
+            </div>
+            {:W('News/index_list',array('8'))}
+
+        </div>
+        <!--资讯列表 结束-->
+        <!--资讯列表 开始-->
+        <div class="asklist_c">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>互联网资讯</span>
+                <a class="more_b" href="{:getDoMain()}news/c9/">more</a>
+            </div>
+            {:W('News/index_list',array('9'))}
+
+        </div>
+        <!--资讯列表 结束-->
+        <!--资讯列表 开始-->
+        <div class="asklist_c ml20">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>域名应用</span><a class="more_b" href="{:getDoMain()}news/c10/">more</a>
+            </div>
+            {:W('News/index_list',array('10'))}
+
+        </div>
+        <!--资讯列表 结束-->
+        <div class="height30 clear"></div>
+        <a href="#"><img src="/Public/Home/images/ewrewrewr.jpg" class="fl" /></a>
+        <!--资讯列表 开始-->
+        <div class="asklist_c">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>域名服务商</span>
+                <a class="more_b" href="{:getDoMain()}news/c12/">more</a>
+            </div>
+            {:W('News/index_list',array('12'))}
+
+        </div>
+        <!--资讯列表 结束-->
+        <!--资讯列表 开始-->
+        <div class="asklist_c ml20">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>法律争议</span><a class="more_b" href="{:getDoMain()}news/c14/">more</a>
+            </div>
+            {:W('News/index_list',array('14'))}
+
+        </div>
+        <!--资讯列表 结束-->
+        <!--资讯列表 开始-->
+        <div class="asklist_c">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>域名时评</span>
+                <a class="more_b" href="{:getDoMain()}news/c15/">more</a>
+            </div>
+            {:W('News/index_list',array('15'))}
+
+        </div>
+        <!--资讯列表 结束-->
+        <!--资讯列表 开始-->
+        <div class="asklist_c ml20">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>观点评论</span> <a class="more_b" href="{:getDoMain()}news/c6/">more</a>
+            </div>
+            {:W('News/index_list',array('6'))}
+
+        </div>
+        <!--资讯列表 结束-->
+    </div>
+    <div class="wrap_r2">
+        <!--新闻列表 开始-->
+        <div class="listbox">
+            <div class="title">
+                <h3 class="titleh3b">优惠资讯</h3>
+                <a href="{:getDoMain()}news/c16/" class="more">more</a>
+            </div>
+            <div class="listfl">
+                {:W('News/tab_list',array('16',array('create_time' => 'DESC'),5))}
+            </div>
+        </div>
+        <!--新闻列表 结束-->
+        <div class="asklist_d">
+            <div class="asklist_titile">
+                <span>人物专访</span>
+                <a href="{:getDoMain()}news/c5/" class="more_c">往期访谈</a>
+            </div>
+            <img src="/Public/Home/images/wrap_jj_11.jpg" />
+            <ul>
+                <li><span>本期嘉宾:嘉宾</span></li>
+                <li>个人爱好:旅游</li>
+                <li>出生地：北京</li>
+                <li>拥有域名：www.abcd.com</li>
+            </ul>
+            <dl>
+                <dt>本期主题：双拼域名qiche.com千万交易</dt>
+                <dd><p>知名域名投资者吴昊花天价将极品双拼域名
+                        “汽车”qiche.com成功购入囊中。</p></dd>
+                <dd><a href="{:getDoMain()}news/" class="more_c">立即阅读>></a></dd>
+            </dl>
+        </div>
+        <div class="tabbox">
+            {:W('News/domain_sale')}
+        </div>  
+        <div class="tabbox">
+            {:W('News/domain_trade')}
+        </div>
+    </div>
+</div>
+<!--主体内容 结束-->

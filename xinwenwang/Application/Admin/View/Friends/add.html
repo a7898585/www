@@ -1,0 +1,69 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/friends/add">添加友情链接</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <form id="form1" name="form1" method="post" action="__SELF__">
+        <input type="hidden" class="am-form-field am-input-sm" name="id" value="{$friendInfo.id}">
+        <div class="am-margin">
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            网站名称
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="title" value="{$friendInfo.title}" placeholder="最长32个字符。" maxlength="32">
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            网站链接
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="url" value="{$friendInfo.url}" placeholder="完整链接，需要以“http://”开头。" maxlength="100">
+                        </div>
+                        <div class="am-u-sm-4">*必填 完整链接，需要以“http://”开头</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            显示顺序
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="order" value="{$friendInfo.order}" placeholder="数值越大，显示越靠后。" maxlength="32">
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            备注
+                        </div>
+                        <div class="am-u-sm-10">
+                            <textarea name="remark" maxlength="140" id="desc" placeholder="备注140字" class="am-form-field">{$info.remark}</textarea>
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">显示状态</div>
+                        <div class="am-u-sm-10">
+                            <div class="am-btn-group" data-am-button>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.status" value="1"> am-active</eq>">
+                                    <input type="radio" name="status" value="1" <eq name="info.status" value="1"> checked="checked"</eq> id="option1"> Yes
+                                </label>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.is_hide" value="0"> am-active</eq>">
+                                    <input type="radio" name="status" value="0" <eq name="info.status" value="0"> checked="checked"</eq> id="option3"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blank20"></div>
+                </div></div>
+            <div class="am-margin">
+                <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+            </div>
+        </div>
+    </form>
+
+</div>

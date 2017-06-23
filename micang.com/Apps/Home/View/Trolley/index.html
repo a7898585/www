@@ -1,0 +1,150 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+  <em>您的位置：</em>
+  <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+  <span>></span>
+  <i>购物车</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap_a">
+  <div class="wrap_a_a">
+    <div class="title_b_icon2"><i class="iconfont">&#xe60e;</i></div>
+    <span>我的购物车</span>
+    <img src="/Public/Home/images/lct_c.jpg" class="fr"/>
+  </div>
+  <div class="airp_listc_left4">
+    <form name="form_trolley" method="post" action="/trolley/confirm">
+      <table width="1090" height="34" cellspacing="1" cellpadding="0" border="0">
+        <tbody>
+        <tr class="table_title">
+          <td>域名</td>
+          <td width="167">域名类型</td>
+          <td width="100">操作类型</td>
+          <td width="200">模版</td>
+          <td width="60">年限</td>
+          <td width="90">费用</td>
+          <td width="60">操作</td>
+        </tr>
+        <volist name="domains" id="item">
+          <tr>
+            <td><span>{$item.domain}</span></td>
+            <td><notempty name="item.idn">中文</notempty>{$item.suffix}&nbsp;域名</td>
+            <td><switch name="item.type">
+              <case value="register">域名注册</case>
+              <case value="renew">域名续费</case>
+            </switch></td>
+            <td>
+              <eq name="item.type" value="register">
+                <select name="domains[{$item.id}][tmpid]" data-name="template" class="select_sty">
+                  <volist name="templates" id="title">
+                    <option value="{$key}" <eq name="item.template" value="$key">selected</eq>>{$title}</option>
+                  </volist>
+                </select>
+              <else/>
+                -
+              </eq>
+            </td>
+            <td>
+              <select name="domains[{$item.id}][age]" data-name="age" class="select_sty" data-id="{$item.id}">
+                <eq name="item.type" value="register">
+                <volist name="item['allow_register_age']" id="reg_age">
+                  <php>$register_year='price_register_year'.$reg_age;</php>
+                  <option value="{$reg_age}" data-price="{$domainPrices[$item['full_suffix']][$register_year]/100}" <eq name="item.age" value="$reg_age">selected</eq>>{$reg_age} 年</option>
+                </volist>
+                </eq>
+                <eq name="item.type" value="renew">
+                  <volist name="item['allow_renew_age']" id="renew_age">
+                    <php>$renew_year='price_renew_year'.$renew_age;</php>
+                    <option value="{$renew_age}" data-price="{$domainPrices[$item['full_suffix']][$renew_year]/100}" <eq name="item.age" value="$renew_age">selected</eq>>{$renew_age} 年</option>
+                  </volist>
+                </eq>
+              </select>
+            </td>
+            <td class="s_price_register" id="item_money{$item.id}">{$item.total_money} 元</td>
+            <td><a class="listent_d" title="删除" href="/trolley/ajax_del_cart?id={$item.id}" data-btn="btn_delete">删除</a></td>
+          </tr>
+        </volist>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <div class="doma_d_c sh_ca">
+    <a class="listent_d fl" href="/trolley/ajax_clear_cart" data-btn="btn_batch_delete">清空购物车</a>
+    <select class="select_sty" data-name="batch-template">
+      <option value="0" selected>域名模板</option>
+      <volist name="templates" id="val">
+        <option value="{$key}">{$val}</option>
+      </volist>
+    </select>
+    <select class="select_sty" data-name="batch_age">
+      <option value="0" selected>年限</option>
+      <option value="1">1 年</option>
+      <option value="2">2 年</option>
+      <option value="3">3 年</option>
+      <option value="4">4 年</option>
+      <option value="5">5 年</option>
+      <option value="6">6 年</option>
+      <option value="7">7 年</option>
+      <option value="8">8 年</option>
+      <option value="9">9 年</option>
+      <option value="10">10 年</option>
+    </select>
+    <div class="txt_price">总计费用：<span id="money_total">{$totalMoney} 元</span></div>
+    <a class="doma_d_btn3" href="javascript:;" id="register_done"></a>
+  </div>
+</div>
+<!--主体内容 结束-->
+
+<script type="text/javascript" src="/Public/Common/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    //单域名年限变更事件
+    $(':input[data-name="age"]').change(function(){
+      var totalMoney = 0;
+      $('#item_money'+$(this).data('id')).text($(this).find('option:selected').data('price')+' 元');
+      $(':input[data-name="age"]').each(function(){
+        totalMoney += $(this).find('option:selected').data('price');
+      });
+      $('#money_total').text(totalMoney+' 元');
+    });
+    //批量设置域名年限
+    $(':input[data-name="batch_age"]').change(function () {
+      var age = $(this).val();
+      if (age == '0')   return false;
+      $(':input[data-name="age"]').each(function(){
+        $(this).val(age);
+      }).change();
+    });
+    //批量设置域名模板
+    $(':input[data-name="batch-template"]').change(function () {
+      var template = $(this).val();
+      if (template == '0')  return false;
+      $(':input[data-name="template"]').each(function () {
+        $(this).val(template);
+      }).change();
+    });
+    //单个删除 和 清空
+    $('a[data-btn="btn_delete"], a[data-btn="btn_batch_delete"]').click(function(e){
+      e.preventDefault();
+      if (confirm('确认执行此操作吗？')){
+        $.getJSON($(this).attr('href'), function (result) {
+          if (result.status == 400) {
+            layer.alert(result.message, function () {
+              window.location = result.url;
+            });
+          } else if (result.status == 200) {
+            window.location.reload();
+          } else {
+            layer.msg(result.message);
+          }
+        });
+      }
+      return false;
+    });
+    $('#register_done').click(function () {
+      $('form[name="form_trolley"]').submit();
+    });
+  });
+</script>

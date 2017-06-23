@@ -1,0 +1,26 @@
+<div class="bar_r">
+    <div class="u_tle"><span class="side_l">我的信息</span></div>
+    <div class="box_info2">
+        <dl class="info">
+            <dt>账号：{$userInfo.email} 
+            <!--<a href="{$base_url}account/add/">修改</a>-->
+            </dt>
+            <dd>可用余额：{$userInfo.money|default=0}元<br/>联系电话：{$userInfo.mobile}<br/>联系人：{$userInfo.contact}<br/>公司：{$userInfo.company}<br/></dd>
+        </dl>
+<!--        <ul class="pic">
+            <empty name="certif.idcard">
+                <li><span><img src="/Public/Agent/images/none.png"></span><p>身份证正面</p></li>
+                <li><span><img src="/Public/Agent/images/none.png"></span><p>身份证背面</p></li>
+                <else /> 
+                <li><span><img src="{$Think.config.YOU_PAI_YUN}{$certif.idcard.thumb_a}"></span><p>身份证正面</p></li>
+                <li><span><img src="{$Think.config.YOU_PAI_YUN}{$certif.idcard.thumb_b}"></span><p>身份证背面</p></li>
+            </empty>
+            <empty name="certif.qualify">
+                <li><span><img src="/Public/Agent/images/none.png"></span><p>营业执照</p></li>
+                <else /> 
+                <li><span><img src="{$Think.config.YOU_PAI_YUN}{$certif.qualify.thumb_a}"></span><p>身份证背面</p></li>
+            </empty>
+
+        </ul>-->
+    </div>
+</div>

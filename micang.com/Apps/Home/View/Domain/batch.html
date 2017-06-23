@@ -1,0 +1,125 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+  <em>您的位置：</em>
+  <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+  <span>></span>
+  <i>买域名</i>
+  <span>></span>
+  <i>批量注册</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap">
+  <!--主体左边 开始-->
+  <div class="wrap_l">
+    <img src="/Public/Home/images/lct.jpg"/>
+    <form name="form_register_batch" method="post" action="/domain/batch?op=add_cart">
+      <div class="doma">
+        <div class="doma_a">域名批量注册</div>
+        <div class="search_b">
+          <textarea class="search_txt_d" name="domains" id="domain" style="height: 300px; width:720px;"></textarea>
+        </div>
+        <div class="doma_d_mym"><input type="submit" name="" value="" class="search_btn_c"/></div>
+      </div>
+    </form>
+    <div class="xspm">
+      <div class="navhl" id="navhljs1">
+        <a href="javascript:void(0);" onclick="jdhddh(this,0)" class="navhl_h">限时竞价</a>
+        <a href="javascript:void(0);" onclick="jdhddh(this,1)" class="navhl_q">一口价</a>
+        <a href="javascript:void(0);" onclick="jdhddh(this,2)" class="navhl_q">询价</a>
+      </div>
+      <div id="navhljs1_c0" class="price_list" style="display:block;">
+        {:W('Sale/sale_list_domain',array('2'))}
+      </div>
+      <div id="navhljs1_c1" class="price_list" style="display:none;">
+        {:W('Sale/sale_list_domain',array('1'))}
+      </div>
+      <div id="navhljs1_c2" class="price_list" style="display:none;">
+        {:W('Sale/sale_list_domain',array('3'))}
+      </div>
+    </div>
+  </div>
+  <!--主体左边 结束-->
+  <!--主体右边 开始-->
+  <div class="wrap_r">
+    <div class="tabbox_b">
+      <!--米铺域名-->
+      {:W('Domain/mipu')}
+    </div>
+    <div class="height30"></div>
+    <div class="tabbox_b">
+      <div class="navhl_b">
+        <div class="navhl_b_title">域名代购</div>
+      </div>
+      <div class="list_c">
+        <ul>
+          <li>
+            <span>域名</span>
+            <input type="text" class="list_ctxt_a" name=""/>
+          </li>
+          <li>
+            <span>预算</span>
+            <input type="text" class="list_ctxt_b" name=""/>
+            <em>元</em>
+          </li>
+          <li>
+            <span>指定</span>
+            <!--js仿表单下拉 开始-->
+            <div class="select_box_1 select_box_a">
+              <div class="select_main_1 select_main_click"><input type="text" readonly="readonly" value="系统指派"/>
+                <div class="select_icon"></div>
+              </div>
+              <ul class="option_1 option_select">
+                <li>系统指派</li>
+                <li>系统指派</li>
+                <li>系统指派</li>
+              </ul>
+              <div class="select_bg_1 select_bg_div"></div>
+            </div>
+            <!--js仿表单下拉 结束-->
+          </li>
+          <li><input type="submit" class="list_ctbtn" value=""/></li>
+        </ul>
+      </div>
+    </div>
+    <div class="height30"></div>
+    <div class="tabbox_b">
+      <!--精品域名-->
+      {:W('Domain/do_list3',array('3'))}
+    </div>
+  </div>
+  <!--主体右边 结束-->
+</div>
+<!--主体内容 结束-->
+<script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+<script type="text/javascript">
+  var domainNameTip = "-友情提示：|- 用换行分隔，每个域名占一行；|- 域名必须带后缀；|- 不符合要求和重复的域名将被过滤；|- 批量域名注册功能，默认注册年限为1年。";
+  $(document).ready(function () {
+    $("#domain").val(domainNameTip.replace(/\|/g, "\r\n")).css("color", "#b5b5b5");
+    $("#domain").focus(function () {
+      var thisval = $(this).val().replace(/[\r\n]/g, "|");
+      if (thisval == domainNameTip) {
+        $(this).val("").css("color", "black");
+      }
+    }).blur(function () {
+      var pre = $(this).val();
+      if (pre == "") {
+        $(this).val(domainNameTip.replace(/\|/g, "\r\n")).css("color", "#b5b5b5");
+      }
+    });
+    $('.option_select li').click(function () {
+      $(this).parent().parent().find('input').val($(this).attr('tid'));
+      $(this).parent().prev().find('input').val($(this).html());
+      $(this).parent().toggle();
+      $(this).parent().next().toggle();
+    });
+    $('form[name="form_register_batch"]').submit(function () {
+      var domains = $('[name="domains"]').val().replace(/[\r\n]/g, "|");
+      if (domains=='' || domains==domainNameTip) {
+        layer.msg('请填写要查询的域名。');
+        return false;
+      }
+      $(this).submit();
+    });
+  });
+</script>

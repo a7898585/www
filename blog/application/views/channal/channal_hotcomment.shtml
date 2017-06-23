@@ -1,0 +1,18 @@
+<?php include $header;?>
+<div id="Content">
+    <div class="AllNav">
+        <!--加内容的地方-->
+        <div class="lmtsz">
+            <div class="lmtsz01">今日热门回复</div>
+        </div>
+        <table cellspacing="1" cellpadding="5" border="0" bgcolor="#cccccc" width="960" class="m_t7">
+            <tbody>
+                <tr>
+                    <td bgcolor="#e4e6e9" align="left" width="520">文章标题</td>
+                    <td bgcolor="#e4e6e9" align="left" width="200">作者</td>
+                    <td bgcolor="#e4e6e9" align="left" width="110">回复数</td>
+                </tr>
+                <?php include $shtml.'runcront_artcomdaysrank.shtml';?>
+            </tbody>
+        </table>
+        <?php include $footer;?>

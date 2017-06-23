@@ -1,0 +1,21 @@
+<div class="x_nav1">
+    	<div class="jq"><h3>剧  情：</h3>
+			{pc:content action="category" catid="32" order="listorder ASC" return="catlist"}
+			  {loop $catlist $r}
+				<a href="{$r[url]}" >{$r[catname]}</a>&nbsp;|
+			  {/loop}
+			{/pc}
+		</div>
+		<div class="nd"><h3>地  区：</h3>
+			 {php $sql = "select linkageid,name from tt_linkage where keyid=3360 order by listorder desc";}
+				{pc:get sql="$sql" cache="3600" }
+				{loop $data $r}
+					<a href="/dm_diqu{$r[linkageid]}">{$r[name]}</a>&nbsp;|
+				{/loop}
+			 {/pc}
+		</div>
+        <div class="jq"><h3>状  态：</h3>
+		<a href="/dm_lianzai">连载</a>&nbsp;|&nbsp;
+		<a href="/dm_wanjie">完结</a>
+	</div>
+ </div>

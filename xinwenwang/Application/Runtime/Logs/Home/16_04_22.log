@@ -1,0 +1,245 @@
+[ 2016-04-22T15:14:25+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001597s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.014699s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.014823s ]
+NOTIC: [2] htmlentities() expects parameter 1 to be string, array given D:\258\xinwenwang\Application\Home\Controller\HomeCommonController.class.php 第 23 行.
+NOTIC: [2] htmlentities() expects parameter 1 to be string, array given D:\258\xinwenwang\Application\Home\Controller\HomeCommonController.class.php 第 24 行.
+SQL: SHOW COLUMNS FROM `xw_news` [ RunTime:0.0239s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `xw_news` WHERE `type_id` IN ('1800','1801','1802','1803','1804','1805','1806','1807','1808','1809','1810','1811','1812','1813','1814','1815','1816','1817','1818','1819','1820','1821','1823','1824','1825','1826','1827','1829','1830','1831','1833') LIMIT 1   [ RunTime:1.1730s ]
+SQL: SELECT `id`,`title`,`intro`,`img_list`,`show_type`,`is_hot`,`is_new`,`is_tuijian`,`comment_sum`,`source_name`,`source_url`,`update_time`,`good_sum`,`bad_sum`,`collect_sum` FROM `xw_news` WHERE `type_id` IN ('1800','1801','1802','1803','1804','1805','1806','1807','1808','1809','1810','1811','1812','1813','1814','1815','1816','1817','1818','1819','1820','1821','1823','1824','1825','1826','1827','1829','1830','1831','1833') ORDER BY update_time desc LIMIT 0,50   [ RunTime:0.0706s ]
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000201s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000328s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 90 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000069s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.028440s ]
+NOTIC: [8] Undefined index: keyword D:\258\xinwenwang\Application\Runtime\Cache\Home\ee791d6d6d17b353106b64bf61807316.php 第 32 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012870s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013042s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000362s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000445s ]
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 111 行.
+NOTIC: [8] Use of undefined constant item - assumed 'item' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+NOTIC: [8] Use of undefined constant is_tuijian - assumed 'is_tuijian' D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 112 行.
+SQL: SHOW COLUMNS FROM `xw_news` [ RunTime:0.0122s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `xw_news` WHERE ( show_type=2 or show_type=3 ) AND `update_time` > 1460704465 LIMIT 1   [ RunTime:0.1278s ]
+SQL: SELECT `id`,`title`,`intro`,`img_list`,`show_type`,`is_hot`,`is_new`,`is_tuijian`,`comment_sum`,`source_name`,`source_url`,`update_time`,`good_sum`,`bad_sum`,`collect_sum` FROM `xw_news` WHERE ( show_type=2 or show_type=3 ) AND `update_time` > 1460704465 ORDER BY good_sum desc,update_time desc LIMIT 0,8   [ RunTime:0.2499s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.441343s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004370s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.401305s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000024s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.405335s ]
+NOTIC: [8] Undefined variable: type_id D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 199 行.
+SQL: SHOW COLUMNS FROM `xw_news_comment` [ RunTime:0.0124s ]
+SQL: SELECT COUNT(*) AS tp_count FROM xw_news_comment xwnc LEFT JOIN xw_news xwn ON xwnc.news_id = xwn.id  LIMIT 1   [ RunTime:0.0138s ]
+SQL: SELECT xwnc.id,xwnc.uid,xwnc.news_id,xwu.username,xwu.head_pic,xwnc.content,xwnc.goods,xwn.title,xwnc.add_time as update_time,xwnc.ip FROM xw_news_comment xwnc LEFT JOIN xw_users xwu ON xwu.id=xwnc.uid LEFT JOIN xw_news xwn ON xwnc.news_id = xwn.id  ORDER BY xwnc.add_time desc LIMIT 0,5   [ RunTime:0.0070s ]
+NOTIC: [8] Undefined index: img_list D:\258\xinwenwang\Application\Home\Model\NewsModel.class.php 第 318 行.
+NOTIC: [8] Undefined index: img_list D:\258\xinwenwang\Application\Home\Model\NewsModel.class.php 第 318 行.
+NOTIC: [8] Undefined index: img_list D:\258\xinwenwang\Application\Home\Model\NewsModel.class.php 第 318 行.
+NOTIC: [8] Undefined index: img_list D:\258\xinwenwang\Application\Home\Model\NewsModel.class.php 第 318 行.
+NOTIC: [8] Undefined index: img_list D:\258\xinwenwang\Application\Home\Model\NewsModel.class.php 第 318 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000062s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.482448s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.252438s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.442256s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000027s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.694378s ]
+NOTIC: [8] Undefined index: username D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 219 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0064s ]
+NOTIC: [8] Undefined variable: where D:\258\xinwenwang\Application\Common\Model\FriendLinksModel.class.php 第 20 行.
+SQL: SELECT * FROM `xw_friend_links` ORDER BY `order` ASC  [ RunTime:0.0115s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000057s ]
+INFO: [ template_filter ] --END-- [ RunTime:-0.755750s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003440s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.716194s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000040s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.719412s ]
+NOTIC: [8] Undefined variable: user_email D:\258\xinwenwang\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 527 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.003916s ]
+INFO: [ view_parse ] --END-- [ RunTime:-0.716194s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000020s ]
+INFO: [ view_filter ] --END-- [ RunTime:-0.719884s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000700s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000783s ]
+

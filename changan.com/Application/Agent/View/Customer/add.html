@@ -1,0 +1,170 @@
+<link rel="stylesheet" href="/Public/Home/css/validform.css" type="text/css" media="all" />
+<style type="text/css">
+    .autocomplete-wrapper { margin: 44px auto 44px; max-width: 600px; }
+    .autocomplete-wrapper label { display: block; margin-bottom: .75em; color: #3f4e5e; font-size: 1.25em; }
+    .autocomplete-wrapper .text-field { padding: 0 15px; width: 100%; height: 40px; border: 1px solid #CBD3DD; font-size: 1.125em; }
+    .autocomplete-wrapper ::-webkit-input-placeholder { color: #CBD3DD; font-style: italic; font-size: 18px; }
+    .autocomplete-wrapper :-moz-placeholder { color: #CBD3DD; font-style: italic; font-size: 18px; }
+    .autocomplete-wrapper ::-moz-placeholder { color: #CBD3DD; font-style: italic; font-size: 18px; }
+    .autocomplete-wrapper :-ms-input-placeholder { color: #CBD3DD; font-style: italic; font-size: 18px; }
+    .autocomplete-suggestions { overflow: auto; border: 1px solid #CBD3DD; background: #FFF; }
+    .autocomplete-suggestion { overflow: hidden; padding: 5px 15px; white-space: nowrap; }
+    .autocomplete-selected { background: #F0F0F0; }
+    .autocomplete-suggestions strong { color: #029cca; font-weight: normal; }
+</style>
+<div class="bar_r">
+    <div class="u_tle"><span class="side_l">添加客户</span></div>
+    <div class="box_info2">
+        <form action="{$base_url}account/save" method="post" enctype="multipart/form-data" id='form_info'>
+            <dl class="info">
+                <dt><span class="f_fl"></dt>
+                    <dd>
+                        <p><span class="f_fl">帐号：</span>
+                            <input type="text"  class="inpt_txt" AUTOCOMPLETE="off" value="" name="mail" datatype="e" ajaxurl="/api/check_email" sucmsg="用户名验证通过！" nullmsg="请输入用户名！" errormsg="请用邮箱注册！"  />
+
+                        </p>
+                        <p style="margin-left: 70px;"><span class="Validform_checktip">用户名为邮箱</span></p>
+                        <p><span class="f_fl">密码：</span>
+                            <input type="password" class="inpt_txt" AUTOCOMPLETE="off" value="" name="userpassword" datatype="*6-15" errormsg="密码范围在6~15位之间！" />
+
+                        </p>
+                        <p style="margin-left: 70px;"><span class="Validform_checktip">密码范围在6~15位之间！</span></p>
+                        <p><span class="f_fl">确认密码：</span>
+                            <input type="password" class="inpt_txt" AUTOCOMPLETE="off" value="" name="userpassword2" datatype="*" recheck="userpassword" errormsg="您两次输入的账号密码不一致！" />
+                        </p>
+                        <p style="margin-left: 70px;"><span class="Validform_checktip">密码范围在6~15位之间！</span>    </p>
+                        <p><span class="f_fl">姓名：</span>
+                            <input type="text" class="inpt_txt" AUTOCOMPLETE="off" value="" name="name" datatype="*2-8" sucmsg="姓名验证通过！" nullmsg="请输入姓名！" errormsg="请用输入姓名！"  />
+
+                        </p>
+                        <p style="margin-left: 70px;"><span class="Validform_checktip">请用输入姓名</span>      </p>
+                        <p><span class="f_fl">手机号码：</span>
+                            <input type="text" class="inpt_txt" AUTOCOMPLETE="off" value="" name="phone" datatype="m" sucmsg="手机号码验证通过！" nullmsg="请输入手机号码！" errormsg="请用输入手机号码！"  />
+                        </p>
+                        <p style="margin-left: 70px;"><span class="Validform_checktip">请用输入手机号码</span>      </p>
+                        <p><span class="f_fl">所属公司：</span>
+                            <input type="text" class="inpt_txt"  AUTOCOMPLETE="off" value=""  id="autocomplete-ajax" name="company" datatype="*" sucmsg="公司验证通过！" nullmsg="请输入所属公司！" errormsg="请用输入所属公司！"  />
+                            <input type="hidden" name="company_id" id="company_id" />
+
+                        </p>
+                        <p style="margin-left: 70px;"><span class="Validform_checktip">请用输入所属公司</span>      </p>
+                        <p><span>所在地区：</span>
+                            <select id="province" class="inpt_txt" onchange="changeProince()" name="province" errormsg="请选择所在省份！" nullmsg="请选择所在省份！" datatype="*"  class="">
+                                <option value="">请选择</option>
+                            </select>
+                            <select id="city"  class="inpt_txt" onchange="changeCity()" name="city" errormsg="请选择所在城市！" nullmsg="请选择所在城市！" datatype="*"  class="">
+                                <option value="">请选择</option>
+                            </select>
+                            <select id="stree" class="inpt_txt" name="stree" errormsg="请选择所在地区！" nullmsg="请选择所在地区！" datatype="*" class="Validform_error">
+                                <option  value="">请选择</option>
+                            </select>
+                        </p>
+                        <p style="margin-left: 70px;"><span class="Validform_checktip">请选择所在地区</span>      </p>
+                        <p class="t_align_c po2"><a class="btn" href="javascript:;" id="register_daili">保存</a><a class="btn btn2" href="{$base_url}account">返回</a></p>
+                    </dd>
+            </dl>
+        </form>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/Public/Home/js/validform.js"></script>
+<script type="text/javascript" src="/Public/Home/js/jquery.autocomplete.min.js"></script>
+
+<script type="text/javascript">
+    var userform = null;
+    var dailiform = null;
+    $(document).ready(function(){
+        // Initialize ajax autocomplete:
+        $('#autocomplete-ajax').autocomplete({
+            serviceUrl: '/api/company',
+            //            lookup: countriesArray,
+            lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+                var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+                return re.test(suggestion.value);
+            },
+            onSelect: function(suggestion) {
+                $('#company_id').val(suggestion.data)
+            },
+            onHint: function (hint) {
+                $('#autocomplete-ajax-x').val(hint);
+            },
+            onInvalidateSelection: function() {
+                $('#selction-ajax').html('You selected: none');
+            }
+        });
+        province();
+        $('.hd span').click(function(){
+            $('.hd span').removeClass('z_in');
+            $(this).addClass('z_in');
+            $('.bd_con').hide();
+            $('.bd_con').eq($(this).index()).show();
+
+        });
+        //                userform = $(".userform").Validform({tiptype:2});
+        dailiform = $("#form_info").Validform({
+            btnSubmit:"#register_daili",
+            ajaxPost:true,
+            tiptype:4,
+            beforeSubmit:function(curform){
+                layer.load('注册中...');
+            },
+            callback:function(data){
+                if(data.code==200){
+                    layer.msg(data.msg,1,1,function(){
+                        window.location.href='/customer';
+                    });
+                }else{
+                    layer.msg(data.msg,1,3);
+                }
+            }
+        });
+
+
+    });
+    
+    function province(){
+        $.ajax({
+            type: "post",
+            url: "/api/province",
+            dataType:"json",
+            success: function(data){
+                $.each(data,function(i,t){
+                    $('#province').append('<option value="'+i+'">'+t+'</option>');
+                });
+            }
+        });
+    }
+    function changeProince(){
+        $('#city').empty().append('<option value="">请选择</option>');
+        $('#stree').empty().append('<option value="">请选择</option>');
+        var id = $('#province').val();
+        $.ajax({
+            type: "post",
+            url: "/api/area?level=2&id="+id,
+            dataType:"json",
+            success: function(data){
+                $.each(data,function(i,t){
+                    $('#city').append('<option value="'+i+'">'+t+'</option>');
+                });
+            }
+        });
+    }
+    function changeCity(){
+        $('#stree').empty().append('<option value="">请选择</option>');
+        var id = $('#city').val();
+        $.ajax({
+            type: "post",
+            url: "/api/area?level=2&id="+id,
+            dataType:"json",
+            success: function(data){
+                $.each(data,function(i,t){
+                    $('#stree').append('<option value="'+i+'">'+t+'</option>');
+                });
+            }
+        });
+    }
+
+
+</script>
+

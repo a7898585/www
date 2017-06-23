@@ -1,0 +1,108 @@
+
+    <div class="RgtCont Bdreb R W760 Mt15">
+        <h3>管理博客（最多不能超过<?php echo memberbloglimit;?>个）</h3>
+        <?php if($bloglist['RetRecords'] < 1){?><h3><a href="<?php echo $baseurl;?>/register/Register">创建博客</a></h3><?php }?>
+        <div class="BgCont">
+		<?php
+		if($bloglist['RetRecords'] > 1)
+		{
+		?>        
+          <table class="CtMageLst" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th class="BlogNm">博客名称</th>
+                <th class="PostArti">发表文章</th>
+                <th class="UpdateSet">更改设置</th>
+                <th class="ArtiSum">文章</th>
+                <th class="Status">状态</th>
+              </tr>
+			<?php
+			foreach($bloglist['Record'] as $key => $bloginfo)
+			{
+			?>              
+              <tr>
+				<?php 
+				if($bloginfo['Status']==0)
+				{
+				?>              
+                <td class="BlogNm"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>"><?php echo $bloginfo['BlogName'];?></a></td>
+                <td><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/Add"><img src="http://hs.cnfol.com/uj/Imgs/Jqita/PostIco.png"></a></td>
+                <td><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/config/Edit"><img src="http://hs.cnfol.com/uj/Imgs/Jqita/SetIco.png"></a></td>
+				<?php
+				}
+				else
+				{
+				?>           
+	                <td class="BlogNm"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>"><?php echo $bloginfo['BlogName'];?></a></td>
+	                <td><a href="javascript:;"><img src="http://hs.cnfol.com/uj/Imgs/Jqita/PostIco.png"></a></td>
+	                <td><a href="javascript:;"><img src="http://hs.cnfol.com/uj/Imgs/Jqita/SetIco.png"></a></td>
+	           				     
+ 	           <?php } ?>     
+	                <td><?php echo (isset($blogstat['TotalArticle'])? $blogstat['TotalArticle']:'0');?></td>
+	                <td><?php echo ($bloglist['Record']['Status']==0? '正常使用':'已关闭！');?></td>              
+	           </tr>
+		  <?php
+			}
+			?>  	           
+          </table>
+        
+		<?php 
+			} 
+		else if($bloglist['RetRecords'] == 1)
+		{		
+		?>
+          <table class="CtMageLst" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th class="BlogNm">博客名称</th>
+                <th class="PostArti">发表文章</th>
+                <th class="UpdateSet">更改设置</th>
+                <th class="ArtiSum">文章</th>
+                <th class="Status">状态</th>
+              </tr>
+			<?php
+			?>              
+              <tr>
+			<?php 
+				if($bloglist['Record']['Status']==0)
+				{
+				?>              
+	                <td class="BlogNm"><a href="<?php echo $baseurl.'/'.$bloglist['Record']['DomainName'];?>"><?php echo $bloglist['Record']['BlogName'];?></a></td>
+	                <td><a href="<?php echo $baseurl.'/'.$bloglist['Record']['DomainName'];?>/article/Add"><img src="http://hs.cnfol.com/uj/Imgs/Jqita/PostIco.png"></a></td>
+	                <td><a href="<?php echo $baseurl.'/'.$bloglist['Record']['DomainName'];?>/config/Edit"><img src="http://hs.cnfol.com/uj/Imgs/Jqita/SetIco.png"></a></td>
+	          <?php } else {?>	                
+	                <td class="BlogNm"><a href="<?php echo $baseurl.'/'.$bloglist['Record']['DomainName'];?>"><?php echo $bloglist['Record']['BlogName'];?></a></td>
+	                <td><a href="javascript:;"><img src="http://hs.cnfol.com/uj/Imgs/Jqita/PostIco.png"></a></td>
+	                <td><a href="javascript:;"><img src="http://hs.cnfol.com/uj/Imgs/Jqita/SetIco.png"></a></td>
+	           
+	           <?php } ?>     
+	                <td><?php echo (isset($blogstat['TotalArticle'])? $blogstat['TotalArticle']:'0');?></td>
+	                <td><?php echo ($bloglist['Record']['Status']==0? '正常使用':'已关闭！');?></td>
+
+              </tr>
+          </table>
+		
+		<?php
+			}
+		else
+		{?>		
+        <table class="CtMageLst" border="0" cellspacing="0" cellpadding="0">
+            <tr>		
+				<td class="sort" style="text-align:center">
+			
+				您还没有博客，是否 <a class="create_a" href="<?php echo $baseurl.'/register/Register';?>">创建博客</a>
+			
+				</td>	
+			</tr>
+		</table>	
+		<?php
+			}
+		?>		
+          <p class="SpreadAd">亲爱的博主，想让更多人看到您的博客吗？请看如何推广您的博客？<a href="http://tuiguang.cnfol.com/">我要推广</a></p>
+        </div>  
+        <div class="Proposal"> 
+            <h4><a class="PostVedio" href="http://zb.video.cnfol.com/" target="_blank">&gt;&gt; 发起视频</a>（点击发起视频即可创建视频直播室与投资者交流）</h4>           
+            <p class="ProName">尊敬的博主：</p>
+            <p>		  　　为维护良好的沟通环境，营造平等、自由的探讨园地，打造财经行业互动交流的平台，本网站将再次对涉及以下方面的内容进行清理，各博客的内容（包括博客名、副标题、公告、文章分类、文章、评论、友情链接等所有在博客中展示的内容）中，凡涉及到煽动社会不满的各类博客文章和评论，具有代客理财、推荐黑马、提供内幕等为个人谋取利益的行为，发布各类非法证券期货活动、广告，以及其他违法内容等，请您自行对该类型信息进行清理删除，否则我们将删除涉及以上内容的所有博客或文章。请广大博主积极配合，衷心感谢！<br/><br/>
+　　给中金在线博客一片绿地，让我们共同营造思想交流的家园！<br/><br/>　　通知：天信投资联合中金在线推出<a href="http://vip.g.cnfol.com" target="_blank">VIP圈子</a>，便于您与博客用户做更深入的交流，如果您有一定用户基础，想把知识转化为财富，请及时<a href="http://vip.g.cnfol.com/createvip.html" target="_blank">申请创建VIP圈子</a>，用户加入您的圈子只需支付最高不超过300元/月的平台使用费。<br/><br/>　　<a href="http://vip.g.cnfol.com/createvip.html" target="_blank">马上申请VIP圈子》》</a><br/>　　咨询电话：0591-87986180</p>
+                
+        </div>
+    </div>

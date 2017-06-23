@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>添加博客直播主题</title>
+        <style type="text/css">
+            #wrapper{ margin:auto; width:438px;}
+            #meaagewindow{ height:250px; border:1px solid; padding:4px; overflow:auto;}
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <fieldset>
+                <legend>创建直播主题</legend>
+                <form method="post" id="addsubform" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/online/Action">
+                    内容：<input type="text" size="40" id="subject" name="subject" value="<?php echo (isset($subject['Record']['0'])? $subject['Record']['0']['Subject']:'');?>"><br />
+                    <input type="hidden" name="domain" id="domain" value="<?php echo $bloginfo['DomainName'];?>" />
+                    <input type="hidden" name="memid" id="memid" value="<?php echo $bloginfo['MemberID'];?>" />
+                    <input type="hidden" name="act" id="act" value="addsubject" />
+                    <input type="hidden" name="subjectid" id="subjectid" value="<?php echo (isset($subject['Record']['0'])? $subject['Record']['0']['OnlineID']:'0');?>" />
+                    <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>" />
+                    <input type="submit" value="<?php echo (isset($subject['Record']['0'])? '修 改':'创 建');?>" />
+                </form>
+            </fieldset>
+        </div>
+    </body>
+</html>

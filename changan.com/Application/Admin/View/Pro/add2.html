@@ -1,0 +1,140 @@
+<script type="text/javascript" src="/Public/Common/js/jquery.uploadify.js"></script>
+<script type="text/javascript" src="{$home_url}/Public/Admin/js/kindeditor/kindeditor-all-min.js"></script>
+<link type="text/css" rel="stylesheet" href="{$home_url}/Public/Admin/js/kindeditor/themes/default/default.css"/>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[editor="true"]', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            allowImageUpload : false,
+            wyswygMode:true,
+            items:['source', '|', 'fullscreen', 'undo', 'redo', 'print', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|', 'selectall', '-',
+                'title', 'fontname', 'fontsize', '|', 'bold',
+                'italic', 'underline', 'strikethrough', 'removeformat', '|', 'image', 'advtable', 'hr', 'emoticons', 'link', 'unlink', '|', 'about']
+        });
+    });
+</script>
+<script type="text/javascript">
+    function addProjects(t){
+        var count = $('#projects tr').length;
+        if(count==7){
+            return alert('超出限制,最多支持7个!');
+        }
+        var str = '<li><label>保障项目<input type="text" value="" name="projects_name[]"></label><label>保障额度<input type="text" value="" name="projects_money[]"></label><label>说明<input class="k_200" type="text" value="" name="projects_desc[]"></label></li>';
+        $('#projects').append(str);
+
+    }
+</script>
+<div class="bar_r">
+    <form name="pro_from" method="post" action="__SELF__">
+        <div class="u_tle"><span class="side_l">产品管理</span><a  class="side_r" href="/pro/index">返回</a></div>
+    <div class="box_form">
+        <ul class="form">
+            <li><span>名称：</span><input type="text" value="{$info.title}" name="title" maxlength="25" /></li>
+            <li>
+                <span>公司：</span>
+                <select name="company_id">
+                    <option value="0">请选择</option>
+                    <foreach name="companys" item="item">
+                        <option value="{$item.id}" <eq name="info.company_id" value="$item.id"> selected</eq>>{$item.pinyin_f}{$item.short_name}</option>
+                    </foreach>
+                </select>
+            </li>
+            <li>
+                <span>类别：</span>
+                <select name="pro_type_id">
+                    <foreach name="types" item="item">
+                        <option value="{$item.id}" <eq name="info.type_id" value="$item.id"> selected</eq> >{$item.name}</option>
+                        <if condition="count($item.subs)">
+                            <foreach name="item.subs" item="temp">
+                                <option value="{$temp.id}">--{$temp.name}</option>
+                            </foreach>
+                        </if>
+                    </foreach>
+                </select>
+            </li>
+
+            <li>
+                <span>投保年龄：</span>
+                <input type="text" value="{$info.insure_years}" name="insure_years" placeholder="1-100岁" maxlength="20" />
+            </li>
+            <li>
+                <span>投保对象：</span>
+                <select name="insure_object">
+                    <option value="1" <eq name="info.insure_object" value="1">selected</eq> >幼儿</option>
+                    <option value="2" <eq name="info.insure_object" value="1">selected</eq>>青年</option>
+                    <option value="3" <eq name="info.insure_object" value="1">selected</eq>>中年</option>
+                    <option value="4" <eq name="info.insure_object" value="1">selected</eq>>老年</option>
+                    <option value="5" <eq name="info.insure_object" value="1">selected</eq>>团队</option>
+                </select>
+            </li>
+        </ul>
+        <div class="f_line"></div>
+        <div class="form2">
+            <ul class="form_con" id="projects">
+                <if condition="count($info.projects) gt 0">
+                    <foreach name="info.projects" item="item2">
+                        <li><label>保障项目<input type="text" value="{$item2.name}" name="projects_name[]"></label><label>保障额度<input type="text" value="{$item2.money}" name="projects_money[]"></label><label>说明<input class="k_200" type="text" value="{$item2.desc}" name="projects_desc[]"></label></li>
+                    </foreach>
+                <else />
+                    <li><label>保障项目<input type="text" value="{$item2.name}" name=projects_name[]"></label><label>保障额度<input type="text" value="{$item2.money}" name="projects_money[]"></label><label>说明<input class="k_200" type="text" value="{$item2.desc}" name="projects_desc[]"></label></li>
+                </if>
+            </ul>
+            <a class="btn_add" onclick="addProjects(this)">继续添加</a>
+        </div>
+        <div class="f_line"></div>
+        <div class="form3">
+            <ul class="form_con">
+                <li>
+                    <span><i>*</i>年缴保费：</span>
+                    <label><input type="text" name="price" value="{$info.price}" maxlength="10" />
+                </li>
+                <li>
+                    <span><i>*</i>保障金额：</span>
+                    <label>
+                        <input type="text" name="coverage" value="{$info.coverage}" maxlength="10" />
+                    </label>
+                </li>
+                <li>
+                    <span><i>*</i>保障期限：</span>
+                    <input type="text" name="insure_times" value="{$info.insure_times}" maxlength="20" />
+                </li>
+                <li>
+                    <span><i>*</i>缴费方式：</span>
+                    <input type="text" name="pay_type" value="{$info.pay_type}" maxlength="50" />
+                </li>
+                <li>
+                    <span><i>*</i>保障介绍：</span>
+                    <label><textarea editor="true" name="information">{$info.information}</textarea></label>
+                </li>
+                <li>
+                    <span><i>*</i>产品特色：</span>
+                    <label><textarea editor="true" name="feature">{$info.feature}</textarea></label>
+                </li>
+                <li>
+                    <span><i>*</i>最热：</span>
+                    <input style="width: 30px;" type="checkbox" name="is_hot" value="1"<eq name="info.is_hot" value="1"> checked</eq>/>
+                </li>
+                <li>
+                    <span>状态：</span>
+                    <select name="pro_type_id">
+                        <option value="0" <eq name="info.status" value="0"> selected</eq> >下架</option>
+                        <option value="1" <eq name="info.status" value="1"> selected</eq> >正常</option>
+                        <option value="3" <eq name="info.status" value="3"> selected</eq> >待审核</option>
+                        <option value="4" <eq name="info.status" value="4"> selected</eq> >审核失败</option>
+                    </select>
+                </li>
+                <li>
+                    <span><i>*</i>排序：</span>
+                    <input type="text" name="order_id" value="{$info.order_id}" maxlength="6" />
+                </li>
+            </ul>
+        </div>
+        <div class="f_line"></div>
+        <div class="t_align_c"><input type="submit" value="保 存" /></div>
+    </div>
+    </form>
+</div>

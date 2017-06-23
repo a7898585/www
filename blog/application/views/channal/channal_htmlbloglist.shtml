@@ -1,0 +1,7 @@
+<?php include $header;?>
+<div id="Content">
+
+    <div class="AllNav">
+        <!--加内容的地方-->
+        <?php include $shtml.'runcront_recommendbloglist.shtml';?>
+        <?php include $footer;?>

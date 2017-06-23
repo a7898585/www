@@ -1,0 +1,29 @@
+<div class="RgtBar" id="Mod_ArtList" rel="drag">
+
+    <div class="MaLBx articleListAll" id="getarticlelist">
+        <?php if(isset($dragable) && $dragable==1): ?>
+        <a style="cursor:move;" href="###" id="Mod_ArtList_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="NBDp4"></a><div class="NBDbx"><a class="NBDp1" href="###" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_ArtList_td3"></a><a class="NBDp2" href="###" onclick="clkmenu(this.id,2);return false;" style="DISPLAY: none" title="展开" id="Mod_ArtList_td4"></a><a class="NBDp3" href="###" onclick="removemod(this.id);setmod_input();return false;" title="删除" id="Mod_ArtList_td2"></a></div>
+        <?php endif; ?>
+        <div class="modbox1" id="newArticleListAll"></div>
+    </div>
+</div>
+<?php if(isset($dragable) && $dragable==1){ ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(function(){
+            $('#getarticlelist').load("<?php echo config_item('base_url').'/index.php/myblog/articleListConfig/'.$bloginfo['DomainName'].'?page='.($_GET['page']>1?$_GET['page']:1);?>&currentid=<?php echo($bloginfo['UserID']); ?>&r="+new Date().getTime());
+        }) 
+        $('#scrolltopflag').val("1");
+    });
+</script>
+
+<?php }else{ ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(function(){
+            $('#getarticlelist').load("<?php echo config_item('base_url').'/index.php/myblog/articleList/'.$bloginfo['DomainName'].'?page='.($_GET['page']>1?$_GET['page']:1);?>&currentid=<?php echo($bloginfo['UserID']); ?>&r="+new Date().getTime());
+        }) 
+    });
+    $('#scrolltopflag').val('2');
+</script>
+<?php } ?>

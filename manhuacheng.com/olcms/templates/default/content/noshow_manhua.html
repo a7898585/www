@@ -1,0 +1,63 @@
+{php $w="id=$manhuaid"}
+{pc:content action="lists" catid="13" where="$w" num="1"}
+	{loop $data $r1}
+		{php $mh_title = $r1[title];}
+	{/loop}
+{/pc}
+
+{php $SEO['title']=$mh_title.$title."漫画_".$mh_title."漫画".$title."_".$mh_title."漫画-漫画城";}
+{php $SEO['keyword']=$mh_title.$title."，".$title."漫画";}
+{php $SEO['description']="漫画城提供".$mh_title.$title."、".$mh_title."漫画".$title."第一时间更新，同时也提供".$mh_title.$title."、".$mh_title."漫画的情报、图透等信息，漫画城是一个综合的".$mh_title."在线漫画阅读网站。";}
+{template "content","header"}
+<style type="text/css" >
+.photo_prev a{cursor:url({IMG_PATH}beta/prev.cur), auto;}
+.photo_next a{cursor:url({IMG_PATH}beta/next.cur), auto;}
+</style>
+<div class="left c666" style="padding-top:5px;">您现在的位置：&nbsp;<a class="LinkPath" href="{siteurl()}">首页</a>&nbsp;&gt;&nbsp;<a class="LinkPath" href="/manhua">在线漫画</a>
+		&gt;&nbsp;<a class="LinkPath" href="/manhua{$manhuaid}">{$mh_title}</a>
+		&gt;&nbsp;{$title}
+    <div class="center" id='Article'>
+		<h1>{$mh_title}{$title}</h1>
+		<script type="text/javascript">
+/*漫画城文字广告940*150，创建于2013-5-30*/
+var cpro_id = "u1294693";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+		<div class="vie_ins">很抱歉，“{$mh_title}”目前暂不开放在线观看， 请下载<a href="/api.php?op=download">漫画城</a>软件观看该漫画 。 </div>
+	</div>    
+	
+	</div>
+    <div class="middle_div1">
+    	<div class="middle_div1_le" style="border:none;">
+             <div class="clear1"></div>
+		  </div>
+        </div>
+        <div class="middle_div1_ri">
+        	<div class="tu">{template "content","250ad"}</div>
+            <div class="xh_man">
+					<div class="rs_dm_tit">
+						<h3>您可能会喜欢的漫画</h3>
+					</div>
+
+                <div class="xh_man_txt">
+                	<ul>
+					{php $where = "typeid='$manhua_typeid' AND status='99' AND id != $manhuaid"}
+					{pc:content action="table_list" table="Cartoon" fields="id,catid,title,thumb"  where="$where" order="views DESC" num="6" cache="3600" }
+						{loop $data $r}
+                    	<li>
+                        	<a target="_blank" title="{$r[title]}" href="/manhua{$r[id]}"><img width=80 height=115 src="{thumb($r[thumb], 80, 115, 0)}"></a>
+                            <a target="_blank" title="{$r[title]}" href="/manhua{$r[id]}">{str_cut($r[title],20,'')}</a>
+                        </li>
+							{/loop}
+							{/pc}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div id="load_pic" style="display:none;" rel="{IMG_PATH}msg_img/loading_d.gif">
+</div>
+<script type="text/javascript" src="{JS_PATH}show_picture.js"></script>
+<script type="text/javascript" src="{APP_PATH}api.php?op=count&id={$id}&modelid={$modelid}&type={$parameters}"></script>
+{template "content","footer"}

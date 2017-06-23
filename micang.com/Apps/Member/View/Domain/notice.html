@@ -1,0 +1,40 @@
+<div class="onlineplay">
+  <div id="navhljs1" class="navhl"> 
+  <a class="navhl_h" href="javascript:void(0);">我关注的域名</a>
+  </div>
+  <div style="display:block;" class="onlineplay_c2" id="navhljs1_c0">
+    <div class="airp_listc_left4">
+      <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+        <tbody>
+          <tr class="table_title">
+            <td width="120">域名</td>
+            <td width="150">域名简介</td>
+            <td width="180">结束时间</td>
+            <td width="170">交易类型</td>
+            <td>查看</td>
+          </tr>
+          <empty name="domains">
+          <tr>
+        <td class="table_bg_b" colspan="5">您还没有关注的域名</td>
+      </tr>
+          <else />
+          <volist name="domains" id="item">
+          <tr class="table_bg_b">
+        	<td>{$item.domain}</td>
+        	<td>{$item.summary|default="暂无"}</td>
+        	<td>{$item.end_time|date='Y-m-d H:i:s',###}</td>
+        	<td><eq name="item.type" value="1">一口价</eq></span><eq name="item.type" value="2">拍卖</eq></span><eq name="item.type" value="3">询价交易</eq></td>
+            <td><a href="{:str_replace('member','www',getDoMain())}Sell/detail?id={$item.id}" target="_blank">[ 查看 ]</a>
+            	<a href="javascript:DelNotice('{$item.id}');">[ 取消关注 ]</a>
+            </td>
+          </tr>
+          </volist>
+          </empty>
+          <tr>
+      		<td colspan="5">{$pager}</td>
+    	  </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+{template "content","header"}
+<!--main-->
+<script type="text/javascript">
+var model_arr = new Array();
+<?php echo $model_arr ?>
+function select_modelid(siteid, modelid){
+	var model_option = '<option value="0">所有模型</option>';
+	var select = '';
+	for(i=0; i< <?php echo $i?>; i++){
+		if(model_arr[i][2] == siteid){
+			select = model_arr[i][0] == modelid ? 'selected' :'';
+			model_option += '<option value="'+model_arr[i][0]+'" '+select+'>'+model_arr[i][1]+'</option>';
+		}
+	}
+	$('#modelid').html(model_option);
+}
+</script>
+<div class="main cat-search">
+	<div class="col-auto">
+    <div class="crumbs"><a href="{APP_PATH}">首页</a><span> > </span><a href="index.php?m=tags">热门标签</a> > {$tag}</div>
+        <form name="myform" method="get" action="">
+        <ul class="search-form">
+		<li>
+		<label>选择站点：</label>
+			<select name="siteid" onchange="select_modelid($(this).val())">
+		<option value="0">所有站点</option>
+		{loop $sitelist $site_v}
+		<option value="{$site_v['siteid']}" {if $siteid == $site_v['siteid']}selected{/if}>{$site_v['name']}</option>
+		{/loop}
+		</select>
+
+		</li>
+		
+		<li>
+		<label>选择模型：</label>
+			<select name="modelid" id="modelid" >
+		<option value="0">所有模型</option>
+		
+		</select>
+
+		</li>
+{if $siteid}
+			<script type="text/javascript">
+			select_modelid({$siteid}, {$_GET['modelid']});
+			</script>
+		{/if}
+<li><label>排序方式</label><select name="orderby" id="orderby"  size="1">
+<option value="0" >更新时间 降序</option>
+<option value="1" {if $orderby}selected{/if}>更新时间 升序</option>
+</select></li>
+<li><div class="btn"><input type="submit" name="dosubmit" value="搜索" /></div></li>
+  <input type="hidden" name="m" value="tags"> 
+  <input type="hidden" name="c" value="index"> 
+  <input type="hidden" name="a" value="init"> 
+  <input type="hidden" name="tag" value="<?php echo $_GET['tag']?>" />
+
+        </ul></form>
+        <div class="search-point">共找到符合条件的标签 <strong class="red">{$total}</strong> 个</div>
+          <ul class="search-list">
+			{loop $tagdata $r}
+           	<li style="margin:0">
+               <h5><a href="{$r[url]}" target="_blank" class="blue fn">{$r[title]}</a> - <a href="{if strpos($CATEGORYS[$r[catid]][url],'http://')===false}{$siteurl}{$CATEGORYS[$r[catid]][url]}{else}{$CATEGORYS[$r[catid]][url]}{/if}" class="blue f12 fn">{$CATEGORYS[$r[catid]][catname]}</a> - <span class="green f12 fn">发布时间：{date('Y-m-d H:i',$r[updatetime])}</span></h5>
+			</li>
+			{/loop}
+			</li>
+
+        </ul>
+        <div id="pages" class="text-c">{$pages}</div>
+  </div>
+</div>
+{template "content","footer"}

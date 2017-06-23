@@ -1,0 +1,476 @@
+<link type="text/css" rel="stylesheet" href="http://img.cnfol.com/osapi/css/newcard.v3.css" />
+<link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=uc/Css/NewBlog/Skin.css,uc/Css/NewBlog/EditBox.css"/>
+<!--<link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Skin.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css,ua/css/Public/TopBarFoot.css,uc/Css/NewBlog/EditBox.css" />-->
+<script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/Functioner.js"></script><!--上线后改回-->
+<script charset="utf-8" src="http://hs.cnfol.com/f=Cm/Js/Tabs.js,Cm/Js/Dialog.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName']; ?>";
+    var action = baseuri+"/article/Action";
+    var mydomainname="<?php echo $bloginfo['DomainName']; ?>";
+</script>
+<script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/Article.js"></script><!--上线后改回-->
+<style type="text/css">
+    .show
+    {
+        display:block !important;
+    }
+</style>
+<!--top-->
+
+<div class="EditBox indMain Fr Mt15 SetEdit Pt0" id="editBox">
+    <!--<div class="editBg Trans"></div>高级编辑背景-->
+    <input type="hidden" value="sup"  id="simsupCut" />
+    <input type="hidden" value="0"  id="timingSaveControl" /><!--确保自动保存js只运行一个-->
+    <!--高级编辑器-->
+    <div class="supEdit show EditAra">
+        <form id="supForm" name="" action="" method="post" onsubmit="return false;">
+            <input type="hidden" value="" name="timestamp" id="supTimestamp" />
+            <input type="hidden" id="articleid" name="articleid" value="<?php echo $article['ArticleID'];?>" />
+            <input type="hidden" name="memid" id="memid" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input id="appeartime" type="hidden" name="appeartime" value="<?php echo $article['AppearTime'];?>" />
+            <input type="hidden" name="act" id="act" value="<?php echo $article['ArticleID'] ? 'edit' : 'add';?>" />
+            <input type="hidden" name="groupStr" value="<?php echo trim($bloginfo['GroupID'],',');?>" />
+            <input type="hidden" name="blogName" value="<?php echo $bloginfo['BlogName'];?>" />
+            <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" />
+            <input type="hidden" value="0"  id="supSaveEditControl" name="draftsArticleid" /><!--第一次保存草稿箱后定时保存的就只做修改-->
+            <input type="hidden" value="0"  id="EditVifdata" name="draftsVifdata" />
+            <input type="hidden" value="0"  id="supSaveEditTimeControl" name="draftsAppeartime" />
+
+            <input type="hidden" value="0"  id="draftEditSaveTimeControl"/><!--草稿编辑时定时保存控制-->
+
+            <div class="editBt TitleBox">
+                <label class="LabSlc"> 
+                    <select <?php if(empty($article['SysTagID'])) {?>name="tagId" id="supTagid" <?php }else {?>name="tagIdEdit" id="supTagidEdit"<?php }?>>
+                        <option value="0">选择分类</option>
+                        <?php foreach($systaglist as $tagid => $tag): ?>
+                        <option value="<?php echo $tagid;?>" <?php if($article['SysTagID'] == $tagid) echo 'selected="selected"';?>><?php echo $tag;?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </label>
+                <input class="Bt timingkey" type="text" name="title" value="<?php echo $article['Title'];?>" id="<?php echo $article['Title'] ? 'supTitleEdit': 'supTitle';?>" onclick="javascript:vifdata('sup')" />
+
+                <span class="font14b cogrey" id="supTimingSave" style="font-size:12px;font-weight:normal;display:none;"></span>
+            </div>
+            <div class="row border">
+                <span class="L">标签：</span>
+                <div class="ML40 cogrey">
+                    <!--新增标签选项修改于0623---->
+                    <input class="Bt" type="text" name="tag" id="tag" value="<?php echo $article['TagName'];?>"/> <a href="javascript:toggle('LabelBar');" class="addIco Ico"></a>（选择已经有的标签）<a href="javascript:autoget();" class="Btn2">自动提取标签</a><br />
+                    <div class="LabelBox" id="LabelBar"></div>
+                    <!--end 0623--->
+
+                    <label id="Autotiqu">
+                        <span class="Sparow"></span>
+                        <div class="Bqremind">
+                            <p class="Mt2">多个标签用逗号分隔，单个标签最大长度30个字节</p>
+                            <p>添加标签可在中金在线博客首页获得更多的展示机会</p>
+                            <h6>热门标签：</h6><div class="MyTabs" id="s_hottaglist"></div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="row border">
+                <span class="L">摘要：</span>
+                <div class="ML40 cogrey">
+                    <textarea class="brief" name="summary"><?php echo $article['Summary'];?></textarea><br />
+                    <a href="javascript:cutSummary()" class="btnDiaY Btn1">自动截取</a> <span class="cogrey">(摘要是对文章主要内容的精炼概括，只支持文本格式分类)</span>
+                </div>
+            </div>
+            <!--高级编辑器项目修改于0623---->
+            <div class="row border PL40">
+                <div class="Mb9"><textarea name="content" id="supContent" style="width:652px; height:352px;"><?php echo htmlEncode($article['Content']);?></textarea></div>
+
+                <span id="supMemberidBlog" style="<?php if(empty($bloglistfilter)){echo('display:none;');} ?>">发表到：<select class="selBoke" name="memberid" id="supMemberid">
+                        <?php if(!empty($bloglistfilter)){?>
+                        <?php foreach($bloglistfilter as $item):?><option value="<?php echo $item['MemberID']; ?>" <?php echo $item['MemberID']==$bloginfo['MemberID'] ? 'selected':''?>><?php echo $item['BlogName']?></option><?php endforeach; ?>
+                        <?php } ?>
+                    </select> 博客</span>
+
+            </div>
+            <div class="row border PL40">
+                个人分类：<select name="sortId" id="sortid"><option value="18295">默认分类</option></select> <span class="cogrey">(中金在线个人用户对自己发布的文章进行分类)</span>
+            </div>
+            <!--end 0623--->
+            <div class="row border PL40">
+                <input class="cnfolck" type="checkbox" id="supCnfolck" <?php if(!empty($article['GiftPrice'])){?>checked<?php }?>/>
+                       <span class="lockBtn lock">用户需要赠送 <input name="GiftPrice" id="supGiftPrice" type="text" class="num coSmart" value="<?php echo $article['GiftPrice'] ? $article['GiftPrice'] : 0;?>" <?php if(empty($article['GiftPrice'])){?>disabled="true"<?php }?> /> 朵鲜花才可查看该文章！（1朵鲜花=0.1元人民币）</span>
+                <br />
+                <a href="#" class="coSmart">兑换鲜花&gt;&gt;</a> <span class="cogrey">（当鲜花大于10000朵即可将其兑换成人民币）</span>
+            </div>
+            <div class="row border PL40">
+                阅读对象： <select name="readStatus">
+                    <option value="0" <?php if($article['ReadStatus'] == 0) echo 'selected';?>>所有人</option>
+                    <option value="1" <?php if($article['ReadStatus'] == 1) echo 'selected';?>>注册用户</option>
+                    <option value="3" <?php if($article['ReadStatus'] == 3) echo 'selected';?>>不公开</option>
+                </select>
+            </div>
+            <div class="row border PL40">
+                是否推荐： 
+                <label for="Y">
+
+                    <input id="Y" type="radio" value="1" name="memberRecommend" <?php if($article['SelfRecommend']=='1'||$article['SelfRecommend']==''){echo 'checked=checked';} ?> /> 是
+                </label>
+                <label for="N">
+                    <input id="N" type="radio" value="0" name="memberRecommend" <?php if($article['SelfRecommend']=='0'){echo 'checked=checked';} ?> /> 否
+                </label>
+            </div>
+            <div class="row PL40 border">
+                引用通告：<input class="Bt" name="trackback" type="text" onkeyup="value=value.replace(/[，,\s]/g,';');" />
+                <p class="cogrey PL60">
+                    要引用另一个用户的网络日志项，请输入以上网络日志项的引用通告地址。用分号分隔多个地址。<br />
+                    例如：<?php echo(config_item('base_url')); ?>/1373/1049126d04.trackback;
+                </p>
+            </div>
+
+            <div class="row PL40 LastRow">
+                <input type="hidden" name="isvalidate" id="supisvalidate" value="<?php echo($isvalidate?'1':'0'); ?>" />
+                <p class="LastIt" id="supLastIt" <?php if($isvalidate){echo("style='display:none;'");} ?> >验证码：<input class="code" type="text" name="validate" id="supValidate"  />
+                    <span id="supVarifySpan">
+                        <img onclick="javascript:vifdata('sup')" id="supVifdataImg" alt="输入验证码" src="<?php echo $baseurl; ?>/register/varify?r=<?php echo(time()); ?>" style="cursor:pointer"/>
+
+                    </span><a href="javascript:void(0);" onclick="javascript:vifdata('sup')" id="supIndistinct" >&nbsp;看不清</a></p>
+                <!--<p style="border:0px solid white;height:3px;" <?php if($isvalidate){echo("style='display:none;'");} ?> id="supLastIt_2" >&nbsp;</p>-->
+                <?php if(!empty($bloglistfilter)&&empty($article['ArticleID'])){ ?>
+
+                <a href="javascript:void(0);" onclick="javascript:submitfuntTiming('sup','handSave');" class="Btn1 R">保存草稿箱</a>
+                <a href="javascript:submitfun('sup',<?php echo $user['userid']; ?>,'1');" class="BtnSub btn">发表博文</a>
+
+                <?php 
+                }elseif(!empty($article['ArticleID'])){
+                ?>
+                <a href="javascript:void(0);" onClick="javascript:submitUpdatefun()" class="BtnSub btn">
+                    <?php 
+                    if($this->input->get('draftsEdit')=='1')
+                    {
+                    ?>
+                    发表博文
+                    <?php
+                    }
+                    else
+                    {
+                    ?>
+                    修改博文
+                    <?php
+                    }
+                    ?>
+                </a>
+                <?php }else{ ?>
+                <a href="javascript:submitfun_guest('sup',<?php echo $user['userid']; ?>)" class="BtnSub btn">发表博文</a>
+                <?php } ?>
+                <a href="javascript:void(0);" onclick="javascript:resetForm('supForm')" class="BtnXz btn">重置</a>
+                <a href="javascript:preview();" class="BtnXz btn">预览</a>
+                <a class="Spread" target="_blank" href="http://tuiguang.cnfol.com/">
+                    我要推广
+                    <i class="NewIco"></i>
+
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php
+if(!empty($bloglistfilter))
+{
+foreach($bloglistfilter as $item):$MemberID=$item['MemberID'];break;endforeach; 
+}
+?>
+<input type="hidden" name="UserLevel" id="UserLevel" value="<?php echo($point); ?>" /><!--用于判断用户等级-->
+<script type="text/javascript" src="<?php echo($baseurl); ?>/ke4/kindeditor-min.js"></script>
+<script type="text/javascript">
+    var Min = 3;
+    var Max = 150000;
+    var editor;
+    var editorsimple;
+
+    KindEditor.ready(function(K) {
+        //高级编辑框用
+        if(document.getElementById('UserLevel').value<3000){
+            editor = K.create('#supContent',{
+                resizeType : 0,
+                uploadJson : '<?php echo(config_item("base_url")); ?>/ajaxeditorupload/attupload/<?php echo $bloginfo['UserID']; ?>',
+                emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+                items: ['undo', 'redo', '|', 'preview', 'print', 'template', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+                    'flash', 'media', 'table', 'hr', 'emoticons', 'code', 'link', 'unlink','|','about'],
+                allowFlashUpload: false,
+                allowMediaUpload: false,
+                afterCreate : function() {
+                    KindEditor.ctrl(this.edit.doc, 13, function() {
+                        submitfun('sup',"<?php echo $user['userid']; ?>",'');
+				
+                    });
+                    syncEdit('sim2sup',this.edit);
+                } 
+            });
+        }else{
+            editor = K.create('#supContent',{
+                resizeType : 0,
+                uploadJson : '<?php echo(config_item("base_url")); ?>/ajaxeditorupload/attupload/<?php echo $bloginfo['UserID']; ?>',
+                emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+                items: ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+                    'flash', 'media', 'table', 'hr', 'emoticons', 'code', 'link', 'unlink','|','about'],
+                allowFlashUpload: false,
+                allowMediaUpload: false,
+                afterCreate : function() {
+                    KindEditor.ctrl(this.edit.doc, 13, function() {
+                        submitfun('sup',"<?php echo $user['userid']; ?>",'');
+				
+                    });
+                    syncEdit('sim2sup',this.edit);
+                } 
+            });
+        }
+        //高级编辑框用
+	
+    });
+
+		
+    function resetForm(form){
+        document.forms[form].reset();
+        editor.html('');
+    }
+    function preview(){
+        editor.clickToolbar('preview');
+    }
+
+    function vifdata(sign){
+        var Now = new Date();
+        $('#'+sign+'VifdataImg').attr('src','<?php echo $baseurl; ?>/register/varify?&r='+Now.getTime());
+        $('input[name="validate"]').val('');
+    }
+
+    //自动提取标签用
+    /*
+    function autoget()
+    {
+        var action='<?php echo(config_item("base_url")); ?>/fenci/gettag.php';
+	
+        $.ajax({
+            type: 'post',
+            contentType:'application/x-www-form-urlencoded',
+            url:action,
+            data:$.param({'source':editor.html()}), 
+            dataType:'json',
+            async: false,
+            success: function(data){
+                if(data.error=='success')
+                {
+                    var str='';
+                    for(i=0;i<data.info.length;i++)
+                    {
+                        str+=data.info[i]+',';
+                    }
+				
+                    str=str.substring(0,str.length-1);
+                    $('#tag').val(str);
+                }
+                else
+                {
+                    showalert('无可用标签','popupTip','TMDeleteSuccess');
+                }
+			
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                //showalert('系统繁忙，请稍后...'+XMLHttpRequest.status+','+XMLHttpRequest.readyState+','+textStatus);
+                //showalert('系统繁忙，请稍后...');
+			
+                showalert('系统繁忙，请稍后...','popupTip','TMDeleteSuccess');
+			
+			
+            }
+        });
+    }
+     */
+    function autoget()
+    {
+        showalert('标签提取中...','popupTip','TMDeleteSuccess');
+    	
+        var action='<?php echo(config_item("base_url")); ?>/f/utf8.php';
+        var content=editor.html();
+        content=content.replace(/(\&nbsp\;)+|(^\s*)|(\s*$)|(\<br\s*\/>)+/g,'');
+        //content=content.replace(/(\<p\>)+|(\<\/p\>)+|(\<br\s*\/>)+|(\&nbsp\;)+/gi,'');
+        //content=content.replace(/\&nbsp\;/g,'');
+		
+        var result=content.match(/^[0-9A-Za-z\s\-\_\.\(\)\+\=\%\$\&\#\@\!\~\`\*\"\'\|\\\:\;\?\/\>\<\,\}\{\]\[\^\０\１\２\３\４\５\６\７\８\９\Ａ\Ｂ\Ｃ\Ｄ\Ｅ\Ｆ\Ｇ\Ｈ\Ｉ\Ｊ\Ｋ\Ｌ\Ｍ\Ｎ\Ｏ\Ｐ\Ｑ\Ｒ\Ｓ\Ｔ\Ｕ\Ｖ\Ｗ\Ｘ\Ｙ\Ｚ\ａ\ｂ\ｃ\ｄ\ｅ\ｆ\ｇ\ｈ\ｉ\ｊ\ｋ\ｌ\ｍ\ｎ\ｏ\ｐ\ｑ\ｒ\ｓ\ｔ\ｕ\ｖ\ｗ\ｘ\ｙ\ｚ\（\）\〔\〕\【\】\〖\〗\“\”\‘\｛\｝\《\》\％\＋\—\－\～\：\。\、\，\、\；\？\！\…\‖\”\‘\｜\〃\ =>]+$/);
+		
+        if(result!=''&&result!=null)
+        {
+            showalertminute('无可用标签',1000,'','popupTip','TMDeleteSuccess');
+            return;
+        }
+		
+        if(content==''||content==' '||content.length<4)
+        {
+            showalertminute('无可用标签',1000,'','popupTip','TMDeleteSuccess');
+            return;
+        }
+        
+        
+        
+        $.ajax({
+            type: 'post',
+            contentType:'application/x-www-form-urlencoded',
+            url:action,
+            data:$.param({'content':editor.html(),'num':4,'json':'1'}), 
+            dataType:'json',
+            //async: false,//影响  showalert函数调用
+            success: function(data){
+            	
+                if(data.error=='success')
+                {
+                    //var str='';
+                    //for(i=0;i<data.info.length;i++)
+                    //{
+                    //    str+=data.info[i]+',';
+                    // }
+				
+                    //str=str.substring(0,str.length-1);
+                    if(data.info==''||data.info==' ')
+                    {
+                        
+                        showalertminute('无可用标签',1000,'','popupTip','TMDeleteSuccess');
+                    }
+                    else
+                    {
+                        Dialog.Close();
+                        $('#tag').val(data.info);
+                    }
+                }
+                else
+                {
+                    
+                    showalertminute('无可用标签',1000,'','popupTip','TMDeleteSuccess');
+                }
+			
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                //showalert('系统繁忙，请稍后...'+XMLHttpRequest.status+','+XMLHttpRequest.readyState+','+textStatus);
+                //showalert('系统繁忙，请稍后...');
+			
+               
+                showalertminute('系统繁忙，请稍后...',1000,'','popupTip','TMDeleteSuccess');
+			
+            }
+        });
+    }
+    
+
+    $('#sortid').load("<?php echo $baseurl;?>/ajaxsort/list/<?php echo $bloginfo['MemberID'];?>?sortid=<?php echo($article['SortID']); ?>");
+    $('#LabelBar').load("<?php echo $baseurl;?>/ajaxarticletags/list");
+    $('#s_hottaglist').load("<?php echo $baseurl;?>/ajaxhottaglist/list");
+    
+    function submitUpdatefun(){
+        var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+        var action = baseuri+'/article/Action';
+        var tags = $('#tag').val().split(',');
+        if(tags.length > 5){
+            
+            showalertminute('每篇文章最多设置5个标签',2000,'','popupTip','TMDeleteSuccess');
+        }else if(mb_strlen($('#supTitleEdit').val()) > 99 || mb_strlen($('#supTitleEdit').val()) < 1){
+            
+            showalertminute('*文章标题长度应该在1-99个字节之内',2000,'','popupTip','TMDeleteSuccess');
+            return false;
+        }else if($('#supTagid').val() == 0||$('#supTagidEdit').val()==0){
+          
+            showalertminute('*请选择文章分类',2000,'','popupTip','TMDeleteSuccess');
+            return false;
+        }else if(editor.count() > Max || editor.count() < Min){
+            
+            showalertminute('*文章内容长度应该在3-150000个字节之内',2000,'','popupTip','TMDeleteSuccess');
+            return false;
+        }else{
+            editor.sync();
+            //showloading();
+            showalert("加载中...",'popupTip','TMDeleteSuccess');
+            
+            $.ajax({
+                type: 'post',
+                url: action, 
+                data: $('#supForm').serialize(), 
+                dataType: 'json',
+                contentType:'application/x-www-form-urlencoded',
+                success: function(data){
+                    if(data.errno == 'success' || data.errno == '200036' || data.errno == '200037'){
+                        Dialog.Close();
+                        var basruri = "<?php echo $baseurl;?>";
+                        var blogurl = basruri + "/<?php echo $bloginfo['DomainName'];?>";
+                        var arturl  = blogurl + "/article/" +data.appeartime+"-"+data.articleid+".html";
+
+                        var strHtml = '\
+                                        <div style="padding:10px;">\
+                                                <div style="background: none repeat scroll 0 0 rgb(239,243,195);text-align:left;height:45px;padding:5px 0px 5px 10px;">\
+                                                        <b style="font-size:16px">'+data.error+'</b><br />系统将在 <span id="secs">3</span> 秒钟后自动跳转\
+                                                </div>\
+                                                <div style="padding-left:10px;padding-top:5px">\
+                                                        <div style="float:left;">我们推荐您：<br />或者您可以：</div>\
+                                                        <div style="float:left;padding:0px;margin:0px;">\
+                                                                <ul>\
+                                                                        <li><a target="_blank" href="http://bbs.cnfol.com"><b>逛逛论坛</b></a>、<a target="_blank" href="http://g.cnfol.com"><b>逛逛圈子</b></a></li>\
+                                                                        <li><a href="'+arturl+'" target="_blank">查看刚才发表的文章</a></li>\
+                                                                        <li><a href="'+blogurl+'/article/Add" target="_blank">撰写一篇新博文</a></li>\
+                                                                        <li><a href="'+blogurl+'/manage/article/List" target="_blank">查看文章列表</a></li>\
+                                                                        <li><a href="'+blogurl+'" target="_blank">查看我的博客首页</a></li>\
+                                                                        <li><a href="'+basruri+'" target="_blank">查看中金博客首页</a></li>\
+                                                                </ul>\
+                                                        </div>\
+                                                </div>\
+                                        </div>';
+
+                        
+                        showalertminute(strHtml,4000,'','publishTip','articlePublishSuccess');
+                        countDown(arturl, 3);
+                        seoLast(data.memberid,data.articleid,data.appeartime);//提取并保存关键字
+                    } else {
+                        showalert(data.error,'popupTip','TMDeleteSuccess');
+                    }
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    
+                    showalertminute('发生错误，请重新提交保存('+XMLHttpRequest.status+','+XMLHttpRequest.readyState+','+textStatus+')',2000,'','popupTip','TMDeleteSuccess');
+                    vifdata();
+                }
+            });
+		
+        }
+	
+    }
+    function countDown(url,secs){
+        $('#secs').text(secs);
+        if(--secs >= 0){
+            setTimeout( "countDown('"+url+"',"+secs+")" ,1500);
+        }else{
+            window.location.href = url;
+        }
+    }
+    
+    var draft="<?php echo(($article['IsDel']==2)?'2':''); ?>"?2:3;
+    $('#draftEditSaveTimeControl').val(0);
+    $('#timingSaveControl').val('0');
+    $('#supSaveEditControl').val("<?php if($this->input->get('draftsEdit')=='1'){echo $article['ArticleID'];}else{echo('0');} ?>");
+    
+    $('#EditVifdata').val("<?php if($this->input->get('draftsEdit')=='1'){echo('1');}else{echo('0');} ?>");
+    $('#supSaveEditTimeControl').val("<?php if($this->input->get('draftsEdit')=='1'){echo $article['AppearTime'];}else{echo('0');} ?>");
+    var arid="<?php echo empty($article['ArticleID'])?'':$article['ArticleID'];?>";
+    if(arid!='')
+    {
+        $('#supLastIt').css('display','none');
+    }
+    
+    $(document).ready(function(){
+        $('#articleid').val(arid);
+    	
+    });
+</script>
+<script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/forArticleEdit.js" ></script><!-- 上线后改回 -->
+<!--/top-->

@@ -1,0 +1,370 @@
+<include file="Public:head" />
+<include file="Public:navi" />
+<div id="container" class="bg-white clearfix">
+    <div class="container-main">
+        <div class="container-main">
+            <div id="pagelet-feedlist">
+                <p data-node="alertMsg" class="alert-msg" style="">
+                    <img src="/Public/Home/images/loading_50c5e3e.gif">
+                    <span>推荐数据加载中...</span>
+                </p>
+                <div data-node="unread" class="unread" style="display: none;">
+                    <div class="inner">
+                        <span>您有未读新闻，点击查看</span>
+                    </div>
+                </div>
+                <ul data-node="listBox" id="listBox">
+                    <foreach name="list" item="item">
+                        <switch name="item.show_type" >
+                        <case value="1">
+                            <li data-node="item" class="item2 clearfix">
+                                <div ga_event="feed_item" style="width: 100%;" class="info">
+                                    <p class="title ">
+                                        <a target="_blank" ga_event="feed_title" href="{$item.url}">
+                                            {$item.title}
+                                        </a>
+                                    <if condition="item.is_hot eq 1 "><img src="/Public/Home/images/images/hot.png" class="hoticon">
+                                        <elseif condition="item.is_tuijian eq 1"/><img src="/Public/Home/images/jian.png" class="hoticon">
+                                    </if>
+                                    
+                                    </p>
+                                    <p class="desc">
+                                        {$item.intro}
+                                    </p>
+                                </div>
+                        </case>
+
+                        <default />
+                        <li data-node="item" class="item clearfix">
+                            <div ga_label="hasImg" ga_event="feed_item" class="info">
+                                <p class="title ">
+                                    <a target="_blank" ga_event="feed_title" href="{$item.url}">
+                                        {$item.title}
+                                    </a>
+                                </p>
+                                <p class="desc">
+                                    {$item.intro}
+                                </p>
+                            </div>
+                            <div class="thumbnail">
+                                <div class="img-box">
+                                    <a target="_blank" href="{$item.url}" ga_event="feed_img" class="feed-img">
+                                        <img rel="nofollow" src="{:setUpUrl($item['img_list'][0])}">
+                                    </a>
+                                </div>
+                            </div>
+                            </switch>
+
+                            <p <if condition="($item['show_type'] eq 1) ">style="width: 100%;"</if> class="footer">
+                        <span class="other">
+                            <span class="btn-group" data-node="likeGroup">
+                                <a title="顶" href="javascript:;" class="btn line" data-groupid="{$item.id}" data-node="digg" ga_event="feed_item_digg">
+                                    <i class="icon icon-like icon-small"></i>
+                                    <span data-node="num" class="liked-num">{$item.good_sum}</span>
+                                </a><a title="踩" href="javascript:;" class="btn" data-groupid="{$item.id}" data-node="bury" ga_event="feed_item_bury">
+                                    <i class="icon icon-dislike icon-small"></i>
+                                    <span data-node="num" class="disliked-num">{$item.bad_sum}</span>
+                                </a>
+                            </span>
+                        </span>
+                        <span class="footer-right">
+                            <a target="_blank" href="{$item.url}" class="btn datetime">
+                                <span data-publishtime="{$item.update_time}">{$item.show_time}</span>
+                            </a>
+                            <a href="javascript:;" class="btn share" data-pic="" data-text="【{$item.title}】（分享来自 @新闻王官网）" data-desc="来自新闻王 http://www.xinwenwang.com" data-url="{$item.url}" data-node="share">
+                                <i class="icon icon-share"></i>
+                                <span class="share-list">
+                                    <i title="分享到新浪微博" href="javascript:;" class="icon icon-tsina" data-type="tsina" ga_label="tsina" ga_event="feed_item_share"></i>
+                                    <i title="分享到腾讯微博" href="javascript:;" class="icon icon-tqq" data-type="tqq" ga_label="tqq" ga_event="feed_item_share"></i>
+                                    <i title="分享到ＱＱ空间" href="javascript:;" class="icon icon-qzone" data-type="qzone" ga_label="qzone" ga_event="feed_item_share"></i>
+                                </span>
+                            </a>
+                        </span>
+                        </p>
+                        <a data-groupid="{$item.id}" data-node="close" href="javascript:;" title="不感兴趣" class="btn close" ga_event="feed_item_dislike">
+                            <i class="icon icon-close icon-small"></i>
+                        </a>
+                        </li>
+                    </foreach>
+                </ul>
+                {$page_html}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-right">
+        <div class="main_r_box app">
+            <div class="title"><h2>手机应用</h2></div>
+            <div class="main_r_cont phoneapp">
+                <span><img src="/Public/Home/images/xwwicon.png"></span>
+                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容，给你阅读。</p>
+                <a href="{$base_url}/app_server/" class="btn_download">Anroid</a><a href="{$base_url}/app_server/" class="btn_download">iPhone</a>
+            </div>
+        </div>
+        <!--今日点击-->
+        <div class="main_r_box clicktoday">
+            <div class="title"><h2>点击今日</h2><a href="#">+</a></div>
+            {:W('Home/hotNews')}
+        </div>
+        <!--广告位-->
+        <div class="main_r_box adpic">
+            {:W('Ad/common')}
+        </div>
+        <!--今日热评-->
+        <div id="pagelet-hotcomment">
+            <div class="inner main_r_box" data-node="inner">
+                <div class="title"><h2>今日热评</h2><a href="#">+</a></div>
+                {:W('Home/hotComments',array($type_id))}
+            </div>
+        </div>
+        <div id="pagelet-feedback">
+            <ul>
+                <li><a ga_event="gotop" class="btn" href="javascript:;" data-node="back"><i class="icon icon-back"></i> </a></li>
+                <li><a ga_event="feedback" class="btn" href="javascript:;" data-node="feedback"><i class="icon icon-comment"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<script id="hot_comments" type="text/html">
+    {{# for(var i = 0, len = d.data_list.length; i < len; i++){ }}
+    <li>
+        <p class="comment-title">
+            <a href="/u{{d.data_list[i].id}}/" ga_event="hotcomment_headimg">
+                <img src="{{d.data_list[i].head_pic}}">
+            </a>
+            <a href="/u{{d.data_list[i].id}}/" class="name" ga_event="hotcomment_name">
+                {$item['username']}
+            </a>
+            <a data-id="{{d.data_list[i].id}}" data-node="digg" href="javascript:;" class="btn" ga_event="hotcomment_dig">
+                <i class="icon icon-like-blue icon-small"></i>
+                <span data-node="likedNum" class="liked-num">{{d.data_list[i].good_sum}}</span>
+            </a>
+        </p>
+        <p class="comment">
+            <i class="arrow"></i>
+            {{d.data_list[i].title}}
+        </p>
+        <p class="label">评论于：</p>
+        <p class="source">
+            <a target="_blank" href="{{d.data_list[i].url}}" ga_event="hotcomment_title">
+                {{d.data_list[i].content}}
+            </a>
+        </p>
+    </li>
+    {{# } }}
+</script>
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/laytpl.js"></script>
+<script type="text/javascript" src="/Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    //点击展开分类
+    $('a[ga_event="feed_setting"]').click(function () {
+        if ($('#pagelet-toolbar').attr('class') == '') {
+            $(this).find('i').addClass('icon-customize-up');
+            $('#pagelet-toolbar').addClass('customize');
+            $('.custom-box').show();
+        } else {
+            $(this).find('i').removeClass('icon-customize-up');
+            $('#pagelet-toolbar').removeClass('customize');
+            $('.custom-box').hide();
+        }
+    });
+    //点击头部页面关闭分类
+    $('#container,#pagelet-nav').click(function () {
+        $('a[ga_event="feed_setting"]').find('i').removeClass('icon-customize-up');
+        $('#pagelet-toolbar').removeClass('customize');
+        $('.custom-box').hide();
+    });
+
+    //重载页面
+    $('.icon-refresh').click(function () {
+        $('.alert-msg').show();
+        window.location.reload();
+    });
+
+    //点击删除
+    $("#defaultCategory li").live("click", function () {
+        if ($('.customize').length && $(this).index()) {
+            $("#otherCategory").append("<li>" + $(this).html() + "</li>");
+            $(this).remove();
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $('.ban-msg').removeClass('error').html('点击添加新闻分类');
+                sysNav();
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //点击添加
+    $("#otherCategory li").live("click", function () {
+        if ($('.customize').length) {
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $("#defaultCategory").append("<li>" + $(this).html() + "</li>");
+                $(this).remove();
+                sysNav();
+            } else {
+                $('.ban-msg').addClass('error').html('分类已满（最多7个），请先删除一些');
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //未读新闻 点击查看
+    $('.unread').click(function () {
+        window.location.reload();
+    });
+    //点赞
+    $('a[data-node="digg"]').live('click', function () {
+        /*        var temp = is_login();
+     //        if (temp == false) return false;
+         */
+        var a = $(this).parent('span.disliked').length;
+        var b = $(this).parent('span.liked').length;
+        var gid = $(this).attr('data-groupid');
+        var c_id = $.cookie('_xw_dz' + gid);
+        if (!c_id) {
+            $.cookie('_xw_dz' + gid, gid);
+        }
+        /*无操作*/
+        if (!a && !b && !c_id) {
+            $(this).parent('span').addClass('liked');
+            var liked_num = $(this).find('.liked-num');
+            $(liked_num).html(parseInt($(liked_num).html()) + 1);
+            $(this).attr('title', '已顶');
+            $.post("/news/good", {id: gid}, function (result) {
+            });
+        }
+    });
+    //踩楼
+    $('a[data-node="bury"]').live('click', function () {
+        /*        var temp = is_login();
+     //        if (temp == false) return false;
+         */       var a = $(this).parent('span.disliked').length;
+        var b = $(this).parent('span.liked').length;
+        var gid = $(this).attr('data-groupid');
+        var c_id = $.cookie('_xw_dz' + gid);
+        if (!c_id) {
+            $.cookie('_xw_dz' + gid, gid);
+        }
+        if (!a && !b && !c_id) {
+            $(this).parent('span').addClass('disliked');
+            var disliked_num = $(this).find('.disliked-num');
+            $(disliked_num).html(parseInt($(disliked_num).html()) + 1);
+            $(this).attr('title', '已踩');
+            $.post("/news/bad", {id: gid}, function (result) {
+            });
+        }
+    });
+
+    //不喜欢此类文章
+    $('a[ga_event="feed_item_dislike"]').live('click', function () {
+        news_id = $(this).attr('data-groupid');
+        $.layer({
+            type: 1,
+            shade: [0.5, '#000'],
+            area: ['auto', 'auto'],
+            closeBtn: false,
+            shadeClose: true,
+            title: false,
+            border: [0],
+            page: {dom: '.confirm-dialog'}
+        });
+        return false;
+    });
+    //不喜欢取消
+    $('div[data-node="cancel"]').live('click', function () {
+        news_id = 0;
+        layer.closeAll();
+    });
+    //不喜欢确认
+    $('div[data-node="ok"]').live('click', function () {
+        $.ajax({
+            type: 'POST',
+            url: '/public/nolike',
+            data: {id: news_id},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.code == 200) {
+                    //成功
+                }
+            }
+        });
+        layer.closeAll();
+    });
+
+    //评论点赞
+    $('a[data-node="c_digg"]').live('click', function () {
+        /* var temp = is_login();
+     if (temp == false) return false;
+         */
+        var cid = $(this).attr('data-id');
+        var c_id = $.cookie('_cm_dz' + cid);
+        if (!c_id) {
+            $.cookie('_cm_dz' + cid, cid);
+            $.ajax({
+                type: 'POST',
+                url: '/News/usergb',
+                data: {id: cid, 'gb': 'good'},
+                dataType: 'json',
+                success: function (msg) {
+                }
+            });
+            var liked_num = $(this).find('.liked-num');
+            $(liked_num).html(parseInt($(liked_num).html()) + 1);
+        }
+    });
+    //评论下一页
+    var comment_page = 1;
+    $('a[ga_event="hotcomment_change"]').click(function () {
+        comment_page++;
+        $.ajax({
+            type: 'POST',
+            url: '/hot_comments',
+            data: {p: comment_page},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.data.data_list.length < 5) {
+                    comment_page = 1;
+                }
+                if (msg.code == 200) {
+                    laytpl($('#hot_comments').html()).render(msg.data, function (render) {
+                        $('.comment-list').html(render);
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+    window.scrollTo(0, 0);
+    function sysNav() {
+        var str = new Array();
+        $('#defaultCategory li>a').each(function (t) {
+            var k = $(this).attr('data_key');
+            var v = $(this).attr('data_value');
+            if (k)
+                str += k + '_';
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/public/sysnav',
+            data: {str: str},
+            dataType: 'json',
+            success: function (msg) {
+            }
+        });
+    }
+</script>
+<if condition="$link_show eq 1 ">
+    {:W('Cate/links')}
+</if>
+
+<include file="Public:foot" />
+

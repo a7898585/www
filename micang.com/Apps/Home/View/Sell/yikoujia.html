@@ -1,0 +1,137 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+	<em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+	<span>></span>
+    <a href="{:getDoMain()}sell/page" class="crumbs_c">域名交易</a>
+	<span>></span>
+    <i>{$detail.domain}域名一口价</i>
+</div>
+<!--面包屑 结束-->
+<div class="wrap xunjia">
+    <div class="wrap_jj_l fl">
+    <div class="bidding">
+        <h3><span>域名一口价</span></h3>
+        <div class="bidding_n">
+        	<div class="ding_l fl">
+            <p>{$detail.domain}</p>
+            <ul>
+            <li><span>域名释义：</span>{$detail.summary|default="暂无简介"}</li>
+            <li><span>注册时间：</span>{$domainDetail.register_time}<em class="fr">百度权重<span style="border:none;"><img border=0 src="http://br.links.cn/getbr.asp?url={$detail.domain}&style=2"></span></em></li>
+            <li><span>备 案 号：</span><empty name="domainDetail.beian">暂无备案<else />{$domainDetail.beian}</empty><em class="fr">Google<span><img border=0 src="http://tool.baiwanzhan.com/t1/prImg.aspx?s=3&mode=pic&url={$detail.domain}"></span></em></li>
+            </ul>
+            </div>
+            <div class="ding_r fr">
+            <ul>
+            <p><span><a class="tg1" href="javascript:Notice('{$detail.id}');">关注</a><a>提醒</a></span></p>
+            <p>当前价格：<em>{$detail.seller_price|Fen2Yuan}</em>元</p>
+            <li style="width:100%;">剩余时间：<span class="yse2">
+    <span id="t_d">00天</span>
+    <span id="t_h">00时</span>
+    <span id="t_m">00分</span>
+    <span id="t_s">00秒</span></span></li>
+            <li style="width:100%;">结束时间：<span class="yse1">{$detail.end_time|date='Y/m/d H:i:s',###}</span></li>
+           <neq name="detail.mid" value="$mid"> <li class="eyur">
+           <input onclick="check_seccode('YiKouJia_Buy','{$detail.id}');" type="button" class="btn_cj fl" value="立即购买" style="margin-left:70px;" /></li></neq>
+            </ul>
+            </div>
+        </div>
+        <!--内容结束 结束-->
+    </div>
+    <div class="biddkun mr20">
+    	<h3><span>卖家其他一口价</span></h3>
+        <div class="detailbox">
+            <volist name="other" id="item">
+            <div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即询价</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+    </div>
+    <div class="biddkun mr20">
+    	<div class="navh2" id="navhljs2">
+			<a href="javascript:void(0);" onclick="jdhddh(this,0)" class="navhl_h">纯数字域名</a> 
+			<a href="javascript:void(0);" onclick="jdhddh(this,1)" class="navhl_q">纯数字域名</a> 
+			<a href="javascript:void(0);" onclick="jdhddh(this,2)" class="navhl_q">杂米</a> 
+        </div>
+        <div id="navhljs2_c0" class="detailbox" style="display: block;">
+        	<volist name="salesShuZi" id="item">
+        	<div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即查看</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+        <div id="navhljs2_c1" class="detailbox" style="display: none;">
+        	<volist name="salesZiMu" id="item">
+        	<div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即查看</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+        <div id="navhljs2_c2" class="detailbox" style="display: none;">
+        	<volist name="salesZaMi" id="item">
+        	<div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即查看</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+    </div>
+    <!--详细结束 结束-->
+    </div>
+    <!--左侧缩展导航 结束-->
+    <div class="wrap_jj_r fl">
+    
+    <div class="stepvrs">
+    	<ul>
+        <h4>一口价交易规则</h4>
+        <p><b>拍卖时间：</b></p>
+        <p>拍卖开始与结束时间以系统提示时间为准。</p>
+        <p><b>出价规则 ：</b></p>
+        <p>买家id账号下需要有域名交易价格的全额款项，才能出价，出价时扣除交易额全款，若买家id账号下款项不足，则不能参与交易。</p>
+        <p><b>一口价交易规则 ：</b></p>
+        <p>买家出价后，系统立即扣款并过户域名到买家id下，交易自动完成。</p>
+      	</ul>
+    </div>
+    <!--流程 结束-->
+  </div>
+    <!--右侧缩展导航 结束-->             
+</div>
+<script language="javascript">
+	function getRTime(){
+        var EndTime= new Date('{$detail.end_time|date='Y/m/d H:i:s',###}'); //截止时间 前端路上 http://www.51xuediannao.com/qd63/
+        var NowTime = new Date();
+        var t =EndTime.getTime() - NowTime.getTime();
+        var d=Math.floor(t/1000/60/60/24);
+        var h=Math.floor(t/1000/60/60%24);
+        var m=Math.floor(t/1000/60%60);
+        var s=Math.floor(t/1000%60);
+		if(d==0 && h==0 && m==0 && s==0){
+			window.location.reload();
+		}
+        document.getElementById("t_d").innerHTML = d + "天";
+        document.getElementById("t_h").innerHTML = h + "时";
+        document.getElementById("t_m").innerHTML = m + "分";
+        document.getElementById("t_s").innerHTML = s + "秒";
+    }
+    setInterval(getRTime,1000);
+</script>

@@ -1,0 +1,57 @@
+<div class="onlineplay ymxx">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" onclick="jdhddh(this,0)" href="javascript:void(0);">发布域名</a> 
+    </div>
+    <div style="display:block;" class="onlineplay_c4" id="navhljs1_c0">
+        <form action="" method="post">  
+            <div class="release">
+                <div class="">
+                    <textarea class="search_txt_d" name="domain" id="domain" style="color: rgb(181, 181, 181);" onClick="if(this.value=='每行一个域名，例如 xxx.com'){this.value='';}" onblur="if(this.value=='')this.value='每行一个域名，例如 xxx.com';">每行一个域名，例如 xxx.com</textarea>
+                </div>
+                <div class="release_niher fr">
+                    <!--                <span>选择出售方式</span>
+                                    <select class="select_sty m20">
+                                        <option>限时竞价</option>
+                                        <option>国际域名模板</option>
+                                        <option>国际域名模板</option>
+                                        <option>国际域名模板</option>
+                                        <option>国际域名模板</option>
+                                    </select>-->
+                </div>
+            </div>
+            <div class="release_ing mr20">
+                <p><input type="checkbox" class="space_l" value="1" checked>我已阅读并统一米仓网域名交易协议</p>
+                <p><input class="btn1" type="button" value="提交" onClick="checkDomain();"></p>
+            </div>
+        </form>
+        <div class="explain">
+            <div class="title_b_icon3"><i class="iconfont"></i></div>
+            <div class="txt_c">域名出售规则</div>
+            <dl>
+                <dt class="fl">1.</dt>
+                <dd>限时竞价手续费：可提现2%，暂不提现 1%</dd>
+            </dl>
+            <dl>
+                <dt class="fl">2.</dt>
+                <dd>一口价手续费：可提现2%，暂不提现 1%</dd>
+            </dl>
+            <dl>
+                <dt class="fl">3.</dt>
+                <dd>买家询价：买家可对域名进行报价，买卖双方经过议价确定价格后即开始交易，目前没有保证金机制，手续费：可提现2%，暂不提现1%</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<script>
+    function checkDomain(){
+        if($('textarea[name=domain]').val()=='每行一个域名，例如 xxx.com'){
+            layer.msg('请输入域名');
+        }else{
+            if($('input[type=checkbox]').attr('checked') =='checked'){
+                $('form').submit();
+            }else{
+                layer.msg('必须阅读并统一米仓网域名交易协议');
+            }
+        }
+    }
+</script>

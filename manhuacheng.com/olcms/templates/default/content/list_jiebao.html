@@ -1,0 +1,62 @@
+{template "content","header"}
+<!--main-->    <div class="middle_div1">
+    	<div class="middle_div1_le" style="border:none;">
+        	<div class="mhzx middle_div1_ri">
+			
+				<div class="rs_dm_tit" style="width:100%">
+					<h3>{$CATEGORYS[$catid]['catname']}</h3>
+				</div>
+			{pc:content action="lists" catid="$catid" num="7" order="id DESC" page="$page"}
+				{loop $data $r}
+					<div class="mhzx_txt">
+						<div class="mhzx_txt_le"><a href="{$r[url]}" target="_blank"><img width='200' height='130' src="{thumb($r[thumb], 200, 130, 0)}"/></a></div>
+						<div class="mhzx_txt_ri">
+							<div class="to">
+								<i class="icon"></i>
+								<h3><a href="{$r[url]}" target="_blank" >{$r[title]}</a></h3>
+							</div>
+							<p>{$r[description]}<a href="{$r[url]}" target="_blank">[阅读全文]</a></p>
+							<div class="pl">
+								<div class="pl_le"><span>浏览:{$r[views]}</span></div>
+							</div>
+						</div>
+					</div>
+				{/loop}
+			{/pc}
+
+                <div class="ad02 page" id="search_fy">
+				{$pages}     	   
+				</div>	
+            </div>
+        </div>
+        
+        
+        <div class="middle_div1_ri">
+        	<div class="tu">{template "content","250ad"}</div>
+		{template "content","block_ranking"}
+
+            
+                <div class="xh_man">
+				<div class="rs_dm_tit">
+					<h3>完结漫画推荐</h3>
+				</div>
+                <div class="xh_man_txt">
+                	<ul>
+						{php $where = "status=99 AND state = 1 AND type_id NOT IN(".dimplode(dexplode(NOT_ALLOW)).")";}		
+						{pc:content action="table_list" table="Cartoon" fields="id,catid,title,thumb"  where="$where" order="views DESC" num="6" cache="3600" }
+						{loop $data $r}
+						<li>
+                        	<a href="/manhua{$r[id]}" title ="{$r[title]}" target="_blank"><img width=80 height=115 src="{$r[thumb]}"></a>
+                            <a href="/manhua{$r[id]}" title ="{$r[title]}" target="_blank">{str_cut($r[title],15,'')}</a>
+                        </li>
+
+							{/loop}
+							{/pc}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{template "content","footer"}

@@ -1,0 +1,190 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="kavascript:;">个人资料</a>
+    </div>
+    <div class="add_temp" id="navhljs1_c1">
+        <form name="form_profile" action="" method="post">
+            <div class="add_temp_b">
+                <ul>
+                    <if condition="$profile.realname neq ''">
+                        <li>
+                            <p>真实姓名：</p>{$profile.realname}
+                        </li>
+                    </if>
+
+                    <if condition="$profile.mobile neq ''">
+                        <li>
+                            <p>手机号码：</p>{$profile.mobile}
+                        </li>
+                    </if>
+                    <li>
+                        <p>固定电话：</p>
+                        <input type="text" class="list_ctxt_a" size="30" name="tele" value="{$profile.tele}" placeholder="格式:0592-12345678" maxlength="13" />
+                    </li>
+                    <li>
+                        <p>传真号码：</p>
+                        <input type="text" class="list_ctxt_a" size="30" name="fax" value="{$profile.fax}" placeholder="格式:0592-12345678" maxlength="13" />
+                    </li>
+
+                    <li style="width: 500px;">
+                        <p>所在地区：</p>
+                        <select name="province" class="select_sty">
+                            <option value="">选择省份</option>
+                        </select>
+                        <select name="city" class="select_sty">
+                            <option value="">选择城市</option>
+                        </select>
+                        <select name="county" class="select_sty">
+                            <option value="">选择区县</option>
+                        </select>
+                    </li>
+                    <li>
+                        <p>详细地址：</p>
+                        <input type="text" class="list_ctxt_a" size="30" name="address" value="{$profile.address}" />
+                    </li>
+                    <li>
+                        <p>邮编：</p>
+                        <input type="text" class="list_ctxt_a" size="30" name="postcode" value="{$profile.postcode}" maxlength="6" />
+                    </li>
+                    <li> <p>上传头像：</p>
+                        <input id="photo_url" type="file" value="上传" class="file_btn"/><br>
+                        <div id="idcard_pic" class="id_cont">
+                            <if condition="$profile.head_url neq '' ">
+                                <span><img class="sfz" src="{$profile.head_url}" /><input type="hidden" name="head_url" value="{$profile.head_url}">
+                                </span>
+                            </if>
+                        </div>
+
+                    </li>
+                    <li>
+                        <input type="submit" value="确定提交" class="list_submit">
+                    </li>
+                </ul>
+            </div>    
+        </form>
+    </div>
+</div>     
+<link type="text/css" rel="stylesheet" href="/Public/Common/js/uploadify/uploadify.css"/>
+<style>
+    .id_cont{margin-left: 140px;}
+    .swfupload{margin-left: -120px;}
+    .uploadify-button-text {
+        background: #ff993d none repeat scroll 0 0;
+        border: medium none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        height: 30px;
+        margin: 20px 0 0;
+        width: 90px;
+    }
+</style>
+<script type="text/javascript" src="/Public/Common/js/uploadify/jquery.uploadify.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_Datatype.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        uploadFile('photo_url','上传头像');
+        $('form[name="form_profile"]').Validform({
+            tiptype:3,
+            beforeSubmit: function(curform){
+                curform.find(':submit').prop('disabled', true);
+                $.post(curform.attr('action'), curform.serialize(), function(result){
+                    layer.msg(result.message);
+                    curform.find(':submit').prop('disabled', false);
+                });
+                return false;
+            }
+        });
+        $(':input[name="province"]').change(function(){
+            area('city', this.value, '');
+        });
+        $(':input[name="city"]').change(function(){
+            area('county', this.value, '');
+        });
+        area('province', '001', '{$profile.province}');
+        area('city', '{$profile.province}', '{$profile.city}');
+        area('county', '{$profile.city}', '{$profile.county}');
+    });
+    function area(target, parent, selected){
+        if (parent == '') return false;
+        if (target=='city' && $.inArray(parent, ['001001','001002','001003','001004'])!=-1){
+            var citys = {'001001':'北京','001002':'上海','001003':'天津','001004':'重庆'};
+            var option = '<option value="">选择城市</option>';
+            if (selected != ''){
+                option += '<option value="'+parent+'" selected>'+citys[parent]+'</option>';
+            }else{
+                option += '<option value="'+parent+'">'+citys[parent]+'</option>';
+            }
+            $(':input[name="'+target+'"]').empty().append(option);
+            $(':input[name="county"]').empty().append('<option value="">选择区县</option>');
+
+            return false;
+        }
+        $.getJSON('/public/ajax_get_area', {type:target, parent:parent}, function (result) {
+            var option = '';
+            if (target == 'province'){
+                option = '<option value="">选择省份</option>';
+            }else if (target == 'city'){
+                option = '<option value="">选择城市</option>';
+                $(':input[name="county"]').empty().append('<option value="">选择区县</option>');
+            }else if (target == 'county'){
+                option = '<option value="">选择区县</option>';
+            }
+            $.each(result, function(id, item){
+                if (selected == item['areaID']){
+                    option += '<option value="' + item['areaID'] + '" selected="selected">' + item['simple'] + '</option>';
+                }else {
+                    option += '<option value="' + item['areaID'] + '">' + item['simple'] + '</option>';
+                }
+            });
+            $(':input[name="'+target+'"]').empty().append(option);            
+        })
+    }
+    
+    function uploadFile(id,buttonText){
+        $('#'+id).uploadify({
+            auto: true,
+            swf:'/Public/Common/js/uploadify/uploadify.swf',
+            uploader: '{$Think.config.UPAIYUN_CONFIG.UPYUN_UPLOAD_URL}',
+            buttonText: '选择文件并上传',
+            width: '200',
+            height: '32',
+            fileTypeDesc: '图片文件',
+            fileTypeExts: '*.jpg;*.png;*.gif',
+            fileSizeLimit: '1MB',
+            fileObjName: 'file',
+            removeTimeout: 0,
+            formData: {
+                policy: '{$policy}',
+                signature: '{$sign}'
+            },
+            overrideEvents: [ 'onDialogClose', 'onUploadError', 'onSelectError' ],
+            onSelectError: function(file, errorCode, errorMsg){
+                switch(errorCode) {
+                    case -100:
+                        layer.msg("上传的文件数量已经超出系统限制的"+$('#'+id).uploadify('settings','queueSizeLimit')+"个文件！");
+                        break;
+                    case -110:
+                        layer.msg("文件 ["+file.name+"] 大小超出系统限制的"+$('#'+id).uploadify('settings','fileSizeLimit')+"大小！");
+                        break;
+                    case -120:
+                        layer.msg("文件 ["+file.name+"] 大小异常！");
+                        break;
+                    case -130:
+                        layer.msg("文件 ["+file.name+"] 类型不正确！");
+                        break;
+                }
+            },
+            onUploadSuccess: function(file, data, response){
+                result = $.parseJSON(data); 
+                //                console.log(result);
+                $('#idcard_pic').html('<span><img class="sfz" src="{$Think.config.UPAIYUN_CONFIG.UPYUN_URL}'+result.url+'" /><input type="hidden" name="head_url" value="{$Think.config.UPAIYUN_CONFIG.UPYUN_URL}'+result.url+'"></span>');
+            },
+            onUploadError: function(file, errorCode, errorMsg, errorString){
+                layer.msg('上传失败，请检查上传文件是否符合要求。1MB，jpg/gif/png');
+            }
+        });
+    }
+
+</script>

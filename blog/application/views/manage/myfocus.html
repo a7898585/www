@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Skin.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css,ua/css/Public/TopBarFoot.css" />
+        <title>粉丝3ww444列表</title>
+    </head>
+
+    <body>
+        <!--顶部-->
+        <div class="LoginBox LgBe">
+            <div class="LoginBar">
+                <a href="http://help.cnfol.com/" target="_blank" class="LgOtLk R">客服帮助</a>
+
+                <div class="LgBes Cf W835">
+                    <a href="javascript:;" class="LgSel" name="Slg"></a><span class="LgShowSe2"><a class="Acell Clapp" target="_blank" href="http://p.cnfol.com/">Apple ios</a><a class="Acell Cladd" target="_blank" href="http://p.cnfol.com/">Android</a></span>
+                    <a class="LgPocket Ntladd Mt3" target="_blank" href="http://p.cnfol.com/">移动中金</a>
+
+                    <a href="javascript:;" class="LgSel" name="Slg"></a><span class="LgShowSel"><a href="javascript:Tn.Sina();"></a></span>
+                    <a href="javascript:Tn.Qzone();" title="QQ登录" class="LgQQ"></a>
+                    <a href="http://passport.cnfol.com/accounts/Register" target="_blank" title="快速注册" >注册</a>
+                    <a href="http://passport.cnfol.com/forgetpassword" target="_blank" title="忘记密码?" >忘记密码?</a>
+                    <a href="javascript:Tn.Submit();" class="LgBtn">登录</a>
+                    我的中金: <input type="text" class="LoginName" id="LoginName" value="用户名/邮箱" />
+                    密码: <input class="LoginPass" id="LoginPass" type="password" />          
+                </div>
+                <div class="LgAfs">
+                    <i>欢迎您，<a href="#" target="_blank" class="LgName" id="LgName" >123456789</a> ！</i>|
+                    <a href="#" target="_blank" class="LgMoney" id="LgMoney" >(123456)</a>|
+                    <a href="#" target="_blank" class="LgEmail" id="LgEmail" >(0)</a>|
+                    <a href="#" target="_blank" >我的帐户</a>|
+                    <a href="#" target="_blank" >我要充值</a>|
+                    <a href="javascript:Tn.TopQuit();" >退出</a>
+                </div>
+            </div>
+        </div>
+        <!--end 顶部-->    
+        <!--导航-->
+        <div class="Wrap Nav">
+            <form class="R Mr10">
+                <input type="text" id="C2" class="Srinput L" value="搜索博文/博主">
+                <label class="LabSlc L Ml10">
+                    <select name="SlctFrst" class="SlSW SlcWrp">
+                        <option value="本博客">本博客</option>
+                    </select>
+                </label>
+                <a href="javascript:;" class="Asrch Ml10"></a>
+            </form>
+            <a class="AHome Mr30" href="javascript:;" target="_blank">我的首页</a><a class="ABlog" href="javascript:;" target="_blank">我的博客</a><a class="APhoto" href="javascript:;" target="_blank">相 册</a><a class="ASet ANowst" href="javascript:;" target="_blank">设 置</a>
+        </div>
+        <!--end 导航-->
+        <!--内容-->
+        <div class="Wrap Cf Mt15">
+            <!--左-->
+            <div class="MaLft">
+                <!--关注筛选-->
+                <div class="FilterBox">
+                    <div class="Sum">共关注<em>365</em>人</div>
+                    <div class="SearchBox">
+                        <!--搜索框-->
+                        <div class="SearchBar"><input id="Csearch" name="" type="text" value="输入昵称或备注" /><a class="SearchBtn" href="javascript:;"></a></div> 
+                        <!--end 搜索框-->
+                        <label class="LabSlc">
+                            <select name="TitleCate" class="SlLW SlcWrp">
+                                <option>全部</option>
+                                <option>全部</option>
+                                <option>全部</option>
+                            </select>
+                        </label>            
+                    </div>
+                </div>
+                <!--end 关注筛选-->        
+                <!--关注列表-->
+                <div class="MyFollowBox FirstMesg">                    
+                    <div class="FaceBox">
+                        <a href="#"><img /></a>
+                    </div> 
+                    <div class="DetailBox">
+                        <div class="HandleBox"><a class="Attention" href="javascript:;" onClick="Dialog('PlusSucPop')">关注</a>|<a href="javascript:;" onClick="Dialog('DelFansPop')">移除粉丝</a>|<a href="javascript:;" onClick="Dialog('BlacklistPop')">黑名单</a></div>
+                        <p class="Name"><a href="#">张三四</a></p>
+                        <p class="FollowInfo"><span>关注<em>800</em></span>|<span>粉丝<em>800</em></span>|<span>文章<em>800</em></span></p>
+                        <p class="Intro">简介：简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+                        <p class="News">最新动态：发表一篇文章<a href="#">文章标题</a></p>
+                    </div>           
+                </div>
+                <!--end 关注列表-->
+                <!--关注列表-->
+                <div class="MyFollowBox">                    
+                    <div class="FaceBox">
+                        <a href="#"><img /></a>
+                    </div> 
+                    <div class="DetailBox">
+                        <div class="HandleBox"><span>互相关注</span>|<a href="javascript:;" onClick="Dialog('UnfollowPop')">取消关注</a>|<a href="#">黑名单</a></div>
+                        <p class="Name"><a href="#">张三四</a></p>
+                        <p class="FollowInfo"><span>关注<em>800</em></span>|<span>粉丝<em>800</em></span>|<span>文章<em>800</em></span></p>
+                        <p class="Intro">简介：简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+                        <p class="News">最新动态：发表一篇文章<a href="#">文章标题</a></p>
+                    </div>  
+                </div>
+                <!--end 关注列表-->
+                <!--关注列表-->
+                <div class="MyFollowBox">                    
+                    <div class="FaceBox">
+                        <a href="#"><img /></a>
+                    </div> 
+                    <div class="DetailBox">
+                        <div class="HandleBox"><a class="Attention" href="#">关注</a>|<a href="#">移除粉丝</a>|<a href="#">黑名单</a></div>
+                        <p class="Name"><a href="#">张三四</a></p>
+                        <p class="FollowInfo"><span>关注<em>800</em></span>|<span>粉丝<em>800</em></span>|<span>文章<em>800</em></span></p>
+                        <p class="Intro">简介：简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+                        <p class="News">最新动态：发表一篇文章<a href="#">文章标题</a></p>
+                    </div>  
+                </div>
+                <!--end 关注列表-->
+                <!--关注列表-->
+                <div class="MyFollowBox">                    
+                    <div class="FaceBox">
+                        <a href="#"><img /></a>
+                    </div> 
+                    <div class="DetailBox">
+                        <div class="HandleBox"><a class="Attention" href="#">关注</a>|<a href="#">移除粉丝</a>|<a href="#">黑名单</a></div>
+                        <p class="Name"><a href="#">张三四</a></p>
+                        <p class="FollowInfo"><span>关注<em>800</em></span>|<span>粉丝<em>800</em></span>|<span>文章<em>800</em></span></p>
+                        <p class="Intro">简介：简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+                        <p class="News">最新动态：发表一篇文章<a href="#">文章标题</a></p>
+                    </div>  
+                </div>
+                <!--end 关注列表-->
+                <!--关注列表-->
+                <div class="MyFollowBox">                    
+                    <div class="FaceBox">
+                        <a href="#"><img /></a>
+                    </div> 
+                    <div class="DetailBox">
+                        <div class="HandleBox"><a class="Attention" href="#">关注</a>|<a href="#">移除粉丝</a>|<a href="#">黑名单</a></div>
+                        <p class="Name"><a href="#">张三四</a></p>
+                        <p class="FollowInfo"><span>关注<em>800</em></span>|<span>粉丝<em>800</em></span>|<span>文章<em>800</em></span></p>
+                        <p class="Intro">简介：简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+                        <p class="News">最新动态：发表一篇文章<a href="#">文章标题</a></p>
+                    </div>  
+                </div>
+                <!--end 关注列表-->
+                <!--关注列表-->
+                <div class="MyFollowBox">                    
+                    <div class="FaceBox">
+                        <a href="#"><img /></a>
+                    </div> 
+                    <div class="DetailBox">
+                        <div class="HandleBox"><a class="Attention" href="#">关注</a>|<a href="#">移除粉丝</a>|<a href="#">黑名单</a></div>
+                        <p class="Name"><a href="#">张三四</a></p>
+                        <p class="FollowInfo"><span>关注<em>800</em></span>|<span>粉丝<em>800</em></span>|<span>文章<em>800</em></span></p>
+                        <p class="Intro">简介：简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+                        <p class="News">最新动态：发表一篇文章<a href="#">文章标题</a></p>
+                    </div>  
+                </div>
+                <!--end 关注列表-->
+                <!--关注列表-->
+                <div class="MyFollowBox">                    
+                    <div class="FaceBox">
+                        <a href="#"><img /></a>
+                    </div> 
+                    <div class="DetailBox">
+                        <div class="HandleBox"><a class="Attention" href="#">关注</a>|<a href="#">移除粉丝</a>|<a href="#">黑名单</a></div>
+                        <p class="Name"><a href="#">张三四</a></p>
+                        <p class="FollowInfo"><span>关注<em>800</em></span>|<span>粉丝<em>800</em></span>|<span>文章<em>800</em></span></p>
+                        <p class="Intro">简介：简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+                        <p class="News">最新动态：发表一篇文章<a href="#">文章标题</a></p>
+                    </div>  
+                </div>
+                <!--end 关注列表-->
+                <!--关注列表-->
+                <div class="MyFollowBox">                    
+                    <div class="FaceBox">
+                        <a href="#"><img /></a>
+                    </div> 
+                    <div class="DetailBox">
+                        <div class="HandleBox"><a class="Attention" href="#">关注</a>|<a href="#">移除粉丝</a>|<a href="#">黑名单</a></div>
+                        <p class="Name"><a href="#">张三四</a></p>
+                        <p class="FollowInfo"><span>关注<em>800</em></span>|<span>粉丝<em>800</em></span>|<span>文章<em>800</em></span></p>
+                        <p class="Intro">简介：简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</p>
+                        <p class="News">最新动态：发表一篇文章<a href="#">文章标题</a></p>
+                    </div>  
+                </div>
+                <!--end 关注列表-->
+                <!--分页-->
+                <div class="Page">
+                    <div class="SelectPage">当前第<em>1/15</em>页，跳转至第<input name="" type="text" />页</div>
+                    <div class="NextPage"><a href="#">首页</a>|<a href="#">上一页</a>|<a href="#">下一页</a>|<a href="#">尾页</a></div>
+                </div>
+                <!--end 分页-->      
+            </div>
+            <!--end 左-->
+            <!--右-->
+            <div class="MaRgt">
+                <div class="BloggerFaceBox">
+                    <div class="PicBox"><img /></div>
+                    <ul class="BloggerAtten">
+                        <li>
+                            <p><b>237</b></p>
+                            <p>关注</p>
+                        </li>
+                        <li class="Fans">  
+                            <p><b>237</b></p>
+                            <p>粉丝</p>
+                        </li>
+                        <li>  
+                            <p><b>237</b></p>
+                            <p>文章</p>
+                        </li>
+                    </ul>
+                </div>
+                <!--分组-->
+                <div class="RgtBar FirstBar">
+                    <h3>分组</h3>
+                    <ul class="CountLst">
+                        <li>未分组</li>
+                        <li>圈友</li>
+                        <li>博友</li>
+                        <li class="Last">其他</li>
+                    </ul>
+                </div>
+                <!--end 分组-->
+                <!--可能感兴趣的人-->
+                <div class="RgtBar LastBar">
+                    <a class="Change" href="#">[换一批]</a>
+                    <h3>可能感兴趣的人</h3>
+                    <ul class="PicLst">
+                        <li>
+                            <a href="#"><img /></a>
+                            <p><a href="#">张三系</a></p>
+                        </li>
+                        <li>
+                            <a href="#"><img /></a>
+                            <p><a href="#">张三系</a></p>
+                        </li>
+                        <li>
+                            <a href="#"><img /></a>
+                            <p><a href="#">张三系</a></p>
+                        </li>
+                        <li>
+                            <a href="#"><img /></a>
+                            <p><a href="#">张三系</a></p>
+                        </li>
+                        <li>
+                            <a href="#"><img /></a>
+                            <p><a href="#">张三系</a></p>
+                        </li>
+                        <li>
+                            <a href="#"><img /></a>
+                            <p><a href="#">张三系</a></p>
+                        </li>
+                    </ul>
+                </div>
+                <!--end 可能感兴趣的人-->  
+            </div>
+            <!--end 右-->
+        </div>
+        <!--end 内容--> 
+        <!--============= 弹窗 ================-->
+        <!--关注成功弹窗-->
+        <div class="PlusSucPop" id="PlusSucPop">
+            <h4>关注成功</h4>
+            <a class="Close" href="javascript:;" onClick="Dialog.Close();"></a>
+            <div class="Cont">
+                <p>为<b>张三四</b>选择分组</p>
+                <p class="CheckBox">
+                    <label>
+                        <input type="checkbox" name="复选框组1" value="f" id="复选框组1_0" />
+                        朋友</label>
+                    <label>
+                        <input type="checkbox" name="复选框组1" value="s" id="复选框组1_1" />
+                        同学</label>
+                    <label>
+                        <input type="checkbox" name="复选框组1" value="o" id="复选框组1_2" />
+                        其他</label>
+                    <label>
+                        <input type="checkbox" name="复选框组1" value="c" id="复选框组1_3" />
+                        圈友</label>
+                    <label>
+                        <input type="checkbox" name="复选框组1" value="co" id="复选框组1_4" />
+                        同事</label>
+                    <label>
+                        <input type="checkbox" name="复选框组1" value="b" id="复选框组1_5" />
+                        博友</label>  
+                </p>            
+                <!--<p class="NewGroup"><a class="Creat" href="#">创建新分组</a></p>-->
+                <!--创建-->
+                <p class="NewGroup Cf">
+                    <input name="" type="text" value="新分组" style="color:#999999;"/><a class="CreatBtn" href="#">创建</a><a class="CancelBtn" href="#">取消</a>
+                    <span class="Tip">请输入新分组名称！</span>
+                    <!--<span class="Tip">该分组已经存在，请重新输入新分组名称！</span>-->
+                </p>
+                <!--end 创建-->
+                <p class="BtnBox"><a class="SaveBtn" href="#">保存</a><a class="CancelBtn" href="javascript:;" onClick="Dialog.Close();">取消</a></p>
+            </div>
+        </div>
+        <!--end 关注成功弹窗-->
+        <!--移除粉丝后提示框-->
+        <div class="DeterminePop" id="DelFansPop">
+            <a class="Close" href="javascript:;" onClick="Dialog.Close();"></a>
+            <p class="Tip">是否确认移除这个粉丝？</p>
+            <p class="BtnBox"><a class="SubmitBtn" href="#">确认</a><a class="CancelBtn" href="javascript:;" onClick="Dialog.Close();">取消</a></p>
+        </div>
+        <!--end 移除粉丝后提示框-->
+        <!--黑名单提示框-->
+        <div class="DeterminePop" id="BlacklistPop">
+            <a class="Close" href="javascript:;" onClick="Dialog.Close();"></a>
+            <p class="Tip">是否确认将这个粉丝放进黑名单？</p>
+            <p class="BtnBox"><a class="SubmitBtn" href="#">确认</a><a class="CancelBtn" href="javascript:;" onClick="Dialog.Close();">取消</a></p>
+        </div>
+        <!--end 黑名单提示框-->
+        <!--取消关注提示框-->
+        <div class="DeterminePop" id="UnfollowPop">
+            <a class="Close" href="javascript:;" onClick="Dialog.Close();"></a>
+            <p class="Tip">是否取消关注这个粉丝？</p>
+            <p class="BtnBox"><a class="SubmitBtn" href="#">确认</a><a class="CancelBtn" href="javascript:;" onClick="Dialog.Close();">取消</a></p>
+        </div>
+        <!--end 取消关注提示框-->
+        <!--============= end 弹窗 ================-->  
+        <script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Dialog.js,ui/Js/Select/Select.js,Cm/Js/Cleaner.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            Selects('TitleCate','SlctFrst');
+            Cleaner("Csearch");
+        </script>    
+        <script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,ua/js/Public/Base64.js,ua/js/Public/Login.js"></script>
+        <script type="text/javascript">
+            Tn.TopLogin();
+        </script>
+    </body>
+</html>

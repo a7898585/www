@@ -1,0 +1,85 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03" style="width:160px">当前位置：添加自定义CSS</div>
+    </div>
+    <div class="szym06" style="height:500px">
+        <table width="100%" border="0" cellpadding="3" cellspacing="3">
+            <form id="popFormSubmit" name="popFormSubmit" method="post"  onSubmit="return AddCss()"  >   
+                <tr>
+                    <td width="149">样式名称：</td>
+                    <td width="597"><input type="text" name="name" id="name" value="<?php if($editstyleid > 0) echo (isset($usestyle['Name']))? $usestyle['Name']:'';?>"/></td>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">CSS样式内容：</td>
+                    <td align="left"><textarea name="Content" cols="60" rows="15" id="Content"><?php echo (isset($usestyle['Content']))? strip_tags($usestyle['Content']):'';?></textarea><a href="<?php echo $baseurl;?>/shtml/CssHelp.shtml" target="_blank">帮助</a></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input name="act" type="hidden" id="act" value="addcss" />
+                        <input name="isuse" type="hidden" id="isuse" value="0" />
+                        <input name="styleid" type="hidden" id="styleid" value="<?php echo $editstyleid;?>" />
+                        <input name="MemberID" type="hidden" id="mid" value="<?php echo $bloginfo['MemberID'];?>" />
+                        <input name="flashCode" type="hidden" id="flasbCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>" />
+                        <?php 
+                        if($editstyleid > 0)
+                        {?>
+                        <input type="submit" onclick="saveuse('0')" value="保存" name="Submit">
+                        <?php
+                        }
+                        else
+                        {?>
+                        <input type="submit" name="Submit" value="添加" />
+                        <?php
+                        }?>
+ 　        <input type="reset" name="reset" value="重置" />
+                        <?php
+                        if($editstyleid > 0)
+                        {?>
+                        <input type="submit" onclick="saveuse('1')" value="保存并使用">
+                        <?php
+                        }?>
+                        <input type="button" name="preview" value="预览" onclick="csspreview()"/></td>
+                </tr></form>
+        </table>
+    </div>
+</div>
+<div style="display: none;">
+    <form target="_blank" method="post" action="#" name="fpreview" id="fpreview"> 
+        <textarea id="PreviewContent" name="PreviewContent"></textarea>
+    </form>
+</div>
+<SCRIPT language=JavaScript>
+    var g_pop=null;
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var action =  baseuri + "/template/Action";
+    var defined = baseuri + "/template/Define";
+    var previewurl = baseuri + "/preview/0";
+    function AddCss()
+    {
+        if(mb_strlen($('#name').val()) < 3 || mb_strlen($('#name').val()) > 60){
+            showalert("样式名称长度应该在3-60个字节之内", false); return false;	
+        }else if(mb_strlen($('#Content').val()) < 100 || mb_strlen($('#Content').val()) > 1000000){
+            showalert("样式内容长度应该在100-1000000个字节之内", false); return false;	
+        }else{ 
+            $.post(action,$('#popFormSubmit').serialize(), function callback(data){
+                showalert(data.error, false);
+                if(data.errno == 'success'){
+                    setTimeout(function(){ location.href= defined;},3000);
+                }
+            },'json');
+        }
+        return false;
+    }
+    function saveuse(isuse){
+        $('#isuse').val(isuse);
+    }
+    function csspreview()
+    {  
+        form = document.popFormSubmit;
+        formpreview = document.fpreview;
+        formpreview.PreviewContent.value =form.Content.value;
+        formpreview.action = previewurl;
+        document.fpreview.submit();
+    }
+</script>

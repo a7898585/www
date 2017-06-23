@@ -1,0 +1,353 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>新闻王</title>
+
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="icon" type="image/png" href="/Public/Home/i/favicon.png">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="/Public/Home/i/app-icon72x72@2x.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="apple-touch-icon-precomposed" href="/Public/Home/i/app-icon72x72@2x.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="/Public/Home/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+    <link rel="stylesheet" href="/Public/Mobile/css/amazeui.css?v=i4uol9ri">
+    <!--<link rel="stylesheet" href="/Public/Mobile/css/amaze.min.css?v=i4uol9ri">-->
+    <link rel="stylesheet" href="/Public/Mobile/css/app.css">
+</head>
+<body>
+
+<header data-am-widget="header" class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+        <a href="#left-link" class="">
+            <i class="am-header-icon am-icon-home"></i>
+        </a>
+    </div>
+    <h1 class="am-header-title">新闻王</h1>
+    <div class="am-header-right am-header-nav">
+        <a class="" data-am-modal="{target: '#login-modal', closeViaDimmer: 0, width: 300}">
+            <i class="am-header-icon am-icon-user"></i>
+        </a>
+    </div>
+</header>
+
+<!--登录框-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="login-modal">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">登录
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            <form class="am-form am-text-left" method="post">
+                <input type="email" value="" id="email" name="" placeholder="邮箱账户">
+                <label></label>
+                <input type="password" value="" id="password" name="" placeholder="密码">
+                <label></label>
+                <div class="am-cf">
+                    <input type="button" class="am-btn am-btn-primary am-btn-block" value="登 录" id="btnLogin">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div id="nav_list" style="background:#f5f5f5;" class="am-g am-collapse am-topbar-collapse">
+    <ul style="padding:0;font-weight: 100;" class="am-nav am-nav-pills am-nav-justify am-nav-header">
+        <foreach name="nav_list" item="item">
+            <li class=""><a href="{$home_url}/{$item.pinyin}" style="padding: 3px 5px;width: 50px;">{$item.title}</a></li>
+        </foreach>
+    </ul>
+</div>
+
+
+<!--轮播图片-start-->
+<div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{&quot;animation&quot;:&quot;slide&quot;,&quot;slideshow&quot;:false}'>
+    <ul class="am-slides">
+        <li>
+            <img src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg">
+            <div class="am-slider-desc">这是标题标题标题标题标题标题标题0</div>
+        </li>
+        <li>
+            <img src="http://s.cn.bing.net/az/hprichbg/rb/CardinalsBerries_ZH-CN10679090179_1366x768.jpg">
+            <div class="am-slider-desc">这是标题标题标题标题标题标题标题1</div>
+        </li>
+        <li>
+            <img src="http://s.cn.bing.net/az/hprichbg/rb/QingdaoJiaozhou_ZH-CN10690497202_1366x768.jpg">
+            <div class="am-slider-desc">这是标题标题标题标题标题标题标题2</div>
+        </li>
+        <li>
+            <img src="http://s.cn.bing.net/az/hprichbg/rb/FennecFox_ZH-CN13720911949_1366x768.jpg">
+            <div class="am-slider-desc">这是标题标题标题标题标题标题标题3</div>
+        </li>
+    </ul>
+</div>
+<!--轮播图片-end-->
+
+
+
+<!--推荐-start-->
+<div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi">
+    <h2 class="am-titlebar-title">热门推荐</h2>
+    <nav class="am-titlebar-nav">
+        <a href="#more" class="">more &raquo;</a>
+    </nav>
+</div>
+<div data-am-widget="list_news" class="am-list-news am-list-news-default">
+    <div class="am-list-news-bd">
+        <ul class="am-list issue-list">
+            <li class="am-g">
+                <a href="/news/info/12" class="am-list-item-hd ">我很囧，你保重....晒晒旅行中的那些囧！</a>
+            </li>
+            <li class="am-g">
+                <a href="/news/info/12" class="am-list-item-hd ">我最喜欢的一张画</a>
+            </li>
+            <li class="am-g">
+                <a href="/news/info/12" class="am-list-item-hd ">我最喜欢的一张画</a>
+            </li>
+            <li class="am-g">
+                <a href="/news/info/12" class="am-list-item-hd ">我最喜欢的一张画<span class="am-badge am-badge-success am-fr am-icon-md am-circle">12</span></a>
+            </li>
+            <li class="am-g">
+                <a href="/news/info/12" class="am-list-item-hd ">“你的旅行，是什么颜色？” 晒照片，换北欧梦幻极光之旅！</a>
+            </li>
+        </ul>
+    </div>
+    <!--更多在底部-->
+    <div class="am-list-news-ft">
+        <a class="am-list-news-more am-btn am-btn-default " href="###">查看更多 &raquo;</a>
+    </div>
+</div>
+<!--推荐-end-->
+
+<!--数码-start-->
+<div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi">
+    <h2 class="am-titlebar-title">数码</h2>
+    <nav class="am-titlebar-nav">
+        <a href="#more" class="">more &raquo;</a>
+    </nav>
+</div>
+<div data-am-widget="list_news" class="am-list-news am-list-news-default">
+    <div class="am-list-news-bd">
+        <ul class="am-list">
+            <!--缩略图在标题左边-->
+            <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                <div class="am-u-sm-4 am-list-thumb">
+                    <a href="/news/info/12" class="">
+                        <img src="http://img5.douban.com/lpic/o636459.jpg" alt="我很囧，你保重....晒晒旅行中的那些囧！"/>
+                    </a>
+                </div>
+                <div class=" am-u-sm-8 am-list-main">
+                    <h3 class="am-list-item-hd">
+                        <a href="/news/info/12" class="">我很囧，你保重....晒晒旅行中的那些囧！</a>
+                    </h3>
+                    <div class="am-list-item-text">囧人囧事囧照，人在囧途，越囧越萌。标记《带你出发，陪我回家》http://book.douban.com/subject/25711202/为“想读”“在读”或“读过”，有机会获得此书本活动进行3个月，每月送出三本书。会有不定期bonus！</div>
+                </div>
+            </li>
+            <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                <div class="am-u-sm-4 am-list-thumb">
+                    <a href="/news/info/12" class="">
+                        <img src="http://img3.douban.com/lpic/o637240.jpg" alt="我最喜欢的一张画" />
+                    </a>
+                </div>
+                <div class=" am-u-sm-8 am-list-main">
+                    <h3 class="am-list-item-hd">
+                        <a href="/news/info/12" class="">我最喜欢的一张画</a>
+                    </h3>
+                    <div class="am-list-item-text">你最喜欢的艺术作品，告诉大家它们的------名图画，色彩，交织，撞色，线条雕塑装置当代古代现代作品的照片美我最喜欢的画群296795413进群发画，少说多发图，</div>
+                </div>
+            </li>
+            <li class="am-g am-list-item-desced">
+                <div class=" am-list-main">
+                    <h3 class="am-list-item-hd">
+                        <a href="/news/info/12" class="">“你的旅行，是什么颜色？” 晒照片，换北欧梦幻极光之旅！</a>
+                    </h3>
+                    <div class="am-list-item-text">还在苦恼圣诞礼物再也玩儿不出新意？快来抢2013最炫彩的跨国圣诞礼物！【参与方式】1.关注“UniqueWay无二之旅”豆瓣品牌小站http://brand.douban.com/uniqueway/2.上传一张**本人**在旅行中色彩最浓郁、最丰富的照片（色彩包含取景地、周边事物、服装饰品、女生彩妆等等，发挥你们无穷的创意想象力哦！^^）一定要有本人出现喔！3.
+                        在照片下方，附上一句旅行宣言作为照片说明。 成功参与活动！* 听他们刚才说，上传照片的次</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--推荐-end-->
+
+
+
+<div data-am-widget="titlebar" class="am-titlebar am-titlebar-multi"  >
+    <h2 class="am-titlebar-title">科技频道</h2>
+    <nav class="am-titlebar-nav">
+        <a href="[data-tab-panel-0]" class="">手机</a>
+        <a href="[data-tab-panel-1]" class="">数码</a>
+        <a href="[data-tab-panel-2]" class="">影音</a>
+    </nav>
+</div>
+
+<div data-am-widget="tabs" class="am-tabs am-tabs-default"  data-am-scrollspy="{animation: 'fade', delay: 300}">
+    <ul class="am-tabs-nav am-cf" style="display: none;">
+        <li class="am-active">
+            <a href="[data-tab-panel-0]" class="">青春</a>
+        </li>
+        <li class="">
+            <a href="[data-tab-panel-1]" class="">彩虹</a>
+        </li>
+        <li class="">
+            <a href="[data-tab-panel-2]" class="">歌唱</a>
+        </li>
+    </ul>
+    <div class="am-tabs-bd">
+        <div data-tab-panel-0 class="am-tab-panel am-active">
+            <div data-am-widget="list_news" class="am-list-news am-list-news-default">
+                <div class="am-list-news-bd">
+                    <ul class="am-list">
+                        <li class="am-g">
+                            <a href="/news/info/12" class="am-list-item-hd ">我很囧，你保重....晒晒旅行中的那些囧！</a>
+                        </li>
+                        <li class="am-g">
+                            <a href="/news/info/12" class="am-list-item-hd ">我最喜欢的一张画<span class="am-badge am-round">1</span></a>
+                        </li>
+                        <li class="am-g">
+                            <a href="/news/info/12" class="am-list-item-hd ">“你的旅行，是什么颜色？” 晒照片，换北欧梦幻极光之旅！</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--更多在底部-->
+                <div class="am-list-news-ft">
+                    <a class="am-list-news-more am-btn am-btn-default " href="###">查看更多 &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div data-tab-panel-1 class="am-tab-panel ">
+            <div data-am-widget="list_news" class="am-list-news am-list-news-default">
+
+                <div class="am-list-news-bd">
+                    <ul class="am-list">
+                        <li class="am-g">
+                            <a href="/news/info/12" class="am-list-item-hd ">我很囧，你保重....晒晒旅行中的那些囧！</a>
+                        </li>
+                        <li class="am-g">
+                            <a href="/news/info/12" class="am-list-item-hd ">我最喜欢的一张画</a>
+                        </li>
+                        <li class="am-g">
+                            <a href="/news/info/12" class="am-list-item-hd ">“你的旅行，是什么颜色？” 晒照片，换北欧梦幻极光之旅！</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--更多在底部-->
+                <div class="am-list-news-ft">
+                    <a class="am-list-news-more am-btn am-btn-default " href="###">查看更多 &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div data-tab-panel-2 class="am-tab-panel ">
+            <div data-am-widget="list_news" class="am-list-news am-list-news-default">
+
+                <div class="am-list-news-bd">
+                    <ul class="am-list">
+                        <li class="am-g">
+                            <a href="/news/info/12" class="am-list-item-hd ">我很囧，你保重....晒晒旅行中的那些囧！</a>
+                        </li>
+                        <li class="am-g">
+                            <a href="/news/info/12" class="am-list-item-hd ">我最喜欢的一张画</a>
+                        </li>
+                        <li class="am-g">
+                            <a href="/news/info/12" class="am-list-item-hd ">“你的旅行，是什么颜色？” 晒照片，换北欧梦幻极光之旅！</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--更多在底部-->
+                <div class="am-list-news-ft">
+                    <a class="am-list-news-more am-btn am-btn-default " href="###">查看更多 &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="amz-toolbar" class="amz-toolbar" style="right: 20px;position: fixed;bottom: 20px;z-index: 99999;">
+    <a id="amz-go-top" onclick="$('html, body').animate({scrollTop: 0}, '500');" class="am-icon-btn am-icon-arrow-up am-active" title="回到顶部" href="#top"></a>
+    <!--<a class="am-icon-faq am-icon-btn am-icon-question-circle" title="常见问题" href="/getting-started/faq"></a>-->
+</div>
+
+<!--底部-->
+<footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }" style="background: #333333;color:#fff;">
+    <div class="am-g " style="background:#f5f5f5;">
+        <ul class="am-nav am-nav-pills am-nav-justify am-nav-header" style="padding:0;font-weight: 100;">
+            <li class="" style="margin: 0;"><a href="/news/lists">推荐</a></li>
+            <li style="margin: 0;"><a href="/news/lists" class="am-round">热点</a></li>
+            <li style="margin: 0;"><a href="/news/lists">社会</a></li>
+            <li style="margin: 0;"><a href="/news/lists">娱乐</a></li>
+            <li style="margin: 0;"><a href="/news/lists">体育</a></li>
+            <!--<li><a href="#">财经</a></li>-->
+        </ul>
+    </div>
+    <div class="am-g" style="background:#f5f5f5;border-bottom: 2px solid #3bb4f2;">
+        <ul class="am-nav am-nav-pills am-nav-justify am-nav-header"  style="padding:0;font-weight: 100;">
+            <li style="margin: 0;"><a href="/news/lists">军事</a></li>
+            <li style="margin: 0;"><a href="/news/lists">国际</a></li>
+            <li style="margin: 0;"><a href="/news/lists">汽车</a></li>
+            <li style="margin: 0;"><a href="/news/lists">科技</a></li>
+            <li style="margin: 0;"><a href="/news/lists">游戏</a></li>
+            <!--<li><a href="#">旅游</a></li>-->
+        </ul>
+    </div>
+    <div class="am-footer-switch">
+        <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">云适配版</span>
+        <span class="am-footer-divider">|</span>
+        <a id="godesktop" data-rel="desktop" class="am-footer-desktop "
+           href="#">电脑版</a>
+    </div>
+    <div class="am-footer-miscs ">
+        <p>由
+            <a href="http://www.yunshipei.com/" title="诺亚方舟" target="_blank">class="" 诺亚方舟</a>提供技术支持</p>
+        <p>CopyRight©2014 AllMobilize Inc.</p>
+        <p>京ICP备13033158</p>
+    </div>
+</footer>
+<div id="am-footer-modal" class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd am-modal-footer-hd">
+            <a href="javascript:void(0)" data-dismiss="modal" class="am-close am-close-spin "
+               data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">您正在浏览的是
+            <span class="am-switch-mode-owner">云适配</span>
+            <span class="am-switch-mode-slogan">为您当前手机订制的移动网站。</span>
+        </div>
+    </div>
+</div>
+
+
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/Public/Mobile/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="/Public/Mobile/js/amazeui.js"></script>
+<script type="text/javascript">
+    var ajax_login = false;
+    $(document).ready(function(){
+        $('#btnLogin').click(function(){
+            if(ajax_login) return false;
+
+        });
+    });
+</script>
+</body>
+</html>

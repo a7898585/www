@@ -1,0 +1,377 @@
+
+<div class="admin-content">
+
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/company/parent">保险总公司</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <form id="add_from" method="post" action="/company/p_add?id={$info.id}" enctype="multipart/form-data">
+        <div class="am-margin">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="#tab1">基本信息</a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            公司名称
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="name" value="{$info.name}">
+                        </div>
+                        <div class="am-u-sm-2">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            简称
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="short_name" value="{$info.short_name}">
+                        </div>
+                        <div class="am-u-sm-2">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            拼音首字母
+                        </div>
+                        <div class="am-u-sm-4">
+                            <input type="text" class="am-form-field am-input-sm" name="pinyin_f" value="{$info.pinyin_f}">
+                        </div>
+                        <div class="am-u-sm-2">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            客服热线
+                        </div>
+                        <div class="am-u-sm-4">
+                            <input type="text" class="am-form-field am-input-sm" name="online" value="{$info.online}">
+                        </div>
+                        <div class="am-u-sm-2">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">所在地</div>
+                        <div class="am-u-sm-6">
+                            <select name="province_id" id="province_list">
+                                <option value="0">请选择</option>
+                                <foreach name="province" item="item">
+                                    <option value="{$item.id}" <eq name="item.id" value="$info.province_id"> selected</eq> >{$item.name}</option>
+                                </foreach>
+                            </select>
+
+                            <select name="city_id" id="city_list">
+                                <option value="0">请选择</option>
+                                <foreach name="city" item="item">
+                                    <option value="{$item.id}" <eq name="item.id" value="$info.city_id"> selected</eq> >{$item.name}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-4"></div>
+                    </div>
+                           <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            联系地址
+                        </div>
+                        <div class="am-u-sm-4">
+                            <input type="text" class="am-form-field am-input-sm" name="address" value="{$info.address}">
+                        </div>
+                        <div class="am-u-sm-2">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">类型</div>
+                        <div class="am-u-sm-2">
+                            <select name="company_type_id" id="company_type_id">
+                                <option value="0">请选择</option>
+                                <foreach name="type_list" item="item">
+                                    <option value="{$item.id}" <eq name="item.id" value="$info.company_type_id"> selected</eq> >{$item.name}</option>
+                                </foreach>
+                            </select>
+                        </div>     <div class="am-u-sm-6">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">规模</div>
+                        <div class="am-u-sm-2">
+                            <select name="scale">
+                                <option value="0" <if condition="$info.scale eq 0 "> selected</if> >5人以下</option>
+                                <option value="1" <if condition="$info.scale eq 1 "> selected</if> >5 - 10人</option>
+                                <option value="2" <if condition="$info.scale eq 2 "> selected</if> >11 - 50人</option>
+                                <option value="3" <if condition="$info.scale eq 3 "> selected</if> >51 - 100人</option>
+                                <option value="4" <if condition="$info.scale eq 4 "> selected</if> >101 - 500人</option>
+                                <option value="5" <if condition="$info.scale eq 5 "> selected</if> >501 - 1000人</option>
+                                <option value="6" <if condition="$info.scale eq 6 "> selected</if> >1000人以上</option> 
+                            </select>
+                        </div>     <div class="am-u-sm-6">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            成立时间
+                        </div>
+                        <div class="am-u-sm-4">
+                            <div class="am-form-group am-form-icon">
+                                <i class="am-icon-link"></i>
+                                <input class="am-form-field am-input-sm" type="text" placeholder="成立时间" name="setuptime" value="{$info.setuptime}">
+                            </div>
+                        </div>
+                        <div class="am-u-sm-6"></div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            企业官网
+                        </div>
+                        <div class="am-u-sm-4">
+                            <div class="am-form-group am-form-icon">
+                                <i class="am-icon-link"></i>
+                                <input class="am-form-field am-input-sm" type="text" placeholder="企业官网" name="website" value="{$info.website}">
+                            </div>
+                        </div>
+                        <div class="am-u-sm-6"></div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            企业简介
+                        </div>
+                        <div class="am-u-sm-10">
+                            <textarea name="content" id="content"  class="am-form-field">{$info.content}</textarea>
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            产品简介
+                        </div>
+                        <div class="am-u-sm-10">
+                            <textarea name="desc" maxlength="140" id="desc" placeholder="产品简介140字" class="am-form-field">{$info.desc}</textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="#tab1">执照信息</a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            法人性别
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="radio" name="sex" value="1" <eq name="info.sex" value="1"> checked="checked"</eq> id="option1"> 男
+                            <input type="radio" name="sex" value="0" <eq name="info.sex" value="0"> checked="checked"</eq> id="option3"> 女
+                        </div>
+                        <div class="am-u-sm-2">*必填</div>
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">年营业额</div>
+                    <div class="am-u-sm-2">
+                        <select name="turnover" id="company_type_id">
+                            <option <if condition="$info.turnover eq 1 "> selected</if> value="1">人民币10万元/年以下</option>
+                            <option <if condition="$info.turnover eq 2 "> selected</if> value="2">人民币10万元/年-30万元/年</option>
+                            <option <if condition="$info.turnover eq 3 "> selected</if> value="3">人民币30万元/年-50万元/年</option>
+                            <option <if condition="$info.turnover eq 4 "> selected</if> value="4">人民币50万元/年-100万元/年</option>
+                            <option <if condition="$info.turnover eq 5 "> selected</if> value="5">人民币100万元/年-200万元/年</option>
+                            <option <if condition="$info.turnover eq 6 "> selected</if> value="6">人民币200万元/年-300万元/年</option>
+                            <option <if condition="$info.turnover eq 7 "> selected</if> value="7">人民币300万元/年-500万元/年</option>
+                            <option <if condition="$info.turnover eq 8 "> selected</if> value="8">人民币500万元/年-700万元/年</option>
+                            <option <if condition="$info.turnover eq 9 "> selected</if> value="9">人民币700万元/年-1000万元/年</option>
+                            <option <if condition="$info.turnover eq 10 "> selected</if> value="10">人民币1000万元/年-2000万元/年</option>
+                            <option <if condition="$info.turnover eq 11 "> selected</if> value="11">人民币2000万元/年-3000万元/年</option>
+                            <option <if condition="$info.turnover eq 12 "> selected</if> value="12">人民币3000万元/年-5000万元/年</option>
+                            <option <if condition="$info.turnover eq 13 "> selected</if> value="13">人民币5000万元/年-1亿元/年</option>
+                            <option <if condition="$info.turnover eq 14 "> selected</if> value="14">人民币1亿元/年以上</option>        
+                        </select>
+                    </div>     <div class="am-u-sm-6">*必填</div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        营业执照号
+                    </div>
+                    <div class="am-u-sm-6">
+                        <input type="text" class="am-form-field am-input-sm" name="license" value="{$info.license}">
+                    </div>
+                    <div class="am-u-sm-2">*必填</div>
+                </div>
+
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        营业执照图片
+                    </div>
+                    <input id="photo_url_val_1" type="hidden" name="license_img" class="uploadify am-btn am-btn-primary am-btn-xs"  value="{$info.license_img}" />
+                    <div class="am-u-sm-4">   
+                        <?php
+                        //获取项目跟路径
+                        $baseURL = getDoMain('');
+
+                        //设置swfupload参数
+                        $flashvars = 'uploadURL=' . urlencode($baseURL . 'api/uploadtx/?t=1');   						   #上传提交地址
+                        $flashvars.= '&buttonImageURL=' . urlencode($baseURL . '/Public/Daili/swfupload/upload.png');        	   #按钮背景图片
+                        $flashvars.= '&btnWidth=95';                                                               #按钮宽度
+                        $flashvars.= '&btnHeight=35';                                                              #按钮高度
+                        $flashvars.= '&fileNumber=20';                                                             #每次最多上传20个文件
+                        $flashvars.= '&fileSize=2';                                        					   #单个文件上传大小为20M
+                        $flashvars.= '&bgColor=#ffffff';                                                           #背景颜色
+                        $flashvars.= '&fileTypesDescription=Images';                                               #选择文件类型
+                        $flashvars.= '&fileType=*.jpg;*.png;*.gif;*.jpeg';                                         #选择文件后缀名	
+
+                        ?>
+                        <object style="float: left;" width="95" height="35" data="__PUBLIC__/Daili/swfupload/upload.swf" type="application/x-shockwave-flash">
+                            <param value="transparent" name="wmode">
+                            <param value="__PUBLIC__/Daili/swfupload/upload.swf" name="movie">
+                            <param value="high" name="quality">
+                            <param value="false" name="menu">
+                            <param value="always" name="allowScriptAccess">
+                            <param value="<?php echo $flashvars;?>" name="flashvars">
+                        </object>
+                    </div>
+                    <div class="am-u-sm-6">*必填</div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        营业执照图片预览
+                    </div>
+                    <div class="am-u-sm-4">
+                        <a href="{$info.license_img|setUpUrl=###}" target="_blank"><img id="photo_url_show_1" src="{$info.license_img|setUpUrl=###}" style="<empty name='info.license_img'>display:none;</empty>" /></a>
+                    </div>
+                    <div class="am-u-sm-6">*必填</div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        公司Logo
+                    </div>
+                    <input id="photo_url_val_2" type="hidden" name="photo_url" class="uploadify am-btn am-btn-primary am-btn-xs"  value="{$info.photo_url}" />
+                    <div class="am-u-sm-4">   
+                        <?php
+                        //获取项目跟路径
+                        $baseURL = getDoMain('');
+
+                        //设置swfupload参数
+                        $flashvars = 'uploadURL=' . urlencode($baseURL . 'api/uploadtx/?t=2');   						   #上传提交地址
+                        $flashvars.= '&buttonImageURL=' . urlencode($baseURL . '/Public/Daili/swfupload/upload.png');        	   #按钮背景图片
+                        $flashvars.= '&btnWidth=95';                                                               #按钮宽度
+                        $flashvars.= '&btnHeight=35';                                                              #按钮高度
+                        $flashvars.= '&fileNumber=20';                                                             #每次最多上传20个文件
+                        $flashvars.= '&fileSize=2';                                        					   #单个文件上传大小为20M
+                        $flashvars.= '&bgColor=#ffffff';                                                           #背景颜色
+                        $flashvars.= '&fileTypesDescription=Images';                                               #选择文件类型
+                        $flashvars.= '&fileType=*.jpg;*.png;*.gif;*.jpeg';                                         #选择文件后缀名	
+
+                        ?>
+                        <object style="float: left;" width="95" height="35" data="__PUBLIC__/Daili/swfupload/upload.swf" type="application/x-shockwave-flash">
+                            <param value="transparent" name="wmode">
+                            <param value="__PUBLIC__/Daili/swfupload/upload.swf" name="movie">
+                            <param value="high" name="quality">
+                            <param value="false" name="menu">
+                            <param value="always" name="allowScriptAccess">
+                            <param value="<?php echo $flashvars;?>" name="flashvars">
+                        </object>
+                    </div>
+                    <div class="am-u-sm-6">*必填</div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        公司Logo预览
+                    </div>
+                    <div class="am-u-sm-4">
+                        <a href="{$info.photo_url|setUpUrl=###}" target="_blank"><img id="photo_url_show_2" src="{$info.photo_url|setUpUrl=###}" style="<empty name='info.photo_url'>display:none;</empty>" /></a>
+                    </div>
+                    <div class="am-u-sm-6">*必填</div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">显示状态</div>
+                    <div class="am-u-sm-10">
+                        <div class="am-btn-group" data-am-button>
+                            <label class="am-btn am-btn-default am-btn-xs <eq name="info.status" value="1"> am-active</eq>">
+                                <input type="radio" name="status" value="1" <eq name="info.status" value="1"> checked="checked"</eq> > 显示
+                            </label>
+                            <label class="am-btn am-btn-default am-btn-xs <eq name="info.status" value="0"> am-active</eq>">
+                                <input type="radio" name="status" value="0" <eq name="info.status" value="0"> checked="checked"</eq>> 不显示
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="am-margin">
+            <input type="submit" class="am-btn am-btn-primary am-btn-xs" value="提交保存">
+            <button type="button" onclick="location.href='{$Think.server.HTTP_REFERER}'" class="am-btn am-btn-primary am-btn-xs">返回</button>
+        </div>
+    </form>
+</div>
+<link type="text/css" rel="stylesheet" href="/Public/Common/js/kindeditor/themes/default/default.css"/>
+<script type="text/javascript" src="/Public/Common/js/kindeditor/kindeditor-all-min.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor =K.create('#content', {
+            autoHeightMode : true,
+            allowPreviewEmoticons : false,
+            urlType : 'absolute',
+            allowUpload : false, //允许上传图片
+            uploadJson : '/public/upload_img',
+            filterMode:false,
+            afterCreate : function() {
+                this.loadPlugin('autoheight');
+            }
+        });
+    });
+    
+    $("#province_list").bind("change",function(){
+            var areaID = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "/api/area?level=2&id="+areaID,
+                dataType:"json",
+                success: function(data){
+                    $('#city_list').html('<option value="-1">-请选择-</option>');
+                    $.each(data,function(i,t){
+                        $('#city_list').append('<option value="'+i+'">'+t+'</option>');
+                    });
+                }
+            });
+        }); 
+</script>
+
+<script type="text/javascript" src="__PUBLIC__/Daili/swfupload/jquery.js"></script>
+<script>
+    /*上传错误信息提示*/
+    function showmessage(message){alert(message);}
+    /*显示文件名称*/
+    function setfilename(ID,filename){
+        ID = replaceStr(ID);
+        var htmls = '<li id="'+ID+'"><p>'+filename+'</p><p class="load">0%</p></li>';
+        $("#uploadPut").append(htmls);
+    }
+    /*显示上传进度*/
+    function setfileload(ID,load){
+        ID = replaceStr(ID);
+        $("#"+ID+" .load").html(load);
+    }
+    /*返回服务上传的数据*/
+    function setfilepath(ID,data){
+        ID = replaceStr(ID);
+        var s = eval('('+data+')');
+        //        alert(s.type)
+        if(s.result=="true"){
+            $('#photo_url_show_'+s.type).attr('src',s.filepath_url+'?r='+Math.random()).attr('width',135).attr('height',80).show();
+            $('#photo_url_val_'+s.type).val(s.filepath);
+        }else{
+            $("#"+ID).html(s.name+"上传失败");
+        }
+    }
+    /*替换特殊字符*/
+    function replaceStr(ID){
+        var reg = new RegExp("[=,/,\,?,%,#,&,(,),!,+,-,},{,:,>,<]","g"); //创建正则RegExp对象
+        var ID = ID.replace(reg,"");
+        return ID;
+    }
+</script>
+
+
+
+
+

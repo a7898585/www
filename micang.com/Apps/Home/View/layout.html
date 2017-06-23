@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>{$seo.title}</title>
+  <meta name="keywords" content="{$seo.key}"/>
+  <meta name="description" content="{$seo.des}"/>
+  <meta name="copyright" content="网站版权申明"/>
+  <link href="/Public/Home/css/layout.css" rel="stylesheet" type="text/css"/>
+  <script src="/Public/Common/js/jquery.min.js" type="text/javascript"></script>
+  <script src="/Public/Common/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+  <script type="text/javascript" src="/Public/Common/js/trade.js"></script>
+  <link href="/Public/Member/css/ui-dialog.css" rel="stylesheet"/>
+  <if condition="$navtap eq 'index'">
+    <script src="/Public/Home/js/bktb.js" type="text/javascript"></script>
+  </if>
+</head>
+
+<body>
+<!--顶部通条导航 开始-->
+<div class="topnav_bj">
+  <div class="topnav">
+    <div class="topnav_l">
+      <neq name="Think.session.MEMBERINFO|is_array" value="1">
+        欢迎来到<span>米仓</span>
+        <else/>
+        欢迎<span>{$Think.session.MEMBERINFO.username}</span>来到米仓
+      </neq>
+    </div>
+    <div class="topnav_r">
+      <neq name="Think.session.MEMBERINFO|is_array" value="1">
+        <a href="{:getDoMain()}public/login" rel="nofollow">登录</a>
+        <span>|</span>
+        <a href="{:getDoMain()}public/register" rel="nofollow">注册</a>
+        <else/>
+        <a href="/trolley" rel="nofollow">购物车(<b style="color:red;" id="trolley_num">{$trolley_num|default=0}</b>)</a>
+        <span>|</span>
+        <a href="{:getDoMain('member')}" rel="nofollow">用户中心</a>
+        <span>|</span>
+        <a href="{:getDoMain('member')}logout" rel="nofollow">退出</a>
+      </neq>
+
+    </div>
+  </div>
+</div>
+<!--顶部通条导航 结束-->
+<div class="header">
+  <a href="{:getDoMain()}"><img src="/Public/Home/images/logo.jpg" class="logo" alt="米仓网"/></a>
+  <!--搜索 开始-->
+  <div class="search">
+    <div class="nav_b">
+      <ul>
+        <li><a href="#" class="navxd">域名直达</a></li>
+        <li><a href="#">Whois查询</a></li>
+        <li><a href="#">域名分析</a></li>
+      </ul>
+    </div>
+    <input type="text" name="" value="请输入你要查询的域名，例如 xxx.com" onblur="if(this.value=='')this.value='请输入你要查询的域名，例如 xxx.com';" onfocus="if(this.value=='请输入你要查询的域名，例如 xxx.com')this.value='';" class="search_txt"/>
+    <input type="submit" name="" value="" class="search_btn"/>
+  </div>
+  <!--搜索 结束-->
+  <div class="header_txt">客服热线<span>4008-767-258</span></div>
+</div>
+<!--导航 开始-->
+<div class="navbg">
+  <div class="nav">
+    <ul>
+      <li><a href="{:getDoMain()}" class="navc <eq name=" navtap" value="index">navxd</eq>">首页</a></li>
+      <div class="cbtc_btn">
+        <div class="cbtc_b">
+          <a href="{:getDoMain()}domain/" class="navc_b <eq name=" navtap" value="domain_register_query">navxd</eq>">买域名</a>
+        </div>
+        <div class="cbtc_c">
+          <div class="cbtc_c_l">
+            <ul>
+              <li><a href="{:getDoMain()}domain/">域名注册</a></li>
+              <li><a href="{:getDoMain()}sell/page?type=2">限时竞价</a></li>
+              <li><a href="{:getDoMain()}sell/page?type=1">一口价</a></li>
+              <li><a href="{:getDoMain()}sell/page?type=3">买家询价</a></li>
+              <li><a href="{:getDoMain()}domain/purchase">域名代购</a></li>
+              <li><a href="{:getDoMain('member')}agency/buy/">域名中介</a></li>
+              <li><a href="#">域名分析</a></li>
+            </ul>
+          </div>
+          <div class="cbtc_c_r">
+            <dl>
+              <dt>域名注册常见问题</dt>
+              <dd><a href="#">如何使用代金劵使用说明</a></dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <li><a href="{:getDoMain()}sell/" class="navc <eq name=" navtap" value="sell">navxd</eq>">卖域名</a></li>
+      <li><a href="" class="navc">查域名</a></li>
+      <li><a href="#" class="navc">养域名</a></li>
+      <li><a href="{:getDoMain()}news/" class="navc <eq name=" navtap" value="news">navxd</eq>">域名资讯</a></li>
+    </ul>
+  </div>
+</div>
+{__CONTENT__}
+<div class="about">
+  <div class="wrap">
+    <dl>
+      <dt>关于我们</dt>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}about/">米仓网简介</a></dd>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}about/fee/">收费标准</a></dd>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}about/state/">网站声明</a></dd>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}about/contact/">联系我们</a></dd>
+    </dl>
+    <dl>
+      <dt>帮助中心</dt>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}help/">新手上路</a></dd>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}help/oper/">操作引导</a></dd>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}help/protocol/">网站协议</a></dd>
+    </dl>
+    <dl>
+      <dt>支付方式</dt>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}help/zf/">在线支付</a></dd>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}help/yhhk/">银行汇款</a></dd>
+    </dl>
+    <dl>
+      <dt>服务支持</dt>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}help/ask/">在线提问</a></dd>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}help/relation/">合作联系</a></dd>
+      <dd><i class="iconfont">&#xe613;</i><a href="{:getDoMain()}help/download/">文档下载</a></dd>
+      <dd><i class="iconfont">&#xe613;</i><a href="javascript:;">服务电话</a></dd>
+    </dl>
+    <div class="phone_txt"><span>4008-767-258</span></div>
+  </div>
+</div>
+<!--版权 开始-->
+<div class="copyright">
+  <ul>
+    <li>Copyright © {:date('Y')} 厦门米仓网版权所有</li>
+    <li>地址：厦门湖里万达写字楼C1栋501 客服电话：4008-767-258 传真：</li>
+    <li>国家域名注册服务投诉中心投诉受理电话:010-58813000</li>
+    <li>邮件supervise@cnnic.cn 传真：010-58812666</li>
+  </ul>
+</div>
+<script src="/Public/Home/js/interactive.js" type="text/javascript"></script>
+<script src="/Public/Home/js/common.js" type="text/javascript"></script>
+<!--版权 结束-->
+</body>
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?eca024a0fffa8edfb8952d00fec8f101";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+</html>

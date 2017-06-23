@@ -1,0 +1,484 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《新闻王》是一款会自动学习的资讯软件，它会聪明地分析你的兴趣爱好，自动为你推荐喜欢的内容，并且越用越懂你。新闻王 - 你关心的，才是头条！ - 头条网 TouTiao.com">
+    <meta name="keywords" content="新闻王,头条,头条网">
+
+    <link rel="shortcut icon" href="/Public/Home/images/favicon.ico" type="image/x-icon">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://s2.pstatp.com/r2/js/lib/html5shim.js"></script>
+    <![endif]-->
+
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/main.css" />
+
+    <title>内涵段子的全部文章 - 新闻王媒体平台</title>
+    <style>
+        #content{ margin-top:50px!important;}
+        #article{ width:730px; min-height:800px!important;}
+        #ColumnContainer{ width:730px}
+        .empty_article{ text-align:center; padding-top:100px;}
+        #article .pin .close { display:none}
+        .control-line { float:none!important}
+        .control-line span.comment { display:block; float:right!important; margin-right:0!important; padding-right:0!important}
+        .control-line span.share{ display:none!important}
+        .share_list { top:0!important}
+
+        .item_info{ margin:10px 0 }
+        .item_info tr td{ font-size:12px!important; color:#aaa!important; padding-right:20px; }
+        p.media_description{padding:10px 20px;text-align:left;word-wrap: break-word;}
+        .mp_home{margin: 0 10px 20px;padding-bottom: 20px;border-bottom: 1px solid #d9d9d9;}
+        .mp_home a{color:#b50808;}
+        .side-pane hr{margin:18px 10px;}
+    </style>
+
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="http://s2.pstatp.com/r2/css/ie_fix.css" />
+    <![endif]-->
+
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="http://s2.pstatp.com/r2/css/toutiao_ie6.css" />
+    <script src="http://s2.pstatp.com/r2/js/toutiao_ie6.js"></script>
+    <![endif]-->
+
+
+    <link rel="stylesheet" type="text/css" href="http://s2.pstatp.com/r2/css/main_toutiao.css"/>
+    <script type="text/javascript">
+        var login_user = {:intval($USER['id'])};
+    </script>
+</head>
+<body>
+
+
+
+
+
+
+<div id="profile-header">
+    <div class="header-bar">
+        <div class="container">
+            <div id="profile"  data-id="{$dingyue.id}">
+                <div class="profile_avatar">
+                    <a href="{$base_url}/m{$dingyue.id}/"><img src="/Public/Home/images/app.png"/></a>
+                </div>
+                <div class="profile_info">
+                    <span class="profile_name"> <a href="/m{$dingyue.id}/">{$dingyue.name}</a></span>
+                    <span class="profile_follow">
+                    <a href="javascript:;" data-id="{$dingyue.id}" data-action="like">+ 订阅</a>
+                	</span>
+                </div>
+                <!--<div class="profile_desc"><a href="/m2773452475/">内涵段子是iPhone和Android平台最受欢迎的休闲娱乐软件。网络热辣段子发源地，国内最大的内涵社区，以内涵会友，你的幽默只有我们才懂！</a></div>-->
+                <div class="profile_menu">
+
+                    <div class="profile_item">
+
+                        <notempty name="USER">
+                            <div class="menu profile_item">
+                                <div class="trigger">
+                                    <a class="ava" href="javascript:;"><img width="20" height="20" src="{:setUpUrl($USER['head_pic'])}"></a>
+                                    <a class="sig" href="javascript:;">&nbsp;{$USER.username}</a>
+                                </div>
+                                <div class="dropdown">
+                                    <ul>
+                                        <li><a ga_label="personal_tab" ga_event="nav_loginout" rel="nofollow" >退出</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </notempty>
+                        <empty name="USER">
+                            <a ga_event="nav_login" class="login-btn" href="javascript:;" data-node="login">
+                                <span>登录</span>
+                            </a>
+                        </empty>
+                    </div>
+                    <div class="profile_item profile_about">
+                        <a href="{$base_url}" target="_blank">首页</a>
+                    </div>
+                    <div class="profile_item profile_about">
+                        <a href="#" target="_blank">关于新闻王</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="content">
+    <div id="content_wrapper">
+        <div class="container">
+
+            <input type="hidden" name='channel' id='channel' value="">
+            <input type="hidden" name='tag' id='tag' value="">
+            <input type="hidden" name='sort' id='sort' value="">
+            <input type="hidden" name='days' id='days' value="">
+
+            <div id="article">
+            <div id="ColumnContainer" style="overflow: visible;">
+            <foreach name="list" item="item">
+            <div class="pin">
+                <a title="不感兴趣" group_id="{$item.id}" href="#" class="close"></a>
+                <div group_id="{$item.id}" data-type="context" class="pin-content">
+                    <table width="680">
+                        <tbody><tr>
+                            <td height="35">
+                                <h2><a rel="nofollow" ga_label="index_feed" ga_event="source_url" target="_blank" href="{$item.url}">{$item.title}~</a></h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <switch name="item.show_type" >
+                                    <case value="2">
+                                        <div style="float:left; max-height:180px; overflow:hidden; margin-right:10px" class="img_bg shadow_img">
+                                            <a target="_blank" href="{$item.url}" ga_event="source_url" ga_label="index_feed" rel="nofollow">
+                                                <img rel="nofollow" width="202" src="{:setUpUrl($item['img_list'][0])}" >
+                                            </a>
+                                        </div>
+                                    </case>
+                                    <case value="3">
+                                        <div class="list_image">
+                                            <ul>
+                                                <li class="img_bg shadow_img"><a rel="nofollow" href="{$item.url}" target="_blank"><img src="{:setUpUrl($item['img_list'][0])}"></a></li>
+                                                <li class="img_bg shadow_img"><a rel="nofollow" href="{$item.url}" target="_blank"><img src="{:setUpUrl($item['img_list'][1])}"></a></li>
+                                                <li class="img_bg shadow_img"><a rel="nofollow" href="{$item.url}" target="_blank"><img src="{:setUpUrl($item['img_list'][2])}"></a></li>
+                                            </ul>
+                                        </div>
+                                    </case>
+                                    <default />
+                                </switch>
+                                <div class="text">{$item.desc}</div>
+                                <div class="clearfix"></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <table width="100%" class="item_info">
+                                    <tbody><tr>
+                                        <!--<td>阅读: 0</td>-->
+                                        <td>顶: {:intval($item.good_sum)}</td>
+                                        <td>评论: {:intval($item.comment_sum)}</td>
+                                        <td align="right">{$item.show_time}</td>
+                                    </tr>
+                                    </tbody></table>
+                            </td>
+                        </tr>
+                        </tbody></table>
+                </div>
+            </div>
+            </foreach>
+                <div id="flow-loading-tip" style="display: none;"><img src="http://s2.pstatp.com/r2/image/toutiao/BouncingLoader.gif"><span>获取数据…</span></div>
+                <div id="flow-no-pin-tip" style="display: none;"><span>没有更多数据啦</span></div>
+            </div>
+
+
+
+                <div class="side-pane">
+                    <div style="padding:15px 0 100px; text-align:center">
+                        <div class="mp-info">
+                            <img src="/Public/Home/images/app.png">
+                            <p></p>
+                        </div>
+                        <p class="media_description" >每天24小时滚动报道国内，国际及社会新闻，网络天下事尽在新闻王。</p>
+                        <hr>
+                        <!--<img src="">-->
+                    </div>
+                </div>
+
+
+
+
+
+
+        </div>
+    </div>
+    <div class="modal hide login-dialog" id="auth_modal">
+        <div id="myModal">
+            <a class="close" data-dismiss="modal"></a>
+            <div class="modal-header">
+                <h3>登录</h3>
+            </div>
+            
+            <div class="modal-body">
+                <div class="pull-left">
+                    <form action="/auth/login/" method="POST" id="modal_login_form" name="modal_login_form" style="margin:0">
+                        <ul style="margin-bottom:0">
+                            <li>
+                                <span><input name="name_or_email" type="text" value=""  id='email' placeholder="用户名/注册邮箱" /></span>
+                                <span class="error"></span>
+                            </li>
+                            <li>
+                                <span><input name="password" type="password" value="" id='password' placeholder='密码' /></span>
+                                <span class="error"></span>
+                            </li>
+                            <li style="margin-bottom:15px; _margin-bottom:0">
+                                <input type="checkbox" id="remember_me" name="remember_me" checked style="vertical-align:top"/>
+                                <label for="remember_me" style="display:inline">记住我</label>
+                            </li>
+                            <li>
+                                <input type="button" id='submit_btn'value="登录"/>
+                                <span id="login_msg" style="color:red; padding-left:5px"></span>
+                            </li>
+                            <input type="HIDDEN" value="" name="next" />
+                        </ul>
+                    </form>
+                </div>
+                <div class="pull-right" style="float:left;" >
+                    <h4>合作网站帐号登陆</h4>
+                    <ul class="modal_login_list">
+                        <li class="sinaweibo"><a href="#" rel="nofollow" data-toggle="sns_login" name='sina_weibo' onClick="return false;">新浪微博</a></li>
+                        <li class="qqweibo"><a href="#" rel="nofollow" data-toggle="sns_login" name="qq_weibo" onClick="return false;">腾讯微博</a></li>
+                        <li class="renren"><a href="#" rel="nofollow" data-toggle="sns_login" name="renren_sns" onClick="return false;">人人网</a></li>
+                        <li class="kaixin"><a href="#" rel="nofollow" data-toggle="sns_login" name="kaixin_sns" onClick="return false;">开心网</a></li>
+                        <li class="qzone"><a href="#" rel="nofollow" data-toggle="sns_login" name="qzone_sns" onClick="return false;">QQ空间</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /*用户反馈*/
+    #feed_back{ position:fixed; right:0; bottom:140px; padding:20px; padding-bottom:0; background:#f5f5f5; border: 1px solid #aaa; border-radius: 5px 0 0 5px; border-right: none; z-index:1000; display: none}
+    #feed_back form{ width:320px;}
+    #feed_back form .controls{ padding-bottom:10px;}
+    #feed_back form .form-control{ width:100%; margin-bottom:0}
+    #feed_back .feed_back_close{ float:right; padding-top:5px; }
+
+    .tools{ position:fixed; bottom:50px; right:20px; z-index:1000}
+    .feed_back,
+    .back_top{ display:block; height:32px; width:32px; background:url(http://s0.pstatp.com/image/pgc/01.gif) no-repeat; background-position:0 -64px;  margin-top:5px;}
+    .feed_back:hover{ background-position:0 -96px;}
+    .back_top{ background-position:0 0;}
+    .back_top:hover{ background-position:0 -32px}
+</style>
+<div class="tools">
+    <a href="#" class="back_top" title="返回顶部" onClick="back_top(); return false;"></a>
+    <a href="#" class="feed_back hidden-xs" title="提点意见" onClick="feebback_togger(); return false"></a>
+    <!--<a href="mailto:kefu@bytedance.com" class="feed_back visible-xs" title="提点意见"></a>-->
+</div>
+
+<div id="feed_back" class="hidden-xs"  action="/post_message/">
+    <form  method="post">
+        <div class="form-group">
+            <label class="control-label" for="input01">联系方式 <span class="text-danger"> (必填)</span></label>
+            <div class="controls">
+                <input type="text"  id="feedback-email" name="feedback-email" placeholder="您的邮箱/QQ号" class="form-control required" value="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">您的意见 <span class="text-danger">  (必填)</span></label>
+            <div class="controls">
+                <div class="textarea">
+                    <textarea name="feedback-content" type="" id="feedback-content" class="form-control" style="margin: 0; height: 100px;" maxlength="140" placeholder="请填写您的意见，不超过140字"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="controls">
+                <a class="feed_back_close" href="#" onClick="feebback_togger(); return false;">[关闭]</a>
+                <a class="btn btn-danger"  onClick="feedback_submit(); return false;" id="feedback-submit">提交</a>
+                <span id="feedback-form-tip"></span>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
+<script id="dingyue_list" type="text/html">
+{{# for(var i = 0, len = d.data_list.length; i < len; i++){ }}
+<div class="pin">
+    <a title="不感兴趣" group_id="{{d.data_list[i].id}}" href="#" class="close"></a>
+    <div group_id="{{d.data_list[i].id}}" data-type="context" class="pin-content">
+        <table width="680">
+            <tbody><tr>
+                <td height="35">
+                    <h2><a rel="nofollow" ga_label="index_feed" ga_event="source_url" target="_blank" href="{{d.data_list[i].url}}">{{d.data_list[i].title}}~</a></h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{# if(d.data_list[i].show_type==2){ }}
+                        <div style="float:left; max-height:180px; overflow:hidden; margin-right:10px" class="img_bg shadow_img">
+                            <a target="_blank" href="{{d.data_list[i].url}}" ga_event="source_url" ga_label="index_feed" rel="nofollow">
+                                <img rel="nofollow" width="202" src="{{d.data_list[i].img_list[0]}}" >
+                            </a>
+                        </div>
+                    {{#}}}
+                    {{# if(d.data_list[i].show_type==3){ }}
+                        <div class="list_image">
+                            <ul>
+                                <li class="img_bg shadow_img"><a rel="nofollow" href="{$item.url}" target="_blank"><img src="{{d.data_list[i].img_list[0]}}"></a></li>
+                                <li class="img_bg shadow_img"><a rel="nofollow" href="{$item.url}" target="_blank"><img src="{{d.data_list[i].img_list[1]}}"></a></li>
+                                <li class="img_bg shadow_img"><a rel="nofollow" href="{$item.url}" target="_blank"><img src="{{d.data_list[i].img_list[2]}}"></a></li>
+                            </ul>
+                        </div>
+                    {{#}}}
+                    <div class="text">{{d.data_list[i].desc}}</div>
+                    <div class="clearfix"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table width="100%" class="item_info">
+                        <tbody><tr>
+                            <!--<td>阅读: 0</td>-->
+                            <td>顶: {{d.data_list[i].good_sum}}</td>
+                            <td>评论: {{d.data_list[i].comment_sum}}</td>
+                            <td align="right">{{d.data_list[i].show_time}}</td>
+                        </tr>
+                        </tbody></table>
+                </td>
+            </tr>
+            </tbody></table>
+    </div>
+</div>
+{{# } }}
+</script>
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/layer/laytpl.js"></script>
+
+<script type="text/javascript">
+    var page = 1;
+    var loading = false;
+    $(window).scroll(function ()
+    {
+        if ((($(window).scrollTop() + $(window).height())) >= $(document).height())
+        {
+            if (loading == false)
+            {
+                nextPage()
+            }
+        }
+    }
+    );
+    $(document).ready(function(){
+        $('a[ga_event="nav_login"]').click(function (){
+            is_login();
+        });
+
+        $('a[ga_event="nav_loginout"]').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/loginout' ,
+                dataType: 'text',
+                success: function(msg){
+                    layer.msg('退出成功,跳转中...',0,1);
+                    window.location.reload();
+
+
+                }
+            });
+        });
+        $('#submit_btn').click(function(){
+            var login_dom = $('.login-dialog');
+            var name = $(login_dom).find('input[name="name_or_email"]').val();
+            var password = $(login_dom).find('input[name="password"]').val();
+            layer.load('登录中...');
+            $.ajax({
+                type: 'POST',
+                url: '/login' ,
+                data: {u:name,p:password} ,
+                dataType: 'json',
+                success: function(msg){
+                    if(msg.code==200){
+                        layer.msg('登录成功,跳转中...',0,1);
+                        window.location.reload();
+                    }else{
+                        layer.msg(msg.msg);
+                    }
+
+
+                }
+            });
+        });
+        $('.profile_follow a').click(function(){
+            var temp = is_login();
+            if(temp==false) return false;
+            var c = $(this).attr('data-action');
+            var t = '';
+
+            if(c=='unlike'){
+                c='like';
+                t='+ 订阅';
+            }else {
+                c = 'unlike';
+                t = '已订阅';
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/News/add_dingyue' ,
+                data: {id:$(this).attr('data-id')} ,
+                dataType: 'html',
+                success: function(msg){
+                    if(msg==1){
+                        $('.profile_follow a').attr('data-action',c).html(t);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+    function is_login(){
+        if(parseInt(login_user)<1){
+            $.layer({
+                type: 1,
+                shade: [0.5, '#000'],
+                area: ['auto', 'auto'],
+                closeBtn: false,
+                shadeClose: true,
+                title: false,
+                border: [0],
+                page: {dom : '.login-dialog'}
+            });
+            return false;
+        }else{
+            return true;
+        }
+    }
+    function nextPage(){
+        loading=true;
+        $('#flow-loading-tip').show();
+        page++;
+        $.ajax({
+            type: 'POST',
+            url: '__SELF__' ,
+            data: {p:page} ,
+            dataType: 'json',
+            success: function(msg){
+                var count = msg.data.data_list.length;
+                if(count!=20){
+                    $('#flow-loading-tip').remove();
+                    $('#flow-no-pin-tip').show();
+                    loading = true;
+                }
+                if(msg.code==200){
+                    laytpl($('#dingyue_list').html()).render(msg.data, function(render){
+                        $('#flow-loading-tip').before(render);
+                    });
+                    loading = false;
+                }else{
+                    $('.loadmore').remove();
+                    loading = true;
+                }
+            }
+        });
+    }
+    window.scrollTo(0, 0);
+</script>

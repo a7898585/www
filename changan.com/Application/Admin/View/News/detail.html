@@ -1,0 +1,686 @@
+<include file="Public:header" />
+<!-- 内容 star -->
+<div class="bx_conter wrap">
+
+    <div class="bx_contsid">
+        <!-- 左 star-->
+        <div class="bx_contlt">
+            <div class="bx_artessay">
+                <div class="bx_academic">
+                    <h1>{$article.title}</h1>
+                    <div class="bx_acad">
+                        <div class="bx_acadlt">
+                            <a href="/news/{$article.classtype}">{$article.classname}</a>
+                            <span>{$article.add_time}</span>
+                        </div>
+                        <div class="bx_acadrt">
+                            <a href="#">分享<i></i></a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <p>{$article.content|msubstr=0,200}</p>
+                    <h6>{$article.title}</h6>
+                    <div class="bx_artform">
+                        <form>
+                            <h4>提交需求，即可获得<em>3</em> 家保险公司报价</h4>
+                            <ul>
+                                <li>
+                                    <label>给谁投保</label>
+                                    <select name="who" id="to_who" >
+                                        <option selected="selected" value="自己">自己</option>
+                                        <option value="丈夫">丈夫</option>
+                                        <option value="妻子">妻子</option>
+                                        <option value="父亲">父亲</option>
+                                        <option value="母亲">母亲</option>
+                                        <option value="儿子">儿子</option>
+                                        <option value="女儿">女儿</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label>出生年月</label>
+                                    <select name="year" id="year">
+                                        <for start="0" end="100">
+                                            <option value="{:date('Y')-$i}">{:date('Y')-$i}年</option>
+                                        </for>
+                                    </select>
+                                    <select name="month" id="month">
+                                        <option selected="selected" value="1">1月</option>
+                                        <option value="2">2月</option>
+                                        <option value="3">3月</option>
+                                        <option value="4">4月</option>
+                                        <option value="5">5月</option>
+                                        <option value="6">6月</option>
+                                        <option value="7">7月</option>
+                                        <option value="8">8月</option>
+                                        <option value="9">9月</option>
+                                        <option value="10">10月</option>
+                                        <option value="11">11月</option>
+                                        <option value="12">12月</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <label>&nbsp;</label>
+                                    <input type="button" value="提交" onclick="javascript:location.href='/publicmethod/setInsurance'"/>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    {$article.content}
+                    <div class="bx_pages">
+                        上一篇:{$shang}
+                        下一篇:{$xia}
+                    </div>
+                    <div class="bx_artfot">
+                        <div class="bx_artftl">
+                            <span>标签：</span>
+                            <a href="#">{$article.keywords}</a>
+                        </div>
+                        <div class="bx_artftr">
+                            <em></em>
+                            <a class="bx_fxtx" href="#"></a>
+                            <a class="bx_fxkj" href="#"></a>
+                            <a class="bx_fxwb" href="#"></a>
+                            <a class="bx_fxyx" href="#"></a>
+                            <a class="bx_fxtt" href="#"></a>
+                            <a class="bx_fxrr" href="#"></a>
+                            <a class="bx_fxst" href="#"></a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="bx_newlist">
+                    <div class="bx_conthed"><h4>{$article.classname}相关新闻</h4></div>
+                    <ul>
+                        <volist name="relateNews" id="vo" >
+                            <li><a href="/news{$vo.id}">>{$vo.title}</a></li>
+                        </volist>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="bx_dynamic product_box">
+                <div class="bx_befthd bx_tchages">
+                    <volist name="news_arr" id="vo">
+                        <span class="bx_noclck" rel="{$key}">{$vo.classname}</span>
+                    </volist>
+                </div>
+                <div class="bx_dycont product_list">
+                    <volist name="news_arr" id="productsItem">
+                        <div class="bx_dycontone bx_substan" style="display:none;" rel="{$key}">
+                            <div class="bx_dymatter delbot">
+                                <div class="bx_dymatlt">
+                                    <dl>
+                                        <dd>
+                                            <a href="/news{$productsItem.0.id}"><img src="/Public/Home/images/news/pic1_{$key}.jpg" /></a>
+                                            <h6>本周{$productsItem.classname}推荐</h6>
+                                            <p>{$productsItem.0.title}</p>
+                                        </dd>
+                                        <dd>
+                                            <a href="/news{$productsItem.1.id}"><img src="/Public/Home/images/news/pic2_{$key}.jpg" /></a>
+                                            <h6>本周{$productsItem.classname}推荐</h6>
+                                            <p>{$productsItem.1.title}</p>
+                                        </dd>
+                                    </dl>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="bx_dymatrt">
+                                    <ul>
+                                        <volist name="productsItem" id="vo" offset="2" length='5' >
+                                            <li><a href="/news{$vo.id}">· {$vo['title']}</a></li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="bx_dymatter delbot">
+                                <div class="bx_dymatlt">
+                                    <dl>
+                                        <dd>
+                                            <a href="/news{$productsItem.7.id}"><img src="/Public/Home/images/news/pic3_{$key}.jpg" /></a>
+                                            <h6>本周{$productsItem.classname}推荐</h6>
+                                            <p>{$productsItem.7.title}</p>
+                                        </dd>
+                                        <dd>
+                                            <a href="/news-{$productsItem.8.id}"><img src="/Public/Home/images/news/pic4_{$key}.jpg" /></a>
+                                            <h6>本周{$productsItem.classname}推荐</h6>
+                                            <p>{$productsItem.8.title}</p>
+                                        </dd>
+                                    </dl>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="bx_dymatrt">
+                                    <ul>
+                                        <volist name="productsItem" id="vo" offset="9" length='5' >
+                                            <li><a href="/news{$vo.id}">· {$vo['title']}</a></li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </volist>
+                </div>
+            </div>
+
+            <div class="bx_dynamic">
+                <div class="bx_befthd bx_tchages">
+                    <span class="bx_clckon">意外险</span>
+                    <span class="bx_noclck">重大疾病险</span>
+                    <span class="bx_noclck">商业医疗险</span>
+                    <span class="bx_noclck">少儿险</span>
+                    <span class="bx_noclck">定期寿险</span>
+                    <span class="bx_noclck">商业养老险</span>
+                    <span class="bx_noclck">旅游保险</span>
+                </div>
+                <div class="bx_dycont">
+                    <div class="bx_dyconttwo bx_substan" style="display:block;">
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿1</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="bx_dyconttwo bx_substan" style="display:none;">
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿2</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="bx_dyconttwo bx_substan" style="display:none;">
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿3</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="bx_dyconttwo bx_substan" style="display:none;">
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿4</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="bx_dyconttwo bx_substan" style="display:none;">
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿5</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="bx_dyconttwo bx_substan" style="display:none;">
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿6</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="bx_dyconttwo bx_substan" style="display:none;">
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿7</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bx_dyinsure">
+                            <dl>
+                                <dt>
+                                <a href="#"><img src="images/tp1.jpg" /><span>中国人寿</span></a>
+                                </dt>
+                                <dd>
+                                    <h4><a href="#">国寿松鹤颐年年金保险（分红型）</a></h4>
+                                    <p>投保年龄：0~60</p>
+                                    <p>保险期限： 可选</p>
+                                    <p>缴费方式： 年交</p>
+                                </dd>
+                            </dl>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- 左 end-->
+        <!-- 右 star-->
+        <div class="bx_contrt">
+            <div class="bx_cortmod">
+                <div class="bx_commhd"><h3>地区代理人</h3><div class="clear"></div></div>
+                <div class="bx_region">
+                    <volist name="areaUsers" id="vo" >
+                        <dl class="delbot">
+                            <dt><a href="/{$vo.id}"><img src="{$vo.id|getUserImg}"></a></dt>
+                            <dd>
+                                <h4><a href="/{$vo.id}">{$vo.nickname}</a><i>推荐</i></h4>
+                                <p>{$vo.area_name}&nbsp;&nbsp;{$vo.company_id|getUserCompany}</p>
+                                <p>{$vo.phone}</p>
+                                <a class="bx_leann" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$vo.qq}&site=qq&menu=yes"">QQ交谈</a>
+                            </dd>
+                        </dl> 
+                        <div class="clear"></div>
+                    </volist>
+                </div>
+            </div>
+
+            <div class="bx_cortmod">
+                <div class="bx_commhd"><h3>投保指南</h3><a href="/news/guide">更多>></a><div class="clear"></div></div>
+                <div class="bx_comsense">
+                    <a class="bx_bigimgs" href="/news{$guideNews[0]['id']}"><img src="/Public/Home/images/tp2.jpg" /></a>
+                    <h6>{$guideNews[0]['title']|msubstr=0,18}</h6>
+                    <p>{$guideNews[0]['content']|msubstr=0,50}</p>
+                    <ul>
+                        <volist name="guideNews" id="vo" offset="1" length='5'>
+                            <li><a href="/news{$vo.id}">{$vo.title|msubstr=0,20}</a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bx_cortmod">
+                <div class="bx_commhd"><h3>专题新闻</h3><a href="/news/special">更多>></a><div class="clear"></div></div>
+                <div class="bx_comsense">
+                    <dl>
+                        <dt><a href="/news{$specialNews[0]['id']}"><img src="/Public/Home/images/zkt_img20.jpg"></a></dt>
+                        <dd>
+                            <h5><a href="/news{$specialNews[0]['id']}">{$specialNews[0]['title']|msubstr=0,10}</a></h5>
+                            <p>{$specialNews[0]['content']|msubstr=0,30}</p>
+                        </dd>
+                    </dl>
+                    <ul>
+                        <volist name="specialNews" id="vo" offset="1" length='8'>
+                            <li><a href="/news{$vo.id}">• {$vo.title|msubstr=0,20}</a></li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>  
+
+        </div>
+        <!-- 右 end-->
+        <div class="clear"></div>
+    </div>
+    <div style="height:12px;"></div>
+    <div class="bx_deputy">
+        <div class="bx_conthed"><h4>优秀代理人推荐</h4></div>
+        <div class="bx_deputyone">
+            {:W('Cate/recomend')}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="bx_crumbs">
+        <span>当前位置：</span>
+        <a href="/">首页</a><em>&gt;</em>
+        <a href="/baoxianzixun">保险资讯</a><em>&gt;</em>
+        <a href="/baoxianzixun/{$article.classtype}">{$article.classname}</a><em>&gt;</em>
+        <a href="#">{$article.name}</a>
+    </div>
+
+</div>
+<!-- 内容 end -->
+<script>
+    $(function(){
+        var $product_box = $(".product_box");
+        var $title_blue = $product_box.find("div.bx_befthd");
+        var rel = $title_blue.find("span:first").removeClass().addClass("bx_clckon").attr("rel");
+        var $product_list = $(".product_list");
+        $product_list.find("div[rel='"+rel+"']").show();
+        $(".forbxbox").find("div:first").show();
+        $title_blue.find("span").bind("click",function(){
+            var rel = $(this).attr("rel");
+            $(this).removeClass().addClass("bx_clckon").siblings("span").removeClass("bx_clckon");
+            $product_list.find("div[rel='"+rel+"']").show().siblings("div").hide();
+            $product_list.find("div:last").show();
+        });
+    })
+</script>
+<include file="Public:footer" />

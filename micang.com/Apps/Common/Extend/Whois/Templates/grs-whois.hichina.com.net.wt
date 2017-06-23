@@ -1,0 +1,20 @@
+Registrar WHOIS Server:%COM_WHOIS_SERVER%
+Updated Date:%COM_UPDATE_TIME%
+Creation Date:%COM_CREATE_TIME%
+Registrar Registration Expiration Date:%COM_EXPIRE_TIME%
+Registrar:%COM_REGISTRAR_NAME%
+Registry Registrant ID:%REG_HANDLE_ID%
+Registrant Name:%REG_NAME%
+Registrant Organization:%REG_ORG%
+Registrant Street:%REG_ADDRESS%
+Registrant City:%REG_CITY%
+Registrant State/Province:%REG_PROVINCE%
+Registrant Postal Code:%REG_POSTCODE%
+Registrant Country:%REG_COUNTRY%
+Registrant Phone:%REG_TEL%
+Registrant Phone Ext:%REG_TEL_EXT%
+Registrant Fax:%REG_FAX%
+Registrant Fax Ext:%REG_FAX_EXT%
+Registrant Email:%REG_EMAIL%
+Name Server:%COM_DNS1%
+Name Server:%COM_DNS2%

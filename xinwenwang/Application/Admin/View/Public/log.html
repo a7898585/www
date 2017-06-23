@@ -1,0 +1,43 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/public/log">日志查询</a></li>
+        <li class="am-active">列表</li>
+    </ol>
+    <div class="am-g">
+        <form class="am-form">
+            <div class="am-u-sm-12">
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                        <tr>
+                            <th class="table-id">管理员ID</th>
+                            <th class="table-title">管理员</th>
+                            <th class="table-type">操作内容</th>
+                            <th class="table-author">时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="list" item="item">
+                        <tr>
+                            <td>{$item.uid}</td>
+                            <td>{$item.uname}</td>
+                            <td>{$item.content}</td>
+                            <td><?php echo  date("Y-m-d H:i:s",$item['c_time']) ?></td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <div class="am-cf">
+                    共 {$totalRows} 条记录
+                    <div class="am-fr">
+                        {$pager}
+                    </div>
+                </div>
+                <hr />
+                <p>注：请勿删除!!!</p>
+
+            </div>
+        </form>
+    </div>
+</div>
+</div>

@@ -1,0 +1,24 @@
+<div class="RgtBar" id="Mod_MyFans" rel="drag">
+    <?php if(isset($dragable) && $dragable==1): ?>
+    <h3 id="fansTitle" style="display: none;"><a href="javascript:;">我的粉丝</a><i>|</i><a href="javascript:;">我的关注</a></h3>
+    <a style="cursor:move;" href="###" id="Mod_MyFans_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="NBDp4"></a><div class="NBDbx"><a class="NBDp1" href="###" onclick="clkmenuIn(this.id,1);return false;" title="收起" id="Mod_MyFans_td3"></a><a class="NBDp2" href="###" onclick="clkmenuIn(this.id,2);return false;" style="DISPLAY: none" title="展开" id="Mod_MyFans_td4"></a><a class="NBDp3" href="###" onclick="removemod(this.id);setmod_input();return false;" title="删除" id="Mod_MyFans_td2"></a></div>             
+    <?php endif; ?> 
+    <div class="modbox1">
+        <dl class="FansLst" id="M1fans">
+            <dt><a href="javascript:;">我的粉丝</a><i>|</i><a href="javascript:;">我的关注</a></dt>
+        </dl>
+    </div>
+</div>
+<script language="javascript">
+    $(function(){
+        $("#M1fans").load("<?php echo BLOG_FANS_LIST.'/'.$bloginfo['DomainName']; ?>");    
+    })
+    function clkmenuIn(id,type){
+        if(type == 1){
+            $('#fansTitle').show();
+        }else{
+            $('#fansTitle').hide();
+        }
+        clkmenu(id,type);
+    }
+</script>

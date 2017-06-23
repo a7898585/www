@@ -1,0 +1,142 @@
+
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>评论文章列表</h3>
+    <div class="BgCont">
+        <?php
+        $dot = '';
+        if (strlen($article['Title']) > 50) {
+        $dot = ' ...';
+        }
+        ?>
+        <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID'];?>.html" target="_blank"><?php echo FilterJs(utf8_str($article['Title'],50,'false')).$dot; ?></a>
+        [<?php echo $article['AppearTime'];?>]
+        <form onsubmit="return DelComment();" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/manage/comment/Action" method="post" name="formc" id="formc">
+            <input type="hidden" value="27920006" id="tableid" name="tableid">
+            <input type="hidden" name="userdomain" value="<?php echo getPrimariBlogDomain($bloglist);?>">
+            <input type="hidden" value="del" name="act">
+            <dl class="ArtiComtLst">
+                <dt><span class="Title">评论内容</span><span class="Date">发表时间</span><span class="Mage">管理</span></dt>              
+                <?php
+                if($commentlist['RetRecords'] > 0)
+                {
+                if($commentlist['RetRecords'] == 1)
+                {
+                $commentlist['Record'] = array(0=>$commentlist['Record']);
+                }
+                $flashCode = getVerifyStr($article['ArticleID'].$bloginfo['UserID']);
+                foreach($commentlist['Record'] as $comment)
+                {
+                $dot = '';
+                $comment['Content']=strip_tags($comment['Content']);
+                $comment['Content']=preg_replace('/\&nbsp\;/i','',$comment['Content']);
+                if (strlen($comment['Content']) > 20) {
+                $dot = ' ...';
+
+                }
+
+                $dot2 = '';
+
+                if (strlen($comment['NickName']) > 10) {
+                $dot2 = ' ...';
+                }
+                ?>
+                <dd>
+                    <label class="Title" for=""><input type="checkbox" value="<?php echo $comment['CommentID'];?>" id="DelId[]" name="DelId[]"><?php echo FilterJs(utf8_str($comment['Content'],20,'false')).$dot; ?> [<?php echo utf8_str($comment['NickName'],10,'false').$dot2; ?>]</label>
+                    <span class="Date"><?php echo $comment['DataTime'];?></span>
+                    <span class="Mage"><a href="javascript:;" onClick="replayPop(<?php echo $comment['CommentID'];?>)">[回复]</a>
+                        <a class="Ml5" onClick="DelComment(<?php echo $comment['CommentID'].','.$article['ArticleID'].',\''.$flashCode.'\'';?>)" href="javascript:;">[删除]</a></span>
+                </dd>
+                <?php
+                }?>
+                <dd class="AllSelect">
+                    <label class="Fl"><input type="checkbox" onclick="javascript:SelectAll('formc');">全选/反选</label>
+                    <a class="Mr30" name="Submit" onclick="DelCommentList('formc', <?php echo $article['ArticleID'].',\''.$flashCode.'\'';?>);" href="javascript:;">删除所选</a>
+                </dd>    
+                <?php
+                }
+                else
+                {?>
+                <dd>还没有网友对这篇文章做相关评论</dd>
+                <?php
+                }?>
+            </dl>   
+            <!--分页-->
+            <div class="Page">
+                <?php echo $pagebar;?>
+            </div>
+            <!--end 分页-->                 
+    </div>
+</div>
+<div class="SetPop" id="ReplyPop">
+    <span class="Close" onClick="Dialog.Close();"></span>
+    <h5>回复评论内容</h5>
+    <div class="Cont">
+        <span id="replyContent"><textarea class="Reply" name="" cols="" rows=""></textarea></span>
+        <p class="SetBtnWrap Mt10"><span id="replyComfirm"><a class="Mr10 SetSubmit" href="#">确定</a></span><a class="SetCancel" onClick="Dialog.Close();" href="javascript:;">取消</a></p>
+    </div>
+</div>
+
+<script language="javascript">
+    function replayPop(comId){
+        $('#replyComfirm').html('<a class="Mr10 SetSubmit" href="javascript:;" onclick="postOwnerComment('+comId+')">确定</a>');
+        $('#replyContent').html('<textarea class="Reply" id="txtOwnerComment'+comId+'"  name="txtOwnerComment'+comId+'" cols="" rows=""></textarea>');
+        Dialog('ReplyPop');
+    }
+    function postOwnerComment(cid){
+        var aid = "<?php echo $article['ArticleID']?>";
+        var mid = "<?php echo $bloginfo['MemberID'];?>";
+        var appeartime = "<?php echo $article['AppearTime'];?>";
+        var content = $('#txtOwnerComment'+cid).val();
+        var articleSubject = "<?php echo $article['Title'];?>";
+        var userdomain = $('input[name="userdomain"]').val();
+        $.post(baseurl+'/ajaxcomment/Action',{'act':'ownercomment','CommentID':cid,'ArticleID':aid,'Content':content,'MemberID':mid,'articleSubject':articleSubject,'userdomain':userdomain,'appeartime':appeartime},function(data){
+
+            if(data.errno == 'succ'){
+                $('#txtOwnerComment'+cid).val('');
+                alert('回复成功！');
+                Dialog.Close();
+            }else{
+                showalert(data.error);
+            }
+        },'json');
+    }
+</script>
+<script language="javascript">
+    var baseurl = "<?php echo $baseurl; ?>";
+    var memid = <?php echo $bloginfo['MemberID'];?>;
+    function DelComment(cid,artid,co){
+        $.post(baseurl+'/ajaxcomment/Action',{'act':'delcomment','cid':cid,'artid':artid,'flashcode':co,'memid':memid},function callback(data){
+            
+            showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+            if('succ' == data.errno){
+                setTimeout(function(){
+                    $('input[type="checkbox"]').attr('checked',false);
+                    window.location.reload();
+                },2000);
+            }
+        },'json');
+        return false;    
+    }
+    function DelCommentList(formid,artid,co){
+        var comlist = '';
+        $('#'+formid+' input[type="checkbox"]').each(function(){
+            if(true == $(this).attr("checked")){
+                comlist += $(this).val()+',';
+            }
+        });
+        if(comlist == ''){
+            showalert('请选择要删除的评论选项');return;
+        }
+        $.post(baseurl+'/ajaxcomment/Action',{'act':'delcomment','cid':comlist,'artid':artid,'flashcode':co,'memid':memid},function callback(data){
+            
+            showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+            if('succ' == data.errno){
+                setTimeout(function(){
+                    $('input[type="checkbox"]').attr('checked',false);
+                    window.location.reload();
+                },2000);
+            }
+        },'json');
+        return false;  
+    }
+</script>

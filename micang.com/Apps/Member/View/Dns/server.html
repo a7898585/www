@@ -1,0 +1,48 @@
+<!--左侧缩展导航 结束-->
+<div class="onlineplay ymxx">
+  <div class="ymxx_title"><span>域名：</span><em> {$Think.get.domain} 的相关信息</em></div>
+  <div class="navhl">
+    <a class="navhl_q" href="/dns/record?domain={$Think.get.domain}">域名解析</a>
+    <a class="navhl_h" href="/dns/server?domain={$Think.get.domain}">DNS设置</a>
+  </div>
+  <div class="onlineplay_c2">
+    <div class="list_d">
+      <ul>
+        <li>
+          <p>DNS 1 :</p>
+          <input type="text" name="dns_host1" class="list_ctxt_a" value="{$domainInfo.dns_host1}">
+        </li>
+        <li>
+          <p>DNS 2 :</p>
+          <input type="text" name="dns_host2" class="list_ctxt_a" value="{$domainInfo.dns_host2}">
+        </li>
+        <li>
+          <input type="checkbox" class="list_ctxt_c" name="agree" checked>
+          <input type="hidden" name="domain" value="{$Think.get.domain}">
+          <div class="list_ctxt_d">同意《<a href="#" target="_blank">DNS服务协议</a>》</div>
+        </li>
+        <li><input type="button" value="提　交" class="list_ctbtn_g" data-btn="btn_dns_submit" style="background: url(/Public/Home/images/icon.png) no-repeat -160px -500px; font-size: 18px;"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(':button[data-btn="btn_dns_submit"]').click(function (e) {
+    if ($(':checkbox[name="agree"]').prop('checked') == false){
+      layer.msg('您必须同意《米仓网DNS服务协议》的内容，方可使用本服务。');
+      return false;
+    }
+    var that = this;
+    $(that).attr('disabled', true);
+    var dns1 = $.trim($(':text[name="dns_host1"]').val());
+    var dns2 = $.trim($(':text[name="dns_host2"]').val());
+    var domain = $(':hidden[name="domain"]').val();
+    $.post('/dns/ajax_set_server', {domain:domain, dns1:dns1, dns2:dns2}, function (result) {
+      $(that).attr('disabled', false);
+      layer.msg(result.message);
+    });
+  });
+});
+</script>

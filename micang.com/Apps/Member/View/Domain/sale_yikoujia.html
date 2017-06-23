@@ -1,0 +1,162 @@
+<div class="onlineplay">
+  <div id="navhljs1" class="navhl"> 
+  <a class="navhl_h" href="javascript:void(0);">一口价设置</a> </div>
+  <div style="display:block;" class="onlineplay_c2" id="navhljs1_c0">
+    <div class="airp_listc_left4" style="padding-bottom:115px;">
+    <form id="sale_form" action="/domain/sale_confirm" method="post">
+      <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+        <tbody>
+          <tr class="table_title">
+            <td>选择</td>
+        	<td>域名</td>
+        	<td>一口价</td>
+        	<td>交易结束时间</td>
+        	<td>用途类型</td>
+          </tr>
+          <tr>
+        	<td><input type="checkbox" value="1" id="selectBox" onclick="SelextAll();" checked="checked"/></td>
+        	<td>批量设置行</td>
+        	<td><input  type="text" class="input_sty" onkeyup="setValue(this.value,'price','{$num}');" autocomplete="off">元</td>
+        	<td><select onchange="setValue(this.value,'day','{$num}');" class="select_sty">
+            <option value="2">2天</option>
+            <option value="3">3天</option>
+            <option value="7">7天</option>
+            <option value="15">15天</option>
+            <option value="30" selected="selected">30天</option>
+            <option value="60">60天</option>
+            <option value="90">90天</option>
+          </select>
+          <select onchange="setValue(this.value,'time','{$num}');" class="select_sty">
+            <option value="8">8:00-8:59</option>
+            <option value="9">9:00-9:59</option>
+            <option value="10">10:00-10:59</option>
+            <option value="11">11:00-11:59</option>
+            <option value="12">12:00-12:59</option>
+            <option value="13">13:00-13:59</option>
+            <option value="14">14:00-14:59</option>
+            <option value="15">15:00-15:59</option>
+            <option value="16">16:00-16:59</option>
+            <option value="17">17:00-17:59</option>
+            <option value="18">18:00-18:59</option>
+            <option value="19">19:00-19:59</option>
+            <option value="20">20:00-20:59</option>
+            <option value="21" selected="selected">21:00-21:59</option>
+            <option value="22">22:00-22:59</option>
+          	</select></td>
+          	</td>
+        	<td>--</td>
+      	 </tr>
+         <volist name="domainsList" id="item" key="k">
+        <tr class="table_bg_b">
+          <td>
+          	<input id="checklBox{$k}" class="checklBox" type="checkbox" value="{$item.id}" checked="checked"/>
+            <input name="domainId[]" type="hidden" value="{$item.id}" />
+          </td>
+          <td style="line-height:20px;">{$item.domain}<br>
+          <input name="summary[]" id="summary{$k}" type="hidden" value="" />
+          <span title="test" class="orange" style="overflow: hidden;" id="tmpid{$k}"></span>
+          <a href="#" onclick="bianji('{$k}');return false;" class="blue">编辑域名介绍</a></td>
+          <td><input id="price{$k}" name="price[]" class="input_sty" type="text"  value="" maxlength="9" autocomplete="off">
+            元</td>
+          <td><select id="day{$k}" name="day[]" class="select_sty">
+              <!--结束时间-->
+              <option value="2">2天</option>
+              <option value="3">3天</option>
+              <option value="7">7天</option>
+              <option value="15">15天</option>
+              <option value="30" selected="selected">30天</option>
+              <option value="60">60天</option>
+              <option value="90">90天</option>
+            </select>
+            <select id="time{$k}" name="time[]" class="select_sty">
+              <option value="8">8:00-8:59</option>
+              <option value="9">9:00-9:59</option>
+              <option value="10">10:00-10:59</option>
+              <option value="11">11:00-11:59</option>
+              <option value="12">12:00-12:59</option>
+              <option value="13">13:00-13:59</option>
+              <option value="14">14:00-14:59</option>
+              <option value="15">15:00-15:59</option>
+              <option value="16">16:00-16:59</option>
+              <option value="17">17:00-17:59</option>
+              <option value="18">18:00-18:59</option>
+              <option value="19">19:00-19:59</option>
+              <option value="20">20:00-20:59</option>
+              <option value="21" selected="selected">21:00-21:59</option>
+              <option value="22">22:00-22:59</option>
+            </select></td>
+          <td><div class="asd3">
+              <div class="asd"><dl id="strusetype{$k}">请选择</dl> <span class="checkone"></span></div>
+              <div class="asd2">
+                <ul id="drlusetype1" name="nameusetype">
+                  <volist name="domainTradeType" id="item" key="key2">
+                    <li>
+                      <input type="checkbox" id="tradetype{$k}_{$item.id}" name="tradetype{$k}[]" value="{$item.id}" data="{$item.name}" onclick="setText('strusetype{$k}','{$item.name}')">
+                      <label for="chk1d1">{$item.name}</label>
+                    </li>
+                  </volist>
+                </ul>
+              </div>
+            </div></td>
+        </tr>
+      </volist>
+      <tr class="table_bg_b">
+        <td colspan="5"><div style="line-height: 25px; height: 25px;">
+            <input id="chkRole" name="chkRole" checked="checked" type="checkbox" value="" style="vertical-align: middle; margin-left: 11px; margin-top: -3px;">
+            我已阅读并同意 <a target="_blank" href="#" class="blue" title="域名交易规则">《域名交易规则》</a> </div></td>
+      </tr>
+      <tr class="table_bg_b">
+        <td colspan="5">
+        	<div class="form-button">
+            <input name="type" type="hidden" value="1" />
+            <button id="btn_ok" type="button" class="bnt-orange width100" onclick="yikoujia_submit('{$num}')">确认提交</button>
+            <button  type="button"  class="bnt-hui width100 ml10" onclick="history.go(-1)"> 返回</button>
+            </div>
+        </td>
+      </tr> 
+        </tbody>
+      </table>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="TOP_BGCOVERDIV" style="position: fixed; z-index: 2147483647; left: 427.5px; top: 223.333px; display: block; display:none;"><div id="bei_change" style="display: block;" class="ui-dialog">
+            <div class="ui-dialog-arrow-a">
+            </div>
+            <div class="ui-dialog-arrow-b">
+            </div>
+            <table class="ui-dialog-grid">
+                <tbody><tr>
+                    <td id="header" class="ui-dialog-header">
+                        <button i="close" class="ui-dialog-close g_v" onclick="$('#TOP_BGCOVERDIV').hide();">
+                            ×</button>
+                        <div id="title" class="ui-dialog-title">
+                            编辑域名介绍
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="body" class="ui-dialog-body">
+                        <div id="content" class="ui-dialog-content">
+                            <textarea class="want_name" type="text" id="bei_main_txare" name="bei_main_txare" style="width: 500px; border: 1px solid #e5e5e5;" rows="3"></textarea>
+                            <input id="hidid" value="0" type="hidden">
+                            <br>
+                            <p>
+                                250字符
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="footer" class="ui-dialog-footer">
+                        <div id="statusbar" class="ui-dialog-statusbar">
+                            <input type="button" id="bei_change_ok" value="确认" class="bnt-orange  g_v" style="width:50px;margin: -5px 0px 0px 359px;" onclick="setSummary();">
+                            <input type="reset" id="bei_change_cancel" value="取消" class="bnt-hui" style="width:50px;margin: -2px 0 0 15px" onclick="$('#TOP_BGCOVERDIV').hide();">
+                        </div>
+                        <div id="button" class="ui-dialog-button">
+                        </div>
+                    </td>
+                </tr>
+            </tbody></table>
+        </div></div>

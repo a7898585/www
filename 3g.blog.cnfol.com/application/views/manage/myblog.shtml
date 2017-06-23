@@ -1,0 +1,62 @@
+<?php include $commonheader;?>
+<?php  if(isset($isowner) && $isowner==true){?>
+<?php include $personalhead; ?>
+<?php } else {?>
+<nav class="Nav TextHeader">
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" class="BackPage ToBlock" ></a>
+    <h2 class="Text-title F16 Tc"><?php echo $bloginfo['NickName'];?></h2>
+</nav>
+<?php } ?>
+<?php include $mybloghead; ?>
+<?php  if(isset($isowner) && $isowner==true){?>
+<section class="My_GNs Wrp">
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/article/draftboxlist'; ?>" class="ToBlock F16 My_border">草稿箱</a>
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/article/myfavorites'; ?>" class="ToBlock F16 My_border">收藏夹</a>
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/recomblog'; ?>" class="ToBlock F16">推荐博客</a>
+</section>
+
+<?php } else {?>
+<section id="Lst_news" class="HY_Lst_news">
+    <?php 
+    if(!empty($artlist) && !empty($artlist['Record'])){
+    foreach($artlist['Record'] as $key=>$art){
+    $arturl = $baseurl.'/'.$bloginfo['DomainName'].'/article/'.strtotime($art['AppearTime']).'-'.$art['ArticleID'].'.html';
+    $artTitle = filter($art['Title']);
+    $artContent = filter(filter($art['Summary']));
+    if(strlen($artTitle) > 28){
+    $artTitle = utf8_str($artTitle,28);
+    }
+    if(strlen($artContent) > 70){
+    $artContent = utf8_str($artContent,70);
+    }
+    ?>
+    <div class="HY_o_new Mt10">
+        <div class="HY_o_new_tit">
+            <h3 class="Fl F16 Red_color">
+                <font class="Red_color">
+                <?php if($art['Recommend'] == 2 || $art['Recommend'] == 3 || $art['IsUsed'] == 1) {?>
+                [荐]
+                <?php } ?>
+                <?php
+                echo $art['IsTop']==1?'[顶]':'';
+                echo($art['Property']==2?'[转]':'');
+                echo($art['Property']==4?'[收藏]':'');
+                echo($art['Property']==5?'[草稿]':'');
+                ?>
+                </font>
+                <a href="<?php echo $arturl;?>"><?php echo $artTitle;?></a>
+            </h3>
+            <?php if($art['PictureUrl']!='0' && !empty($val['PictureUrl'])){ ?><span class="Bh_img Fl"></span><?php } ?>
+        </div>
+        <time class="HY_o_new_time Hui_color"><?php echo timeopMyblog($art['AppearTime']); ?></time>
+        <p class="Lst-new-desc F16 Pr10"><a href="<?php echo $arturl;?>"><?php echo $artContent;?></a></p>
+    </div>
+    <?php } ?>
+    <a href="<?php echo $articleUrl;?>" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore" >查看更多</a>	
+    <?php }else{ ?>
+    <div class="HY_o_new Mt10">该博主未发表博文</div>
+    <?php } ?>
+</section>
+<?php } ?>
+<?php  include $commonfooter; ?>
+

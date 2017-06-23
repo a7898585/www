@@ -1,0 +1,166 @@
+<include file="Public:header" />
+<div class="w">
+    <!-- main begin-->
+    <div style="height:12px;"></div>
+    <div class="zkt_wrap">
+        <div class="zkt_wrap_l2box" style="float:left;">
+            <div class="zkt_title1" style="width:712px;">
+                <h3 class="zkt_titleh3">{$typeArr.name}</h3>
+                <!--<a href="#" class="zkt_more">更多&gt;&gt;</a>-->
+                <p></p>
+            </div>
+            <div class="zkt_zxlb_list">
+                <dl>
+                    <volist name="data.list" id="newsItem">
+                        <dt>
+                        <!--<a href="#"><img src="images/zkt_img21.jpg"></a>-->
+                        <div class="zkt_zxlb_listr">
+                            <a href="/news{$newsItem.id}" class="zkt_zl_a">{$newsItem.title}</a>
+                            <p>{$newsItem.content|msubstr=0,150}</p>
+                            <div class="zkt_zl_b">{$newsItem.add_time}更新    标签：<a href="#">{$newsItem.keywords}</a></div>
+                        </div>
+                        </dt>
+                    </volist>
+
+                </dl>
+                <div class="bx_pages">
+                    <ul>{$data['page']['pagehtml']}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="zkt_wrap_r">
+            <div class="zkt_wrap_rbox">
+                <div class="zkt_title1">
+                    <h3 class="zkt_titleh3">业界要闻</h3><a href="/news/industry" class="zkt_more">更多&gt;&gt;</a>
+                    <p></p>
+                </div>
+                <div id="hglx">
+                    <volist name="hangyeNews" id="vo">
+                        <ul>
+                            <li class="hglx_x" <if condition="$key eq 0 ">style="display:block"<else />style="display:none"</if>>
+                            <a href="/news{$vo.id}"><dl>
+                                    <dt>{$key+1}. {$vo.title|msubstr=0,20}</dt>
+                                    <dd>{$vo.content|msubstr=0,50}</dd>
+                                </dl>
+                            </a>
+                            </li>
+                            <li class="hglx_l" <if condition="$key eq 0 ">style="display:none"<else />style="display:block"</if>><a href="/news{$vo.id}">{$key+1}. {$vo.title|msubstr=0,15}</a></li>
+                        </ul>
+                    </volist>
+                </div>
+            </div>
+            <div class="zkt_wrap_rbox">
+                <div class="zkt_title1">
+                    <h3 class="zkt_titleh3">热门产品</h3>
+                    <p></p>
+                </div>
+                <div class="zkt_wrd_wyzx">
+                    <dl class="zkt_dxx">
+                        <dt>好二郎养老无忧计划</dt>
+                        <dd><em>•</em><a href="#">保障期限：30年-终身</a><p></p></dd>
+                        <dd><em>•</em><a href="#">缴费方式：月交</a><p></p></dd>
+                        <dd><em>•</em><a href="#">投保年龄：18-55周岁</a><p></p></dd>
+                    </dl>
+                    <dl class="zkt_dxx">
+                        <dt>好二郎养老无忧计划</dt>
+                        <dd><em>•</em><a href="#">保障期限：30年-终身</a><p></p></dd>
+                        <dd><em>•</em><a href="#">缴费方式：月交</a><p></p></dd>
+                        <dd><em>•</em><a href="#">投保年龄：18-55周岁</a><p></p></dd>
+                    </dl>
+                    <dl>
+                        <dt>好二郎养老无忧计划</dt>
+                        <dd><em>•</em><a href="#">保障期限：30年-终身</a><p></p></dd>
+                        <dd><em>•</em><a href="#">缴费方式：月交</a><p></p></dd>
+                        <dd><em>•</em><a href="#">投保年龄：18-55周岁</a><p></p></dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="zkt_wrap_rbox">
+                <div class="zkt_title1">
+                    <h3 class="zkt_titleh3">投保指南</h3>
+                    <a href="/news/guide" class="zkt_more">更多&gt;&gt;</a>
+                    <p></p>
+                </div>
+                <div class="hglx_x2">
+                    <a href="/news{$guideNews[0]['id']}"><img src="/Public/Home/images/zkt_img19.jpg"></a>
+                    <dl>
+                        <dt>{$guideNews[0]['title']}</dt>
+                        <dd>{$guideNews[0]['content']}</dd>
+                    </dl>
+                </div>
+                <div class="zkt_wrd_wyzx">
+                    <dl>
+                        <volist name="guideNews" id="vo" offset="1" length='5'>
+                            <dd><em>•</em><a href="/news{$vo.id}">{$vo.title}</a><p></p></dd>
+                        </volist>
+                    </dl>
+                </div>
+            </div>
+            <div class="zkt_wrap_rbox">
+                <div class="zkt_title1">
+                    <h3 class="zkt_titleh3">专题新闻</h3>
+                    <a href="/news/special" class="zkt_more">更多&gt;&gt;</a>
+                    <p></p>
+                </div>
+                <div class="hglx_x3">
+                    <a href="/news{$specialNews[0]['id']}"><img src="/Public/Home/images/zkt_img20.jpg"></a>
+                    <dl>
+                        <dt>{$specialNews[0]['title']}</dt>
+                        <dd>{$specialNews[0]['content']}</dd>
+                    </dl>
+                </div>
+                <div class="zkt_wrd_wyzx">
+                    <dl>
+                        <volist name="specialNews" id="vo" offset="1" length='8'>
+                            <dd><em>•</em><a href="/news{$vo.id}">{$vo.title}</a><p></p></dd>
+                        </volist>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bx_deputy">
+        <div class="bx_conthed"><h4>为您服务的代理人</h4></div>
+        <div class="bx_deputyone">
+            {:W('Cate/recomend')}
+        </div>
+        <div class="clear"></div>
+    </div>		
+    <!--面包屑 开始-->
+    <div class="crumbs">
+        <a href="/" class="crumbs_sy"></a>
+        <em>您的位置：</em>
+        <span>></span>
+        <a href="/news" class="crumbs_c">保险资讯</a>
+        <span>></span>
+        <i>{$typeArr.name}</i>
+    </div>
+    <!--面包屑 结束-->
+</div> 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#hglx").children().each(function(i) {
+            //显示    
+            $(this).mouseover(function(index){
+                //遍历列表显示选择样式
+                for(var b=0;b<10;b++)
+                {
+                    //未选样式
+                    if(b != i)
+                    {
+                        $("#hglx").children().eq(b).children().eq(0).css("display","none");
+                        $("#hglx").children().eq(b).children().eq(1).css("display","block");
+                    }
+                    //当前选择样式
+                    else 
+                    {
+                        $(this).children().first().css({"display":"block"});
+                        $(this).children().eq(1).css("display","none");
+                    }
+                }
+            });
+        });
+    });
+</script>
+<include file="Public:footer" />

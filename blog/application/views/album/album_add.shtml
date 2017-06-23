@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><?php echo $bloginfo['BlogName'];?>添加相册</title>
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Skin.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css,ua/css/Public/TopBarFoot.css" />
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+    </head>
+
+    <script language="javascript">
+        function checkform(id){
+            var name = document.getElementById('name').value;
+            if(name.length < 2 || name.val().length > 100){
+                document.getElementById('__ErrorAlbunamePanel').style.display="";
+                return false;
+            }
+            var summary = document.getElementById('summary').value;
+            if(summary.length > 200){
+                document.getElementById('__ErrorAlbusummPanel').style.display="";
+                return false;
+            }
+        }
+    </script>
+    <body>
+        <div class="AlbumsPop" id="CreateAlbums" style="display: block;width:495px !important;">
+            <div class="Cont">
+                <form class="Fmsec" id="form1" name="form1" method="post" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/album/Action" onSubmit="return checkform('#form1');">
+                    <input name="alubmid" type="hidden" id="alubmid" value="<?php if(isset($albumid)) echo $albumid; else echo '0';?>"/>
+                    <label class="Mt10 LabSlc">
+                        <i>相册名称：</i>
+                        <input class="Txt" id="name" name="name" value="<?php if(isset($albuminfo['Name'])) echo $albuminfo['Name'];?>" type="text"><var>（必填）</var>
+                    </label> 
+                    <label class="Mt10"><i class="Vetop">相册简介：</i>
+                        <?php
+                        if($albuminfo['Summary']=='系统默认相册不能更改，不能删除。')
+                        {
+                        $albuminfo['Summary']='';
+                        }
+                        ?>
+
+                        <textarea class="PhotoIntro" name="summary" cols="30" rows="5" id="summary"><?php if(isset($albuminfo['Summary'])) echo $albuminfo['Summary'];?></textarea>
+                    </label>
+                    <label class="Mt10" for="other"><i>访问权限：</i>
+
+                        <input  type="radio" name="property"    value="0" <?php if($albuminfo['Property']==0) echo 'checked="checked"';?> />
+                                公开 
+
+
+                                <input type="radio" name="property"   value="1" <?php if($albuminfo['Property']==1) echo 'checked="checked"';?> />
+                               不公开
+
+
+
+                               <INPUT TYPE="hidden" NAME="act"  ID="act" VALUE="addalbum">
+                                    </label>
+                                    <label class="Pl80 Mt10">
+                                        <?php if($flag=='1'){ ?>
+                                        <a class="Mr10 SetSubmit" href="javascript:this.form1.submit();">编辑</a>
+                                        <?php }else{ ?>
+                                        <a class="Mr10 SetSubmit" href="javascript:this.form1.submit();">创建</a>
+                                        <?php } ?>
+                                        <a class="SetCancel" href="javascript:this.form1.reset();">取消</a>
+                                    </label>
+                                    </form>  
+                                    </div>
+                                    </div> 
+                                    </body>
+                                    </html>

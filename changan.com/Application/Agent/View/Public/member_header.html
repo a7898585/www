@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>{$seo.title}</title>
+        <meta name="keywords" content="{$seo.keywords}">
+        <meta name="description" content="{$seo.description}">
+        <link type="text/css" rel="stylesheet" href="/Public/Home/css/vip.css"/>
+        <script type="text/javascript" src="/Public/Home/js/jquery.js"></script>
+        <script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+    </head>
+    <body>
+        <div class="top_box">
+            <div  class="top">
+                <div class="top_l">
+                    <notempty name="userInfo">
+                        <a title="{$userInfo.name}" <if condition="$userInfo.type eq 0">href="{:getDoMain('member')}"<else /> href="{:getDoMain('daili')}"</if>>{$userInfo.mail}</a> | <a title="退出登录" href="{:getDoMain('www')}login/loginOut/" rel="nofollow">退出</a>
+                        <else /> 
+                        <a href="{:getDoMain('www')}login/" rel="nofollow" title="请登录">请登录</a> | <a href="{:getDoMain('www')}signup/" rel="nofollow" title="免费注册">免费注册</a><span><a href="#">送</a></span>
+                    </notempty> 
+                </div>
+                <div class="top_r">
+
+                    <div class="webnav">
+                        <span onClick="weblink.style.display='block'">网站导航<a href="#"></a></span>
+                        <div class="navlink" id="weblink" style="display:none;" onClick="weblink.style.display='none'">
+                            <a href="#">中移动</a>
+                            <a href="#" class="bb0">常安保险</a>
+                        </div>
+                    </div>
+                    <a href="{:getDoMain()}vip/">会员服务</a> 
+                </div>
+            </div>
+        </div>
+        <!--head begin-->
+        <div class="w bgfa">
+            <div class="m_head">
+                <a href="{:getDoMain('www')}"><img class="u_logo" src="/Public/Home/images/logo.png" /></a>
+                <span>会员中心</span>
+                <div class="p_nav">
+                    <ul>
+                        <li><a href="{:getDoMain('www')}" class="active">首页</a></li>
+                        <li><a href="{:getDoMain('www')}chanpin">找产品</a></li>
+                        <li><a href="{:getDoMain('www')}dailiren">找代理人</a></li>
+                        <li><a href="{:getDoMain('www')}program">方案制定</a></li>
+                        <li><a href="{:getDoMain('www')}wenba">保险问答</a></li>
+                        <li><a href="{:getDoMain('www')}news">保险资讯</a></li>                   
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--head end-->
+        <div class="w s_bgc_0">
+            <div class="m m_cont">
+                <!--bar_l begin-->
+                <div class="bar_l">
+                    <ul class="nav">
+                        <li <if condition="$params['a'] eq 'index'">class="z_in"</if>><a href="{$base_url}member">会员中心</a></li>
+                        <li <if condition="$params['a'] eq 'record'">class="z_in"</if>><a href="{$base_url}member/record/">定制记录</a></li>
+                        <li <if condition="$params['a'] eq 'myask' or $params['a'] eq 'myreply'">class="z_in"</if>><a href="{$base_url}member/myask/">我的问题</a></li>
+                        <li <if condition="$params['a'] eq 'comment'">class="z_in"</if>><a href="{$base_url}member/comment/">我的评论</a></li>
+                        <li <if condition="$params['a'] eq 'info'">class="z_in"</if>><a href="{$base_url}member/info/">我的信息</a></li>
+                        <li <if condition="$params['a'] eq 'password'">class="z_in"</if>><a href="{$base_url}member/password/">修改密码</a></li>
+                    </ul>
+                </div>
+                <script>
+                    var base_url = '{$base_url}';
+                </script>

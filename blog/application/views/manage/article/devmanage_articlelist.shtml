@@ -1,0 +1,184 @@
+<script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/js/popup.js" ></script>
+<script>
+
+    //设置置顶
+
+    function blogtoparticle(tip,ArticleID,domainname) {
+        $('#topTip').html(tip);
+        $('#delArtId').val(ArticleID);
+        $('#deldomainname').val(domainname);
+        Dialog('topActSure');
+    }
+</script>
+<style type="text/css">
+    .ArticleLst li .Handle span.Sort{margin-left:0;}
+
+</style>
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>文章列表</h3>
+    <div class="BgCont">
+        <dl class="ArticleLstBox">
+            <dt>
+            <a class="CM" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/manage/article/List'; ?>">全部</a>
+            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/manage/article/List/recommend-1'; ?>"><i class="Recom"></i>推荐</a>
+            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/manage/article/List/istop-1';?>"><i class="Top"></i>置顶</a><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/manage/article/List/ismut-1';?>"><i class="WithImg"></i>含图片</a>
+            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/manage/article/List/ismut-2';?>"><i class="WithVedio"></i>含视频</a>      
+            </dt>
+
+            <dd>
+                <ul class="ArticleLst">
+                    <?php
+                    if($artList['RetRecords'] > 0)
+                    {
+                    if($artList['RetRecords'] == 1)
+                    {
+                    $artList['Record'] = array(0=>$artList['Record']);
+                    }
+                    foreach($artList['Record'] as $art)
+                    {
+
+                    ?>  
+
+                    <li><div class="Handle">
+                            <span class="Sort">
+                                <?php
+                                if(trim($art['SortName']) != "")
+                                {
+                                $dotSort = '';
+
+                                if (utf8_strlen($art['SortName']) > 8) {
+                                $dotSort = ' ..';
+                                $art['SortName']=utf8_str($art['SortName'],5,'false').$dotSort;
+                                }
+                                ?>
+                                <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/sort/<?php echo $art['SortID'];?>" ><?php echo $art['SortName'];?></a>
+                                <?php
+                                }
+                                else
+                                {?>
+                                <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/sort/<?php echo $default['articlesort'][0];?>" ><?php echo $default['articlesort'][1];?></a>
+                                <?php
+                                }?></span>
+                            <span><?php echo substr($art['AppearTime'],0,-3);?><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/Add?articleid=<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>">[编辑]</a></span>
+                            <?php
+                            if($art['IsTop']==0)
+                            {
+                            $istop=1;
+                            ?>
+                            <a  href="javascript:;" onclick="javascript:;blogtoparticle('确定置顶吗？','<?php echo($art['ArticleID']); ?>','<?php echo($bloginfo['DomainName']); ?>')">置顶</a>
+                            <?php
+                            }
+                            else
+                            {
+                            $istop=0;
+                            ?>
+                            <a  href="javascript:;" onclick="javascript:;blogtoparticle('确定取消置顶吗？','<?php echo($art['ArticleID']); ?>','<?php echo($bloginfo['DomainName']); ?>')">取消置顶</a>
+                            <?php } ?>
+                            <a  href="javascript:void(0)" onclick="javascript:delThisArticle('<?php echo $art['ArticleID']; ?>','<?php echo($bloginfo['DomainName']); ?>');">删除</a>
+
+                            <form id="article_action_form_<?php echo($art['ArticleID']); ?>" name="article_action_form" method="post" target="_blank">
+                                <input type="hidden" name="act" value="del"/>
+                                <input type="hidden" name="id"  value="<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID']; ?>" />
+                                <input type="hidden" name="memid" id="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+                                <input type="hidden" name="flashCode" id="flashcode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>" />
+
+                                <input type="hidden" name="ismut"  value="<?php echo $art['IsMultimedia']; ?>" />
+                                <input type="hidden" name="recommend"  value="<?php echo $art['Recommend']; ?>" />
+                                <input type="hidden" name="istop"  value="<?php echo $istop; ?>" />
+                            </form>
+
+                        </div>
+                        <h4 class="Title">
+                            <?php
+                            $count=0;
+                            $width=45;
+                            $MultimediaPic='';
+                            if($art['Recommend']||$art['IsUsed']==1)
+                            {
+                            $count++;
+                            ?>
+                            <i class="Recom">荐</i>
+                            <?php } ?>
+                            <?php if($art['IsTop']==1)
+                            {
+                            $count++;
+                            ?>
+                            <i class="Top">置顶</i>
+                            <?php
+                            }
+
+                            if($art['IsMultimedia']=='1')
+                            {
+                            $MultimediaPic='<i class="WithImg"></i>';
+                            $count++;
+                            }
+                            else if($art['IsMultimedia']=='2')
+                            {
+                            $MultimediaPic='<i class="WithVedio"></i>';
+                            $count++;
+                            }
+                            else if($art['IsMultimedia']=='3')
+                            {
+                            $MultimediaPic='<i class="WithImg"></i><i class="WithVedio"></i>';
+                            $count=$count+2;
+                            }
+
+                            if($count==1)
+                            {
+                            $width=35;
+                            }
+                            else if($count==2)
+                            {
+                            $width=30;
+                            }
+                            else if($count==3)
+                            {
+                            $width=20;
+                            }
+                            else if($count==5)
+                            {
+                            $width=10;
+                            }
+
+                            $dot = '';
+                            if (strlen($art['Title']) > $width) {
+                            $dot = ' ...';
+                            }
+                            ?>
+                            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html" target="_blank"><?php echo filter_word(utf8_str($art['Title'],$width,'false')).$dot; ?></a>
+                            <?php
+                            echo($MultimediaPic);
+                            ?>
+                        </h4>
+                    </li>
+                    <?php
+                    }
+                    }
+                    else
+                    {?>
+                    <li>
+                        <p>您暂时还没有该分类的文章记录</p>
+                    </li>
+                    <?php
+                    }?>
+                </ul>
+                <!--分页-->
+                <div class="Page">
+                    <?php echo $pagebar;?>
+                </div>
+                <!--end 分页-->
+            </dd>
+        </dl>       
+    </div>
+</div>
+<script language="javascript">
+    var memberid = <?php echo $bloginfo['MemberID'];?>;
+    var flashCode = "<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>";
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var action = baseuri+'/article/Action';
+    var editurl = baseuri+'/article/Edit';
+
+
+</script>
+
+

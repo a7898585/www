@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>[t]</title>
+<meta name="Keywords" content="[k]"/>
+<meta name="Description" content="[d]"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/com.css" />
+<script type="text/javascript" src="__PUBLIC__/Common/js/jquery-1.8.0.min.js"></script>
+
+</head>
+<body>
+<!--头部开始-->
+<div class="head" id="head">
+  <div class="logo"><a href="/"><img src="__PUBLIC__/Common/images/logo.png" alt="万贷好" title="贷款就上万贷好！" /></a></div>
+  <div class="slogan"> <img src="__PUBLIC__/Common/images/slogan.png" />
+    <div class="cySwitch"><span><a href="/citys" class="cOrange"><b>{$CITY.name_simple}</b></a></span><span>[<a href="/citys" class="cGray01">切换城市</a>]</span></div>
+  </div>
+  <ul class="head-nav">
+   <li class="lg">
+       <empty name="MEMBER">
+           <a href="/login">请登录</a>
+       </empty>
+       <notempty name="MEMBER">
+           <if condition="($MEMBER['roleid'] eq 1)">
+               <a href="{:getDoMain('member')}">{$MEMBER.realname}</a> &nbsp;
+               <a href="/logout">退出</a>
+           <else />
+               <a href="{:getDoMain('xindai')}">{$MEMBER.realname}</a> &nbsp;
+               <a href="/logout">退出</a>
+           </if>
+       </notempty>
+
+   </li>
+    <li class="sep">|</li>
+    <li class="lg"><a href="{:getDoMain('xindai')}/reg">信贷经理注册</a></li>
+    <li class="sep">|</li>
+    <li class="tel">客服电话：<span class="cRed2"><b>400-8858-258</b></span></li>
+    <li class="sitenav"><i></i><a href="/navigation">网站导航</a></li>
+  </ul>
+</div>
+<!--头部结束-->

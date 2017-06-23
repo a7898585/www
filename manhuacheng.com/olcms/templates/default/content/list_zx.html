@@ -1,0 +1,29 @@
+{template "content","header"}
+
+<div class="mainborder mar">
+     <div class="mainbox">
+      <div class="title">
+
+        <div class="title_left"></div>
+        <div class="title_mid title3"><span id="result_box"><span title="" closure_uid_16t2ze="97" lc="新闻动态" mc="新闻动态">新闻动态</span></span></div>
+        <div class="title_right"></div>
+      </div>
+      <div class="content_box box5">
+	   <ul>	    
+		{pc:content action="lists" catid="$catid" num="10" order="id DESC" page="$page"}
+		{loop $data $r}
+		<li><a href="{$r[url]}" target="_blank" class="style1">{$r[title]}</a><span></span></li>
+		{/loop}
+		{/pc}
+        </ul>
+      <div class="page">{$pages}</div>
+      </div>
+      <div class="box_foot">
+
+        <div class="foot_left"></div>
+        <div class="foot_mid title3"></div>
+        <div class="foot_right"></div>
+      </div>
+    </div>
+</div>
+{template "content","footer"}

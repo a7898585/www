@@ -1,0 +1,40 @@
+{template "content","header"}
+<!--main-->    
+<div class="middle_div1">
+    	<div class="middle_div1_le" style="border:none;">
+        	<div class="mhzx middle_div1_ri">
+				<div class="rs_dm_tit" style="width:100%">
+					<h3>{$CATEGORYS[$catid]['catname']}</h3>
+				</div>
+			{pc:content action="lists" catid="$catid" num="10" moreinfo="1" order="id DESC" page="$page"}
+				{loop $data $r}
+					<div class="mhzx_txt">
+						<div class="mhzx_txt_le"><a href="/zixun{$r['id']}/" target="_blank"><img width='200' height='130' src="{thumb($r[thumb], 200, 130, 0)}"/></a></div>
+						<div class="mhzx_txt_ri">
+
+							<div class="to">
+								<i class="icon"></i>
+								<h3>
+									<a href="/zixun{$r['id']}/" target="_blank" title="{$r[title]}">{str_cut($r[title],55,'')}</a>
+								</h3>
+							</div>
+							<div class="pl_le2"><span>{date('Y-m-d H:i',$r[inputtime])}</span><span>来源:{if empty($r[copyfrom])}网络{else}{$r[copyfrom]}{/if}</span></div>
+							<p>{$r[description]}<a href="/zixun{$r['id']}/" target="_blank">[阅读全文]</a></p>
+							
+							<div class="pl">
+								<div class="pl_le"><span>浏览：{$r[views]} 次</span><span>评论：{if $comment_total}{$comment_total}{else}0{/if}</span></div>
+							</div>
+						</div>
+					</div>
+				{/loop}
+			{/pc}
+
+                <div class="ad02 page" id="search_fy">
+				{$pages}     	   
+				</div>	
+            </div>
+        </div>
+		{template "content","block_right_zixun"}
+    </div>
+
+{template "content","footer"}

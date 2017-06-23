@@ -1,0 +1,65 @@
+<div id="wrapper">
+    <div id="pagelet-nav">
+        <div class="nav-inner clearfix">
+            <div class="nav-logo">
+                <a href="{$base_url}" class="logo-box" ga_event="nav_icon">
+                    <img src="/Public/Home/images/logo.jpg" class="logo">
+                </a>
+            </div>
+            <div class="nav-title">
+                <ul class="clearfix">
+                    <li>
+                        <a data-node="home" ga_event="nav_index" class="btn <if condition="$navtap eq 'index'">selected</if>" href="{$base_url}">
+                            <span>首页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-node="dynamic" ga_event="nav_dynamic" class="btn <if condition="$navtap eq 'updates'">selected</if>" href="{$base_url}/updates">
+                            <span>动态</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-node="dynamic" ga_event="nav_dynamic" class="btn <if condition="$navtap eq 'subject'">selected</if>" href="{$base_url}/subject">
+                            <span>专题</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-subtitle">
+                <ul class="nav-list clearfix">
+                    <notempty name="USER">
+                        <li data-node="username" class="username-box nav-item">
+                            <a href="{$base_url}/user/subscribe/" class="btn user-head" id="user_head">
+                                <img src="{:setUpUrl($USER['head_pic'])}">
+                                <span>{$USER.username}</span>
+                            </a>
+                            <i class="line"></i><div class="layer">
+                                <ul>
+                                    <li><a ga_event="nav_my_message" href="{$base_url}/user/subscribe/?msg=dingyue" class="layer-item">我的订阅</a></li>
+                                    <li><a ga_event="nav_my_message" href="{$base_url}/user/subscribe/?msg=collect" class="layer-item">我的收藏</a></li>
+                                    <li><a ga_event="nav_my_message" href="{$base_url}/user/subscribe/?msg=comment" class="layer-item">我的评论</a></li>
+                                    <li><a ga_event="nav_my_message" href="{$base_url}/user/subscribe/?msg=friends" class="layer-item">我的好友</a></li>
+                                    <li><a href="javascript:;" onclick="uppwd()" class="layer-item">修改密码</a></li>
+                                    <li><a href="javascript:;" ga_event="nav_loginout" class="layer-item">退出账号</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="btn " href="javascript:;" ga_event="nav_loginout">退出</a>
+                        </li>
+                    </notempty>
+                    <empty name="USER">
+                        <li class="username-box nav-item" data-node="username">
+                            <a ga_event="nav_login" class="btn user-head" href="javascript:;" data-node="login">
+                                <span>登录</span>
+                            </a>
+                            <i class="line"></i>
+                            <a ga_event="nav_register" class="btn " href="javascript:;" data-node="register">
+                                <span>注册</span>
+                            </a>
+                        </li>
+                    </empty>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {:W('Home/nav',array('nav'=>$nav))}

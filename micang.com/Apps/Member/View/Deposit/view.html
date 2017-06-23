@@ -1,0 +1,55 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="javascript:;">提现详情</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c add_temp_d" id="navhljs1_c0">
+        <ul>
+            <li>
+                <p>申请会员</p>{$detail['mid']}</li>
+            <li>
+                <p>流水号</p>{$detail['id']}</li>
+            <li>
+                <p>申请提现金额</p><div class="price">{$detail['money']}元</div>
+            </li>
+            <li>
+                <p>手续费</p>{$detail['counterfee']}元</li>
+            <li>
+                <p>实际提现金额</p><?php echo ($detail['money']-$detail['counterfee']);?>元 </li>
+            <li>
+                <p>联系电话</p>{$detail['mobile']}</li>
+            <li>
+                <p>申请时间</p>{$detail['addtime']}</li>
+            <li>
+                <p>姓名</p>{$detail['account']['realname']}
+            </li>
+             <li>
+                <p>账户</p>{$detail['account']['account']}
+            </li>
+             <li>
+                <p>银行</p><if condition="$detail['account']['type'] eq '1'">支付宝
+                                    <else /> {$detail['account']['bankname']}
+                                </if>
+            </li>
+            <li>
+                <p>开户行</p>{$detail['account']['address']|default='&nbsp;--'}
+            </li>
+            <li>
+                <p>当前状态</p> <switch name="detail.status">
+            <case value="0">待汇款</case>
+            <case value="1">汇款成功</case>
+            <case value="2">汇款关闭</case>
+            <default /></switch>
+            </li>
+            <li>
+                <p>汇款流水号</p> {$detail['tid']}
+            </li>
+            <li>
+                <p>备注</p> {$detail['remark']}
+            </li>
+            <li>
+                <p>处理日期</p><if condition="$detail.notify_time eq '0000-00-00 00:00:00' ">--<else />{$detail.notify_time}</if>
+            </li>
+            <li><input type="button" class="list_submit list_submit_marg" value="返回" onclick="javascript:history.go(-1);"></li>
+        </ul>
+    </div>
+</div>

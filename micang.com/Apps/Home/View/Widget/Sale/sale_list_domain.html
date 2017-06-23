@@ -1,0 +1,32 @@
+{__NOLAYOUT__}
+<ul>
+    <volist name="data" id="vo">
+        <li>
+            <p>{$vo.domain}</p>
+            <div class="price_list_a">{$vo.summary}</div>
+            <div class="price_list_b">
+                <if condition="$type eq '1' ">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span>{$vo['seller_price']|Fen2Yuan|max=###,1} 元</span>
+                    <elseif condition="$type eq '2'"/>
+                    当前价格：<span>{$vo['buyer_price']|Fen2Yuan|max=###,1} 元</span>
+                    <elseif condition="$type eq '3'"/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span></span>
+                </if>
+            </div>
+            <div class="prli_hover">
+                <p><em>{$vo.domain}</em></p>
+                <div class="price_list_c">{$vo.summary}</div>
+                <div class="price_list_b">
+                    <if condition="$type eq '1' ">
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span>{$vo['seller_price']|Fen2Yuan|max=###,1} 元</span>
+                        <elseif condition="$type eq '2'"/>
+                        当前价格：<span>{$vo['buyer_price']|Fen2Yuan|max=###,1} 元</span>
+                        <elseif condition="$type eq '3'"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span></span>
+                    </if>
+                </div>
+                <a href="/Sell/detail?id={$vo.id}" class="prli_btn_b"></a>
+            </div>
+        </li>
+    </volist>
+</ul>

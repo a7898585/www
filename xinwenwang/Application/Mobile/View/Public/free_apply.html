@@ -1,0 +1,411 @@
+<div class="free">
+    <div class="free_wrap">
+        <div class="tit">
+            <ul class="step">
+                <li class="cur" id="one1"><i></i>联系方式</li>
+                <li id="two2"><i></i>资质审核</li>
+                <li id="three3"><i></i>申请结果</li>
+            </ul>
+        </div>
+        <div class="sqcon">
+            <form id="free_apply_form" method="post">
+                <div id="apply_div_1" style="display:block;">
+                    <div class="ps">您的信息将只做为产品推荐使用，不会以任何形式泄露给其他人员或机构</div>
+                    <ul>
+                        <li>
+                            <div class="item"><span class="lab">真实姓名</span>
+                                <input type="text" name="realname" datatype="s1-18" class="input-txt3" nullmsg="姓名不能为空" sucmsg=" " errormsg="您的姓名输入有误,长度1-18" value="{$member.realname}"/>
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">手机号码</span>
+                                <input type="text" name="mobile" id="mobile" datatype="m" maxlength="11" class="input-txt3" nullmsg="手机号码不能为空" sucmsg=" " errormsg="手机号码错误,请核实"  ajaxurl="/public/valid_mobile" value="{$member.mobile}"/>
+                            </div>
+                            <div class="tip Validform_label" id="mobile_msg"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">手机验证码</span>
+                                <input type="text" value="" name="code" datatype="/^\d{6}$/" class="input-txt4"  maxlength="6" sucmsg=" " nullmsg="验证码不能为空" errormsg="验证码验证失败,请核实！"  />
+                                <a class="get get_on" id="getcode" onclick="getSmsCode1(this)" chk="1">获取验证码</a> </div>
+                            <div class="tip Validform_label" id="code_msg"></div>
+                        </li>
+                        <li></li>
+                    </ul>
+                    <div class="btn_next"><a href="javascript:void(0);" onclick="applyNext1('apply_div_2')" class="sqbtn btn6">下一步</a></div>
+                    <div class="blank20"></div>
+                </div>
+                <div id="apply_div_2" style="display: none;">
+                    <div class="ps">请您先完善您个人的资料，完整的贷款资料好贷将为你匹配相关产品</div>
+                    <ul>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">两年内信用记录{$member.company.creditlog}</span>
+                                <select class="op2" id="creditlog" name="creditlog">
+                                    <foreach name="member_creditlog" item="vo" key="k">
+                                        <option value="{$k}" <if condition="$member['company']['creditlog'] eq $k">selected="selected"</if>>{$vo}</option>
+                                    </foreach>
+                                </select>
+
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">您是否有信用卡</span>
+                                <div class="se fl">
+                                    <label class="fl"><input name="creditcard" type="radio" <if condition="$member['company']['creditcard'] neq 1">checked="checked"</if> value="0">无卡</label>
+                                    <label class="fl"><input name="creditcard" type="radio" <if condition="$member['company']['creditcard'] eq 1">checked="checked"</if> value="1">有卡</label>
+                                </div>
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li zu="creditcard"  <empty name="creditcard"> style="display: none;"</empty>>
+                        <div class="item" style="overflow:visible;">
+                            <span class="lab">单卡最高额度</span>
+                            <select class="op2" name="credit">
+                                <foreach name="member_credit" item="vo">
+                                    <option value="{$key}" <if condition="$member['company']['credit'] eq $key">selected="selected"</if>>{$vo}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="tip Validform_label"></div>
+                        </li>
+                        <li zu="creditcard" <empty name="creditcard"> style="display: none;"</empty>>
+                        <div class="item" style="overflow:visible;">
+                            <span class="lab">最早开卡时间</span>
+                            <select class="op2" name="cardopen">
+                                <foreach name="member_cardopen" item="vo">
+                                    <option value="{$key}" <if condition="$member['company']['cardopen'] eq $key">selected="selected"</if>>{$vo}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="tip Validform_label"></div>
+                        </li>
+                        <li zu="creditcard" <empty name="creditcard"> style="display: none;"</empty>>
+                        <div class="item" style="overflow:visible;">
+                            <span class="lab">半年内逾期情况</span>
+                            <select class="op2" name="yuqi">
+                                <foreach name="member_yuqi" item="vo">
+                                    <option value="{$key}" <if condition="$member['company']['yuqi'] eq $key">selected="selected"</if>>{$vo}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">工作所在地</span>
+                                <empty name="member.company.workplace">
+                                    <select class="province" id="work_province">
+                                        <option>所在地</option>
+                                    </select>
+                                    <select class="" name="workarea" style="display: none;">
+                                        <option value="">城市</option>
+                                    </select>
+                                    <else /> 
+                                    <input type="text" name="workarea" datatype="s1-18" class="input-txt3" nullmsg="工作所在地不能为空" sucmsg=" " errormsg="您的工作所在地输入有误,长度1-18" value="{$member.company.workplace}"/>
+
+                                </empty>
+
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">户籍所在地</span>
+                                <empty name="member.company.homepalce">
+                                    <select class="province" id="huji_province">
+                                        <option>所在地</option>
+                                    </select>
+                                    <select class="" name="huji" style="display: none;">
+                                        <option value="">城市</option>
+                                    </select>
+                                    <else /> 
+                                    <input type="text" name="huji" datatype="s1-18" class="input-txt3" nullmsg="户籍不能为空" sucmsg=" " errormsg="您的户籍输入有误,长度1-18" value="{$member.company.homepalce}"/>
+                                </empty>
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;"><span class="lab">出生年份</span>
+                                <select class="op2" name="birth">
+                                    <?php $year = '1999';for($year;$year>'1948';$year--){?>
+                                    <option value="<?php echo $year;?>" <if condition="$member['company']['year'] eq $year">selected="selected"</if>><?php echo $year;?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">名下房产</span>
+                                <select class="op2" name="hashouse">
+                                    <foreach name="member_hashouse" item="vo">
+                                        <option value="{$key}" <if condition="$member['company']['hashouse'] eq $key">selected="selected"</if>>{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">名下车产</span>
+                                <select class="op2" name="hascar">
+                                    <foreach name="member_hascar" item="vo">
+                                        <option value="{$key}" <if condition="$member['company']['hascar'] eq $key">selected="selected"</if>>{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">有无成功贷款记录</span>
+                                <div class="se fl">
+                                    <label class="fl"><input name="hasrecord"  type="radio" <if condition="$member['company']['asrecord'] neq 2">checked="checked"</if> value="1">有</label>
+                                    <label class="fl"><input name="hasrecord"  type="radio" <if condition="$member['company']['creditcard'] eq 2">checked="checked"</if> value="2">无</label>
+                                </div>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">负债情况</span>
+                                <div class="se">
+                                    <foreach name="member_hasdebts" item="vo">
+                                        <label class="fl"><input name="hasdebts"  type="radio" checked="checked" value="{$key}" <if condition="$member['company']['hasdebts'] eq $key">checked="checked"</if> >{$vo}</label>
+                                    </foreach>
+
+                                </div>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">性别</span>
+                                <div class="se fl">
+                                    <foreach name="member_sex" item="vo">
+                                        <label class="fl"><input name="sex"  type="radio" checked="checked" value="{$key}" <if condition="$member['company']['sex'] eq $key">checked="checked"</if>>{$vo}</label>
+                                    </foreach>
+                                </div>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">婚姻状况</span>
+                                <select class="op2" name="hasmarry">
+                                    <foreach name="member_hasmarry" item="vo">
+                                        <option value="{$key}" <if condition="$member['company']['hasmarry'] eq $key">selected="selected"</if>>{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">文化程度</span>
+                                <select class="op2" name="education">
+                                    <foreach name="member_education" item="vo">
+                                        <option value="{$key}" <if condition="$member['company']['education'] eq $key">selected="selected"</if>>{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">职业身份</span>
+                                <select class="op2" name="job">
+                                    <foreach name="member_job" item="vo">
+                                        <option value="{$key}" <if condition="$member['company']['job'] eq $key">selected="selected"</if>>{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                    </ul>
+                    <div class="btn_next"><a href="#" onclick="applyNext2('apply_div_3')" class="sqbtn btn6">提交</a></div>
+                    <div class="blank20"></div>
+                </div>
+                <div id="apply_div_3" style="display:none;">
+                    <div class="sq_tip hide" id="tip1">
+                        <div class="sq_tip_pic"><img src="images/tip_80_01.png" width="80" /></div>
+                        <div class="sq_tip_info">
+                            <h3>很抱歉，申请未成功！</h3>
+                            <p>您的资质无法申请：薪易贷</p>
+                        </div>
+                    </div>
+                    <div class="sq_tip" id="tip2">
+                        <div class="sq_tip_pic"><img src="__PUBLIC__/Common/images/tip_80_02.png" width="80" /></div>
+                        <div class="sq_tip_info">
+                            <h3>恭喜，申请提交成功！</h3>
+                            <p>万贷好已收到您的申请，将会在24小时内联系你，请您保持手机畅通。</p>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="btn_next"><a href="javascript:void(0);" onclick="applyOK()" class="sqbtn btn6">确定</a></div>
+                    <div class="blank20"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var free_apply_form;
+    $(document).ready(function(){
+        free_apply_form = $("#free_apply_form").Validform({
+            tiptype:2
+        });
+        $('#free_apply_form input[name="creditcard"]').click(function(){
+            if($(this).val()==0){
+                $('#free_apply_form li[zu="creditcard"]').hide();
+            }else{
+                $('#free_apply_form li[zu="creditcard"]').show();
+            }
+            layer.autoArea(layer.index);
+        });
+        $("#apply_div_1 input[name='code']").blur(function(){
+
+        });
+        loadProSelect();
+    });
+    function loadProSelect(){
+        $.getJSON("/valid/getprolist/",'',function(data){
+            _html = '<option value="">请选择</option>';
+            for(var i=0; i<data.length; i++){
+                _html += '<option value="'+data[i].area_id+'">'+data[i].name_simple+'</option>';
+            }
+            $(".province").html(_html);
+            //            $("#huji_province").html(_html);
+        })
+    }
+    $(".province").change(function(){
+        var pobject = $(this);
+        var id = $(this).val();
+        var _html = "";
+        var arr = ['001001001','001002001','001003001','001004001'];
+        if(jQuery.inArray( id, arr )=='-1'){
+            $.getJSON("/valid/getcity",{
+                areaid:id
+            },function(data){
+                _html += '<option value="">请选择</option>';
+                for(var i=0; i<data.length; i++){
+                    _html += '<option value="'+data[i].area_id+'">'+data[i].name_simple+'</option>';
+                }
+                var cityobj = pobject.next();
+                cityobj.html(_html);
+                cityobj.show();
+            })
+        }else{
+            var cid = '';
+            var cname= '';
+            if(id=='001001001'){
+                cname= '北京';
+            }else if(id=='001002001'){
+                cname= '上海';
+            }else if(id=='001003001'){
+                cname= '天津';
+            }else if(id=='001004001'){
+                cname= '重庆';
+            }
+            _html += '<option value="'+id+'">'+cname+'</option>';
+        }
+        var cityobj = pobject.next();
+        cityobj.html(_html);
+        cityobj.show();
+       
+    });
+    function applyNext1(){
+        var realname = free_apply_form.check(false,$("#apply_div_1 input[name='realname']"));
+        var mobile = free_apply_form.check(false,$("#apply_div_1 input[name='mobile']"));
+        var  code = free_apply_form.check(false,$("#apply_div_1 input[name='code']"));
+        if(!realname||!mobile||!code){
+            return false;
+        }
+        var mobile = $("#apply_div_1 input[name='mobile']").val();
+        var code_ = $("#apply_div_1 input[name='code']").val();
+        $.post("/Public/valid_sms", { param:code_ } ,function(data){
+            if(data=='y'){
+                $('#code_msg').html('');
+                $('.step li').removeClass('cur');
+                $('.step li').eq(1).addClass('cur');
+                $('#apply_div_1').hide();
+                $('#apply_div_2').show();
+                layer.autoArea(layer.index);
+            }else{
+                $('#code_msg').html(data);
+            }
+        });
+
+
+    }
+    var temp = true;
+    function applyNext2(){
+        if(free_apply_form.check(false)){
+            if(temp){
+                temp = false;
+                $.ajax({
+                    type: "post",
+                    url: '__SELF__',
+                    cache:false,
+                    async:false,
+                    data:$('#free_apply_form').serialize(),
+                    dataType:'JSON',
+                    success: function(data){
+                        if(data['code']==200){
+                            $('.step li').removeClass('cur');
+                            $('.step li').eq(2).addClass('cur');
+                            //                            layer.msg('申请信息提交成功,24小时内万贷好客服会与您联系',2,1,function(){layer.closeAll();});
+                            $('#apply_div_2').hide();
+                            $('#apply_div_3').show();
+                            layer.autoArea(layer.index);
+                        }else{
+                            layer.msg(data['msg']);
+                        }
+
+                        temp=true;
+                    },
+                    error:function(){
+                        temp=true;
+                    }
+                });
+            }else{
+                layer.msg('请勿重复提交数据',1,1);
+            }
+        }
+    }
+    function applyOK(){
+        layer.closeAll();
+    }
+    var count1=90;
+    var timer1;
+    function getSmsCode1(t){
+        var mobile = $('#apply_div_1 input[id="mobile"]').val();
+        if(!mobile.match(/^(13[0-9]|14[7]|15[0|1|3|5|6|7|8|9]|18[0-9]|17[0|7])\d{8}$/)){
+            $('#mobile_msg').html('请输入正确的手机号');
+            return false;
+        } 
+        if($(t).attr('chk')==0){
+            return false;
+        }
+        $(t).text('发送中');
+        $('#mobile_msg').html('');
+        $(t).removeClass('get_on');
+        $.get("/Public/send_sms", { mobile: mobile } ,function(data){
+            if(data!='ok'){
+                $(t).addClass('get_on');
+                $(t).text('获取验证码');
+                layer.msg(data,1,3);
+                return false;
+            }
+            $(t).attr('chk',0);
+            timer1 = setInterval(function(){
+                count1=count1-1;
+                $(t).text(count1+'秒后重新获取');
+                if(count1==0){
+                    $(t).attr('chk',1);
+                    $(t).text('重新发送');
+                    $(t).addClass('get_on');
+                    count1=90;
+                    clearInterval(timer1);
+                }
+            },1000);
+        });
+    }
+</script>

@@ -1,0 +1,479 @@
+<div class="company">
+    <p>
+        <span>© 2015 新闻王 xinwenwang.com</span>
+        闽ICP备11014391号-200
+    <p>
+        <a href="#" class="icp" target="_blank">网络文化经营许可证</a>
+        <a href="#" target="_blank">跟帖评论自律管理承诺书 </a>
+        违法和不良信息举报电话：010-58733394
+        公司名称：厦门粉酷网络科技有限公司
+    </p>
+</div>
+<!--返回顶部-->
+<div class="tools">
+    <a href="javascript:;" class="back_top" title="返回顶部" onClick="window.scrollTo(0,0); return false;"></a>
+    <a href="javascript:feedback();" class="feed_back hidden-xs" title="提点意见" ></a>
+</div>
+<!--意见反馈-->
+<div style="display: none;" class="login-dialog " id="feedback-dialog">
+    <div class="login-dialog-header">
+        <h3>意见反馈</h3>
+    </div>
+    <a class="btn-close" data-node="close" ga_event="login-dialog-close">
+        <i class="icon icon-close"></i>
+    </a>
+    <div data-node="inner" class="login-dialog-inner">
+        <div class="login-pannel bottom-line">
+            <ul>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>联系方式（必填）</label>
+                            <input type="text" name="feedback-email" placeholder="您的邮箱/QQ号" class="name" >
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>您的意见（必填）</label>
+                            <textarea placeholder="请填写您的意见，不超过140字" maxlength="140" class="name" name="feedback-content" style="height:100px;width:280px;"></textarea>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <input type="button" value="提交" class="submit-btn" id="feedback-submit">
+                        <!--                        <span data-node="msg" class="msg">333</span>-->
+                        <!--<a href="javascript:;" class="close" data-node="close">[关闭]</a>-->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--不喜欢文章-->
+<div style="width: 300px;display: none;" class="confirm-dialog">
+    <div data-node="inner" class="confirm-inner">不喜欢这类文章？</div>
+    <div class="btn-group">
+        <div data-node="cancel" class="btn cancel">取消</div>
+        <div data-node="ok" class="btn">确认</div>
+    </div>
+</div>
+
+<!--登录框-->
+<div style="display: none;" id="login-dialog" class="login-dialog">
+    <div class="login-dialog-header">
+        <h3>邮箱登录</h3>
+    </div>
+    <a class="btn-close" data-node="close" ga_event="login-dialog-close">
+        <!--<i class="icon icon-close"></i>-->X
+    </a>
+    <div data-node="inner" class="login-dialog-inner">
+        <div class="login-pannel bottom-line">
+            <ul>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>邮箱</label>
+                            <input type="text" spellcheck="false" autocomplete="off" placeholder="请使用您的注册邮箱" name="name_or_email" value="{$user_email}" class="name">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>密码</label>
+                            <input type="password" spellcheck="false" autocomplete="off" placeholder="密码" data-node="password" name="password" class="password">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <input type="checkbox" id="remember_me" style="vertical-align:top" checked="" name="remember_me">
+                        <label class="label" for="remember_me">记住账号</label>
+                        <!--                        <a href="javascript:;" onclick="forget()">
+                                                    忘记密码
+                                                </a>-->
+                    </div>
+                </li>
+                <li>
+                    <div style="text-align: center;" class="input-group">
+                        <input type="button" value="登录" class="submit-btn" id="btn_login">
+                        <p data-node="errorMsg" class="error"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="login-dialog-header">
+            <h3>合作网站帐号登陆</h3>
+        </div>
+        <div class="login-pannel">
+            <ul class="sns_login_list clearfix">
+                <li class="sinaweibo">
+                    <a data-pid="sina_weibo" data-node="snsLogin" href="javascript:;">
+                        <i class="icon"></i>
+                        新浪微博
+                    </a>
+                </li>
+                <li class="qzone">
+                    <a data-pid="qzone_sns" data-node="snsLogin" href="javascript:;">
+                        <i class="icon"></i>
+                        QQ空间
+                    </a>
+                </li>
+                <li class="renren">
+                    <a data-pid="renren_sns" data-node="snsLogin" href="javascript:;">
+                        <i class="icon"></i>
+                        人人网
+                    </a>
+                </li>
+                <li class="qqweibo">
+                    <a data-pid="qq_weibo" data-node="snsLogin" href="javascript:;" style="margin-right:0;">
+                        <i class="icon"></i>
+                        腾讯微博
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--注册框-->
+<div style="display: none;" class="login-dialog " id="register-dialog">
+    <div class="login-dialog-header">
+        <h3>用户注册</h3>
+    </div>
+    <a class="btn-close" data-node="close" ga_event="login-dialog-close">
+        <i class="icon icon-close"></i>
+    </a>
+    <div data-node="inner" class="login-dialog-inner">
+        <div class="login-pannel bottom-line">
+            <ul>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>邮箱</label>
+                            <input type="text" spellcheck="false" autocomplete="off" placeholder="请输入您的注册邮箱" name="email" class="name">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>账户</label>
+                            <input type="text" spellcheck="false" autocomplete="off" placeholder="请输入您的账户" name="username" class="name">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>密码</label>
+                            <input type="password" spellcheck="false" autocomplete="off" placeholder="密码" data-node="password" name="password" class="password">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div style="text-align: center;" class="input-group">
+                        <input type="button" value="完成注册" class="submit-btn" id="btn_register">
+                        <p data-node="errorMsg" class="error"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--忘记密码框-->
+<div style="display: none;" class="login-dialog " id="forget-dialog">
+    <div class="login-dialog-header">
+        <h3>忘记密码</h3>
+    </div>
+    <a class="btn-close" data-node="close" ga_event="login-dialog-close">
+        <i class="icon icon-close"></i>
+    </a>
+    <div data-node="inner" class="login-dialog-inner">
+        <div class="login-pannel bottom-line">
+            <ul>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>邮箱</label>
+                            <input type="text" spellcheck="false" autocomplete="off" placeholder="请输入您的注册邮箱" name="email" class="name">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>账户</label>
+                            <input type="text" spellcheck="false" autocomplete="off" placeholder="请输入您的账户" name="username" class="name">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div style="text-align: center;" class="input-group">
+                        <input type="button" value="提交" class="submit-btn" id="btn_forget">
+                        <p data-node="errorMsg" class="error"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<style>
+    /*用户反馈*/
+    #feed_back{ position:fixed; right:0; bottom:140px; padding:20px; padding-bottom:0; background:#f5f5f5; border: 1px solid #aaa; border-radius: 5px 0 0 5px; border-right: none; z-index:1000; display: none}
+    #feed_back form{ width:320px;}
+    #feed_back form .controls{ padding-bottom:10px;}
+    #feed_back form .form-control{ width:100%; margin-bottom:0}
+    #feed_back .feed_back_close{ float:right; padding-top:5px; }
+
+    .tools{ position:fixed; bottom:50px; right:20px; z-index:1000}
+    .feed_back,
+    .back_top{ display:block; height:32px; width:32px; background:url(http://s0.pstatp.com/image/pgc/01.gif) no-repeat; background-position:0 -64px;  margin-top:5px;}
+    .feed_back:hover{ background-position:0 -96px;}
+    .back_top{ background-position:0 0;}
+    .back_top:hover{ background-position:0 -32px}
+</style>
+
+<!--<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>-->
+<!--<script type="text/javascript" src="/Public/Common/js/layer/layer.min.js"></script>-->
+<!--<script type="text/javascript" src="/Public/Common/js/layer/laytpl.js"></script>-->
+
+<script type="text/javascript">
+    $('li[data-node="username"]').mouseover(function(){
+        $(this).children('.layer').show();
+    }).mouseout(function(){
+        $(this).children('.layer').hide();
+    });
+    function feedback(){
+        layer.closeAll();
+        $.layer({
+            type: 1,
+            shade: [0.5, '#000'],
+            area: ['auto', 'auto'],
+            closeBtn: false,
+            shadeClose: true,
+            title: false,
+            border: [0],
+            page: {dom: '#feedback-dialog'}
+        });
+    }
+    function forget(){
+        layer.closeAll();
+        $.layer({
+            type: 1,
+            shade: [0.5, '#000'],
+            area: ['auto', 'auto'],
+            closeBtn: false,
+            shadeClose: true,
+            title: false,
+            border: [0],
+            page: {dom: '#forget-dialog'}
+        });
+    }
+    var news_id = 0;
+    $(document).ready(function () {
+        //分享
+        $('.share-list i').live('click', function () {
+            var ga_label = $(this).attr('ga_label');
+            var title = $(this).parent().parent('.share').attr('data-text');
+            var desc = $(this).parent().parent('.share').attr('data-desc');
+            var url = $(this).parent().parent('.share').attr('data-url');
+            var open_url = '';
+            if (ga_label == 'tsina') {
+                open_url = 'http://service.weibo.com/share/share.php?url=' + url + '&title=' + title + '&appkey=&searchPic=true';
+            } else if (ga_label == 'tqq') {
+                open_url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + '&title=' + title + '&desc=' + desc + '&summary=&site=';
+            } else if (ga_label == "qzone") {
+                open_url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + '&title=' + title + '&desc=' + desc + '&summary=&site=';
+            }
+            window.showModalDialog(open_url, window, "dialogWidth:650px;dialogHeight:570px;center:yes;status:no;scroll:no;help:no;");
+        });
+        $('a[ga_event="nav_login"]').click(function () {
+            is_login();
+        });
+        //注册框
+        $('a[ga_event="nav_register"]').click(function () {
+            $.layer({
+                type: 1,
+                shade: [0.5, '#000'],
+                area: ['auto', 'auto'],
+                closeBtn: false,
+                shadeClose: true,
+                title: false,
+                border: [0],
+                page: {dom: '#register-dialog'}
+            });
+        });
+        
+        //注册
+        $('#btn_register').click(function () {
+            var login_dom = $('#register-dialog');
+            var username = $(login_dom).find('input[name="username"]').val();
+            var email = $(login_dom).find('input[name="email"]').val();
+            var password = $(login_dom).find('input[name="password"]').val();
+            layer.load('注册中...');
+            $.ajax({
+                type: 'POST',
+                url: '/register',
+                data: {username: username, email: email, password: password},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('注册成功,跳转中...', 0, 1);
+                        window.location.reload();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        });
+        $('#btn_forget').click(function () {
+            var login_dom = $('#forget-dialog');
+            var username = $(login_dom).find('input[name="username"]').val();
+            var email = $(login_dom).find('input[name="email"]').val();
+            layer.load('提交中...');
+            $.ajax({
+                type: 'POST',
+                url: '/user/reset_pwd',
+                data: {username: username, email: email},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 1) {
+                        layer.msg('密码修改成功,注意查收邮件，跳转中...', 0, 1);
+                        window.location.reload();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        });
+        $('#feedback-submit').click(function () {
+            var login_dom = $('#feedback-dialog');
+            var username = $(login_dom).find('input[name="feedback-email"]').val();
+            var email = $(login_dom).find('textarea[name="feedback-content"]').val();
+            if(username==''){
+                layer.msg('联系方式不能为空');
+                return false;
+            }
+            if(email==''){
+                layer.msg('反馈内容不能为空');
+                return false;
+            }
+            layer.load('提交中...');
+            $.ajax({
+                type: 'POST',
+                url: '/user/feedback',
+                data: {contact: username, msg: email},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('您的反馈意见提交成功...', 2, 1);
+                        window.location.reload();
+                        //                        layer.closeAll();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        });
+        //退出登录
+        $('a[ga_event="nav_loginout"]').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/loginout',
+                dataType: 'text',
+                success: function (msg) {
+                    layer.msg('退出成功,跳转中...', 0, 1);
+                    window.location.reload();
+                }
+            });
+        });
+
+        //登录
+        $('#btn_login').click(function () {
+            var login_dom = $('#login-dialog');
+            var name = $(login_dom).find('input[name="name_or_email"]').val();
+            var password = $(login_dom).find('input[name="password"]').val();
+            if (!name || !password) {
+                return false;
+            }
+            layer.load('登录中...');
+            $.ajax({
+                type: 'POST',
+                url: '/login',
+                data: {u: name, p: password},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('登录成功,跳转中...', 0, 1);
+                        window.location.reload();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        });
+        function keyDown(e) {
+            var currKey = 0, e = e || event;
+            if (e.keyCode == 13)
+                $('#btn_login').click();
+        }
+
+        document.onkeydown = keyDown;
+
+
+        /*        $('a[ga_event="hotcomment_name"]').live('click', function () {
+            if (!$(this).hasClass('liked')) {
+                $(this).html(parseInt($(this).text()) + 1).addClass('liked');
+            }
+            return false;
+        });
+         */
+
+        //弹出层的关闭按钮
+        $('a[ga_event="login-dialog-close"]').on('click', function () {
+            layer.closeAll();
+        });
+
+    });
+
+    function is_login() {
+        if (parseInt(login_user) < 1) {
+            $.layer({
+                type: 1,
+                shade: [0.5, '#000'],
+                area: ['auto', 'auto'],
+                closeBtn: false,
+                shadeClose: true,
+                title: false,
+                border: [0],
+                page: {dom: '#login-dialog'}
+            });
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    $(document).scroll(function(){
+        if($(window).scrollTop() > 70){
+            $("#pagelet-toolbar").css({"position":"fixed","top":"0","left":"0"});
+        }else{
+            $("#pagelet-toolbar").css("position","relative");
+        }
+    });
+</script>
+<div style="display: none">
+    <script language="javascript" type="text/javascript" src="http://js.users.51.la/17700581.js"></script>
+</div>
+<noscript>
+<a href="http://www.51.la/?17700581" target="_blank" style="display:none;">
+    <img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/17700581.asp" style="border:none" />
+</a>
+</noscript>

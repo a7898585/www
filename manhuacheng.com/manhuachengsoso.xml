@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<sdd>
+  <provider></provider>
+  <version>1.0</version>
+  <dataserviceid>10_10</dataserviceid>
+  <updatemethod>all</updatemethod>
+  <datalist>
+    <item>
+      <keyword></keyword>
+      <url>http://www.manhuacheng.com</url>
+      <creator></creator>
+      <publishdate>2011-07-27</publishdate>
+      <title>漫画城（漫画下载器）</title>
+      <imageaddress1>http://www.manhuacheng.com/uploadfile/2011/0727/20110727091235714.jpg</imageaddress1>
+      <imagealt1></imagealt1>
+      <imagelink1>http://www.manhuacheng.com</imagelink1>
+      <content1>软件版本：V2.0.0.7</content1>
+      <content2>更新时间：2011-07-15 文件大小：1.7MB</content2>
+      <content3>支持系统：Win2000/WinXP/Win2003,Vista</content3>
+      <linktext1>官方下载</linktext1>
+      <linktarget1>http://www.manhuacheng.com/download/</linktarget1>
+      <linktext2>多特下载</linktext2>
+      <linktarget2>http://duote.com/soft/32511.html</linktarget2>
+      <linktext3>华军下载</linktext3>
+      <linktarget3>http://www.onlinedown.net/soft/83309.htm</linktarget3>
+      <linktext4>天空下载</linktext4>
+      <linktarget4>http://skycn.com/soft/66600.html</linktarget4>
+      <valid>1</valid>
+    </item>
+  </datalist>
+</sdd>

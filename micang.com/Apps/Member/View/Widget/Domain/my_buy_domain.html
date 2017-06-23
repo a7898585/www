@@ -1,0 +1,14 @@
+{__NOLAYOUT__}
+<volist name="data" id="vo">
+    <ul>
+        <li class="numbee_1">{$vo.domain}</li>
+        <li class="numbee_2">
+            <switch name="vo.type">
+        <case value="1">一口价购买成功价</case>
+        <case value="2">竞价确认</case>
+        <default />询价完成
+        </switch>
+        </li>
+        <li class="numbee_3"><a href="{:getDoMain('www')}Sell/detail?id={$vo.id}">立即查看</a></li>
+    </ul>
+</volist>

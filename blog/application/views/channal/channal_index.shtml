@@ -1,0 +1,962 @@
+<?php include $header;?>
+<!--内容部分开始-->
+<div id="Content">
+
+    <div class="AllNav">
+        <div class="LeftNav fl">
+            <div class="LeftAllNav">
+                <div class="co_01 fl">
+                    <div class="flashAdNav">
+                        <div class="content"><?php include $shtml.'blog_flash.shtml';?></div>
+                    </div><!--End .flashAdNav-->
+
+                </div><!--End .co_01-->
+
+                <div class="co_02 fr">
+                    <div class="CenterNews">
+                        <?php include $shtml.'blog_recommendarticle.shtml';?>
+                    </div><!--End .CenterNews-->
+
+                </div><!--End .co_02-->
+
+            </div><!--End .LeftAllNav-->
+            <div class="h07"></div>
+
+            <div class="LeftAllNav">
+                <div class="co_03 fl">
+                    <div class="specialBase">
+                        <dl>
+                            <dt><span class="fl">名家看市　　<?php include $shtml.'blog_cjsp.shtml';?></span><span class="fr"><a href="<?=$baseurl.'/r2List/1.html';?>" target="_blank">更多</a></span></dt>
+                            <dd>
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <script src="http://tuiguang.cnfol.com/report/advertis/index.shtml?code=blog_mjks_001"></script>
+                                        <?php include $shtml.'runcront_recommend_cjsp.shtml';?>
+                                    </ul>
+                                </div>
+
+
+                            </dd>
+                        </dl>
+                    </div>              
+
+                </div><!--End .co_01-->
+
+                <div class="co_03 fr">
+                    <div class="specialBase">
+
+                        <dl>
+                            <dt><span class="fl">高手看盘　　<?php include $shtml.'blog_cjsp2.shtml';?></span>
+                            <span class="fr">
+                                <a href="<?=$baseurl.'/r3List/1.html';?>" target="_blank">更多</a>
+                            </span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="gsks0" onclick="javascript:TabShow('0','2','gsks','tab_active','tab_unactive')" style="cursor: pointer">1</li>
+                                    <li class="tab_unactive" id="gsks1" onclick="javascript:TabShow('1','2','gsks','tab_active','tab_unactive')" style="cursor: pointer">2</li>	
+                                </ul>
+                            </span>
+                            </dt>
+                            <dd>
+
+                                <div class="content">
+
+                                    <ul class="list ellipsis" id="gsks0_nr">
+                                        <script src="http://tuiguang.cnfol.com/report/advertis/index.shtml?code=blog_gskp_001"></script>
+                                        <?php include $shtml.'runcront_recommend_gskp_1.shtml';?>
+                                    </ul>
+
+                                    <ul class="list ellipsis" id="gsks1_nr" style="display:none;">
+                                        <?php include $shtml.'runcront_recommend_gskp_2.shtml';?>
+                                    </ul>
+
+                                </div>
+                            </dd>
+                        </dl>                   
+                    </div><!--End .review-->
+
+                </div><!--End .co_02-->
+
+            </div><!--End .LeftAllNav-->
+
+            <div class="h07"></div>
+
+
+            <div class="LeftAllNav">
+                <div class="hotLabel">
+                    <div class="title fl"><span>热门标签</span></div>
+                    <div class="label fl" style="width:289px"><?php include $shtml.'blog_hottag.shtml';?></div>
+
+                    <div class="SearchNav fr">
+                        <form action="<?php echo $baseurl;?>/ajaxblogsearch" onsubmit="return blogsearch(this);" name="searchform" method="post">
+                            <input name="searchvalue" type="text" class="inputSty01"/>
+                            <select name="searchtype" class="inputSty02">
+                                <option value="tags">标签</option>
+                                <option value="blogname">博客名</option>
+                                <option value="nickname">昵称</option>
+                            </select>   
+                            <input name="" type="submit" value="搜 索" class="btn01" /> 
+                        </form>
+                    </div><!--End .SearchNav--> 
+
+                </div><!--End .hotLabel-->
+            </div><!--End .LeftAllNav-->
+            <div class="h07"></div>
+
+            <div class="LeftAllNav">
+                <div class="share">
+                    <dl class="tab">
+                        <dt>
+                        <span class="fl">股市精粹</span>
+                        <span class="fr">
+                            <a href="<?php echo $baseurl;?>/list/1461.html" target="_blank">更多</a>
+                        </span>
+                        <span class="fr">
+                            <ul>
+                                <li class="tab_active" id="gsjc0" onclick="javascript:TabShow('0','2','gsjc','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">1</a></li>
+                                <li class="tab_unactive" id="gsjc1" onclick="javascript:TabShow('1','2','gsjc','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">2</a></li>	
+                            </ul>
+                        </span>
+                        </dt>
+                        <dd id="gsjc0_nr">
+                            <div class="content">
+                                <ul class="list ellipsis">
+                                    <?php include $shtml.'runcront_recommend_gsjc_1.shtml';?>
+                                </ul>
+                            </div><!--End .content-->
+                            <div class="botTool2">
+                                <?php include $shtml.'blog_belowgsjc.shtml';?>
+                            </div>  
+                        </dd>
+
+                        <dd id="gsjc1_nr" style="display:none;">
+                            <div class="content">
+
+                                <ul class="list ellipsis">
+                                    <?php include $shtml.'runcront_recommend_gsjc_2.shtml';?>
+                                </ul>
+                            </div><!--End .content-->
+                            <div class="botTool">
+                                <span class="fl">
+                                    <?php include $shtml.'blog_belowgsjc.shtml';?>
+                                </span>
+                                <span class="fr"><a href="<?php echo $baseurl;?>/list/1461.html" target="_blank">更多</a></span>
+                            </div>  
+                        </dd>
+                    </dl>
+
+                </div><!--End .share 股市精粹-->
+            </div><!--End .LeftAllNav-->
+            <div class="h07"></div>
+            <div class="LeftAllNav">
+                <div class="co_03 fl">
+
+                    <div class="financeNav">
+
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">财经板块A</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="cjbkA0" onmouseover="javascript:TabShow('0','2','cjbkA','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1463.html" target="_blank">财经杂谈</a></li>
+                                    <li class="tab_unactive" id="cjbkA1" onmouseover="javascript:TabShow('1','2','cjbkA','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1460.html" target="_blank">投资收藏</a></li>	
+                                </ul>
+                            </span>
+                            </dt>
+                            <dd id="cjbkA0_nr">
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagjjzt.shtml';?>
+                                    </ul>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowcjzt.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1463.html" target="_blank">更多</a></span>
+                                </div>  
+                            </dd>
+
+                            <dd id="cjbkA1_nr" style="display:none;">
+                                <div class="content">
+
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagtzsc.shtml';?>
+                                    </ul>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowtzsc.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1460.html" target="_blank">更多</a></span>
+                                </div>   	
+                            </dd>
+                        </dl>
+
+                    </div><!--End .financeNav-->                
+
+                    <div class="h07"></div>
+                    <div class="financeNav">
+
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">财经板块B</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="cjbkB0" onmouseover="javascript:TabShow('0','2','cjbkB','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1445.html" target="_blank">基 金</a></li>
+                                    <li class="tab_unactive" id="cjbkB1" onmouseover="javascript:TabShow('1','2','cjbkB','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1465.html" target="_blank">外 汇</a></li>	
+                                </ul>
+
+                            </span>
+                            </dt>
+                            <dd id="cjbkB0_nr">
+                                <div class="content">                            
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagjj.shtml';?> 
+                                    </ul>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowjj.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1445.html" target="_blank">更多</a></span>
+                                </div>  
+                            </dd>
+
+                            <dd id="cjbkB1_nr" style="display:none;">
+                                <div class="content">                           
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagwh.shtml';?> 
+                                    </ul>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowwh.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1465.html" target="_blank">更多</a></span>
+                                </div>   	
+                            </dd>
+                        </dl>
+                    </div><!--End .financeNav-->                
+                    <div class="h07"></div>
+                    <div class="financeNav">
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">财经板块C</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="cjbkC0" onmouseover="javascript:TabShow('0','2','cjbkC','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1451.html" target="_blank">银 行</a></li>
+                                    <li class="tab_unactive" id="cjbkC1" onmouseover="javascript:TabShow('1','2','cjbkC','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1449.html" target="_blank">保 险</a></li>	
+                                </ul>
+                            </span>
+                            </dt>
+                            <dd id="cjbkC0_nr">
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagyh.shtml';?> 
+                                    </ul>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowyh.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1451.html" target="_blank">更多</a></span>
+                                </div>  
+                            </dd>
+
+                            <dd id="cjbkC1_nr" style="display:none;">
+                                <div class="content">
+
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagbx.shtml';?> 
+                                    </ul>
+
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowbx.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1449.html" target="_blank">更多</a></span>
+                                </div>   	
+                            </dd>
+                        </dl>
+                    </div><!--End .financeNav-->                
+
+                </div><!--End .co_03-->
+
+                <div class="co_03 fr">
+                    <div class="financeNav">
+
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">财经板块D</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="cjbkD0" onmouseover="javascript:TabShow('0','2','cjbkD','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1453.html" target="_blank">黄 金</a></li>
+                                    <li class="tab_unactive" id="cjbkD1" onmouseover="javascript:TabShow('1','2','cjbkD','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1462.html" target="_blank">白 银</a></li>	
+                                </ul>
+
+                            </span>
+                            </dt>
+                            <dd id="cjbkD0_nr">
+                                <div class="content">
+
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytaghj.shtml';?> 
+                                    </ul>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowhj.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1453.html" target="_blank">更多</a></span>
+                                </div>  
+                            </dd>
+
+                            <dd id="cjbkD1_nr" style="display:none;">
+                                <div class="content">
+
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagby.shtml';?>  
+                                    </ul>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowby.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1462.html" target="_blank">更多</a></span>
+                                </div>   	
+                            </dd>
+                        </dl>
+                    </div><!--End .financeNav-->                
+                    <div class="h07"></div>
+                    <div class="financeNav">
+
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">财经板块E</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="cjbkE0" onmouseover="javascript:TabShow('0','2','cjbkE','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1433.html" target="_blank">期指期货</a></li>
+                                    <li class="tab_unactive" id="cjbkE1" onmouseover="javascript:TabShow('1','2','cjbkE','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1464.html" target="_blank">港 股</a></li>	
+                                </ul>
+                            </span>
+                            </dt>
+                            <dd id="cjbkE0_nr">
+                                <div class="content">
+
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagqh.shtml';?>
+                                    </ul>
+
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowqh.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1433.html" target="_blank">更多</a></span>
+                                </div>  
+                            </dd>
+
+                            <dd id="cjbkE1_nr" style="display:none;">
+                                <div class="content">
+
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytaggg.shtml';?>
+                                    </ul>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowgg.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1464.html" target="_blank">更多</a></span>
+                                </div>   	
+                            </dd>
+                        </dl>
+
+                    </div><!--End .financeNav-->                
+
+                    <div class="h07"></div>
+                    <div class="financeNav">
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">财经板块F</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="cjbkF0" onmouseover="javascript:TabShow('0','2','cjbkF','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1459.html" target="_blank">休 闲</a></li>
+                                    <li class="tab_unactive" id="cjbkF1" onmouseover="javascript:TabShow('1','2','cjbkF','tab_active','tab_unactive')" style="cursor: pointer"><a href="<?php echo $baseurl;?>/list/1455.html" target="_blank">汽 车</a></li>	
+                                </ul>
+                            </span> 
+                            </dt>
+                            <dd id="cjbkF0_nr">
+                                <div class="content">
+
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagxxq.shtml';?>
+                                    </ul>
+
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowxx.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1459.html" target="_blank">更多</a></span>
+                                </div>  
+                            </dd>
+
+                            <dd id="cjbkF1_nr" style="display:none;">
+                                <div class="content">
+
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_newartusebytagqc.shtml';?>
+                                    </ul>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl"><?php include $shtml.'blog_belowqc.shtml';?></span>
+                                    <span class="fr"><a href="<?php echo $baseurl;?>/list/1455.html" target="_blank">更多</a></span>
+                                </div>   	
+                            </dd>
+                        </dl>
+                    </div><!--End .financeNav-->   
+                </div><!--End .co_03-->
+            </div><!--End .LeftAllNav-->
+            <div class="h07"></div>
+            <div class="LeftAllNav">
+                <div class="imgBbs">
+                    <dl>
+                        <dt>
+                        <span class="fl">图片博客</span><span class="fr hidden"><a href="#" target="_blank">更多</a></span> 
+                        </dt>
+                        <dd>
+                            <div class="content">          
+                                <?php include $shtml.'blog_imgblog.shtml';?>
+                            </div> 
+                        </dd>
+                    </dl>                
+                </div><!--End .imgBbs-->
+            </div><!--End .LeftAllNav-->
+            <div class="h07"></div>
+            <div class="LeftAllNav">
+                <div class="co_03 fl">
+                    <div class="starNav">
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">财经名博</span><span class="fr"><a href="<?=$baseurl?>/shtml/bloglist.html" target="_blank">更多</a></span>
+                            </dt>
+                            <dd>
+                                <div class="content">
+                                    <?php include $shtml.'blog_cjmbblog.shtml';?>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl">
+                                        <form method="post" name="searchform" onsubmit="return blogsearch(this);" action="<?=$baseurl?>/ajaxblogsearch">
+                                            <input name="searchvalue" type="text" class="inputSty01"/>
+                                            <select name="searchtype" class="inputSty02">
+                                                <option selected="selected" value="blogname">博客名</option>
+                                                <option value="nickname">昵&nbsp;&nbsp;称</option>
+                                            </select>   
+                                            <input name="" type="submit" value="提交" class="btn01" /> 
+                                        </form>
+                                    </span>
+                                    <span class="fr"><a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">我要自荐</a></span>
+
+                                </div>  
+
+                            </dd>
+
+                        </dl>
+                    </div><!--End .starNav-->                    
+                    <div class="h07"></div>
+
+                    <div class="starNav">
+
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">分析师部落</span><span class="fr"><a href="<?=$baseurl?>/shtml/bloglist.html" target="_blank">更多</a></span>
+
+                            </dt>
+                            <dd>
+                                <div class="content content2">
+                                    <?php include $shtml.'blog_fxsgroups.shtml';?>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl">
+                                        <form method="post" name="searchform" onsubmit="return blogsearch(this);" action="<?=$baseurl?>/ajaxblogsearch">
+                                            <input name="searchvalue" type="text" class="inputSty01"/>
+                                            <select name="searchtype" class="inputSty02">
+                                                <option selected="selected" value="blogname">博客名</option>
+                                                <option value="nickname">昵&nbsp;&nbsp;称</option>
+                                            </select>   
+                                            <input name="" type="submit" value="提交" class="btn01" /> 
+                                        </form>
+                                    </span>
+                                    <span class="fr"><a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">我要自荐</a></span>
+
+                                </div>  
+                            </dd>
+                        </dl>
+                    </div><!--End .starNav-->  
+                </div><!--End .co_03-->
+                <div class="co_03 fr">
+                    <div class="starNav">
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">散户高手</span><span class="fr"><a href="<?=$baseurl?>/shtml/bloglist.html" target="_blank">更多</a></span>
+
+                            </dt>
+                            <dd>
+                                <div class="content">
+                                    <?php include $shtml.'blog_shgsblog.shtml';?>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl">
+                                        <form method="post" name="searchform" onsubmit="return blogsearch(this);" action="<?=$baseurl?>/ajaxblogsearch">
+                                            <input name="searchvalue" type="text" class="inputSty01"/>
+                                            <select name="searchtype" class="inputSty02">
+                                                <option selected="selected" value="blogname">博客名</option>
+                                                <option value="nickname">昵&nbsp;&nbsp;称</option>
+                                            </select>   
+                                            <input name="" type="submit" value="提交" class="btn01" /> 
+                                        </form>
+                                    </span>
+                                    <span class="fr"><a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">我要自荐</a></span>
+
+                                </div>  
+                            </dd>
+                        </dl>
+                    </div><!--End .starNav-->                   
+                    <div class="h07"></div>
+                    <div class="starNav">
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">机构俱乐部</span><span class="fr"><a href="<?=$baseurl?>/shtml/bloglist.html" target="_blank">更多</a></span>
+
+                            </dt>
+                            <dd>
+                                <div class="content content2">
+                                    <?php include $shtml.'blog_jggroups.shtml';?>
+                                </div>
+                                <div class="botTool">
+                                    <span class="fl">
+                                        <form method="post" name="searchform" onsubmit="return blogsearch(this);" action="<?=$baseurl?>/ajaxblogsearch">
+                                            <input name="searchvalue" type="text" class="inputSty01"/>
+                                            <select name="searchtype" class="inputSty02">
+                                                <option selected="selected" value="blogname">博客名</option>
+                                                <option value="nickname">昵&nbsp;&nbsp;称</option>
+                                            </select>   
+                                            <input name="" type="submit" value="提交" class="btn01" /> 
+                                        </form>
+                                    </span>
+                                    <span class="fr"><a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">我要自荐</a></span>
+
+                                </div>  
+                            </dd>
+                        </dl>
+                    </div><!--End .starNav-->                  
+                </div><!--End .co_03--> 
+            </div><!--End .LeftAllNav-->
+            <div class="h07"></div> 
+            <div class="LeftAllNav">
+                <div class="co_03 fl">
+                    <div class="hotBBS">
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">热门点击</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="rmdj0" onclick="javascript:TabShow('0','3','rmdj','tab_active','tab_unactive')" style="cursor: pointer">48小时</li>
+                                    <li class="tab_unactive" id="rmdj1" onclick="javascript:TabShow('1','3','rmdj','tab_active','tab_unactive')" style="cursor: pointer">一 周</li>	
+                                    <li class="tab_unactive" id="rmdj2" onclick="javascript:TabShow('2','3','rmdj','tab_active','tab_unactive')" style="cursor: pointer">总排行</li>	
+                                </ul>
+                            </span>
+                            </dt>
+                            <dd id="rmdj0_nr">
+
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">点击</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_artclicktdayrank.shtml';?>
+                                    </ul>
+                                </div>  
+                            </dd>
+                            <dd id="rmdj1_nr" style="display:none;">
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">点击</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_artclickweekrank.shtml';?>
+                                    </ul>
+                                </div> 
+                            </dd>
+                            <dd id="rmdj2_nr" style="display:none;">
+
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">点击</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_artclicktotalrank.shtml';?>
+                                    </ul>
+                                </div> 
+                            </dd>                          
+                        </dl>
+                    </div><!--End .hotBBS-->      
+                </div><!--End .co_03-->	 
+                <div class="co_03 fr">
+                    <div class="hotBBS">
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">热点评论</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="rdpl0" onclick="javascript:TabShow('0','3','rdpl','tab_active','tab_unactive')" style="cursor: pointer">48小时</li>
+                                    <li class="tab_unactive" id="rdpl1" onclick="javascript:TabShow('1','3','rdpl','tab_active','tab_unactive')" style="cursor: pointer">一 周</li>	
+                                    <li class="tab_unactive" id="rdpl2" onclick="javascript:TabShow('2','3','rdpl','tab_active','tab_unactive')" style="cursor: pointer">总排行</li>	
+                                </ul>
+
+                            </span>
+
+                            </dt>
+                            <dd id="rdpl0_nr">
+
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">评论</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_artcomtdayrank.shtml';?>
+                                    </ul>
+                                </div>  
+                            </dd>
+                            <dd id="rdpl1_nr" style="display:none;">
+
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">评论</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_artcomweekrank.shtml';?>
+                                    </ul>
+                                </div> 
+                            </dd>
+                            <dd id="rdpl2_nr" style="display:none;">
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">评论</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_artcomtotalrank.shtml';?>
+                                    </ul>
+                                </div> 
+                            </dd>                          
+                        </dl>
+                    </div><!--End .hotBBS-->    
+                </div><!--End .co_03-->	
+
+            </div><!--End .LeftAllNav-->
+            <div class="h07"></div>            
+        </div><!--End .LeftNav-->
+
+        <div class="RightNav fr">
+            <div class="rTempNav notice">
+                <dl>
+                    <dt>
+                    <span class="fl">公告</span>&nbsp;
+                    <!--
+                    <marquee width="135" height="25" direction="left" scrollamount="3" onmouseover="this.stop()" onmouseout="this.start()">
+                            <a href="http://vote.blog.cnfol.com/2012" target="_blank" style="color:red;">2012年十大财经博客评选活动</a>
+                            <a href="http://vote.blog.cnfol.com/2012/BlgJoin.shtml" target="_blank" style="color:red;">我要参赛</a>
+                    </marquee>
+                    -->
+
+                    </dt>
+                    <dd>
+                        <div class="content" style="width:210px;padding:5px;">
+                            <?php include $shtml.'blog_bulletin.shtml';?>
+                        </div>
+                    </dd>
+                </dl>
+            </div><!--End .notice 公告-->
+            <div class="h07"></div>
+
+            <div class="rTempNav">
+                <dl>
+                    <dt><span class="fl">鲜花排行榜</span><span class="fr"><a href="<?=$baseurl?>/shtml/giftrankarticle,12.html" target="_blank">更多</a></span></dt>
+                </dl>
+
+            </div>
+            <div class="rTempNav2 myTop">
+                <dl class="tab tab2">
+                    <dt>
+
+                    <ul>
+                        <li class="tab_active" id="gift0" onmouseover="javascript:TabShow('0','3','gift','tab_active','tab_unactive')" style="cursor: pointer">12小时</li>
+                        <li class="tab_unactive" id="gift1" onmouseover="javascript:TabShow('1','3','gift','tab_active','tab_unactive')" style="cursor: pointer">24小时<span class="fr"></span></li>	
+                        <li class="tab_unactive" id="gift2" onmouseover="javascript:TabShow('2','3','gift','tab_active','tab_unactive')" style="cursor: pointer">周排行<span class="fr"></span></li>	
+                    </ul>
+                    </dt>                 
+                </dl>
+
+            </div><!--End .rTempNav2 -->
+            <div class="rTempNav">
+                <dl>
+                    <dd>
+                        <div class="content" id="gift0_nr"><?php include $shtml.'runcront_rankgifts12.shtml';?></div>
+                        <div class="content" id="gift1_nr" style="display:none;"><?php include $shtml.'runcront_rankgifts24.shtml';?></div>
+                        <div class="content" id="gift2_nr" style="display:none;"><?php include $shtml.'runcront_rankgiftsweek.shtml';?></div>
+                    </dd>
+                </dl>
+            </div>
+            <div class="h07"></div>
+
+            <div class="rTempNav">
+                <dl>
+                    <dt><span class="fl">博客之星</span><span class="fr"><a href="<?=$baseurl?>/shtml/bloglist.html" target="_blank">更多</a></span></dt>
+                    <dd>
+                        <div class="content">
+                            <?php include $shtml.'blog_superstar.shtml';?>
+                            <div style="clear:both;"></div>
+                        </div> 
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav 热门微博-->
+            <div class="h07"></div>
+
+            <div class="rTempNav">
+                <dl class="tab">
+                    <dt><span class="fl">推荐博客</span>
+                    <span class="fr">
+                        <ul>
+                            <li class="tab_active" id="tjbk0" onmouseover="javascript:TabShow('0','2','tjbk','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">1</a></li>
+                            <li class="tab_unactive" id="tjbk1" onmouseover="javascript:TabShow('1','2','tjbk','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">2</a></li>	
+                        </ul>
+                    </span>
+                    </dt>
+                    <dd id="tjbk0_nr">
+                        <div class="content">
+                            <?php include $shtml.'blog_recommendblog1.shtml';?>
+                        </div> 
+                        <div class="botTool"><span class="fl"><a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">我要自荐</a></span><span class="fr"><a href="<?=$baseurl;?>/shtml/bloglist.html" target="_blank">更多</a></span></div>     
+                    </dd>
+                    <dd id="tjbk1_nr" style="display:none;">
+                        <div class="content">
+                            <?php include $shtml.'blog_recommendblog2.shtml';?>	
+                        </div> 
+                        <div class="botTool"><span class="fl"><a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">我要自荐</a></span><span class="fr"><a href="<?=$baseurl;?>/shtml/bloglist.html" target="_blank">更多</a></span></div>     
+                    </dd>
+
+                </dl>
+
+            </div><!--End .rTempNav 推荐博客-->
+            <div class="h07"></div>
+
+            <div class="rTempNav">
+                <dl>
+                    <dt><span class="fl">博客专题•热点</span><span class="fr"><a href="<?=$baseurl?>/shtml/hottpicartslist.html" target="_blank">更多</a></span></dt>
+                    <dd>
+                        <div class="content">
+                            <ul class="list ellipsis">
+                                <?php include $shtml.'blog_hottopic.shtml';?>
+                            </ul>
+                        </div> 
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav 热门微博-->
+            <div class="h07"></div>
+
+            <div class="rTempNav2">
+                <dl class="tab">
+                    <dt>
+
+                    <ul>
+                        <li class="tab_active" id="phb0" onclick="javascript:TabShow('0','2','phb','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">博客排行榜</a></li>
+                        <li class="tab_unactive" id="phb1" onclick="javascript:TabShow('1','2','phb','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">活跃用户</a><span class="fr"></span></li>	
+                    </ul>
+                    </dt>
+                    <dd id="phb0_nr">
+                        <div class="content">
+                            <ul class="list listVote">
+                                <?php include $shtml.'runcront_shouyeblogrank.shtml';?>
+                            </ul>
+                        </div>
+                        <div class="botTool"><span class="fr"><a href="<?=$baseurl;?>/shtml/day50topclick.html" target="_blank">更多</a></span></div>  
+                    </dd>
+
+                    <dd id="phb1_nr" style="display:none;">
+                        <div class="content">
+                            <ul class="list listVote">
+                                <?php include $shtml.'runcront_rankfactiveblog.shtml';?>
+                            </ul>
+
+                        </div>
+                        <div class="botTool"><span class="fr"><a href="<?=$baseurl;?>/shtml/newupdateblog.html" target="_blank">更多</a></span></div>  	
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav 新博推荐-->
+            <div class="h07"></div>
+            <div class="rTempNav">
+                <dl>
+                    <dt><span class="fl">热门直播</span></dt>
+                    <dd>
+                        <div class="content">
+                            <?php include $shtml.'blog_hotminiblog.shtml';?>
+                        </div> 
+                        <div class="botTool"><span class="fl"><a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">我要自荐</a></span><span class="fr"><a href="http://blog.cnfol.com/shtml/online.html" target="_blank">更多</a></span></div> 	
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav 热门微博-->
+            <div class="h07"></div>
+            <div class="rTempNav">
+                <dl class="tab">
+                    <dt>
+                    <span class="fl">新博推荐</span>
+                    <span class="fr">
+                        <ul>
+                            <li class="tab_active" id="xbtj0" onmouseover="javascript:TabShow('0','2','xbtj','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">1</a></li>
+                            <li class="tab_unactive" id="xbtj1" onmouseover="javascript:TabShow('1','2','xbtj','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">2</a></li>	
+                        </ul>
+
+                    </span>
+
+                    </dt>
+                    <dd id="xbtj0_nr">
+                        <div class="content">
+                            <?php include $shtml.'blog_recommendnewblog1.shtml';?>
+                        </div>
+                        <div class="botTool"><span class="fl"><a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">我要自荐</a></span><span class="fr"><a href="<?=$baseurl;?>/shtml/bloglist.html" target="_blank">更多</a></span></div>  
+                    </dd>
+
+                    <dd id="xbtj1_nr" style="display:none;">
+                        <div class="content">
+                            <?php include $shtml.'blog_recommendnewblog2.shtml';?>
+                        </div>
+                        <div class="botTool"><span class="fl"><a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">我要自荐</a></span><span class="fr"><a href="<?=$baseurl;?>/shtml/bloglist.html" target="_blank">更多</a></span></div>  	
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav 新博推荐-->
+            <div class="h07"></div>
+
+            <div class="rTempNav">
+                <dl>
+                    <dt><span class="fl">网友自荐区</span><span class="fr"><a href="<?=$baseurl?>/shtml/recommendarticles,1.html" target="_blank">更多</a></span></dt>
+                    <dd>
+                        <div class="content" id="ScrollNews" style="height:87px;overflow:hidden;float:left;">
+                            <ul class="list ellipsis goldenEllipsis">
+                                <?php include $shtml.'runcront_userrecommend_20.shtml';?>
+                            </ul>
+                        </div>
+                        <div style="clear:both"></div>
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav-->
+            <div class="h07"></div>
+            <div class="rTempNav2 myTop">
+                <dl class="tab tab2">
+                    <dt>
+
+                    <ul>
+                        <li class="tab_active" id="wytj0" onclick="javascript:TabShow('0','3','wytj','tab_active','tab_unactive')" style="cursor: pointer">我要推荐</li>
+                        <li class="tab_unactive" id="wytj1" onclick="javascript:TabShow('1','3','wytj','tab_active','tab_unactive')" style="cursor: pointer">我要开博客<span class="fr"></span></li>	
+                        <li class="tab_unactive" id="wytj2" onclick="javascript:TabShow('2','3','wytj','tab_active','tab_unactive')" style="cursor: pointer">我要建圈子<span class="fr"></span></li>	
+                    </ul>
+                    </dt>
+                    <dd id="wytj0_nr">
+                        <div class="content">
+                            <form method="post" onsubmit="return false;" id="recmmondart" ischeck="false" >
+                                <p class="CN">我要向编辑推荐好文章（只能推荐中金博客文章）：</p>
+                                <p><span>作者昵称：</span><input id="author" name="author" type="text" class="style01" /></p>
+                                <p><span>文章标题：</span><input id="arttitle" name="arttitle" type="text" class="style01" /></p>
+                                <p><span>文章链接：</span><input id="arturl" name="arturl" type="text" class="style01" /></p>
+                                <p class="submit"><input name="remsubmit" type="button" value="提交" onclick="indexrecmmond(1);" class="btn" /> <input name="checksubmit" type="button" value="检查是否正确" class="btn btn02" onclick="indexrecmmond(0);" /> <input name="resetsubmit" type="reset" value="重置" class="btn" /></p>
+                            </form>
+                        </div>
+                    </dd>
+
+                    <dd id="wytj1_nr" style="display:none;">
+                        <div class="content content3">
+
+                            1.中金在线博客随时欢迎您来安家！<br/>
+                            2.我该如何开通我的博客呢？请见“<a href="<?php echo(config_item('base_url')); ?>/blogcnfol/article/1637774.html" target="_blank">如何开通博客</a>”<br/>
+                            3.提供一些必要的信息之后，您将拥有属于您自己的博客。<br/>
+                            4.若您在使用过程中遇到问题或有宝贵建议可到<a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">中金博客意见反馈吧</a>反馈！ <br/>
+
+                        </div> 	
+                    </dd> 
+                    <dd id="wytj2_nr" style="display:none;">
+                        <div class="content content3">
+
+                            1.建立圈子需要您先登录中金博客。<br/>
+                            2.在登录之后，点击“<a href="http://g.cnfol.com/create.html" target="_blank">创建圈子</a>”链接。<br/>
+                            3.提供一些必要的信息后，您就可以建立属于您自己的圈子了。<br/>
+                        </div> 	
+                    </dd>                   
+                </dl>
+
+            </div><!--End .rTempNav2 我要推荐-->
+            <div class="h07"></div>
+
+            <div class="assistant">
+                <dl>
+                    <dt><span class="fl">博客小助手</span></dt>
+                    <dd>
+
+                        <div class="content">
+                            <?php include $shtml.'blog_assistance.shtml';?>
+                        </div>
+                    </dd>
+                </dl>
+            </div><!--End .rTempNav-->
+            <div class="h07"></div>
+
+            <div class="rTempNav helpCenter">
+                <dl>
+                    <dt><span class="fl">帮助中心</span><span class="fr"><a href="<?=$baseurl?>/blogcnfol" target="_blank">更多</a></span></dt>
+                    <dd>
+
+                        <div class="content">
+                            <?php include $shtml.'blog_helpcenter.shtml';?>
+                        </div>
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav-->
+            <div class="h07"></div>
+
+            <div class="rTempNav contactUs" style="padding-bottom:0px;">
+                <dl>
+                    <dt><span class="fl">官方微信</span></dt>
+                    <dd>
+                        <div class="content">
+                            <?php include $shtml.'contactus.shtml';?>
+                        </div>
+                    </dd>
+                </dl>
+            </div><!--End .rTempNav-->
+        </div><!--End .RightNav-->
+        <br class="clear" />
+    </div><!--End .AllNav-->
+
+    <div class="h07"></div>
+    <div class="AllNav" id="ads3">载入中…</div>
+    <!--End .AllNav-->
+
+    <div class="h07"></div>
+    <div class="AllNav">
+
+        <div class="friendLinksNav">
+            <span class="title">友情链接：</span><?php include $shtml.'blog_friendlink.shtml';?>
+        </div><!--End .friendLinksNav--> 
+    </div><!--End .AllNav-->    
+    <br class="clear" />
+</div><!--End #Content-->
+<div class="h07"></div>
+<!--内容部分结束-->
+<script language="javascript">
+
+    $(function(){
+        var $this = $("#ScrollNews");
+        var scrollTimer;
+        $this.hover(function(){
+            clearInterval(scrollTimer);
+        },function(){
+            scrollTimer = setInterval(function(){
+                scrollNews( $this );
+            }, 3000 );
+        }).trigger("mouseleave");
+    });
+
+    function scrollNews(obj){
+        var $self = obj.find("ul:first"); 
+        var lineHeight = $self.find("li:first").height(); //获取行高
+        $self.animate({ "marginTop" : -lineHeight +"px" }, 600 , function(){
+            $self.css({marginTop:0}).find("li:first").appendTo($self); //appendTo能直接移动元素
+        })
+    }
+    function blogsearch(obj){
+        var seachval = $.trim(obj.searchvalue.value);
+        if(mb_strlen(seachval) < 1){
+            showalert("搜索关键字必须在一个字符以上");
+            return false;
+        }
+	
+        return true;
+    }
+
+</script>
+<!--底部部分 -->
+<?php include $footer;?>

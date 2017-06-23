@@ -1,0 +1,235 @@
+<script language="javascript" src="/Public/Common/js/layer/layer.js"></script>
+<link href="/Public/Member/css/ui-dialog.css" rel="stylesheet" />
+<!--面包屑 开始-->
+<div class="crumbs">
+	<em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+	<span>></span>
+    <a href="{:getDoMain()}sell/page" class="crumbs_c">域名交易</a>
+	<span>></span>
+    <i>{$detail.domain}域名交易</i>
+</div>
+<!--面包屑 结束-->
+<div class="wrap xunjia">
+    <div class="wrap_jj_l fl">
+    <div class="bidding">
+        <h3><span>完结交易</span></h3>
+        <div class="bidding_n">
+        	<div class="ding_l fl">
+            <p>{$detail.domain}</p>
+            <ul>
+            <li><span>域名释义：</span>{$detail.summary|default="暂无简介"}</li>
+            <li><span>注册时间：</span>{$domainDetail.register_time}<em class="fr">百度权重<span style="border:none;"><img border=0 src="http://br.links.cn/getbr.asp?url={$detail.domain}&style=2"></span></em></li>
+            <li><span>备 案 号：</span><empty name="domainDetail.beian">暂无备案<else />{$domainDetail.beian}</empty><em class="fr">Google<span><img border=0 src="http://tool.baiwanzhan.com/t1/prImg.aspx?s=3&mode=pic&url={$detail.domain}"></span></em></li>
+            </ul>
+            </div>
+            <div class="ding_r fr">
+            <ul>
+            <p></p>
+            <li style="width:100%;">交易类型：<span class="yse2"><eq name="detail.type" value="1">一口价</eq></span><eq name="detail.type" value="2">拍卖</eq></span><eq name="detail.type" value="3">询价交易</eq></span></li>
+            <gt name="detail.buyer_price" value="0"><li style="width:100%;">交易金额：<span class="yse2">{$detail.buyer_price|Fen2Yuan}元</span></li></gt>
+            <li style="width:100%;">注 册 商：<span class="yse1"><eq name="domainDetail.is_transfer" value="1">米仓<else />{$domainDetail.registrar}</eq></span></li>
+            <li style="width:100%;">上架时间：<span class="yse2">{$detail.create_time|date='Y/m/d H:i:s',###}</span></li>
+            <li style="width:100%;">结束时间：<span class="yse2">{$detail.end_time|date='Y/m/d H:i:s',###}</span></li>
+            </ul>
+            </div>
+        </div>
+        <!--内容结束 结束-->
+    </div>
+    
+    <div class="biddkun mr20">
+    	<div class="navh2" id="navhljs2">
+			<a href="javascript:void(0);" onclick="jdhddh(this,0)" class="navhl_h">纯数字域名</a> 
+			<a href="javascript:void(0);" onclick="jdhddh(this,1)" class="navhl_q">纯数字域名</a> 
+			<a href="javascript:void(0);" onclick="jdhddh(this,2)" class="navhl_q">杂米</a> 
+        </div>
+        <div id="navhljs2_c0" class="detailbox" style="display: block;">
+        	<volist name="salesShuZi" id="item">
+        	<div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即查看</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+        <div id="navhljs2_c1" class="detailbox" style="display: none;">
+        	<volist name="salesZiMu" id="item">
+        	<div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即查看</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+        <div id="navhljs2_c2" class="detailbox" style="display: none;">
+        	<volist name="salesZaMi" id="item">
+        	<div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即查看</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+    </div>
+    <!--详细结束 结束-->
+    </div>
+    <!--左侧缩展导航 结束-->
+    <div class="wrap_jj_r fl">
+    <div class="steps">
+    	<h3><span class="fl"><img src="/Public/Home/images/wrap_jj_04.png"/></span>拍卖流程</h3>
+        <ul>
+        <li><a>参与竞价</a></li>
+        <li><a>持续竞价</a></li>
+        <li><a>竞价结束</a></li>
+        <li><a>最高出价者得标</a></li>
+        <li><a>平台自动发起交易</a></li>
+        <h4>拍卖规则</h4>
+        <p>竞价时间00:00-23:00</p>
+        <p>竞价时间与结束时间以米仓系统提示时间为准。</p>
+        <p><span>代理竞价</span></p>
+        <p>当您的出价大于"当前价格+加价幅度"系统将记录您的出价(为代理价)。</p>
+      	</ul>
+    </div>
+    <div class="stepvrs mt20">
+    	<ul>
+        <h4>买方报价规则</h4>
+        <p>买方报价是一种由买家先出价、买卖双方议价的交易方式。卖家在发布域名的时候可以设置最小出价，以过滤最小出价以下的报价。
+其他注册商域名发布买方报价，要求域名状态正常、注册满60天、距过期时间大于30天、能正常申请转移密码、能正常转移注册商；所提交的域名必须介绍规范，不得有误导、虚假等性质的介绍。</p>
+      	</ul>
+    </div>
+    <div class="stepvrs mt20">
+    	<ul>
+        <h4>一口价交易规则</h4>
+        <p><b>拍卖时间：</b></p>
+        <p>拍卖开始与结束时间以系统提示时间为准。</p>
+        <p><b>出价规则 ：</b></p>
+        <p>买家id账号下需要有域名交易价格的全额款项，才能出价，出价时扣除交易额全款，若买家id账号下款项不足，则不能参与交易。</p>
+        <p><b>一口价交易规则 ：</b></p>
+        <p>买家出价后，系统立即扣款并过户域名到买家id下，交易自动完成。</p>
+      	</ul>
+    </div>
+    <!--流程 结束-->
+  </div>
+    <!--右侧缩展导航 结束-->             
+</div>
+<script language="javascript">
+	function Notice(x){
+		var mid='{$mid}';
+		if(!mid){
+			layer.alert("请先登录米仓网",function(){
+				window.location="/public/login";
+			});
+			return;
+		}
+		$.post("/Sell/ajax", { d:"notice",sale_id:x },
+   				function(data){
+    				if(data.status=='1'){
+						layer.msg('关注成功');
+					}else{
+						layer.alert(data.message);
+					}
+					
+   				} 
+		);
+	}
+	function Buy(){
+		var mid='{$mid}';
+		var chujia=parseInt($('#chujia').val());
+		if(!chujia){
+			layer.alert("请填写出价");
+			return;
+		}
+		var min_price=parseInt({$detail.seller_price|Fen2Yuan});
+		if(chujia<min_price){
+			layer.alert('价格不能小于'+min_price+'元');
+			return;
+		}
+		$('#price').val(chujia);
+		if(!mid){
+			layer.alert('请先登录米仓网');
+			return;
+		}
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $("#dialog").height();   
+		var popupWidth = $("#dialog").width();   
+		//居中设置   
+		$("#dialog").css({   
+			"position": "absolute",   
+			"top": windowHeight/2-popupHeight/2,   
+			"left": windowWidth/2-popupWidth/2   
+		});   	
+		$('#dialog').show();
+		$('#yinying').show();
+	}
+	function BuyConfirm(){
+		var seccode=$('#seccode').val();
+		if(!seccode){
+			layer.alert('请输入安全码');
+			return;
+		}
+		$.post("/Sell/ajax", { d:"check_seccode",seccode:seccode },
+   				function(data){
+    				if(data.status=='1'){
+						$('#dialog').hide();
+						$('#yinying').hide();
+						$('#buy_form').submit();
+					}else{
+						alert(data.message);
+					}
+					
+   				} 
+		);
+	}
+</script>
+<div id="yinying" style="display: none; z-index: 1000; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; -webkit-user-select: none; opacity: 0.5; background: rgb(0, 0, 0);" tabindex="0"></div>
+<div id="dialog" class="ui-dialog" style="display:none; width:500px; z-index:10001;">
+  <div class="ui-dialog-arrow-a"></div>
+  <div class="ui-dialog-arrow-b"></div>
+  <form id="buy_form" action="/Sell/buy" method="post">
+  <table class="ui-dialog-grid" width="500">
+    <tbody>
+      <tr>
+        <td i="header" class="ui-dialog-header"><button type="button" i="close" class="ui-dialog-close" title="取消" onclick="$('#dialog').hide();$('#yinying').hide();">×</button>
+          <div i="title" class="ui-dialog-title">安全码验证</div></td>
+      </tr>
+      <tr>
+        <td i="body" class="ui-dialog-body"><div i="content" class="ui-dialog-content">
+             <table>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>安全码：</td>
+                    <td><input type="password" id="seccode" name="seccode" value="" autocomplete="off"><font class="txt999">请输入您的安全密码</font>[<a href="#" target="_blank" style="color:blue;">忘记安全码？</a>]</td>
+                  </tr>
+                  <tr><td>提醒：</td><td align="left" colspan="2"><div class="out_right"><a href="#" target="_blank" style="color: blue;">什么是安全码？</a></div></td></tr>
+                  <tr>
+                    <td colspan="2">
+                    <input name="sale_id" type="hidden" value="{$detail.id}" />
+                    <input name="price" id="price" type="hidden" value="" />
+                    <input name="type" type="hidden" value="3" />
+                    <a class="bnt-green width100" style="margin:10px 0 0 70px; display:block; color:white; text-align:center; float:left; height:22px;" href="javascript:BuyConfirm();">确认</a>
+                    <a class="bnt-hui width100" style="margin:10px 0 0 70px; display:block; color:white; text-align:center; float:left; height:22px;" onclick="$('#dialog').hide();$('#yinying').hide();">取消</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+</div>

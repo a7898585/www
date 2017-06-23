@@ -1,0 +1,11 @@
+<volist name="recomendUsers" id="vo" >
+    <dl>
+        <dt><a href="/{$vo.id}"><img src="{$vo.id|getUserImg}"></a></dt>
+        <dd>
+            <p><b>{$vo.nickname}</b><em>推荐</em></p>
+            <p>{$vo.area_name}</p>
+            <p>{$vo.company_id|getUserCompany}</p>
+            <p>{$vo.phone}</p>
+        </dd>
+    </dl>
+</volist>

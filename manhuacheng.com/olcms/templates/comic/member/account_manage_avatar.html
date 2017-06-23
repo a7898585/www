@@ -1,0 +1,40 @@
+{template 'member', 'header'}
+<div id="memberArea">
+	{template 'member', 'account_manage_left'}
+	<div class="col-auto">
+		<div class="col-1 ">
+			<h5 class="title">{L('modify').L('avatar')}</h5>
+			<div class="content">
+			{if $this->ucopen}
+				<img src='{$avatar[small]}' /><br />{$avatar_html}
+				<ul class="col-right col-avatar" id="avatarlist">
+				  {loop $avatar $k $v}
+					<li>
+						<img src="{$v}" onerror="this.src='{IMG_PATH}nophoto.gif'"><br />
+						{L('avatar')}{$k} x {$k}
+					</li>
+				  {/loop}
+				</ul>
+			{else}
+				{getavatar_upload_html($memberinfo['userid'])}
+				<ul class="col-right col-avatar" id="avatarlist">
+				  {loop $avatar $k $v}
+					<li>
+						<img src="{$v}" onerror="this.src='{IMG_PATH}nophoto.gif'"><br />
+						{$k}{L('avatar')}
+					</li>
+				  {/loop}
+				</ul>
+				<div class="col-auto">
+					<div id="myContent"> 
+					  <p>Alternative content</p> 
+					</div>
+				</div>
+			{/if}
+			</div>
+			<span class="o1"></span><span class="o2"></span><span class="o3"></span><span class="o4"></span>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+{template 'member', 'footer'}

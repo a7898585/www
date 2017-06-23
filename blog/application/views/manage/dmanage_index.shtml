@@ -1,0 +1,71 @@
+<?php include $peronalhead;?>
+
+<!-- 中间部分 -->
+<div class="zjddiv">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td  width="180" valign="top">
+                <!-- 个人设置部分 -->
+                <div class="szym-ztdiv">
+                    <div class="szym01">
+                        <div class="szym02"></div>
+                        <div class="szym03">个人设置</div>
+                    </div>
+                    <div class="szym04">	
+                        <div class="szym05">
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/config/Edit">博客设置</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/affiche/Edit">公告管理</a><br />
+                            · <a href="<?php echo $baseurl;?>/ShareCssList,domain=<?php echo $bloginfo['DomainName'];?>">选择模板</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/template/Advanced">高级设置</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/stat/View">访问统计</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/blackuser/list">黑名单管理</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/template/Define">自定义模板</a><br />
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 文章管理部分 -->
+                <div class="szym-ztdiv">
+                    <div class="szym01">
+                        <div class="szym02"></div>
+                        <div class="szym03">文章管理</div>
+                    </div>
+                    <div class="szym04">	
+                        <div class="szym05">
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/Add">发表文章</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/manage/article/List">文章列表</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articlesort/Add">添加栏目</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articlesort/List">栏目列表</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articletag/List">标签管理</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/comment/List">评论管理</a><br />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 链接管理部分 -->
+                <div class="szym-ztdiv">
+                    <div class="szym01">
+                        <div class="szym02"></div>
+                        <div class="szym03">链接管理</div>
+                    </div>
+                    <div class="szym04">	
+                        <div class="szym05">
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/link/Add">添加链接</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/link/List">链接列表</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/link/AddSort">添加分类</a><br />
+                            · <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/link/ListSort">分类列表</a><br />
+                        </div>
+                    </div>
+                </div>
+
+            </td>
+            <td width="20"></td>
+            <td valign="top">
+                <?php include $block;?>
+            </td>
+        </tr>
+    </table>
+</div>
+<!--footer begin-->
+<?php include $peronalfoot;?>

@@ -1,0 +1,70 @@
+
+</div><!--End .AllNav-->
+</div><!--End #Content-->
+<!--内容部分结束-->
+<!--底部部分 -->
+<div class="body83" style="width:960px; margin:0 auto">
+    <div class="blue"><a href="http://www.cnfol.com/info/job.shtml" target="_blank">诚聘英才</a> | <a href="http://www.cnfol.com/info/contact.shtml" target="_blank">联系我们</a> | <a href="http://www.cnfol.com/info/adservice/" target="_blank">广告服务</a> | <a href="http://www.cnfol.com/info/partner.shtml" target="_blank">合作伙伴</a> | <a href="http://www.cnfol.com/info/law.shtml" target="_blank">法律声明</a> | <a href="http://www.cnfol.com/info/zg.shtml" target="_blank">征稿启事</a> | <a href="http://www.cnfol.com/info/sitemap.shtml" target="_blank">网站地图</a>
+    </div>
+    <div class="body84">---------------------------------------------------------------------------------------------</div>
+    <div class="body85">
+        本站所有文章、数据仅供参考，使用前务请仔细阅读<a href="http://www.cnfol.com/info/law.shtml" target="_blank">法律声明</a>，风险自负<br/>
+        《中华人民共和国增值电信业务经营许可证》编号：闽 B2-20050010 号<br/>
+        《电子公告服务许可证》编号：闽通信互联网 [2008]1 号<br />
+        <a href="http://news.cnfol.com/100511/101,1587,7680282,00.shtml" target="_blank">网络视听许可证1310422号</a><br />
+        <a href="http://news.cnfol.com/100517/101,1587,7710153,00.shtml" target="_blank">广播电视节目制作经营许可证 编号：(闽)字第091号</a><br/>
+        证券资讯提供:福建天信投资咨询顾问有限公司 [证书：ZX0151]<br/>
+        Copyright &copy; 2003-<script language="javascript"> date=new Date();document.writeln(date.getFullYear()); </script>  福建中金在线网络股份有限公司. All Right Reserved.<br/>
+        <a href="http://www.12321.cn" target="_blank"><img src="http://img.cnfol.com/newblog/img_css/images/mew8-web03.gif" border="0"/></a> <a href="http://www.fuzhou.cyberpolice.cn/" target="_blank"><img src="http://img.cnfol.com/newblog/img_css/images/mew8-web02.gif" width="37" height="43" border="0"/></a>
+    </div>
+</div>
+
+<!--广告-->	
+
+<div id="hide_ads3" style="display:none">
+    <!--AdForward Begin:-->
+    <iframe marginheight="0" marginwidth="0" frameborder="0" width="960" height="80" scrolling="no" src="http://cnfolimedia.allyes.com/main/s?user=cnfol|boke|boke_banner2&db=cnfolimedia&border=0&local=yes"></iframe>
+    <!--AdForward End-->
+    <!--<script>BAIDU_CLB_fillSlotWithSize("248894", 960, 90);</script>-->
+
+</div>
+<script type="text/javascript">
+    document.getElementById("ads3").innerHTML = document.getElementById("hide_ads3").innerHTML;
+    document.getElementById("hide_ads3").innerHTML = "";
+</script>
+<!--广告 end-->	
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+    _atrk_opts = { atrk_acct:"miaPi1a8Dy00w2", domain:"cnfol.com",dynamic: true};
+    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=miaPi1a8Dy00w2" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- End Alexa Certify Javascript -->
+
+<!--百度统计-->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc378c4854ec370c1c8438f72e19b7170' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- End of LogMicroscope Code --> 
+<DIV style="DISPLAY: none"><!-- START AIYA Site Stat. -->
+    <SCRIPT language=JavaScript type="text/javascript" src="http://s.cnfolimg.com/v5.0/js/stat01-min.js"></SCRIPT>
+    <NOSCRIPT><img src="http://logs.cnfol.com/a?ci=cnfol" alt=""></NOSCRIPT><!-- END AIYA Site Stat. -->
+</DIV> 
+
+<!--微信-->
+<div class="FixedRight" id="FixedRight">
+    <a href="javascript:;" onclick="document.getElementById('FixedRight').style.display='none'" class="Cls" title="关闭">X</a>
+    <iframe marginheight="0" marginwidth="0" frameborder="0" width="110" height="150" scrolling="no" src="http://cnfolimedia.allyes.com/main/s?user=cnfol|weixinyemian|weihangqingerweima&db=cnfolimedia&border=0&local=yes"></iframe>
+</div>
+<script charset="utf-8" src="http://hs.cnfol.com/Cm/Js/Base.js" type="text/javascript"></script>
+<!--[if lt IE 7]>
+  <script charset="utf-8" src="http://hs.cnfol.com/Cm/Js/Fixed.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  Fixed("FixedRight","R0","B100");
+  </script>
+<![endif]-->
+<!--微信-->
+</body>
+</html>

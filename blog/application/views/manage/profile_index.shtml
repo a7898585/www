@@ -1,0 +1,36 @@
+<?php include $peronalhead;?>
+<!--top头像，编辑器-->
+<?php include $tmp_editor;?>
+
+<!--动态-->
+<div class="main01 mainInd clearfix">
+    <div class="malft">
+        <a href="<?php echo $baseurl;?>/fans.html" class="menuCur lftbar lftbarBot"><span class="fansIco Ico"></span>粉丝 <span class="fansNm"><?php echo $user['FllowerNum']; ?></span></a>
+        <a href="<?php echo $baseurl;?>/attention.html" class="lftbar"><span class="attenIco Ico"></span>关注 <span class="fansNm"><?php echo $user['FollowingNum']; ?></span></a>
+    </div>
+    <!--动态-->
+    <div class="mace">
+        <div id="artlistMain">
+            正在为您加载数据...	
+        </div>
+        <div id="morelistBtn">
+            <?php echo $more; ?>
+        </div>
+    </div>
+    <!--end 动态-->
+</div>
+<!--end 主体-->
+<div id="ajaxdiv"></div>
+<div id="transshipmentdiv"></div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#artlistMain').load("<?php echo(config_item('base_url')); ?>/index.php/news/newlist?limit=12&type=index&r="+new Date().getTime());
+	
+    });
+
+</script>
+
+<!--返回顶部按钮-->
+<a href="#" class="btnTop btn Fx RB" id="backTop"></a>
+
+<?php include $peronalfoot;?>

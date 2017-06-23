@@ -1,0 +1,166 @@
+{__NOLAYOUT__}
+<div class="col-lg-12">
+    <form method="post" action="" role="form" class="form-inline" name="add_form">
+        <input type="hidden" value="{$id}" name="id">
+        <input type="hidden" value="{$register}" name="register">
+        <div class="form-group" style="margin-bottom: 10px;">
+            <label class="control-label text-nowrap">域名后缀：</label>
+            <input type="text" value="{$suffix}" maxlength="16" name="suffix" class="form-control input-sm" style="width: 200px;" placeholder="例如:“.com”，最长16个字符" <notempty name="suffix">readonly</notempty>/>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h6 class="panel-title">代理价</h6>
+            </div>
+            <table class="table">
+                <tr>
+                    <th rowspan="2" style="vertical-align: middle;">注册</th>
+                    <for start="1" end="6">
+                        <?php $price = $cc_prices['price_register_year'.$i.''];?>
+                        <td><input type="text" name="cc_price_register_year{$i}" class="form-control input-sm" style="width: 70px;" value="{$price}"/>&nbsp;元/{$i}年</td>
+                    </for>
+                </tr>
+                <tr>
+                    <for start="6" end="11">
+                        <?php $price = $cc_prices['price_register_year'.$i.''];?>
+                        <td><input type="text" name="cc_price_register_year{$i}" class="form-control input-sm" style="width: 70px;" value="{$price}"/>&nbsp;元/{$i}年</td>
+                    </for>
+                </tr>
+                <tr>
+                    <th rowspan="2" style="vertical-align: middle;">续费</th>
+                    <for start="1" end="6">
+                        <?php $price = $cc_prices['price_renew_year'.$i.''];?>
+                        <td><input type="text" name="cc_price_renew_year{$i}" class="form-control input-sm" style="width: 70px;" value="{$price}"/>&nbsp;元/{$i}年</td>
+                    </for>
+                </tr>
+                <tr>
+                    <for start="6" end="11">
+                        <?php $price = $cc_prices['price_renew_year'.$i.''];?>
+                        <td><input type="text" name="cc_price_renew_year{$i}" class="form-control input-sm" style="width: 70px;" value="{$price}"/>&nbsp;元/{$i}年</td>
+                    </for>
+                </tr>
+                <tr>
+                    <th>转入</th>
+                    <td colspan="10"><input type="text" name="cc_price_transfer" class="form-control input-sm" value="{$cc_prices['price_transfer']}" />&nbsp;元</td>
+                </tr>
+                <tr>
+                    <th>赎回</th>
+                    <td colspan="10"><input type="text" name="cc_price_redeem" class="form-control input-sm" value="{$cc_prices['price_redeem']}" />&nbsp;元</td>
+                </tr>
+            </table>
+        </div>
+        <volist name="data" id="val" key="k">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h6 class="panel-title">
+                        <switch name="key">
+                            <case value="level1">普通会员</case>
+                            <case value="level2">核心伙伴</case>
+                            <case value="level3">战略伙伴</case>
+                            <case value="level9">股东</case>
+                        </switch>
+                    </h6>
+                </div>
+                <input type="hidden" name="level[]" value="{$key}">
+                <table class="table">
+                    <tr>
+                        <th rowspan="2" style="vertical-align: middle;">注册</th>
+                        <for start="1" end="6">
+                            <?php $price = $val['price_register_year'.$i.'']/100;?>
+                        <td><input type="text" name="price_register_year{$i}[]" class="form-control input-sm" style="width: 70px;" value="{$price}" id="price_register_year{$k}{$i}"/>&nbsp;元/{$i}年</td>
+                        </for>
+                    </tr>
+                    <tr>
+                        <for start="6" end="11">
+                            <?php $price = $val['price_register_year'.$i.'']/100;?>
+                            <td><input type="text" name="price_register_year{$i}[]" class="form-control input-sm" style="width: 70px;" value="{$price}" id="price_register_year{$k}{$i}"/>&nbsp;元/{$i}年</td>
+                        </for>
+                    </tr>
+                    <tr>
+                        <th rowspan="2" style="vertical-align: middle;">续费</th>
+                        <for start="1" end="6">
+                            <?php $price = $val['price_renew_year'.$i.'']/100;?>
+                            <td><input type="text" name="price_renew_year{$i}[]" class="form-control input-sm" style="width: 70px;" value="{$price}" id="price_renew_year{$k}{$i}"/>&nbsp;元/{$i}年</td>
+                        </for>
+                    </tr>
+                    <tr>
+                        <for start="6" end="11">
+                            <?php $price = $val['price_renew_year'.$i.'']/100;?>
+                            <td><input type="text" name="price_renew_year{$i}[]" class="form-control input-sm" style="width: 70px;" value="{$price}" id="price_renew_year{$k}{$i}"/>&nbsp;元/{$i}年</td>
+                        </for>
+                    </tr>
+                    <tr>
+                        <th>转入</th>
+                        <td colspan="10"><input type="text" name="price_transfer[]" class="form-control input-sm" value="{$val['price_transfer']/100}" />&nbsp;元</td>
+                    </tr>
+                    <tr>
+                        <th>赎回</th>
+                        <td colspan="10"><input type="text" name="price_redeem[]" class="form-control input-sm" value="{$val['price_redeem']/100}" />&nbsp;元</td>
+                    </tr>
+                </table>
+            </div>
+        </volist>
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //筛选
+        $('#price_register_year11').on('keyup', function(){
+            var price = $(this).val();
+            for(var i=2; i<11; i++){
+                var newPrice = Number(price)*i;
+                $('#price_register_year1'+i).val(newPrice);
+            }
+        });
+        $('#price_register_year21').on('keyup', function(){
+            var price = $(this).val();
+            for(var i=2; i<11; i++){
+                var newPrice = Number(price)*i;
+                $('#price_register_year2'+i+'').val(newPrice);
+            }
+        });
+        $('#price_register_year31').on('keyup', function(){
+            var price = $(this).val();
+            for(var i=2; i<11; i++){
+                var newPrice = Number(price)*i;
+                $('#price_register_year3'+i+'').val(newPrice);
+            }
+        });
+        $('#price_register_year41').on('keyup', function(){
+            var price = $(this).val();
+            for(var i=2; i<11; i++){
+                var newPrice = Number(price)*i;
+                $('#price_register_year4'+i+'').val(newPrice);
+            }
+        });
+        
+        $('#price_renew_year11').on('keyup', function(){
+            var price = $(this).val();
+            for(var i=2; i<11; i++){
+                var newPrice = Number(price)*i;
+                $('#price_renew_year1'+i+'').val(newPrice);
+            }
+        });
+        $('#price_renew_year21').on('keyup', function(){
+            var price = $(this).val();
+            for(var i=2; i<11; i++){
+                var newPrice = Number(price)*i;
+                $('#price_renew_year2'+i+'').val(newPrice);
+            }
+        });
+        $('#price_renew_year31').on('keyup', function(){
+            var price = $(this).val();
+            for(var i=2; i<11; i++){
+                var newPrice = Number(price)*i;
+                $('#price_renew_year3'+i+'').val(newPrice);
+            }
+        });
+        $('#price_renew_year41').on('keyup', function(){
+            var price = $(this).val();
+            for(var i=2; i<11; i++){
+                var newPrice = Number(price)*i;
+                $('#price_renew_year4'+i+'').val(newPrice);
+            }
+        });
+    });
+</script>
+

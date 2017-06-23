@@ -1,0 +1,130 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/news/news_type">新闻分类</a></li>
+        <li class="am-active">列表</li>
+    </ol>
+
+    <div class="am-g">
+        <form action="/news/news_list" method="get">
+            <div class="am-u-md-6 am-cf">
+                <div class="am-fl am-cf">
+                    <div class="am-btn-toolbar am-fl">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <a href="javascript:editNewsType();" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
+                        </div>
+                        <div class="am-form-group am-margin-left am-fl">
+                            <select name="show_type">
+                                <option value="0">展示类型</option>
+                                <option value="1" <eq name="Think.get.show_type" value="1"> selected </eq> >新闻</option>
+                                <option value="2" <eq name="Think.get.show_type" value="2"> selected </eq> >图片</option>
+                                <option value="3" <eq name="Think.get.show_type" value="3"> selected </eq> >文字</option>
+                                <option value="4" <eq name="Think.get.show_type" value="4"> selected </eq> >广告</option>
+                            </select>
+                        </div>
+                        <div class="am-form-group am-margin-left am-fl">
+                            <select name="type_id">
+                                <option value="0">新闻分类</option>
+                                <foreach name="type_list" item="item">
+                                <option value="{$item.id}" <eq name="Think.get.show_type" value="$item.id"> selected </eq> >{$item.title}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-3 am-cf">
+                <div class="am-fr">
+                    <div class="am-input-group am-input-group-sm">
+                        <input type="text" class="am-form-field" name="title" value="{$Think.get.title}">
+                <span class="am-input-group-btn">
+                  <button class="am-btn am-btn-default" type="submit">搜索</button>
+                </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="am-g">
+        <form class="am-form">
+            <div class="am-u-sm-12">
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                    <tr>
+                        <th class="table-check"><input type="checkbox" /></th>
+                        <th class="table-id">编号</th>
+                        <th class="table-title">名称</th>
+                        <th class="table-type">分类</th>
+                        <th class="table-author">展示类型</th>
+                        <th class="table-date">评论</th>
+                        <th class="table-date">点赞</th>
+                        <th class="table-date">时间</th>
+                        <th class="table-set">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name='list' item='item'>
+                        <tr>
+                            <td><input type="checkbox" /></td>
+                            <td>{$item.id}</td>
+                            <td>{$item['title']}</td>
+                            <td class="table-author">{$item.type_name}</td>
+                            <td class="table-author">{$item.show_type|showTypes=###}</td>
+                            <td class="table-date">{$item.comment_sum}</td>
+                            <td class="table-date">{$item.good_sum}</td>
+                            <td class="table-date">{$item.add_time|fdate=###}</td>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <a href="/news/news_info?id={$item.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                                        <!--<a href="/company/del?id={$item.id}" class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</a>-->
+
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <div class="am-cf">
+                    共 {$page['totalCount']} 条记录
+                    <div class="am-fr">
+                        {$pager}
+                    </div>
+                </div>
+                <hr />
+                <p>注：请勿删除!!!</p>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="am-modal " tabindex="-1" id="your-modal">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">Modal 标题
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            Modal 内容。
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function editNewsType(id){
+        $.ajax({
+            type: "GET",
+            url: "/news/add",
+            dataType: "html",
+            data: { id: id},
+            success:function(html){
+                $('#your-modal').find('.am-modal-bd').html(html);
+                $('#your-modal').modal('toggle');
+            }
+        });
+    }
+
+</script>

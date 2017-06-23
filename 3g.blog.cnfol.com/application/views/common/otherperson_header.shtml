@@ -1,0 +1,83 @@
+<section class="GZ_top Pb10" id="GZ_top">
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" class="GZ_top_img Fl Tc"><img src="<?php echo getUserHead($bloginfo['UserID']);?>" width="48" height="48"></a>
+    <div class="GZ_top_zi Fl">
+        <h3 class="F14 Oh">
+            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" class="Fl" ><?php echo $bloginfo['NickName'];?></a>
+            <?php if($auth == 1){?>
+            <span class="HY_v Fl"></span>
+            <?php } ?>
+        </h3>
+        <p class=" F14">访问量：<font class="Red_color"><?php echo $totalVisit; ?></font></p>
+    </div>
+    <?php  if(!empty($user)){?>
+    <?php  if(isset($isowner) && $isowner==true){?>
+
+    <?php } else {?>
+    <?php if($isFrends == 0 || $isFrends == 2){ ?>
+    <?php if($isFrends!=''){ ?>
+    <a href="javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','add');" id="GuanZhuFocus" class="Fr GuanZhuBtn3 Tc" >加关注</a>
+    <?php }else{ ?>
+    <a href="javascript:void(0);" class="Fr GuanZhuBtn3 Tc" >加关注</a>
+    <?php }  }else{ ?>
+    <a href="javascript:delAttentionSure('<?php echo $bloginfo['UserID']; ?>','del');" id="GuanZhuFocus" class="Fr GuanZhuBtn2 Tc" >取消关注</a>
+    <?php } ?>
+    <?php }} ?>
+</section>
+<div class="GZ_dialog F16 Hide" id="GZ_dialog">
+    <div class="GZ_dtit Pt10">确定取消对“<?php echo $bloginfo['NickName'];?>”的关注吗？</div>
+    <div class="Gz_dBtn Tc">
+        <a href="javascript:void(0);" class="QueDing Fl" onclick="delAttention()">确定</a>
+        <a href="javascript:void(0);" class="QuXiao Fl" onclick="cacheDelAttention()">取消</a>
+    </div>
+</div>
+<script type="text/javascript">
+    var baseurl = "<?php echo $baseurl; ?>";
+    var userid = '';
+    var act = '';
+    function delAttentionSure(uid,artct){
+        userid = uid;
+        act = artct;
+        $("#DialogMark").removeClass('Hide');
+        $("#GZ_dialog").removeClass('Hide');
+    }
+    function cacheDelAttention(){
+        $("#DialogMark").addClass('Hide');
+        $("#GZ_dialog").addClass('Hide');
+    }
+    function delAttention(uid,artct){
+        if(uid && artct){
+            userid = uid;
+            act = artct;
+        }
+        var url = baseurl+"/index.php?c=myfocus&m=action&act="+act;
+        var params = {"friendIDs":userid};
+	
+        $.getJSON(url+"&r="+new Date().getTime(), params, function(json){
+            if(json.erron=='01'){
+                
+                if(act == "del"){
+                    cacheDelAttention();
+                    var focusNum = parseInt($(".fansNum").first().text())-1;
+                    $(".fansNum").each(function(){
+                        $(this).text(focusNum);		
+                    })
+                    $("#GuanZhuFocus").removeClass('GuanZhuBtn2');
+                    $("#GuanZhuFocus").addClass('GuanZhuBtn3');
+                    $("#GuanZhuFocus").html('加关注');
+                    $("#GuanZhuFocus").attr("href","javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','add');");
+                }else{
+                    var focusNum = parseInt($(".fansNum").first().text())+1;
+                    $(".fansNum").each(function(){
+                        $(this).text(focusNum);		
+                    })				
+                    $("#GuanZhuFocus").removeClass('GuanZhuBtn3');
+                    $("#GuanZhuFocus").addClass('GuanZhuBtn2');
+                    $("#GuanZhuFocus").html('取消关注');
+                    $("#GuanZhuFocus").attr("href","javascript:delAttentionSure('<?php echo $bloginfo['UserID']; ?>','del');");	
+                }
+            }else{
+                alertDialog(json.error);
+            }	
+        });
+    }
+</script>

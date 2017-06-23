@@ -1,0 +1,42 @@
+        <div class="middle_div1_ri">
+            <div class="tu">{template "content","250ad"}</div>
+            <div class="xh_man">
+                <div class="rs_dm_tit">
+                    <h3>最新更新漫画</h3>
+                </div>
+                <div class="xh_man_txt">
+                    <ul>
+                        {pc:content action="table_list" table="Cartoon" where="$where" order="updatetime DESC" num="4" cache="3600" }
+                          {loop $data $r}
+                          <li>
+                            <a href="/manhua{$r[id]}" title="{$r[title]}" target="_blank"><img width='80' height='115' src="{$r[thumb]}"></a>
+                            <a href="/manhua{$r[id]}" title="{$r[title]}" target="_blank">{str_cut($r[title],15,'')}</a>
+                          </li>
+                          {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+            <script type="text/javascript">
+    /*漫画城列表页漫画捷报250*250 创建于 2015-06-01*/
+    var cpro_id = "u2131314";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+            <div class="jiebao">
+                <div class="rs_dm_tit">
+                    <h3>漫画捷报<span style="float: right;font-size: 12px;font-weight: normal;padding-right: 5px;"><a href="/jiebao">更多&gt;&gt;</a></span></h3>
+                </div>
+                    <div class="jiebao_txt">
+                        <ul>
+                                {pc:content action="lists" catid="55" order="updatetime DESC" num="10" cache="3600" }
+                                {loop $data $r}
+                                    <li><a target="_blank" href="{$r[url]}" title= "{$r[title]}">{str_cut($r[title],45,'..')}</a></li>
+                                {/loop}
+                            {/pc}
+                        </ul>
+                    </div>
+                </div>
+                
+             <a href="http://www.yunzhuan.com" target="_blank" title="前往云赚公益平台" rel="nofollow"><img src="/statics/images/yz2.png" alt="云赚平台"></img></a>
+            
+        </div>

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>{$title}</title>
+        <link type="text/css" rel="stylesheet" href="/Public/Agent/css/agent.css"/>
+        <script type="text/javascript" src="/Public/Home/js/jquery.js"></script>
+        <script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+    </head>
+    <body>
+        <!--head begin-->
+        <div class="w bggray">
+            <div class="m m_head">
+                <a href="{:getDoMain('www')}"><img class="u_logo" src="/Public/Agent/images/logo.png"></a><span>代理商管理后台</span>
+            </div>
+        </div>
+        <!--head end-->
+        <div class="f_solid"></div>
+        <!--contain begin-->
+        <div class="w s_bgc_0">
+            <div class="m m_cont">
+                <!--bar_l begin-->
+                <div class="bar_l">
+                    <ul class="nav">
+                        <li <if condition="$params['c'] eq 'Index' ">class="z_in"</if>><a href="{$base_url}">代理商后台</a></li>
+                        <li <if condition="$params['c'] eq 'Customer' and $params['a'] eq 'index'">class="z_in"</if>><a href="{$base_url}customer">我要下单</a></li>
+                        <li <if condition="$params['c'] eq 'Customer' and $params['a'] eq 'my'">class="z_in"</if>><a href="{$base_url}customer/my">我的客户</a></li>
+                        <li <if condition="$params['c'] eq 'Customer' and $params['a'] eq 'add'">class="z_in"</if>><a href="{$base_url}customer/add/">添加客户</a></li>
+                        <li <if condition="$params['c'] eq 'Order' and $params['a'] eq 'index'">class="z_in"</if>><a href="{$base_url}order/">订单管理</a></li>
+                        <!--<li <if condition="$params['c'] eq 'Order' and $params['a'] eq 'account'">class="z_in"</if>><a href="{$base_url}order/account">帐户消费</a></li>-->
+                        <li <if condition="$params['c'] eq 'Account' and $params['a'] neq 'password'">class="z_in"</if>><a href="{$base_url}account/">我的信息</a></li>
+                        <li <if condition="$params['c'] eq 'Account' and $params['a'] eq 'password'">class="z_in"</if>><a href="{$base_url}account/password">修改密码</a></li>
+                        <li><a href="{$base_url}public/login_out">退出</a></li>
+                    </ul>
+                </div>
+                <!--bar_l end-->
+                <!--bar_r begin-->
+                {__CONTENT__}
+                <!--bar_r end-->
+            </div>
+        </div>
+        <!--contain end-->
+        <!--font begin-->
+        <div class="w s_bgc_1">
+            <div class="m m_foot">
+                <p>© CopyRight 2008-2015  常安保险 厦门保啦网络科技有限公司</p>
+                <p>闽ICP备15000619号-2  电话：0592-2211350  邮件：kefu@changan.com</p>
+            </div>
+        </div>
+        <!--font end-->
+    </body>
+</html>

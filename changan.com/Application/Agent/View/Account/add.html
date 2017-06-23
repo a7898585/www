@@ -1,0 +1,42 @@
+<div class="bar_r">
+    <div class="u_tle"><span class="side_l">我的信息</span></div>
+    <div class="box_info2">
+        <form action="{$base_url}account/save" method="post" enctype="multipart/form-data" id='form_info'>
+            <dl class="info">
+                <dt><span class="f_fl">账号：</span>{$userInfo.mail}</dt>
+                <dd>
+                    <p><span class="f_fl">电话：</span><input class="inpt_txt" type="text" value="{$userInfo.phone}" name="phone" /></p>
+                    <p><span class="f_fl">联系人：</span><input class="inpt_txt" type="text" value="{$userInfo.name}" name="name"/></p>
+                    <p><span class="f_fl">公司简称:</span><input class="inpt_txt" type="text" value="{$userInfo.company_short_name}" name="company_short_name" /></p>
+                    <p><span class="f_fl">公司全称:</span><input class="inpt_txt" type="text" value="{$userInfo.company_name}" name="company_name" /></p>
+                    <p><span class="f_fl">营业执照:</span><input class="inpt_txt" type="text" value="{$userInfo.company_zhizhao}" name="company_zhizhao" /></p>
+                    <p><span class="f_fl">详细地址:</span><input class="inpt_txt" type="text" value="{$userInfo.company_address}" name="company_address"/></p>
+                    <ul class="pic po1">
+                        <li><span><img <empty name="certif.idcard.thumb_a">src="/Public/Agent/images/none.png"<else />src="{$Think.config.YOU_PAI_YUN}{$certif.idcard.thumb_a}"</empty>></span><p>身份证正面</p><p><input class="inpt_btn" type="file" name="idcard_thumb_a"/></p></li>
+                        <li><span><img <empty name="certif.idcard.thumb_b">src="/Public/Agent/images/none.png"<else />src="{$Think.config.YOU_PAI_YUN}{$certif.idcard.thumb_b}"</empty>></span><p>身份证背面</p><p><input class="inpt_btn" type="file" name="idcard_thumb_b"/></p></li>
+                        <li><span><img <empty name="certif.qualify.thumb_a">src="/Public/Agent/images/none.png"<else />src="{$Think.config.YOU_PAI_YUN}{$certif.qualify.thumb_a}"</empty>></span><p>营业执照</p><p><input class="inpt_btn" type="file" name="qualify_thumb"/></p></li>
+                    </ul>
+                    <input name="r_idcard_id" type="hidden" value="{$certif.idcard.id}">
+                    <input name="r_qualify_id" type="hidden" value="{$certif.qualify.id}">
+                    <p class="t_align_c po2"><a class="btn" href="javascript:save();">保存</a><a class="btn btn2" href="{$base_url}account">返回</a></p>
+                </dd>
+            </dl>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function save(){
+        var msg ='';
+       
+        if($('input[name=idcard_thumb_a]').val()=='' && $('input[name=qualify_thumb]').val()==''){
+            msg='必须上传附件';
+        }
+        if(msg==''){
+            $('#form_info').submit();
+        }else{
+            alert(msg)
+        }
+    }
+</script>    

@@ -1,0 +1,107 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03" style="width:150px;">当前位置：友情链接管理</div>
+    </div>
+    <div class="szym06">
+        <table cellpadding="0" cellspacing="0" border="0" class="bd_tab" width="100%">
+            <?php 
+            if($linklist['RetRecords'] < 1)
+            {?>
+            <tr>
+                <td colspan="3">您还没有友情链接的记录！</td>
+            </tr>
+            <?php
+            }
+            else if($linklist['RetRecords'] > 1)
+            {
+            foreach($linklist['Record'] as $val)
+            {?>
+            <tr class="sort" id="link<?php echo $val['LinkID'];?>">
+                <td height="30">
+                    <a target="_blank" href="<?php echo $val['Path'];?>">
+                        <span id="name_<?php echo $val['LinkID'];?>"><?php echo $val['Name'];?></span>
+                    </a>&nbsp;
+                </td>
+                <td height="20">
+                    <?php if(trim($val['SortName']!="")) echo $val['SortName']; else echo "默认分类";?>
+                    <span id="sortid_<?php echo $val['LinkID'];?>" style="display:none;"><?php echo $val['LinkSortID'];?></span>&nbsp;
+                    <span id="isopen_<?php echo $val['LinkID'];?>" style="display:none;"><?php echo $val['IsPublic'];?></span>
+                    <span id="rank_<?php echo $val['LinkID'];?>" style="display:none;"><?php echo $val['Rank'];?></span>
+                </td>
+                <td height="30">
+                    <a target="_blank" href="<?php echo $val['Path'];?>">
+                        <span id="path_<?php echo $val['LinkID'];?>"><?php echo $val['Path'];?></span>
+                    </a>&nbsp;
+                </td>
+                <td height="30"><?php echo $val['DataTime'];?>&nbsp;</td>
+                <td height="30">
+                    <a href="javascript:submit_form('action_form','<?php echo $val['LinkID'];?>');">修改</a> 
+                    <a onclick="javascript:dellink('<?php echo $val['LinkID'];?>');" href="javascript:void(0)">删除</a> 
+                </td>
+            </tr>
+            <?php
+            }
+            }
+            else
+            {?>
+            <tr class="sort" id="link<?php echo $linklist['Record']['LinkID'];?>">
+                <td height="30">
+                    <a target="_blank" href="<?php echo $linklist['Record']['Path'];?>">
+                        <span id="name_<?php echo $linklist['Record']['LinkID'];?>"><?php echo $linklist['Record']['Name'];?></span>
+                    </a>&nbsp;
+                </td>
+                <td height="20">
+                    <?php if(trim($linklist['Record']['SortName']!="")) echo $linklist['Record']['SortName']; else echo "默认分类";?>&nbsp;
+                    <span id="sortid_<?php echo $linklist['Record']['LinkID'];?>" style="display:none;"><?php echo $linklist['Record']['LinkSortID'];?></span>&nbsp;
+                    <span id="isopen_<?php echo $linklist['Record']['LinkID'];?>" style="display:none;"><?php echo $linklist['Record']['IsPublic'];?></span>
+                    <span id="rank_<?php echo $linklist['Record']['LinkID'];?>" style="display:none;"><?php echo $linklist['Record']['Rank'];?></span>
+                </td>
+                <td height="30">
+                    <a target="_blank" href="<?php echo $linklist['Record']['Path'];?>">
+                        <span id="path_<?php echo $linklist['Record']['LinkID'];?>"><?php echo $linklist['Record']['Path'];?></span>
+                    </a>&nbsp;
+                </td>
+                <td height="30"><?php echo $linklist['Record']['DataTime'];?>&nbsp;</td>
+                <td height="30">
+                    <a href="javascript:submit_form('action_form','<?php echo $linklist['Record']['LinkID'];?>');">修改</a>
+                    <a onclick="javascript:dellink('<?php echo $linklist['Record']['LinkID'];?>');" href="javascript:void(0)">删除</a> 
+                    <?php
+                    }?>
+            <tr class="sort">
+                <td colspan="5"><?php echo $pagebar;?></td>
+            </tr>
+        </table>
+        <form id="action_form" method="post" target="_self" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/link/Edit">
+            <input type="hidden" name="act" id="act" value="editLink" />
+            <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>" />
+            <input type="hidden" name="MemberID" id="MemberID" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="hidden" name="linkid" id="linkidforupd" />
+            <input type="hidden" name="name" id="nameforupd" />
+            <input type="hidden" name="sortid" id="sordidforupd" />
+            <input type="hidden" name="path" id="pathforupd" />
+            <input type="hidden" name="rank" id="rankforupd" />
+            <input type="hidden" name="ispublic" id="ispublicforupd" />
+        </form>
+    </div>
+</div>
+<script language="javascript">
+    var baseuri   = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var actionurl = baseuri + "/link/Action";
+    function dellink(linkid){
+        $.post(actionurl,{act:'delLink',linkID:linkid,flashCode:$('#flashCode').val(),MemberID:$('#MemberID').val()},function(data){
+            showalert(data.error);
+            if(data.errno == 'success')
+                $('#link'+linkid).remove();
+        },'json');
+    }
+    function submit_form(targetform,linkid){
+        $('#linkidforupd').val(linkid);	
+        $('#nameforupd').val($('#name_'+linkid).html());	
+        $('#sordidforupd').val($('#sortid_'+linkid).html());	
+        $('#pathforupd').val($('#path_'+linkid).html());	
+        $('#rankforupd').val($('#rank_'+linkid).html());
+        $('#ispublicforupd').val($('#isopen_'+linkid).html());
+        $('#'+targetform).submit();
+    }
+</script>

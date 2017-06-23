@@ -1,0 +1,42 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03" style="width:160px;">当前位置：评论文章列表</div>
+    </div>
+    <div class="szym06">  <table cellspacing="0" cellpadding="0" border="0" width="100%" class="bd_tab">
+            <tbody><tr>
+                    <td width="50%" class="bg_tab">标题</td>
+                    <td width="23%" class="bg_tab">发表时间</td>
+                    <td width="15%" class="bg_tab">管理</td>
+                </tr>
+                <?php
+
+                if(empty($artList) || !is_array($artList))
+                {?>
+                <tr class="sort">
+                    <td height="30">暂无相关的博客评论文章</td>
+                </tr>
+                <?php 
+                }
+                else
+                {
+                foreach($artList['Record'] as $art)
+                {?>
+                <tr class="sort">
+                    <td height="30"><a target="_blank" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo $art['ArticleID'];?>.html"><?php echo $art['Title'];?>&nbsp;</a></td>
+                    <td><?php echo $art['AppearTime'];?>&nbsp;</td>
+                    <td width="15%"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/manage/comment/CommentList/<?php echo $art['ArticleID'];?>">评论数(<?php echo $art['CommentNumber'];?>)</a></td>
+                </tr>
+                <?php
+                }
+                }?>
+
+                <tr class="sort">
+                    <td colspan="7"><?php echo $pagebar;?></td>
+                </tr>
+            </tbody></table>
+        <form action="" target="_self" method="post" name="action_form" id="action_form">
+            <input type="hidden" id="articleid" name="articleid">
+        </form>
+    </div>
+</div>

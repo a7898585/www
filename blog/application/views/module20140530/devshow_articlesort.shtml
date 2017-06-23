@@ -1,0 +1,12 @@
+
+<h3>文章分类</h3>
+<ul class="CommLst" id="blogarticlesort">
+    数据加载中...
+</ul>
+
+
+<script language="javascript">
+    $(function(){
+        $('#blogarticlesort').load("<?php echo $baseurl.'/ajaxgetarticlesortstat/'.$bloginfo['MemberID'].'?do='.$bloginfo['DomainName'].'&isowner='.$isowner;?>");
+    })
+</script>

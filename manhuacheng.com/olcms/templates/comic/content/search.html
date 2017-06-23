@@ -1,0 +1,40 @@
+{template "content","header"}
+<!--main-->
+<div class="main cat-search">
+        
+        <div class="col-auto">
+        <div class="crumbs"><a href="{APP_PATH}">首页</a><span> > </span>{catpos($catid)}搜索</div>
+        <form name="myform" method="get" action="">
+        <ul class="search-form">
+{loop $forminfos $field $info}
+{if $info[formtype]=='box'}<li class="bk"></li>{/if}
+<li><label>{$info[name]}</label>{$info[form]}{if $info[formtype]=='datetime'}之后{/if}</li>
+{if $info[formtype]=='box'}<li class="bk"></li>{/if}
+{/loop}
+
+<li><label>排序方式</label><select name="orderby" id="orderby"  size="1">
+<option value="a.id DESC" >发布时间 降序</option>
+<option value="a.id ASC" >发布时间 升序</option>
+</select></li>
+<li><div class="btn"><input type="submit" value="搜索" /></div></li>
+  <input type="hidden" name="m" value="content"> 
+  <input type="hidden" name="c" value="search"> 
+  <input type="hidden" name="a" value="init"> 
+  <input type="hidden" name="catid" value="{$catid}"> 
+  <input type="hidden" name="dosubmit" value="1">
+
+        </ul></form>
+        <div class="search-point">共找到到符合条件的结果 <strong class="red">{$total}</strong> 条</div>
+          <ul class="search-list">
+			{loop $datas $r}
+           	<li style="margin:0">
+                {if $r[thumb]}<a href="{$r[url]}" target="_blank"><img height="60" width="60" src="{$r[thumb]}"></a>{/if}
+                <h5><a href="{$r[url]}" target="_blank" class="blue fn">{$r[title]}</a> - <a href="{if strpos($CATEGORYS[$r[catid]][url],'http://')===false}{$siteurl}{$CATEGORYS[$r[catid]][url]}{else}{$CATEGORYS[$r[catid]][url]}{/if}" class="blue f12 fn">{$CATEGORYS[$r[catid]][catname]}</a> - <span class="green f12 fn">发布时间：{date('Y-m-d H:i',$r[updatetime])}</span></h5>
+                <p>{$r[description]}</p>
+			</li>
+			{/loop}
+        </ul>
+        <div id="pages" class="text-c">{$pages['lists']}</div>
+  </div>
+</div>
+{template "content","footer"}

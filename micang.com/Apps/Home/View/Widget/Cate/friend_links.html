@@ -1,0 +1,8 @@
+{__NOLAYOUT__}
+<div class="frie_link">
+    友情链接：
+    <volist name="data" id="vo">
+        <if condition="$key gt o "><span>|</span></if>
+        <a href="{$vo.url}" target="_blank" title="{$vo.title}">{$vo.title}</a>
+    </volist>
+</div>

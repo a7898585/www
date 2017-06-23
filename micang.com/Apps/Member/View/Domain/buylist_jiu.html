@@ -1,0 +1,265 @@
+<link href="/Public/Member/css/ui-dialog.css" rel="stylesheet" />
+<style>
+.bnt-green {
+    background: #86C440;
+    border: none;
+    font-size: 14px;
+    border-radius: 2px;
+}
+.bnt-green:hover {
+	color: white;
+	background: #92d04d;
+}
+.width100 {
+    width: 100px;
+}
+.asd3 {
+	position:relative;
+	z-index:0
+}
+.asd {
+	width: 100px;
+	height: 21px;
+	line-height: 21px;
+	border: 1px solid #a9a9a9;
+	position: relative;
+	z-index:0;
+	text-align:left;
+	text-indent:15px;
+	cursor:pointer;
+}
+.checkone {
+	background: url(/Public/Member/images/icon2013.png) no-repeat;
+	display: inline-block;
+}
+.checkone {
+	width: 10px;
+	height: 10px;
+	background-position: 0 -20px;
+	overflow:hidden;
+	margin-left:10px;
+	position:absolute;
+	top:4px;
+	right:10px;
+}
+.asd3:hover .asd {
+	border-bottom:1px solid #fff;
+	z-index:3;
+}
+.asd3:hover .asd2 {
+	display: block;
+}
+.asd3:hover {
+	z-index:2;
+}
+.asd3 .asd2 {
+	position: absolute;
+	left: -155px;
+	top: 22px;
+	border: 1px solid #a9a9a9;
+	width: 235px;
+	padding: 0 0 0 20px;
+	background: #fff;
+	display: none;
+}
+.asd2 ul li {
+	width: 33.3%;
+	line-height: 30px;
+	float: left;
+	text-align:left;
+}
+.form-button {
+    width: 100%;
+    margin-top: 25px;
+    text-align: center;
+}
+.bnt-orange {
+	background:#FF8D08;
+	color: #FFFFFF;
+	text-align: center;
+	text-decoration: none;
+	font-size: 14px;
+	
+	display:inline-block;
+	border:none;
+	height:30px;
+	line-height:30px;
+	border-radius:2px;
+}
+.bnt-orange:hover {
+	background: #ffa00a;
+	cursor: pointer;
+	color: #FFFFFF;
+}
+.bnt-hui {
+    background-color: #DDDDDD;
+    color: #666666;
+	text-decoration: none;
+	font-size: 14px;
+	height:30px;
+	border:none;
+}
+.bnt-hui:hover{background-color: #e5e5e5;
+    color: #666666; text-decoration: none;}
+	.width100 {
+    width: 100px;
+}
+.ml10{
+	margin-left:10px;
+}
+</style>
+<script language="javascript">
+	function Trade(x){
+		$('#trade_id').val(x);
+		var windowWidth = document.documentElement.clientWidth;   
+		var windowHeight = document.documentElement.clientHeight;   
+		var popupHeight = $("#dialog").height();   
+		var popupWidth = $("#dialog").width();   
+		//居中设置   
+		$("#dialog").css({   
+			"position": "absolute",   
+			"top": windowHeight/2-popupHeight/2,   
+			"left": windowWidth/2-popupWidth/2   
+		});   	
+		$('#dialog').show();
+		$('#yinying').show();
+	}
+	function TradeConfirm(){
+		var seccode=$('#seccode').val();
+		if(!seccode){
+			alert('请输入安全码');
+			return;
+		}
+		$.post("/Domain/ajax", { d:"check_seccode",seccode:seccode },
+   				function(data){
+    				if(data.status=='1'){
+						$('#dialog').hide();
+						$('#yinying').hide();
+						$('#trade_form').submit();
+					}else{
+						alert(data.message);
+					}
+   				} 
+		);
+	}
+	function Close(id,type){
+		if(confirm("确定不购买域名吗？")){
+			window.location.href="/Domain/cancel_buyer?id="+id;
+		}
+	}
+</script>
+<div class="main">
+  <div class="title">
+    <h3>我正在进行的交易</h3>
+  </div>
+    <table width="100%" border="0" class="infotab">
+      <tr>
+        <td colspan="7">
+           <form action="/domain/buylist" method="post">
+           		<span>状态：<select name="status">
+                    <option value="-1" <eq name="status" value="-1"> selected="selected"</eq>>全部</option>
+                    <option value="0" <eq name="status" value="0"> selected="selected"</eq>>等待卖家确认</option>
+                    <option value="1" <eq name="status" value="1"> selected="selected"</eq>>等待买家确认</option>
+                    <option value="2" <eq name="status" value="2"> selected="selected"</eq>>成功交易</option>
+                    <option value="3" <eq name="status" value="3"> selected="selected"</eq>>买家反悔</option>
+                    <option value="4" <eq name="status" value="4"> selected="selected"</eq>>卖家反悔</option>
+                    <option value="5" <eq name="status" value="5"> selected="selected"</eq>>卖家拒绝报价</option>
+                    <option value="6" <eq name="status" value="6"> selected="selected"</eq>>等待域名转入</option>
+                    <option value="7" <eq name="status" value="7"> selected="selected"</eq>>等待买家付款</option>
+                </select>
+                <input name="" type="submit" value="确定"/>
+                </span>
+           </form>
+        </td>
+      </tr>
+      <tr>
+        <th>域名</th>
+        <th>类型</th>
+        <th>买家出价</th>
+        <th>买家ID</th>
+        <th>更新时间</th>
+        <th>状态</th>
+        <th>操作</th>
+      </tr>
+      <empty name="domains">
+        <tr>
+          <td colspan="7">没有找到符合条件的交易信息！</td>
+        </tr>
+        <else/>
+        <volist name="domains" id="item">
+          <tr id="tr_{$item.id}">
+            <td>{$item.domain}</td>
+            <td><eq name="item.type" value="1">一口价</eq>
+              <eq name="item.type" value="2">拍卖</eq>
+              <eq name="item.type" value="3">买方出价</eq></td>
+            <td>{$item.money|Fen2Yuan}元</td>
+            <td>{$item.to_mid}</td>
+            <td>{$item.update_time|date='Y-m-d H:i:s',###}</td>
+            <td>
+            <eq name="item.status" value="0">等待卖家确认</eq>
+            <eq name="item.status" value="1">等待买家确认</eq>
+            <eq name="item.status" value="2">成功交易</eq>
+            <eq name="item.status" value="3">买家反悔</eq>
+            <eq name="item.status" value="4">卖家反悔</eq>
+            <eq name="item.status" value="5">拒绝报价</eq>
+            <eq name="item.status" value="6">等待域名转入</eq>
+            <eq name="item.status" value="7">等待买家付款</eq>
+            </td>
+            <td>
+            <eq name="item.status" value="1">
+            <input type="button" value="购买域名" onclick="Trade('{$item.id}');"/>&nbsp;&nbsp;<input type="button" value="不买了" onclick="Close('{$item.id}','{$item.type}');"/>
+            </eq>
+            <eq name="item.status" value="7">
+            <input type="button" value="购买域名" onclick="Trade('{$item.id}');"/>&nbsp;&nbsp;<input type="button" value="不购买了" onclick="Close('{$item.id}','{$item.type}');"/>
+            </eq>
+            </td>
+          </tr>
+        </volist>
+      </empty>
+      <tr>
+        <td colspan="7"><div class="pages">{$pager}</div></td>
+      </tr>
+    </table>
+</div>
+<div id="yinying" style="display: none; z-index: 1000; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; -webkit-user-select: none; opacity: 0.5; background: rgb(0, 0, 0);" tabindex="0"></div>
+<div id="dialog" class="ui-dialog" style="display:none; width:500px; z-index:10001;">
+  <div class="ui-dialog-arrow-a"></div>
+  <div class="ui-dialog-arrow-b"></div>
+  <form id="trade_form" action="/domain/deal_buyer" method="post">
+  <table class="ui-dialog-grid" width="500">
+    <tbody>
+      <tr>
+        <td i="header" class="ui-dialog-header"><button i="close" class="ui-dialog-close" title="取消" onclick="$('#dialog').hide();$('#yinying').hide();">×</button>
+          <div i="title" class="ui-dialog-title">安全码验证</div></td>
+      </tr>
+      <tr>
+        <td i="body" class="ui-dialog-body"><div i="content" class="ui-dialog-content">
+             <table>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>安全码：</td>
+                    <td><input type="password" id="seccode"  name="seccode" value="" autocomplete="off"><font class="txt999">请输入您的安全密码</font>[<a href="#" target="_blank" style="color:blue;">忘记安全码？</a>]</td>
+                  </tr>
+                  <tr><td>提醒：</td><td align="left" colspan="2"><div class="out_right"><a href="#" target="_blank" style="color: blue;">什么是安全码？</a></div></td></tr>
+                  <tr>
+                    <td colspan="2">
+                    <input name="trade_id" id="trade_id" type="hidden" value="" />
+                    <a class="bnt-green width100" style="margin:10px 0 0 70px; display:block; color:white; text-align:center; float:left; height:22px;" href="javascript:TradeConfirm();">确认</a>
+                    <a class="bnt-hui width100" style="margin:10px 0 0 70px; display:block; color:white; text-align:center; float:left; height:22px;" onclick="$('#dialog').hide();$('#yinying').hide();">取消</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+</div>
+<div class="clear"></div>
+

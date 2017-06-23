@@ -1,0 +1,173 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <a href="{:getDoMain()}domain/" class="crumbs_c">买域名</a>
+    <span>></span>
+    <i>查询结果</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap">
+    <!--主体左边 开始-->
+    <div class="wrap_l">
+        <div class="txt_lc">
+            <ul>
+                <li>1、注册查询</li>
+                <li class="txt_lc_cur">2、查询结果</li>
+                <li>3、选择模板</li>
+                <li>4、注册成功</li>
+            </ul>
+        </div>
+        <div class="doma">
+            <div class="doma_a">域名查询</div>
+            <!--搜索 开始-->
+            <form name="form_query" method="post" action="/domain/register?op=query_result">
+                <div class="search_b">
+                    <span>www.</span>
+                    <input class="search_txt_b" name="domain">
+                    <input type="submit" name="" value="" class="search_btn_b"/>
+                </div>
+            </form>
+            <!--搜索 结束-->
+            <form name="form_query_result" method="post" action="/domain/register?op=add_cart">
+                <dl>
+                    <volist name="domains" id="item">
+                        <dt>
+                        <div class="doma_b"><input type="checkbox" name="domains[]" value="{$item}" id="checkbox_{$item|str_replace='.','_',###}" disabled="disabled"/>{$item} </div>
+                        <div class="doma_c doma_cocl_a" id="loading_{$item|str_replace='.','_',###}">查询中...</div>
+                        </dt>
+                    </volist>
+                </dl>
+                <div class="doma_d">
+                    <label><input name="checked_all" type="checkbox" /> 
+                        <span>全选/反选</span></label>
+                    <i class="iconfont">&#xe60e;</i>
+                    <a href="javascript:;" onclick="add_cart()" class="listent_d fl">加入购物车</a>
+                    <a href="javascript:;" id="add_cart_submit" class="doma_d_btn"></a>
+                </div>
+            </form>
+        </div>
+        <div class="title_b">
+            <div class="title_b_icon"><i class="iconfont">&#xe615;</i></div>
+            <dl>
+                <dt>推荐域名</dt>
+                <dd>提供稳定的<span>金牌</span>服务</dd>
+            </dl>
+        </div>
+        <div class="jj_yk">
+            <div class="price_list">
+                <div class="title">
+                    <h3 class="titleh3"><i class="iconfont">&#xe601;</i>限时竞价</h3>
+                </div>
+                {:W('Sale/sale_list',array('2'))}
+            </div>
+            <div class="price_list">
+                <div class="title">
+                    <h3 class="titleh3"><span></span><em class="fl">一口价</em></h3>
+                </div>
+                {:W('Sale/sale_list',array('1'))}
+            </div>
+        </div>
+        <div class="height30 clear"></div>
+    </div>
+    <!--主体左边 结束-->
+    <!--主体右边 开始-->
+    <div class="wrap_r">
+        <div class="tabbox_b">
+            {:W('Domain/mipu')}
+        </div>
+        <div class="height30"></div>
+        <div class="tabbox_b">
+            <!--精品域名-->
+            {:W('Domain/do_list3',array('3'))}
+        </div>
+    </div>
+    <!--主体右边 结束-->
+</div>
+<!--主体内容 结束-->
+<script type="text/javascript" src="/Public/Common/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+<script type="text/javascript"> 
+    $(document).ready(function(){
+        $('.search_btn_b').click(function(){
+            if($('input[name=domain]').val() ==''){
+                layer.msg('请输入要注册的域名。');
+                return false;
+            }
+            var str =$('input[name=domain]').val();
+            if(str.indexOf('.')>0){
+                return true;
+            }
+            layer.msg('域名必须有后缀！');
+            return false;
+        });
+        $(':checkbox').not('[name="checked_all"]').each(function(){
+            checkDomainStatus(this.value);
+        });
+        $('#add_cart_submit').click(function(){
+            if ($(':checkbox:checked').not('[name="checked_all"],:disabled').length > 0){
+                $('form[name="form_query_result"]').submit();
+            }else{
+                layer.msg('请先选择要注册的域名。');
+            }
+            return false;
+        });
+        
+    });
+    function add_cart(domain){
+        if(!domain){
+            var $e = document.getElementsByName('domains[]');
+            if(undefined == $e.length) {
+                layer.msg('请先选择要注册的域名。');
+                return false;
+            }else{
+                var a = new Array();
+                for (var i=0;i<$e.length;i++) {
+                    var e = $e[i];
+                    if (e.checked==true && e.type=='checkbox' && e.name && e.disabled==false) {
+                        a.push(e.value);
+                    }
+                }
+                domain = a.join(',');
+            }
+        }
+        if(domain){
+            $.post('/trolley/ajax_add_cart', {domain:domain}, function(result){
+                if(result.status == 400){
+                    layer.alert(result.message, function(){window.location=result.url;});
+                }else{
+                    $('#trolley_num').html(result.new_num+Number($('#trolley_num').html()));
+                    layer.msg(result.message);
+                }
+            });
+        }else{
+            layer.msg('请先选择要注册的域名。');
+            return false;
+        }
+    }
+    function checkDomainStatus(domain){
+        $.getJSON('/domain/ajax_query_do', {domain:domain}, function(result){
+            if (result.status == 200){
+                $('#checkbox_'+result.message.replace(/\./g,'_')).attr('disabled', false);
+                $('#loading_'+result.message.replace(/\./g,'_')).replaceWith('未被注册，<a href="javascript:;" onclick="add_cart(\''+domain+'\')" class="listent_d">加入购物车</a>');
+            }else{
+                //                $('#checkbox_'+result.message.replace(/\./g,'_')).parent().html('<span>'+domain+'</span>');
+                if (result.status == 404){
+                    $('#loading_'+result.message.replace(/\./g,'_')).replaceWith('<span style="color:red;">已被注册</span>');
+                }else if (result.status == 301){
+                    $('#loading_'+result.message.replace(/\./g,'_')).replaceWith('已被其他注册商下用户注册(一口价：'+result.price+')，立即申请<a href="/Sell/detail?id='+result.id+'" class="listent_d">域名代购</a>;');
+                }else if (result.status == 302){
+                    $('#loading_'+result.message.replace(/\./g,'_')).replaceWith('目前归本站用户所有，点击进入<a href="/Sell/detail?id='+result.id+'" class="listent_d">域名询价</a>');
+                }else if (result.status == 303){
+                    $('#loading_'+result.message.replace(/\./g,'_')).replaceWith('目前正在本站竞拍当中，立即闯入<a href="/Sell/detail?id='+result.id+'" class="listent_d">域名竞拍</a>;');
+                }else if (result.status == 400){
+                    $('#loading_'+result.message.replace(/\./g,'_')).replaceWith(result.error);
+                }else{
+                    $('#loading_'+result.message.replace(/\./g,'_')).replaceWith('<span style="color:red;">查询失败，刷新重试</span>');
+                }
+            }
+        });
+    }
+</script>

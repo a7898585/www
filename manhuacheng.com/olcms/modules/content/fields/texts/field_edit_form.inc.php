@@ -1,0 +1,1 @@
+允许同时上传的个数：<input type="text" name="setting[upload_number]" value="<?php echo $setting['upload_number'];?>" size=3>

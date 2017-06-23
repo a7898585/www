@@ -1,0 +1,57 @@
+{__NOLAYOUT__}
+<div class="col-lg-12">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">ID：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$detail['id']}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">操作类型：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$detail['type']|getAdminLogType}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">操作人ID：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$detail['admin_id']}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">操作IP：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$detail['ip']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">操作人账号：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$detail['account']['account']}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">操作人名称：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$detail['account']['realname']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">标题：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$detail.title}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">操作时间：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$detail.addtime|date="Y-m-d H:i:s",###}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">操作地址：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{$detail['url']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">描述：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{$detail.note}</p>
+            </div>
+        </div>
+    </form>
+</div>

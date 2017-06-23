@@ -1,0 +1,42 @@
+<div class="tit">
+    <h2>编辑友情链接</h2>
+    <div class="fr"><span><a href="javascript:void(0);" onclick="window.history.back(1)">返回</a></span></div>
+</div>
+<form id="form1" name="form1" method="post" action="">
+    <div class="w_content a_con">
+        <div class="sqcon">
+            <ul style="margin-top:10px;">
+                <li>
+                    <div class="item"><span class="lab">网站名称：</span>
+                        <input name="title" type="text" class="input-txt3"  placeholder="最长32个字符。" maxlength="32" value="{$friendInfo.title}" />
+                    </div>
+                </li>
+                <li>
+                    <div class="item"><span class="lab">网站链接：</span>
+                        <input name="url" type="text" class="input-txt3"  placeholder="完整链接，需要以“http://”开头。" value="{$friendInfo.url}" />完整链接，需要以“http://”开头
+                    </div>
+                </li>
+                <li>
+                    <div class="item"><span class="lab">显示顺序：</span>
+                        <input name="order" type="text" class="input-txt3"  placeholder="数值越大，显示越靠后。" maxlength="4" value="{$friendInfo.order}" />
+                    </div>
+                </li>
+                <li>
+                    <div class="item"><span class="lab">显示模块：</span>
+                        <select name="type">
+                            <option value="0" <if condition="$friendInfo.type eq 0 ">selected="selected"</if>>首页</option>
+                            <option value="1" <if condition="$friendInfo.type eq 1 ">selected="selected"</if>>找产品</option>
+                            <option value="2" <if condition="$friendInfo.type eq 2 ">selected="selected"</if>>找代理人</option>
+                            <option value="3" <if condition="$friendInfo.type eq 3 ">selected="selected"</if>>定制方案</option>
+                            <option value="4" <if condition="$friendInfo.type eq 4 ">selected="selected"</if>>保险问吧</option>
+                            <option value="5" <if condition="$friendInfo.type eq 5 ">selected="selected"</if>>保险资讯</option>
+                        </select>
+                    </div>
+                </li>
+            </ul>
+            <div class="blank20"></div>
+        </div>
+        <input type="hidden" name="refer" value="{$Think.server.HTTP_REFERER}" />
+        <input class="btn6" type="submit" value="提交" />
+    </div>
+</form>

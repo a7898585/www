@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css" />
+<title>留言</title>
+</head>
+
+<body>
+<!--顶部-->
+<div></div>
+<!--end 顶部-->    
+<!--导航-->
+<div class="Wrap Nav">
+    <form class="R Mr10">
+        <input type="text" id="C2" class="Srinput L" value="搜索博文/博主">
+        <label class="LabSlc L Ml10">
+            <select name="SlctFrst" class="SlSW SlcWrp">
+                <option value="本博客">本博客</option>
+            </select>
+        </label>
+        <a href="javascript:;" class="Asrch Ml10"></a>
+    </form>
+    <a class="AHome Mr30" href="javascript:;" target="_blank">我的首页</a><a class="ABlog" href="javascript:;" target="_blank">我的博客</a><a class="APhoto" href="javascript:;" target="_blank">相 册</a><a class="ASet ANow" href="javascript:;" target="_blank">设 置</a>
+</div>
+<!--end 导航-->
+<!--内容-->
+<div class="Wrap Cf Mt15">
+  <!--左-->
+  <div class="MaLft">
+    <!--留言编辑框-->
+    <div class="LeaveCommBox">
+      <!--显示留言条数-->
+      <div class="CommSum">共有留言<em><?php echo $stat['UnreadAmount'];?></em>条</div>
+      <!--end 显示留言条数-->
+      <div class="TextareaBox">
+        <div class="TxtWidget">
+          <a class="Phiz" href="#"></a><a class="Pic" href="#"></a>
+        </div>
+        <textarea id="Ccommt" name="" cols="" rows="">输入评论内容</textarea>            
+      </div>
+      <div class="BtnBox">            
+        <a class="SubmitBtn" href="#">提交</a><a class="BackBtn" href="#">返回</a>
+      </div>
+    </div>
+    <!--end 留言编辑框-->
+    <!--留言-->
+    <?php foreach($list['list'] as $k=>$v) { ?>
+    <div class="MessageBox FirstMesg">                    
+      <div class="FaceBox">
+        <a href="#"><img src="<?php echo get_user_head($v['UserID'],48);?>" /></a>
+        <p><a href="<?php echo PASSPORT_USERMESSAGEINFO_URL?>?id=<?php echo $v['SessionID'];?>"><?php echo $v['NickName']?></a></p>
+      </div> 
+      <div class="DetailBox">
+        <div class="MessageInfo">
+          <!--操作-->
+          <div class="HandleBox"><a href="#">回复</a>|<a href="#">引用</a>|<a href="#">删除</a>|<a href="#">黑名单</a></div>
+          <!--end 操作-->
+          <p class="Num">第<em>100</em>楼</p>
+          <p class="Time">留言时间<em>2013-02-07 10:07</em></p>
+        </div>
+        <div class="Messages">
+          <div class="Cont">
+			<?php echo $v['LastMessage'];?>
+          </div>
+          <div class="ReplyBox"><div class="Fl"><textarea id="Creply" name="" cols="" rows="">请输入回复内容</textarea></div><a class="SubmitBtn" href="#">提交</a><a class="CancelBtn" href="#">取消</a></div>
+        </div>
+      </div>
+    </div>
+    <?php  } ?>
+    <!--end 留言-->
+    <!--已回复的留言-->
+    <div class="MessageBox">                    
+      <div class="FaceBox">
+        <a href="#"><img /></a>
+        <p><a href="#">张三四</a></p>
+      </div> 
+      <div class="DetailBox">
+        <div class="MessageInfo">
+          <!--操作-->
+          <div class="HandleBox"><a href="#">回复</a>|<a href="#">引用</a>|<a href="#">删除</a>|<a href="#">黑名单</a></div>
+          <!--end 操作-->
+          <p class="Num">第<em>100</em>楼</p>
+          <p class="Time">留言时间<em>2013-02-07 10:07</em></p>
+        </div>
+        <div class="Messages">
+          <div class="Cont">
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+          </div>
+          <div class="ReplyBox">
+            <div class="ReplyMesgBox">                  
+              <span class="Arrow"></span>
+              <div class="ReplyMesgInfo">
+                <!--操作-->
+                <div class="HandleBox"><a href="#">回复</a>|<a href="#">引用</a>|<a href="#">删除</a>|<a href="#">黑名单</a></div>
+                <!--end 操作-->
+                <p class="ReplyTime"><em class="Name">张三四</em>留言时间<em class="Time">2013-02-07 10:07</em></p>
+              </div>  
+              <div class="ReplyMesg">
+                <p>回复留言内容，回复留言内容回复留言内容回复留言内容回复留言内容。</p>
+              </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end 已回复的留言-->
+    <!--已回复引用的留言-->
+    <div class="MessageBox">                    
+      <div class="FaceBox">
+        <a href="#"><img /></a>
+        <p><a href="#">张三四</a></p>
+      </div> 
+      <div class="DetailBox">
+        <div class="MessageInfo">
+          <!--操作-->
+          <div class="HandleBox"><a href="#">回复</a>|<a href="#">引用</a>|<a href="#">删除</a>|<a href="#">黑名单</a></div>
+          <!--end 操作-->
+          <p class="Num">第<em>100</em>楼</p>
+          <p class="Time">留言时间<em>2013-02-07 10:07</em></p>
+        </div>
+        <div class="Messages">
+          <div class="Cont">
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+          </div>
+          <div class="ReplyBox">
+            <div class="ReplyMesgBox">                  
+              <span class="Arrow"></span>
+              <div class="ReplyMesgInfo">
+                <!--操作-->
+                <div class="HandleBox"><a href="#">回复</a>|<a href="#">引用</a>|<a href="#">删除</a>|<a href="#">黑名单</a></div>
+                <!--end 操作-->
+                <p class="ReplyTime"><em class="Name">张三四</em>留言时间<em class="Time">2013-02-07 10:07</em></p>
+              </div>  
+              <div class="ReplyMesg">
+                <blockquote>引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用引用</blockquote>
+                <p>回复留言内容，回复留言内容回复留言内容回复留言内容回复留言内容。</p>
+              </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end 已回复引用的留言-->
+    <!--留言-->
+    <div class="MessageBox">                    
+      <div class="FaceBox">
+        <a href="#"><img /></a>
+        <p><a href="#">张三四</a></p>
+      </div> 
+      <div class="DetailBox">
+        <div class="MessageInfo">
+          <!--操作-->
+          <div class="HandleBox"><a href="#">回复</a>|<a href="#">引用</a>|<a href="#">删除</a>|<a href="#">黑名单</a></div>
+          <!--end 操作-->
+          <p class="Num">第<em>100</em>楼</p>
+          <p class="Time">留言时间<em>2013-02-07 10:07</em></p>
+        </div>
+        <div class="Messages">
+          <div class="Cont">
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+          </div>              
+        </div>
+      </div>
+    </div>
+    <!--end 留言--> 
+    <!--留言-->
+    <div class="MessageBox">                    
+      <div class="FaceBox">
+        <a href="#"><img /></a>
+        <p><a href="#">张三四</a></p>
+      </div> 
+      <div class="DetailBox">
+        <div class="MessageInfo">
+          <!--操作-->
+          <div class="HandleBox"><a href="#">回复</a>|<a href="#">引用</a>|<a href="#">删除</a>|<a href="#">黑名单</a></div>
+          <!--end 操作-->
+          <p class="Num">第<em>100</em>楼</p>
+          <p class="Time">留言时间<em>2013-02-07 10:07</em></p>
+        </div>
+        <div class="Messages">
+          <div class="Cont">
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+          </div>              
+        </div>
+      </div>
+    </div>
+    <!--end 留言-->
+    <!--留言-->
+    <div class="MessageBox">                    
+      <div class="FaceBox">
+        <a href="#"><img /></a>
+        <p><a href="#">张三四</a></p>
+      </div> 
+      <div class="DetailBox">
+        <div class="MessageInfo">
+          <!--操作-->
+          <div class="HandleBox"><a href="#">回复</a>|<a href="#">引用</a>|<a href="#">删除</a>|<a href="#">黑名单</a></div>
+          <!--end 操作-->
+          <p class="Num">第<em>100</em>楼</p>
+          <p class="Time">留言时间<em>2013-02-07 10:07</em></p>
+        </div>
+        <div class="Messages">
+          <div class="Cont">
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+            <p>留言内容留言内容留言内容留言内容留言内容留言内容留言内容，留言内容留言内容留言内容留言内容。</p>
+          </div>              
+        </div>
+      </div>
+    </div>
+    <!--end 留言-->    
+    <!--分页-->
+    <div class="Page">
+      <div class="SelectPage">当前第<em>1/15</em>页，跳转至第<input name="" type="text" />页</div>
+      <div class="NextPage"><a href="#">首页</a>|<a href="#">上一页</a>|<a href="#">下一页</a>|<a href="#">尾页</a></div>
+    </div>
+    <!--end 分页-->      
+  </div>
+  <!--end 左-->
+  <!--右-->
+  <div class="MaRgt">
+    <div class="BloggerFaceBox">
+      <div class="PicBox"><img /></div>
+      <ul class="BloggerAtten">
+        <li>
+          <p><b>237</b></p>
+          <p>关注</p>
+        </li>
+        <li class="Fans">  
+          <p><b>237</b></p>
+          <p>粉丝</p>
+        </li>
+        <li>  
+          <p><b>237</b></p>
+          <p>文章</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--end 右-->
+</div>
+<!--end 内容-->
+<script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Cleaner.js,ui/Js/Select/Select.js" type="text/javascript"></script>
+<script type="text/javascript">
+	Cleaner("Ccommt","Creply");
+	Selects('SlctFrst');
+</script>   
+</body>
+</html>

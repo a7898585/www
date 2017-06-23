@@ -1,0 +1,31 @@
+<div class="RgtBar LastBar" id="Mod_ArchiveList" rel="drag">
+    <h3>文章存档</h3>
+    <?php if(isset($dragable) && $dragable==1): ?>
+    <a style="cursor:move;" href="###" id="Mod_ArchiveList_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="NBDp4"></a><div class="NBDbx"><a class="NBDp1" href="###" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_ArchiveList_td3"></a><a class="NBDp2" href="###" onclick="clkmenu(this.id,2);return false;" style="DISPLAY: none" title="展开" id="Mod_ArchiveList_td4"></a><a class="NBDp3" href="###" onclick="removemod(this.id);setmod_input();return false;" title="删除" id="Mod_ArchiveList_td2"></a></div>
+    <?php endif; ?>  
+    <div class="modbox1">
+        <ul class="CountLst" id="articlearchive">
+            数据加载中...
+        </ul>
+    </div>
+    <script language="javascript">
+        $(function(){
+            $('#articlearchive').load("<?php echo $baseurl?>/ajaxgetarticlearchivelist/<?php echo $bloginfo['MemberID'];?>/<?php echo $bloginfo['DomainName'];?>");
+        });
+
+        function toggleFun(obj){
+            var f = $(obj).attr('rel');
+            if(f == '1'){
+                $('#archiveDiv').css({ 'height': ''});
+                $(obj).html('点击收起↑');
+                $(obj).attr('rel','2');
+            }else{
+                $('#archiveDiv').css({ 'height': '300px'});
+                $(obj).html('点击展开↓');
+                $(obj).attr('rel','1');
+            }
+        }
+    </script>
+</div>
+
+

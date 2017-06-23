@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css" />
+        <script src='<?php echo(config_item("js_base_url")); ?>/myblog_files/data.js'></script>
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+        <script src="http://images.cnfol.com/uploads/v5.0/passportweb/script/tipswindown.js" language="javascript"></script>
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Skin.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css,ua/css/Public/TopBarFoot.css" />
+        <title>文章列表</title>
+    </head>
+
+    <body>
+        <!--顶部-->
+        <div class="LoginBox LgBe">
+            <div class="LoginBar">
+                <a href="http://help.cnfol.com/" target="_blank" class="LgOtLk R">客服帮助</a>
+
+                <div class="LgBes Cf W835">
+                    <a href="javascript:;" class="LgSel" name="Slg"></a><span class="LgShowSe2"><a class="Acell Clapp" target="_blank" href="http://p.cnfol.com/">Apple ios</a><a class="Acell Cladd" target="_blank" href="http://p.cnfol.com/">Android</a></span>
+                    <a class="LgPocket Ntladd Mt3" target="_blank" href="http://p.cnfol.com/">移动中金</a>
+
+                    <a href="javascript:;" class="LgSel" name="Slg"></a><span class="LgShowSel"><a href="javascript:Tn.Sina();"></a></span>
+                    <a href="javascript:Tn.Qzone();" title="QQ登录" class="LgQQ"></a>
+                    <a href="http://passport.cnfol.com/accounts/Register" target="_blank" title="快速注册" >注册</a>
+                    <a href="http://passport.cnfol.com/forgetpassword" target="_blank" title="忘记密码?" >忘记密码?</a>
+                    <a href="javascript:Tn.Submit();" class="LgBtn">登录</a>
+                    我的中金: <input type="text" class="LoginName" id="LoginName" value="用户名/邮箱" />
+                    密码: <input class="LoginPass" id="LoginPass" type="password" />          
+                </div>
+                <div class="LgAfs">
+                    <i>欢迎您，<a href="#" target="_blank" class="LgName" id="LgName" >123456789</a> ！</i>|
+                    <a href="#" target="_blank" class="LgMoney" id="LgMoney" >(123456)</a>|
+                    <a href="#" target="_blank" class="LgEmail" id="LgEmail" >(0)</a>|
+                    <a href="#" target="_blank" >我的帐户</a>|
+                    <a href="#" target="_blank" >我要充值</a>|
+                    <a href="javascript:Tn.TopQuit();" >退出</a>
+                </div>
+            </div>
+        </div>
+        <!--end 顶部-->    
+        <!--导航-->
+        <div class="Wrap Nav">
+            <form class="R Mr10">
+                <input type="text" id="C2" class="Srinput L" value="搜索博文/博主">
+                    <label class="LabSlc L Ml10">
+                        <select name="SlctFrst" class="SlSW SlcWrp">
+                            <option value="本博客">本博客</option>
+                        </select>
+                    </label>
+                    <a href="javascript:;" class="Asrch Ml10"></a>
+            </form>
+            <a class="AHome Mr30" href="javascript:;" target="_blank">我的首页</a><a class="ABlog" href="javascript:;" target="_blank">我的博客</a><a class="APhoto" href="javascript:;" target="_blank">相 册</a><a class="ASet ANowst" href="javascript:;" target="_blank">设 置</a>
+        </div>
+        <!--end 导航-->
+        <!--内容-->
+        <div class="Wrap Cf Mt15">
+            <!--左-->
+            <div class="MaLft">
+                <dl class="ArticleLstBox">
+                    <dt><a class="CM" href="javascript:void(0)" onclick="selectType('recommend', '0')">全部</a>
+                        <a href="javascript:void(0)"><i class="Recom" onclick="selectType('recommend', '1')"></i>推荐</a>
+                        <a href="#"><i class="Top"></i>置顶</a><a href="#"><i class="WithImg"></i>含图片</a>
+                        <a href="#"><i class="WithVedio"></i>含视频</a>
+                    </dt>
+                    <form action="" method="post" name="frm1">
+                        <input type="hidden" name="" value="" class="selectType">
+                    </form>
+                    <dd>
+                        <ul class="ArticleLst">
+                            <?php
+                            if(!empty($artlist) && !empty($artlist['Record']))
+                            {
+                            $artidlist = '';
+                            foreach($artlist['Record'] as $art)
+                            {
+                            $artidlist .= ','.$art['ArticleID'];
+
+                            ?>	        	        	        
+                            <li><span class="Date"><em>(<?php echo $num[$art['ArticleID']];  ?>/<span id="atonclick_<?php echo $art['ArticleID'];?>">0</span>)</em><?php echo $art['AppearTime'];?></span><h4>
+                                    <?php if($art['Recommend'] == 2 || $art['Recommend'] == 3 || $art['IsUsed'] == 1) {?>
+                                    <i class="Recom">荐</i>
+                                    <?php } ?>
+                                    <?php if($art['IsTop']==1) { ?>
+                                    <i class="Top">置顶</i>
+                                    <?php } ?>
+                                    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html"><?php echo filter_word($art['Title']); ?></a></h4></li>
+                            <?php } ?>
+                            <?php } ?>
+                        </ul>
+                        <!--分页-->
+                        <div class="Page">
+                            <?php echo $pagebar; ?>
+                        </div>
+                        <!--end 分页-->
+                    </dd>
+                    <dd></dd>
+                    <dd></dd>
+                    <dd></dd>
+                    <dd></dd>
+                </dl>             
+            </div>
+            <!--end 左-->
+            <!--右-->
+            <div class="MaRgt">
+                <div class="BloggerFaceBox">
+                    加载中.......
+                </div>
+                <!--推荐文章-->
+                <div class="RgtBar FirstBar">
+                    <?php include $blocks['recommend']; ?>
+                </div>
+
+                <!--end 推荐文章-->
+                <!--文章分类-->
+                <div class="RgtBar LastBar">
+                    <?php include $blocks['articlesort'];?>
+                </div>
+                <!--end 文章分类-->
+                <!--文章存档-->
+                <div class="RgtBar FirstBar">
+                    <?php include $blocks['archive'];  ?>
+
+                </div>
+                <!--end 文章存档-->
+                <!--草稿箱-->
+                <div class="RgtBar LastBar">
+                    <h3>草稿箱</h3>
+                    <ul class="CommLst">
+                        <li><a href="#">如何进行自主自主推广？</a></li>
+                        <li><a href="#">如何进行自主推自主</a></li>
+                        <li><a href="#">如何进行自主推广？</a></li>
+                        <li><a href="#">如何进行自主推广？</a></li>
+                        <li><a href="#">如何进行何进行自主推广？</a></li>
+                        <li><a href="#">如何进行自主自主推广？</a></li>
+                        <li><a href="#">如何进行自主推自主</a></li>
+                        <li><a href="#">如何进行自主推广？</a></li>
+                        <li><a href="#">如何进行自主推广？</a></li>
+                        <li><a href="#">如何进行何进行自主推广？</a></li>            
+                    </ul>
+                </div>
+                <!--end 草稿箱-->
+            </div>
+            <!--end 右-->
+        </div>
+        <div id="ajaxdiv"></div>
+        <!--end 内容--> 
+        <script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Dialog.js,ui/Js/Select/Select.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            Selects('SlctFrst');
+        </script> 
+        <script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,ua/js/Public/Base64.js,ua/js/Public/Login.js"></script>
+        <script type="text/javascript">
+            Tn.TopLogin();
+
+            /*
+             *  跳转页面
+             */
+            function jump($url)
+            {
+                url = $url+$(".Inpjump").val();
+                window.location.href = url;		
+            }
+            function enterPress($url)
+            {
+                //alert("WWWWW")88;
+                var e = e || window.event; 
+                alert(e.keyCode);
+                if(e.keyCode == 13) {
+                    jump($url);
+                }
+            }
+                <?php if(!empty($artidlist)){ ?>
+                    $(function(){
+                    $('#ajaxdiv').load("<?php echo $baseurl.'/ajaxomcount/art/'.$artidlist;?>?"+new Date().getTime());
+                })
+                    <?php }?>	
+	
+                $(".BloggerFaceBox").load("<?php echo BLOG_FACE_INFO.$bloginfo['DomainName']; ?>")
+	
+            function recommendA() {
+                alert(window.location)
+                alert("@@@@@@")
+                window.location.href = window.location+"?recommend=1";
+            }
+	
+            function selectType($type, $data)
+            {
+                $(".selectType").attr('name', $type);
+                $(".selectType").attr('value', $data);		
+                $("form[name='frm1']").submit();
+            }
+        </script>
+    </body>
+</html>

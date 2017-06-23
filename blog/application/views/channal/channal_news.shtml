@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <link href="http://img.cnfol.com/newblog/batev6.0/css/global_v1.1.1.1.css" rel="stylesheet" rev="stylesheet" media="all" />
+        <link href="http://img.cnfol.com/newblog/batev6.0/css/cnFolBlog.css" rel="stylesheet" rev="stylesheet" media="all" />
+        <script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/js/function.js"></script> 
+        <link href="http://www.cnfol.com/inc/v5.0/20120525_blog/blog.css?b" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <!--内容部分开始-->
+        <div class="LeftNav fl">
+            <div class="LeftAllNav">
+                <div class="co_01 fl">
+                    <div class="flashAdNav">
+                        <div class="content"><?php include $shtml.'blog_flash.shtml';?></div>
+                    </div><!--End .flashAdNav-->
+
+                </div><!--End .co_01-->
+
+                <div class="co_02 fr">
+                    <div class="CenterNews">
+                        <?php include $shtml.'blog_recommendarticle.shtml';?>
+                    </div><!--End .CenterNews-->
+
+                </div><!--End .co_02-->
+
+            </div><!--End .LeftAllNav-->
+            <div class="h07"></div>
+
+            <div class="LeftAllNav">
+                <div class="co_03 fl">
+                    <div class="specialBase">
+                        <dl>
+                            <dt><span class="fl">名家看市　　<?php include $shtml.'blog_cjsp.shtml';?></span><span class="fr"><a href="<?=$baseurl.'/r2List/1.html';?>" target="_blank">更多</a></span></dt>
+                            <dd>
+                                <div class="content" style="height:260px">
+                                    <ul class="list ellipsis">
+                                        <?php include $shtml.'runcront_recommend_cjsp.shtml';?>
+                                    </ul>
+                                </div>
+
+
+                            </dd>
+                        </dl>
+                    </div>              
+
+                </div><!--End .co_01-->
+
+                <div class="co_03 fr">
+                    <div class="specialBase">
+
+                        <dl>
+                            <dt><span class="fl">高手看盘　　<?php include $shtml.'blog_cjsp2.shtml';?></span>
+                                <span class="fr">
+                                    <a href="<?=$baseurl.'/r3List/1.html';?>" target="_blank">更多</a>
+                                </span>
+                                <span class="fr">
+                                    <ul>
+                                        <li class="tab_active" id="gsks0" onclick="javascript:TabShow('0','2','gsks','tab_active','tab_unactive')" style="cursor: pointer">1</li>
+                                        <li class="tab_unactive" id="gsks1" onclick="javascript:TabShow('1','2','gsks','tab_active','tab_unactive')" style="cursor: pointer">2</li>	
+                                    </ul>
+                                </span>
+                            </dt>
+                            <dd>
+
+                                <div class="content" style="height:260px">
+
+                                    <ul class="list ellipsis" id="gsks0_nr">
+                                        <?php include $shtml.'runcront_recommend_gskp_1.shtml';?>
+                                    </ul>
+
+                                    <ul class="list ellipsis" id="gsks1_nr" style="display:none;">
+                                        <?php include $shtml.'runcront_recommend_gskp_2.shtml';?>
+                                    </ul>
+
+                                </div>
+                            </dd>
+                        </dl>                   
+                    </div><!--End .review-->
+
+                </div><!--End .co_02-->
+
+            </div><!--End .LeftAllNav-->
+
+
+        </div><!--End .LeftNav-->
+    </body>
+</html>

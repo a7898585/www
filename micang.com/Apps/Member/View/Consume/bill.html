@@ -1,0 +1,47 @@
+<div class="onlineplay">
+    <div class="navhl">
+        <a class="navhl_h" href="/consume/bill/">消费明细</a>
+        <a class="navhl_q" href="/income/bill/">收入明细</a>
+        <a class="navhl_q" href="/consume/lock/">冻结明细</a>
+        <a class="navhl_q" href="/consume/report/">月度报表</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody><tr class="table_title">
+                        <th>ID</th>
+                        <th>类型</th>
+                        <th>金额</th>
+                        <th>时间</th>
+                        <th>描述</th>
+                    </tr>
+                <empty name="consumes">
+                    <tr>
+                        <td colspan="5">暂无消费记录！</td>
+                    </tr>
+                    <else/>
+                    <volist name="consumes" id="item">
+                        <tr>
+                            <td>{$item.id}</td>
+                            <td><switch name="item.type">
+                        <case value="register">域名注册</case>
+                        <case value="renew">域名续费</case>
+                        <case value="push">PUSH接收</case>
+                        </switch></td>
+                        <td>&yen; {$item['money']/100}</td>
+                        <td>{$item.time|date='Y-m-d H:i:s',###}</td>
+                        <td>{$item.content}</td>
+                        </tr>
+                    </volist>
+                </empty>
+                <tr>
+                    <td colspan="4">
+                        {$pager}
+                    </td>
+                </tr>
+                </tbody></table>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,215 @@
+<?php include $header;?>
+<!--内容部分开始-->
+<div id="Content">
+    <div class="AllNav">
+        <div class="LeftNav fl">  
+            <div class="LeftAllNav">
+                <div class="co_List01 fl">
+                    <div class="childLeftNavTemp">
+                        <dl>
+                            <dt>
+                            <span class="fl">分类文章汇总 </span>  
+                            </dt>
+                            <dd>
+                                <div class="content">
+                                    <?php include $categorymenu;?>
+                                </div>
+                            </dd>                                  
+                        </dl> 
+                    </div><!--End .normalNav 分类文章汇总 -->                  
+                    <div class="h07"></div>
+                    <div class="rTempNav2">
+                        <dl class="tab">
+                            <dt>
+                            <ul>
+                                <li class="tab_active" id="phb0" onmouseover="javascript:TabShow('0','1','phb','tab_active','tab_unactive')"><a href="javascript:;">博客排行榜</a><span class="fr"></span></li>
+                            </ul>
+                            </dt>
+                            <dd id="phb0_nr">
+                                <div class="content">
+                                    <ul class="list listVote">
+                                        <?php include $shtml.'runcront_systagblogrank.shtml';?>  
+                                    </ul>
+
+                                </div>
+                                <div class="botTool"><span class="fr"><a href="<?=$baseurl?>/shtml/hotclickrank.html" target="_blank">更多</a></span></div> 
+                            </dd>
+                        </dl>
+
+                    </div><!--End .rTempNav 博客排行榜-->
+                    <div class="h07"></div>                
+                    <div class="rTempNav2">
+                        <dl class="tab">
+                            <dt>
+                            <ul>
+                                <li class="tab_active" id="hyyh0" onmouseover="javascript:TabShow('0','1','hyyh','tab_active','tab_unactive')"><a href="javascript:;">活跃用户</a><span class="fr"></span></li>
+                            </ul>           
+                            </dt>
+
+                            <dd id="hyyh0_nr">
+                                <div class="content">
+                                    <ul class="list listVote">
+                                        <?php include $shtml.'runcront_ranktactiveblog.shtml';?>
+                                    </ul>
+                                </div>
+                                <div class="botTool"><span class="fr"><a href="<?=$baseurl?>/shtml/newupdateblog.html" target="_blank">更多</a></span></div>  	
+                            </dd>
+                        </dl>
+
+                    </div><!--End .rTempNav 活跃用户-->
+                </div><!--End .co_List01-->
+                <div class="co_List02 fr">
+                    <div class="childCenterNavTemp">
+                        <dl>
+                            <dt>
+                            <span class="fl"><?=$TagTitle;?></span><span class="fr">
+                                <!--
+                                <?php if($TagTitle=='黄金'||$TagTitle=='白银'){?>
+                                <a href="http://doing.cnfol.com/zw/gjs/index.shtml" target="_blank" style="color:red;">2012贵金属行业优秀博文评选</a>
+                <a href="http://doing.cnfol.com/zw/gjs/woyaocansai.shtml" target="_blank" style="color:red;">我要参赛</a>
+                <?php } ?>-->
+                                <a href="<?=$RssURL;?>" target="_blank"><img src="<?=config_item('estblog');?>/images/XML.gif" /></a><a href="http://www.emailrss.cn/?rss=<?=$RssURL;?>" target="_blank"><img src="<?=config_item('estblog');?>/images/Email_read.gif" /></a></span>
+                            </dt>
+                            <dd>
+                                <div class="content">
+                                    <ul class="list ellipsis">
+                                        <?php if($TagID==1453){?>
+                                        <script src="http://tuiguang.cnfol.com/report/advertis/index.shtml?code=blog_huangjin_001"></script>
+                                        <?php }?>
+                                        <?php include $shtml.$ArtListUrl; ?> 
+                                    </ul>
+                                </div>
+                                <div class="PageNav">
+                                    <?=$pagebar;?>
+                                </div><!--End .PageNav-->                         
+
+                            </dd>                                  
+
+                        </dl>
+
+                    </div><!--End .normalNav 高手看盘 -->   
+
+                </div><!--End .co_List02-->
+
+            </div>
+            <!--End .LeftAllNav-->
+
+            <div class="h07"></div>
+
+        </div><!--End .LeftNav-->
+
+        <div class="RightNav fr">
+            <div class="rTempNav notice">
+                <dl>
+                    <dt><span class="fl">公告</span>&nbsp;
+
+                    <!--
+                    <marquee width="135" height="25" direction="left" scrollamount="3" onmouseover="this.stop()" onmouseout="this.start()">
+                            <a href="http://vote.blog.cnfol.com/2012" target="_blank" style="color:red;">2012年十大财经博客评选活动</a>
+                            <a href="http://vote.blog.cnfol.com/2012/BlgJoin.shtml" target="_blank" style="color:red;">我要参赛</a>
+                    </marquee>
+                    -->
+
+
+                    </dt>
+                    <dd>
+                        <div class="content" style="width:210px;padding:5px;">
+                            <?php include $shtml.'blog_bulletin.shtml';?>
+                        </div>
+
+                    </dd>
+                </dl>
+            </div><!--End .notice 公告-->
+            <div class="h07"></div>
+
+            <div class="rTempNav">
+                <dl class="tab">
+                    <dt><span class="fl">推荐博客</span>
+                    <span class="fr">
+                        <ul>
+                            <li class="tab_active" id="tjbk0" onmouseover="javascript:TabShow('0','2','tjbk','tab_active','tab_unactive')"><a href="javascript:;">1</a></li>
+                            <li class="tab_unactive" id="tjbk1" onmouseover="javascript:TabShow('1','2','tjbk','tab_active','tab_unactive')"><a href="javascript:;">2</a></li>	
+                        </ul>
+
+                    </span>
+
+                    </dt>
+                    <dd id="tjbk0_nr">
+                        <div class="content">
+                            <?php include $shtml.'blog_recommendblog1.shtml';?>
+                        </div> 
+                        <div class="botTool"><span class="fl"><a href="http://passport.cnfol.com/support/SendContact" target="_blank">我要自荐</a></span><span class="fr"><a href="<?=$baseurl?>/shtml/bloglist.html" target="_blank">更多</a></span></div>     
+                    </dd>
+                    <dd id="tjbk1_nr" style="display:none;">
+                        <div class="content">
+                            <?php include $shtml.'blog_recommendblog2.shtml';?>
+                        </div> 
+                        <div class="botTool"><span class="fl"><a href="http://passport.cnfol.com/support/SendContact" target="_blank">我要自荐</a></span><span class="fr"><a href="<?=$baseurl?>/shtml/bloglist.html" target="_blank">更多</a></span></div>     
+                    </dd>
+
+                </dl>
+
+            </div><!--End .rTempNav 推荐博客-->
+            <div class="h07"></div>
+
+            <div class="rTempNav2">
+                <dl class="tab">
+                    <dt>
+
+                    <ul>
+                        <li class="tab_active" id="bzjh0" onmouseover="javascript:TabShow('0','2','bzjh','tab_active','tab_unactive')"><a href="javascript:;">鲜花排行榜</a></li>
+                        <li class="tab_unactive" id="bzjh1" onmouseover="javascript:TabShow('1','2','bzjh','tab_active','tab_unactive')"><a href="javascript:;">今日热门</a><span class="fr"></span></li>	
+                    </ul>
+                    </dt>
+
+                    <dd id="bzjh0_nr">
+                        <div class="rTempNav2 myTop">
+                            <dl class="tab tab2">
+                                <dt>
+                                <ul>
+                                    <li class="tab_active" id="gift0" onmouseover="javascript:TabShow('0','3','gift','tab_active','tab_unactive')" style="cursor: pointer">12小时</li>
+                                    <li class="tab_unactive" id="gift1" onmouseover="javascript:TabShow('1','3','gift','tab_active','tab_unactive')" style="cursor: pointer">24小时<span class="fr"></span></li>	
+                                    <li class="tab_unactive" id="gift2" onmouseover="javascript:TabShow('2','3','gift','tab_active','tab_unactive')" style="cursor: pointer">周排行<span class="fr"></span></li>	
+                                </ul>
+                                </dt>                 
+                            </dl>
+
+                        </div><!--End .rTempNav2 -->
+                        <div class="rTempNav">
+                            <dl>
+                                <dd>
+                                    <div class="content" id="gift0_nr"><?php include $shtml.'runcront_tagpage_rankgifts12.shtml';?></div>
+                                    <div class="content" id="gift1_nr" style="display:none;"><?php include $shtml.'runcront_tagpage_rankgifts24.shtml';?></div>
+                                    <div class="content" id="gift2_nr" style="display:none;"><?php include $shtml.'runcront_tagpage_rankgiftsweek.shtml';?></div>
+                                </dd>
+                            </dl>
+                        </div><!--End .rTempNav 鲜花排行-->
+                        <div class="botTool"><span class="fr"><a href="<?=$baseurl?>/shtml/giftrankarticle,12.html" target="_blank">更多</a></span></div>  
+                    </dd> 
+
+                    <dd id="bzjh1_nr" style="display:none;">
+                        <div class="content">    				
+                            <ul class="list ellipsis">
+                                <?php 
+                                include $shtml.$Art24RankUrl;
+                                ?>
+                            </ul>
+                        </div>
+                        <div class="botTool"><span class="fr"><a href="<?=$baseurl?>/shtml/day50topclick.html" target="_blank">更多</a></span></div>  	
+                    </dd>
+
+                </dl>
+
+            </div><!--End .rTempNav2 今日热门-->
+            <div class="h07"></div>
+
+        </div><!--End .RightNav-->
+        <br class="clear" />
+    </div><!--End .AllNav-->
+    <div class="h07"></div>  
+    <br class="clear" />
+</div><!--End #Content-->
+<div class="h07"></div>
+<!--内容部分结束-->
+<!--底部部分 -->
+<?php include $footer;?>

@@ -1,0 +1,143 @@
+<div class="RgtCont Bdreb R W760 Mt15">
+    <div class="szym-ztdiv">
+        <div class="szym01">
+            <div class="szym02"></div>
+            <div class="szym03">当前位置：公告管理</div>
+        </div>
+        <div class="szym06" style="height:500px">
+
+            <form name="popFormSubmit" id="popFormSubmit" method="post" onSubmit="return false;">
+                <input type="hidden" id="affcheid" value="<?php echo $blogaffiche['AfficheID'];?>" />
+                <input type="hidden" id="midstr" value="<?php echo $bloginfo['MemberID'];?>" />
+                <input type="hidden" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid'].$blogaffiche['AfficheID']);?>" />
+
+                <textarea id="content" name="content" style="width:600px;height:250px;visibility:hidden;"><?php echo !empty($blogaffiche['Content'])?$blogaffiche['Content']:affiche_defalut_content; ?></textarea>
+                <span id="spancontent" style="color:#FF0000"></span><br/>
+                <div align="center"><input class="szym-bd03" id="affichform" type="submit" name="sub" value="提　交"/>
+                    &nbsp;
+                    <input class="szym-bd03"  type="reset" name="reset" value="重　置"  onclick="SetContents()"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="editorFlag" value="1" >
+
+<div id="TMDeleteSuccess" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp" id="popupTip"></p>
+    </div>
+</div>
+
+<link rel="stylesheet" href="<?php echo $baseurl; ?>/ke4/themes/default/default.css" />
+
+
+
+<!--新增添加QQ模块-->
+<link rel="stylesheet" href="http://hs.cnfol.com/ue/Css/NewBlog/BlogNot.css" />
+<script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/kindeditor-min2.js"></script>
+<script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/lang/zh_CN.js"></script>
+<style>
+    .ke-icon-quote {
+        background-image: url(<?php echo(config_item('base_url')); ?>/ke4/themes/common/quote.gif);
+        background-position: 0px;
+        width: 16px;
+        height: 16px;
+    }
+</style>
+<input type="hidden" name="UserLevel" id="UserLevel" value="<?php echo($point); ?>" /><!--用于判断用户等级-->
+<script language="javascript">
+    KindEditor.lang({
+        qq : '插入在线QQ'
+    },'zh_CN');
+    var editor;
+    KindEditor.ready(function(K) {
+        if(document.getElementById('UserLevel').value<3000){//判断用户等级是否小于3，隐藏源代码编辑功能
+            editor = K.create('#content', {
+                resizeType : 1,
+                uploadJson : '<?php echo(config_item("base_url")); ?>/ajaxeditorupload/attupload/<?php echo $bloginfo['UserID']; ?>',
+                emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+                items: [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link','anchor','|','about','qq'],		
+                allowFlashUpload: false,
+                allowMediaUpload: false,
+                afterFocus:function(){editorHtml();},
+                afterBlur:function(){editorHtmlBlur();}
+            });
+        }else{//以下为正常显示源代码编辑功能
+            editor = K.create('#content', {
+                resizeType : 1,
+                uploadJson : '<?php echo(config_item("base_url")); ?>/ajaxeditorupload/attupload/<?php echo $bloginfo['UserID']; ?>',
+                emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+                items: [
+                    'source', '|', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link','anchor','|','about','qq'],
+                allowFlashUpload: false,
+                allowMediaUpload: false,
+                afterFocus:function(){editorHtml();},
+                afterBlur:function(){editorHtmlBlur();}
+            });
+        }
+    });
+
+
+
+    function editorHtml()
+    {
+	
+        if(editor.html()=='<span style="color:#cccccc;">公告长度不能超过2千个字节</span>')
+        {
+            editor.html('');
+        }
+	
+        if($('#editorFlag').val()=='1')
+        {
+            editor.html(editor.html().replace(/\<span\s*style=\"color:\#cccccc\;\"\>公告长度不能超过2千个字节\<\/span\>/,""));
+            $('#editorFlag').val('0');
+        }
+    }
+
+    function editorHtmlBlur()
+    {
+        var editorContent=editor.html();
+        editorContent=editorContent.replace(/\s|&nbsp;|\<br\s*\/\>/g,"");
+	
+        if(editorContent=='')
+        {
+            editor.html('<span style="color:#cccccc;">公告长度不能超过2千个字节</span>');
+            $('#editorFlag').val('1');
+        }
+	
+    }
+
+    $('#editorFlag').val('1');
+
+    var actionurl = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/affiche/Action";
+    var pop = null;
+    $(function(){
+        $('#affichform').click(function(){
+		
+            if(editor.html()=='<span style="color:#cccccc;">公告长度不能超过2千个字节</span>')
+            {
+                showalertminute("内容不能为空",2000,'','popupTip','TMDeleteSuccess');
+                return;
+            }
+		
+            if(editor.count() > 6000){
+			
+                showalertminute('博客公告长度应该在2千个字节之间',2000,'','popupTip','TMDeleteSuccess');
+                return false;
+            }
+		
+            $.post(actionurl,{MemberID:$('#midstr').val(),AfficheID:$('#affcheid').val(),Verify:$('#flashCode').val(),Content:editor.html()},function(data){
+                showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                return false;
+            },'json');
+        });
+    });
+</script>

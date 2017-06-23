@@ -1,0 +1,409 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>新闻王</title>
+
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="新闻王"/>
+
+    <meta name="msapplication-TileColor" content="#0e90d2">
+    <link rel="stylesheet" href="/Public/Mobile/css/amazeui.flat.min.css">
+    <link rel="stylesheet" href="/Public/Mobile/css/app.css">
+</head>
+<body>
+
+<header data-am-widget="header" class="am-header am-header-default">
+    <div class="am-header-left am-header-nav">
+        <a href="javascript:downApp();" class="">
+            <i class="am-header-icon am-icon-home"></i>
+        </a>
+    </div>
+    <h1 class="am-header-title">新闻王</h1>
+    <div class="am-header-right am-header-nav">
+        <a onclick="login()">
+            <i class="am-header-icon am-icon-user"></i>
+        </a>
+    </div>
+</header>
+
+
+{:W('Mobile/nav',array('nav'=>$nav));}
+
+
+<!--数码-start-->
+<div class="am-titlebar-multi"></div>
+<div data-am-widget="list_news" class="am-list-news am-list-news-default">
+    <div class="am-list-news-bd">
+        <ul class="am-list" id="view8">
+            <foreach name="list" item="item">
+                <switch name="item.show_type" >
+                    <case value="1">
+                        <li class="am-g am-list-item-desced am-list-item-thumbed ">
+                            <div class="am-u-sm-12 am-list-main">
+                                <h3 class="am-list-item-hd">
+                                    <a href="{$item.url}">{$item.title}</a>
+                                </h3>
+                                <div class="am-g">
+                                    <div class="item_info">
+                                        <span class="hot_label space">热</span>
+                                        <span class="src  space">{$item.source_name}</span>
+                                        <span class="cmt">{$item.good_sum}</span>
+                                        <span title="{$item.show_time}" class="time fr canhide">{$item.show_time}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </case>
+                    <case value="2">
+                        <li class="am-g am-list-item-desced am-list-item-thumbed ">
+                            <div class="am-u-sm-8 am-list-main">
+                                <h3 class="am-list-item-hd">
+                                    <a href="{$item.url}">{$item.title}</a>
+                                </h3>
+                                <div class="am-g">
+                                    <div class="item_info">
+                                        <span class="src  space">{$item.source_name}</span>
+                                        <span class="cmt">{$item.good_sum}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="am-u-sm-4 am-list-thumb">
+                                <a href="{$item.url}" class="">
+                                    <img src="{:setUpUrl($item['img_list'][0])}" alt="{$item.title}" title="{$item.title}"/>
+                                </a>
+                            </div>
+                        </li>
+                    </case>
+                    <case value="3">
+                        <li class="am-g am-list-item-desced am-list-item-thumbed">
+                            <div class="am-g">
+                                <div class="am-u-sm-12" style="padding-top: 5px;">
+                                    <h3 class="am-list-item-hd am-text-truncate">
+                                        <a href="{$item.url}">{$item.title}</a>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="am-g">
+                                <div class="am-u-sm-4 am-list-thumb">
+                                    <a href="{$item.url}">
+                                        <img src="{$item['img_list'][0]}" alt="{$item.title}" title="{$item.title}"/>
+                                    </a>
+                                </div>
+                                <div class="am-u-sm-4 am-list-thumb">
+                                    <a href="{$item.url}">
+                                        <img src="{$item['img_list'][1]}" alt="{$item.title}" title="{$item.title}"/>
+                                    </a>
+                                </div>
+                                <div class="am-u-sm-4 am-list-thumb">
+                                    <a href="{$item.url}">
+                                        <img src="{$item['img_list'][2]}" alt="{$item.title}" title="{$item.title}"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="am-g">
+                                <div class="item_info">
+                                    <span class="hot_label space">热</span>
+                                    <span class="src  space">{$item.source_name}</span>
+                                    <span class="cmt">{$item.good_sum}</span>
+                                    <span title="{$item.show_time}" class="time fr canhide">{$item.show_time}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </case>
+                    <default />
+                </switch>
+            </foreach>
+
+        </ul>
+        <div class="am-list-news-ft">
+            <button id="page_id" data-pages="{$total}" data-cur-page="{$Think.get.p|default=1}" type="button" class="am-btn am-btn-default am-btn-block">查看更多</button>
+
+        </div>
+    </div>
+</div>
+<!--推荐-end-->
+
+
+
+<div id="amz-toolbar" class="amz-toolbar" style="right: 20px;position: fixed;bottom: 20px;z-index: 99999;">
+    <a id="amz-go-top" onclick="$('html, body').animate({scrollTop: 0}, '500');" class="am-icon-btn am-icon-arrow-up am-active" title="回到顶部" href="#top"></a>
+</div>
+
+<!--底部-->
+<footer data-am-widget="footer" class="am-footer am-footer-default" style="background: #333333;color:#fff;">
+
+    <div class="am-footer-switch">
+        <span class="am-footer-ysp">触屏版</span>
+        <span class="am-footer-divider">|</span>
+        <a class="am-footer-desktop" href="http://www.xinwenwang.com/">电脑版</a>
+    </div>
+    <div class="am-footer-miscs ">
+        <p>CopyRight©2015</p>
+        <p>闽ICP备11014391号-200</p>
+    </div>
+</footer>
+<div class="am-alert am-alert-danger am-text-center" id="alertApp" style="display:none;line-height:50px;position: fixed;z-index: 999999;bottom: 0;margin: 0;width: 100%;">
+    <button type="button" class="am-close">&times;</button>
+    <a href="http://www.xinwenwang.com/Public/d/app-xww.apk" target="_blank">下个新闻王吧</a>
+</div>
+<script type="text/html" id="newsList">
+    {{# for(var i = 0, len = d.length; i < len; i++){ }}
+        {{# if(d[i]['show_type']=='1'){ }}
+            <li class="am-g am-list-item-desced am-list-item-thumbed ">
+                <div class="am-u-sm-12 am-list-main">
+                    <h3 class="am-list-item-hd">
+                        <a href="{{ d[i]['url'] }}">{{ d[i]['title'] }}</a>
+                    </h3>
+                    <div class="am-g">
+                        <div class="item_info">
+                            <span class="hot_label space">热</span>
+                            <span class="src  space">{{ d[i]['source_name'] }}</span>
+                            <span class="cmt">{{ d[i]['good_sum'] }}</span>
+                            <span title="{{ d[i]['show_time'] }}" class="time fr canhide">{{ d[i]['show_time'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {{# }else if(d[i]['show_type']=='2'){ }}
+            <li class="am-g am-list-item-desced am-list-item-thumbed ">
+                <div class="am-u-sm-8 am-list-main">
+                    <h3 class="am-list-item-hd">
+                        <a href="{{ d[i]['url'] }}">{{ d[i]['title'] }}</a>
+                    </h3>
+                    <div class="am-g">
+                        <div class="item_info">
+                            <span class="src  space">{{ d[i]['source_name'] }}</span>
+                            <span class="cmt">{{ d[i]['good_sum'] }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-sm-4 am-list-thumb">
+                    <a href="{{ d[i]['url'] }}" class="">
+                        <img src="{{ d[i]['img_list'][0] }}" alt="{{ d[i]['title'] }}" title="{{ d[i]['title'] }}"/>
+                    </a>
+                </div>
+            </li>
+        {{# }else if(d[i]['show_type']=='3'){ }}
+            <li class="am-g am-list-item-desced am-list-item-thumbed">
+                <div class="am-g">
+                    <div class="am-u-sm-12" style="padding-top: 5px;">
+                        <h3 class="am-list-item-hd am-text-truncate">
+                            <a href="{{ d[i]['url'] }}">{{ d[i]['title'] }}</a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="am-g">
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="{{ d[i]['url'] }}">
+                            <img src="{{ d[i]['img_list'][0] }}" alt="{{ d[i]['title'] }}" title="{{ d[i]['title'] }}"/>
+                        </a>
+                    </div>
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="{$item.url}">
+                            <img src="{{ d[i]['img_list'][1] }}" alt="{{ d[i]['title'] }}" title="{{ d[i]['title'] }}"/>
+                        </a>
+                    </div>
+                    <div class="am-u-sm-4 am-list-thumb">
+                        <a href="{$item.url}">
+                            <img src="{{ d[i]['img_list'][2] }}" alt="{{ d[i]['title'] }}" title="{{ d[i]['title'] }}"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="am-g">
+                    <div class="item_info">
+                        <span class="hot_label space">热</span>
+                        <span class="src  space">{{ d[i]['source_name'] }}</span>
+                        <span class="cmt">{{ d[i]['good_sum'] }}</span>
+                        <span title="{{ d[i]['show_time'] }}" class="time fr canhide">{{ d[i]['show_time'] }}</span>
+                    </div>
+                </div>
+            </li>
+        {{# } }}
+    {{# } }}
+</script>
+
+<script type="text/html" id="login-modal">
+    <if condition="$user_info">
+        <div class="am-g">
+            <div class="am-modal-hd" style="text-align: center;font-size:1.8rem;">{$user_info['username']}
+                <a href="javascript: layer.closeAll();" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                <p><img class="am-circle" src="{$user_info.head_pic}" width="80" height="80"/></p>
+                <p style="padding:7px 0;font-size: 1.8rem;">{$user_info.email}</p>
+                <p style="font-size: 1.4rem;padding-bottom: 8px;">此用户太懒,什么都没有写...</p>
+                <p><button type="button" class="am-btn am-btn-danger am-btn-block" onclick="loginOut()">注销</button></p>
+            </div>
+        </div>
+        <else />
+        <div class="am-g">
+            <div class="am-modal-hd" style="text-align: center;font-size:1.8rem;">登录
+                <a href="javascript: layer.closeAll();" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                <form class="am-form am-text-left" method="post">
+                    <input type="text" value="" id="username" name="" placeholder="用户名">
+                    <label></label>
+                    <input type="password" value="" id="password" name="" placeholder="密码">
+                    <label></label>
+                    <div class="am-cf">
+                        <input type="button" class="am-btn am-btn-primary am-btn-block" value="登 录" onclick="loginBtn()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </if>
+
+</script>
+
+<script type="text/html" id="downApp" >
+    <div class="am-g">
+        <a href="http://www.xinwenwang.com/Public/d/app-xww.apk"><img src="/Public/Home/images/l_g.jpg"/></a>
+    </div>
+</script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/Public/Mobile/js/jquery.min.js"></script>
+<!--<![endif]-->
+<script src="/Public/Mobile/js/laypage/laypage.js"></script>
+<script src="/Public/Mobile/js/laytpl.js"></script>
+<script src="/Public/Mobile/js/layer.m/layer.m.js"></script>
+<script type="text/javascript">
+    var ajax_login = false;
+    $(document).ready(function(){
+        $('#btnLogin').click(function(){
+            if(ajax_login) return false;
+
+        });
+        var ajax = false;
+        $('#page_id').click(function(){
+
+            if(ajax) return false;
+            var cur_page = $(this).attr('data-cur-page');
+            var pages = $(this).attr('data-pages');
+            ajax = true;
+            if(!cur_page) cur_page = 1;
+            if(cur_page === pages){
+                $(this).html('没有更多了');
+                return false;
+            }else{
+            $(this).html('<i class="am-icon-spinner am-icon-spin"></i>加载中');
+            cur_page = parseInt(cur_page)+1;
+            $(this).attr('data-cur-page',cur_page);
+                $.ajax({
+                    type: "POST",
+                    url: "/{$nav}?p="+cur_page,
+                    dataType: "JSON",
+                    maxmin:true,
+                    data: { ajax: 'post'},
+                    success:function(d){
+                        $('#page_id').html('查看更多');
+                        laytpl($('#newsList').html()).render(d.data, function(html){
+                            $('#view8').append(html);
+                            ajax = false;
+                        });
+                    },error:function(){
+                        ajax = false;
+                        $('#page_id').html('查看更多');
+                    }
+                });
+            }
+        });
+        var w = document.body.clientWidth;
+        var w2 = w/2;
+        $('#top_menu a').each(function(i){
+            $(this).attr('scroll-left',i*60);
+        });
+        $('#top_menu').scroll(function(){
+            console.log(this.scrollLeft);
+        });
+        var s = $("#top_menu").find('.cur').attr('scroll-left');
+        $('#top_menu').scrollLeft(s-w2);
+    });
+
+    function login(){
+        var pageii = layer.open({
+            type: 1,
+            fixed:true,
+            content: $('#login-modal').html(),
+            style:'width:80%;'
+        });
+    }
+
+    function loginBtn(){
+        var username = $('#username').val();
+        var password = $('#password').val();
+        console.log(username+password);
+        var loadLayer = layer.open({
+            type: 2
+        });
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            dataType: "JSON",
+            maxmin:true,
+            data: { username: username,password:password},
+            success:function(d){
+                if(d.code==200){
+                    window.location.reload();
+                    layer.closeAll();
+                }else{
+                    layer.open({
+                        content: d.msg,
+                        time:2
+                    })
+                    layer.close(loadLayer);
+                }
+            },error:function(){
+                layer.close(loadLayer);
+            }
+        });
+    }
+
+    function loginOut(){
+        $.ajax({
+            type: "GET",
+            url: "/loginout",
+            maxmin:true,
+            success:function(d){
+                if(d==1){
+                    layer.closeAll();
+                    layer.open({
+                        content: '注销成功',
+                        time: 2
+                    });
+                    window.location.reload();
+                }
+            },error:function(){
+                layer.closeAll();
+            }
+        });
+    }
+
+    function downApp(){
+        var pageii = layer.open({
+            type: 1,
+            fixed:true,
+            content: $('#downApp').html(),
+        });
+    }
+</script>
+{:W('Mobile/tongji')}
+</body>
+</html>

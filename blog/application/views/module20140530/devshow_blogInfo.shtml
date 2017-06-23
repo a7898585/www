@@ -1,0 +1,40 @@
+<div class="BloggerFaceBox">
+</div>
+<script>
+    $(".BloggerFaceBox").load("<?php echo BLOG_FACE_INFO.$bloginfo['DomainName']; ?>");
+    function delAttention(userid,act)
+    {
+        var url = baseurl+"/index.php?c=myfocus&m=action&act="+act;
+        var params = {"friendIDs":userid};
+	
+        $.getJSON(url+"&r="+new Date().getTime(), params, function(json){
+	    
+            if(json.erron=='01')
+            {
+                if(act == "del")
+                {
+                    var focusNum = parseInt($(".fansNum").first().text())-1;
+                    $(".fansNum").each(function(){
+                        $(this).text(focusNum);		
+                    })			
+                    $(".focus").html("<a class=\"Plus\"  href=\"javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','add');\">加关注</a>");
+		
+                }
+                else
+                {
+                    var focusNum = parseInt($(".fansNum").first().text())+1;
+                    $(".fansNum").each(function(){
+                        $(this).text(focusNum);		
+                    })						
+                    $(".focus").html("<a class=\"HasPlus\"  href=\"javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','del');\">取消关注</a>");
+				
+                }
+            }
+            else
+            {
+                alert(json.error);
+            }
+		
+        });
+    }
+</script>

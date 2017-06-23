@@ -1,0 +1,40 @@
+{__NOLAYOUT__}
+<ul class="cr">
+    <li class="taomee_1 search_k" rid="{$order2}" data_btn="xl"><span>域名销量</span><em></em></li>
+    <li class="taomee_2 search_k" rid="{$order1}" data_btn="view"><span>访问次数</span><em></em></li>
+    <li class="taomee_3 search_k" rid="{$order3}" data_btn="count"><span>域名数量</span><em></em></li>
+    <li class="taomee_4 search_k" rid="{$order}" data_btn="time"><span>创建时间</span><em></em></li>
+    <li class="taomee_5">
+        <a class="fr"><input type="text" id="shop_key" class="form-control" placeholder="请输入店铺关键词" onblur="if(this.value=='')this.value='请输入店铺关键词';" onfocus="if(this.value=='请输入店铺关键词')this.value='';"><i onclick="s()">搜 索</i></a>
+    </li>
+</ul>
+<volist name="shopData" id="item">
+    <ul <if condition="$key%2">class="cl"</if>>
+        <li class="taomee1_1">{$item.d_sell_count|default=0} 单</li>
+        <li class="taomee1_2">{$item.view_count|default=0}次</li>
+        <li class="taomee1_3">{$item.d_count|default=0}个</li>
+        <li class="taomee1_4">{$item.addtime|date="Y-m-d H:i",###}</li>
+        <li class="taomee1_5">{$item.title}玉米店</li>
+        <li class="taomee1_6"><a href="{:getDoMain()}shop/{$item.id}">进店扫米</a></li>
+    </ul>
+</volist>
+<div class="mipu_a_b fl">{$pager}</div>
+<script type="text/javascript">
+    var xl='';
+    var view='';var count='';var time='';var key='';var p ='';
+    $(document).ready(function () {
+        $('.search_k').click(function(){
+            var obj = $(this);
+            if(obj.attr('data_btn')=='time'){
+                time = obj.attr('rid');
+            }else if(obj.attr('data_btn')=='view'){
+                view = obj.attr('rid');
+            }else if(obj.attr('data_btn')=='count'){
+                count = obj.attr('rid');
+            }else if(obj.attr('data_btn')=='xl'){
+                xl = obj.attr('rid');
+            }
+            getData(p,key,xl,view,count,time);
+        })
+    })
+</script>

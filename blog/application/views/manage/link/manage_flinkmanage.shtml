@@ -1,0 +1,320 @@
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>链接管理</h3>
+    <div class="BgCont">
+        <h6 class="Pl10">添加链接</h6>
+        <form class="Fmsec Fmsz" action="" method="get" name="frm1" id="popFormSubmit">
+            <input type="hidden" name="act" value="addLink"/>    
+            <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>"/> 				        
+            <input type="hidden" name="MemberID" id="MemberID" value="<?php echo $bloginfo['MemberID'];?>"/>		               
+            <label><i>链接名称：</i>
+                <input id="C1"  name="name"  class="W200 linkname" type="text" value="">
+            </label>
+            <label class="Mt10 LabSlc">
+                <i>链接分类：</i>
+                <select  name="sortId" id="sortId"  class="SlLW SlcWrp">
+                    <?php 
+                    if($sortlist['RetRecords'] > 1)
+                    {
+                    foreach($sortlist['Record'] as $val)
+                    {?>
+                    <option value="<?php echo $val['LinkSortID'];?>" <?php 
+                            if(isset($link) && ($val['LinkSortID'] == $link['SortID']))
+                            {
+                            echo 'selected="selected"';
+                            }
+                            else if($val['LinkSortID'] == 5)
+                            {
+                            echo 'selected="selected"';
+                            }?>><?php echo $val['Name']?></option>
+                    <?php
+                    }
+                    }else if($sortlist['RetRecords'] == 1)
+                    {?>
+                    <option value="<?php echo $sortlist['Record']['LinkSortID'];?>" <?php if(isset($link) && ($sortlist['Record']['LinkSortID'] == $link['SortID'])) echo 'selected="selected"';?>><?php echo $sortlist['Record']['Name'];?></option>
+                    <?php
+                    }?>
+                </select>
+            </label>
+            <label class="Mt10"><i>链接排序：</i>
+                <input name="rank" id="C1" class="W200" type="text" value="0">
+                <var>（显示的排序，值越大排列在越前面，默认为0）</var>
+            </label>
+            <label class="Mt10 LabSlc">
+                <i>是否公开：</i>
+                <select name="Public" class="SlLW SlcWrp">
+                    <option value="0">公开</option>
+                    <option value="1">不公开</option>                        
+                </select>
+            </label>
+            <label class="Mt10"><i>链接地址：</i>
+                <input name="path"  id="C1"  class="linkpath"class="W200" type="text">
+                <var>（如：http://www.cnfol.com）</var>
+            </label>
+            <label class="Pl70 Mt10">
+                <a href="javascript:;" class="Mr10 CoWht BtnA Ml2"  id="subform">提交</a><a href="javascript:;" id="Cncle" class="Co666 BtnB">取消</a>
+            </label>
+        </form>
+
+
+
+        <!-- 链接列表 -->
+        <h6 class="Pl10">链接列表</h6>
+        <form name="frm2">
+            <ul class="LinkLst">
+                <?php 
+                if($linklist['RetRecords'] < 1)
+                {?>
+                <tr>
+                    <td colspan="3">&nbsp;&nbsp;&nbsp;您还没有友情链接的记录！</td>
+                </tr>
+                <?php }else if($linklist['RetRecords'] > 1){
+                foreach($linklist['Record'] as $val){?>      
+                <li  id="link<?php echo $val['LinkID'];?>"  class="sort" >
+                    <label class="Title"><input name="linkCheck[]" type="checkbox" value="<?php echo $val['LinkID'];?>">
+                        <a target="_blank" href="<?php echo $val['Path'];?>">
+                            <span id="name_<?php echo $val['LinkID'];?>"><?php echo $val['Name'];?></span>
+                        </a>&nbsp;
+                    </label>
+                    <span class="Cate"><?php if(trim($val['SortName']!="")) echo $val['SortName']; else echo "默认分类";?></span>                          
+                    <a class="Link" href="<?php echo $val['Path'];?>"><span id="path_<?php echo $val['LinkID'];?>"><?php echo $val['Path'];?></span></a>
+                    <span class="Handle"><a onClick="updateLink('<?php echo $val['LinkID'];?>')" href="javascript:;">[修改]</a><a class="Mr30" onClick="checkbox(this);Dialog('Confirm');" href="javascript:;">[删除]</a></span>
+                    <span id="sortid_<?php echo $val['LinkID'];?>" style="display:none;"><?php echo $val['LinkSortID'];?></span>
+                    <span id="isopen_<?php echo $val['LinkID'];?>" style="display:none;"><?php echo $val['IsPublic'];?></span>
+                    <span id="rank_<?php echo $val['LinkID'];?>" style="display:none;"><?php echo $val['Rank'];?></span> 
+
+                </li> 
+                <?php }
+                }else {?>
+                <li id="link<?php echo $linklist['Record']['LinkID'];?>"  class="sort" >
+                    <label class="Title"><input name="linkCheck[]" type="checkbox" value="<?php echo $linklist['Record']['LinkID'];?>">
+                        <a target="_blank" href="<?php echo $linklist['Record']['Path'];?>">
+                            <span id="name_<?php echo $linklist['Record']['LinkID'];?>"><?php echo $linklist['Record']['Name'];?></span>
+                        </a>&nbsp;
+                    </label>
+                    <span class="Cate"><?php if(trim($linklist['Record']['SortName']!="")) echo $linklist['Record']['SortName']; else echo "默认分类";?></span>
+
+                    <a class="Link" href="<?php echo $linklist['Record']['Path'];?>"><span id="path_<?php echo $linklist['Record']['LinkID'];?>"><?php echo $linklist['Record']['Path'];?></span></a>
+                    <span class="Handle"><a onClick="updateLink('<?php echo $linklist['Record']['LinkID'];?>')" href="javascript:;">[修改]</a><a class="Mr30" onClick="checkbox(this);Dialog('Confirm');" href="javascript:;">[删除]</a></span>
+                    <span id="sortid_<?php echo $linklist['Record']['LinkID'];?>" style="display:none;"><?php echo $linklist['Record']['LinkSortID'];?></span>
+                    <span id="isopen_<?php echo $linklist['Record']['LinkID'];?>" style="display:none;"><?php echo $linklist['Record']['IsPublic'];?></span>
+                    <span id="rank_<?php echo $linklist['Record']['LinkID'];?>" style="display:none;"><?php echo $linklist['Record']['Rank'];?></span>               
+
+                </li> 
+                <?php }?> 
+
+                <input type="hidden" name="act" value="delLink"/>    
+                <input type="hidden" class="linkID" name="linkID" value=""/>    	 		
+                <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>"/> 				        
+                <input type="hidden" name="MemberID" id="MemberID" value="<?php echo $bloginfo['MemberID'];?>"/>	
+                <?php 
+                if($linklist['RetRecords'] > 1)
+                {?>
+                <li class="AllSelect"><label class="Title">
+                        <input name="" type="checkbox" value="" id="Ca" class="Chk" onclick="CheckAllTwo_2(this,'linkCheck[]')">
+                        全选/反选</label><a onClick="Dialog('DeleteAll');" href="javascript:;">删除所选</a></li>
+                <?php } ?>
+            </ul>
+        </form>  
+        <!--分页-->
+        <div class="Page">
+            <?php echo $pagebar;?>            
+        </div>
+        <!--end 分页-->
+    </div>
+</div>    
+
+<form id="action_form" method="post" target="_self" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/link/Edit">
+    <input type="hidden" name="act" id="act" value="editLink" />
+    <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>" />
+    <input type="hidden" name="MemberID" id="MemberID" value="<?php echo $bloginfo['MemberID'];?>" />
+    <input type="hidden" name="linkid" id="linkidforupd" />
+    <input type="hidden" name="name" id="nameforupd" />
+    <input type="hidden" name="sortid" id="sordidforupd" />
+    <input type="hidden" name="path" id="pathforupd" />
+    <input type="hidden" name="rank" id="rankforupd" />
+    <input type="hidden" name="ispublic" id="ispublicforupd" />
+</form>
+
+
+
+<!--弹出窗-->
+<div class="SetPop" id="Update">  
+    <span class="Close" onClick="Dialog.Close();"></span>
+    <h5>修改分类名称</h5>
+    <div class="Cont linkUpdate">
+
+    </div>
+    <iframe frameborder="0" style=" position:absolute; z-index:-1; width:100%; height:280px; top:0; left:0;"></iframe>
+</div>
+
+<div class="SetPop" id="Confirm">
+    <span class="Close" onClick="Dialog.Close();"></span>
+    <h5>提示</h5>
+    <div class="Cont">
+        <p class="SetBtnWrap">确定删除这个链接吗？</p>
+        <p class="SetBtnWrap Mt15"><a class="Mr10 SetSubmit" href="###" onClick="del()">确定</a><a class="SetCancel" onClick="Dialog.Close();" href="javascript:;">取消</a></p>
+    </div>
+</div>
+
+<div class="SetPop" id="DeleteAll">
+    <span class="Close" onClick="Dialog.Close();"></span>
+    <h5>提示</h5>
+    <div class="Cont">
+        <p class="SetBtnWrap">确定删除<b>所有</b>链接吗？</p>
+        <p class="SetBtnWrap Mt15"><a class="Mr10 SetSubmit" href="###" onClick="del()">确定</a><a class="SetCancel" onClick="Dialog.Close();" href="javascript:;">取消</a></p>
+    </div>
+</div>
+<div id="TMTip" class="HandIn PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoRed Yzxxp">还没有选择</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="Dialog.Close();" class="Mr10 CoWht BtnA">关闭</a></p>
+    </div>
+</div> 	
+
+<!--end 弹出窗-->
+
+
+<script language="javascript">
+    var baseuri   = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var actionurl = baseuri + "/link/Action";
+    var checkurl = "<?php echo $baseurl;?>/register/Check"; 
+
+    //全选
+    function CheckAllTwo_2(obj,name)
+    {
+        if(obj.checked)
+        {
+            $("input[name='"+name+"']").each(function() {	
+                $(this).attr('checked',true);
+            });
+        }
+        else
+        {
+            $("input[name='"+name+"']").each(function() {	
+                $(this).attr('checked',false);
+            });
+        }
+    }	
+    /*
+     * 修改
+     */
+    function updateLink(linkid)
+    {
+        Dialog("Update");
+        $('#linkidforupd').val(linkid);		
+        $('#nameforupd').val($('#name_'+linkid).html());	
+        $('#sordidforupd').val($('#sortid_'+linkid).html());	
+        $('#pathforupd').val($('#path_'+linkid).html());	
+        $('#rankforupd').val($('#rank_'+linkid).html());
+        $('#ispublicforupd').val($('#isopen_'+linkid).html());	 
+        $.getJSON(
+        '<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/link/Edit',
+        $("#action_form").serialize(),
+        function(json){
+            //	alert(json.erron)
+            if(json.errno == 'success')
+            {
+                $(".linkUpdate").html(json.error);
+            }
+			
+        })
+	
+    }
+
+
+
+    /*
+     *  跳转页面
+     */
+    function jump($url)
+    {	
+        if($(".Inpjump").val()=="")
+        {
+            return false;
+        }
+        var url = $url+$(".Inpjump").val();
+        window.location.href = url;		
+    }
+    function enterPress($url,e)
+    {
+        var e = e || window.event;
+        if(e.keyCode==13) {
+            jump($url);
+        }
+    }
+
+
+
+    $(function(){
+        $('.linkname').blur(function(){
+            if(mb_strlen($('.linkname').val())>30 || mb_strlen($('.linkname').val())<3){
+                showalert("链接名称长度应该在3-30个字节之间"); return false;
+            }
+        });
+        $('#subform').click(function(){
+            if(mb_strlen($('.linkname').val())>30 || mb_strlen($('.linkname').val())<3){
+                showalert("链接名称长度应该在1-30个字节之内"); return;
+            }else if(! /^https?:\/\/[\d\-\_a-zA-Z]+((\.[\d\-\_a-zA-Z]+)*\/?)+[\.\/\d\-\_a-zA-Z]*$/g.test($('.linkpath').val())){
+                showalert("链接地址不合法链接规则"); return;
+            }else if(mb_strlen($('.linkpath').val()) > 250){
+                showalert("链接地址长度超过了250字节的限制"); return;
+            }else{
+                $('#subform').attr('disabled','disabled');
+                $.post(actionurl, $('#popFormSubmit').serialize(),function(data){
+                	
+                    showalert(data.error);
+                    
+                    if(data.errno == 'success'){
+                        setTimeout(function(){
+                            window.location.reload();
+                        },1000)
+                    }
+                },'json');	
+            }
+        });
+    });
+
+    /*
+     *   点删除按钮，复选框选中
+     */
+    function checkbox(obj)
+    {
+        $(obj).parent().parent().find(".Title").eq(0).find('input').attr('checked',true);
+    }
+
+    /*
+     * 删除
+     */
+    function del(){
+        var str = "";
+        var i = 0;
+        Dialog.Close();
+        $("input[name='linkCheck[]']:checked").each(function(){
+            i++;
+            if(i==1)
+            {
+                str += $(this).val();		
+            }
+            else
+            {
+                str +=','+$(this).val();			
+            }					
+        })
+        if(i==0)
+        {
+            Dialog('TMTip');
+            setTimeout(function(){Dialog.Close()}, 1000)
+            return;
+        }
+        $(".linkID").val(str);
+        $.post(actionurl,$("form[name='frm2']").serialize(),function(data){
+            showalert(data.error);
+            if(data.errno == 'success')
+                window.location.reload();
+        },'json');
+    }
+
+
+</script>    
+

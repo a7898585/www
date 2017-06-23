@@ -1,0 +1,159 @@
+<?php include $peronalhead;?>
+
+<!--<script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>-->
+<!--<script src="http://images.cnfol.com/uploads/v5.0/passportweb/script/tipswindown.js" language="javascript"></script>-->
+
+
+<link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=uc/Css/NewBlog/Skin.css" />
+<!--内容-->
+<div class="Wrap Cf Mt15">
+    <!--左-->
+    <div class="MaLft">
+        <dl class="ArticleLstBox">
+            <dt><a class="CM" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/articlelist/alist'; ?>">全部</a>
+            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/articlelist/alist/recommend-1'; ?>"></i>推荐</a>
+            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/articlelist/alist/istop-1';?>"><i class="Top"></i>置顶</a><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/articlelist/alist/ismut-1'; ?>"><i class="WithImg"></i>含图片</a>
+            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/articlelist/alist/ismut-2'; ?>"><i class="WithVedio"></i>含视频</a>
+            </dt>
+            <form action="" method="post" name="frm1">
+                <input type="hidden" name="" value="" class="selectType">
+            </form>
+            <dd>
+                <ul class="ArticleLst">
+                    <?php
+                    //var_dump($artlist);
+                    if(!empty($artlist) && !empty($artlist['Record']))
+                    {
+                    $artidlist = '';
+                    foreach($artlist['Record'] as $art)
+                    {
+                    $artidlist .= ','.$art['ArticleID'];
+
+                    if (strlen($art['Title']) > 60) {
+
+                    $art['Title']=utf8_str($art['Title'],60,'false').'...';
+                    }
+                    ?>	        	        	        
+                    <li><span class="Date"><em>(<?php echo $num[$art['ArticleID']];  ?>/<span id="atonclick_<?php echo $art['ArticleID'];?>">0</span>)</em><?php echo $art['AppearTime'];?></span><h4>
+                            <?php if($art['Recommend']||$art['IsUsed']==1) {?>
+                            <i class="Recom">荐</i>
+                            <?php } ?>
+                            <?php if($art['IsTop']==1) { ?>
+                            <i class="Top">置顶</i>
+                            <?php } ?>
+                            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html"><?php echo filter_word($art['Title']); ?></a>
+                            <?php 
+
+                            if($art['IsMultimedia']=='1')
+                            {
+                            echo('<i class="WithImg"></i>');
+                            }
+                            else if($art['IsMultimedia']=='2')
+                            {
+                            echo('<i class="WithVedio"></i>');
+                            }
+                            else if($art['IsMultimedia']=='3')
+                            {
+                            echo('<i class="WithImg"></i><i class="WithVedio"></i>');
+                            }
+
+                            ?>
+                        </h4></li>
+                    <?php } ?>
+                    <?php } ?>
+                </ul>
+                <!--分页-->
+                <div class="Page">
+                    <?php echo $pagebar; ?>
+                </div>
+                <!--end 分页-->
+            </dd>
+            <dd></dd>
+            <dd></dd>
+            <dd></dd>
+            <dd></dd>
+        </dl>             
+    </div>
+    <!--end 左-->
+    <!--右-->
+    <div class="MaRgt">
+        <div class="BloggerFaceBox">
+            加载中.......
+        </div>
+        <!--推荐文章-->
+        <div class="RgtBar FirstBar">
+            <?php include $blocks['recommend']; ?>
+        </div>
+
+        <!--end 推荐文章-->
+        <!--文章分类-->
+        <div class="RgtBar LastBar">
+            <?php include $blocks['articlesort'];?>
+        </div>
+        <!--end 文章分类-->
+        <!--文章存档-->
+        <div class="RgtBar FirstBar">
+            <?php include $blocks['archive'];  ?>
+
+        </div>
+        <!--end 文章存档-->
+        <!--草稿箱-->
+        <?php if($isowner==true){ ?>
+        <div class="RgtBar LastBar">
+            <h3>草稿箱</h3>
+            <?php include $show_draft; ?>
+        </div>
+        <?php } ?>
+        <!--end 草稿箱-->
+    </div>
+    <!--end 右-->
+</div>
+<div id="ajaxdiv"></div>
+<!--end 内容--> 
+<script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Dialog.js,ui/Js/Select/Select.js" type="text/javascript"></script>
+<!--<script src='http://blog.cnfol.com/myblog_files/data.js'></script>-->
+<script type="text/javascript">
+    Selects('SlctFrst');
+</script>
+<script type="text/javascript">
+    /*
+     *  跳转页面
+     */
+    function jump($url)
+    {	
+        if($(".Inpjump").val()=="")
+        {
+            return false;
+        }
+        var url = $url+$(".Inpjump").val();
+        window.location.href = url;		
+    }
+    function enterPress($url,e)
+    {
+        var e = e || window.event;
+        if(e.keyCode==13) {
+            jump($url);
+        }
+    }
+        <?php if(!empty($artidlist)){ ?>
+            $(function(){
+            $('#ajaxdiv').load("<?php echo $baseurl.'/ajaxomcount/art/'.$artidlist;?>?"+new Date().getTime());
+        })
+            <?php }?>	
+	
+        $(".BloggerFaceBox").load("<?php echo BLOG_FACE_INFO.$bloginfo['DomainName']; ?>")
+	
+    function recommendA() {
+        alert(window.location)
+        alert("@@@@@@")
+        window.location.href = window.location+"?recommend=1";
+    }
+	
+    function selectType($type, $data)
+    {
+        $(".selectType").attr('name', $type);
+        $(".selectType").attr('value', $data);		
+        $("form[name='frm1']").submit();
+    }
+</script>
+<?php include 'article_common_footer.html';?>

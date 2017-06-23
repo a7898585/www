@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>资讯互动</title>
+        <link href="http://img.cnfol.com/newblog/ap/css/style.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <center>
+            <div class="wth700">
+                <div class="wth430">
+                    <div class="bkmj01"><?php echo $TagTitle; ?></div>
+                    <div class="bkmj02" style="OVERFLOW: auto">
+                        <div><img src="http://img.cnfol.com/newblog/ap/images/hqbb-tp10.gif" width="16" height="8" /></div>
+
+                        <?php foreach($TagArtList['Record'] as $art){ ?>
+                        <div class="bkmj03">
+                            <div class="fla_l bkmj04">·<a href="<?php echo $baseurl;?>/ap/<?php echo $art['DomainName']?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID']?>.html" target="_self" title="<?php echo $art['Title']?>"><?php echo $art['Title']?></a></div>
+                            <div class="fla_r bkmj05"><a href="<?php echo $baseurl;?>/ap/<?php echo $art['DomainName']?>/list" target="_self"><?php echo $art['NickName']?></a></div>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="wth250">
+                    <div class="bktj04">推荐博客</div>
+                    <div class="bktj05"><script src="http://he.js.cnfol.com/index2ap.php/charset=utf-8"></script></div>
+                    <div><img src="http://img.cnfol.com/newblog/ap/images/hqbb-tp06.gif" /></div>
+                </div>
+
+            </div>
+        </center>
+    </body>
+</html>

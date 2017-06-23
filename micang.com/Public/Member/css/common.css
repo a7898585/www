@@ -1,0 +1,76 @@
+/* 头部 */
+.wrap{width:980px;margin:0 auto;}
+.top{height:26px;line-height:26px;background:#fefefe;border-bottom:1px solid #d8d8d8;text-align:right;color:#555;}
+.top p{float:left;}
+.top span{color:#048ddd;}
+.top a{margin:0 10px;}
+
+.head{height:95px;background:url(../images/head_bg.jpg) no-repeat center center;}
+.head .logo{float:left;margin:14px 0 0 0;}
+
+.head .search{float:right;width:496px;margin:20px 0 0 0;}
+.head .search .inputbox{width:496px;height:45px;}
+.head .search .input{float:left;width:380px;height:30px;border:1px solid #0878ba;margin:6px 0 0 5px; padding:0 0 0 5px; background:url(../images/input_bg.jpg) no-repeat;}
+.head .search .btn{float:left;width:105px;height:32px;background:url(../images/search_btn.jpg) repeat-x;border:1px solid #1a5f92;margin:6px 0 0 -1px;cursor:pointer;font:bold 14px/32px "宋体";color:#fff;}
+.head .search ul{padding:0 0 0 12px;}
+.head .search li{float:left;color:#666;padding:0 15px 0 0;}
+.head .search li a{color:#666;}
+.head .search li a:hover{color:#048ddd;text-decoration:underline;}
+.head .search li.on a,.head .search li.on a:hover{font-weight:bold;color:#048ddd;text-decoration:none;}
+
+.nav{height:40px;background:url(../images/nav_bg.jpg) repeat-x;border-top:1px solid #0878ba;border-bottom:1px solid #066093;}
+.nav ul{width:980px;height:40px;margin:0 auto;background:url(../images/nav_mar.jpg) no-repeat left 0;padding:0 0 0 1px;}
+.nav li{float:left;height:40px;line-height:40px;background:url(../images/nav_mar.jpg) no-repeat right 0;padding:0 1px 0 0;}
+.nav li a{height:40px;width:97px;text-align:center;color:#f6f6f6;font-size:14px;display:block;}
+.nav li a:hover,.nav li a.hover{background:#0186d1;color:#f6f6f6;font-weight:bold;text-decoration:none;}
+
+/*分页*/
+.pages {text-align:center;height:25px;line-height:25px;margin:20px 0;}
+.pages a,.pages span{margin:0 4px;border:#efefef 1px solid;background:#fff;color:#0075c1;text-decoration:none;padding:3px 6px;}
+.pages .current,.pages a:hover{background:#0878ba;color:#fff;}
+.pages .current{font-weight:bold;}
+
+/*分页*/
+.mypages {text-align:center;height:25px;line-height:25px;margin:20px 0;}
+.mypages a,.pages span{margin:0 4px;border:#efefef 1px solid;background:#fff;color:#0075c1;text-decoration:none;padding:3px 6px;}
+.mypages .current,.pages a:hover{background:#0878ba;color:#fff;}
+.mypages .current{margin:0 4px;border:#efefef 1px solid;background:#fff;color:red;text-decoration:none;padding:3px 6px;font-weight:bold;}
+
+/* 按钮 */
+.ye_mbtn{width:50px;height:24px;background:url(../images/ybtn_bg.jpg) repeat-x center center;border:1px solid #f25b00;cursor:pointer;font:400 12px/22px "宋体";color:#fff;}
+.isearch .ye_mbtn{margin:0 0 0 5px;}
+.ye_btn{width:107px;height:33px;background:url(../images/ybtn_bg.jpg) repeat-x;border:none;cursor:pointer;font:bold 14px/31px "宋体";color:#fff;}
+.login .ye_btn{wmargin:0 5px 0 0;}
+
+/*跳到页首*/
+.goTop {
+    background: url("../images/top.png") no-repeat scroll 16px 16px #FFFFFF;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    height: 50px;
+    overflow: hidden;
+    position: fixed;
+    right: 30px;
+    text-indent: -999px;
+    top: 80%;
+    width: 50px;
+}
+
+/* foot */
+.foot{background:#033c5c;padding:20px 0;text-align:center;}
+.foot p{height:24px;line-height:24px;color:#fff;}
+.foot p a{color:#fff;text-decoration:none;margin:0 5px;}
+.foot p a:hover{color:#ff6600;text-decoration:underline;}
+
+/* 提示框 */
+.message.errormsg{background:url(../images/errormsg.gif) no-repeat 12px 12px #ffcece;border:1px solid #e98585;padding-left:35px;}
+.message.errormsg span{color:#f20;}
+.message.success{background:url(../images/successmsg.gif) no-repeat 12px 12px #edfbd8;border:1px solid #bfde84;padding-left:35px;}
+.message.success span{color:#508600;}
+.message.infomsg{background:url(../images/infomsg.gif) no-repeat 12px 12px #ecf9ff; border:1px solid #bbdbe0;padding-left:35px;}
+.message.infomsg span{color:#0888c3;}
+.message.warning{background:url(../images/warningmsg.gif) no-repeat 12px 12px #fefde2;border: 1px solid #e5e181;padding-left:35px;}
+.message.warning span{color:#666666;}
+.message {border-radius:3px 3px 3px 3px;margin:10px 0;overflow:hidden;padding:10px 15px 10px 40px;_height:18px;display:block;}
+.message .close{background:url(../images/close.png) no-repeat;cursor:pointer;display:block;float:right;height:16px;margin-top:2px;opacity:0.7;width:16px;}

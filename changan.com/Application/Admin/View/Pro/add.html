@@ -1,0 +1,274 @@
+<style type="text/css">
+    .autocomplete-wrapper { margin: 44px auto 44px; max-width: 600px; }
+    .autocomplete-wrapper label { display: block; margin-bottom: .75em; color: #3f4e5e; font-size: 1.25em; }
+    .autocomplete-wrapper .text-field { padding: 0 15px; width: 100%; height: 40px; border: 1px solid #CBD3DD; font-size: 1.125em; }
+    .autocomplete-wrapper ::-webkit-input-placeholder { color: #CBD3DD; font-style: italic; font-size: 18px; }
+    .autocomplete-wrapper :-moz-placeholder { color: #CBD3DD; font-style: italic; font-size: 18px; }
+    .autocomplete-wrapper ::-moz-placeholder { color: #CBD3DD; font-style: italic; font-size: 18px; }
+    .autocomplete-wrapper :-ms-input-placeholder { color: #CBD3DD; font-style: italic; font-size: 18px; }
+    .autocomplete-suggestions { overflow: auto; border: 1px solid #CBD3DD; background: #FFF; }
+    .autocomplete-suggestion { overflow: hidden; padding: 5px 15px; white-space: nowrap; }
+    .autocomplete-selected { background: #F0F0F0; }
+    .autocomplete-suggestions strong { color: #029cca; font-weight: normal; }
+</style>
+<script type="text/javascript" src="/Public/Home/js/jquery.autocomplete.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#autocomplete-ajax').autocomplete({
+            serviceUrl: '/Public/autoCompany',
+            //            lookup: countriesArray,
+            lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+                var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+                return re.test(suggestion.value);
+            },
+            onSelect: function(suggestion) {
+                $('#company_id').val(suggestion.data)
+            },
+            onHint: function (hint) {
+                $('#autocomplete-ajax-x').val(hint);
+            },
+            onInvalidateSelection: function() {
+                $('#selction-ajax').html('You selected: none');
+            }
+        });
+    });
+    function addProjects(t){
+        var count = $('#projects tr').length;
+        if(count==7){
+            return alert('超出限制,最多支持7个!');
+        }
+        var str = '<tr>'
+            +'<td><input type="text" class="am-form-field am-input-sm" name="projects_name[]" value=""></td>'
+            +'<td><input type="text" class="am-form-field am-input-sm" name="projects_money[]" value=""></td>'
+            +'<td><input type="text" class="am-form-field am-input-sm" name="projects_desc[]" value=""></td>'
+            +'</tr>';
+        $('#projects').append(str);
+    }
+</script>
+
+<div class="admin-content">
+
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/pro">产品管理</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <form id="add_from" method="post" action="__SELF__">
+        <input name="id" value="{$info.id}" type="hidden">
+        <div class="am-margin">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="#tab1">产品信息</a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            名称
+                        </div>
+                        <div class="am-u-sm-4">
+                            <input type="text" class="am-form-field am-input-sm" name="title" placeholder="名称" value="{$info.title}">
+                        </div>
+                        <div class="am-u-sm-6">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            公司
+                        </div>
+                        <div class="am-u-sm-4">
+                            <input type="text" AUTOCOMPLETE="off" value="{$info.company_name}"  id="autocomplete-ajax" class="am-form-field am-input-sm"  />
+                            <input type="hidden" name="company_id" id="company_id" value="{$info.company_id}" />
+                        </div>
+                        <div class="am-u-sm-6">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            类别
+                        </div>
+                        <div class="am-u-sm-4">
+                            <select name="pro_type_id" class="am-form-field am-input-sm" >
+                                <foreach name="pro_types" item="item">
+                                    <option value="{$item.id}" <eq name="info.pro_type_id" value="$item.id"> selected</eq> >{$item.name}</option>
+                                    <if condition="count($item.subs)">
+                                        <foreach name="item.subs" item="temp">
+                                            <option value="{$temp.id}" <eq name="info.pro_type_id" value="$temp.id"> selected</eq>>--{$temp.name}</option>
+                                        </foreach>
+                                    </if>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-6">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            投保对象
+                        </div>
+                        <div class="am-u-sm-4">
+                            <select name="insure_object" class="am-form-field am-input-sm" >
+                                <volist name=":getInsureObject()" id="vo">
+                                    <option value="{$key}" <eq name="info.insure_object" value="{$key}"> selected</eq> >{$vo}</option>
+                                </volist>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-6">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            投保年龄
+                        </div>
+                        <div class="am-u-sm-4">
+                            <input type="text" class="am-form-field am-input-sm" name="insure_years" placeholder="投保年龄" value="{$info.insure_years}">
+                        </div>
+                        <div class="am-u-sm-6">*必填</div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">保障项目</div>
+                        <div class="am-u-sm-10 am-text-right">
+                            <table class="am-table am-table-bordered">
+                                <thead><th>保障项目</th><th>保障额度</th><th>说明</th></tr></thead>
+                                <tbody id="projects">
+                                <if condition="count($projects) gt 0">
+                                    <foreach name="projects" item="item2">
+                                        <tr>
+                                            <!--<td class="am-text-middle"><a href="" class="am-close am-close-alt am-close-spin">&times;</a></td>-->
+                                            <td><input type="text" class="am-form-field am-input-sm" name="projects_name[]" value="{$item2.name}"></td>
+                                            <td><input type="text" class="am-form-field am-input-sm" name="projects_money[]" value="{$item2.money}"></td>
+                                            <td><input type="text" class="am-form-field am-input-sm" name="projects_desc[]" value="{$item2.desc}"></td>
+                                        </tr>
+                                    </foreach>
+                                    <else />
+                                    <tr>
+                                        <!--<td class="am-text-middle"><a href="" class="am-close am-close-alt am-close-spin">&times;</a></td>-->
+                                        <td><input type="text" class="am-form-field am-input-sm" name="projects_name[]" value=""></td>
+                                        <td><input type="text" class="am-form-field am-input-sm" name="projects_money[]" value=""></td>
+                                        <td><input type="text" class="am-form-field am-input-sm" name="projects_desc[]" value=""></td>
+                                    </tr>
+                                </if>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="3"><button type="button" class="am-btn am-btn-success am-fr" onclick="addProjects()">添加选项</button></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            保障利益
+                        </div>
+                        <div class="am-u-sm-10">
+                            <textarea name="notices" edit="true" class="am-form-field">{$info.notices}</textarea>
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">缴费方式</div>
+                        <div class="am-u-sm-4">
+                            <input type="text" class="am-form-field am-input-sm" placeholder="缴费方式" name="pay_type" value="{$info.pay_type}">
+                        </div>
+                        <div class="am-u-sm-6">*必填，例趸交,3年交,5年交,10年交</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            保障额度
+                        </div>
+                        <div class="am-u-sm-4">
+                            <div class="am-form-group am-form-icon">
+                                <i class="am-icon-cny"></i>
+                                <input class="am-form-field am-input-sm" type="text" placeholder="保障额度" name="coverage" value="{$info.coverage}">
+                            </div>
+                        </div>
+                        <div class="am-u-sm-6">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            保障期限
+                        </div>
+                        <div class="am-u-sm-4">
+                            <div class="am-form-group am-form-icon">
+                                <i class="am-icon-asterisk"></i>
+                                <input class="am-form-field am-input-sm" type="text" placeholder="保障期限" name="insure_times" value="{$info.insure_times}">
+                            </div>
+                        </div>
+                        <div class="am-u-sm-6">*</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            投保价格
+                        </div>
+                        <div class="am-u-sm-2">
+                            <div class="am-form-group am-form-icon">
+                                <i class="am-icon-cny"></i>
+                                <input class="am-form-field am-input-sm" type="text" placeholder="投保价格" name="price" value="{$info.price}">
+                            </div>
+                        </div>
+                        <div class="am-u-sm-8">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">状态</div>
+                        <div class="am-u-sm-2">
+                            <select name="status" class="am-form-field am-input-sm">
+                                <option value="0" <eq name="info.status" value="0"> selected</eq> >下架</option>
+                                <option value="1" <eq name="info.status" value="1"> selected</eq> >上架</option>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-8"></div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">最热</div>
+                        <div class="am-u-sm-2">
+                            <select name="is_hot" class="am-form-field am-input-sm">
+                                <option value="0" <eq name="info.is_hot" value="0"> selected</eq> >默认</option>
+                                <option value="1" <eq name="info.is_hot" value="1"> selected</eq> >最热</option>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-8"></div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            排序
+                        </div>
+                        <div class="am-u-sm-2">
+                            <div class="am-form-group am-form-icon">
+                                <i class="am-icon-cny"></i>
+                                <input class="am-form-field am-input-sm" type="text" placeholder="排序" name="order_id" value="{$info.order_id}">
+                            </div>
+                        </div>
+                        <div class="am-u-sm-8">*从大到小排列</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="am-margin">
+            <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+            <button type="button" onclick="window.history.back();" class="am-btn am-btn-primary am-btn-xs">返回</button>
+            <notempty name="pre_id">
+                <button type="button" onclick="location.href='/pro/add?id={$pre_id}'" class="am-btn am-btn-primary am-btn-xs">上一条</button>
+            </notempty>
+            <notempty name="next_id">
+                <button type="button" onclick="location.href='/pro/add?id={$next_id}'" class="am-btn am-btn-primary am-btn-xs">下一条</button>
+            </notempty>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="/Public/Common/js/kindeditor/kindeditor-all-min.js"></script>
+<link type="text/css" rel="stylesheet" href="/Public/Common/js/kindeditor/themes/default/default.css"/>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor =K.create('textarea[edit="true"]', {
+            autoHeightMode : true,
+            allowPreviewEmoticons : false,
+            urlType : 'absolute',
+            allowUpload : false, //允许上传图片
+            uploadJson : '/public/upload_img',
+            filterMode:false,
+            afterCreate : function() {
+                this.loadPlugin('autoheight');
+            }
+        });
+    });
+</script>

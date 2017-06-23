@@ -1,0 +1,104 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl"> 
+        <a <eq name="pst" value="all"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/buylist?pst=all&type={$Think.get.type}">全部</a>
+        <a <eq name="pst" value="trading"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/buylist?pst=trading&type={$Think.get.type}">交易中</a>
+        <a <eq name="pst" value="finish"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/buylist?pst=finish&type={$Think.get.type}">成功交易</a> 
+        <a <eq name="pst" value="bad"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/buylist?pst=bad&type={$Think.get.type}">失败交易</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c2" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody>
+                    <tr class="table_title">
+                        <td>域名</td>
+                        <td>类型</td>
+                        <td>买家出价</td>
+                        <td>买家ID</td>
+                        <td>更新时间</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                <empty name="domains">
+                    <tr class="table_bg_b">
+                        <td colspan="7">没有找到符合条件的交易信息！</td>
+                    </tr>
+                    <else/>
+                    <volist name="domains" id="item">
+                        <tr id="tr_{$item.id}" class="table_bg_b">
+                            <td>{$item.domain}</td>
+                            <td><eq name="item.type" value="1">一口价</eq>
+                                <eq name="item.type" value="2">拍卖</eq>
+                                <eq name="item.type" value="3">买方出价</eq></td>
+                            <td>{$item.money|Fen2Yuan}元</td>
+                            <td>{$item.to_mid}</td>
+                            <td>{$item.update_time|date='Y-m-d H:i:s',###}</td>
+                            <td>
+                                <eq name="item.status" value="0">等待卖家确认</eq>
+                                <eq name="item.status" value="1">等待买家确认</eq>
+                                <eq name="item.status" value="2">成功交易</eq>
+                                <eq name="item.status" value="3">买家反悔</eq>
+                                <eq name="item.status" value="4">卖家反悔</eq>
+                                <eq name="item.status" value="5">拒绝报价</eq>
+                                <eq name="item.status" value="6">等待域名转入</eq>
+                                <eq name="item.status" value="7">等待买家付款</eq>
+                            </td>
+                            <td>
+                                <eq name="item.status" value="1">
+                                <a href="javascript:check_seccode('TradeBuyer','{$item.id}');"/>购买域名</a>&nbsp;&nbsp; <a href="javascript:check_seccode('CloseBuyer','{$item.id}');"/>不买了</a>
+                                </eq>
+                                <eq name="item.status" value="7">
+                                <a href="javascript:check_seccode('TradeBuyer','{$item.id}');"/>购买域名</a>&nbsp;&nbsp;<a href="javascript:check_seccode('CloseBuyer','{$item.id}');"/>不购买了</a>
+                                </eq>
+                            </td>
+                        </tr>
+                    </volist>
+                </empty>
+                <tr>
+                    <td colspan="7">{$pager}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="yinying" style="display: none; z-index: 1000; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; -webkit-user-select: none; opacity: 0.5; background: rgb(0, 0, 0);" tabindex="0"></div>
+<div id="dialog" class="ui-dialog" style="display:none; width:500px; z-index:10001;">
+    <div class="ui-dialog-arrow-a"></div>
+    <div class="ui-dialog-arrow-b"></div>
+    <form id="trade_form" action="/domain/deal_buyer" method="post">
+        <table class="ui-dialog-grid" width="500">
+            <tbody>
+                <tr>
+                    <td i="header" class="ui-dialog-header"><button i="close" class="ui-dialog-close" title="取消" onclick="$('#dialog').hide();$('#yinying').hide();">×</button>
+                        <div i="title" class="ui-dialog-title">安全码验证</div></td>
+                </tr>
+                <tr>
+                    <td i="body" class="ui-dialog-body"><div i="content" class="ui-dialog-content">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>安全码：</td>
+                                        <td><input type="password" id="seccode"  name="seccode" value="" autocomplete="off"><font class="txt999">请输入您的安全密码</font>[<a href="#" target="_blank" style="color:blue;">忘记安全码？</a>]</td>
+                                    </tr>
+                                    <tr><td>提醒：</td><td align="left" colspan="2"><div class="out_right"><a href="#" target="_blank" style="color: blue;">什么是安全码？</a></div></td></tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input name="trade_id" id="trade_id" type="hidden" value="" />
+                                            <a class="bnt-green width100" style="margin:10px 0 0 70px; display:block; color:white; text-align:center; float:left; height:22px;" href="javascript:TradeConfirm();">确认</a>
+                                            <a class="bnt-hui width100" style="margin:10px 0 0 70px; display:block; color:white; text-align:center; float:left; height:22px;" onclick="$('#dialog').hide();$('#yinying').hide();">取消</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<div class="clear"></div>

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<link href="{CSS_PATH}css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{JS_PATH}change_tag.js"></script>
+
+<style>
+body{background:none;}
+.new_img {
+  position: absolute;
+  left: 60px;
+}
+
+.mh_copy1{
+	position: relative;
+}
+.middle_div3_ri .middle_ten .middle_ten_le .mos .mos_txt {
+	width:530px;
+}
+#search_fy a:link, #search_fy a:visited {margin:0}
+</style>
+</head>
+<body>  
+<div id="ifreame_height" class ="middle_div3_ri" style="float:none">
+<div style="margin-top:0px;" class="today">
+		<div class="today_tit">
+		{pc:content action="lists" catid="14" manhuaid="$id" num="9999" order="id asc" }
+		{php $mh_list = array_chunk($data,100);}
+			<ul id="tab_list"> 
+				{loop $mh_list $key $r}
+				{php $key ++}
+				{php $start= current($r);}
+				{php $end= end($r);}
+				<li class="{if ($key == 1)}on{/if}" onmouseover="secBoard('tab_list','infolist_list',{$key},'on','');GetSize();"><strong>{$start['title']}-{$end['title']}</strong></li>         
+				{/loop}
+			</ul>
+		</div>
+		<div class="today_t">
+		{loop $mh_list $key $v}
+			{php $key++}
+			<ul id="infolist_list_{$key}" class="nr6 lan2" style="display:{if ($key == 1)}block{else}none{/if}">		
+				{loop $v $val}
+					<li>
+						<a title="{$val[title]}" id="{$val[id]}" href="#" target="_blank">{$val[title]}</a>
+					</li>  
+				{/loop}
+			</ul>
+		{/loop}
+		</div>
+		{/pc}
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	function GetSize() {  
+		//自动调节窗口的大小  
+		var vHeight = document.body.offsetHeight;  
+		//alert(vHeight);
+		window.parent.SetHeight(vHeight);
+	}  
+</script>
+</html>

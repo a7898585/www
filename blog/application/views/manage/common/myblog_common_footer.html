@@ -1,0 +1,290 @@
+<script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Tabs.js,Cm/Js/Dialog.js" type="text/javascript"></script>
+<script src="http://passport.cnfol.com/getOnline.php?type=jsvar&t=uid&d=<?php echo $bloginfo['UserID'];?>" language="javascript"></script>
+<script type="text/javascript">
+    //new Tabs("C1fans");	
+</script>   
+
+<script type="text/javascript">
+
+    $("#M1fans").load("<?php echo BLOG_FANS_LIST.'/'.$bloginfo['DomainName']; ?>");
+
+    $(function(){
+        for(var $i=0; $i<8; $i++)
+        {	
+            var $firstTime = parseInt($(".time_"+$i).val());
+            var $j = $i+1;
+            var $secondTime = parseInt($(".time_"+$j).val());
+            var $cut = $firstTime - $secondTime;	            		
+            if($firstTime - $secondTime ==1)
+            {
+                $(".time_"+$i).parent().css("border-bottom", "1px red solid");		            	
+
+            }
+        }
+    })
+
+    $(function(){
+        $('#getarticlelist').load("<?php echo config_item('base_url').'/index.php/myblog/articleList/'.$bloginfo['DomainName'].'?page='.($_GET['page']>1?$_GET['page']:1);?>&currentid=<?php echo($bloginfo['UserID']); ?>&r="+new Date().getTime());
+
+        $(window).bind("scroll",function() {
+			
+            // 然后判断窗口的滚动条是否接近页面底部，这里的20可以自定义
+        
+            if ($(document).scrollTop() + $(window).height() > $(document).height() - 20) {
+                if($('#scrolltopflag').val()=='2')
+                {
+                    if($('#loadCrontal').val()=='1')
+                    {
+                        $('.LoadingBox').css('display','');
+                        $('#moreartlistMain').load("<?php echo(config_item('base_url')); ?>/index.php/myblog/ajaxMoreArticle/<?php echo($bloginfo['DomainName']); ?>?page=<?php echo($_GET['page']>1?$_GET['page']:1); ?>&currentid=<?php echo($bloginfo['UserID']); ?>&r="+new Date().getTime());
+                    }
+                }
+            }
+         
+        })
+
+
+    })
+
+    $(function(){
+	
+        $('#signature').load("<?php echo $baseurl.'/ajaxgetuserprofile/'.$bloginfo['UserID'];?>");
+        var checkUserId=<?php echo $bloginfo['UserID'];?>;
+        if(typeof(online_<?php echo $bloginfo['UserID'];?>)!='undefined')
+        {
+            var temOnline = online_<?php echo $bloginfo['UserID'];?>;
+		
+			
+            if(temOnline != 'offline')//在线
+            {	
+                if($('#onlinediv').hasClass("OffMale"))
+                {
+                    $('#onlinediv').removeClass().addClass("Male");				
+                }
+                else
+                {
+                    $('#onlinediv').removeClass().addClass("Female");						
+                }
+
+
+            }
+			
+            if('<?php echo($isonline); ?>'!='')
+            {
+                if('<?php echo($isonline); ?>'=='0')
+                {
+                    $('#onlinediv').removeClass().addClass("Male");				
+                }
+                else
+                {
+                    $('#onlinediv').removeClass().addClass("Female");						
+                }
+            }
+	
+		
+        }
+    })	
+
+
+
+
+    function delAttention(userid,act)
+    {
+        var url = baseurl+"/index.php?c=blog&m=action&act="+act;
+        var params = {"friendIDs":userid};
+	
+        $.getJSON(url+"&r="+new Date().getTime(), params, function(json){
+	    
+            if(json.errno=='00')
+            {
+                $(".focus").html("<a class=\"HasPlus\"  href=\"javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','del');\">取消关注</a>");
+                if(act == "del")
+                {
+                    window.location.reload();
+                }
+            }
+            else
+            {
+                alert(json.error);
+            }
+		
+        });
+    }
+
+
+
+
+
+        <?php if($isowner == true){ ?>
+            function showEditCP(id){
+            $('#'+id).show();
+            $('#'+id+'_C').hide();
+        }
+        function hideEditCP(id){
+            $('#'+id).hide();
+            $('#'+id+'_C').show();
+        }
+        function saveEditValue(id){
+            var val = $('#'+id).val();
+            if(val == ""){
+                return false;
+            }
+	
+            if($('#'+id).val().length>42)
+            {
+        
+                showalertminute('博客副标题长度不能大于42个字节',2000,'','popupTip','TMDeleteSuccess');
+                return false;
+            }
+            else
+            {
+	
+                showalert('载入中...','popupTip','TMDeleteSuccess');
+                var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+                var action = baseuri+'/config/HeadEdit';
+                if(id == 'Subtitle') {
+                    $.post(action,{Subtitle:val},function(data){
+                        if(data.errno == 'success'){
+                            $('#'+id).val(data.error);
+                            $('#'+id+'Load').text(data.error);
+                            showalertminute('博客副标题更新成功！',2000,'','popupTip','TMDeleteSuccess');
+                        }else{
+                            showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                        }
+                        return false;
+                    },'json');
+                }else{
+                    $.post(action,{BlogName:val},function(data){
+                        if(data.errno == 'success'){
+                            $('#'+id).val(data.error);
+                            $('#'+id+'Load').text(data.error);
+                            showalertminute('博客标题更新成功！',2000,'','popupTip','TMDeleteSuccess');
+                        }else{
+                            showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                        }
+                        return false;
+                    },'json');
+                }
+                hideEditCP(id+'CP');
+            }
+        }
+            <?php } ?>
+
+
+
+</script>
+
+
+<div class="NewFooter Footer" id="footer">
+    <center>博主昵称:<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" target="_blank" style="color:black;"><?php echo $bloginfo['NickName'];?></a></center>
+    <center>本站所有文章、数据仅供参考，使用前务请仔细阅读<a href="http://www.cnfol.com/info/law.shtml" target="_blank" style="color:#6C4B3A;">法律声明</a>，风险自负</center>
+    <center>Copyright &copy; 2004 -
+        <script type="text/javascript">
+            date=new Date();
+            year = date.getFullYear();
+            document.writeln(year);
+        </script>
+
+        福建中金在线网络股份有限公司.All Right Reserved
+
+    </center>
+
+
+    <!-- 
+    <script type="text/javascript">
+    date=new Date();
+    year = date.getFullYear();
+    document.writeln(year);
+    </script>
+    &copy;
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" target="_blank"><?php echo $bloginfo['NickName'];?></a>
+    </center>
+    -->
+</div>
+<!--点击统计-->
+<script type="text/javascript" src="<?php echo $viewurl;?>"></script>
+<script language="javascript">
+
+
+    function killErrors() { 
+        return true; 
+    } 
+    window.onmouseover=function()
+    {
+        window.onerror = killErrors; 
+    }
+
+    function setbg(url)
+    {
+        $('.BloggerWrap').css('background','url('+url+') no-repeat center center');//预览背景
+                                               
+    }
+    document.body.onclick=function(event) {
+        var browser=navigator.appName;
+        if(browser=="Netscape")
+        {
+            obj =event.srcElement?event.srcElement:event.target;
+            if(obj.tagName!="IMG"&& document.getElementById("showinfo") &&g_pop==null) document.getElementById("showinfo").style.display="none"; 
+        }else
+        {
+            if(window.event.srcElement.tagName!="IMG" && document.getElementById("showinfo") && g_pop==null) document.getElementById("showinfo").style.display="none";}; 
+    }
+    var bgurl = "<?php echo $blogconfig['Background'];?>";
+    if(bgurl){
+        setbg(bgurl);
+    }
+</script>  
+</center>
+
+<?php if(!isset($ismanage) || $ismanage === false){?>
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+    _atrk_opts = { atrk_acct:"miaPi1a8Dy00w2", domain:"cnfol.com",dynamic: true};
+    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=miaPi1a8Dy00w2" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- End Alexa Certify Javascript -->
+
+<!--百度统计-->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc378c4854ec370c1c8438f72e19b7170' type='text/javascript'%3E%3C/script%3E"));
+
+    //站内信
+    var num ='0';
+    var url = 'http://passport.cnfol.com/index.php/getinfo/userinfo/<?php echo $user['userid']; ?>/getnewmsgcount/json?callback=?';
+    var url = 'http://passport.cnfol.com/api/msginfo/getusermsgcount?callback=?';
+    var param = {'uid':'<?php echo $user['userid'];?>', 'key': '<?php echo md5($user['userid'].'hello_cnfol');?>'};
+
+    //$.getJSON(url,param, function(json){
+    //	alert("@@@@@@");
+    //	alert(json.total);
+    //num = json.count; 
+    // $('.LgMsg').html('('+num+')');
+    // });
+    //站内信
+</script>
+
+<!-- End of LogMicroscope Code --> 
+<DIV style="DISPLAY: none"><!-- START AIYA Site Stat. -->
+    <SCRIPT language=JavaScript type="text/javascript" src="http://s.cnfolimg.com/v5.0/js/stat01-min.js"></SCRIPT>
+    <NOSCRIPT><img src="http://logs.cnfol.com/a?ci=cnfol" alt=""></NOSCRIPT><!-- END AIYA Site Stat. -->
+</DIV> 
+<?php } ?>
+
+<!--微信-->
+<!--  
+<div class="FixedRight" id="FixedRight">
+  <a href="javascript:;" onclick="document.getElementById('FixedRight').style.display='none'" class="Cls" title="关闭">X</a>
+  <iframe marginheight="0" marginwidth="0" frameborder="0" width="110" height="150" scrolling="no" src="http://cnfolimedia.allyes.com/main/s?user=cnfol|weixinyemian|weihangqingerweima&db=cnfolimedia&border=0&local=yes"></iframe>
+</div>
+-->
+<!--会导致ie6出错
+<!--[if lt IE 7]>
+  <script charset="utf-8" src="http://hs.cnfol.com/Cm/Js/Fixed.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  Fixed("FixedRight","R0","B100");
+  </script>
+<![endif]-->
+</body>
+</html>

@@ -1,0 +1,85 @@
+<?php include $commonheader;?>
+<?php include $personalhead; ?>
+
+<section id="Lst_news">
+    <?php if(!empty($list)){ 
+    foreach($list as $val){
+
+    $arturl = $baseurl.'/'.$val['DomainName'].'/article/'.strtotime($val['AppearTime']).'-'.$val['ArticleID'].'.html';
+    $artTitle = filter($val['Title']);
+    $artContent = filter(filter($val['Summary']));
+    if(strlen($artTitle) > 28){
+    $val['Title'] = utf8_str($artTitle,28).'...';
+    }
+    if(strlen($artContent) > 70){
+    $val['Summary'] = utf8_str($artContent,70);
+    }
+    ?>
+    <div class="Lst-o-new Mt10 Pl10">
+        <div class="Lst-new-tit F16 Red_color">
+            <?php if($val['Recommend'] == 2 || $val['Recommend'] == 3 || $val['IsUsed'] == 1){ ?>
+            <font class="Fl">[荐]</font>
+            <?php }if($val['IsTop'] == 1){ ?>
+            <font class="Fl">[顶]</font>
+            <?php } ?>
+            <a href="<?php echo $arturl;?>" class="Fl"><?php echo $val['Title'];?></a>
+            <?php if($val['PictureUrl']!='0' && !empty($val['PictureUrl'])){ ?>
+            <span class="Bh_img Fl"></span>
+            <?php } ?>
+            <time class="Fr Hui_color Pr10 F10"><?php echo timeop($val['AppearTime']);?></time>
+        </div>
+        <p class="Lst-new-desc F14 Pr10"><a href="<?php echo $arturl;?>"><?php echo $val['Summary'];?></a></p>
+        <h4 class="Hb_author F12 Hui_color">作者：<?php echo $val['NickName'];?></h4>
+    </div>
+    <?php }
+    }?>
+
+</section>
+<a href="javascript:void(0);" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore" >获取更多</a>
+<?php  include $commonfooter; ?>
+<input type="hidden" name="currentpage" id="currentpage" value="2" />
+<input type="hidden" name="scrolltopflag" id="scrolltopflag" value="2" />
+<script type="text/javascript">
+   
+    var baseurl = "<?php echo $baseurl; ?>";
+    var moreType = "<?php echo $moreType; ?>";
+    var tagType = "<?php echo $tagType; ?>";
+    var oGetMore=C.G('GetMore');
+    var oLst_news=C.G('Lst_news')
+    var Btn=true;
+    if(Btn && oGetMore){
+        window.onscroll=function(){
+            var top=Bk.tools.getPos(oGetMore).t + oGetMore.offsetHeight;
+            var Viewh=document.documentElement.clientHeight||document.body.clientHeight;
+            var ScrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+        
+            if(top < (Viewh + ScrollTop)){ 
+            	
+                var page=document.getElementById("currentpage").value;  
+                if($('#scrolltopflag').val()=='2'){
+                    $('#scrolltopflag').val('1');
+                    if(Btn && oGetMore.style.display!=='none'){ 
+                    	
+                        oGetMore.innerHTML= '正在加载更多...';
+                        $.getJSON(baseurl+'/index.php/more/'+moreType+'/?page='+page+'&tagType='+tagType+'&r='+new Date().getTime(), function(json){
+                            $('#scrolltopflag').val('2');
+                            if(json.page != ''){
+                                document.getElementById('currentpage').value=json.page;
+                            }
+                            if(json.data != '' && json.error == 1){
+                                $('#Lst_news').append(json.data);
+                            }else{
+                                oGetMore.innerHTML= '已经显示全部内容';
+                                Btn=false;
+                            }
+            
+                        });
+                    }	
+                }
+            }  
+        }
+    }
+    $('#scrolltopflag').val('2');
+    
+    
+</script>

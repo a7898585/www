@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+        <link rel="shortcut icon" href="/Public/Home/images/favicon.ico" type="image/x-icon">
+
+        <meta name="baidu-site-verification" content="eKtLexAbn4" />
+        <meta property="qc:admins" content="2550121366601675671676375" />
+
+        <title>{$seo.t}</title>
+        <meta name="keywords" content="{$seo.k}"/>
+        <meta name="description" content="{$seo.d}"/>
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/main_news.css" />
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/detail_news.css"/>
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/base_ebda236.css">
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/core_f6e82af.css">
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/home_7d6d27a.css">
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/laypage.css" />
+        <script type="text/javascript">
+            var login_user = {:intval($USER['id'])};
+        </script>
+    </head>
+    <body>
+
+    <include file="Public:navi" />
+    <!--主体内容 开始-->
+    <div id="container" class="bg-white clearfix">
+        <div class="zt_picnews">
+            <div class="zt_bpicnews">
+                <a href="{$list_first.url}" target="_blank" title="{$list_first.title}">
+                    <img src="{$list_first['img_list'][0]|setUpUrl}" alt="{$list_first.title}">
+                    <div class="zt_bpicnews_tit">
+                        <h2>{$list_first.title}</h2>
+                        <p>{$list_first.intro|msubstr=0,70}</p>
+                    </div>
+                </a>
+            </div>
+            <ul  class="zt_spicnews">
+                <volist name="list" id="vo">
+                    <li <if condition="$key%2">class="mr0"</if>>
+                    <a href="{$vo.url}" target="_blank" title="{$vo.title}">
+                        <img src="{$vo['img_list'][0]|setUpUrl}" alt="{$vo.title}">
+                        <span>{$vo.title|msubstr=0,18}</span>
+                    </a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+
+        <div class="zt_newslist">
+            <volist name="type" id="vo" offset="0" length='6'>
+                <div class="main_r_box clicktoday">
+                    <div class="title"><h2>{$vo.title}</h2><a href="{$Think.config.URL_DOMAIN}/subject/{$vo.id}" target="_blank">+</a></div>
+                    <div class="main_r_cont ">
+                        {:W('Home/subject',array('type_id'=>$key))}      
+                    </div>
+                </div>
+            </volist>
+
+        </div>
+        <if condition="count($type) gt 6 ">
+            <div class="zt_more">
+                <h2>更多专题</h2>
+                <div class="zt_more_item">
+                    <volist name="type" id="vo" offset="6" length='6'>
+                        <a href="{$Think.config.URL_DOMAIN}/{$vo.pinyin}" target="_blank"><i class="zt_icon{$i}"></i><span>{$vo.title}</span></a>
+                    </volist>
+                </div>
+            </div>
+        </if>
+    </div>
+
+    <!--主体内容 结束-->
+</div>
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/laytpl.js"></script>
+<script type="text/javascript" src="/Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    //点击展开分类
+    $('a[ga_event="feed_setting"]').click(function(){
+        if($('#pagelet-toolbar').attr('class')==''){
+            $(this).find('i').addClass('icon-customize-up');
+            $('#pagelet-toolbar').addClass('customize');
+            $('.custom-box').show();
+        }else{
+            $(this).find('i').removeClass('icon-customize-up');
+            $('#pagelet-toolbar').removeClass('customize');
+            $('.custom-box').hide();
+        }
+    });
+    //点击头部页面关闭分类
+    $('#container,#pagelet-nav').click(function(){
+        $('a[ga_event="feed_setting"]').find('i').removeClass('icon-customize-up');
+        $('#pagelet-toolbar').removeClass('customize');
+        $('.custom-box').hide();
+    });
+
+    //重载页面
+    $('.icon-refresh').click(function () {
+        $('.alert-msg').show();
+        window.location.reload();
+    });
+
+    //点击删除
+    $("#defaultCategory li").live("click", function () {
+        if ($('.customize').length && $(this).index()) {
+            $("#otherCategory").append("<li>" + $(this).html() + "</li>");
+            $(this).remove();
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $('.ban-msg').removeClass('error').html('点击添加新闻分类');
+                sysNav();
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //点击添加
+    $("#otherCategory li").live("click", function () {
+        if ($('.customize').length) {
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $("#defaultCategory").append("<li>" + $(this).html() + "</li>");
+                $(this).remove();
+                sysNav();
+            } else {
+                $('.ban-msg').addClass('error').html('分类已满（最多7个），请先删除一些');
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //未读新闻 点击查看
+    $('.unread').click(function () {
+        window.location.reload();
+    });
+
+           
+</script>
+<include file="Public:foot" />
+

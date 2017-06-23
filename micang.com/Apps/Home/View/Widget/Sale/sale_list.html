@@ -1,0 +1,14 @@
+{__NOLAYOUT__}
+<ul>
+    <volist name="data" id="vo">
+        <li><p>{$vo.domain}</p>
+            <div class="txtjj_a">域名释义：{$vo.summary|msubstr=0,8}</div>
+            <div class="txtjj_b">到期时间：{$vo.end_time|date="m/d H:i:s",###}</div>
+            <div class="txtjj_c">当前价格：<span>{$vo['buyer_price']/100|max=1,###}元</span></div>
+            <a href="{:getDoMain()}sell/detail?id={$vo.id}" class="jjbtn"><p>{$vo.domain}</p>
+                <div class="txtjj_d">当前价格：<if condition="$type eq '1' ">{$vo['seller_price']/100}<else />{$vo['buyer_price']/100|max=1,###}</if>元</div>
+                <div class="prli_btn"><if condition="$type eq '2' ">参与竞价<elseif condition="$type eq '1'"/>点击购买<elseif condition="$type eq '3'"/>点击报价<else />点击进入</if></div>
+            </a>
+        </li>
+    </volist>
+</ul>

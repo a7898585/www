@@ -1,0 +1,115 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+	<em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+	<span>></span>
+    <a href="{:getDoMain()}sell/page" class="crumbs_c">域名交易</a>
+	<span>></span>
+    <i>{$detail.domain}域名询价</i>
+</div>
+<!--面包屑 结束-->
+<div class="wrap xunjia">
+    <div class="wrap_jj_l fl">
+    <div class="bidding">
+        <h3><span>询价域名</span></h3>
+        <div class="bidding_n">
+        	<div class="ding_l fl">
+            <p>{$detail.domain}</p>
+            <ul>
+            <li><span>域名释义：</span>{$detail.summary|default="暂无简介"}</li>
+            <li><span>注册时间：</span>{$domainDetail.register_time}<em class="fr">百度权重<span style="border:none;"><img border=0 src="http://br.links.cn/getbr.asp?url={$detail.domain}&style=2"></span></em></li>
+            <li><span>备 案 号：</span><empty name="domainDetail.beian">暂无备案<else />{$domainDetail.beian}</empty><em class="fr">Google<span><img border=0 src="http://tool.baiwanzhan.com/t1/prImg.aspx?s=3&mode=pic&url={$detail.domain}"></span></em></li>
+            </ul>
+            </div>
+            <div class="ding_r fr">
+            <ul>
+            <p><span><a class="tg1" href="javascript:Notice('{$detail.id}');">关注</a><a>提醒</a></span></p>
+            <li style="width:100%;">注 册 商：<span class="yse1"><eq name="domainDetail.is_transfer" value="1">米仓<else />{$domainDetail.registrar}</eq></span></li>
+            <li style="width:100%;">询价次数：<span class="yse2">{$detail.times}次</span></li>
+            <li style="width:100%;">上架时间：<span class="yse2">{$detail.create_time|date='Y/m/d H:i:s',###}</span></li>
+            <li style="width:100%;">关注人数：<span class="yse3">{$noticeNum|intval}人</span></li>
+            <neq name="detail.mid" value="$mid"><li class="eyur"><span class="fl">你的出价</span>
+            <input class="name_3 fl"  type="text" name="chujia" id="chujia" value="输入您的报价" onClick="if(this.value='输入您的报价')this.value='';">
+            <input type="hidden" id="seller_price" value="{$detail.seller_price|Fen2Yuan}">
+            <input onclick="check_seccode('XunJia_Buy','{$detail.id}');" type="button" class="btn_cj fl" value="立即出价"/>
+            </span></li></neq>
+            </ul>
+            </div>
+        </div>
+        <!--内容结束 结束-->
+    </div>
+    <div class="biddkun mr20">
+    	<h3><span>卖家其他询价</span></h3>
+        <div class="detailbox">
+            <volist name="other" id="item">
+            <div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即询价</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+    </div>
+    <div class="biddkun mr20">
+    	<div class="navh2" id="navhljs2">
+			<a href="javascript:void(0);" onclick="jdhddh(this,0)" class="navhl_h">纯数字域名</a> 
+			<a href="javascript:void(0);" onclick="jdhddh(this,1)" class="navhl_q">纯数字域名</a> 
+			<a href="javascript:void(0);" onclick="jdhddh(this,2)" class="navhl_q">杂米</a> 
+        </div>
+        <div id="navhljs2_c0" class="detailbox" style="display: block;">
+        	<volist name="salesShuZi" id="item">
+        	<div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即查看</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+        <div id="navhljs2_c1" class="detailbox" style="display: none;">
+        	<volist name="salesZiMu" id="item">
+        	<div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即查看</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+        <div id="navhljs2_c2" class="detailbox" style="display: none;">
+        	<volist name="salesZaMi" id="item">
+        	<div>
+            <div class="box">
+            <div class="h-zi1">{$item.domain}</div>
+            <div class="h-zi2">{$item.summary|default="暂无"}</div>
+            <div class="h-zi2"><em>关注人数：{$item.id|CountNotice}人</em></div>
+            <a href="/Sell/detail?id={$item.id}" class="h-orderbte">立即查看</a>
+            </div>
+            </div>
+            </volist>
+        </div>
+    </div>
+    <!--详细结束 结束-->
+    </div>
+    <!--左侧缩展导航 结束-->
+    <div class="wrap_jj_r fl">
+    
+    <div class="stepvrs">
+    	<ul>
+        <h4>买方报价规则</h4>
+        <p>买方报价是一种由买家先出价、买卖双方议价的交易方式。卖家在发布域名的时候可以设置最小出价，以过滤最小出价以下的报价。
+其他注册商域名发布买方报价，要求域名状态正常、注册满60天、距过期时间大于30天、能正常申请转移密码、能正常转移注册商；所提交的域名必须介绍规范，不得有误导、虚假等性质的介绍。</p>
+      	</ul>
+    </div>
+    <!--流程 结束-->
+  </div>
+    <!--右侧缩展导航 结束-->             
+</div>
+</div>

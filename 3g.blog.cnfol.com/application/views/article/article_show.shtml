@@ -1,0 +1,473 @@
+<?php include $commonheader;?>
+<nav class="Nav TextHeader">
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/article/list';?>" class="BackPage ToBlock" ></a>
+    <h2 class="Text-title F16 Tc">博客正文</h2>
+</nav>
+<?php  if(isset($isowner) && $isowner==true){?>
+
+<?php } else {?>
+<?php include $otherpersonhead;?>
+<?php } ?>
+<section>
+    <header class="WZ_header2">
+        <h2 class="WZ_title F16 Pl10 Pt10">
+            <font class="Red_color zdshow"></font>
+            <?php 
+            if($article['Recommend'] == 2 || $article['Recommend'] == 3 || $articlestat['IsUsed'] == 1) {?>
+            <font class="Red_color">[荐]</font>&nbsp;
+            <?php } ?>
+            <?php if($articlestat['IsTop'] == 1) {?>
+            <font class="Red_color zdshow">[顶]</font>&nbsp;
+            <?php }
+            if($article['Property']=='2'){ ?>
+            <font class="Red_color">[转]</font>&nbsp;
+            <?php }else if($article['Property']=='4'){ ?>
+            <font class="Red_color">[收藏]</font>
+            <?php } ?>
+            <?php echo $article['Title'];?>
+        </h2>
+        <p class="WZ_desc Pl10 Pr10 Hui_color">
+            <time class="Fl"><?php echo timeopMyblog($article['AppearTime']);?></time>
+            <span class="Fr">浏览量：<span id="atonclick_<?php echo $article['ArticleID'];?>"><em>0</em></span></span>
+        </p>
+    </header>
+    <section class="WZ_content F14">
+        <?php if(isset($loginform) && $loginform == 1 && !$isowner){?>
+        <p>该文章需要注册用户才能查阅，请先 <a style="cursor:pointer;color:red;" href="<?php echo $this->config->item('usercenter_url').curPageURL();?>">登录</a></p>
+        <?php }else if($article['GiftPrice'] > 0 && $article['CheckGift'] != 1 && !$isowner){?>
+        <p>送鲜花文章无法查看</p>
+        <?php }else{
+        $searchArray=array('/(现\s*货\s*金)/','/(现\s*货\s*黄\s*)(金)/','/(现\s*货\s*银)/','/(现\s*货\s*白\s*)(银)/','/(t\s*d\s*金)/i','/(t\s*d\s*银)/i','/(天\s*通\s*银)/','/(黄)(\s*金\s*t\s*d)/i','/(白)(\s*银\s*t\s*d)/i','/(纸\s*黄\s*)(金)/','/(纸\s*白\s*)(银)/','/(黄\s*)(金)(\s*价\s*格)/','/(白\s*)(银)(\s*价\s*格)/','/(黄\s*金)/','/(白\s*银)/','/(金\s*价)/','/(银\s*价)/');
+        $repalceArray=array('<a href="http://gold.cnfol.com" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://gold.cnfol.com" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://silver.cnfol.com/" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://silver.cnfol.com" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">-1203replace3021-$1-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">-1203replace3021-$1-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-$3</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-$3</a>','<a href="http://gold.cnfol.com" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://silver.cnfol.com/" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1</a>');
+
+        $article['Content']=preg_replace($searchArray, $repalceArray,$article['Content'],1);
+        $article['Content']=preg_replace('/-1203replace3021-/','',$article['Content']);
+        $article['Content'] = str_replace('http://blog.cnfol.com',config_item('base_url'),$article['Content']);
+        echo (strip_tags($article['Content'], '<img><p><br><a>')); 
+        }
+        ?> 
+    </section>
+    <section class="FenXiang" id="FenXiang">
+        <span class="F14 Fl Pl10">分享到：</span>
+        <span class="Sina Fl"></span>
+        <span class="Qzone Fl Ml10"></span>
+        <span class="FxBtn3 Fl Ml10"></span>
+        <span class="FxBtn4 Fl Ml10"></span>
+        <!-- Baidu Button BEGIN -->
+            <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+            <a class="bds_tsina"></a>
+            <a class="bds_qzone"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_tqf"></a>
+            </div>
+            <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+            <script type="text/javascript" id="bdshell_js"></script>
+            <script type="text/javascript">
+            document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+            </script>
+		<!-- Baidu Button END --> 
+    </section>
+    <?php if(!empty($user)){?>
+    <?php  if(isset($isowner) && $isowner==true){?>
+    <section class="MoreModules" id="MoreModules">
+        <?php 
+        if($articlestat['IsTop']==0){
+        $istop=1;$istopName = '置顶';$zdimg = 'class="M_top_img ToBlock Wrp"';
+        }else{
+        $istop=0;$istopName = '取消置顶';$zdimg = 'class="M_top_img2 ToBlock Wrp"';
+        }
+        ?>
+        <form id="article_action_form" name="article_action_form" method="post" target="_blank">
+            <input type="hidden" name="act" value="del"/>
+            <input type="hidden" name="id"  value="<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID']; ?>" />
+            <input type="hidden" name="memid" id="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="hidden" name="flashCode" id="flashcode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>" />
+
+            <input type="hidden" name="ismut"  value="<?php echo $article['IsMultimedia']; ?>" />
+            <input type="hidden" name="recommend"  value="<?php echo $article['Recommend']; ?>" />
+            <input type="hidden" name="istop"  value="<?php echo $istop;?>" />
+        </form>
+        <div class="M_edit Fl"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/Add?articleid=<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID'];?>" class="M_edit_img ToBlock Wrp" >编辑</a></div>
+        <div class="M_top Fl" id="zdStatusChange"><a href="javascript:void(0);" <?php echo $zdimg;?> onclick="javascript:isArticleTop('<?php echo $istop; ?>');"><?php echo $istopName;?></a></div>
+        <div class="M_del Fl"><a href="javascript:void(0);" onclick="javascript:delArticleSure();" class="M_del_img ToBlock Wrp" >删除</a></div>
+    </section>
+    <?php } else {
+    $scanging = $collect_aticle==1 ? 'class="ScangImg2 ToBlock Wrp"':'class="ScangImg ToBlock Wrp"';
+    
+    ?>
+    <section class="MoreModules" id="MoreModules">
+        <div class="Zan Fl"><a href="javascript:submitvote();" class="ZanImg ToBlock Wrp" id="showvotes"><?php echo (isset($articlestat['TotleVote'])? $articlestat['TotleVote']:'0');?></a></div>
+        <div class="Plun Fl"><a href="javascript:void(0);" class="PlunImg ToBlock Wrp" id="pinglunBut">评论</a></div>
+        <div class="Zzai Fl"><a href="javascript:transshipment('2','<?php echo(strtotime($article['AppearTime'])); ?>','<?php echo($article['ArticleID']); ?>','<?php echo $bloginfo['MemberID'];?>','<?php echo getPrimariBlogMemberId($bloglist); ?>','transshipmentnum');" class="ZzaiImg ToBlock Wrp" >转载</a></div>
+        <div class="Scang Fl"><a href="javascript:articlecollect('2','<?php echo(strtotime($article['AppearTime'])); ?>','<?php echo($article['ArticleID']); ?>','<?php echo $bloginfo['MemberID'];?>','<?php echo getPrimariBlogMemberId($bloglist); ?>','collectnum');" <?php echo $scanging;?> id="reserved">收藏</a></div>
+    </section>
+
+    <form class="PL_form Wrp Hide Feedback" id="PL_form" method="get" name="myComment">
+        <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($blogconfig['AllowComment'].$bloginfo['MemberID'].$article['ArticleID'].$article['Title']);?>">
+        <input type="hidden" name="allowcomment" value="<?php echo $blogconfig['AllowComment'];?>">
+        <input type="hidden" name="memberid" value="<?php echo $bloginfo['MemberID'];?>">
+        <input type="hidden" name="userdomain" value="<?php echo getPrimariBlogDomain($bloglist);?>">
+        <input type="hidden" name="address" value="<?php echo $baseurl;?>">
+        <input type="hidden" name="loginuserid" value="<?php echo($loginuserid); ?>" />
+        <input type="hidden" name="userid" value="<?php echo($bloginfo['UserID']); ?>" />
+        <input type="hidden" name="articleId" value="<?php echo $article['ArticleID'];?>"/>
+        <input type="hidden" name="act" value="addcomment"/>
+        <input type="hidden" name="appeartime" value="<?php echo $article['AppearTime'];?>" />
+        <input name="articleSubject" type="hidden" id="articleSubject"  value="<?php echo $article['Title'];?>"/>
+        <textarea class="PL_textarea " preset="Rqd" id="PLtxt" name="content">请输入评论内</textarea><i></i>
+        <div class="PL_Btn"><input type="button" class="PL_submit" value="评论" onclick="checkcmtformComment('PL_form')"/></div>
+    </form>
+    <?php } ?>
+    <?php } ?>
+    <section class="PingLun">
+        <h3 class="PL_title Mt10 Red_color"><font class="F16 Hei_color">评论</font> (<span id="ArticleCommentNum"><?php echo (isset($article['CommentNumber']) && $article['CommentNumber'] > 0 ? $article['CommentNumber'] : '0');?></span>人)</h3>
+        <input type="hidden" name="pl_artid" id="pl_artid" value="<?php echo $article['ArticleID'];?>"/>
+        <input type="hidden" name="pl_co" id="pl_co" value="<?php echo getVerifyStr($article['ArticleID'].$bloginfo['UserID']);?>"/>
+        <input type="hidden" name="pl_cnum" id="pl_cnum" value="3"/>
+        <section class="PL_Box" id="PL_Box">
+            <div class="List_o_pl">
+                评论加载中...
+            </div>
+        </section>
+        <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/artComment/<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID'];?>.html" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore" >查看全部评论</a>	
+    </section>
+</section>
+<?php if(!empty($user)){?>
+<?php  if(isset($isowner) && $isowner==true){?>
+<form class="PL_form Wrp Show Feedback" id="PL_form" method="get" name="myComment">
+    <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($blogconfig['AllowComment'].$bloginfo['MemberID'].$article['ArticleID'].$article['Title']);?>">
+    <input type="hidden" name="allowcomment" value="<?php echo $blogconfig['AllowComment'];?>">
+    <input type="hidden" name="memberid" value="<?php echo $bloginfo['MemberID'];?>">
+    <input type="hidden" name="userdomain" value="<?php echo getPrimariBlogDomain($bloglist);?>">
+    <input type="hidden" name="address" value="<?php echo $baseurl;?>">
+    <input type="hidden" name="loginuserid" value="<?php echo($loginuserid); ?>" />
+    <input type="hidden" name="userid" value="<?php echo($bloginfo['UserID']); ?>" />
+    <input type="hidden" name="articleId" value="<?php echo $article['ArticleID'];?>"/>
+    <input type="hidden" name="act" value="addcomment"/>
+    <input type="hidden" name="appeartime" value="<?php echo $article['AppearTime'];?>" />
+    <input name="articleSubject" type="hidden" id="articleSubject"  value="<?php echo $article['Title'];?>"/>
+    <textarea class="PL_textarea " preset="Rqd" id="PLtxt" name="content">请输入评论内</textarea><i></i>
+    <div class="PL_Btn"><input type="button" class="PL_submit" value="评论" onclick="checkcmtformComment('PL_form',1)"/></div>
+</form>
+<?php }?>
+<?php } else {?>
+<?php if($blogconfig['AllowComment'] > 0){?>
+<section class="NL_msg Tc Mt10">您还未登录只能<a href="javascript:void(0);" id="NL_send">匿名发表评论</a>。您可以<a href="<?php echo $this->config->item('usercenter_url').curPageURL();?>">登录</a>丨<a href="#">注册</a>后发表</section>
+<form class="PL_form Wrp Feedback Hide" id="PL_form" method="get" >
+    <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($blogconfig['AllowComment'].$bloginfo['MemberID'].$article['ArticleID'].$article['Title']);?>">
+    <input type="hidden" name="allowcomment" value="<?php echo $blogconfig['AllowComment'];?>">
+    <input type="hidden" name="memberid" value="<?php echo $bloginfo['MemberID'];?>">
+    <input type="hidden" name="userdomain" value="<?php echo getPrimariBlogDomain($bloglist);?>">
+    <input type="hidden" name="address" value="<?php echo $baseurl;?>">
+    <input type="hidden" name="loginuserid" value="<?php echo($loginuserid); ?>" />
+    <input type="hidden" name="userid" value="<?php echo($bloginfo['UserID']); ?>" />
+    <input type="hidden" name="articleId" value="<?php echo $article['ArticleID'];?>"/>
+    <input type="hidden" name="act" value="addcomment"/>
+    <input type="hidden" name="appeartime" value="<?php echo $article['AppearTime'];?>" />
+    <input name="articleSubject" type="hidden" id="articleSubject"  value="<?php echo $article['Title'];?>"/>
+    <input type="hidden" name="username" value="中金在线网友">
+    <textarea class="PL_textarea " preset="Rqd" id="PLtxt" name="content">请输入评论内</textarea><i></i>
+    <div class="PL_Btn">
+        <input type="button" class="PL_submit" value="评论" onclick="checkcmtformComment('PL_form')"/>
+    </div>
+</form>
+<?php } ?>
+<?php } ?>
+<?php  if(isset($isowner) && $isowner==true){?>
+<!--下面是置定弹出窗和遮照层DialogMark-->
+<div class="DialogMark Hide" id="ZD_Mark"></div>
+<div class="GZ_dialog F16 Hide" id="ZD_dialog">
+    <div class="GZ_dtit Pt10">是否要<span id="zhiding">取消置顶</span>？</div>
+    <div class="Gz_dBtn Tc">
+        <a href="javascript:void(0);" class="QueDing Fl" onClick="isTopSure();">确定</a>
+        <a href="javascript:void(0);" class="QuXiao Fl" onClick="cacheisTop();">取消</a>
+    </div>
+</div>
+<!--弹出窗结束-->
+<!--下面是删除弹出窗和遮照层DialogMark-->
+<div class="DialogMark Hide" id="Del_Mark"></div>
+<div class="GZ_dialog F16 Hide" id="Del_dialog">
+    <div class="GZ_dtit Pt10">是否要删除文章？</div>
+    <div class="Gz_dBtn Tc">
+        <a href="javascript:void(0);" class="QueDing Fl" onClick="delSure();">删除</a>
+        <a href="javascript:void(0);" class="QuXiao Fl" onClick="cacheDel();">取消</a>
+    </div>
+</div>
+<!--弹出窗结束-->
+<?php } ?>
+<?php  include $commonfooter; ?>
+<div id="ajaxdiv" style="display:none;"></div>
+
+<script type="text/javascript" src="<?php echo($viewurl); ?>"></script>
+<script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Forms.js"></script>
+<script type="text/javascript">
+    var pinglun=C.G('pinglunBut');
+    var NL_send=C.G('NL_send');
+    var oPL_form=C.G('PL_form');
+    var baseurl = "<?php echo $baseurl; ?>";
+    var aid = "<?php echo $article['ArticleID'];?>";
+    var getcode = "<?php echo getVerifyStr($article['ArticleID']);?>";
+    var memid   = "<?php echo $bloginfo['MemberID'];?>";
+    var blogartvote   = "<?php echo $blogartvote;?>";
+    
+    window.onload=function(){
+        Bk.app.toShare();
+        Forms("PL_form");
+        Bk.app.YzPL();
+        $(function(){
+            $('#ajaxdiv').load("<?php echo $baseurl.'/ajaxomcount/art/'.$article['ArticleID'];?>?"+new Date().getTime());
+        });
+        $(function(){
+            if(blogartvote == 1){
+                $('#showvotes').removeClass('ZanImg');
+                $('#showvotes').addClass('ZanImg2');
+            }
+        });
+    }
+    
+    if(pinglun){
+        pinglun.onclick=function(){
+            if(oPL_form.className=='PL_form Wrp Hide Feedback'){
+                oPL_form.className='PL_form Wrp Show Feedback';
+            }else{
+                oPL_form.className='PL_form Wrp Hide Feedback';
+            };
+        }
+    }
+    if(NL_send){
+        Bk.app.noLoginSendPL();
+    }
+    function submitvote(){
+        if(blogartvote != 1){
+            $.post(baseurl+'/ajaxsetartvotecnt/'+aid+'/'+memid,{code:getcode,tnlvote:$('#showvotes').html()},function(data){
+                if(data.errno == 'succ'){
+                    $('#showvotes').removeClass('ZanImg');
+                    $('#showvotes').addClass('ZanImg2');
+                    var num = parseInt($('#showvotes').html()) + 1;
+                    $('#showvotes').html(num);
+                    blogartvote = 1;
+                }else{
+                    alertDialog(data.error);
+                }
+            },'json');
+        }else{
+            alertDialog('你已经赞过了');
+        }
+    }
+    function transshipment(type,articletime,articleid,memberid,loginmemberid,showid,istransshipment){
+
+        if(istransshipment=='1'){
+            alertDialog('不能转载自己的文章');
+            return;
+        }
+	
+        type = (type==1)?'添加好友':'转载';
+        url  = baseurl+"/index.php/widget/articletransshipment?articletime="+articletime+"&articleid="+articleid+'&memberid='+memberid+'&loginmemberid='+loginmemberid+'&showid='+showid+'&type=json&r='+new Date().getTime();
+    
+        $.ajax({
+            type: 'get',
+            url: url, 
+            dataType: 'json',
+            success: function(data){
+                if(data.error=='1'){
+                    alertDialog('转载成功');
+                    
+                }else{
+                    alertDialog('已经转载过');
+                }
+			
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alertDialog('系统繁忙，稍后再试');
+            }
+        });
+    }
+    function articlecollect(type,articletime,articleid,memberid,loginmemberid,showid,iscollect){
+        if(iscollect=='1')
+        {
+            alertDialog('同一篇文章不能重复收藏');
+            return;
+        }
+        type = (type==1)?'添加好友':'收藏';
+        url  = baseurl+"/index.php/widget/articlecollect?articletime="+articletime+"&articleid="+articleid+'&memberid='+memberid+'&loginmemberid='+loginmemberid+'&showid='+showid+'&type=json&r='+new Date().getTime();
+    
+        $.ajax({
+            type: 'get',
+            url: url, 
+            dataType: 'json',
+            success: function(data){
+                $('#reserved').removeClass('ScangImg');
+                $('#reserved').addClass('ScangImg2');
+                if(data.error=='1'){
+                    alertDialog('收藏成功');
+                }else{
+                    alertDialog('已经收藏过');
+                }
+			
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alertDialog('系统繁忙，稍后再试');
+            }
+        });
+    
+    }
+
+</script>
+
+<script language="javascript">
+    $(function(){
+        getAricleList();
+    });
+    function getAricleList(){
+        var flashCode = $('#pl_co').val();
+        var num = $('#pl_cnum').val();
+        var articleid = $('#pl_artid').val();
+        
+        $.getJSON(baseurl+'/ajaxcomment/list/'+articleid+'/1',{'flashCode':flashCode,'num':num, 'replaceid':'PL_Box','r':new Date().getTime()}, function(json){
+            if(json.data != ''){
+                $('#PL_Box').html(json.data);
+            }
+            
+        });
+    }
+    function checkcmtformComment(id,type){
+        var content = $('#PLtxt').val();
+        if(content == '' || content == '请输入评论内'){
+            alertDialog('请输入评论'); return false;
+        }else{
+            $.post(baseurl+'/ajaxcomment/Action',$('#'+id).serialize(),function callback(data){
+                alertDialog(data.error);
+                if((data.errno == '200036') || (data.errno == '200037') || (data.errno == 'check')){
+                    $('#PLtxt').val('');  
+                }else{
+                    $('#PLtxt').val('');
+                    if(data.errno == 'succ'){
+                        var focusNum = parseInt($("#ArticleCommentNum").first().text())+1;   
+                        $('#ArticleCommentNum').html(focusNum);
+                        getAricleList();
+                    }
+               
+                }
+                if(type !=1){
+                    $('#PL_form').removeClass('Show ');
+                    $('#PL_form').addClass('Hide');
+                }
+                $('#PL_form i').removeClass('Ok');
+            
+            },'json');   
+        }
+    }
+    function DelSingleComment(cid,artid,co,page){ 
+        if(page == undefined) page = 1;
+        $.post(baseurl+'/ajaxcomment/Action',{
+            'act':'delcomment',
+            'cid':cid,
+            'artid':artid,
+            'flashcode':co,
+            'memid':memid
+        },function callback(data){
+            alertDialog(data.error);
+            if('succ' == data.errno){
+                $('#Content'+cid).addClass('Hide');
+                var focusNum = parseInt($("#ArticleCommentNum").first().text())-1;
+                $('#ArticleCommentNum').html(focusNum);
+            }
+        },'json');
+        return false;    
+    }
+    
+    var viewW=document.documentElement.clientWidth||document.body.clientWidth;
+    var viewH=document.documentElement.clientHeight||document.body.clientHeight;
+    var bodyHeight=document.documentElement.offsetHeight||document.body.offsetHeight;
+		
+    function toFixed(oMark, oDialog){
+        var srlTop=document.documentElement.scrollTop||document.body.scrollTop;
+        oMark.style.height=bodyHeight+"px";
+        oDialog.style.marginTop= -oDialog.offsetHeight/2+"px";
+        oDialog.style.MarginLeft= -oDialog.offsetWidth/2+"px";
+
+    }
+    function toShow(oMark, oDialog){
+        Bk.tools.removeClass(oMark,"Hide");
+        Bk.tools.addClass(oMark,"Show");
+        Bk.tools.removeClass(oDialog,"Hide");
+        Bk.tools.addClass(oDialog,"Show");		
+    }
+    function toHide(oMark, oDialog){
+        Bk.tools.removeClass(oDialog,"Show");
+        Bk.tools.addClass(oDialog,"Hide");
+        Bk.tools.removeClass(oMark,"Show");
+        Bk.tools.addClass(oMark,"Hide");		
+    }
+    var oDel_dialog=C.G('Del_dialog');
+    var oDel_Mark=C.G('Del_Mark');
+    var oZD_dialog=C.G('ZD_dialog');
+    var oZD_Mark=C.G('ZD_Mark');
+    var domainName = '<?php echo($bloginfo['DomainName']);?>';
+    function delArticleSure(){
+        toShow(oDel_Mark, oDel_dialog);
+        toFixed(oDel_Mark, oDel_dialog);
+    }
+    function isArticleTop(top){
+        toShow(oZD_Mark,oZD_dialog);
+        toFixed(oZD_Mark,oZD_dialog);
+        if(top == 1){
+            $('#zhiding').html('置顶');
+        }else{
+            $('#zhiding').html('取消置顶');
+        }
+    }
+    function cacheDel(){
+        toHide(oDel_Mark, oDel_dialog);
+    }
+    function cacheisTop(){
+        toHide(oZD_Mark,oZD_dialog);
+    }
+    function delSure()
+    {
+        cacheDel();
+        $.ajax({
+            type: 'post',
+            url: baseurl+'/index.php/article/Action/'+domainName, 
+            data: $('#article_action_form').serialize(), 
+            dataType: 'json',
+            success: function(data){
+                alertDialog(data.error);
+                countDownHref("<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/article/list';?>");
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alertDialog('发生错误，请重新提交保存'+XMLHttpRequest.status+','+XMLHttpRequest.readyState+','+textStatus);
+            }
+        });
+    }
+    
+    function isTopSure(){
+        cacheisTop();
+        $.ajax({
+            type: 'post',
+            url: baseurl+'/index.php/article/Action/'+domainName, 
+            data: $('#article_action_form').serialize()+'&act=top', 
+            dataType: 'json',
+            success: function(data){
+                alertDialog(data.error);
+                if(data.errno == 'success'){
+                    var istop = $('input[name=istop]').val();
+                    if(istop==1){
+                        $('input[name=istop]').val('0');
+                        var zdhtml = '<a href="javascript:void(0);" class="M_top_img2 ToBlock Wrp" onclick="javascript:isArticleTop(\'0\');">取消置顶</a>';
+                        $('#zdStatusChange').html(zdhtml);
+                        $('.zdshow').html('[顶]');
+                    }else{
+                        $('input[name=istop]').val('1');
+                        var zdhtml = '<a href="javascript:void(0);" class="M_top_img ToBlock Wrp" onclick="javascript:isArticleTop(\'1\');">置顶</a>';
+                        $('#zdStatusChange').html(zdhtml);
+                        $('.zdshow').html('');
+                    }
+                }
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alertDialog('发生错误，请重新提交保存'+XMLHttpRequest.status+','+XMLHttpRequest.readyState+','+textStatus);
+            }
+        });
+    }
+</script>

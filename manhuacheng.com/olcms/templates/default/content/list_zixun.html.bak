@@ -1,0 +1,156 @@
+{template "content","header"}
+<!--main-->    
+<div class="middle_div1">
+    	<div class="middle_div1_le" style="border:none;">
+			<img src="{IMG_PATH}/img/hkhkfdgh.jpg"  class="mdl_img"/>
+        	<div class="mhzx middle_div1_ri">
+				<div class="rs_dm_tit" style="width:100%">
+					<h3>{$CATEGORYS[$catid]['catname']}</h3>
+				</div>
+			{pc:content action="lists" catid="$catid" num="7" order="id DESC" page="$page"}
+				{loop $data $r}
+					<div class="mhzx_txt">
+						<div class="mhzx_txt_le"><a href="{$r[url]}" target="_blank"><img width='200' height='130' src="{thumb($r[thumb], 200, 130, 0)}"/></a></div>
+						<div class="mhzx_txt_ri">
+							<div class="to">
+								<i class="icon"></i>
+								<h3><a href="{$r[url]}" target="_blank" >{$r[title]}</a></h3>
+							</div>
+							<p>{$r[description]}<a href="{$r[url]}" target="_blank">[阅读全文]</a></p>
+							<div class="pl">
+								<div class="pl_le"><span>浏览:{$r[views]}</span></div>
+							</div>
+						</div>
+					</div>
+				{/loop}
+			{/pc}
+
+                <div class="ad02 page" id="search_fy">
+				{$pages}     	   
+				</div>	
+            </div>
+        </div>
+        
+        
+        <div class="middle_div1_ri">
+					<div class="phb">
+					<div class="rs_dm_tit">
+						<h3>排行榜</h3>
+					</div>
+                    <div class="phb_txt">
+                    	<ul>
+                        	<li>
+								<i class="first2">1</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+							<li>
+								<div class="phb_img">
+									<img src="{IMG_PATH}/img/sdfsdf.jpg" />
+									<div class="phb_img_kj"><span>NO.1</span></div>
+								</div>								
+							</li>
+							<li>
+								<i class="first2">2</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+							<li>
+								<i class="first2">3</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+							<li>
+								<i class="first3">4</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+							<li>
+								<i class="first3">5</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+							<li>
+								<i class="first3">6</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+							<li>
+								<i class="first3">7</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+							<li>
+								<i class="first3">8</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+							<li>
+								<i class="first3">9</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+							<li>
+								<i class="first3">10</i>
+								<a href="#" class="phb_txtc">妖精的尾巴，妖精的尾巴。</a>
+								<span class="phb_txt_hs">12</span>
+							</li> 
+						</ul>                          
+                    </div>
+                </div>
+				<div class="phb2">
+					<div class="rs_dm_tit">
+						<h3>热门标签</h3>
+					</div>
+                    <div class="phb_txt2">
+                    	<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c2">雷人</a>  
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c1">雷人</a> 
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c2">雷人</a> 
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c2">雷人</a>  
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c1">雷人</a> 
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c2">雷人</a> 
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c2">雷人</a>  
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c1">雷人</a> 
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c2">雷人</a> 
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c2">雷人</a>  
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c1">雷人</a> 
+						<a href="#" class="pt2c1">感动</a>
+					    <a href="#" class="pt2c2">雷人</a>                 
+                    </div>
+                </div>
+        	<!-- <div class="tu">{template "content","250ad"}</div> -->
+                <div class="xh_man">
+				<div class="rs_dm_tit">
+					<h3>完结漫画推荐</h3>
+				</div>
+                <div class="xh_man_txt">
+                	<ul>
+						{php $where = "status=99 AND state = 1 AND type_id NOT IN(".dimplode(dexplode(NOT_ALLOW)).")";}		
+						{pc:content action="table_list" table="Cartoon" fields="id,catid,title,thumb"  where="$where" order="views DESC" num="6" cache="3600" }
+						{loop $data $r}
+						<li>
+                        	<a href="/manhua{$r[id]}" title ="{$r[title]}" target="_blank"><img width=80 height=115 src="{thumb($r[thumb], 80, 115, 0)}"></a>
+                            <a href="/manhua{$r[id]}" title ="{$r[title]}" target="_blank">{str_cut($r[title],22,'')}</a>
+                        </li>
+
+							{/loop}
+							{/pc}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{template "content","footer"}

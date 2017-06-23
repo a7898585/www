@@ -1,0 +1,70 @@
+<dt>
+<a href="<?php echo($this->config->item('base_url').'/'.$bloginfo['DomainName'].'/myfocused/friend'); ?>" class="fanf" target="_blank">我的粉丝</a><i>|</i>
+<a href="<?php echo($this->config->item('base_url').'/'.$bloginfo['DomainName'].'/myfocus/friend'); ?>" class="fans" target="_blank">我的关注</a></dt>       
+<dd style="display:block" class="fanff">    
+    <ul class="PicLst">
+        <?php if($focuseCount < 1) {?>
+        <p>&nbsp;&nbsp;&nbsp;暂时还没有粉丝</p>
+        <?php } else if($focuseCount == 1) {?>
+
+        <li>
+            <a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$focuse['UserID'].'.html'; ?>" target="_blank"><img src="<?php  echo getUserHead($focuse['UserID']);?>" class="refid" refid="<?php echo $focuse['UserID']; ?>" style="cursor: pointer;" onerror="this.onerror='';this.src='<?php echo($this->config->item('headurl')); ?>/man_48.png';" ></a>
+            <p><a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$focuse['UserID'].'.html';?>" target="_blank"><?php echo utf8_str($focuse['NickName'],8,'false'); ?></a></p>
+        </li>
+
+        <?php } else {?>
+        <?php 
+        if($focuse!='')
+        {
+        foreach($focuse as $v) { 
+        ?>
+        <li>
+            <a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$v['UserID'].'.html';?>"  target="_blank">
+
+                <img src="<?php  echo getUserHead($v['UserID']);?>" class="refid" refid="<?php echo $v['UserID']; ?>" style="cursor: pointer;" onerror="this.onerror='';this.src='<?php echo($this->config->item('headurl')); ?>/man_48.png';" />
+
+            </a>
+            <p><a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$v['UserID'].'.html';?>" target="_blank"><?php echo utf8_str($v['NickName'],8,'false'); ?></a></p>
+
+        </li>
+        <?php } } ?>
+        <?php   }?>
+
+    </ul>
+</dd> 
+<dd class="fanss">
+    <ul class="PicLst">
+        <?php if($focusedCount < 1) {?>
+        <p>&nbsp;&nbsp;&nbsp;暂时还没有关注</p>
+
+        <?php } else if($focusedCount == 1) {?>
+        <li>
+            <a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$focused['UserID'].'.html';?>"  target="_blank"><img src="<?php  echo getUserHead($focused['UserID']);?>" class="refid" refid="<?php echo $focused['UserID']; ?>" style="cursor: pointer;" onerror="this.onerror='';this.src='<?php echo($this->config->item('headurl')); ?>/man_48.png';" ></a>
+            <p><a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$focused['UserID'].'.html';?>" target="_blank"><?php echo utf8_str($focused['NickName'],8,'false'); ?></a></p>
+        </li>       	  	
+        <?php } else{ ?>
+        <?php 
+        if($focused!='')
+        {
+        foreach($focused as $v) { 
+        ?>
+        <li>
+            <a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$v['UserID'].'.html';?>"  target="_blank"><img src="<?php  echo getUserHead($v['UserID']);?>" class="refid" refid="<?php echo $v['UserID']; ?>" style="cursor: pointer;" onerror="this.onerror='';this.src='<?php echo($this->config->item('headurl')); ?>/man_48.png';" ></a>
+            <p><a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$v['UserID'].'.html';?>" target="_blank"><?php echo utf8_str($v['NickName'],8,'false'); ?></a></p>
+        </li>
+        <?php } } ?>
+        <?php   } ?>
+    </ul>
+</dd> 
+<script>
+    $(".fans").hover(function(){
+        $(".fanss").show();
+        $(".fanff").hide();
+    })
+
+    $(".fanf").hover(function(){
+        $(".fanss").hide();
+        $(".fanff").show();
+    })
+        	
+</script>

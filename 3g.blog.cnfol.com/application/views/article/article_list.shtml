@@ -1,0 +1,184 @@
+<?php include $commonheader;?>
+<nav class="Nav TextHeader">
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" class="BackPage ToBlock" ></a>
+    <h2 class="Text-title F16 Tc">
+        <?php  if(isset($isowner) && $isowner==true){?>
+        我的博文
+        <?php } else {?>
+        他的博文
+        <?php } ?>
+    </h2>
+</nav>
+<section id="Lst_news" class="HY_Lst_news">
+    <?php 
+    if(!empty($artlist) && !empty($artlist['Record'])){
+    foreach($artlist['Record'] as $key=>$art){
+    $arturl = $baseurl.'/'.$bloginfo['DomainName'].'/article/'.strtotime($art['AppearTime']).'-'.$art['ArticleID'].'.html';
+    $artTitle = filter($art['Title']);
+    $artContent = filter(filter($art['Summary']));
+    if(strlen($artTitle) > 28){
+    $artTitle = utf8_str($artTitle,28);
+    }
+    if(strlen($artContent) > 70){
+    $artContent = utf8_str($artContent,70);
+    }
+    ?>
+    <div class="HY_o_new Mt10">
+        <div class="HY_o_new_tit">
+            <h3 class="Fl F16 Red_color">
+                <font class="Red_color">
+                <?php if($art['Recommend'] == 2 || $art['Recommend'] == 3 || $art['IsUsed'] == 1) {?>
+                [荐]
+                <?php } ?>
+                <?php
+                echo $art['IsTop']==1?'[顶]':'';
+                echo($art['Property']==2?'[转]':'');
+                echo($art['Property']==4?'[收藏]':'');
+                echo($art['Property']==5?'[草稿]':'');
+                ?>
+                </font>
+                <a href="<?php echo $arturl;?>"><?php echo $artTitle;?></a>
+            </h3>
+            <?php if($art['PictureUrl']!='0' && !empty($val['PictureUrl'])){ ?><span class="Bh_img Fl"></span><?php } ?>
+        </div>
+        <time class="HY_o_new_time Hui_color"><?php echo timeopMyblog($art['AppearTime']); ?></time>
+        <p class="Lst-new-desc F16 Pr10"><a href="<?php echo $arturl;?>"><?php echo $artContent;?></a></p>
+    </div>
+    <?php } ?>
+    <?php if($articleMore == 1){ ?>
+    <a href="javascript:void(0);" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore" >获取更多</a>
+    <?php }else{ ?>	
+    <a href="javascript:void(0);" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore" >已经显示全部内容</a>
+    <?php } ?>
+    <?php }else{ ?>
+    <div class="HY_o_new Mt10">该博主未发表博文</div>
+    <?php } ?>	
+</section>
+<input type="hidden" name="currentpage" id="currentpage" value="2" />
+<input type="hidden" name="scrolltopflag" id="scrolltopflag" value="2" />
+<?php  include $commonfooter; ?>
+<script type="text/javascript">
+    var DataFields={
+        title:"title",
+        content:"content",
+        arturl:"arturl",
+        time:"time",
+        isContainImg:"isContainImg",
+        isZhuan:"isZhuan",
+        isJian:"isJian",
+        isDing:"isDing"		
+    }
+    var url="";
+	
+    var oGetMore=C.G('GetMore');
+    var oLst_news=C.G('Lst_news')
+    var oNews=document.querySelectorAll('#Lst_news .Lst-o-new');
+    var oLastNew=oNews[oNews.length-1];
+    var Num=0; //默认条数
+    var Btn=true;
+    var Limit=10; //第次返回的条数
+    var baseurl="<?php echo $baseurl; ?>";
+    if(Btn && oGetMore){
+        window.onscroll=function(){
+            var top= Bk.tools.getPos(oGetMore).t + oGetMore.offsetHeight;
+            var Viewh=document.documentElement.clientHeight||document.body.clientHeight;
+            var ScrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+        
+            if(top < (Viewh + ScrollTop)){
+                var page=document.getElementById("currentpage").value;         
+                if($('#scrolltopflag').val()=='2'){
+                    $('#scrolltopflag').val('1');
+                    if(oGetMore.style.display!=='none'){
+                        oGetMore.innerHTML= '正在加载更多...';
+                        $.getJSON(baseurl+"/index.php/article/ajaxMoreArticle?page="+page+"&currentid=<?php echo($bloginfo['UserID']); ?>&domainname=<?php echo($bloginfo['DomainName']);?>&r="+new Date().getTime(), function(json) {
+                        
+                            $('#scrolltopflag').val('2');
+                            if(json.page != ''){
+                                document.getElementById('currentpage').value=json.page;
+                            }
+                        
+                            if(json.data != '' && json.error == 1){
+                                ToLoadDate(json.data);
+                            }else if(json.error == 2){
+                                oGetMore.innerHTML= '已经显示全部内容';
+                                Btn=false;
+                            }
+                        
+                        });
+                    }	
+                }
+            }
+        }
+    }
+    function ToLoadDate(data){ 
+        Btn=false;	
+		
+        for(var i=0; i<data.length; i++){
+            var str='<div class="HY_o_new_tit"><h3 class="Fl F16 Red_color">'+'{%isDing%}{%isJian%}{%isZhuan%}<a href="{%arturl%}">{%title%}</a>'+'{%isContainImg%}'+'</h3></div>'+'<time class="HY_o_new_time Hui_color">{%time%}</time>'+'<p class="Lst-new-desc F16 Pr10"><a href="{%arturl2%}">{%content%}</a></p>';
+        
+            for(var attr in data[i]){
+                var row=data[i];
+			
+                if(attr==DataFields.arturl){
+                    str=str.replace("{%arturl%}", row[attr]);
+                    str=str.replace("{%arturl2%}", row[attr]);
+                }; 
+                if(attr==DataFields.time){
+                    str=str.replace("{%time%}", row[attr]);
+                }; 		
+                if(attr==DataFields.title){
+                    str=str.replace("{%title%}", row[attr]);
+                };
+				
+                if(attr==DataFields.content){
+                    str=str.replace("{%content%}", row[attr]);	
+                };
+
+                if(attr==DataFields.isContainImg){
+                    if(parseInt(row[attr])){
+                        str=str.replace("{%isContainImg%}", '<span class="Bh_img Fl"></span>');
+                    }else{
+                        str=str.replace("{%isContainImg%}", '');
+                    }
+                };
+				
+                if(attr==DataFields.isZhuan){
+					
+                    if(parseInt(row[attr])){
+                        str=str.replace("{%isType%}", '转载');
+                        str=str.replace("{%isZhuan%}", '<font class="Red_color">[转]</font>');
+                    }else{
+                        str=str.replace("{%isZhuan%}","");
+                    }	
+                };
+				
+                if(attr==DataFields.isJian){
+					
+                    if(parseInt(row[attr])){
+                        str=str.replace("{%isType%}", '推荐');
+                        str=str.replace("{%isJian%}", '<font class="Red_color">[荐]</font>');
+                    }else{
+                        str=str.replace("{%isJian%}", '');
+                    }
+                };
+				
+                if(attr==DataFields.isDing){
+					
+                    if(parseInt(row[attr])){
+                        str=str.replace("{%isType%}", '顶');
+                        str=str.replace("{%isDing%}", '<font class="Red_color">[顶]</font>');
+                    }else{
+                        str=str.replace("{%isDing%}", '');
+                    }
+                };
+				
+            }
+            var oDiv=document.createElement('div');
+            oDiv.className="HY_o_new Mt10";
+            oDiv.innerHTML=str;
+            oLst_news.insertBefore(oDiv, oGetMore);
+        };
+		
+        Btn=true;
+    }
+</script>

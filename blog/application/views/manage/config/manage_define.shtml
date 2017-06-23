@@ -1,0 +1,107 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：自定义CSS</div>
+    </div>
+    <div class="szym06">
+        <div class="szym-nr01"><b>当前模板CSS</b></div>
+        <span align="center"><img src="<?php echo getCssImg($blogconfig['StyleID']);?>"  onerror="this.src='<?php echo 'http://images.cnfol.com/uploads/mod_blog/1/nothing.gif';?>';return false;"  onload="this.style.display=''" style="display:none"  border="0"  alt="<?php echo (isset($usestyle['Name']))? $usestyle['Name']:'';?>" width="150" height="150" /><br /><br/>
+            <?php echo (isset($usestyle['Name']))? $usestyle['Name']:'';?></span>
+        <hr/>
+        <div class="szym-nr01">自定义模板CSS 最多可以创建<?php echo blogcssmaxhave;?>个自定义模板，开始创建后的初始代码，为“默认”模板的代码。分享完模板后，该模板将不出现“分享”链接。</div>
+        <div class="wzjtym01">自定义CSS列表　　<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/template/Add">马上创建</a>　　<a href="<?php echo $baseurl;?>/ShareCssList,domain=<?php echo $bloginfo['DomainName'];?>" target='_blank'>系统共享列表</a>　　<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/template/ShareList">查看我共享的样式</a></div>
+        <hr/>
+        <table width="100%" border="0" cellpadding="0" cellspacing="3">
+            <tr>
+                <?php 
+                if(isset($usercsslist) && is_array($usercsslist['Record']))
+                {
+                foreach($usercsslist['Record'] as $styles)
+                {
+                ?>
+                <td>
+                    <table border="0" align="center" cellpadding="0" cellspacing="3">
+                        <tr>
+                            <td width="" align="center"><img height="150" border="0" width="150" alt="dfsdf" style="" onload="this.style.display=''" onerror="getCssimg(this,'','');error=null;" src="<?php echo getCssImg($styles['StyleID']);?>"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><strong><?php echo $styles['Name'];?></strong> </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <span  onclick="javascript:edit('<?php echo $styles['StyleID'];?>')" style="cursor: pointer" >编辑</span> 
+                                <?php
+                                if($styles['StyleID'] != $blogconfig['StyleID'])
+                                {?>
+                                <span onclick="javascript:del('<?php echo $styles['StyleID'];?>') " style="cursor: pointer">删除</span> 
+                                <?php
+                                }
+                                if($styles['IsShared'] == 0)
+                                {?>
+                                <span onclick="javascript:share('<?php echo $styles['StyleID'];?>','<?php echo $styles['Name'];?>') " style="cursor: pointer">共享 </span>
+                                <?php 
+                                }
+                                if($styles['StyleID'] == $blogconfig['StyleID'])
+                                {?>
+                                <span style="cursor: pointer">正在使用</span>
+                                <?php
+                                }
+                                else
+                                {?>
+                                <span onclick="javascript:use('<?php echo $styles['StyleID'];?>') " style="cursor: pointer">使用</span>　
+                                <?php
+                                }?>
+                                <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/preview/<?php echo $styles['StyleID'];?>" target="_blank">预览</a></td>
+                        </tr>
+                    </table>
+                </td>
+                <?php
+                }
+                }?>
+            </tr>
+            <tr ><td colspan="3" class="critical"><?php if(isset($pagebar)) echo $pagebar;?></td><tr>
+        </table>
+        <form id="submitform" name="submitform" onsubmit="return false;">
+            <input type="hidden" name="OriTemlID" value="<?php echo $blogconfig['StyleID'];?>">
+            <input type="hidden" name="MemberID"  value="<?php echo $bloginfo['MemberID'];?>" id="MemberID">
+            <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>">
+            <input type="hidden" name="templateID" id="templateID">
+            <input type='hidden' name='act' value="updCss">
+        </form>
+        <form method="post" target="_self" name="editform" id="editform">
+            <input type="hidden" id="editstyleid" name="editstyleid" value="">
+        </form>
+    </div>
+</div>
+<script language="javascript">
+    var returnbackurl = "<?php echo $baseurl .'/'. $bloginfo['DomainName'];?>";
+    var actionurl = returnbackurl + "/template/LayoutAction";
+    var editurl   = returnbackurl + "/template/Edit";
+    var action    = returnbackurl + "/template/Action";
+    var setshareurl = returnbackurl + "/template/SetCssShareSort";
+    function edit(styleid){
+        $('#editstyleid').val(styleid);
+        $('#editform').attr('action',editurl);
+        $('#editform').submit();
+    }
+    function del(styleid) {  	
+        g_pop = new Popup({contentType:3, isReloadOnClose:false, width:340, height:80});
+        g_pop.setContent("title", "删除自定义样式");
+        g_pop.setContent("confirmCon", "您确定要删除此样式吗？");
+        g_pop.setContent("callBack", delCallback);
+        g_pop.setContent("parameter", {act:'delcss',id:styleid,MemberID:$('#MemberID').val(),flashCode:$('#flashCode').val()});
+        g_pop.build();
+        g_pop.show();
+    }
+    function delCallback(para){
+        g_pop.close();
+        $.post(action,jQuery.param(para),function(data){
+            showalert(data.error, true); setTimeout(function(){ location.reload(); },1000); return false;
+        },'json');
+    }
+    function share(styleid,name){
+        var url = setshareurl+'/'+styleid+'?name='+name;
+        showiframe(url, 340, 150, "选择共享样式类型", false);
+        return false;
+    }
+</script>

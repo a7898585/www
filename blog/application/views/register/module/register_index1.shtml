@@ -1,0 +1,97 @@
+<div class="cen2">
+    <div class="cen2-a">
+        <div class="cen2-a-1">开通博客</div>
+    </div>
+    <div class="cen1-b" id="right">
+        <table border="0" cellpadding="0" cellspacing="0" class="cen2-a-3">
+            <form name="blogRegister" id="blogRegister">
+                <input type="hidden" id="TolCnt" value="<?php echo $blogCount;?>" />
+                <input type="hidden" id="flashCode" value="<?php echo getVerifyStr($blogCount.$user['userid']);?>" />
+                <tr>
+                    <td height="26"colspan="2">完成这一过程后，您可以使用<a href="http://www.cnfol.com" target="_blank"> 中金在线 </a>用户中心帐户和密码登录到博客。</td>
+                </tr>
+                <tr>
+                    <td height="26">博 客 名：</td>
+                    <td><input type="text" id="regblogName" id="b" size="20" class="form" value="" />
+                        <span style="cursor: pointer" onclick="checkblogname();">检查是否可用</span><span id="spanblogName"></span></td>
+                </tr>
+                <tr>
+                    <td height="26"colspan="2">请为您的空间起个名字，必填项，最多30个字符。博客名是在您的博客首页显示的。比如“管理员的博客”，这是您的博客名。</td>
+                </tr>
+                <tr>
+                    <td height="26">博客地址：</td>
+                    <td>http://blog.cnfol.com/
+                        <input type="text" id="regDomainName" class="form" size="20" maxlength="16" onkeyup="value=value.replace(/[^a-zA-Z0-9_]/g,'')" onblur="value=value.replace(/[^a-zA-Z0-9_]/g,'')" value="" />
+                        <span id="showid" style="display:none">请输入博客地址！</span><span style="cursor: pointer" onclick="checkregister();">　检查是否可用</span><span id="spnInfo" ></span></td>
+                </tr>
+                <tr>
+                    <td height="26"colspan="2">请为您的空间指定唯一的网址。以字母开头、数字和下划线，长度必须大于6位，一旦申请成功即不可更改。</td>
+                </tr>
+                <tr>
+                    <td height="26"colspan="2">博客地址不能以ajax、cnfol开头</td>
+                </tr>
+                <tr>
+                    <td height="26">验证码：</td>
+                    <td> <input type="text" id="validate" size="10" class="form" onfocus="$('#verifycodespan').html('');" onblur="if(value.length < 3) $('#verifycodespan').html('<br>请正确输入验证码');" />
+   　请输入下面的验证码（无需区分大小写）<span id="verifycodespan" style="color: red;"></span></td>
+                </tr>
+                <tr>
+                    <td height="50" colspan="2"><img src="<?php echo $baseurl;?>/register/varify?t=1" alt="看不清？" id="varifycode" style="cursor: pointer" align="absmiddle" onclick="javascript:vifdata();"/><span onclick="javascript:vifdata();" style="cursor: pointer" >看不清？</span></td>
+                </tr>
+                <tr>
+                    <td height="26"colspan="2"><input id="spIsConfirm" size="14"  maxlength="14" value="Y" type="checkbox" onclick="if($(this).is(':checked')) $('#IsConfirmspan').html('');">
+                        我已阅读并接受<a href="http://passport.cnfol.com/account/protocal" target="_blank" class="sort">《中金在线用户使用协议》</a>。<span id="IsConfirmspan" style="color: red;"></span></td>
+                </tr>
+                <tr>
+                    <td height="26"colspan="2" align="center"><input type="submit" id="subbutton" name="sub" value="开通"  class="but_1" onclick="create();return false;"/></td>
+                </tr>
+            </form>
+        </table>
+    </div>
+</div>
+<div style="clear:both"></div>
+</div>
+<script type="text/javascript">
+    varifyurl = "<?php echo $baseurl;?>/register/varify?t=1&";
+    checkurl  = "<?php echo $baseurl;?>/register/Check";
+    actionurl = "<?php echo $baseurl;?>/register/Action";
+
+    function vifdata(){
+        var Now = new Date();
+        $('#varifycode').attr('src',varifyurl+Now.getTime());
+        $('#validate').val('');
+    }
+    function checkblogname(){
+        $.post(checkurl,{BlogName:$('#regblogName').val(),act:'checkblogname'},function(data){
+            $('#spanblogName').html(data.error);
+        },'json');
+    }
+    function checkregister(){
+        $.post(checkurl,{DomainName:$('#regDomainName').val(),act:'checkdomainname'},function(data){
+            $('#spnInfo').html(data.error);
+        },'json');
+    }
+    function create()
+    {
+        if(!$('#spIsConfirm').is(':checked')){
+            $('#IsConfirmspan').html('<br />请先接受《中金在线用户使用协议》');
+            return false;
+        }
+        $('#subbutton').attr('disabled','disabled');
+        $.post(actionurl,{DomainName:$('#regDomainName').val(), BlogName:$('#regblogName').val(),flashCode:$('#flashCode').val(),TolCnt:$('#TolCnt').val(),VerifyCode:$('#validate').val()},function(data){
+            if(data.errno != 'success' && data.errno != 'errorloading'){
+                $('#'+data.errno).html(data.error);
+                vifdata();$('#subbutton').attr('disabled','');
+            }else {
+                showalert(data.error);
+                if(data.errno == 'success'){
+                    setTimeout(function(){
+                        window.location.href="<?php echo $baseurl;?>/register/Home";
+                    }, 2000);
+                }else{
+                    $('#subbutton').attr('disabled','');
+                }
+            }
+        },'json');
+    }
+</script>

@@ -1,0 +1,1 @@
+INSERT INTO `tt_module` (`module`, `name`, `url`, `iscore`, `version`, `description`, `setting`, `listorder`, `disabled`, `installdate`, `updatedate`) VALUES ('tags', 'tag±Í«©', 'tags/', 0, '1.0', 'tag±Í«©', '', 0, 0, '2011-04-23', '2011-04-23');

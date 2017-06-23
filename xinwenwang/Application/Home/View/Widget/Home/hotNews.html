@@ -1,0 +1,20 @@
+<div class="main_r_cont ">
+    <h3><a href="{$jrdj_list[0]['url']}">{$jrdj_list[0]['title']}</a></h3>
+    <div class="text">
+        <notempty name="jrdj_list[0]['img_list']">
+            <span><img rel="nofollow" src="{:setUpUrl($jrdj_list[0]['img_list'][0])}"></span>
+            <else/>
+            <span><img rel="nofollow" src="/Public/Home/images/xwwicon.png"></span>
+        </notempty>
+        <p>{$jrdj_list[0]['intro']|msubstr=0,50}..<a href="{$jrdj_list[0]['url']}">【详情】</a></p>
+    </div>
+    <ul>
+        <volist name="jrdj_list" id="vo">
+            <neq name="i" value="1">
+            <li>
+                <a href="{$vo.url}">{$vo.title}</a>
+            </li>
+            </neq>
+        </volist>            
+    </ul>
+</div>

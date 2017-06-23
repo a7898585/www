@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>对不起，您要访问的页面暂时找不到_常安保险欢迎你</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+        body{margin:0;padding:0;}
+        .head{height:345px;background:url(/Public/Common/images/e/bg_error_x.png) repeat-x;}
+        .head_bg{width:620px;height:345px;background:url(/Public/Common/images/e/bg_error.png) no-repeat;margin:0 auto;position:relative}
+        .logo{width:330px;height:70px;position:absolute;top:255px;left:140px;}
+        .content{width:450px;margin:0 auto;text-align:center;font-size:12px;}
+        .content h2{font-size:14px;font-weight:bold;}
+        .content h3{font-size:12px;font-weight:normal;color:#666;}
+        .red{color:#F00;font-family:Arial, Helvetica, sans-serif;}
+        .btns{height:30px;margin-top:20px;}
+        .btn_home,.btn_home:visited{display:inline-block;background:#0f7ab1;width:90px;height:26px;line-height:26px;border-radius:5px;color:#fff;font-size:12px;text-decoration:none;margin:0 5px;}
+        .btn_kefu,.btn_kefu:visited{display:inline-block;background:#73bb1d;width:90px;height:26px;line-height:26px;border-radius:5px;color:#fff;font-size:12px;text-decoration:none;margin:0 5px;}
+        .btn_home:hover,.btn_kefu:hover{text-decoration:underline;}
+    </style>
+</head>
+<body>
+<div>
+    <div class="head">
+        <div class="head_bg">
+            <div class="logo"><img src="/Public/Common/images/e/error_logo.png" /></div>
+        </div>
+    </div>
+    <div class="content">
+        <h2>对不起，您要访问的页面暂时找不到！</h2>
+        <h3><label class="red" id="timeout">1s</label>后系统将自动跳转到首页</h3>
+        <div class="btns"><span>您也可以：</span><a href="/" class="btn_home">返回首页</a><a href="#" class="btn_kefu">联系客服</a></div>
+    </div>
+</div>
+<script type="text/javascript">
+    <!--
+    var duration = 1000;
+    var timer = null;
+    var endTime = new Date().getTime() + duration;
+    function interval() {
+        var n = (endTime - new Date().getTime()) / 1000;
+        if (n < 0) return;
+        document.getElementById("timeout").innerHTML = n.toFixed(0)+"s";
+        setTimeout(interval, 1);
+    }
+    window.onload = function() {
+        timer = setTimeout("window.location.href='/'", duration);
+        interval();
+    }
+    //-->
+</script>
+</body>
+</html>

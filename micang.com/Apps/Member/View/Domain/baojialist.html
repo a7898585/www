@@ -1,0 +1,65 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a <eq name="pst" value="all"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/baojialist?pst=all&type={$Think.get.type}">全部交易</a> 
+        <a <eq name="pst" value="trading"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/baojialist?pst=trading&type={$Think.get.type}">交易中</a>
+        <a <eq name="pst" value="finish"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/baojialist?pst=finish&type={$Think.get.type}">成功交易</a> 
+        <a <eq name="pst" value="bad"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/baojialist?pst=bad&type={$Think.get.type}">失败交易</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c2" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody>
+                    <tr class="table_title">
+                        <td>域名</td>
+                        <td>类型</td>
+                        <td>买家出价</td>
+                        <td>买家ID</td>
+                        <td>出价时间</td>
+                        <td>状态</td>
+                        <td align="left">操作</td>
+                    </tr>
+                <empty name="domains">
+                    <tr class="table_bg_b">
+                        <td colspan="7">没有找到符合条件的交易信息！</td>
+                    </tr>
+                    <else/>
+                    <volist name="domains" id="item">
+                        <tr id="tr_{$item.id}" class="table_bg_b">
+                            <td>{$item.domain}</td>
+                            <td><eq name="item.type" value="1">一口价</eq>
+                                <eq name="item.type" value="2">拍卖</eq>
+                                <eq name="item.type" value="3">买方出价</eq></td>
+                            <td>{$item.money|Fen2Yuan}元</td>
+                            <td>{$item.to_mid}</td>
+                            <td>{$item.update_time|date='Y-m-d H:i:s',###}</td>
+                            <td>
+                                <eq name="item.status" value="0">等待卖家确认</eq>
+                                <eq name="item.status" value="1">等待买家确认</eq>
+                                <eq name="item.status" value="2">成功交易</eq>
+                                <eq name="item.status" value="3">买家反悔</eq>
+                                <eq name="item.status" value="4">卖家反悔</eq>
+                                <eq name="item.status" value="5">拒绝报价</eq>
+                                <eq name="item.status" value="6">等待域名转入</eq>
+                                <eq name="item.status" value="7">等待买家付款</eq>
+                            </td>
+                            <td>
+                                <eq name="item.status" value="0">
+                                <a href="javascript:check_seccode('TradeSeller','{$item.id}');"/>出售域名</a>&nbsp;&nbsp;<a href="javascript:check_seccode('CloseSeller','{$item.id}');"/>拒绝出售</a>
+                                </eq>
+                                <eq name="item.status" value="6">
+                                <a href="javascript:void();">域名转入</a>
+                                <a href="javascript:check_seccode('DomainTransfer','{$item.id}');"/>我已经转入域名</a>
+                                <a href="javascript:check_seccode('CloseSeller','{$item.id}');"/>拒绝出售</a>
+                                </eq>
+                            </td>
+                        </tr>
+                    </volist>
+                </empty>
+                <tr>
+                    <td colspan="7">{$pager}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

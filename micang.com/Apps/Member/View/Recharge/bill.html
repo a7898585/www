@@ -1,0 +1,38 @@
+<div class="onlineplay">
+    <div class="navhl">
+        <a class="navhl_q" href="/recharge/add/">在线充值</a> 
+        <a class="navhl_h" href="/recharge/bill">充值记录</a> 
+    </div>
+    <div style="display:block;" class="onlineplay_c" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody><tr class="table_title">
+                        <td width="80">订单号</td>
+                        <td width="80">金额</td>
+                        <td width="80">状态</td>
+                        <td width="80">时间</td>
+                        <td width="80">描述</td>
+                    </tr>
+                <empty name="recharges">
+                    <tr class="table_bg_b">
+                        <td colspan="5">暂无充值记录，<a href="/recharge/add">点击充值</a>！</td>
+                    </tr>
+                    <else/>
+                    <volist name="recharges" id="item">
+                        <tr class="table_bg_b">
+                            <td>{$item.id}</td>
+                            <td>&yen; {$item['money']/100}</td>
+                            <td><switch name="item.status"><case value="0">待付款</case><case value="1">已付款</case><case value="2">交易关闭</case></switch></td>
+                        <td><eq name="item.status" value="0">{$item.create_time}<else/>{$item.notify_time}</eq></td>
+                        <td>{$item.title}</td>
+                        </tr>
+                    </volist>
+                    <tr>
+                        <td colspan="5">{$pager}</td>
+                    </tr>
+                </empty>
+                </tbody></table>
+        </div>
+    </div>
+</div>
+

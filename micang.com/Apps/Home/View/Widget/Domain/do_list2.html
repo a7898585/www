@@ -1,0 +1,15 @@
+{__NOLAYOUT__}
+<div class="navhl_b">
+    <div class="navhl_b_title">询价域名</div> 
+    <a href="/sell/page?type=3" class="navhl_b_link">more</a> 
+</div>
+<div class="list_b">
+    <ul>
+        <volist name="data" id="vo">
+            <li>
+                <div class="listb_d"><a href="/Sell/detail?id={$vo.id}" title="{$vo.summary}" class="listent_b">{$vo.domain}</a></div>
+                <a href="/Sell/detail?id={$vo.id}" title="{$vo.summary}" class="listent_c">{$vo.summary}</a>
+            </li>
+        </volist>
+    </ul>
+</div>

@@ -1,0 +1,257 @@
+<?php include $commonheader;?>
+<nav class="Nav TextHeader">
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>"  class="BackPage ToBlock" ></a>
+    <h2 class="Text-title F16 Tc">
+        <?php if(isset($isowner) && $isowner==true){ ?>
+        我的关注
+        <?php }else{ ?>
+        他的关注
+        <?php }?>
+    </h2>
+</nav>
+
+<section class="FenSiList"  id="FenSiList">
+    <?php if($total) { ?>
+    <?php if($list) { ?>
+    <?php foreach($list as $key => $val) {?>
+    <div class="GZ_top Pb10 friend<?php echo $val['UserID']; ?>">
+        <a href="<?php echo $baseurl.'/'.$bloginfo[$val['UserID']]['DomainName'];?>" class="GZ_top_img Fl Tc"><img src="<?php echo getUserHead($val['UserID']);?>" width="48" height="48"></a>
+        <div class="GZ_top_zi Fl">
+            <h3 class="F16 Oh"><a href="<?php echo $baseurl.'/'.$bloginfo[$val['UserID']]['DomainName'];?>" class="Fl" ><?php echo $val['NickName']; ?></a></h3>
+            <p class=" F14"><?php echo($bloginfo[$val['UserID']]['BlogName']); ?></p>
+        </div>
+        <?php 
+        $status = $friendStatus[$val['UserID']][0]['FriendStatus'];
+        if($isowner) { ?>
+        <?php if($status == '1' || $status == '3'){ ?>
+        <a href="javascript:;" class="Fr GuanZhuBtn2 Tc unfocus<?php echo $val['UserID'];?> "  onClick="checkdelete_dialog('<?php echo $val['UserID']?>', 'unfocus','','<?php echo $val['NickName'];?>')">取消关注</a>
+        <?php } ?>
+        <?php }else{ ?>
+        <?php 
+        if($userid != $val['UserID']){
+        if($status == '1' || $status == '3'){ ?>
+        <span><a class="Fr GuanZhuBtn2 Tc unfocus<?php echo $val['UserID'];?>" href="javascript:;"   onClick="checkdelete_dialog('<?php echo $val[UserID];?>', 'unfocus','<?php echo $status;?>','<?php echo $val['NickName'];?>')">取消关注</a></span>
+        <?php }else{ ?>
+        <span><a class="Fr GuanZhuBtn3 Tc unfocus<?php echo $val['UserID'];?>" href="javascript:;"   onClick="checkdelete_dialog('<?php echo $val[UserID];?>', 'focus','<?php echo $status;?>','<?php echo $val['NickName'];?>')">关注</a></span>
+        <?php } }?>
+        <?php } ?>
+    </div>
+    <?php }} ?>
+    <?php 
+    if($total < 10 && isset($isowner) && $isowner==true){ ?>
+    <a href="<?php echo $blogurl.'/'.$bloginfo['DomainName'].'/recomblog';?>" class="GetMore ToBlock Wrp Tc Mt10">点击关注更多人气博客</a>
+    <?php  } elseif($total > 20) {?>
+    <a href="javascript:void(0);" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore">获取更多</a>
+    <?php }else{ ?>
+    <a href="javascript:void(0);" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore">已经显示全部内容</a>
+    <?php } ?>
+    <?php  } else {?>
+    <div class="GZ_top Pb10">&nbsp;&nbsp;&nbsp;暂时还没有关注的好友</div>
+    <?php } ?>
+</section>
+<input type="hidden" name="actionurl" value="" class="actionurl">
+<input type="hidden" name="actionmyfocus" value="" class="actionmyfocus">
+<input type="hidden" name="currentpage" id="currentpage" value="2" />
+<input type="hidden" name="scrolltopflag" id="scrolltopflag" value="2" />
+
+
+<?php  include $commonfooter; ?>
+<div class="DialogMark Hide" id="DialogMark"></div>
+<div class="GZ_dialog F16 Hide" id="GZ_dialog">
+    <div class="GZ_dtit Pt10">确定取消对“<b id="delAttenName"></b>”的关注吗？</div>
+    <div class="Gz_dBtn Tc">
+        <a href="javascript:void(0);" class="QueDing Fl" onclick="unfocus()">确定</a>
+        <a href="javascript:void(0);" class="QuXiao Fl" onclick="cacheDelAttention()">取消</a>
+    </div>
+</div>
+<script type="text/javascript">
+    var delName = '某某';
+    function checkdelete_dialog(url, type, who,name)
+    {	
+        var $userid = '<?php echo $userid;?>';	
+        if($userid == 0){
+            if(confirm('您还未登录，是否登录？')){
+                location.href= "<?php echo $this->config->item('usercenter_url').curPageURL();?>";
+            }
+            return;
+        }
+        $('input[name=actionurl]').val(url);
+        if(who){
+            $('input[name=actionmyfocus]').val(who);
+        }
+	if(name){
+            delName = name;
+        }	
+        switch(type)
+        {
+            case 'focus':
+                unfocus()
+                break;
+            case 'unfocus':
+                delAttentionSure();
+                if(name){
+                    $('#delAttenName').html(name);
+                }
+                break;							
+        }		
+    }
+    function delAttentionSure(){
+        $("#DialogMark").removeClass('Hide');
+        $("#GZ_dialog").removeClass('Hide');
+    }
+    function cacheDelAttention(){
+        $("#DialogMark").addClass('Hide');
+        $("#GZ_dialog").addClass('Hide');
+    }
+    //好友取消关注
+    function unfocus()
+    {
+        cacheDelAttention();
+        var userid = $("input[name='actionurl']").val();
+        var actionmyfocus = $("input[name='actionmyfocus']").val();
+        var word = $(".unfocus"+userid).text();
+        if(word.indexOf("取消关注") >= 0)
+        {
+            var type = "del";
+            var url = "<?php echo $this->config->item('base_url');?>/index.php/myfocus/unfollowajax";			
+        }
+        else if(word.indexOf("关注") >= 0)
+        {
+            var type="add";
+            var url = "<?php echo $this->config->item('base_url');?>/index.php/myfocus/followajax";				
+        }
+        if(userid == ""){
+            return false;
+        }
+		
+        var params = {"friendIDs":userid};
+        var obj=$(this);
+		
+        $.getJSON(url+"?r="+new Date().getTime(), params, function(json){
+            if(json.erron == "01")
+            {
+                if(type == "add"){
+                    var $html = "";
+                    if(actionmyfocus == '2'){
+                        $html = '<a class="Fr GuanZhuBtn2 Tc unfocus'+userid+'" href="javascript:;" onClick="checkdelete_dialog('+userid+',\'unfocus\',3,\''+delName+'\')">取消关注</a>';
+                    }else{
+                        $html = '<a class="Fr GuanZhuBtn2 Tc unfocus'+userid+'" href="javascript:;" onClick="checkdelete_dialog('+userid+',\'unfocus\',1,\''+delName+'\')">取消关注</a>';
+                    }
+                    $(".unfocus"+userid).parent().html($html);
+                }else{
+                    if(actionmyfocus){
+                        if(actionmyfocus== '3'){
+                            var status = 2;
+                        }else if(actionmyfocus== '1'){
+                            var status = 0;
+                        }
+                        $html = '<a class="Fr GuanZhuBtn3 Tc unfocus'+userid+'" href="javascript:;" onClick="checkdelete_dialog('+userid+',\'focus\','+status+')">关注</a>';
+                        $(".unfocus"+userid).parent().html($html);
+                    }else{
+                        $(".friend"+userid).remove();
+                    }
+                }   				
+            }else{
+                alertDialog(json.error);
+            }
+        }
+			
+    );	
+	
+    }
+</script>
+<script type="text/javascript">
+    var DataFields={
+        name:"name",
+        content:"content",
+        blogurl:"blogurl",
+        userId:"userId",
+        topSrc:"topSrc",
+        type:"type"	
+    }
+    var url="";
+	
+    var oGetMore=C.G('GetMore');
+    var oLst_news=C.G('FenSiList')
+    var oNews=document.querySelectorAll('#FenSiList .Lst-o-new');
+    var oLastNew=oNews[oNews.length-1];
+    var Num=0; //默认条数
+    var Btn=true;
+    var Limit=10; //第次返回的条数
+    var baseurl="<?php echo $baseurl; ?>";
+    if(Btn && oGetMore){
+        window.onscroll=function(){
+            var top=Bk.tools.getPos(oGetMore).t + oGetMore.offsetHeight;
+            var Viewh=document.documentElement.clientHeight||document.body.clientHeight;
+            var ScrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+        
+            if(top < (Viewh + ScrollTop)){
+                var page=document.getElementById("currentpage").value;         
+                if($('#scrolltopflag').val()=='2'){
+                    $('#scrolltopflag').val('1');
+                    if(Btn && oGetMore.style.display!=='none'){
+                        oGetMore.innerHTML= '正在加载更多...';
+                        $.getJSON(baseurl+"/index.php/myfocus/moreMyfocus?ftype=<?php echo($bloginfo['FType']); ?>&page="+page+"&currentid=<?php echo($bloginfo['UserID']); ?>&domainname=<?php echo($bloginfo['DomainName']); ?>&r="+new Date().getTime(), function(json) {
+                        
+                            $('#scrolltopflag').val('2');
+                            if(json.page != ''){
+                                document.getElementById('currentpage').value=json.page;
+                            }
+                        
+                            if(json.data != '' && json.error == 1){
+                                ToLoadDate(json.data);
+                            }else if(json.error == 2){
+                                oGetMore.innerHTML= '已经显示全部内容';
+                                Btn=false;
+                            }
+                        
+                        });
+                    }	
+                }
+            }
+        }
+    }
+    function ToLoadDate(data){ 
+        Btn=false;	
+		
+        for(var i=0; i<data.length; i++){
+            var str='<a href="{%blogurl%}" class="GZ_top_img Fl Tc"><img src="{%topSrc%}" width="48" height="48"></a><div class="GZ_top_zi Fl">'+
+                '<h3 class="F16 Oh"><a href="{%blogurl2%}" class="Fl" >{%name%}</a></h3><p class=" F14">{%content%}</p></div><span>{%type%}</span>';
+            var userId = '';
+            for(var attr in data[i]){
+                var row=data[i];
+			
+                if(attr==DataFields.blogurl){
+                    str=str.replace("{%blogurl%}", row[attr]);
+                    str=str.replace("{%blogurl2%}", row[attr]);
+                }; 		
+                if(attr==DataFields.name){
+                    str=str.replace("{%name%}", row[attr]);
+                };
+                if(attr==DataFields.userId){
+                    userId = row[attr];
+                };
+                if(attr==DataFields.topSrc){
+                    str=str.replace("{%topSrc%}", row[attr]);
+                };
+                if(attr==DataFields.content){
+                    if(row[attr]){
+                        str=str.replace("{%content%}", row[attr]);	
+                    }else{
+                        str=str.replace("{%content%}", '');	
+                    }
+                };
+                if(attr==DataFields.type){
+                    str=str.replace("{%type%}", row[attr]);	
+                };
+				
+            }
+            var oDiv=document.createElement('div');
+            oDiv.className="GZ_top Pb10 friend"+userId;
+            oDiv.innerHTML=str;
+            oLst_news.insertBefore(oDiv, oGetMore);
+        };
+		
+        Btn=true;
+    }
+</script>

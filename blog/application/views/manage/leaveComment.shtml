@@ -1,0 +1,513 @@
+<?php include $peronalhead;?>
+<!--end 顶部-->
+<link rel="stylesheet" href="<?php echo $baseurl; ?>/ke4/themes/default/default.css" />
+<style type="text/css">
+
+    .kquote
+    {
+        background:url("http://img.cnfol.com/newblog/batev6.0/images/blockquote.gif") no-repeat scroll left top #F4F5F7;
+        border: 2px solid #EEEEEE;
+        color: #999999;
+        font-size: 9pt;
+        margin: 15px 10px;
+        padding: 5px 5px 5px 35px;
+    }
+</style>
+
+<!--内容-->
+<div class="Wrap Cf Mt15">
+    <!--左-->
+    <div class="MaLft">
+        <!--留言编辑框-->
+        <div class="LeaveCommBox">
+            <!--显示留言条数-->
+            <div class="CommSum">共有留言<em><?php echo $tmpCnt; ?></em>条</div>
+            <form method="post" name="frm1">
+                <!--end 显示留言条数-->
+                <div class="TextareaBox">
+                    <!--内容-->
+                    <div class="txt" align="left" >
+                        <textarea id="content"  name="content"  style="width:732px;height:350px;visibility:hidden;"><?php echo(leave_defalut_content); ?></textarea>
+                        <span id="contentErr" style="color:#FF0000"></span>
+                        <input type="hidden" id="t_id" name="t_id" value="<?php echo $userid; ?>"/>
+                        <input type="hidden" id="getContent" name="content" value=""/>			
+                        <input type="hidden" name="act" value="newsendmsg" />
+                        <input type="hidden" name="contenttext" id="contenttext" value="" />
+                    </div>    
+                    <!--end 留言编辑框-->          
+                </div>
+                <div class="BtnBox">            
+
+
+                    <input name="checkvalidate" type="hidden" id="checkvalidate" value="<?php echo(($checkvalidate)?'1':'0'); ?>" />
+                    <p class="CodeImgBox" style="display:<?php echo(($checkvalidate)?'none':''); ?>"><label>验证码：</label>
+                        <input class="Txt" name="validate" type="text" id="validate" size="8" maxlength="4" msg="请输入四位验证码"/>
+                        <span class="CodeImg">
+                            <img alt="看不清？" id="varifycode" style="cursor: pointer" align="absmiddle" onclick="javascript:Valipic();" src="<?php echo $baseurl;?>/register/varify?r=<?php echo(time()); ?>"/>
+                        </span><a href="javascript:Valipic();" class="LookBtn"  style="background:none;cursor:hand;">看不清</a>
+                        <span id="spanvalidate" style="display:none;color:Red;" >验证码错误，请重新输入！</span>
+                    </p>
+
+                    <a class="SubmitBtn" href="javascript:void(0)" onClick="sub()">提交</a><a class="BackBtn" href="/<?php echo $domainname; ?>">返回</a>
+
+                </div>
+            </form>
+        </div>
+        <div class="messageBox messageBoxBig">
+            <!--留言-->
+            <?php if($tmpCnt > 0) { ?>
+            <?php $num = $tmpCnt-$StartNo; ?>
+
+            <?php foreach($list as $k=>$v) {; ?>
+            <div class="MessageBox FirstMesg message_<?php echo $v['MsgID'];?>" >       
+                <div class="FaceBox">
+                    <a href="<?php echo $baseurl.'/returnbolg/'.$v['FromUserID'].'.html';?>" target="_blank"><img src="<?php echo getUserHead($v['FromUserID'],48);?>" /></a>
+                    <p>
+                        <?php
+                        if (utf8_strlen($v['NickName']) > 6) {
+                        echo(utf8_str($v['NickName'],4,'false').'...');
+                        }
+                        else
+                        {
+                        echo $v['NickName'];
+                        }
+                        ?>
+                    </p>
+                    <input type="hidden" id="leavenickname_<?php echo $v['MsgID'];?>" value="<?php echo($v['NickName']); ?>" />
+                </div> 
+                <div class="DetailBox">
+                    <div class="MessageInfo">
+                        <!--操作-->
+                        <?php if($isowner == true) {?>          
+                        <div class="HandleBox">
+                            <a href="javascript:;" class="reply" >回复</a>|
+
+                            <a href="javascript:;" onclick="javascript:delMsg('<?php echo $v['MsgID'];?>')">删除</a>|
+                            <a href="javascript:;" onclick="javascript:add('<?php echo($userid); ?>','0','<?php echo $v['FromUserID'];?>','1');">黑名单</a>
+                        </div>
+                        <?php }else{ ?>
+                        <div class="HandleBox">
+                            <a href="javascript:;" class="quote" name="<?php echo $v['MsgID'];?>" style="cursor:hand;">引用</a>&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <?php } ?>
+                        <!--end 操作-->
+                        <p class="Num">第<em><?php echo $num-- ;?></em>楼</p>
+                        <p class="Time">留言时间<em id="leavetime_<?php echo $v['MsgID'];?>"><?php echo $v['AddTime'];?></em></p>
+                    </div>
+                    <div class="Messages">
+                        <div class="Cont" style="border:0px;" id="leavecontent_<?php echo $v['MsgID'];?>"><?php echo $v['Content'];?></div>
+                    </div>
+                    <div class="ReplyBox ReplyBoxSend" style="display:none">
+                        <form action="" method="post" name="messageSend" class="form_<?php echo $v['MsgID'];?>">
+                            <div class="Fl">
+                                <textarea id="Creply" name="content" cols="" rows="" onfocus="if(this.value=='请输入评论内容'){this.value='';}"  onblur="if(this.value==''){this.value='请输入评论内容';}">请输入评论内容</textarea>
+                            </div>            
+                            <input type="hidden" id="t_id" name="t_id" value="<?php echo $v['FromUserID']; ?>" />
+                            <input type="hidden" name="act" value="sendmsg" />
+                            <input type="hidden"  name="messageid" value="<?php echo $v['MsgID']; ?>" />		        	
+                            <a class="SubmitBtn" href="javascript:void(0)" onclick="replyMessage(this)">提交</a>
+                            <a class="CancelBtn" href="javascript:void(0)" onclick="cancel(this)">取消</a>		       
+                        </form>
+
+                    </div>
+
+                    <?php if($v[ReplyCnts]>1) {?>
+                    <?php foreach($v[Reply] as $val) {?>
+                    <div class="ReplyBox message_<?php echo $val['MsgID'];?>" >
+                        <div class="ReplyMesgBox">                  
+                            <span class="Arrow"></span>
+                            <div class="ReplyMesgInfo">
+                                <!--操作-->
+                                <?php if($isowner == true) {?> 
+                                <div class="HandleBox"><a href="javascript:delMsg('<?php echo $val['MsgID'];?>');" >删除</a></div>
+                                <?php } ?>
+                                <!--end 操作-->
+                                <p class="ReplyTime"><em class="Name">我</em>回复时间<em class="Time"><?php echo $val['AddTime']; ?></em></p>
+                            </div>  
+                            <div class="ReplyMesg">
+                                <p><?php echo $val['Content']; ?></p>
+                            </div>
+                        </div>    
+                    </div>    
+                    <?php } ?>
+                    <?php }else  if($v[ReplyCnts] == 1) {?>     	
+                    <div class="ReplyBox message_<?php echo $v[Reply]['MsgID'];?>">
+                        <div class="ReplyMesgBox">                  
+                            <span class="Arrow"></span>
+                            <div class="ReplyMesgInfo">
+                                <!--操作-->
+                                <?php if($isowner == true) {?> 		                
+                                <div class="HandleBox"><a href="javascript:delMsg('<?php echo $v[Reply]['MsgID'];?>');" >删除</a></div>
+                                <?php } ?>
+                                <!--end 操作-->
+                                <p class="ReplyTime"><em class="Name">我</em>回复时间<em class="Time"><?php echo $v[Reply]['AddTime']; ?></em></p>
+                            </div>  
+                            <div class="ReplyMesg">
+                                <p><?php echo $v[Reply]['Content']; ?></p>
+                            </div>
+                        </div>    
+                    </div>  	         
+
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } ?>
+            <?php } ?>    
+            <!--end 留言-->
+        </div>
+        <!--分页-->
+        <div class="Page">
+            <?php echo $pagebar; ?>
+        </div>
+        <!--end 分页-->      
+    </div>
+    <!--end 左-->
+    <!--右-->
+    <div class="MaRgt">
+        <div class="BloggerFaceBox">
+            正在加载中......
+        </div>
+    </div>
+    <!--end 右-->
+</div>
+<input type="hidden" name="mid" value="">
+<div class="SetPop" id="confirm">
+    <span class="Close" onClick="Dialog.Close();"></span>
+    <h5>提示</h5>
+    <div class="Cont">
+        <p class="SetBtnWrap">确定删除这个留言吗？</p>
+        <p class="SetBtnWrap Mt15"><a class="Mr10 SetSubmit" href="javascript:;" onClick="delMessage()">确定</a><a class="SetCancel" onClick="Dialog.Close();" href="javascript:;">取消</a></p>
+    </div>
+</div>
+
+
+<div id="TMDeleteSuccess" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp" id="popupTip"></p>
+    </div>
+</div>
+
+<input type="hidden" id="editorFlag" value="1" >
+
+<script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Dialog.js"></script>
+<script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+<!--end 内容-->
+
+<script>
+    /*
+     * 字符串长度
+     */
+    function mb_strlen(str) {
+        var len = 0;
+        for(var i = 0; i < str.length; i++) {
+            len += (str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255)? 2 : 1;
+        }
+        return len;
+    }
+    /*
+     *  跳转页面
+     */
+    function jump($url)
+    {	
+        if($(".Inpjump").val()=="")
+        {
+            return false;
+        }
+        var url = $url+$(".Inpjump").val();
+        window.location.href = url;		
+    }
+    function enterPress($url,e)
+    {
+        var e = e || window.event;
+        if(e.keyCode==13) {
+            jump($url);
+        }
+    }
+    /*
+     *  博客个人信息
+     */
+    $(".BloggerFaceBox").load("<?php echo BLOG_FACE_INFO.$bloginfo['DomainName']; ?>")
+
+    /*
+     * 设置删除的id
+     */
+    function delMsg($mid)
+    {
+        $("input[name='mid']").val($mid);
+        Dialog("confirm");		
+    }
+    /*
+     * 删除留言
+     */
+    function delMessage(){
+        Dialog.Close();
+        showalert('操作中...','popupTip','TMDeleteSuccess');
+        var $messageid = $("input[name='mid']").val();
+        $.post("<?php echo $baseurl; ?>/leaveme/messageaction?r="+new Date().getTime(),{msg_id:$messageid, act:'delmsg'},function(data){
+
+			
+            showalertminute(data.error,1000,'','popupTip','TMDeleteSuccess');
+			
+            $(".message_"+$messageid).remove();
+            if($('.MessageBox').size()==0)
+            {
+                location.reload();
+            }
+
+        },'json');
+    }
+	
+    /*
+     *   添加黑名单
+     */	
+    function add(uid,type,fuid,ftype){
+        showalert("操作中...",'popupTip','TMDeleteSuccess');
+        $.post("/blackuser/Action?r="+new Date().getTime(),{act:'add',uid:uid,type:type,fuid:fuid,ftype:ftype},function(data){
+				
+            showalertminute(data.error,1000,'','popupTip','TMDeleteSuccess');
+        },'json');
+    }
+	
+    /*
+     *   留言页面提交
+     */
+    function sub(){
+        if(editor.html()=='<span style="color:#cccccc;">留言长度不能超过300个字节</span>')
+        {
+            showalertminute("内容不能为空",1000,'','popupTip','TMDeleteSuccess');
+            return;
+        }
+        if($('#validate').val()==''&&$('#checkvalidate').val()=='0')
+        {
+            showalertminute("验证码不能为空",1000,'','popupTip','TMDeleteSuccess');
+            return;
+        }
+        $("#getContent").val(editor.html())
+		
+		
+        if(editor.text().length>300)
+        {
+            showalertminute("留言长度不能超过300个字节",1000,'','popupTip','TMDeleteSuccess');
+            return;
+        }
+		
+        $('#contenttext').val(editor.text());
+        //alert($('.messageBoxBig').attr('class'));
+        showalert("提交中...",'popupTip','TMDeleteSuccess');
+		
+        $.getJSON('<?php echo $baseurl; ?>/leaveme/messageaction?r='+new Date().getTime(), $("form[name='frm1']").serialize(), function(json) {
+			
+            if(json.error == '操作成功') {
+                showalertminute("发表成功",1000,'','popupTip','TMDeleteSuccess');
+                //	$(".ReplyBoxSend").after(json.html)		
+                $(".messageBox").html("加载中");
+                $.getJSON('<?php echo $baseurl; ?>/leaveme/messagelist?r='+new Date().getTime(), {'page':"<?php echo $page;?>", 'uid':"<?php echo $userid; ?>"} , function(json) {
+                    $(".messageBoxBig").html(json.error);	
+						
+                    $(".CommSum em").html(json.count);
+                    //	$(".ke-content").html("");
+						
+                    editor.html('<span style="color:#cccccc;">留言长度不能超过300个字节</span>');
+                    Valipic();
+                })
+					
+                //	window.location.reload();
+            }
+            else
+            {
+					
+                showalertminute(json.error,1000,'','popupTip','TMDeleteSuccess');
+                if(json.error == '验证码错误') {
+                    Valipic();
+                }
+					
+            }
+			
+	
+        })
+    }
+    /*
+     *  回复留言
+     */
+    function replyMessage(obj) {		
+        var param = $(obj).parent().serialize();
+        if($(obj).parent().find(".Fl").find("textarea").val() == '请输入评论内容'||$(obj).parent().find(".Fl").find("textarea").val()=='<span style="color:#cccccc;">留言长度不能超过300个字节</span>')
+        {
+			
+            showalertminute("内容不能为空",1000,'','popupTip','TMDeleteSuccess');
+			
+            return false;
+        }
+        var $url = "<?php echo $baseurl; ?>/leaveme/messageaction";
+
+        showalert("提交中...",'popupTip','TMDeleteSuccess');
+        $.ajax({
+            url: $url+"?r="+new Date().getTime(),
+            data: param,		
+            dataType: "json",
+            success: function(json){
+                if(json.error == "操作成功")
+                {
+                    showalertminute(json.error,1000,'','popupTip','TMDeleteSuccess');
+                    $(obj).parent().parent().after(json.html);
+                    //	$(".ReplyBoxSend").after(json.html)	
+                    $(obj).siblings(".Fl").find("textarea").val("");
+                }
+                else
+                {
+						
+                    showalertminute(json.error,1000,'','popupTip','TMDeleteSuccess');
+						
+                }
+            }
+				
+        })	
+    }   
+    /*
+     *  回复按钮点击，回复框出现和隐藏切换
+     */   
+    $(".reply").click(function(){
+        $(this).parent().parent().parent().find(".ReplyBoxSend").toggle();
+		
+    })
+
+	
+    /*
+     * 取消按钮
+     */
+    function cancel(obj)
+    {
+        $(obj).siblings(".Fl").find("textarea").val("");		
+    }
+
+    /*
+     * 引用
+     */
+    $(".quote").click(function(){
+		
+        var lid=$(this).attr('name');
+        var qname = $('#leavenickname_'+lid).val();
+        var qtime = $('#leavetime_'+lid).text();
+        var qcon = $('#leavecontent_'+lid).html();
+        
+        //var qcontent = '引用：'+qname+'&nbsp;|&nbsp;'+qtime+'&nbsp;|&nbsp;'+qcon+'</span><br>';
+        var qcontent = '引用：'+qname+' | '+qtime+' | '+qcon+' ';
+        var str = '<blockquote class="kquote">'+SetString(qcontent,230)+'</blockquote>';
+        
+        editor.html(str);
+    })
+	
+    //截取字符串(包括中文）
+    function SetString(str,len)
+    {
+        var strlen = 0; 
+        var s = "";
+        for(var i = 0;i < str.length;i++)
+        {
+            if(str.charCodeAt(i) > 128){
+                strlen += 2;
+            }else{ 
+                strlen++;
+            }
+            s += str.charAt(i);
+            if(strlen >= len){ 
+                return s+'...' ;
+            }
+        }
+        return s;
+    }
+</script>   
+
+<script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/kindeditor-min.js"></script>
+<script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/lang/zh_CN.js"></script>
+<style>
+    .ke-icon-count {
+        background-image: url(<?php echo(config_item('base_url')); ?>/ke4/themes/default/default.png);
+        background-position: 0px -944px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .ke-icon-quote {
+        background-image: url(<?php echo(config_item('base_url')); ?>/ke4/themes/common/quote.gif);
+        background-position: 0px;
+        width: 16px;
+        height: 16px;
+    }
+</style>
+<script language="javascript">
+    var Min = 3;
+    var Max = 150000;
+    var summaryMax=500;
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var action = baseuri+"/article/Action";
+    var editor;
+	
+    KindEditor.ready(function(K) {
+		
+        editor = K.create('#content', {
+            resizeType : 2,
+            uploadJson : '<?php echo(config_item("base_url")); ?>/ajaxeditorupload/attupload/<?php echo $bloginfo['UserID']; ?>',
+            emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+            items: ['image', 'emoticons'],
+            allowFlashUpload: false,
+            allowMediaUpload: false,
+            afterCreate : function() {
+                K.ctrl(document, 13, function() {
+                    submitfun();
+                });
+                K.ctrl(this.edit.doc, 13, function() {
+                    submitfun();
+                });
+            },
+            afterFocus:function(){editorHtml();},
+            afterBlur:function(){editorHtmlBlur();}
+			
+        });
+		
+	
+    });
+	
+    function editorHtml()
+    {
+		
+        if(editor.html()=='<span style="color:#cccccc;">留言长度不能超过300个字节</span>')
+        {
+            editor.html('');
+			
+        }
+		
+        if($('#editorFlag').val()=='1')
+        {
+            editor.html(editor.html().replace(/\<span\s*style=\"color:\#cccccc\;\"\>留言长度不能超过300个字节\<\/span\>/,""));
+            $('#editorFlag').val('0');
+        }
+    }
+	
+    function editorHtmlBlur()
+    {
+		
+        var editorContent=editor.html();
+        editorContent=editorContent.replace(/\s|&nbsp;|\<br\s*\/\>|\<p\>|\<\/p\>/g,"");
+		
+        if(editorContent=='')
+        {
+            editor.html('<span style="color:#cccccc;">留言长度不能超过300个字节</span>');
+            $('#editorFlag').val('1');
+        }
+		
+    }
+	
+    $(document).ready(function(){
+        $('#editorFlag').val('1');
+        Valipic();
+    });
+	
+	
+</script>
+<!--点击统计-->
+<script type="text/javascript" src="<?php echo $viewurl;?>"></script>
+
+</body>
+</html>

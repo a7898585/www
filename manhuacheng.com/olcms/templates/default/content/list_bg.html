@@ -1,0 +1,301 @@
+{template "content","header"}
+{php $footer_txt = "漫画城在线漫画频道为您提供最新、最热门的在线漫画阅读，有热门连载漫画、完结漫画、少年热血、少女爱情等包括火影忍者漫画、海贼王漫画、死神漫画等非常好看的漫画。";}
+<style type="text/css">
+    body,ul,li { padding:0; margin:0}
+    ul,li { list-style:none}
+    .a-scroll { position:relative; margin:20px auto 0px auto; width:998px;}
+    .a-scroll .prev,.a-scroll .next { position:absolute; display:block; width:50px; height:130px; background-color:#666666;top:0; color:#FFF; text-align:center; }
+    .a-scroll .prev { left:0;cursor:pointer; background:url("{IMG_PATH}img/fx.png") no-repeat;margin-top: 60px;margin-left: 20px;}
+    .a-scroll .next { right:0;cursor:pointer; background:url("{IMG_PATH}img/fx1.png") no-repeat;margin-top: 60px;margin-right: -5px;}
+    .a-list { position:relative; width:880px; height:150px; margin-left:65px; overflow:hidden}
+    .a-list ul { width:9999px; position:absolute;}
+    .a-list ul a { width:100px; height:120px; color:#000000; text-decoration:none; }
+    .a-list li { float:left; display:inline; width:100px; margin-right:10px; height:150px; text-align:center; }
+    .a-list ul a img { width:98px; height:118px; padding:2px; }
+    .a-list ul a span { font-size:12px; color:#666666; display:inline-block; margin:5px 0px 0px 0px; }
+    .a-list ul a:hover span { text-decoration:underline; color:#ff9900; }
+    .a-list ul a:hover img { border:1px solid #999999; padding:1px; }
+</style>
+
+{template "content","mh_nav"}
+
+{php $where = "status = '99' AND type_id NOT IN(".dimplode(dexplode(NOT_ALLOW)).")";}		
+<!--main-->
+<div class="zjgx">
+    <div class="zjgx_tit">
+        <i class="icon"></i>
+        <h3>最近更新</h3>
+    </div>
+    <div class="zjgx_txt">
+        <div class="tp_n">
+            <div class="a-scroll">
+                <span class="prev">&nbsp;</span>
+                <span class="next">&nbsp;</span>
+                <div class="a-list">
+                    <ul>
+                        {pc:content action="table_list" table="Cartoon" where="$where" order="inputtime DESC" num="15" cache="3600" }
+                        {loop $data $r}
+                        <li><a href="/manhua{$r[id]}" title="{$r[title]}" target="_blank"><img src="{$r[thumb]}"><span>{str_cut($r[title],22,'')}</span></a></li>
+                        {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="xian"></div>
+        <div class="clear1"></div>
+
+        <div class="sj">
+            <span>最新上架</span>
+            {pc:content action="table_list" table="Cartoon" where="$where" order="inputtime DESC" num="10" cache="3600" }
+            {loop $data $r}
+            <a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],16,'')}</a>
+            {/loop}
+            {/pc}
+        </div>
+        <div class="sj">
+            <span>完结漫画</span>
+            {php $where_wanjie = $where." AND state = 1";}		
+            {pc:content action="table_list" table="Cartoon" where="$where_wanjie" order="updatetime DESC" num="10" cache="3600" }
+            {loop $data $r}
+            <a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],15,'')}</a>
+            {/loop}
+            {/pc}
+
+            <a href="/wanjie" target="_blank" style="color:#0000FF;">更多</a>
+        </div>
+        <div class="sj" style="border-bottom:none;">
+            <span>连载漫画</span>
+            {php $where_lianzai = $where." AND state = 0";}		
+            {pc:content action="table_list" table="Cartoon" where="$where_lianzai" order="updatetime DESC" num="10" cache="3600" }
+            {loop $data $r}
+            <a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],15,'')}</a>
+            {/loop}
+            {/pc}
+
+            <a href="/lianzai" target="_blank" style="color:#0000FF;">更多</a>
+        </div>
+    </div>
+</div>
+<div class="middle_div1">
+    <div class="middle_div1_le" style="border:none;">
+        <div class="today">
+            <div class="today_tit">
+                <span>
+                    {loop $m $n $l}
+                    {if $n<6}
+                    <a href="/type{$n}/" target="_blank">{$l}</a>&nbsp;|
+                    {/if}
+                    {/loop}
+                    <a href="#" style="padding-left:15px; color:#0000FF;">更多&gt;&gt;</a></span>
+                <ul id="tab_a">                
+                    <li class="on" onmouseover="secBoard('tab_a','infolist_a',1,'on','');"><strong>今日漫画</strong></li>                
+                    <li onmouseover="secBoard('tab_a','infolist_a',2,'on','');"><strong>最新章节</strong></li>  
+                </ul>
+            </div>
+            <div class="today_txt">
+                <ul id="infolist_a_1" style="display:block">
+                    {pc:content action="position" posid="14" order="updatetime DESC" sort="desc" num="10"}
+                    {loop $data $r}
+                    <li>
+                        <a target="_blank" title="{{$r['title']}" href="/manhua{$r[id]}"><img  width='115' height='130' src="{$r[thumb]}"></a>
+                        <a target="_blank"  title="{$r['title']}" href="/manhua{$r[id]}">{str_cut($r[title],25,'')}</a>
+                    </li>
+                    {/loop}
+                    {/pc}
+                </ul>
+                <ul id="infolist_a_2" style="display:none">
+                    {php $sql = "select cd.web_url,cd.id,c.title as c_title,c.thumb,cd.title from tt_Cartoon as c left join (select * from tt_CartoonDetail where manhuaid != 0 order by id desc limit 500) as cd  ON cd.manhuaid=c.id where cd.catid = '14' AND c.status = '99' AND c.type_id NOT IN(".dimplode(dexplode(NOT_ALLOW)).") GROUP BY c.id order by cd.id desc";}
+                    {pc:get sql="$sql" num="10" cache="3600" }
+                    {loop $data $r}
+                    <li>
+                        <a target="_blank"  title="{$r['c_title']}-{$r['title']}"  href="{getCartoondetailUrl($r[manhuaid],$r[id])}"><img width='115' height='130' src="{$r[thumb]}"></a>
+                        <a target="_blank"  title="{$r['c_title']}-{$r['title']}"  href="{getCartoondetailUrl($r[manhuaid],$r[id])}">{str_cut($r[c_title],25,'')}</a>
+                    </li>
+                    {/loop}
+                    {/pc}
+                </ul>
+            </div>
+        </div>
+        <!--按地区-->
+        <div class="today1">
+            <div class="today1_tit">
+                <ul id="tab_b">   
+                    {php $region= getboxname('12','region');} 
+                    {loop $region $n $l}
+                    {if $n==1}
+                    <li class="on" onmouseover="secBoard('tab_b','regionlist_b',{$n},'on','');"><strong>{$l}</strong></li>
+                    {else}
+                    <li onmouseover="secBoard('tab_b','regionlist_b',{$n},'on','');"><strong>{$l}</strong></li>   
+                    {/if}
+                    {/loop}
+                </ul>
+            </div>
+            <div class="today1_txt">
+                {loop $region $n $l}
+                {if $n==1}
+                {php $style = "display:block";}
+                {else}
+                {php $style = "display:none";}
+                {/if}
+                <ul id="regionlist_b_{$n}" class="today1_txt1" style="{$style}">
+                    {php $region_sql = $where." AND region = $n";}		
+                    {pc:content action="table_list" table="Cartoon" where="$region_sql" order="updatetime DESC" num="10" cache="3600" }
+                    {loop $data $r}
+                    <li>
+                        <a target="_blank" title="{{$r['title']}" href="/manhua{$r[id]}"><img  width='115' height='130' src="{$r[thumb]}"></a>
+                        <a target="_blank"  title="{$r['title']}" href="/manhua{$r[id]}">{str_cut($r[title],25,'')}</a>
+                    </li>
+                    {/loop}
+                    {/pc}
+                </ul>
+                {/loop}
+            </div>
+        </div>
+        <!--按地区end-->
+    </div>
+    <div class="middle_div1_ri">
+        <div class="eveday">
+            <div class="rs_dm_tit">
+                <h3>每日更新</h3>
+            </div>
+            <div class="eveday_txt">
+                <!-- <div class="eveday_txt_l">
+                <ul>
+                        <li class="on" onmouseover="changeTab(7,0)"><strong>一</strong></li> 
+                    <li class="" onmouseover="changeTab(7,1)"><strong>二</strong></li> 
+                    <li class="" onmouseover="changeTab(7,2)"><strong>三</strong></li> 
+                    <li class="" onmouseover="changeTab(7,3)"><strong>四</strong></li> 
+                    <li class="" onmouseover="changeTab(7,4)"><strong>五</strong></li> 
+                    <li class="" onmouseover="changeTab(7,5)"><strong>六</strong></li> 
+                    <li class="" onmouseover="changeTab(7,6)"><strong>七</strong></li> 
+                </ul>
+            </div> -->
+                <div class="eveday_txt_r">
+                    <ul>
+                        {pc:content action="table_list" table="Cartoon" fields="id,title" where="$where" order="inputtime DESC" num="8" cache="3600" }
+                        {loop $data $r}
+                        <li><a href="/manhua{$r[id]}/">{str_cut($r[title],50,'')}</a></li>
+                        {/loop}
+                        {/pc}                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="jiebao">
+            <div class="rs_dm_tit">
+                <h3>漫画捷报<span style="float: right;font-size: 12px;font-weight: normal;padding-right: 5px;"><a href="/jiebao">更多&gt;&gt;</a></span></h3>
+            </div>
+
+            <div class="jiebao_txt">
+                <ul>						
+                    {php $where_jb = "catid ='55' AND status = '99'";}
+                    {pc:content action="table_list" table="news" fields="id,title,url"  where="$where_jb" order="updatetime DESC" num="8" cache="3600" }
+                    {loop $data $r}
+                    <li><a target="_blank" href="{$r[url]}" title= "{$r[title]}">{str_cut($r[title],50,'...')}</a></li>
+                    {/loop}
+                    {/pc}
+                </ul>
+            </div>
+        </div>
+        <div class="rs_dm" style="margin-top: 10px;">
+            <div class="rs_dm_tit"><h3>漫画人气排行榜</h3></div>
+            <div class="rs_dm_txt">
+                <ul>
+                    {php $class= array(1=>'first',2=>'second',3=>'third')}
+                    {php $i=1;}
+                    {pc:content action="hits2" catid="13" num="10"  where="$where" order="views DESC" }
+                    {loop $data $r}
+                    <li><i class="{$class[$i]}">{$i}</i><a title = '{$r[title]}' href="/manhua{$r[id]}">{str_cut($r[title],25,'')}</a></li>
+                    {php $i++}
+                    {/loop}
+                    {/pc}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear1"></div>
+<!--按分类-->
+<div class="dongman1">
+    <div class="dongman1_tit">
+        <ul id="tab_c">
+            {php $i =1 ;}
+            {php $class= array(1=>'on')}
+            {loop $m $n $l}
+            {if !in_array($n,dexplode(NOT_ALLOW))}
+            <li onmouseover="secBoard('tab_c','typelist_c',{$n},'on','');" class="{$class[$i]}"><strong>{$l}</strong></li>	
+            {/if}
+            {php $i++;}
+            {/loop}
+            {php unset($i);unset($class);}
+        </ul>
+    </div>
+    <div class="dongman1_txt">
+        {php $i =1 ;}
+        {loop $m $n $l}
+        {if !in_array($n,dexplode(NOT_ALLOW))}
+        <ul id="typelist_c_{$n}" class="dongman1_txt1" style="{if $i!=1}display:none{/if}">
+            {php $type_sql = $where." AND type_id = $n";}		
+            {pc:content action="table_list" table="Cartoon" where="$type_sql" order="updatetime DESC" num="7" cache="3600" }
+            {loop $data $r}
+            <li>
+                <a target="_blank" title="{{$r['title']}" href="/manhua{$r[id]}"><img  width='115' height='130' src="{$r[thumb]}"></a>
+                <a target="_blank"  title="{$r['title']}" href="/manhua{$r[id]}">{str_cut($r[title],25,'')}</a>
+            </li>
+            {/loop}
+            {/pc}
+        </ul>
+        {/if}
+        {php $i++;}
+        {/loop}
+        {php unset($i);}
+    </div>
+</div>
+<!--按分类end-->
+
+
+<script type="text/javascript">
+    function DY_scroll(wraper,prev,next,a,speed,or)
+    { 
+        var wraper = $(wraper);
+        var prev = $(prev);
+        var next = $(next);
+        var a = $(a).find('ul');
+        var w = a.find('li').outerWidth(true);
+        var s = speed;
+        next.click(function()
+        {
+            a.animate({'margin-left':-w},function()
+            {
+                a.find('li').eq(0).appendTo(a);
+                a.css({'margin-left':0});
+            });
+        });
+        prev.click(function()
+        {
+            a.find('li:last').prependTo(a);
+            a.css({'margin-left':-w});
+            a.animate({'margin-left':0});
+        });
+        if (or == true)
+        {
+            ad = setInterval(function() { next.click();},s*1000);
+            wraper.hover(function(){clearInterval(ad);},function(){ad = setInterval(function() { next.click();},s*1000);});
+
+        }
+    }
+    DY_scroll('.a-scroll','.prev','.next','.a-list',3,false);// true为自动播放，不加此参数或false就默认不自动
+</script>
+<div class="lianjie">
+    <div class="lianjie_tit"><h3>友情链接</h3></div>
+    <div class="lianjie_txt">
+        {pc:link action="lists" typeid="17" linktype="0" order="desc" num="50" return="dat"}
+        {loop $dat $key $v}
+        <a href="{$v[url]}" title="{$v[name]}"  target="_blank">{$v[name]} </a> 
+        {if $v != end($dat)}&nbsp;|&nbsp;{/if}
+        {/loop}
+        {/pc}
+    </div>
+</div>
+{template "content","footer"}

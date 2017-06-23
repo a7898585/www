@@ -1,0 +1,86 @@
+<?php include $header;?>
+<div class="lmtsz" style="margin-top:0px;">
+    <div class="lmtsz01">选择博客模板</div>
+</div>
+<table width="960" border="0" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC" class="m_t7">
+    <form id="sortlist" action="<?php echo $baseurl;?>/ShareCssList,domain=<?php echo $bloginfo['DomainName'];?>" method="post">
+        <tbody>
+            <tr bgcolor="#eff0f2">
+                <td colspan="3" align="left" bgcolor="#E4E6E9">
+                    <input type="hidden" name="rank" value="0" id="rank">
+                    <input type="hidden" name="page" value="<?php echo $CurPage;?>" id="page">
+                    <div class="xzbkmb00"><strong>排序方式：</strong><a href="javascript:'" onclick="$('#sortlist').submit();">时间</a>　<a href="javascript:'" onclick="$('#rank').val(1);$('#sortlist').submit();">人气</a></div>
+                    <div class="xzbkmb01"><strong>一级分类：</strong></div>
+                    <div class="xzbkmb02"><select name="FSort" id="FSort">
+                            <option value="-1" selected="selected">请选择分类</option>
+                        </select>
+                    </div>
+                    <div class="xzbkmb01"><strong>二级分类：</strong></div>
+                    <div class="xzbkmb02"><select name="SSort" id="SSort">
+                            <option value="">请选择分类</option>
+                        </select>
+                    </div>
+                    <div class="xzbkmb03"><input type="image"  src="http://img.cnfol.com/newblog/Version2/images/tj01.gif" /></div>	  </td>
+            </tr>
+    </form>
+    <tr> 
+        <?php 
+        if(!empty($tempList) && isset($tempList['Record']))
+        {
+        foreach($tempList['Record'] as $key=>$value)
+        {?>
+        <td width="33%" align="center" bgcolor="#F6F6F6">
+            <div class="xzbkmb11"> <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/preview/<?php echo $value['StyleID'];?>" target="_blank"><img src="<?php echo getCssImg($value['StyleID']);?>" id="css_<?php echo $value['StyleID'];?>" alt="" width="150" height="150" border="0" onload="this.style.display=''" style="display:none"/></a></div>
+            <div class="xzbkmb12"><?php echo $value['Name'];?></div>
+            <div class="xzbkmb13">作者：系统默认　　人气：<?php echo $value['Clicked'];?>　　<a href="javascript:use('<?php echo $value['StyleID'];?>') " style="cursor: pointer">使用</a> 　<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/preview/<?php echo $value['StyleID'];?>" target="_blank">预览</a></div>
+        </td>
+        <?php
+        if((($key+1) % 3) == 0)
+        {
+        echo '</tr><tr>';
+        }
+        }
+        for($i = 0; $i < (3 - (($key+1) % 3)); $i++)
+        {
+        ?>
+        <td width="33%" align="center" bgcolor="#F6F6F6"></td>
+        <?php
+        }
+        }
+        ?>
+    </tr>
+</table>
+<div class="dep01_960">
+    <div class="dep01m_3 dep01_r">
+        <?php echo $pagebar;?>
+    </div>
+</div>
+<form id="submitform" name="submitform" onsubmit="return false;">
+    <input type="hidden" name="OriTemlID" value="<?php echo $blogconfig['StyleID'];?>">
+    <input type="hidden" name="MemberID"  value="<?php echo $bloginfo['MemberID'];?>">
+    <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>">
+    <input type="hidden" name="templateID" id="templateID">
+    <input type='hidden' name='act' value="updCss">
+</form>
+
+<script language="javascript">
+    var getcsssort = "<?php echo $baseurl;?>/template/CssSortList";
+    $(function(){
+        $.post(getcsssort,{FSortID:0<?php if(isset($search['fsortid'])) echo ',FSelID:'.$search['fsortid'];?>},function(data){
+            $('#FSort').html(data);
+        });
+            <?php if(isset($search['ssortid'])){?>
+                $.post(getcsssort,{FSortID:<?php echo $search['fsortid'];?>,FSelID:<?php echo $search['ssortid'];?>},function(data){
+                $('#SSort').html(data);
+            });
+                <?php }?>
+            $('#FSort').click(function(){
+            $.post(getcsssort,{FSortID:$(this).val()},function(data){
+                $('#SSort').html(data);
+            });
+        });
+    });
+    var returnbackurl = "<?php echo $baseurl .'/'. $bloginfo['DomainName'];?>";
+    var actionurl = returnbackurl+"/template/LayoutAction";
+</script>
+﻿<?php include $footer;?>

@@ -1,0 +1,65 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/intergral">经验值明细</a></li>
+        <li class="am-active">列表</li>
+    </ol>
+
+    <div class="am-g">
+        <div class="am-u-md-6 am-cf">
+            <div class="am-fl am-cf">
+                <div class="am-btn-toolbar am-fl">
+                    当前等级LV{$score.level_arr.level}
+                    <span class="am-input-group-btn">
+                        <if condition="$score['level_arr']['differ_exp'] gt 0">
+
+                            LV{$score['level_arr']['level']+1} 
+                            <i>(距下一次升级还需{$score.level_arr.differ_exp}经验值)</i>
+                            <else /> (满级)
+                        </if>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="am-g">
+        <form class="am-form">
+            <div class="am-u-sm-12">
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                        <tr>
+                            <th class="table-check"><input type="checkbox" /></th>
+                            <th class="table-id">编号</th>
+                            <th class="table-title">名称</th>
+                            <th class="table-type">经验值变化</th>
+                            <th class="table-author">日期</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                    <volist name="data['list']" id="vo">
+                        <tr>  <td><input type="checkbox" /></td>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.name}</td>
+                            <td>+{$vo.num}</td>
+                            <td>{$vo.addtime|date="Y-m-d H:i:s",###}</td>
+                        </tr>
+                    </volist>    
+                    </tbody>
+                </table>
+                <div class="am-cf">
+                    共 {$data.total} 条记录
+                    <div class="am-fr">
+                        {$data['pagehtml']}
+                    </div>
+                </div>
+                <hr />
+                <p>注：请勿删除!!!</p>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

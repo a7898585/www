@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>博客改版分组设置</title>
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,ui/Css/Select/Select.css,uj/Css/Jqita/BlogH.css" />
+        <link href="Css/BlogH.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+
+        <div class="W960 Nav">
+            <form class="R Mr10">
+                <input type="text" id="C2" class="Srinput L" value="搜索博文/博主">
+                <label class="LabSlc L Ml10">
+                    <select name="SlctFrst" class="SlSW SlcWrp">
+                        <option value="本博客">本博客</option>
+                    </select>
+                </label>
+                <a href="javascript:;" class="Asrch Ml10"></a>
+            </form>
+            <a class="AHome Mr30" href="javascript:;" target="_blank">我的首页</a><a class="ABlog" href="javascript:;" target="_blank">我的博客</a><a class="APhoto" href="javascript:;" target="_blank">相 册</a><a class="ASet ANow" href="javascript:;" target="_blank">设 置</a>
+        </div>

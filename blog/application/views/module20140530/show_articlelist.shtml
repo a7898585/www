@@ -1,0 +1,29 @@
+<div rel="drag" id="Mod_IndexArticle" class="wzlbsz-ztdiv">
+    <div class="wzlbsz-top01">
+        <div class="wzlbsz-top02"></div>
+
+        <?php if(isset($isowner) && ($isowner == true)) {?>
+        <div class="wzjtymsz-top03" style="float:right; margin-right:20px;">
+            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/Add">发表新文章</a>
+        </div>
+        <?php }?>
+        <div class="wzlbsz-top03" >文章列表&nbsp;<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/Rss.xml" target="_blank"><img src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-xml.gif" border="0" /></a></div>
+
+
+        <div class="wzlbsz-top03-blog" style="<?php if($blogconfig['StyleID']=='1'||$blogconfig['StyleID']=='4'||$blogconfig['StyleID']=='2002'){echo('display:none;');}else{echo('padding-top:4px;text-align:center;font-weight:bold;display:none;');} ?>"><a href="<?php echo(config_item('vote_base_url')); ?>/2012" target="_blank" style="color:red;display:inline-block;">十大财经博客评选</a>&nbsp;&nbsp;<a href="<?php echo(config_item('vote_base_url')); ?>2012/BlgJoin.shtml" target="_blank" style="color:red;display:inline-block;">我要参赛</a></div>
+
+        <?php if(isset($dragable) && $dragable==1) {?>
+        <div class="gjsz01"><a href="#" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_IndexArticle_td3"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz12.gif"></a><a href="#" onclick="clkmenu(this.id,2);return false;" style="display: none;" title="展开" id="Mod_IndexArticle_td4"><img border="0" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz15.gif"></a><a href="#" onclick="removemod(this.id);return false;" title="删除" id="Mod_IndexArticle_td2"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz14.gif"></a></div>
+        <div style="cursor: move;" id="Mod_IndexArticle_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="gjsz02"><img height="16" width="33" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz11.gif"></div>
+        <?php }?>
+    </div>
+    <div class="wzlbsz">
+        <div id="getarticlelist" class="modbox">数据加载中...</div>
+    </div>
+</div>
+
+<script language="javascript">
+    $(function(){
+        $('#getarticlelist').load("<?php echo $baseurl.'/ajaxgetindexarticlelist/'.$bloginfo['DomainName'].'/'.$bloginfo['MemberID'].'/'.$blogconfig['ShowMode'].'/'.$blogconfig['DisplayNumber'];?>?"+new Date().getTime());
+    })
+</script>

@@ -1,0 +1,142 @@
+<div class="RgtBar" id="Mod_Album" rel="drag">
+    <h3>我的相册</h3>
+    <?php if(isset($dragable) && $dragable==1): ?>
+    <a style="cursor:move;" href="###" id="Mod_Album_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="NBDp4"></a><div class="NBDbx"><a class="NBDp1" href="###" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_Album_td3"></a><a class="NBDp2" href="###" onclick="clkmenu(this.id,2);return false;" style="DISPLAY: none" title="展开" id="Mod_Album_td4"></a><a class="NBDp3" href="###" onclick="removemod(this.id);setmod_input();return false;" title="删除" id="Mod_Album_td2"></a></div>
+    <?php endif; ?>  
+    <div align="center" class="modbox1"><!--id="AdRotator"开始动态加载，沿用旧版以下js-->
+        <div class="wdxcsz00" id="AdRotator" style="overflow: hidden;">
+            数据加载中...
+        </div>	
+        <div class="wdxcsz01" id="_photobar"> <span style="cursor:pointer" onclick="adRotator.select('-1')">上一张</span> <span style="cursor:pointer" onclick="adRotator.select('1')">下一张</span> <span style="cursor:pointer" onclick="adRotator.clear();">暂停</span> <span style="cursor:pointer" onclick="adRotator.play();">播放</span> <a href="http://blog.cnfol.com/zbhzbh1906220/albumlist">所有相册</a></div>	
+    </div>
+
+</div>
+<script language="JavaScript">
+    function adRotator() {};
+    adRotator.initialize=function(o)
+    {
+        this._t = new Array();
+        this._l = new Array();
+        this._p = new Array();
+        this._i = new Image();
+        this._c = 0;
+        this._f = false;
+        this._o = o;
+        this._timeout = null;
+        this._html = "";
+        this.prv=null;
+        this._w = 190;
+        this._h = 150;
+        this._s = 4;
+        this._x = 21;
+        this.prvpic  = 0;
+        this.nextpic = 0;
+        return this;
+    };
+    adRotator.add=function(p,t,l) { with (this)
+        {
+            _p.push(p);
+            _t.push(t);
+            _l.push(l);
+        }};
+
+    adRotator.load=function() { with (adRotator)
+        {
+            this._x =Math.floor(Math.random()*1)+23;
+            if( _i.readyState=='complete'|| _i.complete==true)
+            {
+                if(_p.length-1==_c)
+                {
+                    _f = true;
+                    _c = 0;
+                    window.clearTimeout(_timeout);
+                    adRotator.play();
+                }
+                else
+                {
+                    _c++;
+                    _timeout=window.setTimeout(adRotator.load,10)
+                }
+            }
+            else
+            {
+                _timeout=window.setTimeout(adRotator.load,10)
+            }
+        }};
+    adRotator.play=function() { with (adRotator)
+        {
+            if( _f )
+            {
+                _html = "";
+                _htmlbar = "";
+                _html += '<table style="border:0px solid #333333;"><tr><td style="font-size:9pt;font-family:tahoma;font-weight:bold;">';
+                _html += '<div id="rotatorPlayer"' + ' style="width:' + _w + '' + ';height:"' + _h + '"' + '>';
+                _html += '<a class="fancybox" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/photolist/' + _l[_c] + '" target="_blank">';
+                _html += '<img id="rotatorPic" border="0" src="' + _p[_c] + '" style="display:none" onload=SetImgWidth(this,"190","147")'
+                    + (_t[_c]?' title="' + _t[_c] + '"':'')
+                    + ' style="border:0px solid black;FILTER:revealTrans(transition=' + _x + ',duration=1 );"' + ' >';
+                _html += (_t[_c]?('<div align="center">' + (_c+1) + '. ' + _t[_c] + '</div>'):'<p></p>');
+                _html += '</a>';
+                _html += "</div>";
+                _html += '<div align="right">';
+                prvpic  = parseInt(_c)-1;
+                nextpic = parseInt(_c)+1;
+                _htmlbar += ' <span onclick="adRotator.select(\''+prvpic+'\')" style="cursor:pointer">上一张</span> <span onclick="adRotator.select(\''+nextpic+'\')" style="cursor:pointer">下一张</span> <span onclick="adRotator.clear();" style="cursor:pointer">暂停</span> <span onclick="adRotator.play();" style="cursor:pointer">播放</span>';
+                _htmlbar += " <a href=\"<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/albumlist\">所有相册</a></div></td></tr></table>";
+
+                getRef(_o).innerHTML = _html;
+                getRef('_photobar').innerHTML = _htmlbar;
+                var browser=navigator.appName;
+                if ((browser!="Netscape"))
+                {
+                    getRef("rotatorPic").filters[0].Apply();
+                    getRef("rotatorPic").filters[0].Play();
+                }
+                next();
+            }
+            else
+            {
+                _i.src = _p[_c];
+                adRotator.load();
+            }
+        }};
+    adRotator.next=function() { with (this)
+        {
+            (_p.length-1==_c) ? _c=0 : _c++;
+            _timeout=window.setTimeout(adRotator.play,_s*1000);
+        }};
+    adRotator.select=function(i) { with (this)
+        {
+            window.clearTimeout(_timeout);
+            _c=i;
+            if(_c<0)_c=0;
+            if(_c>_p.length-1)_c=_p.length-1;
+            adRotator.play();
+        }};
+    adRotator.clear=function(i) { with (this)
+        {
+            window.clearTimeout(_timeout);
+        }};
+    adRotator.set=function(second) { with (this)
+        {
+            window.clearTimeout(_timeout);
+            if((/\d+/).test(second)==true)
+            {
+                _s=second;
+                adRotator.play();
+            }
+            else
+            {
+                adRotator.play();
+            }
+        }};
+    function getRef(id)
+    {
+        return (document.all?document.all(id):document.getElementById(id));
+    }
+    $(function(){
+        $.post("<?php echo $baseurl;?>/ajaxgetuserphotolist/<?php echo $bloginfo['MemberID'].'/'.$bloginfo['UserID'];?>",{'co':<?php echo "'".getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID'])."'";?>}, function(data){
+            $('body').append(data);
+        })
+    })
+</script>

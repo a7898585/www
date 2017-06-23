@@ -1,0 +1,152 @@
+<br class="clear" />
+</div><!--End .AllNav-->
+<div class="h07"></div>  
+<br class="clear" />
+</div><!--End #Content-->
+<div class="h07"></div>
+<!--内容部分结束-->
+<!--底部部分 -->
+<div class="body83" style="width:960px; margin:0 auto">
+    <div class="blue"><a href="http://www.cnfol.com/info/job.shtml" target="_blank">诚聘英才</a> | <a href="http://www.cnfol.com/info/contact.shtml" target="_blank">联系我们</a> | <a href="http://www.cnfol.com/info/adservice/" target="_blank">广告服务</a> | <a href="http://www.cnfol.com/info/partner.shtml" target="_blank">合作伙伴</a> | <a href="http://www.cnfol.com/info/law.shtml" target="_blank">法律声明</a> | <a href="http://www.cnfol.com/info/zg.shtml" target="_blank">征稿启事</a> | <a href="http://www.cnfol.com/info/sitemap.shtml" target="_blank">网站地图</a>
+    </div>
+    <div class="body84">---------------------------------------------------------------------------------------------</div>
+    <div class="body85">
+        本站所有文章、数据仅供参考，使用前务请仔细阅读<a href="http://www.cnfol.com/info/law.shtml" target="_blank">法律声明</a>，风险自负<br/>
+        《中华人民共和国增值电信业务经营许可证》编号：闽 B2-20050010 号<br/>
+        《电子公告服务许可证》编号：闽通信互联网 [2008]1 号<br />
+        <a href="http://news.cnfol.com/100511/101,1587,7680282,00.shtml" target="_blank">网络视听许可证1310422号</a><br />
+        <a href="http://news.cnfol.com/100517/101,1587,7710153,00.shtml" target="_blank">广播电视节目制作经营许可证 编号：(闽)字第091号</a><br/>
+        证券资讯提供:福建天信投资咨询顾问有限公司 [证书：ZX0151]<br/>
+        Copyright &copy; 2003-<script language="javascript"> date=new Date();document.writeln(date.getFullYear()); </script>  福建中金在线网络股份有限公司. All Right Reserved.<br/>
+        <a href="http://www.12321.cn" target="_blank"><img src="http://img.cnfol.com/newblog/img_css/images/mew8-web03.gif" border="0"/></a> <a href="http://www.fuzhou.cyberpolice.cn/" target="_blank"><img src="http://img.cnfol.com/newblog/img_css/images/mew8-web02.gif" width="37" height="43" border="0"/></a>
+    </div>
+</div>
+
+<!--广告-->	
+
+<div id="hide_ads3" style="display:none">
+
+    <!--AdForward Begin:-->
+    <iframe marginheight="0" marginwidth="0" frameborder="0" width="960" height="80" scrolling="no" src="http://cnfolimedia.allyes.com/main/s?user=cnfol|boke|boke_banner2&db=cnfolimedia&border=0&local=yes"></iframe>
+    <!--AdForward End-->
+    <!--<script>BAIDU_CLB_fillSlotWithSize("248894", 960, 90);</script>-->
+
+</div>
+<script type="text/javascript">
+    document.getElementById("ads3").innerHTML = document.getElementById("hide_ads3").innerHTML;
+    document.getElementById("hide_ads3").innerHTML = "";
+</script>
+<!--广告 end-->	
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+    _atrk_opts = { atrk_acct:"miaPi1a8Dy00w2", domain:"cnfol.com",dynamic: true};
+    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=miaPi1a8Dy00w2" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- End Alexa Certify Javascript -->
+
+<!--百度统计-->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc378c4854ec370c1c8438f72e19b7170' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- End of LogMicroscope Code --> 
+<DIV style="DISPLAY: none"><!-- START AIYA Site Stat. -->
+    <SCRIPT language=JavaScript type="text/javascript" src="http://s.cnfolimg.com/v5.0/js/stat01-min.js"></SCRIPT>
+    <NOSCRIPT><img src="http://logs.cnfol.com/a?ci=cnfol" alt=""></NOSCRIPT><!-- END AIYA Site Stat. -->
+</DIV> 
+
+<!-----对联广告----->
+<script type="text/javascript" language="JavaScript">
+    lastScrollY=0;
+    function heartBeat(){ 
+        var diffY;
+        if (document.documentElement && document.documentElement.scrollTop)
+            diffY = document.documentElement.scrollTop;
+        else if (document.body)
+            diffY = document.body.scrollTop
+        else
+        {/*Netscape stuff*/}
+        percent=.1*(diffY-lastScrollY); 
+        if(percent>0)percent=Math.ceil(percent); 
+        else percent=Math.floor(percent); 
+        document.getElementById("lovexin12").style.top=parseInt(document.getElementById
+        ("lovexin12").style.top)+percent+"px";
+        document.getElementById("lovexin14").style.top=parseInt(document.getElementById
+        ("lovexin14").style.top)+percent+"px";
+        lastScrollY=lastScrollY+percent; 
+    }
+        <?php
+    $narrow=file_get_contents('http://he.js.cnfol.com/index.php/id=3215&charset=gb2312&json=1');
+    $array=array('/\<\!\-\- Cached \-\-\>/','/\\\/','/\"/');
+    $narrow=preg_replace($array,array('',''),$narrow);
+	
+    $wide=file_get_contents('http://he.js.cnfol.com/index.php/id=3216&charset=gb2312&json=1');
+    $wide=preg_replace($array,array('',''),$wide);
+        ?>
+        if(document.documentElement.offsetWidth<=1120)
+    {
+        suspendcode12='<DIV id="lovexin12" class="FixedRight scrollad" style="width:20px;height:250px;left:2px;POSITION:absolute;TOP:60px;"><a class="Cls" title="关闭" onclick=$(".scrollad").css("display","none"); href="javascript:;">X</a><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="20" height="250"><param name="movie" value="<?php echo($narrow); ?>" />  <param name="quality" value="high" /><embed src="<?php echo($narrow); ?>" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="20" height="250"></embed></object></div>';
+        suspendcode14='<DIV id="lovexin14" class="FixedRight scrollad" style="width:20px;height:250px;right:2px;POSITION:absolute;TOP:60px;"><a class="Cls" title="关闭" onclick=$(".scrollad").css("display","none"); href="javascript:;">X</a><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="20" height="250"><param name="movie" value="<?php echo($narrow); ?>" />  <param name="quality" value="high" /><embed src="<?php echo($narrow); ?>" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="20" height="250"></embed></object></div>';
+
+    }
+    else
+    {
+        suspendcode12='<DIV id="lovexin12" class="FixedRight scrollad" style="width:95px;height:265px;left:2px;POSITION:absolute;TOP:60px;"><a class="Cls" title="关闭" onclick=$(".scrollad").css("display","none"); href="javascript:;">X</a><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="95" height="250"><param name="movie" value="<?php echo($wide); ?>" />  <param name="quality" value="high" /><embed src="<?php echo($wide); ?>" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="95" height="250"></embed></object></div>';
+        suspendcode14='<DIV id="lovexin14" class="FixedRight scrollad" style="width:95px;height:265px;right:2px;POSITION:absolute;TOP:60px;"><a class="Cls" title="关闭" onclick=$(".scrollad").css("display","none"); href="javascript:;">X</a><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="95" height="250"><param name="movie" value="<?php echo($wide); ?>" />  <param name="quality" value="high" /><embed src="<?php echo($wide); ?>" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="95" height="250"></embed></object></div>';
+    }
+
+        <?php
+    if($narrow==''||$wide=='')
+    {
+    }
+    else
+    {
+            ?>
+            document.write(suspendcode12); 
+        document.write(suspendcode14); 
+        window.setInterval("heartBeat()",1);
+            <?php
+    }
+        ?>
+</script>
+<!-----对联广告----->
+
+
+<script type="text/javascript" language="JavaScript">
+    //站内信暂时不用
+    /*
+    var num=0;
+   //var url = 'http://passport.cnfol.com/index.php/getinfo/userinfo/'+uid+'/getnewmsgcount/json?callback=?';
+   var url = '<?php echo(config_item("base_url")); ?>/index.php/widget/getmessage/'+uid+'?r='+new Date().getTime();
+    $.getJSON(url,function(json){
+    num = json[1];
+        if(num.length>2)
+        {
+                $('.LgMsg').html('99+');
+        }
+        else
+        {
+        $('.LgMsg').html('('+num+')');
+        }
+        });
+     */
+    //站内信暂时不用
+</script>
+
+<!--微信-->
+<div class="FixedRight" id="FixedRight">
+    <a href="javascript:;" onclick="document.getElementById('FixedRight').style.display='none'" class="Cls" title="关闭">X</a>
+    <iframe marginheight="0" marginwidth="0" frameborder="0" width="110" height="150" scrolling="no" src="http://cnfolimedia.allyes.com/main/s?user=cnfol|weixinyemian|weihangqingerweima&db=cnfolimedia&border=0&local=yes"></iframe>
+</div>
+<script charset="utf-8" src="http://hs.cnfol.com/Cm/Js/Base.js" type="text/javascript"></script>
+<!--[if lt IE 7]>
+  <script charset="utf-8" src="http://hs.cnfol.com/Cm/Js/Fixed.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  Fixed("FixedRight","R0","B100");
+  </script>
+<![endif]-->
+<!--微信-->
+</body>
+</html>

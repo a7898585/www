@@ -1,0 +1,41 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_q" href="/agency/buy/">中介购买</a> 
+        <a class="navhl_h" href="/agency/">域名中介购买</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c add_temp_d" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody><tr class="table_title">
+                        <td>域名</td>
+                        <td>成交价</td>
+                        <td>手续费</td>
+                        <td>时间</td>
+                        <td>中介状态</td>
+                    </tr>
+                <empty name="data">
+                    <tr class="table_bg_b">
+                        <td colspan="5">暂无中介购买域名记录</td>
+                    </tr>
+                    <else/>
+                    <volist name="data" id="item">
+                        <tr class="table_bg_b">
+                            <td>{$item.domain}</td>
+                            <td>&yen; {$item['pay_price']}</td>
+                            <td><switch name="item.sel_paytype">
+                        <case value="1">买家支付({$item.counter_fee}元)</case>
+                        <case value="2">卖家支付</case>
+                        <case value="3">双方均摊({$item.counter_fee}元)</case>
+                        </switch></td>
+                        <td>{$item.addtime|date="Y-m-d H:i:s",###} </td>
+                        <td><a href="/agency/detail/?id={$item.id}">{$item['status']|getAgencyParam}</a></td>
+                        </tr>
+                    </volist>
+                    <tr>
+                        <td colspan="5">{$pager}</td>
+                    </tr>
+                </empty>
+                </tbody></table>
+        </div>
+    </div>
+</div>

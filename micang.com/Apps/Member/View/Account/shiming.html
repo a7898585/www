@@ -1,0 +1,152 @@
+<link type="text/css" rel="stylesheet" href="/Public/Common/js/uploadify/uploadify.css"/>
+<div class="onlineplay safe_c">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h">实名认证</a> 
+    </div>
+    <div class="onlineplay_c5">
+        <div class="add_temp_b">
+            <form name="form_sm" action="" method="post">
+                <ul>
+                    <if condition="$memberInfo.auth_status eq '1' ">
+                        <li><p>认证情况：</p>恭喜，您已通过实名认证！ </li>
+                        <li>
+                            <p>身份证号码：</p>
+                            {$profile.idcard|substr_replace='****',6,8}
+                        </li>
+                        <li>
+                            <p>身份证姓名：</p>{$profile.realname}
+                        </li>
+                        <li>
+                            <p>身份证正反面：</p>
+                        <volist name="profile['pic']" id="vo">
+                            &nbsp;&nbsp;<img style="width:200px;height: 165px" src="{$vo}" />
+                        </volist>
+                        </li>
+                        <else />
+                        <if condition="$memberInfo.auth_status eq '2' ">
+                            <div class="leftmain_notice y_h">
+                                您的身份证信息在审核中，请耐心等待！
+                            </div>
+                            <elseif condition="$name eq 2"/>
+                            <div class="leftmain_notice y_h">
+                                您的身份证信息审核不通过，原因：{$memberInfo.auth_reason}！请重新提交！
+                            </div>
+                        </if>
+                        <li>
+                            <p>身份证姓名：</p>
+                            <input class="list_ctxt_a" size="30" name="realname" type="text" value="{$profile.realname}" />
+                        </li>
+                        <li>
+                            <p>身份证号码：</p>
+                            <input class="list_ctxt_a" size="30" name="idcard" type="text" value="{$profile.idcard}" />
+                        </li>
+                        <li> <p>身份证照片正反面：</p>
+                            <input id="photo_url" type="file" value="上传" class="file_btn"/><br>
+                            <div id="idcard_pic" class="id_cont">
+                                <volist name="profile['pic']" id="vo">
+                                    <span><img class="sfz" src="{$vo}" /><input type="hidden" name="pic[]" value="{$vo}">&nbsp;<a onclick="$(this).parents('span').remove()" href="javascript:;">删除</a>
+                                    </span>
+                                </volist>
+                            </div>
+                            <div class="lictg_txt">*上传正反面, 证件必须是清晰彩色原件电子版，可以是扫描件或者数码拍
+                                摄照片。仅支持jpg、jpeg、bmp的图片格式。(<i>如果图片大于1M，请压缩在另行上传。</i>）
+                                <!--文件上传按钮美化 结束-->
+                            </div>
+                        </li>
+                    </if>
+
+                </ul>
+                <div class="clear"></div>
+                <input type="submit" class="list_submit list_submit_marg" value="确认提交">
+            </form>
+        </div>
+        <div class="add_temp_c">* 确认提交信息确认无误。</div>
+        <div class="height30 clear"></div>
+    </div>
+</div>
+
+<style>
+    .add_temp_b ul li p {
+        width: 120px;
+    }
+    .id_cont{margin-left: 140px;}
+    .swfupload{margin-left: -120px;}
+    .leftmain_notice{background:#FFFFE5;border: 1px solid #FFCC7F;height: 28px;line-height: 28px;margin-top: 12px; width:90%; padding:0 5px; font-size:13px;}
+    .uploadify-button-text {
+        background: #ff993d none repeat scroll 0 0;
+        border: medium none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        height: 30px;
+        margin: 20px 0 0;
+        width: 90px;
+    }
+</style>
+<script type="text/javascript" src="/Public/Common/js/uploadify/jquery.uploadify.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_Datatype.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('form[name="form_sm"]').Validform({
+            tiptype:3,
+            beforeSubmit: function(curform){
+                curform.find(':submit').prop('disabled', true);
+                $.post(curform.attr('action'), curform.serialize(), function(result){
+                    layer.msg(result.message);
+                    curform.find(':submit').prop('disabled', false);
+                    if(result.status==200){
+                        location.reload();
+                    }
+                });
+                return false;
+            }
+        });
+        uploadFile('photo_url','上传Logo');
+
+    });
+    function uploadFile(id,buttonText){
+        $('#'+id).uploadify({
+            auto: true,
+            swf:'/Public/Common/js/uploadify/uploadify.swf',
+            uploader: '{$Think.config.UPAIYUN_CONFIG.UPYUN_UPLOAD_URL}',
+            buttonText: '选择文件并上传',
+            width: '200',
+            height: '32',
+            fileTypeDesc: '图片文件',
+            fileTypeExts: '*.jpg;*.png;*.gif',
+            fileSizeLimit: '1MB',
+            fileObjName: 'file',
+            removeTimeout: 0,
+            formData: {
+                policy: '{$policy}',
+                signature: '{$sign}'
+            },
+            overrideEvents: [ 'onDialogClose', 'onUploadError', 'onSelectError' ],
+            onSelectError: function(file, errorCode, errorMsg){
+                switch(errorCode) {
+                    case -100:
+                        layer.msg("上传的文件数量已经超出系统限制的"+$('#'+id).uploadify('settings','queueSizeLimit')+"个文件！");
+                        break;
+                    case -110:
+                        layer.msg("文件 ["+file.name+"] 大小超出系统限制的"+$('#'+id).uploadify('settings','fileSizeLimit')+"大小！");
+                        break;
+                    case -120:
+                        layer.msg("文件 ["+file.name+"] 大小异常！");
+                        break;
+                    case -130:
+                        layer.msg("文件 ["+file.name+"] 类型不正确！");
+                        break;
+                }
+            },
+            onUploadSuccess: function(file, data, response){
+                result = $.parseJSON(data); 
+                //                console.log(result);
+                $('#idcard_pic').append('<span><img class="sfz" src="{$Think.config.UPAIYUN_CONFIG.UPYUN_URL}'+result.url+'" /><input type="hidden" name="pic[]" value="{$Think.config.UPAIYUN_CONFIG.UPYUN_URL}'+result.url+'">&nbsp;<a onclick="$(this).parents(\'span\').remove()" href="javascript:;">删除</a></span>');
+            },
+            onUploadError: function(file, errorCode, errorMsg, errorString){
+                layer.msg('上传失败，请检查上传文件是否符合要求。1MB，jpg/gif/png');
+            }
+        });
+    }
+</script>

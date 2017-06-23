@@ -1,0 +1,79 @@
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>链接分类列表</h3>
+    <div class="BgCont">
+        <ul class="LinkLst">
+            <li><label class="Title">链接分类名称</label><span class="Cate">排序</span><span class="Handle">操作</span></li>
+            <?php 
+            if($lsortlist['RetRecords'] > 1)
+            {
+            foreach($lsortlist['Record'] as $link)
+            {?>
+            <li  id="sort<?php echo $link['LinkSortID'];?>" class="sort" >
+                <label class="Title">
+                    <span id="name<?php echo $link['LinkSortID'];?>"><?php echo $link['Name'];?>&nbsp;</span>
+                </label>
+                <span class="Cate" id="rank<?php echo $link['LinkSortID'];?>"><?php echo $link['Rank'];?></span>
+                <span class="Handle">
+                    <a href="javascript:submit_form('action_form','<?php echo $link['LinkSortID'];?>');">修改</a>
+                    <a class="Mr30" href="javascript:void(0)" onclick="javascript:delsort('<?php echo $link['LinkSortID'];?>');">删除</a>
+                </span>
+            </li>
+            <?php
+            }
+            }
+            else if($lsortlist['RetRecords'] == 1)
+            {
+            ?>
+            <li class="sort" id="sort<?php echo $lsortlist['Record']['LinkSortID'];?>">
+                <label class="Title">
+                    <span id="name<?php echo $lsortlist['Record']['LinkSortID'];?>"><?php echo $lsortlist['Record']['Name'];?>&nbsp;</span>
+                </label>
+                <span class="Cate" id="rank<?php echo $lsortlist['Record']['LinkSortID'];?>"><?php echo $lsortlist['Record']['Rank'];?>&nbsp;</span>
+                <span class="Handle">
+                    <a href="javascript:submit_form('action_form','<?php echo $lsortlist['Record']['LinkSortID'];?>');">修改</a>
+                    <a href="javascript:void(0)" class="Mr30" onclick="javascript:delsort('<?php echo $lsortlist['Record']['LinkSortID'];?>');">删除</a>
+                </span>
+            </li>
+            <?php
+            }
+            else 
+            {
+            ?>
+            <li class="sort">
+                <label class="Title">默认分类</label>
+                <span class="Cate" >0&nbsp;</span>
+                <span class="Handle">&nbsp;</span>
+            </li>
+            <?php
+            }?>
+
+
+        </ul>
+        <div class="Page">
+            <?php echo $pagebar;?>            
+        </div>
+        <form id="action_form" name="action_form" method="post" target="_self" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/link/EditSort">
+            <input type="hidden" name="act" id="act" value="editsort" />
+            <input type="hidden" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" />
+            <input type="hidden" id="MemberID" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="hidden" name="sortid" id="sortid" />
+            <input type="hidden" name="name" id="name" />
+            <input type="hidden" name="rank" id="rank" />
+        </form>
+    </div>
+</div>
+<script language="javascript">
+    var actionurl = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/link/Action";
+    function submit_form(formid, sortid){
+        $('#sortid').val(sortid);$('#name').val($('#name'+sortid).html());$('#rank').val($('#rank'+sortid).html());
+        $('#'+formid).submit();
+    }
+    function delsort(sortid){
+        $.post(actionurl,{act:'delSort',MemberID:$('#MemberID').val(), flashCode:$('#flashCode').val(),LinkSortID:sortid},function(data){
+            if(data.errno == 'success'){
+                $('#sort'+sortid).remove();	
+            }
+            showalert(data.error);
+        },'json');
+    }
+</script>

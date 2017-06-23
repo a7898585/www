@@ -1,0 +1,57 @@
+<?php include $commonheader;?>
+<nav class="Nav TextHeader">
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>"  class="BackPage ToBlock" ></a>
+    <h2 class="Text-title F16 Tc">草稿箱</h2>
+</nav>
+<section class="CC_module">
+    <section class="CC_ListNew" id="Draf_Box">
+        <?php
+        if($artlist['UTopCnt'] > 0){
+        foreach($artlist['Record'] as $k=>$art) { ?>
+        <div class="CC_new" id="draft_<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>">
+            <h2 class="CC_tit F16 Pl10"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/Add?articleid=<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>&draftsEdit=1"><?php echo $art['Title'];?></a></h2>
+            <div class="CC_cnt Bai_color">
+                <time class="Fl CC_time Hui_color Pl10"><?php echo timeopMyblog($art['AppearTime']);?></time>
+                <a href="javascript:;" class="Fr Del  Tc F14" onClick="delDrafSure('<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>')">删除</a>
+                <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/Add?articleid=<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>&draftsEdit=1" class="Fr Edit  Tc F14" >编辑</a>
+            </div>
+        </div>
+        <?php } 
+        }else{ ?>
+        <div class="CC_new">&nbsp;&nbsp;暂无草稿箱</div>
+        <?php }?>
+    </section>
+</section>
+
+<?php  include $commonfooter;?>
+<div class="DialogMark Hide" id="Del_DrafMark"></div>
+<div class="GZ_dialog F16 Hide" id="Del_Drafdialog">
+    <div class="GZ_dtit Pt10">是否要删除草稿？</div>
+    <div class="Gz_dBtn Tc">
+        <a href="javascript:void(0);" class="QueDing Fl" onClick="delDraf();">删除</a>
+        <a href="javascript:void(0);" class="QuXiao Fl" onClick="cacheDel();">取消</a>
+    </div>
+</div>
+<script type="text/javascript">
+    var articleId ='';
+    function delDrafSure(aid){
+        articleId = aid;
+        $('#Del_DrafMark').removeClass('Hide');
+        $('#Del_Drafdialog').removeClass('Hide');
+    }
+    function cacheDel(){
+        $('#Del_DrafMark').addClass('Hide');
+        $('#Del_Drafdialog').addClass('Hide');
+    }
+    function delDraf(){
+        $.get("<?php echo $baseurl;?>/index.php/article/delDraf"+"/?id="+articleId+"&memid=<?php echo $bloginfo['MemberID'];?>&f="+Math.random(),null,function(msg) {
+            cacheDel();
+            if(msg == 1){     	
+                alertDialog('文章草稿删除成功');
+                $('#draft_'+articleId).addClass('Hide');
+            }else{
+                alertDialog('文章草稿删除失败');
+            }
+        });
+    }
+</script>

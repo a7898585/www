@@ -1,0 +1,32 @@
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>分组设置</h3>
+    <div class="BgCont">
+        <form class="Fmsz">
+            <label><i>创建新分组：</i><input id="C1" class="W200" type="text" value="输入分组名"></label>
+            <label class="Pl80 Mt10">
+                <a href="javascript:;" class="Mr10 CoWht BtnA">创建</a><a href="javascript:;" class="Co666 BtnB">取消</a>
+            </label>
+        </form>
+        <p class="Pl10 Mt15">
+            <a href="javascript:;" class="CoWht BtnC R Mr10">删除</a>
+            <b>分组列表</b>
+        </p>
+
+        <p class="BdrBsh Pl10">
+            <span class="R"><a href="javascript:;" class="Aclk">修改</a>|<a href="javascript:;" class="Aclk">删除</a></span>
+            <input type="checkbox" class="InpChck Mr10"><i>同事</i>
+        </p>
+        <p class="BdrBsh Pl10">
+            <span class="R"><a href="javascript:;" class="Aclk">修改</a>|<a href="javascript:;" class="Aclk">删除</a></span>
+            <input type="checkbox" class="InpChck Mr10"><i>圈友</i>
+        </p>
+        <p class="BdrBsh Pl10">
+            <span class="R"><a href="javascript:;" class="Aclk">修改</a>|<a href="javascript:;" class="Aclk">删除</a></span>
+            <input type="checkbox" class="InpChck Mr10"><i>博友</i>
+        </p>
+        <p class="BdrBsh Pl10">
+            <span class="R"><a href="javascript:;" class="Aclk">修改</a>|<a href="javascript:;" class="Aclk">删除</a></span>
+            <input type="checkbox" class="InpChck Mr10"><i>同事</i>
+        </p>
+    </div>
+</div>

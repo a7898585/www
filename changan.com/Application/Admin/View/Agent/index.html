@@ -1,0 +1,171 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/agent">代理商管理</a></li>
+        <li class="am-active">代理商列表</li>
+    </ol>
+
+    <div class="am-g">
+        <form action="__SELF__" method="get">
+            <div class="am-u-md-6 am-cf">
+                <div class="am-fl am-cf">
+                    <div class="am-btn-toolbar am-fl">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <a href="javascript:addAgent();" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-3 am-cf">
+                <div class="am-fr">
+                    <div class="am-input-group am-input-group-sm">
+                        <input type="text" class="am-form-field" name="name" value="{$Think.get.name}">
+                        <span class="am-input-group-btn">
+                            <button class="am-btn am-btn-default" type="submit">搜索</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="am-g">
+        <form class="am-form">
+            <div class="am-u-sm-12">
+                <table class="am-table am-table-striped am-table-hover table-main ">
+                    <thead>
+                        <tr class="">
+                            <th class="table-check"><input type="checkbox" /></th>
+                            <th class="table-id">编号</th>
+                            <th class="table-title">用户名</th>
+                            <th class="table-author">手机号码</th>
+                            <th class="table-author">区域</th>
+                            <th class="table-date">客户数</th>
+                            <th class="table-date">可用金额</th>
+                            <th class="table-date">加入时间</th>
+                            <th class="table-date ">状态</th>
+                            <th class="table-set">操作</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                    <foreach name="list" item="item">
+                        <tr>
+                            <td><input type="checkbox" /></td>
+                            <td>{$item.agent_id}</td>
+                            <td>{$item.user_name}</td>
+                            <td>{$item.email}</td>
+                            <td>{$item.province_show} {$item.city_show}</td>
+                            <td>{:intval($item['daili_count'])}</td>
+
+                            <td>{$item['money']}</td>
+                            <td>{$item['ctime']|date="Y-m-d H:i",###}</td>
+                            <td>
+                                <switch name="item.status">
+                                <case value="0">禁用</case>
+                                <case value="1">正常</case>
+                                <default />
+                                </switch>
+                            </td>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <switch name="item.status">
+                                            <case value="0"><span style="cursor: pointer;" class="am-badge am-badge-success am-icon-check-circle" data-id="{$item.id}" onclick="agentStatus(1,{$item.agent_id})"> 开通</span></case>
+                                            <case value="1"><span style="cursor: pointer;" class="am-badge  am-icon-times-circle" data-id="{$item.id}" onclick="agentStatus(0,{$item.agent_id})"> 禁用</span></case>
+                                            <default />
+                                        </switch>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <div class="am-cf">
+                    共 {:count($list)} 条记录
+                    <div class="am-fr">
+                        {$pager}
+                    </div>
+                </div>
+                <hr />
+                <p>注：请勿删除!!!</p>
+
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    layer.config({
+        extend: 'extend/layer.ext.js'
+    });
+    var ajax = false;
+    function addAgent(){
+        if(ajax) return false;
+        layer.prompt({
+            formType: 0,
+            title: '输入代理商ID添加'
+        }, function(value, index, elem){
+            layer.close(index);
+            layer.load(1,{'shade':0.3});
+            $.ajax({
+                type: 'POST',
+                url: '/agent/add_agent' ,
+                data: {agent_id:value} ,
+                dataType: 'json',
+                success: function(data){
+                    layer.closeAll();
+                    if(data.code==200){
+                        layer.msg('代理商添加成功',{shift:6,success:function(){window.location.reload();}});
+                    }else{
+                        layer.msg(data.msg,{shift:6});
+                    }
+                }
+            });
+        });
+    }
+
+
+    function agentStatus(status,agent_id){
+        var title = '确认禁用此代理商?';
+        if(status==1) title = "确认开启此代理商?";
+
+        layer.confirm(title, {
+            btn: ['确认','取消'], //按钮
+            shade: false //不显示遮罩
+        }, function(){
+            layer.load(1,{'shade':0.3});
+            $.ajax({
+                type: 'POST',
+                url: '/agent/agent_status',
+                dataType: 'json',
+                data:{agent_id:agent_id},
+                success: function(data){
+                    layer.closeAll();
+                    if(data.code==200){
+                        layer.msg('操作成功',{shift:6,success:function(){window.location.reload();}});
+                    }else{
+                        layer.msg(data.msg,{shift:6});
+                    }
+                }
+            });
+        });
+    }
+    $(function(){
+        $("#province").bind("change",function(){
+            var areaID = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "{$base_url}api/area?level=2&id="+areaID,
+                dataType:"json",
+                success: function(data){
+                    $('#city').html('<option value="-1">-请选择-</option>');
+                    $.each(data,function(i,t){
+                        $('#city').append('<option value="'+i+'">'+t+'</option>');
+                    });
+                }
+            });
+        }); 
+      
+    });
+   
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>资讯互动</title>
+        <link href="http://img.cnfol.com/newblog/ap/css/style.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body leftmargin="10" topmargin="6">
+        <center>
+            <div>&nbsp;</div>
+            <table width="93%" border="0" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
+                <tr>
+                    <td height="24" align="left" bgcolor="#EEEEEE"><strong>文章标题</strong></td>
+                    <td width="150" align="left" bgcolor="#EEEEEE"><strong>博客名</strong></td>
+                    <td width="130" align="left" bgcolor="#EEEEEE"><strong>发表时间</strong></td>
+                </tr>
+                <?php if(count($Result) > 0) { ?>
+                <?php foreach($Result as $value){ ?>
+                <?php 
+                //$value['Title'] = str_replace($searchValue, '<span style="color: red">'.$searchValue.'</span>', $value['Title']);
+                ?>
+                <tr>
+                    <td height="20" align="left" bgcolor="#FFFFFF">&nbsp;· <A title="<?php echo $value['Title']; ?>"
+                                                                              href="<?php echo $base_url; ?>/ap/<?php echo $value['DomainName']; ?>/article/<?php echo strtotime($value['AppearTime']).'-'.$value['ArticleID']; ?>.html" target="_self" ><?php echo $value['Title']; ?></A></td>
+                    <td align="left" bgcolor="#FFFFFF"><A href="<?php echo $base_url; ?>/ap/<?php echo $value['DomainName']; ?>/list/" target="_self"><?php echo $value['BlogName']; ?></A></td>
+                    <td align="left" bgcolor="#FFFFFF">&nbsp;<?php echo $value['AppearTime']; ?></td>
+                </tr>
+                <?php } ?>	
+                <?php } else {?>
+                <tr>
+                    <td colspan="3">没有相关文章</td>
+                </tr>
+                <?php } ?>
+            </table>
+            <div class="wzlbsz11a">
+                <?php echo $pagebar; ?>
+            </div>
+        </center>
+    </body>
+</html>

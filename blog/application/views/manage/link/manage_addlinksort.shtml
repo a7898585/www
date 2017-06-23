@@ -1,0 +1,94 @@
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>添加分类</h3>
+    <div class="BgCont">
+        <h6 class="Pl10"><?php if(isset($sort['SortID']) && $sort['SortID']>0) echo '编辑链接分类'; else echo '添加链接分类';?></h6>
+
+        <form id="popFormSubmit" name="popFormSubmit" method="post"  onSubmit="return false;" class="Fmsec Fmsz">
+            <input id="MemberID" name="MemberID" value="<?php echo $bloginfo['MemberID'];?>" type="hidden"/>
+            <input id="SortID" name="SortID" value="<?php if(isset($sort['SortID'])) echo $sort['SortID'];?>" type="hidden"/>
+            <input id="act" name="act" value="<?php if(isset($sort['SortID']) && $sort['SortID']>0) echo 'updSort'; else echo 'addSort';?>" type="hidden"/>
+            <input id="flashCode" name="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" type="hidden"/>
+            <input type="hidden" id="OriSortName" name="OriSortName" value="<?php if(isset($sort['Name'])) echo trim($sort['Name']);?>" />	               
+            <label><i>链接分类名称：</i>
+                <input name="name" id="sortlink" class="W200 linkname" type="text" id="name" size="20" value="<?php if(isset($sort['Name'])) echo trim($sort['Name']);?>">
+            </label>
+            <label class="Mt10 LabSlc">
+                <i>链接分类排序：</i>
+                <input name="rank"  type="text"  class="W200" value="<?php if(isset($sort['Rank'])) echo $sort['Rank']; else echo '0';?>" onkeyup="value=value.replace(/[^\d]/g,'')" size="10"/>
+                <var>(显示的顺序，值越大排列在越前面,默认为0)</var>
+            </label>
+            <label class="Pl70 Mt10">
+                <input class="Mr10 CoWht BtnA Ml2" type="submit" id="formSubmit2" value="提交"/>
+                <input class="Co666 BtnB"  type="reset" value="重置" />
+            </label>
+        </form>
+
+
+
+
+    </div>
+</div>
+<script language="javascript">
+    var baserui = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var addsort	= baserui+"/link/Action";
+    var checkurl = "<?php echo $baseurl;?>/register/Check"; 
+    $(function(){
+        $('#sortlink').blur(function(){
+            var OriSortName=$('#OriSortName').val();
+            OriSortName=OriSortName.replace(/(^\s*)|(\s*$)/g,"");
+		
+            var sortlink=$('#sortlink').val();
+            sortlink=sortlink.replace(/(^\s*)|(\s*$)/g,"");
+		
+            if(sortlink!=OriSortName){
+                $.post(checkurl,{act:'linksort',memberid:$('#MemberID').val(),name:sortlink},function(data){
+                    if(data.errno != 'success')
+                        showalert(data.error); return false;
+                },'json');
+            }
+        });
+        $('#formSubmit2').click(function(){
+            var OriSortName=$('#OriSortName').val();
+            OriSortName=OriSortName.replace(/(^\s*)|(\s*$)/g,"");
+		
+            var sortlink=$('#sortlink').val();
+            sortlink=sortlink.replace(/(^\s*)|(\s*$)/g,"");
+		
+            if(mb_strlen(sortlink) > 30 || mb_strlen(sortlink) <2){
+                showalert("链接分类名称长度应该在1-30个字节之内");return;
+            }
+            //$('#formSubmit2').attr('disabled','disabled');
+		
+            if(sortlink!=OriSortName){
+                $.post(checkurl,{act:'linksort',memberid:$('#MemberID').val(),name:sortlink},function(data){
+                    if(data.errno != 'success')
+                    {
+                        showalert(data.error); return false;
+                    }
+                    else
+                    {
+                        $.post(addsort,$('#popFormSubmit').serialize(),function(data){
+                            showalert(data.error);
+                            if(data.errno=='success')
+                                setTimeout(function(){
+                                    window.location.href=baserui+"/link/ListSort";
+                                },1000);
+                        },'json');
+                    }
+                },'json');
+            }
+            else
+            {
+                $.post(addsort,$('#popFormSubmit').serialize(),function(data){
+                    showalert(data.error);
+                    if(data.errno=='success')
+                        setTimeout(function(){
+                            window.location.href=baserui+"/link/ListSort";
+                        },1000);
+                },'json');
+            }
+		
+		
+        });
+    })
+</script>

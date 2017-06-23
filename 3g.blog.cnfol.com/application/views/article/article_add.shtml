@@ -1,0 +1,312 @@
+<?php include $commonheader;?>
+<nav class="Nav TextHeader">
+    <?php if($article['ArticleID']){?>
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/article/'.strtotime($article['AppearTime']).'-'.$article['ArticleID'].'.html'; ?>" class="ToBlock Cancel F14 Tc" >取消</a>
+    <?php }else{ ?>
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/'; ?>" class="ToBlock Cancel F14 Tc" >取消</a>
+    <?php } ?>
+    <h2 class="Text-title F16 Tc">写博客</h2>
+</nav>
+<form method="post" action="" class="WriteBk Wrp Pb10 F14" id="supForm">
+    <input type="hidden" value="" name="timestamp" id="supTimestamp" />
+    <input type="hidden" id="articleid" name="articleid" value="<?php echo $article['ArticleID'];?>" />
+    <input type="hidden" name="memid" id="memid" value="<?php echo $bloginfo['MemberID'];?>" />
+    <input id="appeartime" type="hidden" name="appeartime" value="<?php echo $article['AppearTime'];?>" />
+    <input type="hidden" name="act" id="act" value="<?php echo $article['ArticleID'] ? 'edit' : 'add';?>" />
+    <input type="hidden" name="groupStr" value="<?php echo trim($bloginfo['GroupID'],',');?>" />
+    <input type="hidden" name="blogName" value="<?php echo $bloginfo['BlogName'];?>" />
+    <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" />
+    <input type="hidden" value="0"  id="supSaveEditControl" name="draftsArticleid" /><!--第一次保存草稿箱后定时保存的就只做修改-->
+    <input type="hidden" value="0"  id="supSaveEditTimeControl" name="draftsAppeartime" />
+    <input type="hidden" value="0"  id="EditVifdata" name="draftsVifdata" />
+    <input type="hidden" name="tagId" id="FenLei" value="<?php echo $article['SysTagID'] ? $article['SysTagID'] : 0; ?>" />
+
+    <section class="Wz_class">
+        <div class="Wzc_btn Fl" id="Wzc_btn">
+            <?php if(empty($article['SysTagID'])) {?>
+            <div class="Wzc_tit">选择分类</div>
+            <?php }else{?>
+            <div class="Wzc_tit"><?php echo $systaglist[$article['SysTagID']]; ?></div>
+            <?php }?>
+            <div class="Wzc_content Hide">
+                <?php foreach($systaglist as $tagid => $tag): ?>
+                <a href="javascript:void(0);" data-value="<?php echo $tagid;?>"><?php echo $tag;?></a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        (*必选)
+    </section>
+    <label class="Wzc_title ToBlock">标题：<input type="text" name="title" value="<?php echo $article['Title']?$article['Title']:'点击输入标题';?>" class="Bt_txt" id="Bt_txt"></label>
+    <section class="Wzc_txt Oh">
+        <h3 class="Wzc_wz Fl">正文：</h3>
+        <textarea class="Wzc_textarea Mt10 Fl F14" name="content" id="Wzc_textarea"><?php echo $article['Content']?$article['Content']:'添加内容';?></textarea>
+    </section>
+    <input type="hidden" name="isvalidate" id="supisvalidate" value="<?php echo($isvalidate?'1':'0'); ?>" />
+    <section class="Wzc_yz" <?php if($isvalidate){echo("style='display:none;'");}elseif(!empty($article['ArticleID'])){echo("style='display:none;'");} ?>>
+             <input type="text" class="Yz_txt Fl"  name="validate" id="supValidate"/>
+        <span class="Fl Yz_msg Tc Ml10"><img onclick="javascript:vifdata('sup')" id="supVifdataImg" alt="输入验证码" src="<?php echo $baseurl; ?>/register/varify?r=<?php echo(time()); ?>" style="cursor:pointer"/></span>&nbsp;&nbsp;&nbsp;
+        <span class="Fl F12 Ml10" href="javascript:void(0);" onclick="javascript:vifdata('sup')" style="cursor: pointer;">看不清楚？</span>
+    </section>
+    <section class="Wzc_yz2">
+        <?php if(!empty($bloglistfilter)&&empty($article['ArticleID'])){ ?>
+        <span class="Fl CunBtn Tc Tc" onclick="javascript:submitfuntTiming('sup','handSave');" style="cursor: pointer;">存至草稿箱</span>
+        <input type="button" value="发布" class="Fl FabuBtn Ml10 Tc" onclick="submitfun('sup',<?php echo $user['userid']; ?>,'1');"/>
+        <?php }elseif(!empty($article['ArticleID'])){ ?>
+        <?php if($this->input->get('draftsEdit')=='1'){?>
+        <input value="1" id="editDraf_saveDraf" name="editDraf_saveDraf" type="hidden">
+        <span class="Fl CunBtn Tc Tc" onclick="javascript:submitfuntTiming('sup','handSave');" style="cursor: pointer;">存至草稿箱</span>
+        <input type="button" value="草稿发布" class="Fl FabuBtn Ml10 Tc" onclick="javascript:submitUpdatefun('draf');"/>
+        <?php }else{?>
+        <input type="button" value="编辑" class="Fl FabuBtn Ml10 Tc" onclick="javascript:submitUpdatefun('edit');"/>
+        <p class=" Fl F12 Ml10 Hui_color">提示：代码部分请谨慎编辑</p>
+        <?php }?>
+        <?php }else{ ?>
+        <input type="button" value="发布" class="Fl FabuBtn Ml10 Tc" onclick="javascript:submitfun('sup',<?php echo $user['userid']; ?>)"/>
+        <?php } ?>
+    </section>
+
+</form>
+<?php  include $commonfooter; ?>
+<script type="text/javascript">
+    var baseurl="<?php echo $baseurl; ?>";
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName']; ?>";
+    var action = baseuri+"/article/Action";
+    var mydomainname="<?php echo $bloginfo['DomainName']; ?>";
+    var aticleId = "<?php echo $article['ArticleID'];?>";
+    window.onload=function(){
+        Bk.app.toggleClass();
+        if(aticleId == ''){
+            var st=setInterval(autoSaveDaft,1000*60); 
+        }
+        $('#EditVifdata').val("<?php if($this->input->get('draftsEdit')=='1'){echo('1');}else{echo('0');} ?>");
+        $('#supSaveEditControl').val("<?php if($this->input->get('draftsEdit')=='1'){echo $article['ArticleID'];}else{echo('0');} ?>");
+        $('#supSaveEditTimeControl').val("<?php if($this->input->get('draftsEdit')=='1'){echo $article['AppearTime'];}else{echo('0');} ?>");
+    }
+    
+    function vifdata(sign){
+        var Now = new Date();
+        $('#'+sign+'VifdataImg').attr('src','<?php echo $baseurl; ?>/register/varify?&r='+Now.getTime());
+        $('input[name="validate"]').val('');
+    }
+    /* 发表文章 */
+    function submitfun(type,uid,alone){
+        if($('#Bt_txt').val() == ''|| $('#Bt_txt').val() == '点击输入标题'){
+            alertDialog('请认真填写博文的标题');
+            return;
+        }
+        if($('#Wzc_textarea').val() == ''|| $('#Wzc_textarea').val() == '添加内容'){
+            alertDialog('请认真撰写博文');
+            return;
+        }
+        if($('#FenLei').val() == '0'){
+            alertDialog('请选择博文系统分类');
+            return;
+        }
+        if($('#'+type+'isvalidate').val()=='0'){
+            if($('#'+type+'Validate').val() == ''){
+                alertDialog('请输入验证码');
+                return;
+            }
+        }
+
+        $.ajax({
+            type: 'post',
+            contentType:'application/x-www-form-urlencoded',
+            url:action,
+            data:$('#'+type+'Form').serialize(), 
+            dataType:'json',
+            async: false,
+            success: function(data){
+                if(alone!='1'||data.errno!='success'){
+                    alertDialog(data.error);
+                }
+			
+                if(data.errno == 'success'){
+                    if(alone!='1'){
+                        afterSubmit();
+                        clearform();
+                    }			
+                }
+			
+                if($('#'+type+'isvalidate').val()=='0'){
+                    vifdata(type);
+                }
+			
+                if(type=='sup'){			
+                    if(data.errno=='success')
+                    {
+                        $('#supTag').val('');
+                        $('.brief').val('');
+                        $('#sortid').val('18295');
+                        $('#supGiftPrice').val('0');
+                        $('input[name=trackback]').val('');
+                        $('#tag').val('');
+					
+                        if(alone=='1'){                   
+                            alertDialog('文章已成功发表');
+                            resetForm('supForm');
+                        }			
+                    }
+                    else{
+                        alertDialog('文章发表失败');
+                    }
+                }
+			
+			
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alertDialog('文章未成功发表');
+                clearform();
+                if($('#'+type+'isvalidate').val()=='0'){
+                    vifdata(type);
+                }
+                if(type=='sup'){
+                    $('#supTag').val('');
+                    $('.brief').val('');
+                    $('#sortid').val('18295');
+                    $('#supGiftPrice').val('0');
+                    $('input[name=trackback]').val('');
+                }	
+            }
+        });
+	 
+    }
+    function submitUpdatefun(type){
+        var alNotice = '文章已成功发表';
+        var urlRefer = "<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/article/'.strtotime($article['AppearTime']).'-'.$article['ArticleID'].'.html'; ?>";
+        if(type=='draf'){
+            alNotice = '草稿已成功发表';
+        }else if(type=='edit'){
+            alNotice = '文章已编辑成功';
+        }
+        if($('#Bt_txt').val() == ''|| $('#Bt_txt').val() == '点击输入标题'){
+            alertDialog('请认真填写博文的标题');
+            return;
+        }
+        if($('#Wzc_textarea').val() == ''|| $('#Wzc_textarea').val() == '添加内容'){
+            alertDialog('请认真撰写博文');
+            return;
+        }
+        if($('#FenLei').val() == '0'){
+            alertDialog('请选择博文系统分类');
+            return;
+        }
+        $.ajax({
+            type: 'post',
+            url: action, 
+            data: $('#supForm').serialize(), 
+            dataType: 'json',
+            contentType:'application/x-www-form-urlencoded',
+            success: function(data){
+                if(data.errno == 'success' || data.errno == '200036' || data.errno == '200037'){
+                    alertDialog(alNotice);
+                    countDownHref(urlRefer);                   
+                    //                    clearform();
+                } else {
+                    alertDialog(data.error);
+                }
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alertDialog('发生错误，请重新提交保存('+XMLHttpRequest.status+','+XMLHttpRequest.readyState+','+textStatus+')');
+                vifdata();
+            }
+        });
+    }
+    
+    function clearform(){
+        resetForm('supForm');
+    }
+    function resetForm(form){
+        document.forms[form].reset();
+        $('#Bt_txt').val('');
+        $('#Wzc_btn .Wzc_tit').html('选择分类');
+        $('#FenLei').val('0');
+        $('#Wzc_textarea').val('');
+    }
+    function autoSaveDaft(){
+        if($('#Bt_txt').val() != '' && $('#Bt_txt').val() != '点击输入标题' && $('#Wzc_textarea').val() != '' && $('#Wzc_textarea').val() != '添加内容'){
+            submitfuntTiming('sup','handSave');
+        }
+    }
+    /* 文章保存到草稿箱 */
+    function submitfuntTiming(type,mode){
+        
+        if($('#supSaveEditControl').val()=='0'){
+            var actions=baseurl+'/index.php/mybloglist/action/'+mydomainname+'?act=add';
+        }else{
+            if($('#editDraf_saveDraf').val()=='1'){
+                var actions=baseurl+'/index.php/mybloglist/action/'+mydomainname+'?act=add';
+                
+            }else{
+                var actions=baseurl+'/index.php/mybloglist/action/'+mydomainname+'?act=edit';
+            }
+            
+        }
+        
+	
+        if($('#Bt_txt').val() == '' || $('#Bt_txt').val() == '点击输入标题'){
+            if(mode=='handSave'){
+                alertDialog('请输入文章标题');
+            }
+            return;
+        }
+        if($('#Wzc_textarea').val() == '' || $('#Wzc_textarea').val() == '添加内容'){
+            if(mode=='handSave'){
+                alertDialog('请输入文章内容');
+            }
+            return;
+        }
+	
+        $.ajax({
+            type: 'post',
+            contentType:'application/x-www-form-urlencoded',
+            url:actions,
+            data:$('#'+type+'Form').serialize(), 
+            dataType:'json',
+            async: false,
+            success: function(data){
+
+                if(data.errno == 'success'){
+                    var myDate = new Date();
+                    var minute=myDate.getMinutes();
+                    if(minute<10){
+                        minute='0'+minute;
+                    }
+                    if($('#supSaveEditControl').val()=='0' || $('#editDraf_saveDraf').val()=='1'){
+                        $('#supSaveEditControl').val(data.articleid);
+                        $('#articleid').val(data.articleid);
+                        $('#supSaveEditTimeControl').val(data.appeartime);
+                        $('#appeartime').val(data.appeartime);
+                        $('#editDraf_saveDraf').val('0');
+                    }
+					
+                    if(mode=='handSave'){
+                        alertDialog('保存草稿箱成功');
+                    }
+                }else{
+                    if(mode=='handSave'){
+                        alertDialog('保存草稿箱失败');
+                    }
+                }
+			
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {		
+                if(mode=='handSave'){
+                    alertDialog('文章已保存到草稿箱');
+                }
+			
+            }
+        });
+	 
+    }
+    function afterSubmit(){
+        $('#newart').val('1');
+        $.getJSON(baseurl+'/index.php/mybloglist/getMsg?domainname=<?php echo($bloginfo["DomainName"]); ?>&r='+new Date().getTime(), function(json) {
+            if(json.dyData != ''){   	
+                $('#newlistBtn').html(json.dyData);
+                $('.notInd').click();
+                $('#newart').val('0');
+            }
+        });
+    }
+</script>

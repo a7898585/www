@@ -1,0 +1,18 @@
+Array
+(
+    [ArticleID] => 54067934
+    [MemberID] => 17275
+    [TotalClick] => 632
+    [RealTotalClick] => 632
+    [TodayClick] => 632
+    [RealTodayClick] => 632
+)
+Array
+(
+    [54067934] => Array
+        (
+            [stat] => 632
+            [memid] => 17275
+        )
+
+)

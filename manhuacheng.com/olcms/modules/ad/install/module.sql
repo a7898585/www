@@ -1,0 +1,1 @@
+INSERT INTO `tt_module` (`module`, `name`, `url`, `iscore`, `version`, `description`, `setting`, `listorder`, `disabled`, `installdate`, `updatedate`) VALUES ('ad', '广告', 'ad/', 0, '1.0', '广告', '', 0, 0, '2011-06-28', '2011-06-28');

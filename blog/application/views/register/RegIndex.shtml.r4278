@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><?php echo $user['nickname']; ?>-博客管理中心</title>
+        <script src="http://img.cnfol.com/newblog/batev6.0/core/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+        <script src="http://img.cnfol.com/newblog/batev6.0/core/js/function.js" type="text/javascript"></script>
+        <script src="http://img.cnfol.com/newblog/batev6.0/js/popup.js" type="text/javascript"></script>
+        <script src="http://img.cnfol.com/newblog/batev6.0/js/function.js" type="text/javascript"></script>
+        <script charset="utf-8" src="http://hs.cnfol.com/f=Cm/Js/Base.js" type="text/javascript"></script>
+        <link href="http://img.cnfol.com/style/card_style.css" rel="stylesheet" type="text/css" />
+
+
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=Cm/Css/Base.css,Cm/Css/HdFter.css,uj/Css/Brokerage/Common.css,uj/Css/Bloghead/Blogcom.css" />
+
+        <style>
+            /* 头部部分 */
+            /* CSS Document */
+            body{ margin:0; padding:0; font-size:12px; background-color:#EEEEEE; background-image:url(http://images.cnfol.com/uploads/mod_blog/manage/bg1.gif); 
+                  background-repeat:repeat-x;}
+            a:link {color:#993300; text-decoration:none;}
+            a:visited {color:#993300; text-decoration:none;}
+            a:hover {color: #661212; text-decoration:underline;}
+            a:active { color:#000000; text-decoration:none;}
+
+            /*新增*/
+            .login{background-image:url(http://images.cnfol.com/uploads/mod_blog/1/bkmb-tc1.gif); width:45px; padding-top:2px; height:18px; float:right;margin-right:5px;margin-top:2px;}
+            .titlebar {position:absolute; left:0px; top:0px; width: 298px; font-family:tahoma; font-size:12px;}
+            .wins {position:absolute; border:1px outset #E1E1E1;background-color:#EEF0EF;}
+            .transparent{position:absolute; visibility:hidden; border:3px outset #E1E1E1;background-color:#EEF0EF;filter:alpha(opacity=30);-moz-opacity:0.3;opacity:0.3;left: -500px;}
+            .textlogin {position:absolute; font-family:tahoma; font-size:12px; overflow:auto;}
+            .titlelogin {font-weight:bold; color:#ffffff;}
+            .p_t10{padding-top:10px;}
+            .txt{clear:both;padding:3px;}
+            .bg_tab{font-weight:bolder;font-size:14px;}
+            form{margin:0px;padding:0px;}
+
+            /* 头部部分 */
+            .top-head01{ background-image:url(http://images.cnfol.com/uploads/mod_blog/manage/bk-01.gif); width:980px; height:38px}
+            .top-head01-left{ float:left; padding-top:7px; width:160px; padding-left:20px; text-align:left}
+            .top-head01-left01{ float:left; padding-top:12px; width:160px; padding-left:20px; text-align:left}
+            .top-head01-right{ float:right; padding-top:5px; width:790px;}
+            .top-head01-right01{ float:right; background-image:url(http://images.cnfol.com/uploads/mod_blog/manage/bkmb-bg01.gif); margin-top:2px; height:16px; width:108px; 
+                                 text-align:left; padding-top:4px; padding-left:22px; color:#FF6000}
+            .top-head01-right02{ float:right; padding-top:2px; padding-left:6px; padding-right:15px}
+            .top-head01-right03{ float:right; padding-top:2px; padding-left:6px;}
+            .top-head01-right04{ float:right; padding-top:7px; padding-left:6px;}
+            .top-head01-right05{ float:right; padding: 5px 15px 0 6px;}
+
+
+            .back-cl{ height:10px; width:980px; background-color:#FFFFFF; clear:both;}
+            .top-head02{ width:980px; height:135px;}
+            .top-head03{ width:960px; height:21px; background-image:url(http://images.cnfol.com/uploads/mod_blog/manage/bk-03.gif); color:#FFFFFF; font-weight:bold; 
+                         text-align:left; padding-left:20px; padding-top:10px;}
+
+            /* 中间部分 */
+            .cen{ width:980px; background-color:#FFFFFF;}
+            .cen1{ width:226px; float:left; margin-left:10px;}
+            .cen1-a{ height:17px; background-image:url(http://images.cnfol.com/uploads/mod_blog/manage/bk-05.gif); color:#FFFFFF; font-weight:bold; text-align:left;
+                     padding-left:20px; padding-top:6px;}
+            .cen1-b{ border:1px solid #70A2CE; margin-top:1px; background-image:url(http://images.cnfol.com/uploads/mod_blog/manage/bk-06.gif);}
+            .cen1-c{ margin:5px; line-height:25px; padding-left:5px; text-align:left;}
+            .mar-t{ margin-top:10px;}
+
+
+            .cen2{ width:716px; float:left; margin-left:10px;}
+            .cen2-a{ height:23px; background-image:url(http://images.cnfol.com/uploads/mod_blog/manage/bk-07.gif);}
+            .cen2-a-1{ float:left; padding-left:20px; text-align:left; font-weight:bold; color:#FFFFFF; padding-top:6px;}
+            .cen2-a-2{ float:right; padding-right:20px; text-align:right; font-weight:bold; color:#FFFFFF; padding-top:6px;}
+            .cen2-a-3{ text-align:left;}
+
+            /* 底部分 */
+            .bot{ width:980px; height:30px; text-align:center; line-height:25px; background-color:#FFFFFF;}
+            #footer{ clear:both;}
+
+
+            a.alinkmargin
+            {
+                margin-right:5px;
+                color:#0E4682;
+            }
+            a.alinkblack,a.alinkdanhei
+            {
+                color:#000000;
+            }
+            a.alinkzhinan
+            {
+                color:#FCA61C;
+            }
+            a.alinkhelp
+            {
+                color:#0E4682;
+            }
+            a.linkcnfol
+            {
+                color:#000000;
+                text-decoration:none;
+            }
+            span.Hlft
+            {
+                width:632px;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <!--header begin-->
+
+
+
+
+
+            <div class="top-head01" id="navBar">
+
+
+
+                <div class="W">
+                    <div class="Bghct">
+                        <span class="R Hrgt"><a class="Coff8 Uhp Middle alinkzhinan" href="<?php echo $baseurl; ?>/blogcnfol" target="_blank">用户指南</a><i class="Codc Mr10">|</i><a class="Co1b3 alinkhelp" href="http://help.cnfol.com" target="_blank">客服帮助</a><a href="javascript:void(0);" class="alinkdanhei" onClick="C.SetHome('<?php echo $baseurl; ?>')">设为首页</a><a href="javascript:void(0);" class="alinkdanhei" onClick="C.Collect('<?php echo $baseurl; ?>','中金在线')">加入收藏</a></span>
+                        <span class="Hlft L Ml8 Strong"><i class="Ml8 GoldenMl8 linkcnfol W204"  id="L_UN"><a href="http://blog.cnfol.com" target="_blank" class="linkcnfol">中金博客</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎您，<?php echo $user['nickname']; ?></i><i class="Mr10 Codc">|</i><a class="alinkmargin" href="<?php echo $baseurl; ?>/register/Home" target="_blank">我的博客</a><i class="Codc Mr10 alinkmargin">|</i><a class="alinkmargin" id="addarcBtn" href="<?php echo($baseurl . '/' . $bloglist['Record']['DomainName'] . '/article/Add'); ?>" target="_blank">发表文章</a><i class="Codc Mr10 alinkmargin">|</i><a class="alinkmargin"  href="http://i.blog.cnfol.com" target="_blank">个人中心</a><i class="Codc Mr10">|</i><a class="alinkmargin" href="http://passport.cnfol.com" target="_blank">我的帐户</a><i class="Codc Mr10 alinkmargin">|</i><a class="alinkmargin LgMsg" href="http://passport.cnfol.com/messages/inbox"  target="_blank" style="margin-top:6px;">(0)</a><i class="Codc Mr10 alinkmargin">|</i><a href="http://passport.cnfol.com/login/loginout?return=<?php echo $baseurl; ?>" class="Co7 alinkblack W30" style="width:25px;">退出</a><i class="Codc Mr10" style="display:none;">|</i></span>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="back-cl"><img src="http://images.cnfol.com/uploads/mod_blog/manage/bk-04.gif" /></div>
+            <div class="top-head02"><img src="http://images.cnfol.com/uploads/mod_blog/manage/bk-02.gif" width="980" height="135" /></div>
+            <div class="top-head03"><a href="<?php echo $baseurl; ?>" target="_blank"><font color="#ffffff">博客首页</font></a>         　　　<a href="<?php echo $baseurl; ?>/register/Home" target="_blank"><font color="#ffffff">管理中心</font></a>       　　　<a href="<?php echo $baseurl; ?>/blogcnfol" target="_blank"><font color="#ffffff">用户指南</font></a>       　　　<a href="<?php echo $baseurl; ?>/blogcnfol/article/3576553.html" target="_blank"><font color="#ffffff">博客推广</font></a></div>
+            <div class="back-cl"><img src="http://images.cnfol.com/uploads/mod_blog/manage/bk-04.gif" /></div>
+            <!--header end-->
+
+            <!-- 中间部分 -->
+            <div class="cen">
+                <div class="cen1">
+                    <div class="cen1-a">控制菜单</div>
+                    <div class="cen1-b">
+                        <div class="cen1-c"><a href="http://passport.cnfol.com/account/editbaseinfo" target="_blank">编辑个人资料</a><br />
+                            <a href="http://passport.cnfol.com/account/myaccount" target="_blank">我的帐户</a><br />
+                            <a href="http://passport.cnfol.com/account/editpassword" target="_blank">修改密码</a><br />
+                        </div>
+                    </div>
+                    <div class="cen1-a mar-t">帮助资源</div>
+                    <div class="cen1-b">
+                        <div class="cen1-c">
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637774.html" target="_blank">如何注册申请博客？</a><br/>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637790.html" target="_blank">如何让你的博客个性化?</a><br/>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637796.html" target="_blank">如何在文章中添加、插入图片？</a><br/>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637830.html" target="_blank">如何修改文章？</a><br/>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637928.html" target="_blank">如何查看我的博客访问日志！</a></br>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637834.html" target="_blank">如何创建相册？</a><br/>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637800.html" target="_blank">如何在文章中添加链接？</a><br/>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637882.html" target="_blank">如何自定义CSS样式</a><br/>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637858.html" target="_blank">如何添加相片到相册？</a><br/>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637920.html" target="_blank">如何个性化设置自己的博客显示模块，如何布局？</a><br/>
+                            <a href="<?php echo $baseurl; ?>/blogcnfol/article/1637848.html" target="_blank">如何编辑相册？</a>
+                        </div>
+                    </div>
+                </div>
+
+                <?php
+                include 'module/' . $block;
+                ?>
+                <div class="wbdb lja2" id="footer">Powered By:<a href="http://www.cnfol.com" target="_blank">Cnfol</a> 2006-
+                    <script type="text/javascript">
+                        date=new Date();
+                        weekday=["日","一","二","三","四","五","六",];
+                        year = date.getFullYear();
+                        document.writeln(year);
+                    </script>
+                    &copy;
+                    <a href='<?php echo $baseurl; ?>/' target="_blank"><?php echo $user['nickname']; ?></a> </div>
+                <!--google统计-->
+                <script type="text/javascript">
+                    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+                    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+                </script>
+                <script type="text/javascript">
+                    var pageTracker = _gat._getTracker("UA-197044-9");
+                    pageTracker._trackPageview();
+                </script>
+                <!--百度统计-->
+                <script type="text/javascript">
+                    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc378c4854ec370c1c8438f72e19b7170' type='text/javascript'%3E%3C/script%3E"));
+
+
+                    //站内信
+                    var num ='0';
+                    var url = 'http://passport.cnfol.com/index.php/getinfo/userinfo/<?php echo $user['userid']; ?>/getnewmsgcount/json?callback=?';
+                    $.getJSON(url, function(json){
+                        num = json.count; 
+                        var tms = setInterval(function () {
+                            var LgMsg = C.Cls("LgMsg")[0];
+                            if (LgMsg && num)
+                            {
+                                LgMsg.innerHTML = "("+ num +")";
+                                clearInterval(tms);
+                            }
+                        },100);
+     
+                    });
+                    //站内信
+
+                </script>
+
+                <!--[if IE 6]>
+                    <script type="text/javascript" src="http://hs.cnfol.com/Cm/Js/TransPng.js" ></script>
+                    <script type="text/javascript">
+                       TransPng.fix('.Strong, .Middle, .Week, .ArrRight, .ArrLeft');
+                    </script>
+                <![endif]-->
+                <!-- 登入信息认证 -->
+                <!--
+                <?php
+                if ($user != false) {
+                    ?>
+                    <script src='http://passport.cnfol.com/getinfo/checkUserLogin' type="text/javascript"></script>
+                    <?php
+                }
+                ?>
+                -->
+                <!--中金在线统计-->
+                <DIV style="DISPLAY: none"><!-- START AIYA Site Stat. -->
+                    <SCRIPT language=JavaScript type="text/javascript" src="//s.cnfolimg.com/v5.0/js/stat01-min.js"></SCRIPT>
+                    <NOSCRIPT><img src="//logs.cnfol.com/a?ci=cnfol" alt=""></NOSCRIPT><!-- END AIYA Site Stat. --></DIV> 
+                <!-- End of LogMicroscope Code --> 
+        </center>
+    </body>
+</html>

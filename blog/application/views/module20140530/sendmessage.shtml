@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script language="javascript" src="<?php echo $widget_url['jqueryurl']; ?>"></script>
+        <script language="javascript" src="<?php echo $widget_url['jsurl']; ?>"></script>
+        <script>
+            function getdata(form)
+            {
+                if(Validator.Validate(form,3)==true)
+                {
+                    var b=document.getElementById('sub');
+                    b.disabled=true;
+                    return true;
+                }
+                return false;
+            }
+        </script>
+        <style type="text/css">
+            <!--
+            body {
+                margin-top: 0px;
+            }
+            -->
+        </style></head>
+    <body>
+        <form name="sendMessage" method="post" action="" onSubmit="return getdata(this)">
+            <table width="100%" style="font-size:9pt">
+                <tr>
+                    <td height="27">发送给:</td>
+                    <td><?php echo $friendNickname; ?></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr id="hiddenresultMessage" style="display:none;">
+                    <td width="102" height="27"></td>
+                    <td width="292"><label>
+                            <input name="title" type="text" id="resultMessage"  size="30"  maxlength="60" dataType="Require"  datatype="LimitB" min="1" max="50" style="border:0px solid white;color:red;" />
+                        </label></td>
+                </tr>
+                <tr style="display:none;">
+                    <td width="102" height="27"> 标　题:</td>
+                    <td width="292"><label>
+                            <input name="title" type="text" id="title"  size="30"  maxlength="60" dataType="Require"  datatype="LimitB" min="1" max="50"  msg="<br>标题应该是1至25个汉字的长度" />
+                        </label></td>
+                </tr>
+                <tr>
+                    <td height="47"> 内　容：</td>
+                    <td>
+                        <textarea name="content" cols="25" rows="4" id="message"   maxlength="60"  dataType="Require"  datatype="LimitB" min="1" max="1000"  msg="<br>内容应该是1至500个汉字的长度"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><label>
+                            <div align="center">
+                                <input type="hidden" name="fuserid" value="<?php echo $fromUserID; ?>"/>
+                                <input type="hidden" name="tuserid" value="<?php echo $friendUserID; ?>"/>
+                                <input type="hidden" name="type" value="1"/>
+                                <input type="hidden" name="key" value="<?php echo(md5($fromUserID.'hello_cnfol')); ?>"/>
+                                <input name="sub" type="button" id="sub" value=" 提 交 ">
+                                    <input name="ret" type="reset" id="ret" value="  重 置 ">
+                                        </div>
+                                        </label></td>
+                                        </tr>
+                                        </table>
+
+                                        </form>
+                                        </body>
+                                        <script>
+
+                                            $('#sub').live('click', function(){
+	
+                                                //var url="http://my2.cnfol.com/crontab/api/letter_send.php?callback=?";
+                                                var url="http://passport.cnfol.com/api/msginfo/sendmsg";
+                                                $.getJSON(url+"?r="+new Date().getTime()+"&callback=?",$('form[name=sendMessage]').serialize(),function(json){
+	    
+                                                    if(json.flag=='1')
+                                                    {
+                                                        //window.location.reload();
+                                                        $('#hiddenresultMessage').css('display','');
+                                                        $('#resultMessage').val("发送成功");
+                                                        setTimeout("parent.Dialog.Close();",1000);
+			
+                                                        //$('#resultMessage').text("&nbsp;");
+                                                    }
+                                                    else
+                                                    {
+                                                        $('#hiddenresultMessage').css('display','');
+                                                        $('#resultMessage').val(json.info);
+
+                                                    }
+	    
+		
+                                                });
+	
+                                            })
+	
+                                        </script>
+                                        </html>

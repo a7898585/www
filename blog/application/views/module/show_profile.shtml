@@ -1,0 +1,96 @@
+<div rel="drag" id="Mod_Profile" class="grdasz-ztdiv">
+    <div id="Mod_Profile_t" class="zjfksz-top01">
+        <div class="zjfksz-top02"></div>
+        <div class="zjfksz-top03">个人档案</div>
+        <?php if(isset($dragable) && $dragable==1): ?>
+        <div class="gjsz01"><a href="#" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_Profile_td3"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz12.gif"></a><a href="#" onclick="clkmenu(this.id,2);return false;" style="display: none;" title="展开" id="Mod_Profile_td4"><img border="0" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz15.gif"></a><a href="#" onclick="removemod(this.id);return false;" title="删除" id="Mod_Profile_td2"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz14.gif"></a></div>
+        <div style="cursor: move;" id="Mod_Profile_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="gjsz02"><img height="16" width="33" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz11.gif"></div>
+        <?php endif; ?>
+    </div>
+    <div class="grdasz">
+        <div class="modbox">
+            <div class="grdasz01">
+                <div class="grdasz02" style="height:auto;background-repeat:no-repeat;">
+                    <img height="90" width="90" title="点击查看个人名片" style="cursor: pointer;" id="person" class="refid" refid="<?php echo $bloginfo['UserID'];?>" onerror="this.error=null;this.src='http://head.cnfolimg.com/man.png'" onload="javascript:this.style.display=''" src="<?php echo getUserHead($bloginfo['UserID'],96);?>" />
+                    <span style="padding-top:10px;display:inline-block;"><a target="_blank" href="http://t.cnfol.com/<?php echo $bloginfo['UserName'];?>" >(查看详细信息)</a></span>
+                </div>
+
+                <div class="grdasz03">
+                    <?php if(isset($isowner) && $isowner==true): ?>
+                    <div class="grdasz04"><div class="grdasz05-1"></div><div class="grdasz06">
+                            <a href="http://i.blog.cnfol.com" target="_blank" >个人中心</a>
+                        </div></div>
+                    <div class="grdasz04"><div class="grdasz05-2"></div><div class="grdasz06">
+                            <a href="http://passport.cnfol.com/v7/assistant/messageman">站内信箱</a>
+                        </div></div>
+                    <?php else: ?>
+                    <div class="grdasz04"><div class="grdasz05-1"></div><div class="grdasz06">
+                            <?php if($isFrends == 0 || $isFrends == 2){ ?>
+                            <!--<a href="javascript:Open('1','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['UserID'];?>')">加关注</a>-->
+                            <?php if($isFrends!=''){ ?>
+                            <a href="javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','add');">加关注</a>
+                            <?php }else{ ?>
+                            <a href="javascript:;">加关注</a>
+                            <?php }}else{ ?>
+                            <a href="javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','del');">取消关注</a>
+                            <?php } ?>
+                        </div></div>
+                    <div class="grdasz04"><div class="grdasz05-2"></div><div class="grdasz06">
+                            <a href="javascript:OpenMessage('2','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['UserID'];?>')">给我留言</a></div></div>
+                    <?php endif; ?>
+
+                    <div class="grdasz04">
+                        <div class="grdasz05-3"><img height="25" width="23" alt="在线状态" id="onlineimg" src="http://img.cnfol.com/images/online.gif"></div>
+                        <div id="onlinediv" class="grdasz06">在线状态</div></div>				
+                    <!-- 送鲜花开始 -->
+                    <div class="grdasz04" style="overflow:hidden">
+                        <div style="background-image: none; padding-top: 7px;" class="grdasz05-2">
+                            <img border="0" src="http://img.cnfol.com/newblog/Version2/images/mgh2.gif"></div>
+                        <div class="grdasz06 grdasz06_blue" >
+                            <?php if(isset($isowner) && $isowner==true): ?>
+                            <a target="_blank" href="http://passport.cnfol.com/giftmall">我的礼物</a>
+                            <?php else: ?> 
+                            <a onclick="tipsWindown('我要给<?php echo $bloginfo['NickName'];?>送鲜花', 'ToUserID=<?php echo $bloginfo['UserID']?>&GiftID=1&SourceURL=<?php echo $baseurl.'/'.$bloginfo['DomainName']; ?>&SourceTypeID=1&SourceTypeDesc=blog&SourceTabID=0',320,200,'true','','false','');return false;" href="javascript:;" title="我要给<?php echo $bloginfo['NickName'];?>送鲜花" class="sendgift">送鲜花</a>
+                            <?php endif; ?>
+                            <!-- 送鲜花结束 -->	
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grdasz07"  style="line-height:12px;margin-bottom:0px;">
+                <div class="grdasz04" style="overflow:hidden">
+                    <div class="W108 Fl">
+                        <div class="grdasz05-2 icospace"><img alt="粉丝" id="" src="http://img.cnfol.com/images/20120618/fansIco.gif"></div>
+                        <div class="grdasz06">粉丝 <span class=""><?php echo substr($friendsnumber['FllowerNum'],0,8); ?></span></div>
+                    </div>
+                    <div class="W108 Fl">
+                        <div class="grdasz05-2 icospace"><img alt="关注" id="" src="http://img.cnfol.com/images/20120618/guanzhuIco.gif"></div>
+                        <div class="grdasz06">关注 <span class=""><?php echo substr($friendsnumber['FollowingNum'],0,8); ?></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="grdasz07" id="signature" style="line-height:8px;margin-bottom:0px;">数据加载中...</div>
+        </div>
+    </div>
+</div>
+<div id="showinfo" style=" height:140px; width:290px;display:none;position:absolute;text-align:left" ></div>
+<script src="http://passport.cnfol.com/getOnline.php?type=jsvar&t=uid&d=<?php echo $bloginfo['UserID'];?>" language="javascript"></script>
+<script language="javascript">
+    $(function(){
+	
+        $('#signature').load("<?php echo $baseurl.'/ajaxgetuserprofile/'.$bloginfo['UserID'];?>");
+        var checkUserId=<?php echo $bloginfo['UserID'];?>;
+        if(typeof(online_<?php echo $bloginfo['UserID'];?>)!='undefined')
+        {
+            var temOnline = online_<?php echo $bloginfo['UserID'];?>;
+            if(temOnline=='offline')//在线
+            {
+                $('#onlinediv').innerHTML='离线状态';
+                $('#onlineimg').src='http://img.cnfol.com/images/offonline.gif';
+                $('#onlineimg').alt='离线状态';
+            }
+        }
+    })
+</script>
+

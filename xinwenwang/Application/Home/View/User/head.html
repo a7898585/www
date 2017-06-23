@@ -1,0 +1,275 @@
+<include file="Public:head" />
+<include file="Public:navi" />
+<div class="inbanner">
+    <img src="/Public/Home/images/in_banner.jpg">
+</div>
+<script type="text/javascript" src="/Public/Home/js/swf/swfobject.js"></script>
+<script type="text/javascript" src="/Public/Home/js/swf/fullAvatarEditor.js"></script>
+<!--主体内容 开始-->
+<div id="container" class="bg-white clearfix">        
+
+    <include file="User:top" />
+    <div class="empty"></div>
+    <div class="userphoto">
+        <dl>
+            <dt>自定义头像</dt>
+
+            <dd  id="swfContainer">
+
+            </dd>
+            <dd>
+                <ul>
+                    <empty name="USER.head_pic">
+                        <li>
+                            <p>大头像</p>
+                            <img src="http://port.xinwenwang.com/Public/Common/images/user_big.png" class="userphoto_a" id="userphoto_0">
+                        </li>
+                        <li>
+                            <p>中等头像</p>
+                            <img src="http://port.xinwenwang.com/Public/Common/images/user_big.png" class="userphoto_b" id="userphoto_1">
+                        </li>
+                        <li>
+                            <p>小头像</p>
+                            <img src="http://port.xinwenwang.com/Public/Common/images/user_big.png" class="userphoto_c" id="userphoto_2">
+                        </li>
+                        <else /> 
+                        <li>
+                            <p>大头像</p>
+                            <img src="{$USER.head_pic|setUpUrl}" class="userphoto_a" id="userphoto_0">
+                        </li>
+                        <li>
+                            <p>中等头像</p>
+                            <img src="{$USER.head_pic|setUpUrl}" class="userphoto_b" id="userphoto_1">
+                        </li>
+                        <li>
+                            <p>小头像</p>
+                            <img src="{$USER.head_pic|setUpUrl}" class="userphoto_c" id="userphoto_2">
+                        </li>
+                    </empty> 
+
+                </ul>
+            </dd>
+        </dl>
+        <a id="upload" style="display:none;margin-top:8px;"></a>
+
+        <script type="text/javascript">
+            swfobject.addDomLoadEvent(function () {
+                //以下两行代码正式环境下请删除
+                if(location.href.indexOf('http://') == -1) 
+                    layer.msg('请于WEB服务器环境中查看、测试！\n\n既 http://*/simpleDemo.html\n\n而不是本地路径 file:///*/simpleDemo.html的方式');
+                var swf = new fullAvatarEditor("{$base_url}/Public/Home/js/swf/fullAvatarEditor.swf", "{$base_url}/Public/Home/js/swf/expressInstall.swf", "swfContainer", {
+                    id : 'swf',
+                    upload_url : '{$base_url}/up/headpic',	//上传接口
+                    method : 'post',	//传递到上传接口中的查询参数的提交方式。更改该值时，请注意更改上传接口中的查询参数的接收方式
+                    src_upload : 1,		//是否上传原图片的选项，有以下值：0-不上传；1-上传；2-显示复选框由用户选择
+                    avatar_box_border_width : 0,
+                    avatar_sizes : '100*100|50*50|32*32',
+                    avatar_sizes_desc : '100*100像素|50*50像素|32*32像素'
+                }, function (msg) {
+                    switch(msg.code)
+                    {
+                        case 1 : 
+                            //alert("页面成功加载了组件！");
+                            break;
+                        case 2 : 
+                            //alert("已成功加载图片到编辑面板。");
+                            document.getElementById("upload").style.display = "inline";
+                            break;
+                        case 3 :
+                            if(msg.type == 0)
+                            {
+                                layer.msg("摄像头已准备就绪且用户已允许使用。",1,1);
+                            }
+                            else if(msg.type == 1)
+                            {
+                                layer.msg("摄像头已准备就绪但用户未允许使用！");
+                            }
+                            else
+                            {
+                                layer.msg("摄像头被占用！");
+                            }
+                            break;
+                        case 5 : 
+                            if(msg.content.success == true){
+                                for (var i=0;i<3;i++){
+                                    $('#userphoto_'+i).attr('src',msg.content.sourceUrl);
+                                }
+                                layer.msg("头像已成功保存至服务器",2,1);
+                                location.href='/user/subscribe?msg=collect';
+                            }
+                            break;
+                    }
+                }
+            );
+            });
+            //            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            //            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5f036dd99455cb8adc9de73e2f052f72' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+
+    </div>
+</div>
+<!--主体内容 结束-->
+
+
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/laytpl.js"></script>
+<script type="text/javascript" src="/Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    function uppwd(){
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        //        layer.closeAll();
+        $.layer({
+            type: 1,
+            shade: [0.5, '#000'],
+            area: ['auto', 'auto'],
+            closeBtn: false,
+            shadeClose: true,
+            title: false,
+            border: [0],
+            page: {dom: '#uppwd-dialog'}
+        });
+    }
+    function upsign(){
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        //        layer.closeAll();
+        $.layer({
+            type: 1,
+            shade: [0.5, '#000'],
+            area: ['auto', 'auto'],
+            closeBtn: false,
+            shadeClose: true,
+            title: false,
+            border: [0],
+            page: {dom: '#upsign-dialog'}
+        });
+    }
+    $('#btn_upsign').click(function () {
+        var login_dom = $('#upsign-dialog');
+        var sign = $(login_dom).find('input[name="sign"]').val();
+        if(sign==''){
+            layer.msg('签名不能为空');
+        }else{
+            layer.load('提交中...');
+            $.ajax({
+                type: 'POST',
+                url: '/user/up_sign',
+                data: {sign:sign},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('签名修改成功', 0, 1);
+                        window.location.reload();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        }
+    });
+    $('#btn_uppassword').click(function () {
+        var login_dom = $('#uppwd-dialog');
+        var password = $(login_dom).find('input[name="password"]').val();
+        var new_password = $(login_dom).find('input[name="new_password"]').val();
+        var sure_password = $(login_dom).find('input[name="sure_password"]').val();
+        layer.load('提交中...');
+        $.ajax({
+            type: 'POST',
+            url: '/user/up_pwd',
+            data: {password: password, new_password: new_password,sure_password:sure_password},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.code == 1) {
+                    layer.msg('密码修改成功', 0, 1);
+                    window.location.reload();
+                } else {
+                    layer.msg(msg.msg);
+                }
+            }
+        });
+    });
+    //点击展开分类
+    $('a[ga_event="feed_setting"]').click(function(){
+        if($('#pagelet-toolbar').attr('class')==''){
+            $(this).find('i').addClass('icon-customize-up');
+            $('#pagelet-toolbar').addClass('customize');
+            $('.custom-box').show();
+        }else{
+            $(this).find('i').removeClass('icon-customize-up');
+            $('#pagelet-toolbar').removeClass('customize');
+            $('.custom-box').hide();
+        }
+    });
+    //点击头部页面关闭分类
+    $('#container,#pagelet-nav').click(function(){
+        $('a[ga_event="feed_setting"]').find('i').removeClass('icon-customize-up');
+        $('#pagelet-toolbar').removeClass('customize');
+        $('.custom-box').hide();
+    });
+
+    //重载页面
+    $('.icon-refresh').click(function () {
+        $('.alert-msg').show();
+        window.location.reload();
+    });
+
+    //点击删除
+    $("#defaultCategory li").live("click", function () {
+        if ($('.customize').length && $(this).index()) {
+            $("#otherCategory").append("<li>" + $(this).html() + "</li>");
+            $(this).remove();
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $('.ban-msg').removeClass('error').html('点击添加新闻分类');
+                sysNav();
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //点击添加
+    $("#otherCategory li").live("click", function () {
+        if ($('.customize').length) {
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $("#defaultCategory").append("<li>" + $(this).html() + "</li>");
+                $(this).remove();
+                sysNav();
+            } else {
+                $('.ban-msg').addClass('error').html('分类已满（最多7个），请先删除一些');
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //未读新闻 点击查看
+    $('.unread').click(function () {
+        window.location.reload();
+    });
+
+           
+    var page =2;
+    function getUserRecomend(){
+        $.ajax({
+            type: 'POST',
+            url: '/user/getUserRecomend',
+            data: {p: page},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.code == 200) {
+                    page++;
+                } else {
+                    page=2;
+                }
+                $('#UserRecomend').html(msg.html);
+            }
+        });
+    }
+</script>
+<include file="Public:foot" />

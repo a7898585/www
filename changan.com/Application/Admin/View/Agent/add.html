@@ -1,0 +1,41 @@
+
+<div class="admin-content">
+
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/agent">代理商</a></li>
+        <li class="am-active">添加</li>
+    </ol>
+    <form id="add_from" method="post" action="/agent/add">
+        <div class="am-margin">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="#tab1">基本信息</a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <form class="am-form">
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-2 am-text-right">
+                                代理商id
+                            </div>
+                            <div class="am-u-sm-4">
+                                <textarea name="id" maxlength="140" id="desc" placeholder="代理商添加用 , 分开：500002906,500002933" class="am-form-field"></textarea>
+                            </div>
+                            <div class="am-u-sm-6">*必填;支持多个代理商添加(用 , 分开：500002906,500002933)</div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="am-margin">
+            <button type="button" onclick="$('#add_from').submit();" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+            <button type="button" onclick="location.href='{$Think.server.HTTP_REFERER}'" class="am-btn am-btn-primary am-btn-xs">返回</button>
+        </div>
+    </form>
+</div>
+
+
+

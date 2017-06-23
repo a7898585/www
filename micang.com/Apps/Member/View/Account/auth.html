@@ -1,0 +1,115 @@
+<div class="onlineplay safe_c">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h">安全认证</a> 
+    </div>
+    <div class="onlineplay_c5">
+        <div class="onlineplay_c5_a"></div>
+        <!--图片列表  开始-->
+        <div class="piclist">
+            <ul>
+                <li>
+                    <div class="piclist_icon piclist_a"><i class="iconfont">&#xe618;</i></div>
+                    <div class="piclist_txt_b"><span>实名认证</span> <p>凡经过认证的，您的真实诚信度将大大提高，您的受众率是没有经过认证的20倍以上。</p></div>
+                    <div class="piclist_txt">
+                        <if condition="$memberInfo['auth_status'] eq '1' "><em>已认证</em><i></i>
+                            <elseif condition="$memberInfo['auth_status'] eq '2'"/><p>审核中</p><b></b>
+                            <else /><em>未认证</em><b></b>
+                        </if></div>
+                    <div class="piclist_txt">
+                        <a href="/account/shiming" class="piclist_txt_link">
+                            <if condition="$memberInfo['auth_status'] eq '1' ">查看
+                                <else />身份认证
+                            </if></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="piclist_icon piclist_b"><i class="iconfont">&#xe61c;</i></div>
+                    <div class="piclist_txt_b"><span>邮箱认证</span> <p>通过绑定邮箱后，您可以使用密保邮箱找回密码。</p></div>
+                    <div class="piclist_txt">
+                        <if condition="$memberInfo['status'] eq '1' "><em>已认证</em><i></i>
+                            <else /> <em>未认证</em><b></b>
+                        </if>
+                    </div>
+                    <div class="piclist_txt">
+                        <a href="javascript:;" title="" class="piclist_txt_link"></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="piclist_icon piclist_c"><i class="iconfont">&#xe61e;</i></div>
+                    <div class="piclist_txt_b"><span>手机认证</span> <p>绑定手机后，您可以使用手机找回密码。</p></div>
+                    <div class="piclist_txt">
+                        <if condition="$memberInfo['mobile_status'] eq '1' "> 
+                            <notempty  name="profile.mobile">{$profile.mobile|substr_replace='****',3,4}</notempty>
+                            <else /> <em>未认证</em><b></b>
+                        </if> 
+                    </div>
+                    <div class="piclist_txt">
+                        <a href="/account/mobile" class="piclist_txt_link">
+                            <if condition="$memberInfo['mobile_status'] eq '1' ">查看
+                                <else />点击认证
+                            </if>
+                        </a>
+                    </div>
+                </li>
+                <li style="border-right:0;">
+                    <div class="piclist_icon piclist_d"><i class="iconfont">&#xe61d;</i></div>
+                    <div class="piclist_txt_b"><span>安全码</span>
+                        <p>安全码是除有效证件之外最高级别的帐号保护措施</p>
+                    </div>
+                    <div class="piclist_txt"><empty name="memberInfo.seccode">未设置<else /> 已设置</empty> </div>
+                    <div class="piclist_txt"><a href="/account/password" class="piclist_txt_link">点击<empty name="memberInfo.seccode">添加<else />修改</empty></a></div>
+                </li>
+            </ul>
+        </div>
+        <!--图片列表  结束-->
+        <div class="onlineplay_c5_b">
+            <div class="title_b_icon3"><i class="iconfont">&#xe612;</i></div>
+            <div class="txt_a">账号绑定</div>
+        </div>
+        <div class="onlineplay_c5_c">
+            <ul>
+                <li>
+                    <img src="/Public/Home/images/safe_d.jpg" />
+                    <dl>
+                        <dt>微信账号</dt>
+                        <dd>
+                        <if condition="$memberInfo['weixin'] neq '' ">
+                            <span></span>已绑定 <a href="/account/weixin/" title="已绑定" class="piclist_txt_link">点击查看</a>
+                            <else /> <p></p>未绑定 <a href="/account/weixin/" title="未绑定" class="piclist_txt_link">点击绑定</a></dd>
+                        </if>
+                    </dl>
+                </li>
+                <!--                <li>
+                                    <img src="/Public/Home/images/safe_a.jpg" />
+                                    <dl>
+                                        <dt>QQ账号</dt>
+                                        <dd><p></p>未绑定 <a href="#" title="" class="piclist_txt_link">点击绑定</a></dd>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <img src="/Public/Home/images/safe_b.jpg" />
+                                    <dl>
+                                        <dt>微博账户</dt>
+                                        <dd><p></p>未绑定 <a href="#" title="" class="piclist_txt_link">点击绑定</a></dd>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <img src="/Public/Home/images/safe_c.jpg" />
+                                    <dl>
+                                        <dt>支付宝账户</dt>
+                                        <dd><p></p>未绑定 <a href="#" title="" class="piclist_txt_link">点击绑定</a></dd>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <img src="/Public/Home/images/safe_e.jpg" />
+                                    <dl>
+                                        <dt>百度账户</dt>
+                                        <dd><span></span>已绑定 <a href="#" title="" class="piclist_txt_link">点击绑定</a></dd>
+                                    </dl>
+                                </li>-->
+            </ul>
+        </div>
+        <div class="height30 clear"></div>
+        <div class="height30 clear"></div>
+    </div>
+</div>

@@ -1,0 +1,1053 @@
+<?php include $header;?>
+<!--内容部分开始-->
+<div id="Content">
+
+    <div class="AllNav Mt10 Cf">
+        <div class="LeftNav fl">
+            <div class="LeftAllNav Cf">	
+                <div class="GoldAL1 Fl" style="height:147px;">
+                    <dl id="M1E">
+                        <dt id="M1E_dt">
+                        <a href="javascript:void(0)" class="CM" id="zoushiGold">黄  金</a>
+                        <a href="javascript:void(0)" id="zoushiUSA">美  指</a>
+                        <a href="javascript:void(0)" id="zoushiOil">原  油</a>
+                        <a href="javascript:void(0)" id="zoushiPaper">纸黄金</a>
+                        <a href="javascript:void(0)" id="zoushiPaperwhite">纸白银</a>
+                        </dt>
+                        <dd style="display:block;">
+                            <a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank"><img src="http://price.zhjtong.com/1_gj_180_120.png" alt="点击查看大图" style="width:180px;height:114px;" border="0" class="zoushiPic"/></a>
+
+                            <i style="font-style:normal;">实时行情走势请刷新页面</i>
+                        </dd>
+
+                        <img src="http://price.zhjtong.com/1_gj_180_120.png"  style="display:none;" class="zoushiGold" />
+
+                        <img src="http://price.zhjtong.com/1_mz_180_120.png"  style="display:none;" class="zoushiUSA"/>
+
+                        <img src="http://price.zhjtong.com/1_sy_180_120.png"  style="display:none;" class="zoushiOil"/>
+
+                        <img src="http://price.zhjtong.com/1_gh_180_120.png"  style="display:none;" class="zoushiPaper"/>
+
+                        <img src="http://price.zhjtong.com/1_ying_180_120.png" style="display:none;" class="zoushiPaperwhite"/>
+                    </dl>
+
+                </div>
+
+                <div class="co_02 fr">
+                    <div class="CenterNews" style="border-bottom:1px solid #E6E6E6;height:132px;">
+                        <?php include $shtml.'blog_golden_recommendarticle.shtml';?>
+                    </div><!--End .CenterNews-->
+
+                </div><!--End .co_02-->
+
+            </div><!--End .LeftAllNav-->
+            <div class="h07"></div>
+
+            <div class="LeftAllNav">
+                <div class="share">
+                    <dl class="tab">
+                        <dt>
+                        <span class="fl">高手点金</span>
+                        <span class="fr">
+                            <a href="<?php echo $baseurl;?>/list/1453.html" target="_blank" style="background:none;">更多>></a>
+                        </span>
+                        <span class="fr">
+                            <ul>
+                                <li class="tab_active" id="gsjc0" onclick="javascript:TabShow('0','2','gsjc','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">1</a></li>
+                                <li class="tab_unactive" id="gsjc1" onclick="javascript:TabShow('1','2','gsjc','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">2</a></li>	
+                            </ul>
+                        </span>
+                        </dt>
+                        <dd id="gsjc0_nr">
+                            <div class="content">
+                                <ul class="list ellipsis lineHeight24">
+                                    <?php include $shtml.'runcront_recommend_index_golden_1.shtml';?>
+                                </ul>
+                            </div><!--End .content-->
+
+                            <!--
+    <div class="botTool2">
+                                    <?php include $shtml.'blog_belowgsjc.shtml';?>
+                            </div>  
+                            -->
+
+                        </dd>
+
+                        <dd id="gsjc1_nr" style="display:none;">
+                            <div class="content">
+
+                                <ul class="list ellipsis lineHeight24">
+                                    <?php include $shtml.'runcront_recommend_index_golden_2.shtml';?>
+                                </ul>
+                            </div><!--End .content-->
+
+                            <!--
+         <div class="botTool">
+                                 
+                                          <span class="fl">
+                                          <?php include $shtml.'blog_belowgsjc.shtml';?>
+                                          </span>
+                                          
+                                          <span class="fr"><a href="<?php echo $baseurl;?>/list/1453.html" target="_blank">更多</a></span>
+                                  </div> 
+                            -->
+
+                        </dd>
+                    </dl>
+
+                </div><!--End .share 高手点金-->
+            </div><!--End .LeftAllNav-->
+
+            <div class="h07"></div>
+            <div class="LeftAllNav">
+                <div class="imgBbs">
+                    <dl>
+                        <dt>
+                        <span class="fl">热门话题</span><span class="fr hidden"><a href="#" target="_blank" style="background:none;">更多&gt;&gt;</a></span> 
+                        </dt>
+                        <dd>
+                            <div class="content hotContent" style="height:140px;">
+                                <tr>
+                                    <td><iframe src="http://bbs.cnfol.com/shtml/static_simple_blog.php" width="715" height="139" frameborder="0" scrolling="no" style="margin-bottom:10px;"></iframe></td>
+                                </tr>
+                            </div> 
+                        </dd>
+                    </dl>                
+                </div><!--End .imgBbs-->
+            </div><!--End .LeftAllNav-->
+
+
+            <div class="h07"></div>
+            <div class="LeftAllNav">
+                <div class="share">
+                    <dl class="tab">
+                        <dt>
+                        <span class="fl">今日精选</span>
+                        <span class="fr">
+                            <a href="<?php echo $baseurl;?>/list/1453.html" target="_blank" style="background:none;">更多&gt;&gt;</a>
+                        </span>
+                        <span class="fr">
+                            <ul>
+                                <li class="tab_active" id="gsjcjx0" onclick="javascript:TabShow('0','2','gsjcjx','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">1</a></li>
+                                <li class="tab_unactive" id="gsjcjx1" onclick="javascript:TabShow('1','2','gsjcjx','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">2</a></li>	
+                            </ul>
+                        </span>
+                        </dt>
+                        <dd id="gsjcjx0_nr">
+                            <div class="content">
+                                <ul class="list ellipsis lineHeight24">
+                                    <?php include $shtml.'runcront_recommend_index_blog_golden_1.shtml';?>
+                                </ul>
+                            </div><!--End .content-->
+
+                            <!--
+    <div class="botTool2">
+                                    <?php include $shtml.'blog_belowgsjc.shtml';?>
+                            </div>  
+                            -->
+
+                        </dd>
+
+                        <dd id="gsjcjx1_nr" style="display:none;">
+                            <div class="content">
+
+                                <ul class="list ellipsis lineHeight24">
+                                    <?php include $shtml.'runcront_recommend_index_blog_golden_2.shtml';?>
+                                </ul>
+                            </div><!--End .content-->
+
+                            <!--
+         <div class="botTool">
+                                          <span class="fl">
+                                          <?php include $shtml.'blog_belowgsjc.shtml';?>
+                                          </span>
+                                          <span class="fr"><a href="<?php echo $baseurl;?>/list/1453.html" target="_blank">更多</a></span>
+                                  </div>  
+                            -->
+
+                        </dd>
+                    </dl>
+
+                </div><!--End .share 高手点金-->
+            </div><!--End .LeftAllNav-->
+
+
+
+            <div class="h07"></div>
+
+
+            <div class="LeftAllNav">
+                <div class="hotLabel">
+                    <div class="title fl"><span>论坛推荐</span></div>
+                    <div class="label fl" style="width:auto;float:right;">
+
+
+                        <a href="http://bbs.cnfol.com/forumdisplay.php?fid=14&filter=type&typeid=52" target="_blank">纸黄金</a>&nbsp;| &nbsp;    
+                        <a href="http://bbs.cnfol.com/forumdisplay.php?fid=14&filter=type&typeid=97" target="_blank">现货黄金</a>&nbsp;| &nbsp;   
+                        <a href="http://bbs.cnfol.com/forumdisplay.php?fid=14&filter=type&typeid=53" target="_blank">黄金期货</a>&nbsp;| &nbsp;   
+                        <a href="http://bbs.cnfol.com/forumdisplay.php?fid=14&filter=type&typeid=96" target="_blank">实物黄金</a>&nbsp;| &nbsp;   
+                        <a href="http://bbs.cnfol.com/forumdisplay.php?fid=14&filter=type&typeid=98" target="_blank">黄金T+D</a>&nbsp;| &nbsp;   
+                        <a href="http://bbs.cnfol.com/forumdisplay.php?fid=14&filter=type&typeid=55" target="_blank">黄金学院</a>
+                        <a href="http://bbs.cnfol.com/forum-14-1.html" target="_blank">更多&gt;&gt;</a>
+                    </div><!--End .SearchNav--> 
+
+                </div><!--End .hotLabel-->
+            </div><!--End .LeftAllNav-->
+
+
+
+
+
+
+
+            <div class="LeftAllNav Bbs Cf">
+                <div class="Con hotBBS">
+                    <?php include $shtml.'blog_golden_bbsarticle_left.shtml';?>
+                    <ul class="ALinks list">
+                        <script type="text/javascript" src="http://bbs.cnfol.com/api/javascript.php?key=%E9%BB%84%E9%87%91%E5%8D%9A%E5%AE%A2%E9%A6%96%E9%A1%B5%E8%AE%BA%E5%9D%9B%E6%8E%A8%E8%8D%901-5"></script>
+                    </ul>
+                </div>
+                <div class="Con hotBBS">
+                    <?php include $shtml.'blog_golden_bbsarticle_left.shtml';?>
+                    <ul class="ALinks list">
+                        <script type="text/javascript" src="http://bbs.cnfol.com/api/javascript.php?key=%E9%BB%84%E9%87%91%E5%8D%9A%E5%AE%A2%E9%A6%96%E9%A1%B5%E8%AE%BA%E5%9D%9B%E6%8E%A8%E8%8D%906-10"></script>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="h07"></div> 
+            <div class="LeftAllNav">
+                <div class="co_03 fl">
+                    <div class="hotBBS">
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">热门点击</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="rmdj0" onclick="javascript:TabShow('0','3','rmdj','tab_active','tab_unactive')" style="cursor: pointer">48小时</li>
+                                    <li class="tab_unactive" id="rmdj1" onclick="javascript:TabShow('1','3','rmdj','tab_active','tab_unactive')" style="cursor: pointer">一 周</li>	
+                                    <li class="tab_unactive" id="rmdj2" onclick="javascript:TabShow('2','3','rmdj','tab_active','tab_unactive')" style="cursor: pointer">总排行</li>	
+                                </ul>
+                            </span>
+                            </dt>
+                            <dd id="rmdj0_nr">
+
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">点击</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis lineHeight24">
+                                        <?php include $shtml.'runcront_goldenartclicktdayrank.shtml';?>
+                                    </ul>
+                                </div>  
+                            </dd>
+                            <dd id="rmdj1_nr" style="display:none;" >
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">点击</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis lineHeight24">
+                                        <?php include $shtml.'runcront_goldenartclickweekrank.shtml';?>
+                                    </ul>
+                                </div> 
+                            </dd>
+                            <dd id="rmdj2_nr" style="display:none;">
+
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">点击</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis lineHeight24">
+                                        <?php include $shtml.'runcront_goldenartclicktotalrank.shtml';?>
+                                    </ul>
+                                </div> 
+                            </dd>                          
+                        </dl>
+                    </div><!--End .hotBBS-->      
+                </div><!--End .co_03-->	 
+                <div class="co_03 fr">
+                    <div class="hotBBS">
+                        <dl class="tab">
+                            <dt>
+                            <span class="fl">热点评论</span>
+                            <span class="fr">
+                                <ul>
+                                    <li class="tab_active" id="rdpl0" onclick="javascript:TabShow('0','3','rdpl','tab_active','tab_unactive')" style="cursor: pointer">48小时</li>
+                                    <li class="tab_unactive" id="rdpl1" onclick="javascript:TabShow('1','3','rdpl','tab_active','tab_unactive')" style="cursor: pointer">一 周</li>	
+                                    <li class="tab_unactive" id="rdpl2" onclick="javascript:TabShow('2','3','rdpl','tab_active','tab_unactive')" style="cursor: pointer">总排行</li>	
+                                </ul>
+
+                            </span>
+
+                            </dt>
+                            <dd id="rdpl0_nr">
+
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">评论</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis lineHeight24">
+                                        <?php include $shtml.'runcront_goldenartcomtdayrank.shtml';?>
+                                    </ul>
+                                </div>  
+                            </dd>
+                            <dd id="rdpl1_nr" style="display:none;">
+
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">评论</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis lineHeight24">
+                                        <?php include $shtml.'runcront_goldenartcomweekrank.shtml';?>
+                                    </ul>
+                                </div> 
+                            </dd>
+                            <dd id="rdpl2_nr" style="display:none;">
+                                <div class="topH2"><span class="fl">标题</span><span class="fr">评论</span></div>
+                                <div class="content">
+                                    <ul class="list ellipsis lineHeight24">
+                                        <?php include $shtml.'runcront_goldenartcomtotalrank.shtml';?>
+                                    </ul>
+                                </div> 
+                            </dd>                          
+                        </dl>
+                    </div><!--End .hotBBS-->    
+                </div><!--End .co_03-->	
+
+            </div><!--End .LeftAllNav-->
+
+        </div><!--End .LeftNav-->
+
+        <div class="RightNav fr">
+            <div class="rTempNav notice">
+                <dl>
+                    <dt>
+                    <span class="fl">公告</span>&nbsp;
+
+                    <marquee width="135" height="25" direction="left" scrollamount="3" onmouseover="this.stop()" onmouseout="this.start()">
+                        <a href="http://doing.cnfol.com/zw/gjs/index.shtml" target="_blank" style="color:red;">2012贵金属行业优秀博文评选</a>
+                        <a href="http://doing.cnfol.com/zw/gjs/woyaocansai.shtml" target="_blank" style="color:red;">我要参赛</a>
+                    </marquee>
+
+                    </dt>
+                    <dd>
+                        <div class="content" style="width:210px;padding:5px;">
+                            <?php include $shtml.'blog_bulletin.shtml';?>
+                        </div>
+                    </dd>
+                </dl>
+            </div><!--End .notice 公告-->
+
+
+
+            <div class="h07"></div>
+
+            <div class="rTempNav">
+                <dl>
+                    <dt><span class="fl">专栏明星</span><span class="fr"><a href="javascript:;"  style="font-weight:normal;background:none;">我要申请</a></span></dt>
+                    <dd>
+                        <div class="content">
+                            <?php include $shtml.'blog_golden_star.shtml';?>
+                            <div style="clear:both;"></div>
+                        </div> 
+                    </dd>
+                </dl>
+
+            </div>
+
+
+            <div class="h07"></div>
+
+            <div class="rTempNav">
+                <dl>
+                    <dt><span class="fl">黄金多空调查</span><span class="fr"></span></dt>
+                    <dd>
+                        <div class="content" style="height:120px;">
+                            <span>点击“投票”按钮进行投票</span><br />
+
+                            <table border="0" cellpadding="0" cellspacing="0" height="80" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" valign="middle" width="15%">看多</td>
+                                        <td align="left" valign="middle" width="48%">
+                                            <div style="width:90px;background-color:#F2F2F2; height:9px;">
+                                                <div id="kanduopic" style="float:left;width:0px;background-color:#FA7507;height:9px;"></div>
+                                            </div>
+                                        </td>
+                                        <td align="left" valign="middle" width="21%">
+                                            <form action="me_vote.php" method="post">
+                                                <span id="kanduo" onclick=duokong("kanduo"); style="cursor:pointer;"><img src="http://i0.cnfolimg.com/uploads/v5.0/sc/cen1-16.gif" /></span>
+                                            </form>
+                                        </td>
+                                        <td  id="kanduopercent" align="left" valign="middle" width="16%">&nbsp;0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" valign="middle" width="15%">看空</td>
+                                        <td align="left" valign="middle" width="48%">
+                                            <div style="width:90px;background-color:#F2F2F2; height:9px;">
+                                                <div  id="kankongpic" style="float:left;width:0px;background-color:#96CC02;height:9px;"></div>
+                                            </div>
+                                        </td>
+                                        <td align="left" valign="middle" width="21%">
+                                            <form action="me_vote.php" method="post">
+
+                                                <span id="kankong"  onclick=duokong('kankong');  style="cursor:pointer;"><img src="http://i0.cnfolimg.com/uploads/v5.0/sc/cen1-16.gif" /></span>
+                                            </form>
+                                        </td>
+                                        <td id="kankongpercent" align="left" valign="middle" width="16%">&nbsp;0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" valign="middle" width="15%">盘整</td>
+                                        <td align="left" valign="middle" width="48%">
+                                            <div style="width:90px;background-color:#F2F2F2; height:9px;">
+                                                <div id="panzhengpic" style="float:left;width:0px;background-color:#F7BB6C;height:9px;"></div>
+                                            </div>
+                                        </td>
+                                        <td align="left" valign="middle" width="21%">
+                                            <form action="me_vote.php" method="post">
+
+                                                <span id="panzheng"  onclick=duokong('panzheng');  style="cursor:pointer;"><img src="http://i0.cnfolimg.com/uploads/v5.0/sc/cen1-16.gif" /></span>
+                                            </form>
+                                        </td>
+                                        <td id="panzhengpercent" align="left" valign="middle" width="16%">&nbsp;0%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div><span style="float:left;width:100%;height:18px;text-align:center;margin-top:5px;background-color:#F2F2F2;">每日15时投票数据清零</span></div>
+                            <br />
+
+
+                            <div style="clear:both;"></div>
+                        </div> 
+                    </dd>
+                </dl>
+
+            </div>
+
+
+
+
+
+
+
+            <!--End .rTempNav 热门微博-->
+
+
+
+            <div class="rTempNav Mt10">
+                <dl>
+                    <dt><span class="fl">大家正在说</span><span class="fr"><a href="http://t.cnfol.com/" target="_blank" style="background:none;">更多&gt;&gt;</a></span></dt>
+                    <dd style="height:530px;">
+
+
+
+
+
+                        <div class="content" id="ScrollNews_weibo" style="height:auto;">
+                            <ul class="Speak" id="golden_index_weibo">
+
+
+                            </ul>
+                        </div>
+
+
+
+
+
+
+                        <input type="hidden" id="newweibosign" value="weibo" />
+                        <input type="hidden" id="nowarticleid" value="" />
+                        <div style="clear:both"></div>
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav-->
+
+
+
+            <!--End .rTempNav 我也来说说-->
+            <div class="rTempNav Mt10" id="T140">
+                <dl>
+                    <dt><span>我也来说说</span>
+
+                    </dt>
+                    <dd>
+                        <div class="Talk">
+                            <textarea id="weiboContent" onkeyup="gbcount('T140')" onchange="gbcount('T140')" onfocus="gbcount('T140')" onpaste="gbcount('T140')" onclick="checkLogin();"/></textarea><br />
+                            <p><i style="font-style:normal;">您还可以输入</i><span class="" id="font_size_num">140</span>个字
+                                <input type="button" value="提交" onclick="javascript:exchage('weiboContent','tryPop','weibo')" />
+                            </p> 
+                        </div>
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav 我也来说说-->
+
+
+
+            <!--End .rTempNav 热门微博-->
+
+            <div class="h07"></div>
+
+            <div class="rTempNav">
+                <dl>
+                    <dt><span class="fl">网友自荐区</span><span class="fr"><a href="<?=$baseurl?>/shtml/recommendarticles,1.html" target="_blank" style="background:none;">更多&gt;&gt;</a></span></dt>
+                    <dd>
+                        <div class="content" id="ScrollNews" style="height:87px;overflow:hidden;float:left;">
+                            <ul class="list ellipsis goldenEllipsis">
+                                <?php include $shtml.'runcront_userrecommend_20.shtml';?>
+                            </ul>
+                        </div>
+                        <div style="clear:both"></div>
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav-->
+            <div class="h07"></div>
+            <div class="rTempNav2 myTop">
+                <dl class="tab tab2">
+                    <dt>
+
+                    <ul>
+                        <li class="tab_active" id="wytj0" onclick="javascript:TabShow('0','3','wytj','tab_active','tab_unactive')" style="cursor: pointer">我要推荐</li>
+                        <li class="tab_unactive" id="wytj1" onclick="javascript:TabShow('1','3','wytj','tab_active','tab_unactive')" style="cursor: pointer">我要开博客<span class="fr"></span></li>	
+                        <li class="tab_unactive" id="wytj2" onclick="javascript:TabShow('2','3','wytj','tab_active','tab_unactive')" style="cursor: pointer">我要建圈子<span class="fr"></span></li>	
+                    </ul>
+                    </dt>
+                    <dd id="wytj0_nr">
+                        <div class="content">
+                            <form method="post" onsubmit="return false;" id="recmmondart" ischeck="false" >
+                                <p class="CN">我要向编辑推荐好文章（只能推荐中金博客文章）：</p>
+                                <p><span>作者昵称：</span><input id="author" name="author" type="text" class="style01" /></p>
+                                <p><span>文章标题：</span><input id="arttitle" name="arttitle" type="text" class="style01" /></p>
+                                <p><span>文章链接：</span><input id="arturl" name="arturl" type="text" class="style01" /></p>
+                                <p class="submit"><input name="remsubmit" type="button" value="提交" onclick="indexrecmmond(1);" class="btn" /> <input name="checksubmit" type="button" value="检查是否正确" class="btn btn02" onclick="indexrecmmond(0);" /> <input name="resetsubmit" type="reset" value="重置" class="btn" /></p>
+                            </form>
+                        </div>
+                    </dd>
+
+                    <dd id="wytj1_nr" style="display:none;">
+                        <div class="content content3">
+
+                            1.中金在线博客随时欢迎您来安家！<br/>
+                            2.我该如何开通我的博客呢？请见“<a href="<?php echo(config_item('base_url')); ?>/blogcnfol/article/1637774.html" target="_blank">如何开通博客</a>”<br/>
+                            3.提供一些必要的信息之后，您将拥有属于您自己的博客。<br/>
+                            4.若您在使用过程中遇到问题或有宝贵建议可到<a href="http://bbs.cnfol.com/forum-29-1.html" target="_blank">中金博客意见反馈吧</a>反馈！ <br/>
+
+                        </div> 	
+                    </dd> 
+                    <dd id="wytj2_nr" style="display:none;">
+                        <div class="content content3">
+
+                            1.建立圈子需要您先登录中金博客。<br/>
+                            2.在登录之后，点击“<a href="http://g.cnfol.com/create.html" target="_blank">创建圈子</a>”链接。<br/>
+                            3.提供一些必要的信息后，您就可以建立属于您自己的圈子了。<br/>
+                        </div> 	
+                    </dd>                   
+                </dl>
+
+            </div><!--End .rTempNav2 我要推荐-->
+            <div class="h07"></div>
+
+            <!--
+    <div class="assistant">
+    <dl>
+            <dt><span class="fl">博客小助手</span></dt>
+        <dd>
+        
+        <div class="content">
+                            <?php include $shtml.'blog_assistance.shtml';?>
+        </div>
+      </dd>
+    </dl>
+</div><!--End .rTempNav-->
+
+
+
+            <div class="rTempNav2">
+                <dl class="tab">
+                    <dt>
+
+                    <ul>
+                        <li class="tab_active" id="phb0" onmouseover="javascript:TabShow('0','2','phb','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">博客排行榜</a></li>
+                        <li class="tab_unactive" id="phb1" onmouseover="javascript:TabShow('1','2','phb','tab_active','tab_unactive')" style="cursor: pointer"><a href="javascript:;">鲜花排行榜</a><span class="fr"></span></li>	
+                    </ul>
+                    </dt>
+                    <dd id="phb0_nr">
+                        <div class="content">
+                            <ul class="list listVote">
+                                <?php include $shtml.'runcront_shouyeblogrank.shtml';?>
+                            </ul>
+                        </div>
+                        <div class="botTool"><span class="fr"><a href="<?=$baseurl;?>/shtml/hotclickrank.html" target="_blank" style="background:none;">更多&gt;&gt;</a></span></div>  
+                    </dd>
+
+                    <dd id="phb1_nr" style="display:none;">
+
+
+
+                        <div class="rTempNav2 myTop">
+                            <dl class="tab tab2">
+                                <dt>
+                                <ul>
+                                    <li class="tab_active" id="gift_flower0" onmouseover="javascript:TabShow('0','3','gift_flower','tab_active','tab_unactive')" style="cursor: pointer">12小时</li>
+                                    <li class="tab_unactive" id="gift_flower1" onmouseover="javascript:TabShow('1','3','gift_flower','tab_active','tab_unactive')" style="cursor: pointer">24小时<span class="fr"></span></li>	
+                                    <li class="tab_unactive" id="gift_flower2" onmouseover="javascript:TabShow('2','3','gift_flower','tab_active','tab_unactive')" style="cursor: pointer">周排行<span class="fr"></span></li>	
+                                </ul>
+                                </dt>                 
+                            </dl>
+
+                        </div><!--End .rTempNav2 -->
+                        <div class="rTempNav">
+                            <dl>
+                                <dd>
+                                    <div class="content" id="gift_flower0_nr"><?php include $shtml.'runcront_tagpage_rankgifts_golden_12.shtml';?></div>
+                                    <div class="content" id="gift_flower1_nr" style="display:none;"><?php include $shtml.'runcront_tagpage_rankgifts_golden_24.shtml';?></div>
+                                    <div class="content" id="gift_flower2_nr" style="display:none;"><?php include $shtml.'runcront_tagpage_rankgifts_golden_week.shtml';?></div>
+                                </dd>
+                            </dl>
+                        </div><!--End .rTempNav 鲜花排行-->
+                        <div class="botTool"><span class="fr"><a href="<?=$baseurl?>/shtml/giftrankarticle,12.html" target="_blank" style="background:none;">更多&gt;&gt;</a></span></div>
+
+
+
+
+                        <!--
+    <div class="content">
+        <ul class="list listVote">
+        <?php include $shtml.'runcront_rankfactiveblog.shtml';?>
+        </ul>
+  
+  </div>
+  <div class="botTool"><span class="fr"><a href="<?=$baseurl;?>/shtml/newupdateblog.html" target="_blank">更多</a></span></div> 
+                        -->
+
+
+                    </dd>
+                </dl>
+
+            </div><!--End .rTempNav 新博推荐-->
+
+
+
+            <div class="h07"></div>
+
+
+
+            <div class="rTempNav contactUs">
+                <dl>
+                    <dt><span class="fl">联系方式</span></dt>
+                    <dd>
+                        <div class="content">
+                            <?php include $shtml.'contactus.shtml';?>
+                        </div>
+                    </dd>
+                </dl>
+            </div><!--End .rTempNav-->
+        </div><!--End .RightNav-->
+    </div><!--End .AllNav-->
+
+    <div class="AllNav Mt10">
+        <div class="rTempNav contactUs">
+            <div class="BoxHead">
+                <a href="<?php echo(config_item('base_url')); ?>/shtml/bloglist.html" class="More Fr" target="_blank" style="background:none;">更多&gt;&gt;</a>
+                <h4>推荐博客：</h4>
+            </div>
+            <p class="Blogs">
+                <?php include $shtml.'blog_recommendblog_golden_6.shtml';?>
+            </p>	
+        </div><!--End .friendLinksNav--> 
+    </div><!--End .AllNav-->
+
+
+    <div class="h07"></div>
+    <!--<div class="AllNav" id="ads3">载入中…</div>-->
+    <div class="AllNav" id="ads3">载入中…</div>
+    <!--End .AllNav-->
+
+    <div class="h07"></div>
+    <div class="AllNav">
+
+        <div class="friendLinksNav">
+            <span class="title">友情链接：</span><?php include $shtml.'blog_friendlink.shtml';?>
+        </div><!--End .friendLinksNav--> 
+    </div><!--End .AllNav-->    
+    <br class="clear" />
+</div><!--End #Content-->
+<div class="h07"></div>
+<!--内容部分结束-->
+<script language="javascript">
+    $(function(){
+        var $this = $("#ScrollNews");
+        var scrollTimer;
+        $this.hover(function(){
+            clearInterval(scrollTimer);
+        },function(){
+            scrollTimer = setInterval(function(){
+                scrollNews( $this );
+            }, 3000 );
+        }).trigger("mouseleave");
+    });
+    function scrollNews(obj){
+        var $self = obj.find("ul:first"); 
+        var lineHeight = $self.find("li:first").height(); //获取行高
+        $self.animate({ "marginTop" : -lineHeight +"px" }, 600 , function(){
+            $self.css({marginTop:0}).find("li:first").appendTo($self); //appendTo能直接移动元素
+        })
+    }
+    function blogsearch(obj){
+        var seachval = $.trim(obj.searchvalue.value);
+        if(mb_strlen(seachval) < 1){
+            showalert("搜索关键字必须在一个字符以上");
+            return false;
+        }
+	
+        return true;
+    }
+
+
+    /*--------------多空调查用----------------*/
+    function duokong(sign)
+    {
+        if(sign!='')
+        {
+            var duokongcookie=getCookie('duokong_cookie');
+            if(duokongcookie==''||duokongcookie==null)
+            {
+                setCookie('duokong_cookie','yes',1);
+            }
+            else
+            {
+                showalert('您已投过票，24小时内不能重复');
+                return;
+            }
+		
+		
+		
+        }
+        var url = "<?php echo(config_item('base_url')); ?>/index.php/channelgolden/duokong?sign="+sign;
+        //var params = {"sign":sign};
+        $.getJSON(url+"&r="+new Date().getTime(),function(json) {
+	
+            if(json.kanduo==0&&json.kankong==0&&json.panzheng==0)
+            {
+                mathcount('kanduo',0);
+	
+                mathcount('kankong',0);
+	
+                mathcount('panzheng',0);
+		
+                return;
+		
+            }
+            var count=json.kanduo+json.kankong+json.panzheng;
+	
+            mathcount('kanduo',0);
+	
+            mathcount('kankong',0);
+	
+            mathcount('panzheng',0);
+	
+            var kanduo=json.kanduo/count;
+            mathcount('kanduo',kanduo);
+	
+            var kankong=json.kankong/count;
+            mathcount('kankong',kankong);
+	
+            var panzheng=json.panzheng/count;
+            mathcount('panzheng',panzheng);
+	
+        })
+    }
+
+    function mathcount(value,number)
+    {
+	
+        kanduo_math=mathround(number);
+        //$('#'+value+'pic').css('width',kanduo_math*50+'px');
+        $('#'+value+'pic').animate({width:kanduo_math*95+'px'});
+        var kanduo_per=kanduo_math*100;
+        kanduo_per=mathround(kanduo_per);
+        kanduo_per=kanduo_per+'%';
+        $('#'+value+'percent').html('&nbsp;'+kanduo_per);
+    }
+
+    function mathround(value)
+    {
+        if(value==0)
+        {
+            return 0;
+        }
+        value=Math.round(parseFloat(value)*1000)/1000;
+        return value;
+    }
+
+    function setCookie(c_name,value,expiredays)
+    {
+        var exdate=new Date();
+        exdate.setDate(exdate.getDate()+expiredays);
+        document.cookie=c_name+ "=" +escape(value)+
+            ((expiredays==null) ? "" : ";expires="+exdate.toGMTString()+";path=/");
+    }
+
+    function getCookie(c_name)
+    {
+        if (document.cookie.length>0)
+        {
+            c_start=document.cookie.indexOf(c_name + "=");
+            if (c_start!=-1)
+            { 
+                c_start=c_start + c_name.length+1 ;
+                c_end=document.cookie.indexOf(";",c_start);
+                if (c_end==-1) c_end=document.cookie.length;
+                return unescape(document.cookie.substring(c_start,c_end));
+            } 
+        }
+        return "";
+    }
+
+    duokong('');
+    /*--------------多空调查用----------------*/
+
+    /*--------------微博控制字数用----------------*/
+    function gbcount(M){
+        var T1='您还可以输入';
+        var T2='您输入的字数已超过';
+        var A=GID(M).getElementsByTagName("textarea")[0];
+        var B=GID(M).getElementsByTagName("i")[0];
+        var C=GID(M).getElementsByTagName("span")[1];
+        var strLg=getBytesCount(A.value);
+        var max;
+        max=2*(M.substring(1));
+        if (strLg<=max){
+            C.innerHTML=Math.floor((max-strLg)/2);
+            C.className='';
+            B.innerHTML=T1;
+            return true;
+		
+        }
+        else{
+            C.className='red';
+            C.innerHTML=Math.abs(Math.floor((max-strLg)/2));
+            B.innerHTML=T2;
+            return false;
+        }
+    }
+
+    function GID(str){return (document.getElementById(str))?document.getElementById(str):false;}
+
+    function getBytesCount(str) 
+    { 
+        var bytesCount = 0; 
+        if (str != null) 
+        { 
+            for (var i = 0; i < str.length; i++) 
+            { 
+                var c = str.charAt(i); 
+                if (/^[\u0000-\u00ff]$/.test(c)) 
+                { 
+                    bytesCount += 1; 
+                } 
+                else 
+                { 
+                    bytesCount += 2; 
+                } 
+            } 
+        } 
+        return bytesCount; 
+    }
+    /*--------------微博控制字数用----------------*/
+
+    /*--------------发微博用----------------*/
+
+    function exchage(contentId,showId,weibo){
+        var baseurl="<?php echo(config_item('base_url')); ?>/index.php";
+	
+        if(!gbcount('T140')||!checkLogin())
+        {
+            return;
+        }
+        //Dialog.Close(cloId);
+        //new Dialog('Bg',showId);
+        var content=$('#'+contentId).text();
+        if(content.replace(/\s*/g,'')=='')
+        {
+            showalert('发送内容不能为空');
+            return;
+        }
+        var params = {'uid':$.cookie('cookie\\[passport\\]\\[userId\\]'),'content':content};
+        $.get(baseurl+'?c=channelgolden&m=sendweibo&r='+new Date().getTime(),params,function(data){
+		
+            if(data.indexOf('flag":0}')==-1)
+            {
+                showalert('发送失败');
+            }
+            else
+            {
+                var basruri = "http://t.cnfol.com";
+                var blogurl = basruri + "/"+$.cookie('cookie\\[passport\\]\\[username\\]');
+                var arturl  = "";
+
+                var strHtml = '\
+                                        <div style="padding:10px;">\
+                                                <div style="background: none repeat scroll 0 0 rgb(239,243,195);text-align:left;height:45px;padding:5px 0px 5px 10px;">\
+                                                        <b style="font-size:16px">发送成功</b><br />提示框将在<span id="secs">2</span>秒内自动关闭\
+                                                </div>\
+                                                <div style="padding-left:10px;padding-top:5px">\
+                                                        <div style="float:left;">我们推荐您：<br />或者您可以：</div>\
+                                                        <div style="float:left;padding:0px;margin:0px;">\
+                                                                <ul>\
+                                                                        <li><a href="'+blogurl+'" target="_blank">进入我的微博查看</a></li>\
+                                                                        <li><a href="'+basruri+'" target="_blank">进入中金在线微博首页</a></li>\
+                                                                </ul>\
+                                                        </div>\
+                                                </div>\
+                                        </div>';
+
+                ShowHtmlString(strHtml, 370, 150);
+                countDown(arturl,2);
+            }
+        });
+    }
+    /*--------------发微博用----------------*/
+
+    function checkLogin()
+    {
+        if($.cookie('cookie\\[passport\\]\\[userId\\]') == 0){
+            lrPopup('log', 500, 300, 'http://images.cnfol.com/login_js/login.html', 700, 670, 'http://images.cnfol.com/login_js/register.html');
+            return false;
+        }
+        return true;
+    }
+
+    function ShowHtmlString(strHtml, nwidth, nheight)
+    {
+        if(g_pop){ g_pop.close();}
+        g_pop=new Popup({ contentType:2,isReloadOnClose:false,width:nwidth,height:nheight});
+        g_pop.setContent("contentHtml",strHtml);
+        g_pop.setContent("title","消息提示");
+        g_pop.build();
+        g_pop.show();
+    }
+
+    function countDown(url,secs){
+
+        $('#secs').text(secs);
+        if(--secs >= 0){
+            setTimeout( "countDown('"+url+"',"+secs+")" ,1500);
+        }else{
+            //window.location.href = url;
+            g_pop.close();
+            $('#weiboContent').text('');
+            $('#font_size_num').text('140');
+        }
+    }
+
+
+    <!--左上角走势图用-->
+    $('#M1E_dt').find('a').live('mouseover', function(){
+        $('.zoushiPic').attr('src',$('.'+$(this).attr('id')).attr('src'));
+    })
+ 
+ 
+    <!--左上角走势图用-->
+
+
+    <!--微博滚动用-->
+
+    var base='http://t.cnfol.com/';
+    var url="<?php echo(config_item('base_url')); ?>/index.php/channelgolden/getweibo";
+
+    $.getJSON(url+"?r="+new Date().getTime(), function(json) {
+        var html_weibo='';
+        var nowarticleid='';
+        for(i=0;i<13;i++)
+        {
+            var content=json[i]['Content'];
+            if(content.length>45)
+            {
+                content=content.substring(0,45)+'...';
+            }
+            html_weibo+='<li><a href="'+base+json[i]['UserName']+'" class="HeadPic" target="_blank"><img src="'+json[i]['UserGravatar']+'" /></a><a href="'+base+json[i]['UserName']+'" class="Name" target="_blank">'+json[i]['NickName']+' :</a>'+content+'<p><span class="Time">'+json[i]['PostTime']+'</span><span class="Prov"></span></p></li>';
+            nowarticleid+=json[i]['ArticleID']+',';
+        }
+        $('#golden_index_weibo').html(html_weibo);
+        $('#nowarticleid').val(nowarticleid);
+    });
+
+
+
+    function addneweastweibo()
+    {
+        $(function(){
+            var $this = $("#ScrollNews_weibo");
+            scrollNews_weibo($this);
+            /*
+                var scrollTimer;
+                $this.hover(function(){
+                          clearInterval(scrollTimer);
+                 },function(){
+                   scrollTimer = setInterval(function(){
+                                                 scrollNews( $this );
+                                        }, 3000 );
+                }).trigger("mouseleave");
+             */
+        });
+    }
+    function scrollNews_weibo(obj){
+        var $self = obj.find("ul:first"); 
+        var lineHeight = $self.find("li:last").height(); //获取行高
+        $($self.css({marginTop:-lineHeight}).find("li:last")).prependTo($self);
+   
+        //$($self.find("li:last")).prependTo();//prependTo能直接将元素移动走
+   
+        $self.animate({ "marginTop" : "-1px" }, 600 , function(){
+            //alert($self.css({marginTop:0}).find("li:first").html());//输出当前显示第一条li内容
+            //$self.css({marginTop:0}).find("li:first").appendTo($self); //appendTo能直接将元素移动走,详见如下：$self.css({marginTop:0}).find("li:first").appendTo()
+            //alert($self.css({marginTop:0}).find("li:first").html());//输出当前显示第二条li内容
+        })
+   
+        $($self.find("li:last")).remove();
+   
+        //$self.css({marginTop:0}).find("li:first").appendTo();//代替以上
+    }
+
+
+    $(function(){
+        scrollTimer = setInterval(function(){
+            getneweastweibo();
+        }, 3000 );
+
+    })
+
+    function getneweastweibo()
+    {
+        var url="<?php echo(config_item('base_url')); ?>/index.php/channelgolden/getnewestweibo";
+
+        $.getJSON(url+"?r="+new Date().getTime(), function(json) {
+            //alert(json['ArticleID']);
+            var articleidsign=$('#newweibosign').val();
+            var nowarticleidsign=$('#nowarticleid').val();
+            if(articleidsign==json['ArticleID'])
+            {
+                return;
+            }
+            else if(nowarticleidsign.indexOf(articleidsign)!=-1)
+            {
+                //alert(nowarticleidsign+'......'+articleidsign);
+                return;
+            }
+            else
+            {
+                $('#newweibosign').val(json['ArticleID']);
+		
+                var content=json['Content'];
+                if(content.length>45)
+                {
+                    content=content.substring(0,45)+'...';
+                }
+                var newestweibo='<li><a href="'+base+json['UserName']+'" class="HeadPic" target="_blank"><img src="'+json['UserGravatar']+'" /></a><a href="'+base+json['UserName']+'" class="Name" target="_blank">'+json['NickName']+' :</a>'+content+'<p><span class="Time">'+json['PostTime']+'</span><span class="Prov"></span></p></li>';
+                var $self = $("#ScrollNews_weibo").find("ul:first"); 
+                $($self).append(newestweibo);
+                addneweastweibo();
+                //alert($('.'+json['ArticleID']).css('height'));
+            }
+	
+        });
+    }
+    <!--微博滚动用-->
+</script>
+<!--底部部分 -->
+<?php include $footer;?>

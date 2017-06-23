@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><?php echo $bloginfo['BlogName'];?>添加相册</title>
+        <link href="http://img.cnfol.com/style/card_style.css" rel="stylesheet" type="text/css" />
+        <script>
+            function $(d){
+                return document.getElementById(d);
+            }
+            function getdata(form)
+            {
+                var fname = $('filename').value;
+                if(fname.length < 2 || fname.length > 200){
+                    $('errorfilename').innerHTML = '<br>图片名应该在2-200字节';  return false;
+                }
+                var remark = $('remark').value;
+                if(fname.length < 0 || fname.length > 200){
+                    $('errorfilename').innerHTML = '<br>描述应该是0-200字节';  return false;
+                }
+                if(!chang()){
+                    return false;
+                }
+                var b=$('sub');
+                b.disabled=true;
+                return true;
+            }
+            function chang(){
+                var img= $('uploadimage');
+                if(img.value=='' || !img.value){
+                    $('errortype').innerHTML = "<br>*请选择要上传的图片!"; return false;
+                }
+                var patn = /\.jpg$|\.jpeg$|\.gif|\.png$/i; 
+                if(!patn.test(img.value)){ 
+                    $('errortype').innerHTML = "<br>*您选择的图片格式错误!"; return false;
+                }
+                $('errortype').innerHTML = '';
+                return true;
+            }
+        </script>
+    </head>
+    <body>
+        <table width="100%" height="136" border="0">
+            <form  method="post" enctype="multipart/form-data" name="form1" id="form1" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/photo/PhotoAction" onSubmit="return getdata(this)">
+                <tr>
+                    <td width="18">&nbsp;</td>
+                    <td colspan="3"><p>选择您要上传的相册：     
+                            <INPUT TYPE="hidden" NAME="memberID" id="memberID" value="<?php echo $bloginfo['MemberID'];?>">
+                                <input name="act" type="hidden" id="act" value="uploadphoto" />
+                                <select name="albumID" id='albumID'>    
+                                    <?php 
+                                    if(!empty($album['list']))
+                                    {
+                                    foreach($album['list'] as $v)
+                                    {?>
+                                    <option value="<?php echo $v['AlbumID'];?>" ><?php echo $v['Name'];?></option>
+                                    <?php
+                                    }
+                                    }
+                                    else
+                                    {?>
+                                    <option value="0" >默认相册</option>
+                                    <?php
+                                    }?>
+                                </select></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">&nbsp;</td>
+                    <td width="571">选择文件：<input name="uploadimage" type="file" id="uploadimage" onchange="chang();"/>
+                        <span id="errortype" style="color: red;"></span></td>
+                    <td width="217" rowspan="2"><img src="http://images.cnfol.com/uploads/mod_blog/1/nothing.gif" id='privew' width="132" height="108"></td>
+                    <td width="199" rowspan="2"><p>&nbsp;</p></td>
+
+                </tr>
+                <tr>
+                    <td><p>图片名：
+                            <input name="filename" type="text" id="filename"/><span id="errorfilename" style="color: red;"></span>
+                        </p>
+                        <p> 描　述：
+                            <textarea name="remark" id="remark"></textarea>
+                            <span id="errorremark" style="color: red;"></span>
+                        </p></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="3" align="center"><input type="submit" name="Submit" value="提交" id="sub"/>
+                        <input type="reset" name="Submit2" value="重置" /></td>
+                </tr>
+            </form>
+        </table>
+    </body>
+</html>

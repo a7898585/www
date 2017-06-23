@@ -1,0 +1,579 @@
+{template "content","header"}
+<!--main-->
+<!-- 主体右部开始 -->
+<div class="right">
+		
+		<!-- 轮转图片 -->
+		<div class="images_ad blue">
+				<div class="images_1">
+						<div class="current" id="images_1"> <a href="/manhua3104/" target="_blank" title="火影忍者"> <img src="{IMG_PATH}mnews_hot01.jpg" alt="火影忍者" border="0" /> </a> </div>
+						<div class="normal" id="images_2"> <a href="/manhua1684/" target="_blank" title="死神"> <img src="{IMG_PATH}mnews_hot02.jpg" alt="死神" border="0" /> </a> </div>
+						<div class="normal" id="images_3"> <a href="/manhua3147/" target="_blan" title="海贼王"> <img src="{IMG_PATH}mnews_hot03.jpg" alt="海贼王" border="0" /> </a> </div>
+				</div>
+				<div class="images_2 center" id="images_a">
+						<h3 class="current"><a href="/manhua3104/" title=""target="_blank" onmousemove="secBoard('images_a','images',1,'on','');">火影忍者</a></h3>
+						<h3 class="normal"><a href="/manhua1684/" title=""target="_blank" onmousemove="secBoard('images_a','images',2,'on','');" >死神</a></h3>
+						<h3 class="normal"><a href="/manhua3147/" title=""target="_blank" onmousemove="secBoard('images_a','images',3,'on','');">海贼王</a></h3>
+				</div>
+		</div>
+		<!-- 轮转图片结束 -->
+		<!-- 最近更新漫画 -->
+		<div class="rightlist margintop">
+				<div class="columntitle">
+						<h2 class="allfloatleft titletxta">最近更新漫画</h2>
+						<span class="allfloatleft rss"><a target="_blank" href="rssxml.xml" ><img src="{IMG_PATH}ico_rss.gif" alt="rss" border="0" /></a></span> <span class="columntitlemore red"><a href="/recently/" target="_blank">三天100部</a></span> </div>
+				<div class="updateconten center">
+						<ul>
+						
+						{pc:content action="lists" catid="13" num="10" order="updatetime DESC" }
+										{loop $data $r}
+								<li> 
+								<span class="bluepoint"></span> <span class="allfloatleft"> <a target="_blank" href="/manhua{$r[manhuaid]}/" >{str_cut($r[manhua],20,"")}</a> <span class="red"> <a target="_blank" href="{$r[url]}" >{str_cut($r[title],10,"")}</a> </span> </span> <span class="red allfloatright font11">{date("m-d",$r[updatetime])}</span> </li>
+									{/loop}
+								{/pc}
+						</ul>
+						<br class="clearall" />
+				</div>
+		</div>
+		<!-- 最近更新漫画结束 -->
+		<!-- 最新收录漫画推荐 -->
+		<div class="rightlist margintop">
+				<div class="columntitle">
+						<h2 class="allfloatleft titletxta">最新收录漫画推荐</h2>
+						<span class="columntitlemore gray"><a href="lianzai/" title="连载">连载</a> <a href="wanjie/" title="完结">完结</a></span> </div>
+				<div class="updateconten center">
+						<ul>
+
+                                {pc:content action="lists" catid="14" num="18" order="id DESC" }
+										{loop $data $r}
+
+
+								<li><span class="bluepoint"></span><span class="allfloatleft"><a target="_blank" href="{$r[url]}" >{$r[title]}</a> <span class="blue"><a target="_blank" href="{$r[url]}" >{$r[listid]}</a></span></span><span class="gray allfloatright font11">{date("m-d",$r[updatetime])}</span></li>
+							
+								
+                                 {/loop}
+								{/pc}
+
+						</ul>
+
+						<br class="clearall" />
+				</div>
+		</div>
+		<!-- 最新收录漫画推荐结束 -->
+</div>
+<!-- 主体右部结束 -->
+<!-- 主体左部开始 -->
+<div class="left">
+		<!-- 观看历史开始 -->
+		
+		<!-- 观看历史结束 -->
+		<!-- 搜索开始 -->
+		<!-- <script language="javascript" src="http://static.bengou.com/js/comicsearch.js"></script>
+		<input type="hidden" name="default_value" id="default_value">
+		</input> -->
+<div class="leftlista">
+		
+		
+				<div class="leftcolumntitlea">
+						<h2 class="red allfloatleft titletxt">漫画搜索</h2>
+				</div>
+				<div class="tab" id="search">
+			{php $j=0}
+			{php $search_model = getcache('search_model_'.$siteid, 'search');}
+			{loop $search_model $k=>$v}
+			{php $j++;}
+			{if $j<=1}
+				<a href="javascript:;" onclick="setmodel({$v['type_id']}, $(this));" style="outline:medium none;" hidefocus="true" {if $j==1 && $typeid=$v['typeid']} class="on" {/if}>
+				{/if}
+			{/loop}
+			{php unset($j);}
+		</div>
+				<div class="historycontent center">
+						<div class="searchbox">
+								<label>
+								<form name="search" type="get">
+			  <input type="hidden" name="m" value="search"/>
+			  <input type="hidden" name="c" value="index"/>
+			  <input type="hidden" name="a" value="init"/>
+			  <input type="hidden" name="typeid" value="{$typeid}" id="typeid"/>
+			  <input type="hidden" name="siteid" value="{$siteid}" id="siteid"/>
+            <div class="sr_frm">
+            	<div class="sr_frm_box">
+                	<div class="sr_frmipt"><input type="text" name="q" id="q" class="ipt"><div class="sp" id="aca"></div>
+					<div class="searchbox">
+					<div class="allfloatleft padding">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="ss_btn" value="搜 索"></div></div>
+					</div>
+                </div>
+                <!-- <div id="sr_infos" class="wrap sr_infoul">
+                </div> -->
+            </div>
+			</form>
+								</label>
+						</div>
+						<div id="searchList"></div>
+						<div id="aa"></div>
+						<div class="searchbox">
+								
+								
+						</div>
+						<div class="searchkeyworld blue">
+						 <p class="red fontbold">热门搜索</p>
+					
+						<ul>
+							{pc:content action="lists" catid="13"  num="6" order="id DESC" }
+										{loop $data $r}
+										<li><a href="{$r[url]}" title="{$r[title]}" >{$r[title]} </a></li> 
+							{/loop}
+			                 {/pc}
+	      	</ul>
+
+
+								<br class="clearall" />
+						</div>
+						<!-- <div class="onlinelook">有<span class="red">827</span>位漫友正在看 <span class="red"><a href="/080819/hyrz008081909/index.html" target="_blank">火影忍者</a></span></div> -->
+				</div>
+		</div>
+		<div class="leftlistb">
+				<div class="leftcolumntitleb">
+						<h2 class="allfloatleft titletxt">漫画排行</h2>
+				</div>
+				<!-- 人气最高开始 -->
+				<div class="tab center">
+						<div class="tab_header" id="tab_a"> <span class="allfloatleft red fontbold">人气最高</span>
+								<h3 class="current"> <a href="#" target="_blank" onmouseover="secBoard('tab_a','infolist',1,'on','');">日</a> </h3>
+								<h3 class="normal"> <a href="#" target="_blank" onmouseover="secBoard('tab_a','infolist',2,'on','');">周</a> </h3>
+								<h3 class="normal"> <a href="#" target="_blank" onmouseover="secBoard('tab_a','infolist',3,'on','');">月</a> </h3>
+						</div>
+						<!--选项卡顶部end-->
+						<!--选项卡内容-->
+						<div class="tab_text">
+								<div class="current" id="infolist_1">
+                                {php $i=1;}
+                                {pc:content action="hits" catid="13" num="10" order="dayviews DESC" }
+								{loop $data $r}
+								
+								{if $i==1}
+										<div class="listone">
+												<div class="listonepic"> <a target="_blank" href="{$r[url]}" class="piceffects"><img src="{$r[thumb]}" alt="{$r[title]} " border="0"  width="90" height="120"/> </a> </div>
+												<div class="listonetxt blue">
+														<h2> <a target="_blank" href="{$r[url]}" title="{$r[title]} ">{str_cut($r[title],14,"")} </a> </h2>
+														<p class="gray"> {$r[description]} </p>
+												</div>
+										</div>
+								
+
+
+										<div class="listclass">
+												<ul>    {else}
+														<li> <a target="_blank" href="{$r[url]}" title="{$r[title]} " class="listclassa">{$r[title]} </a> </li>
+													{/if}
+											{php $i++}
+									{/loop}
+								{/pc}
+														
+												</ul>
+										</div>
+								</div>
+								<div class="normal" id="infolist_2">
+										{php $i=1;}
+                                {pc:content action="hits" catid="13" num="10" order="weekviews  DESC" }
+								{loop $data $r}
+								
+								{if $i==1}
+										<div class="listone">
+												<div class="listonepic"> <a target="_blank" href="{$r[url]}" class="piceffects"><img src="{$r[thumb]}" alt="{$r[title]} " border="0"  width="90" height="120"/> </a> </div>
+												<div class="listonetxt blue">
+														<h2> <a target="_blank" href="{$r[url]}" title="{$r[title]} ">{str_cut($r[title],14,"")} </a> </h2>
+														<p class="gray"> {$r[description]} </p>
+												</div>
+										</div>
+								
+
+
+										<div class="listclass">
+												<ul>    {else}
+														<li> <a target="_blank" href="{$r[url]}" title="{$r[title]} " class="listclassa">{$r[title]} </a> </li>
+													{/if}
+											{php $i++}
+									{/loop}
+								{/pc}
+														
+												</ul>
+										</div>
+								</div>
+								<div class="normal" id="infolist_3">
+										{php $i=1;}
+                                {pc:content action="hits" catid="13" num="10" order="monthviews DESC" }
+								{loop $data $r}
+								
+								{if $i==1}
+										<div class="listone">
+												<div class="listonepic"> <a target="_blank" href="{$r[url]}" class="piceffects"><img src="{$r[thumb]}" alt="{$r[title]} " border="0"  width="90" height="120"/> </a> </div>
+												<div class="listonetxt blue">
+														<h2> <a target="_blank" href="{$r[url]}" title="{$r[title]} ">{str_cut($r[title],14,"")} </a> </h2>
+														<p class="gray"> {$r[description]} </p>
+												</div>
+										</div>
+								
+
+
+										<div class="listclass">
+												<ul>    {else}
+														<li> <a target="_blank" href="{$r[url]}" title="{$r[title]} " class="listclassa">{$r[title]} </a> </li>
+													{/if}
+											{php $i++}
+									{/loop}
+								{/pc}
+														
+												</ul>
+										</div>
+								</div>
+						</div>
+						<!-- <br class="clearall" /> -->
+				</div>
+				<!-- 人气最高结束 -->
+				<!-- 最近流行开始 -->
+				<div class="columnlist center">
+						<div class="columnlisttitle"><span class="allfloatleft fontbold">最近流行</span><span class="allfloatright gray"><a href="/top/">更多</a></span></div>
+						<div class="columnlistcontent">
+								<!-- <ul>    {pc:content action="hits" catid="9" order="views DESC" num="10"	}
+										{loop $data $r}
+										<li><a href="{$r[url]}" title="{$r[title]} " target="_blank">{$r[title]}</a></li>
+										{/loop}
+										{/pc} 
+										</ul>-->
+										{pc:content  action="lists" catid="13" order="id DESC" num="10"}
+
+ <ul>
+
+ {loop $data $key $val}
+
+ <li> <a href="{$val['url']}">{$val['title']}</a></li>
+
+ {/loop}
+
+ </ul>
+
+ {/pc}
+								
+								<br class="clearall" />
+						</div>
+				</div>
+				<!-- 最近流行结束 -->
+				<!-- 经典完结开始 -->
+				<div class="columnlist center">
+						<div class="columnlisttitle"><span class="allfloatleft fontbold">经典完结</span><span class="allfloatright gray"><a href="/wanjie/" target="_blank">更多</a></span></div>
+						<div class="columnlistcontent">
+								<ul>     
+								        {pc:content action="lists" catid="13" where="state=1" num="10" order="id DESC" moreinfo="1"}
+										{loop $data $r}
+										<li><a href="{$r[url]}"  target="_blank">{$r[title]}</a></li>
+										{/loop}
+										{/pc}
+										
+								</ul>
+								<br class="clearall" />
+						</div>
+				</div>
+				<!-- 经典完结结束 -->
+				
+				<!-- 最多评论开始 -->
+				<div class="columnlist center">
+						<div class="columnlisttitle"><span class="allfloatleft fontbold">最多评论</span></div>
+						<div class="columnlistcontent">
+								<ul>   {pc:content action="lists" catid="13" num="10" order="updatetime DESC" }
+										{loop $data $r}
+                                    
+										<li><a href="{$r[url]}" title="{$r[title]}  " target="_blank">{$r[title]}</a></li>
+										{/loop}
+										{/pc}
+								</ul>
+								<br class="clearall" />
+						</div>
+				</div>
+				<!-- 最多评论结束 -->
+				<!-- 热门人物开始 -->
+				<div class="columnlist center">
+						<div class="columnlisttitle"> <span class="allfloatleft fontbold">热门人物</span> </div>
+						<div class="columnlistphoto center">
+								<ul>   
+								{pc:content action="lists" catid="13" num="10" order="updatetime DESC" }
+								{loop $data $r}
+										<li> <a href="{$r[url]}" title="{$r[title]}" target="_blank" class="piceffects"><img src="{$r[thumb]}"  border="0" width="70" height="97"/> </a><a href="{$r[url]}" title="主人公：{$r[role]}" target="_blank" class="piceffectstxt">{$r[role]}</a> </li>
+								{/loop}
+								  {/pc}
+										
+								</ul>
+								<br class="clearall" />
+						</div>
+				</div>
+				<!-- 热门人物结束 -->
+		</div>
+	
+		<!-- 火热排行开始 -->
+		<div class="leftlistb">
+				<div class="leftcolumntitleb">
+						<h2 class="allfloatleft titletxt">漫画火热排行</h2>
+				</div>
+				<div class="hotlist center blue">
+						<ul>     
+						                {pc:content action="lists" catid="13" num="8" order="updatetime DESC" }
+								        {loop $data $r}
+										{php $m = getboxname('11','type');}
+										{php $n = getboxname('11','state');}
+											 {if $n[$r[state]]==1 }
+											 {php $s=wanjie;}
+										{else}
+										{php $s=lianzai;}
+										{/if}
+								<li>    
+										<div class="listonepic"><a href="{$r[url]}" target="_blank" class="piceffects"><img src="{$r[thumb]}"border="0"  width="90px" height="120px"/></a></div>
+										<div class="hotlisttxt">
+												<h2><a href="{$r[url]}" target="_blank">{$r[title]} </a></h2>
+												<p><img src="{IMG_PATH}mhhst_i.gif" /></p>
+												<span class="hotlisttitle gray">查看：<span class="hotlistproperty blue">{$r[hits]}</span></span> <span class="hotlisttitle gray">状态：<span class="hotlistproperty red"><a href="/{$s}/"target="_blank">{$n[$r[state]]}</a></span></span> <span class="hotlisttitle gray">类型：<span class="hotlistproperty blue"><a href="/type{$r[type]}/" target="_blank" >{$m[$r[type]]}</a></span></span> </div>
+								</li>
+								 <br class="clearall" />
+								        {/loop}
+								      {/pc}
+								
+						</ul>
+				</div>
+		</div>
+		<!-- 火热排行结束 -->
+</div>
+<!-- 主体左部结束 -->
+
+
+<!-- 主体中部开始 -->
+<div class="middle">
+		<div class="comicswitch">
+				<div class="comicswitchheader blue" id="tab_c">
+						<h3 class="current"><a href="#" target="_blank" onmouseover="secBoard('tab_c','infolistb',1,'on','');">热门漫画</a></h3>
+						<h3 class="normal"><a href="#" target="_blank" onmouseover="secBoard('tab_c','infolistb',2,'on','');">经典完结漫画</a></h3>
+						<h3 class="normal"><a href="#" target="_blank" onmouseover="secBoard('tab_c','infolistb',3,'on','');">最新上架漫画</a></h3>
+				</div>
+				<!--选项卡顶部end-->
+				<!--选项卡内容-->
+				<div class="comicswitchtext blue">
+						<div class="current" id="infolistb_1">
+								<ul>{pc:content action="lists" catid="13" num="10" order="updatetime DESC" }
+										{loop $data $r}
+										<li>    
+												<div class="comicswitchlist">
+														<div class="picbox"> <a href="{$r[url]}" target="_blank"  class="piceffects"> <img src="{$r[thumb]}" border="0" height="75" width="70" /> </a> </div>
+														<a href="{$r[url]}" target="_blank" alt="{$r[title]} " class="piceffectstxt">{$r[title]}</a> </div>
+														
+										</li>
+										{/loop}
+										{/pc}
+								</ul>
+							<br class="clearall" />		</div>
+
+						<div class="normal" id="infolistb_2">
+								<ul>
+									{pc:content action="lists" catid="13" where="state=1" num="10" order="id DESC" }
+										{loop $data $r}
+										<li>    
+												<div class="comicswitchlist">
+														<div class="picbox"> <a href="{$r[url]}" target="_blank"  class="piceffects"> <img src="{$r[thumb]}"  border="0" height="75" width="70" /> </a> </div>
+														<a href="{$r[url]}" target="_blank" alt="{$r[title]} "  class="piceffectstxt">{$r[title]}</a> </div>
+														
+										</li>
+										{/loop}
+										{/pc}
+								</ul>
+								<br class="clearall" />
+						</div>
+
+
+
+						<div class="normal" id="infolistb_3">
+								<ul>
+										{pc:content action="lists" catid="13" num="10" order="id DESC" }
+										{loop $data $r}
+										<li>    
+												<div class="comicswitchlist">
+														<div class="picbox"> <a href="{$r[url]}" target="_blank" title="{$r[title]}" class="piceffects"> <img src="{$r[thumb]}" border="0" height="75" width="70" /> </a> </div>
+														<a href="{$r[url]}" target="_blank"  alt="{$r[title]} "  class="piceffectstxt">{$r[title]}</a> </div>
+														
+										</li>
+										{/loop}
+										{/pc}
+								</ul>
+								<br class="clearall" />
+						</div>
+					
+				</div>
+		</div>
+		<!-- 中部广告 -->
+		<div class="banner">
+				<script src="{JS_PATH}guga_index2.js" language="javascript"></script>
+		</div>
+		<!-- 中部广告 -->
+		<div class="recommended margintop">
+				<div class="recommendedtitle">
+						<h2 class="allfloatleft titletxt">漫画推荐</h2>
+						<span class="columntitlemore gray"><a href="/top/" target="_blank">更多漫画推荐</a></span> </div>
+						{php $i=1;}
+						{pc:content action="lists" catid="13" num="7" order="id DESC" }
+							{loop $data $r}
+							{if $i<3}
+				<div class="recommendedcontent">
+				
+										
+						<div class="recommendedpic allfloatleft"><a href="{$r[url]}" target="_blank" class="piceffects" title=" {$r[title]} "><img src="{$r[thumb]}" width='120' height='160' border="0" alt="{$r[title]}"/></a></div>
+						<div class="recommendedtxt allfloatright ">
+								<h1 class="blue"><a href="{$r[url]}" target="_blank" title="{$r[title]}" class="allfloatleft">{$r[title]}</a></h1>
+								<span class="allfloatright red"><a href="lianzai" target="_blank" title=" 浏览连载漫画 ">[连载]</a></span>
+								<p class="recommendedproperty"><img src="{IMG_PATH}mhhst_i5.gif" /></p>
+								<span class="recommendedproperty gray">人气：<span id="hits">{$r[views]}</span></span> <span class="recommendedpropertya gray">简介：<span>{$r[description]}</span></span> <span><a href="{$r[url]}" target="_blank" class="button">浏览漫画</a></span> </div>
+								
+						<br class="clearall" />
+				</div>
+				{elseif $i==3}
+				<br class="clearall" />
+				<div class="recommendedlist center">
+						<ul>
+								<li>
+										<div class="bluepoint"></div>
+										<div class="allfloatleft recommendedname blue"><a href="{$r[url]}" title="{$r[title]} " target="_blank">{str_cut($r[title],20,"")} </a></div>
+										<div class="gray recommendedinfo allfloatright"><a href="{$r[url]}" target="_blank" title="{$r[title]}">{str_cut($r[description],80,"")} </a></div>
+								</li>
+						{else}
+						       <li>
+										<div class="bluepoint"></div>
+										<div class="allfloatleft recommendedname blue"><a href="{$r[url]}" title="{$r[title]} " target="_blank">{str_cut($r[title],20,"")} </a></div>
+										<div class="gray recommendedinfo allfloatright"><a href="{$r[url]}" target="_blank" title="{$r[title]}">{str_cut($r[description],80,"")} </a></div>
+								</li>
+						{/if}
+						{php $i++;}
+						{/loop}
+					{/pc}
+								
+						</ul>
+				</div>
+		</div>
+		
+		<div class="recommended margintop">
+				<div class="recommendedtitle">
+						<h2 class="allfloatleft titletxt">热门分类漫画</h2>
+						<span class="columntitlemore gray"><a target="_blank" href="/leixingfenlei/">更多热门分类漫画</a></span> </div>
+				<div class="comicclass center blue">
+						<ul> {php $m = getboxname('11','type'); } 
+						     {php $i=1;}
+						     {loop $m $n $k}
+							   {php $a="typeid=$i";}
+							   {if $i<12}
+								<li>
+										<div class="comicclasslist">
+										       
+												<div class="comicclasspic"><a href="/type{$n}/" class="piceffects" title="{$k}"><img src="http://static.bengou.com/images/index/hot_0{$n}.jpg" width="70" height="70" border="0" /></a></div>
+
+												<div class="comicclassinfo">
+														<ul>    
+													{pc:content action="lists" catid="13" where="$a" num="6" order="id DESC" }
+										                  {loop $data $r}
+																<li><a href="{$r[url]}" target="_blank" title="{$r[title]} ">{$r[title]} </a><img src="{IMG_PATH}ico_hot.gif" width="15" height="10" /></li>
+														   {/loop}
+												     {/pc}
+														</ul>
+														<br class="clearall" />
+												</div>
+												<br class="clearall" />
+										</div>
+								</li>
+								{elseif $i==7}
+						</ul>
+						<br class="clearall" />
+				</div>
+				
+						
+						       
+							{/if}
+							{php $i++;}
+						{/loop}
+						
+			
+		</div>
+		<br class="clearall" />
+</div>
+<!-- <script src="http://tk.bengou.com/js/bgiJS.js" language="javascript"></script> -->
+<div class="digit margintop">
+		<div class="digittitle">
+				<h2 class="allfloatleft titletxt red">快速索引</h2>
+				<span class="digirsy">  
+				{php $Q=NULL;}
+                {php for ($i=65; $i<=90; $i++) $Q[]=chr($i);}
+                {loop $Q $r}
+               <a href="#{$r}">{$r}</a>
+               {/loop}
+		</span> </div>
+		 <div class="letterps center">说明：字母快速索引</div>
+		{php $Q=NULL;}
+{php for ($i=65; $i<=90; $i++) $Q[]=chr($i);}
+{php $j=0;}
+{loop $Q $r}
+      {php $j++;}
+      {if $j%2 == 0} 
+	     <div style=" height:114px;background:url(http://static.bengou.com/images2/orange_line.gif) no-repeat bottom #fefaf2">
+	  {else}
+         <div style="height:114px;background:url(http://static.bengou.com/images2/orange_line.gif) no-repeat bottom">
+	  {/if}
+	 
+	 	<a name="{$r}" id="{$r}"></a>
+		<div class="digitno red">{$r}</div>
+			<div class="digitlist blue"> 
+			
+			    {php $a = "status=99 AND `index`='$r'";}	
+			    {pc:content action="lists" catid="13" where="$a" num="12" order="id DESC"}
+				<ul>
+				{loop $data $k}
+					<li>
+					<a href="{$k[url]}" target="_blank" title="{$k[title]}">{str_cut($k[title],20,"")}</a>
+					{if $k[state] == 1}
+					<img src="{IMG_PATH}ico_serial.gif" width="14" height="12" />
+					{else}
+					<img src="{IMG_PATH}ico_end.gif" width="14" height="12" />
+					{/if}
+					</li>
+				{/loop}
+				</ul>		
+		      	{/pc}
+				<br class="clearall" />
+		</div>
+			<a href="/index{$r}/" target="_blank" title="更多" class="lettermore">
+			</a>
+	  </div>
+{/loop}                                                                                               
+ 
+</div> <br class="clearall" />
+
+
+<!-- 友情链接 -->﻿
+<div class="links margintop">
+		<div class="linkstitle">
+				<h2 class="allfloatleft  titletxt titlepadding">友情链接</h2>
+				<span class="qq gray"><b>原创漫画作者合作请联系******</b> -欢迎高质量友链合作 YY：*****</span> </div>
+	   <div class="linkstxt blue">
+        {pc:link  action="type_list" siteid="$siteid" linktype="1" order="listorder DESC" num="1000" return="pic_link"}
+        {loop $pic_link $v}
+        <li><a href="{$v['url']}" title="{$v['name']}" target="_blank"><img src="{$v[logo]}" width="88" height="31" /></a></li>
+        {/loop}
+        {/pc}
+        {pc:link  action="type_list" siteid="$siteid" order="listorder DESC" num="10" return="dat"}
+		{loop $dat $v}
+              {if $type==0}
+              <a href="{$v[url]}" target="_blank">{$v[name]}</a>
+              {else}
+              <a href="{$v[url]}" target="_blank"><img src="{$v[logo]}" width="88" height="31" style="border: 1px solid #FFBE7A;"></a> 
+              {/if}
+		{/loop}
+       {/pc}
+		</div>
+</div>
+<!-- 友情链接结束 -->
+<!--  5253推荐  -->
+
+<!-- 5253推荐结束 --> 
+{template "content","footer"}

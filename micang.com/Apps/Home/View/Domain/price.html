@@ -1,0 +1,138 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <i>域名价格</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap xspm">
+    <!--主体左边 开始-->
+    <div class="wrap_l ymjg">
+        <div id="navhljs1" class="navhl">
+            <a class="navhl_h" onclick="jdhddh(this,0)" href="javascript:void(0);">注册价格</a> 
+            <a class="navhl_q" onclick="jdhddh(this,1)" href="javascript:void(0);">续费价格</a>
+            <a class="navhl_q" onclick="jdhddh(this,2)" href="javascript:void(0);">转入价</a> 
+            <a class="navhl_q" onclick="jdhddh(this,3)" href="javascript:void(0);">赎回价格</a> 
+        </div>
+        <div style="display:block;" class="onlineplay_c8" id="navhljs1_c0">
+            <div class="airp_listc_left4">
+                <table width="800" height="34" cellspacing="1" cellpadding="0" border="0" bgcolor="#b9d4e8" align="center" class="tablelist" style="margin:30px auto;">
+                    <tbody><tr bgcolor="#FFFFFF" align="left" style="color:#666; font-size:14px; font-weight:600; ">
+                            <td width="160">域名后缀</td>
+                            <td width="80">消费属性</td>
+                            <td width="80">普通会员价格</td>
+                            <td width="80">金牌会员价格</td>
+                            <td width="80">白金会员价格</td>
+                            <td width="80">钻石会员价格</td>
+                        </tr>
+                    <volist name="data" id="vo">
+                        <tr bgcolor="#FFFFFF" align="left">
+                            <td>{$key}</td>
+                            <td>注册</td>
+                            <td>{$vo['level1']['price_register_year1']/100}</td>
+                            <td>{$vo['level2']['price_register_year1']/100}</td>
+                            <td>{$vo['level3']['price_register_year1']/100}</td>
+                            <td>{$vo['level9']['price_register_year1']/100}</td>
+                        </tr>
+                    </volist>
+                    </tbody></table>
+            </div>
+        </div>
+        <div style="display:none;" class="onlineplay_c8" id="navhljs1_c1">
+            <div class="airp_listc_left4">
+                <table width="800" height="34" cellspacing="1" cellpadding="0" border="0" bgcolor="#b9d4e8" align="center" class="tablelist" style="margin:30px auto;">
+                    <tbody><tr bgcolor="#FFFFFF" align="left" style="color:#666; font-size:14px; font-weight:600; ">
+                            <td width="160">域名后缀</td>
+                            <td width="80">消费属性</td>
+                            <td width="80">普通会员价格</td>
+                            <td width="80">金牌会员价格</td>
+                            <td width="80">白金会员价格</td>
+                            <td width="80">钻石会员价格</td>
+                        </tr>
+
+                    <volist name="data" id="vo">
+                        <tr bgcolor="#FFFFFF" align="left">
+                            <td>{$key}</td>
+                            <td>注册</td>
+                            <td>{$vo['level1']['price_renew_year1']/100}</td>
+                            <td>{$vo['level2']['price_renew_year1']/100}</td>
+                            <td>{$vo['level3']['price_renew_year1']/100}</td>
+                            <td>{$vo['level9']['price_renew_year1']/100}</td>
+                        </tr>
+                    </volist>   
+                    </tbody></table>
+            </div>
+        </div>
+        <div style="display:none;" class="onlineplay_c8" id="navhljs1_c2">
+            <div class="airp_listc_left4">
+                <table width="800" height="34" cellspacing="1" cellpadding="0" border="0" bgcolor="#b9d4e8" align="center" class="tablelist" style="margin:30px auto;">
+                    <tbody><tr bgcolor="#FFFFFF" align="left" style="color:#666; font-size:14px; font-weight:600; ">
+                            <td width="160">域名后缀</td>
+                            <td width="80">消费属性</td>
+                            <td width="80">普通会员价格</td>
+                            <td width="80">金牌会员价格</td>
+                            <td width="80">白金会员价格</td>
+                            <td width="80">钻石会员价格</td>
+                        </tr>
+
+                    <volist name="data" id="vo">
+                        <tr bgcolor="#FFFFFF" align="left">
+                            <td>{$key}</td>
+                            <td>注册</td>
+                            <td>{$vo['level1']['price_transfer']/100}</td>
+                            <td>{$vo['level2']['price_transfer']/100}</td>
+                            <td>{$vo['level3']['price_transfer']/100}</td>
+                            <td>{$vo['level9']['price_transfer']/100}</td>
+                        </tr>
+                    </volist>   
+                    </tbody></table>
+            </div>
+        </div>
+        <div style="display:none;" class="onlineplay_c8" id="navhljs1_c3">
+            <div class="airp_listc_left4">
+                <table width="800" height="34" cellspacing="1" cellpadding="0" border="0" bgcolor="#b9d4e8" align="center" class="tablelist" style="margin:30px auto;">
+                    <tbody><tr bgcolor="#FFFFFF" align="left" style="color:#666; font-size:14px; font-weight:600; ">
+                            <td width="160">域名后缀</td>
+                            <td width="80">消费属性</td>
+                            <td width="80">普通会员价格</td>
+                            <td width="80">金牌会员价格</td>
+                            <td width="80">白金会员价格</td>
+                            <td width="80">钻石会员价格</td>
+                        </tr>
+
+                    <volist name="data" id="vo">
+                        <tr bgcolor="#FFFFFF" align="left">
+                            <td>{$key}</td>
+                            <td>注册</td>
+                            <td>{$vo['level1']['price_redeem']/100}</td>
+                            <td>{$vo['level2']['price_redeem']/100}</td>
+                            <td>{$vo['level3']['price_redeem']/100}</td>
+                            <td>{$vo['level9']['price_redeem']/100}</td>
+                        </tr>
+                    </volist>   
+                    </tbody></table>
+            </div>
+        </div>
+
+    </div>
+    <!--主体左边 结束-->
+    <!--主体右边 开始-->
+    <div class="wrap_r">
+        <div class="tabbox_b">
+             {:W('Domain/mipu_sell')}
+        </div>
+        <div class="clear height30"></div>
+        <div class="tabbox_b">
+            <div class="navhl_b">
+                <div class="navhl_b_title">域名代购</div> 
+            </div>
+            <div class="list_c">
+                {:W('Cate/purchase')}
+            </div>
+        </div>
+    </div>
+    <!--主体右边 结束-->
+</div>
+<!--主体内容 结束-->

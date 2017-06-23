@@ -1,0 +1,66 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <a href="{:getDoMain()}news/" class="crumbs_c">域名资讯</a>
+    <span>></span>
+    <a href="{:getDoMain()}news/c{$newsInfo.cid}">{$category[$newsInfo['cid']]['name']}</a> 
+    <span>></span>
+    <i>{$newsInfo.title}</i>
+</div>
+<!--面包屑 结束-->
+<!--<a href="#"><img src="/Public/Home/images/4353535.png" class="pic_ad"/></a>-->
+<!--主体内容 开始-->
+<div class="wrap">
+    <div class="wrap_l2">
+        <!--问答列表 开始-->
+        <div class="asklist_b">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>{$category[$newsInfo['cid']]['name']}</span>
+            </div>
+            <!--内容详细 开始-->
+            <div class="detailed">
+                <h1 class="detailed_title">{$newsInfo.title}</h1>
+                <div class="detailed_info">
+                    <em class="dein_link_d">{$newsInfo.create_time|date='Y-m-d H:i:s',###}</em>
+                    <span>阅读：</span>
+                    <i class="dein_link_c">{$newsInfo.click_nums}</i>
+                    <span>来源：</span>
+                    <a href="javascript:;" class="dein_link_a">{$newsInfo.from}</a>
+                </div>
+                <div class="detailed_c">
+                    {$newsInfo.content}
+                </div>
+            </div>
+            <!--内容详细 结束-->
+            <!--<div class="wrap_a_b"><a href="#" class="doma_d_btn5">下一页</a><a href="#" class="doma_d_btn5">上一页</a></div>-->
+        </div>
+        <!--问答列表 结束-->
+        <!--问答列表 开始-->
+        <div class="asklist">
+            <div class="asklist_titile">
+                <div class="askl_titi"></div>
+                <span>{$category[$newsInfo['cid']]['name']}</span>
+            </div>
+            <ul>
+                <volist name="newsList" id="item" empty="没有相关域名新闻">
+                    <li>
+                        <!--<img src="images/54353.png" class="asklist_pic" />-->
+                        <dl>
+                            <dt><a href="{:getDoMain()}news/{$vo.id}">{$item.title}</a><span>阅读<em>{$item.click_nums}</em></span></dt>
+                            <dd><p>{$item.summary}</p></dd>
+                            <dd><span>{$item.create_time|date='Y/m/d H:i:s',###}</span><a href="{:getDoMain()}news/{$item.id}">更多详细>></a></dd>
+                        </dl>
+                    </li>
+                </volist>   
+            </ul>
+        </div>
+        <!--问答列表 结束-->
+    </div>
+    <div class="wrap_r2">
+        <include file="News:right" /> 
+    </div>
+</div>
+<!--主体内容 结束-->

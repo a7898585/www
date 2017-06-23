@@ -1,0 +1,35 @@
+<style type="text/css"> 
+    /*通用样式--容器宽度值*/ 
+    .sharp{width:400px;height:400px;margin-top:20px;float:left;margin-left:10px;display:inline;} 
+    .sharp .content div{padding:10px;text-indent:2em;} 
+    .content{height:598px;}/*这个高度值等于图片的高度值-8px*/ 
+    /*圆角框通用设置样式，如果要运用多个不同颜色，以下部分不用重新变化--------------------------------*/ 
+    .b1,.b2,.b3,.b4,.b5,.b6,.b7,.b8{height:1px; font-size:1px; overflow:hidden; display:block;} 
+    .b1,.b8{margin:0 5px;} 
+    .b2,.b7{margin:0 3px;border-right:2px solid; border-left:2px solid;} 
+    .b3,.b6{margin:0 2px;border-right:1px solid; border-left:1px solid;} 
+    .b4,.b5{margin:0 1px;border-right:1px solid; border-left:1px solid; height:2px;} 
+    .content {border-right:1px solid;border-left:1px solid;overflow:hidden;} 
+    /*图片偏移定位--上面部分*/ 
+    .sharp b.b2{background-position:-4px top;} 
+    .sharp b.b3{background-position:-2px -1px;} 
+    .sharp b.b4{background-position:-1px -2px;} 
+    /*图片偏移定位--下面部分*/ 
+    .sharp b.b7{background-position:-4px bottom;} 
+    .sharp b.b6{background-position:-2px bottom;} 
+    .sharp b.b5{background-position:-1px bottom;} 
+    /*颜色方案一----------------------------------------*/ 
+    /*边框色*/ 
+    .color1 .b2,.color1 .b3,.color1 .b4,.color1 .b5,.color1 .b6,.color1 .b7,.color1 .content{border-color:#ccc;} 
+    .color1 .b1,.color1 .b8{background:#aaa} 
+    /*图片路径*/ 
+    /*.color1 .b2,.color1 .b3,.color1 .b4,.color1 h3,.color1 .b5,.color1 .b6,.color1 .b7,.color1 .content{background:url(http://www.phpddt.com/usr/uploads/2012/10/4085139866.png) no-repeat;} 
+    .color1 .content{background-position:left -4px;} */
+</style> 
+<div class="sharp color1"> 
+    <b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b> 
+    <div class="content"> 
+        qqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+    </div> 
+    <b class="b5"></b><b class="b6"></b><b class="b7"></b><b class="b8"></b> 
+</div> 

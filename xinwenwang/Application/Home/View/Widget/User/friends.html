@@ -1,0 +1,70 @@
+
+<!--            <div class="in_box_l">
+                <div class="inbox_tit">
+                    <h2>好友推荐</h2>
+                    <a href="#">换一组</a>
+                </div>
+                <ul class="myfavorite">
+                    <li>
+                        <span class="favatar"><img src="/Public/Home/images/in_avatar.jpg"></span>
+                        <div class="group">
+                            <h2><a href="#">一条根</a></h2>
+                            <span>目前已经有超过30万的...</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="favatar"><img src="/Public/Home/images/in_avatar.jpg"></span>
+                        <div class="group">
+                            <h2><a href="#">一条根</a></h2>
+                            <span>目前已经有超过30万的...</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>-->
+
+<div class="in_cont_r">
+    <ul class="myfavorite">
+        <volist name="friends" id="vo">
+            <li>
+                <span class="favatar"><img src="{:setUpUrl($vo['head_pic'])}"></span>
+                <div class="group">
+                    <h2><a href="javascript:;">{$vo.username}</a></h2>
+                    <span>{$vo.email}</span>
+                </div>
+                <div class="f_news">
+                    <span>最新动态</span>
+                    <b><a href="{$base_url}/r{$vo.comment.news_id}" target="_blank">{$vo.comment.news_title}</a></b>
+                    <p>{$vo.comment.comment}</p>
+                </div>
+                <div class="edit_btn">
+                    <a href="javascript:del_fans('{$vo.id}');" class="dele"></a>
+                </div>
+            </li>
+        </volist>
+    </ul>
+    {$page_html}
+
+</div>
+<script>
+    function del_fans(fuid){
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        if(fuid && confirm('确认删除好友？')){
+            $.ajax({
+                type: 'POST',
+                url: '/user/del_fans',
+                data: {fuid: fuid},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('好友删除成功', 0, 1);
+                        window.location.reload();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        }
+    }
+</script>

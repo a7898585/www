@@ -1,0 +1,365 @@
+<div class="free">
+    <div class="free_wrap">
+        <div class="tit">
+            <ul class="step">
+                <li class="cur" id="one1"><i></i>联系方式</li>
+                <li id="two2"><i></i>资质审核</li>
+                <li id="three3"><i></i>申请结果</li>
+            </ul>
+        </div>
+        <div class="sqcon">
+            <form id="free_apply_form" method="post">
+                <div id="apply_div_1" style="display:block;">
+                    <div class="ps">您的信息将只做为产品推荐使用，不会以任何形式泄露给其他人员或机构</div>
+                    <ul>
+                        <li>
+                            <div class="item"><span class="lab">真实姓名</span>
+                                <input type="text" name="realname" datatype="s1-18" class="input-txt3" sucmsg="" nullmsg="姓名不能为空" errormsg="您的姓名输入有误,长度1-18" />
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">手机号码</span>
+                                <input type="text" name="mobile" id="mobile" datatype="m" class="input-txt3" sucmsg="" nullmsg="手机号码不能为空" errormsg="手机号码错误,请核实" />
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">手机验证码</span>
+                                <input style="width:50px;" type="text" value="" name="code" datatype="/^\d{6}$/" class="input-txt4"  ajaxurl="/Public/valid_sms" maxlength="6" sucmsg="" nullmsg="验证码不能为空" errormsg="验证码验证失败,请核实！"  />
+                                <a class="get" id="getcode" onclick="getSmsCode1(this)" chk="1">获取验证码</a> </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                    </ul>
+                    <div class="btn_next"><a href="javascript:void(0);" onclick="applyNext1('apply_div_2')" class="sqbtn btn6">下一步</a></div>
+                    <div class="blank20"></div>
+                </div>
+                <div id="apply_div_2" style="display:none;">
+                    <div class="ps">请您先完善您个人的资料，完整的贷款资料好贷将为你匹配相关产品</div>
+                    <ul>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">两年内信用记录</span>
+                                <select class="op2" id="creditlog" name="creditlog">
+                                    <foreach name="member_creditlog" item="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </foreach>
+                                </select>
+
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">您是否有信用卡</span>
+                                <div class="se">
+                                    <foreach name="member_creditcard" item="vo">
+                                        <label class="fl"><input name="creditcard" type="radio" checked="checked" value="{$key}">{$vo}</label>
+                                    </foreach>
+                                </div>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li zu="creditcard">
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">单卡最高额度</span>
+                                <select class="op2" name="credit">
+                                    <foreach name="member_credit" item="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li zu="creditcard">
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">最早开卡时间</span>
+                                <select class="op2" name="cardopen">
+                                    <foreach name="cardopen" item="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li zu="creditcard" >
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">半年内逾期情况</span>
+                                <select class="op2" name="yuqi">
+                                    <foreach name="member_yuqi" item="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">工作所在地</span>
+                                <select class="province" id="work_province">
+                                    <option>所在地</option>
+                                </select>
+                                <select class="" name="workarea" style="display: none;">
+                                    <option value="">城市</option>
+                                </select>
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">户籍所在地</span>
+                                <select class="province" id="huji_province">
+                                    <option>所在地</option>
+                                </select>
+                                <select class="" name="huji" style="display: none;">
+                                    <option value="">城市</option>
+                                </select>
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;"><span class="lab">出生年份</span>
+                                <select class="op2" name="birth">
+                                    <?php $year = '1999';for($year;$year>'1948';$year--){?>
+                                    <option value="<?php echo $year;?>"><?php echo $year;?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                            <div class="tip Validform_label"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">名下房产</span>
+                                <select class="op2">
+                                    <foreach name="member_hashouse" item="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">名下车产</span>
+                                <select class="op2">
+                                    <foreach name="member_hascar" item="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">有无成功贷款记录</span>
+                                <div class="se">
+                                    <label class="fl"><input name="jilu"  type="radio" checked="checked" value="1">有</label>
+                                    <label class="fl"><input name="jilu"  type="radio" value="2">无</label>
+                                </div>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">负债情况</span>
+                                <div class="se">
+                                    <foreach name="member_hasdebts" item="vo">
+                                        <label class="fl"><input name="hasdebts"  type="radio" checked="checked" value="{$key}">{$vo}</label>
+                                    </foreach>
+
+                                </div>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item"><span class="lab">性别</span>
+                                <div class="se">
+                                    <foreach name="member_sex" item="vo">
+                                        <label class="fl"><input name="sex"  type="radio" checked="checked" value="{$key}">{$vo}</label>
+                                    </foreach>
+                                </div>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">婚姻状况</span>
+                                <select class="op2" name="hasmarry">
+                                    <foreach name="member_hasmarry" item="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">文化程度</span>
+                                <select class="op2" name="education">
+                                    <foreach name="member_education" item="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                        <li>
+                            <div class="item" style="overflow:visible;">
+                                <span class="lab">职业身份</span>
+                                <select class="op2" name="job">
+                                    <foreach name="member_job" item="vo">
+                                        <option value="{$key}">{$vo}</option>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="tip"></div>
+                        </li>
+                    </ul>
+                    <div class="btn_next"><a href="#" onclick="applyNext2('apply_div_3')" class="sqbtn btn6">提交</a></div>
+                    <div class="blank20"></div>
+                </div>
+                <div id="apply_div_3" style="display:none;">
+                    <div class="sq_tip hide" id="tip1">
+                        <div class="sq_tip_pic"><img src="images/tip_80_01.png" width="80" /></div>
+                        <div class="sq_tip_info">
+                            <h3>很抱歉，申请未成功！</h3>
+                            <p>您的资质无法申请：薪易贷</p>
+                        </div>
+                    </div>
+                    <div class="sq_tip" id="tip2">
+                        <div class="sq_tip_pic"><img src="__PUBLIC__/Common/images/tip_80_02.png" width="80" /></div>
+                        <div class="sq_tip_info">
+                            <h3>恭喜，申请提交成功！</h3>
+                            <p>万贷好已收到您的申请，将会在24小时内联系你，请您保持手机畅通。</p>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="btn_next"><a href="javascript:void(0);" onclick="applyOK()" class="sqbtn btn6">确定</a></div>
+                    <div class="blank20"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var free_apply_form;
+    $(document).ready(function(){
+        free_apply_form = $("#free_apply_form").Validform({
+            tiptype:2
+        });
+        //        $('#btn_apply_widget').click(function(){
+        //            if(btn_apply_widget.check(false)==true){
+        //                $.ajax({
+        //                    type: "post",
+        //                    url: '/Public/fastApply',
+        //                    cache:false,
+        //                    async:false,
+        //                    data:$('.fast_apply_widget').serialize(),
+        //                    dataType:'JSON',
+        //                    success: function(data){
+        //                        if(data['code']==200){
+        //                            layer.msg('申请信息提交成功,24小时内万贷好客服会与您联系',2,1,function(){layer.closeAll();});
+        //                        }else{
+        //                            layer,msg(data['msg']);
+        //                        }
+        //                    }
+        //
+        //                });
+        //
+        //            }
+        //        });
+        loadProSelect();
+    });
+    function loadProSelect(){
+        $.getJSON("/valid/getprolist/",'',function(data){
+            _html = '<option value="">请选择</option>';
+            for(var i=0; i<data.length; i++){
+                _html += '<option value="'+data[i].area_id+'">'+data[i].name_simple+'</option>';
+            }
+            $(".province").html(_html);
+            //            $("#huji_province").html(_html);
+        })
+    }
+    $(".province").change(function(){
+        var pobject = $(this);
+        var id = $(this).val();
+        var _html = "";
+        var arr = ['001001001','001002001','001003001','001004001'];
+        if(jQuery.inArray( id, arr )=='-1'){
+            $.getJSON("/valid/getcity",{
+                areaid:id
+            },function(data){
+                _html += '<option value="">请选择</option>';
+                for(var i=0; i<data.length; i++){
+                    _html += '<option value="'+data[i].area_id+'">'+data[i].name_simple+'</option>';
+                }
+                var cityobj = pobject.next();
+                cityobj.html(_html);
+                cityobj.show();
+            })
+        }else{
+            var cid = '';
+            var cname= '';
+            if(id=='001001001'){
+                cname= '北京';
+            }else if(id=='001002001'){
+                cname= '上海';
+            }else if(id=='001003001'){
+                cname= '天津';
+            }else if(id=='001004001'){
+                cname= '重庆';
+            }
+            _html += '<option value="'+id+'">'+cname+'</option>';
+        }
+        var cityobj = pobject.next();
+        cityobj.html(_html);
+        cityobj.show();
+       
+    });
+    function applyNext1(){
+
+        var realname = free_apply_form.check(false,$("#apply_div_1 input[name='realname']"));
+        var mobile = free_apply_form.check(false,$("#apply_div_1 input[name='mobile']"));
+        var  code = free_apply_form.check(false,$("#apply_div_1 input[name='code']"));
+        if(!realname||!mobile||!code){
+            return false;
+        }
+        $('.step li').removeClass('cur');
+        $('.step li').eq(1).addClass('cur');
+        $('#apply_div_1').hide();
+        $('#apply_div_2').show();
+        layer.autoArea(layer.index);
+
+    }
+    function applyNext2(){
+        $('.step li').removeClass('cur');
+        $('.step li').eq(2).addClass('cur');
+        $('#apply_div_2').hide();
+        $('#apply_div_3').show();
+        layer.autoArea(layer.index);
+    }
+    function applyOK(){
+        alert('ok');
+    }
+    var count1=90;
+    var timer1;
+    function getSmsCode1(t){
+        var mobile = $('#apply_div_1 input[id="mobile"]').val();
+        if(!mobile) return false;
+        if($(t).attr('chk')==0){
+            return false;
+        }
+        $(t).text('发送中');
+        $.get("/Public/send_sms", { mobile: mobile } ,function(data){
+            if(data!='ok'){
+                return false;
+            }
+            $(t).attr('chk',0);
+            timer1 = setInterval(function(){
+                count1=count1-1;
+                $(t).text(count1+'秒后重新获取');
+                if(count1==0){
+                    $(t).attr('chk',1);
+                    $(t).text('重新发送');
+                    count1=90;
+                    clearInterval(timer1);
+                }
+            },1000);
+        });
+    }
+</script>

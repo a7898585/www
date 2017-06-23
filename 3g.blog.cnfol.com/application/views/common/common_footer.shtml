@@ -1,0 +1,43 @@
+</main>
+<footer class="Footer">
+    <section class="FootNav">
+        <nav class="FN_zi Fl Fb14 Tc Hei_color">
+            <a href="<?php echo(config_item('base_url')); ?>">首页</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="<?php echo DEFAULT_CNFOL_URL.'index.php?r=Footer/Cooperate'; ?>">合作</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="<?php echo DEFAULT_CNFOL_URL.'index.php?r=Footer/Client'; ?>">客户端</a>
+        </nav>
+        <a href="#" class="Back ToBlock"></a>
+    </section>
+    <p class="Copyright Mt10 Tc Hui_color">投资者首选的财经网站 <br />copyright    ©2013    中金在线3G<br /><font class="Cr_min">3g.cnfol.com    2013-08-14  10:00</font></p>
+</footer>
+<!--<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ?"https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost +"google-analytics.com/ga.js'type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-197044-9");
+    pageTracker._trackPageview();
+</script>-->
+<!--百度统计-->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? "https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol +"hm.baidu.com/h.js%3Fc378c4854ec370c1c8438f72e19b7170'type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- End of LogMicroscope Code -->
+<DIV style="DISPLAY: none"><!-- START AIYA Site Stat. -->
+    <SCRIPT language=JavaScript type="text/javascript"
+    src="//s.cnfolimg.com/v5.0/js/stat01-min.js"></SCRIPT>
+    <NOSCRIPT><img src="//logs.cnfol.com/a?ci=cnfol" alt=""></NOSCRIPT><!-- END AIYA Site Stat. -->
+</DIV>
+<!--谷歌统计-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46680606-1', 'cnfol.com');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+Registrar WHOIS Server:%COM_WHOIS_SERVER%
+Update(?:d)? Date:%COM_UPDATE_TIME%
+Creation Date:%COM_CREATE_TIME%
+Registrar Registration Expiration Date:%COM_EXPIRE_TIME%
+Registrar:%COM_REGISTRAR_NAME%
+Registry Registrant ID:%REG_HANDLE_ID%
+Registrant Name:%REG_NAME%
+Registrant Street:%REG_ADDRESS%
+Registrant City:%REG_CITY%
+Registrant Postal Code:%REG_POSTCODE%
+Registrant Country:%REG_COUNTRY%
+Registrant Phone:%REG_TEL%
+Registrant Email:%REG_EMAIL%
+Registry Admin ID:%ADM_HANDLE_ID%
+Admin Name:%ADM_NAME%
+Admin Street:%ADM_ADDRESS%
+Admin City:%ADM_CITY%
+Admin Postal Code:%ADM_POSTCODE%
+Admin Country:%ADM_COUNTRY%
+Admin Phone:%ADM_TEL%
+Admin Email:%ADM_EMAIL%
+Registry Tech ID:%TEC_HANDLE_ID%
+Tech Name:%TEC_NAME%
+Tech Street:%TEC_ADDRESS%
+Tech City:%TEC_CITY%
+Tech Postal Code:%TEC_POSTCODE%
+Tech Country:%TEC_COUNTRY%
+Tech Phone:%TEC_TEL%
+Tech Email:%TEC_EMAIL%
+Name Server:%COM_DNS1%
+Name Server:%COM_DNS2%

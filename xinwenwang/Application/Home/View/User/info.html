@@ -1,0 +1,298 @@
+<include file="Public:head" />
+<include file="Public:navi" />
+<div class="inbanner">
+    <img src="/Public/Home/images/in_banner.jpg">
+</div>
+<!--主体内容 开始-->
+<div id="container" class="bg-white clearfix">        
+    <include file="User:top" />
+    <div class="empty"></div>
+
+    <div id="con_click_3" class="in_cont" >
+        <div class="in_cont_l">
+            <div class="in_box_l">
+                <span>
+                    <!--                    最后登录时间：2015-05-22 12:55:22-->
+                </span>
+                <div class="fixbtn">
+                    <a href="javascript:;" onclick="uppwd()">修改密码</a>
+                    <a href="javascript:;" onclick="upsign()">修改签名</a>
+                </div>	
+                <span>
+                    <empty name="USER.singn">
+                        这个家伙很懒，什么也没有留下...
+                        <else /> 
+                        {$USER.singn}
+                    </empty> 
+                </span>
+            </div>
+            <eq name='msg' value='friends'>
+            <div class="in_box_l" id="UserRecomend">
+                {:W('User/recomend')}
+            </div>
+            </eq>
+        </div>
+        <!--我的收藏-->
+        <eq name='msg' value='collect'>
+        {:W('User/mycollect')}
+        </eq>
+        <!--我的评论-->
+        <eq name='msg' value='comment'>
+        {:W('User/mycomment')}
+        </eq>
+        <!--我的订阅-->
+        <eq name='msg' value='dingyue'>
+        {:W('User/mydingyue')}
+        </eq>
+        <!--我的好友-->
+        <eq name='msg' value='friends'>
+        {:W('User/myfriends')}
+        </eq>
+    </div>
+    <!--返回顶部-->
+    <div id="pagelet-feedback">
+        <ul>
+            <li><a ga_event="gotop" class="btn" href="javascript:;" data-node="back"><i class="icon icon-back"></i> </a></li>
+            <li><a ga_event="feedback" class="btn" href="javascript:;" data-node="feedback"><i class="icon icon-comment"></i></a></li>
+        </ul>
+    </div>
+</div>
+<!--主体内容 结束-->
+<!--忘记密码框-->
+<div style="display: none;" class="login-dialog " id="uppwd-dialog">
+    <div class="login-dialog-header">
+        <h3>修改密码</h3>
+    </div>
+    <a class="btn-close" data-node="close" ga_event="login-dialog-close">
+        <i class="icon icon-close"></i>
+    </a>
+    <div data-node="inner" class="login-dialog-inner">
+        <div class="login-pannel bottom-line">
+            <ul>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>原密码</label>
+                            <input type="password" spellcheck="false" autocomplete="off" placeholder="请输入您的原密码" name="password" class="name">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>新密码</label>
+                            <input type="password" spellcheck="false" autocomplete="off" placeholder="请输入您的新密码" name="new_password" class="name">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>确认密码</label>
+                            <input type="password" spellcheck="false" autocomplete="off" placeholder="请输入您的新密码" name="sure_password" class="name">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div style="text-align: center;" class="input-group">
+                        <input type="button" value="提交" class="submit-btn" id="btn_uppassword">
+                        <p data-node="errorMsg" class="error"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div style="display: none;" class="login-dialog " id="upsign-dialog">
+    <div class="login-dialog-header">
+        <h3>修改签名</h3>
+    </div>
+    <a class="btn-close" data-node="close" ga_event="login-dialog-close">
+        <i class="icon icon-close"></i>
+    </a>
+    <div data-node="inner" class="login-dialog-inner">
+        <div class="login-pannel bottom-line">
+            <ul>
+                <li>
+                    <div class="input-group">
+                        <div class="input">
+                            <label>签名</label>
+                            <!--<textareae spellcheck="false" autocomplete="off" placeholder="请输入您的签名" name="sign" >{$USER.singn}</textareae>-->
+                            <input type="text" spellcheck="false" autocomplete="off" placeholder="请输入您的签名" name="sign" class="name" value="{$USER.singn}">
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div style="text-align: center;" class="input-group">
+                        <input type="button" value="提交" class="submit-btn" id="btn_upsign">
+                        <p data-node="errorMsg" class="error"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/laytpl.js"></script>
+<script type="text/javascript" src="/Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    function uppwd(){
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        //        layer.closeAll();
+        $.layer({
+            type: 1,
+            shade: [0.5, '#000'],
+            area: ['auto', 'auto'],
+            closeBtn: false,
+            shadeClose: true,
+            title: false,
+            border: [0],
+            page: {dom: '#uppwd-dialog'}
+        });
+    }
+    function upsign(){
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        //        layer.closeAll();
+        $.layer({
+            type: 1,
+            shade: [0.5, '#000'],
+            area: ['auto', 'auto'],
+            closeBtn: false,
+            shadeClose: true,
+            title: false,
+            border: [0],
+            page: {dom: '#upsign-dialog'}
+        });
+    }
+    $('#btn_upsign').click(function () {
+        var login_dom = $('#upsign-dialog');
+        var sign = $(login_dom).find('input[name="sign"]').val();
+        if(sign==''){
+            layer.msg('签名不能为空');
+        }else{
+            layer.load('提交中...');
+            $.ajax({
+                type: 'POST',
+                url: '/user/up_sign',
+                data: {sign:sign},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('签名修改成功', 0, 1);
+                        window.location.reload();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        }
+    });
+    $('#btn_uppassword').click(function () {
+        var login_dom = $('#uppwd-dialog');
+        var password = $(login_dom).find('input[name="password"]').val();
+        var new_password = $(login_dom).find('input[name="new_password"]').val();
+        var sure_password = $(login_dom).find('input[name="sure_password"]').val();
+        layer.load('提交中...');
+        $.ajax({
+            type: 'POST',
+            url: '/user/up_pwd',
+            data: {password: password, new_password: new_password,sure_password:sure_password},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.code == 1) {
+                    layer.msg('密码修改成功', 0, 1);
+                    window.location.reload();
+                } else {
+                    layer.msg(msg.msg);
+                }
+            }
+        });
+    });
+    //点击展开分类
+    $('a[ga_event="feed_setting"]').click(function(){
+        if($('#pagelet-toolbar').attr('class')==''){
+            $(this).find('i').addClass('icon-customize-up');
+            $('#pagelet-toolbar').addClass('customize');
+            $('.custom-box').show();
+        }else{
+            $(this).find('i').removeClass('icon-customize-up');
+            $('#pagelet-toolbar').removeClass('customize');
+            $('.custom-box').hide();
+        }
+    });
+    //点击头部页面关闭分类
+    $('#container,#pagelet-nav').click(function(){
+        $('a[ga_event="feed_setting"]').find('i').removeClass('icon-customize-up');
+        $('#pagelet-toolbar').removeClass('customize');
+        $('.custom-box').hide();
+    });
+
+    //重载页面
+    $('.icon-refresh').click(function () {
+        $('.alert-msg').show();
+        window.location.reload();
+    });
+
+    //点击删除
+    $("#defaultCategory li").live("click", function () {
+        if ($('.customize').length && $(this).index()) {
+            $("#otherCategory").append("<li>" + $(this).html() + "</li>");
+            $(this).remove();
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $('.ban-msg').removeClass('error').html('点击添加新闻分类');
+                sysNav();
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //点击添加
+    $("#otherCategory li").live("click", function () {
+        if ($('.customize').length) {
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $("#defaultCategory").append("<li>" + $(this).html() + "</li>");
+                $(this).remove();
+                sysNav();
+            } else {
+                $('.ban-msg').addClass('error').html('分类已满（最多7个），请先删除一些');
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //未读新闻 点击查看
+    $('.unread').click(function () {
+        window.location.reload();
+    });
+
+           
+    var page =2;
+    function getUserRecomend(){
+        $.ajax({
+            type: 'POST',
+            url: '/user/getUserRecomend',
+            data: {p: page},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.code == 200) {
+                    page++;
+                } else {
+                    page=2;
+                }
+                $('#UserRecomend').html(msg.html);
+            }
+        });
+    }
+</script>
+<include file="Public:foot" />

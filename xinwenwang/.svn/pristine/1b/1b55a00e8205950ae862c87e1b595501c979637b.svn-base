@@ -1,0 +1,511 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/Public/Home/images/favicon.ico" type="image/x-icon">
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="./js/html5shim.js"></script>
+        <![endif]-->
+        <title>{$seo.t}</title>
+        <meta name="keywords" content="{$seo.k}"/>
+        <meta name="description" content="{$seo.d}"/>
+        <style>
+            .comment-pane .comment-list .comment-item ul.comment-content { width:610px;}
+            #related_news{ display:none}
+            .pin-pane{ min-height:1200px}
+            #menu,#erweima,.header-nav{ display:none}
+            #content{ margin-top:50px!important;}
+            p.media_description {padding: 10px 10px;text-align:left;word-wrap: break-word;}
+            .side-pane hr {margin: 18px 10px;}
+            .mp_home {margin: 0 10px 20px;padding-bottom: 20px;border-bottom: 1px solid #d9d9d9;}
+            .mp_home a {color: #b50808;}
+            #content_wrapper .title{font-size: 20px;font-weight: 500;line-height: 40px;}
+        </style>
+
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" href="http://s2.pstatp.com/r2/css/ie_fix.css" />
+        <![endif]-->
+        <!--[if IE 6]>
+        <!--<link rel="stylesheet" type="text/css" href="http://s2.pstatp.com/r2/css/toutiao_ie6.css" />-->
+        <!--<script src="/Public/Common/js/ie6.js"></script>-->
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="/Public/Home/new/css/main_news.css" />
+        <link rel="stylesheet" type="text/css" href="/Public/Home/new/css/detail_news.css"/>
+        <link rel="stylesheet" type="text/css" href="/Public/Home/new/css/login_core_f6e82af.css"/>
+        <link rel="stylesheet" type="text/css" href="/Public/Home/new/css/login_base_ebda236.css"/>
+        <link rel="stylesheet" type="text/css" href="/Public/Mobile/js/laypage/skin/laypage.css" />
+        <script type="text/javascript">
+            var login_user = {:intval($USER['id'])};
+        </script>
+    </head>
+    <body>
+
+        <div id="profile-header">
+            <div class="header-bar">
+                <div class="container">
+                    <div id="profile"  data-id="3346748448">
+                        <div class="profile_avatar">
+                            <a href="/m100053/"><img src="/Public/Home/new/images/xwwicon.png"/></a>
+                        </div>
+                        <div class="profile_info">
+                            <span class="profile_name"> <a href="/m{$dingyue.id}/">{$dingyue.name}</a></span>
+                            <span class="profile_follow">
+                                <a href="#" data-id="{$dingyue.id}" data-action="{$islike}">{$isdingyue}</a>
+                            </span>
+                        </div>
+                        <!--<div class="profile_desc"><a href="/m3346748448/">三九网是一家集数码产品销售、咨询，维修售后为一体的专业化公司，是电子商务领域最受消费者欢迎和最具影响力的电子商务网站之一。</a></div>-->
+                        <div class="profile_menu">
+
+                            <div class="profile_item">
+
+                                <notempty name="USER">
+                                    <div class="menu profile_item">
+                                        <div class="trigger">
+                                            <a class="ava" href="javascript:;"><img id="user_header" width="20" height="20" src="{:setUpUrl($USER['head_pic'])}"></a>
+                                            <a class="sig" href="{$base_url}/user/subscribe/" target="_blank">&nbsp;{$USER.username}</a>
+                                        </div>
+                                        <div class="dropdown">
+                                            <ul>
+                                                <li><a ga_label="personal_tab" ga_event="nav_loginout" rel="nofollow" >退出</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </notempty>
+                                <empty name="USER">
+                                    <a ga_event="nav_login" class="login-btn" href="javascript:;" data-node="login">
+                                        <span>登录</span>
+                                    </a>
+                                </empty>
+                            </div>
+                            <div class="profile_item profile_about">
+                                <a href="{$base_url}" target="_blank">首页</a>
+                            </div>
+                            <div class="profile_item profile_about">
+                                <a href="#" target="_blank">关于新闻王</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <div id="content_wrapper">
+                <div class="container ColumnContainer">
+                    <div class="fl">
+                        <volist name="list" id="vo">
+                            <div class="new_T">
+                                <h2>
+                                    <span class="title">
+                                        <a href="{$vo.url}">{$vo.title}</a></span>
+                                </h2>
+                                <if condition="$vo['show_type'] gt 1 ">
+                                <img rel="nofollow" width="202" src="{:setUpUrl($vo['img_list'][0])}" >
+                                <else />
+                                <img rel="nofollow" width="202" src="/Public/Home/new/images/xwwicon.png" >
+                                </if>
+                                <p class="t1">{$vo.intro}</p>
+                                <span>顶: {$vo.good_sum}</span>	<span>评论: {$vo.collect_sum}</span>	<span class="fr">{$vo.show_time}</span>
+                            </div>
+                        </volist>
+                        {$page_html}
+
+                    </div>
+                    <div class="side-pane fl">
+                        <div style="padding:15px 0 15px; text-align:center">
+                            <div class="mp-info">
+                                <img src="/Public/Home/new/images/xwwicon.png">
+                                <p></p>
+                            </div>
+                            <p class="media_description" >每天24小时滚动报道国内，国际及社会新闻，网络天下事尽在新闻王。</p>
+                            <hr>
+                            <!--<img src="">-->
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!--
+            <div style="z-index: 19891015; height: 446px; background-color: rgb(255, 255, 255);" class="xubox_main">
+                <div class="xubox_page"><div style="" id="login-dialog" class="login-dialog layer_pageContent">
+            -->
+            <div class="modal hide login-dialog" id="auth_modal">
+                <div style="display: none;" id="login-dialog" class="login-dialog">
+                    <div class="login-dialog-header">
+                        <h3>邮箱登录</h3>
+                    </div>
+                    <div class="login-pannel bottom-line">
+                        <ul>
+                            <li>
+                                <div class="input-group">
+                                    <div class="input">
+                                        <span>邮箱</span>
+                                        <input type="text" spellcheck="false" autocomplete="off" placeholder="请使用您的注册邮箱" name="name_or_email" class="name">
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-group">
+                                    <div class="input">
+                                        <span>密码</span>
+                                        <input type="password" spellcheck="false" autocomplete="off" placeholder="密码" data-node="password" name="password" class="password">
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-group">
+                                    <input type="checkbox" style="vertical-align:top" checked="" name="remember_me">
+                                    <label class="label">记住账号</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="text-align: center;" class="input-group">
+                                    <input type="button" value="登录" class="submit-btn" id="btn_login">
+                                    <p data-node="errorMsg" class="error"></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="login-dialog-header">
+                        <h3>合作网站帐号登陆</h3>
+                    </div>
+                    <div class="login-pannel">
+                        <ul class="sns_login_list clearfix">
+                            <li class="sinaweibo">
+                                <a data-pid="sina_weibo" data-node="snsLogin" href="javascript:;">
+                                    <i class="icon"></i>
+                                    新浪微博
+                                </a>
+                            </li>
+                            <li class="qzone">
+                                <a data-pid="qzone_sns" data-node="snsLogin" href="javascript:;">
+                                    <i class="icon"></i>
+                                    QQ空间
+                                </a>
+                            </li>
+                            <li class="renren">
+                                <a data-pid="renren_sns" data-node="snsLogin" href="javascript:;">
+                                    <i class="icon"></i>
+                                    人人网
+                                </a>
+                            </li>
+                            <li class="qqweibo">
+                                <a data-pid="qq_weibo" data-node="snsLogin" href="javascript:;" style="margin-right:0;">
+                                    <i class="icon"></i>
+                                    腾讯微博
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span class="xubox_setwin"></span><span class="xubox_botton"></span></div>
+
+
+<input type="hidden" id='news_id' value="{$id}">
+
+<style>
+    /*用户反馈*/
+    #feed_back{ position:fixed; right:0; bottom:140px; padding:20px; padding-bottom:0; background:#f5f5f5; border: 1px solid #aaa; border-radius: 5px 0 0 5px; border-right: none; z-index:1000; display: none}
+    #feed_back form{ width:320px;}
+    #feed_back form .controls{ padding-bottom:10px;}
+    #feed_back form .form-control{ width:100%; margin-bottom:0}
+    #feed_back .feed_back_close{ float:right; padding-top:5px; }
+
+    .tools{ position:fixed; bottom:50px; right:20px; z-index:1000}
+    .feed_back,
+    .back_top{ display:block; height:32px; width:32px; background:url(http://s0.pstatp.com/image/pgc/01.gif) no-repeat; background-position:0 -64px;  margin-top:5px;}
+    .feed_back:hover{ background-position:0 -96px;}
+    .back_top{ background-position:0 0;}
+    .back_top:hover{ background-position:0 -32px}
+</style>
+<div class="tools">
+    <a href="#" class="back_top" title="返回顶部" onClick="back_top(); return false;"></a>
+    <a href="#" class="feed_back hidden-xs" title="提点意见" onClick="feebback_togger(); return false"></a>
+    <!--<a href="mailto:kefu@bytedance.com" class="feed_back visible-xs" title="提点意见"></a>-->
+</div>
+
+<div id="feed_back" class="hidden-xs"  action="/post_message/">
+    <form  method="post">
+        <div class="form-group">
+            <label class="control-label">联系方式 <span class="text-danger"> (必填)</span></label>
+            <div class="controls">
+                <input type="text"  id="feedback-email" name="feedback-email" placeholder="您的邮箱/QQ号" class="form-control required" value="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">您的意见 <span class="text-danger">  (必填)</span></label>
+            <div class="controls">
+                <div class="textarea">
+                    <textarea name="feedback-content" type="" id="feedback-content" class="form-control" style="margin: 0; height: 100px;" maxlength="140" placeholder="请填写您的意见，不超过140字"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="controls">
+                <a class="feed_back_close" href="#" onClick="feebback_togger(); return false;">[关闭]</a>
+                <a class="btn btn-danger"  onClick="feedback_submit(); return false;" id="feedback-submit">提交</a>
+                <span id="feedback-form-tip"></span>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script id="dingyue_list" type="text/html">
+    {{# for(var i = 0, len = d.data_list.length; i < len; i++){ }}
+    <div class="new_T">
+        <a title="不感兴趣" group_id="{{d.data_list[i].id}}" href="#" class="close"></a>
+        <tbody>
+        <h2><a  href="{{d.data_list[i].url}}">{{d.data_list[i].title}}~</a></h2>
+        {{# if(d.data_list[i].img_list[0]){ }}
+        <img rel="nofollow" width="202" src="{{d.data_list[i].img_list[0]}}">
+        {{# } }}
+        <p class="t1">{{d.data_list[i].desc}}</p>
+        <div class="clearfix"></div>
+
+        <span>顶: {{d.data_list[i].good_sum}}</span>	
+        <span>评论: {{d.data_list[i].comment_sum}}</span>	
+        <span class="fr">{{d.data_list[i].show_time}}</span>
+    </tbody>
+</div>
+{{# } }}
+</script>
+
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/laytpl.js"></script>
+
+<script type="text/javascript">
+
+    /*
+     * 设置输入域(input/textarea)光标的位置
+     * @param {HTMLInputElement/HTMLTextAreaElement} elem
+     * @param {Number} index
+     */
+    function setCursorPosition(elem, index) {
+        var val = elem.value
+        var len = val.length
+
+        // 超过文本长度直接返回
+        if (len < index) return
+        setTimeout(function() {
+            elem.focus()
+            if (elem.setSelectionRange) { // 标准浏览器
+                elem.setSelectionRange(index, index)
+            } else { // IE9-
+                var range = elem.createTextRange()
+                range.moveStart("character", -len)
+                range.moveEnd("character", -len)
+                range.moveStart("character", index)
+                range.moveEnd("character", 0)
+                range.select()
+            }
+        }, 10)
+    }
+    $(function(){
+        $('#post_comment_btn').click(function(){
+            var temp = is_login();
+            if(temp==false) return false;
+            var comment_box = $('#comment-box').val();
+            var id = "{$id}";
+            alert(id);
+            $.ajax({
+                type: 'POST',
+                url: '/news/add_comment' ,
+                data: {c:comment_box,news_id:id} ,
+                dataType: 'json',
+                success: function(data){
+  
+                    if(data.code==200){
+                        var data = {content:comment_box,
+                            head_pic:$('.ava').find('img').attr('src'),
+                            id:data.news_id,
+                            user_url:'/u'+login_user+'/',
+                            username:$('.sig').text()
+
+                        };
+                        laytpl($('#comment_demo').html()).render(data, function(html){
+                            $('#comment_list').prepend(html);
+                        });
+                        $('#comment-box').val('');
+                    }else{
+                        layer.msg('回复评论错误~');
+                    }
+
+                }
+            });
+        });
+
+        //评论/转发
+        $('.recomment').live('click',function(){
+            $('#comment-box').val($(this).attr('data-content'));
+            setCursorPosition(document.getElementById('comment-box'),0);
+        });
+        $('.profile_follow a').click(function(){
+            var temp = is_login();
+            if(temp==false) is_login();
+            var c = $(this).attr('data-action');
+            var t = '';
+            if(c=='unlike'){
+                c='like';
+                t='+ 订阅';
+            }else {
+                c = 'unlike';
+                t = '已订阅';
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/News/add_dingyue' ,
+                data: {id:$(this).attr('data-id'),status:c} ,
+                dataType: 'json',
+                success: function(msg){
+                    if(msg==1){
+                        $('.profile_follow a').attr('data-action',c).html(t);
+                    }
+                }
+            });
+            return false;
+        });
+        //文章喜欢
+        $('.control-line > .like').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/public/newsTool' ,
+                data:{id:$(this).attr('data-id'),'t':'like'},
+                dataType: 'json',
+                success: function(msg){
+                    if(msg.code==200){
+
+                    }
+                }
+            });
+            $(this).text(parseInt($(this).text())+1);
+        });
+        //文章踩
+        $('.control-line > .hate').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/public/newsTool' ,
+                data:{id:$(this).attr('data-id'),'t':'hate'},
+                dataType: 'json',
+                success: function(msg){
+                    if(msg.code==200){
+
+                    }
+                }
+            });
+            $(this).text(parseInt($(this).text())+1);
+        });
+        //文章收藏
+        $('.control-line > .fav').click(function(){
+            var t = $(this);
+            $.ajax({
+                type: 'POST',
+                url: '/public/newsTool' ,
+                data:{id:$(t).attr('data-id'),'t':'fav'},
+                dataType: 'json',
+                success: function(msg){
+                    if(msg.code==200){
+                        $(t).text(parseInt($(t).text())+1);
+                    }else if(msg.code==201){
+                        $(t).text(parseInt($(t).text())-1);
+                    }
+                }
+            });
+        });
+        $('a[ga_event="nav_login"]').click(function (){
+            is_login();
+        });
+
+        $('a[ga_event="nav_loginout"]').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/loginout' ,
+                dataType: 'text',
+                success: function(msg){
+                    layer.msg('退出成功,跳转中...',0,1);
+                    window.location.reload();
+                }
+            });
+        });
+        $('#btn_login').click(function(){
+            var login_dom = $('.login-dialog');
+            var name = $(login_dom).find('input[name="name_or_email"]').val();
+            var password = $(login_dom).find('input[name="password"]').val();
+            layer.load('登录中...');
+            $.ajax({
+                type: 'POST',
+                url: '/login' ,
+                data: {u:name,p:password} ,
+                dataType: 'json',
+                success: function(msg){
+                    if(msg.code==200){
+                        layer.msg('登录成功,跳转中...',0,1);
+                        window.location.reload();
+                    }else{
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        });
+    });
+    function is_login(){
+        if(parseInt(login_user)<1){
+            $.layer({
+                type: 1,
+                shade: [0.5, '#000'],
+                area: ['auto', 'auto'],
+                closeBtn: false,
+                shadeClose: true,
+                title: false,
+                border: [0],
+                page: {dom : '.login-dialog'}
+            });
+            return false;
+        }else{
+            return true;
+        }
+    }
+    function goNextPage(){
+        loading=true;
+        $('#flow-loading-tip').show();
+        page++;
+        $.ajax({
+            type: 'POST',
+            url: '__SELF__' ,
+            data: {p:page} ,
+            dataType: 'json',
+            success: function(msg){
+                console.log(111);
+                var count = msg.data.data_list.length;
+                if(count!=20){
+                    $('#flow-loading-tip').remove();
+                    $('#flow-no-pin-tip').show();
+                    loading = true;
+                }
+                if(msg.code==200){
+                    laytpl($('#dingyue_list').html()).render(msg.data, function(render){
+                        $('#flow-loading-tip').before(render);
+                    });
+                    loading = false;
+                }else{
+                    $('.loadmore').remove();
+                    loading = true;
+                }
+            }
+        });
+    }
+    window.scrollTo(0, 0);
+</script>
+<include file="Public:foot" />
+

@@ -1,0 +1,101 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;}
+
+.inbanner{ width:100%; height:260px; margin:0 auto; text-align:center; overflow:hidden;}
+.inbanner img{ display:inline-block;}
+
+.base_info{ width:100%; position:relative; height:80px;}
+.base_info .in_avatar{ width:110px; height:110px; position:absolute; top:-55px; left:20px; border-radius:50%; overflow:hidden;}
+.base_info b{ font-size:20px; color:#fff; position:absolute; top:-40px; left:150px;}
+.base_info .in_tab{ padding:12px 0 0 150px;}
+.base_info .in_tab a{ display:block; float:left; width:100px; height:55px; background:#eee; margin-right:5px; border-radius:3px; text-align:center; overflow:hidden; position:relative;}
+.base_info .in_tab a:hover, .base_info .in_tab a.hover{background:#f44d4d;}
+.base_info .in_tab a:active{ background:#ca0e0e;}
+.base_info .in_tab a span{ display:inline-block; color:#555; line-height:36px; margin-top:22px; cursor:pointer;}
+.base_info .in_tab a:hover span, .base_info .in_tab a.hover span{ color:#fff;}
+.base_info .in_tab a i{ display:block; width:22px; height:22px; background-image:url(../images/center_icon.png); background-repeat:no-repeat; position:absolute; top:10px; left:40px; cursor:pointer;}
+.cicon1{ background-position:-5px -5px;}
+.cicon2{ background-position:-5px -39px;}
+.cicon3{ background-position:-5px -73px;}
+.cicon4{ background-position:-5px -108px;}
+.base_info .in_tab a:hover i.cicon1, .base_info .in_tab a.hover i.cicon1{ background-position:-34px -5px;}
+.base_info .in_tab a:hover i.cicon2, .base_info .in_tab a.hover i.cicon2{ background-position:-34px -39px;}
+.base_info .in_tab a:hover i.cicon3, .base_info .in_tab a.hover i.cicon3{ background-position:-34px -73px;}
+.base_info .in_tab a:hover i.cicon4, .base_info .in_tab a.hover i.cicon4{ background-position:-34px -108px;}
+
+.empty{ width:100%; height:12px; background:#f8f8f8;}
+
+.in_cont{ margin:20px; overflow:hidden;}
+.in_cont_l{ float:left; width:250px; margin-left:15px; }
+.in_box_l{ width:100%; border-bottom:1px solid #ebebeb; padding-bottom:10px; margin-bottom:10px; }
+.in_cont .fixbtn{ text-align:center;}
+.in_cont .fixbtn a{ display:inline-block; width:80px; height:30px; margin:10px 15px; border:1px solid #1c97ff; border-radius:3px; color:#1c97ff; line-height:30px; text-align:center;}
+.in_cont .fixbtn a:hover{ background:#1c97ff; color:#fff;}
+.in_cont_l span{ width:100%; display:block; color:#999; text-align:center; margin:10px auto;}
+
+/*我的收藏*/
+.in_cont_r{ float:right; width:600px; margin-right:50px; overflow:hidden;}
+.in_cont_r .favorite{ width:100%; overflow:hidden;}
+.in_cont_r .favorite li{ width:100%; border-bottom:1px dashed #ddd; padding:15px;}
+.in_cont_r .favorite li:hover{ background:#fafafa;}
+.in_cont_r .favorite li h2{ font-size:20px; text-align:left;}
+.in_cont_r .favorite li h2 a:hover{ color:#ba2020;}
+.in_cont_r .favorite li p { margin-top:5px; line-height:24px; color:#1C97FF;}
+.in_cont_r .favorite li p a.cancel{ display:inline-block; padding-left:25px; background:url(../images/center_icon.png) no-repeat -3px -137px; color:#999; margin-left:10px;}
+.in_cont_r .favorite li p a.cancel:hover{ color:#1C97FF;}
+
+
+/*我的跟贴*/
+.stab_tit{ width:100%; height:40px; border-bottom:1px solid #ddd; }
+.stab_tit a{ display:inline-block; width:80px; height:39px; color:#999; text-align:center; line-height:41px; background:#fff; vertical-align:top;}
+.stab_tit a:hover, .stab_tit a.hover{ height:40px; border-width:1px; border-style:solid; border-color:#ddd #ddd #fff #ddd; border-radius:5px 5px 0 0; color:#1C97FF;}
+
+.ifollow{ width:100%; overflow:hidden; margin:5px auto;}
+.ifollow .bottom_pl_touxiang{ width:40px; height:40px; overflow:hidden;}
+.ifollow .bottom_pl_touxiang img{ width:40px; height:auto;}
+.ifollow p{ color:#9aa8d4; margin:12px 0;}
+.ifollow p b{ color:#666; margin-right:5px;}
+.follow .upfloor{ margin-left:50px; background:#f7f7f7; overflow:hidden; padding:5px;}
+.follow .upfloor .bottom_pl_touxiang img{ width:40px; height:40px; margin-left:5px;}
+.follow .upfloor .comment_cont{ width:300px; float:left; padding:0;}
+.follow .upfloor .comment_pic{ width:110px; height:70px; overflow:hidden; margin-right:15px;}
+.follow .upfloor .comment_pic img{ width:110px; overflow:hidden; }
+.follow_tip{ margin:8px 0 8px 50px; color:#666;}
+
+/*我的收藏*/
+.myfavorite{ width:100%; overflow:hidden;}
+.myfavorite li{ padding:10px 0; width:100%; border-bottom:1px dashed #ddd; overflow:hidden; margin-top:5px;}
+.myfavorite li:hover{ background:#fafafa;}
+.in_cont_l .myfavorite li:last-child{ border-bottom:none;}
+.myfavorite li .favatar{ width:40px; height:40px; overflow:hidden; border-radius:50%; float:left; margin-left:5px;}
+.myfavorite li .favatar img{ width:40px; height:auto;}
+.myfavorite li .group{ float:left; width:125px; overflow:hidden; margin:0 10px;}
+.myfavorite li .group h2{ color:#666; font-size:16px;}
+.myfavorite li .group h2 a:hover{ color:#ba2020;}
+.myfavorite li .group span{ width:150px; line-height:24px; overflow:hidden; text-overflow:ellipsis; color:#999; text-align:left;}
+.myfavorite li .f_news{ float:left; width:280px; overflow:hidden; line-height:24px;}
+.myfavorite li .f_news span{ color:#f00;}
+.myfavorite li .f_news b{ display:block; font-weight:normal; color:#444px; width:100%; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
+.myfavorite li .f_news p{ color:#666;}
+.myfavorite li .edit_btn{ margin:12px 10px 0 0; float:right; text-align:center;}
+.myfavorite li .edit_btn a{ display:inline-block; width:22px; height:22px; background-image:url(../images/center_icon.png); background-repeat:no-repeat; margin:0 5px; }
+.myfavorite li .edit_btn a.upline{ background-position:-4px -162px;}
+.myfavorite li .edit_btn a.dele{ background-position: -34px -162px;}
+.myfavorite li .edit_btn a.upline:hover{ background-position:-4px -188px;}
+.myfavorite li .edit_btn a.dele:hover{ background-position: -34px -189px;}
+
+
+/*好友推荐*/
+.in_box_l .inbox_tit{ width:100%; height:30px; border-bottom:1px solid #ebebeb; position:relative;}
+.in_box_l .inbox_tit h2{ position:absolute; line-height:16px; font-size:14px; color:#444; bottom:-1px; left:0; padding:5px; border-bottom:2px solid #f00;}
+.in_box_l .inbox_tit a{ float:right; line-height:30px; margin-right:5px; color:#999;}
+.in_box_l .inbox_tit a:hover{ color:#1C97FF;}
+.in_box_l .myfavorite li .group span{ margin:0;}
+
+/*友情链接*/
+.links{ width: 970px; margin: 0 auto;  margin-top: 10px; padding:5px 15px 10px; background: #fff; }
+.links strong{  font-weight: bold; color: #333; line-height: 35px; font-size: 14px; border-bottom: 1px solid #eee; display: block; margin: 0 10px 10px 10px; }
+.links p{ color: #ccc; height: 100%; overflow: hidden;}
+.links p a{ padding: 4px 10px; color: #666; display: inline-block; float: left;}
+.links p a:hover{ color: rgba(244, 59, 59, 0.9); }

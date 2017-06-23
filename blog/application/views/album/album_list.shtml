@@ -1,0 +1,72 @@
+<?php include $peronalhead;?>
+<div class="zjddiv">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td valign="top">
+                <!-- 我的相册部分 -->
+                <div class="xc-ztdiv">
+                    <div class="xc01">
+                        <div class="xc02"></div>
+                        <div class="xc03">相册列表 <?php if(isset($isowner) && ($isowner == true)){?>　
+                            <span onclick="javascript:addalbum('<?php echo $bloginfo['DomainName'];?>');" style="cursor:pointer">创建相册</span>　
+                            <span onclick="javascript:addphoto('<?php echo $bloginfo['DomainName'];?>');" style="cursor:pointer">上传照片</span>　
+                            <a href="http://passport.cnfol.com/attachments/photolist" target="_blank">我的图片</a><?php }?></div>
+                    </div>
+                    <div class="xc04">	
+                        <div class="xclb02">
+                            <?php
+                            if(!empty($album['list']))
+                            {
+                            foreach($album['list'] as $aval)
+                            {
+                            if(!preg_match('/http:\/\/(0*)/', $aval['CoverURL']))
+                            {
+                            $aval['CoverURL'] = 'http://images.cnfol.com/uploads/mod_blog/1/nothing.gif';
+                            }
+                            ?>
+                            <div class="xclb">
+                                <div class="xclb00">
+                                    <div align="center"><div class="xclb01">
+                                            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/photolist/<?php echo $aval['AlbumID'];?>">
+                                                <img src="<?php echo $aval['CoverURL'];?>" onerror="this.src='http://images.cnfol.com/uploads/mod_blog/1/nothing.gif';error=null; this.style.display='none'"  border="0" onload="SetImgWidth(this,'200','145');this.style.display='';"/></a>
+                                        </div></div>
+                                    <div align="center">
+                                        <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/photolist/<?php echo $aval['AlbumID'];?>"><?php echo filter_word($aval['Name']);?>(<?php echo $aval['PhotoNum'];?>)</a><br>
+                                        <?php 
+                                        if(isset($isowner) && ($isowner == true))
+                                        {?>
+                                        <span onclick="javascript:editalbum('<?php echo $aval['AlbumID'];?>','<?php echo $bloginfo['DomainName'];?>');" style="cursor:pointer">编辑</span>　
+                                        <span onclick="javascript:if(confirm('确定将此相册删除?')) delalbum('<?php echo $aval['AlbumID'];?>','<?php echo $bloginfo['DomainName'];?>', '<?php echo getVerifyStr($bloginfo['UserID'].$aval['AlbumID']);?>');" style="cursor:pointer">删除</span>
+                                        <?php
+                                        }?>
+                                    </div>
+                                </div>						
+                            </div>
+                            <?php
+                            }
+                            }
+                            else
+                            {?>
+                            <div class="xclb">
+                                <div class="xclb00">
+                                    <div align="center"><div class="xclb01">
+                                            <a href="javascript:;"><img src="http://images.cnfol.com/uploads/mod_blog/1/nothing.gif" onerror="this.src='http://images.cnfol.com/uploads/mod_blog/1/nothing.gif';error=null; this.style.display='none'"  border="0" onload="SetImgWidth(this,'200','145');this.style.display='';"/></a>
+                                        </div></div>
+                                    <div align="center"><a href="javascript:;">默认相册(0)</a></div>
+                                </div>						
+                            </div>
+                            <?php
+                            }?>
+                            <div class="wzlbsz06" style="clear:both"></div>
+                        </div>
+                    </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<form name="autorform" id="autorform" method="post">
+    <input type="hidden" name="albumID" id="albumID">
+    <input type="hidden" name="act" id="act">
+    <input type="hidden" name="flashCode" id="flashCode">
+</form>
+<?php include $peronalfoot;?>

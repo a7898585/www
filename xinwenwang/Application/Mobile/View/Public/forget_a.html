@@ -1,0 +1,76 @@
+<include file="Public:forget_header" />
+<div class="main">
+    <div class="wrap">
+        <div class="reg_titbar"><span class="tit"></span></div>    
+        <div class="box clearfix">
+            <ul class="box-ul clearfix">
+                <li class="one-mo"><a class="current">1.输入登录名</a></li>
+                <li class="two_cur"><a class="current">2.信息确认</a></li>
+                <li class="three-chong" id="pass_nac_li"><a id="pass_nac" class="">3.重置密码</a></li>
+                <li class="four-gai"><a>4.密码修改成功</a></li>
+            </ul>
+            <form action="/pwsave" method="post" id="forgetForm">
+                <input name="roleid" value="{$info.roleid}" type="hidden">
+                <input name="mobile" value="{$info.mobile}" type="hidden">
+                <input name="customer_id" value="{$info.customer_id}" type="hidden">
+                <ul class="getBack" id="forget_a">  
+                    <div class="msg_tip">请查看手机（{$info.mobile}）中来自万贷好的短信!</div>
+                    <li><div class="box_item2">
+                            <div class="box_items"><span class="box_lab2">输入短信验证码：</span><input type="text" class="input-txt" name="vcode"/></div>
+                            <div class="box_tip3" id="vcode_msg">输入您收到的6位验证码</div>
+                        </div></li>
+                    <li class="btn_reg"><div class="box_item2"><span class="box_lab2"></span><a href="javascript:void(0);" onclick="vcodeCheck();" class="box_btn">提交</a></div></li>
+                </ul>
+                <ul class="getBack" style="display: none;" id="forget_b">
+
+                    <li><div class="box_item2">
+                            <div class="box_items"><span class="box_lab2">输入新密码：</span><input onblur="valid.password('password',6)" id="password" name="password" type="password" class="input-txt" /></div>
+                            <div class="box_tip3" id="password_msg">输入新的密码</div>
+                        </div></li>
+                    <li><div class="box_item2">
+                            <div class="box_items"><span class="box_lab2">确认密码：</span><input onblur="valid.repassword('password',6)" id="repassword" name="repassword"  type="password" class="input-txt" /></div>
+                            <div class="box_tip3" id="repassword_msg">再输入一次新密码</div>
+                        </div></li>
+                    <li class="btn_reg"><div class="box_item2"><span class="box_lab2"></span><a href="javascript:void(0);" onclick="save();" class="box_btn">提交</a></div></li>
+                </ul>
+            </form>
+
+            <div class="tishi">
+                <p>. 忘记帐号？试试您的常用邮箱、用户名。<br>
+                    · 如果该电子邮箱地址不正确，或者您已经忘记注册时填写的邮箱地址，那我们无法帮您找回密码，建议创建一个新帐户。<br>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function vcodeCheck(){
+        var mobile = $('input[name=mobile]').val();
+        var vcode = $('input[name=vcode]').val();
+        if(vcode){
+            $.post("/valid/checkSmsCode",{mobile:mobile,vcode:vcode},function(data){
+                if(data.flag==0){
+                    $('#forget_a').hide();
+                    $('#forget_b').show();
+                    $('#pass_nac_li').removeClass('three-chong');
+                    $('#pass_nac').addClass('current');
+                    $('#pass_nac_li').addClass('three_cur');
+                }else{
+                    $('#vcode_msg').html(data.error);
+                    $('#vcode_msg').removeClass('box_tip4');
+                    $('#vcode_msg').addClass('box_tip2');
+                }
+            })
+        }
+        return false;
+    }
+    function save(){
+        if(!valid.password('password',6)) return false;
+        if(!valid.repassword('password',6)) return false;
+        $("#forgetForm").submit();
+    }
+    
+</script>
+<include file="Public:forget_footer" />
+

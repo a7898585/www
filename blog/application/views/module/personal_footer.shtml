@@ -1,0 +1,100 @@
+
+<!--点击统计-->
+<script type="text/javascript" src="<?php echo $viewurl;?>"></script>
+<script language="javascript">
+    function killErrors() { 
+        return true; 
+    } 
+    window.onmouseover=function()
+    {
+        window.onerror = killErrors; 
+    }
+
+    function setbg(url,mode)
+    {
+        var bgPosition = "";
+        if(mode==0) bgPosition = " no-repeat scroll center center";
+        if(url=="") {
+        }
+        else document.body.style.background = "url("+url+")"+bgPosition;    
+    }
+    document.body.onclick=function(event) {
+        var browser=navigator.appName;
+        if(browser=="Netscape")
+        {
+            obj =event.srcElement?event.srcElement:event.target;
+            if(obj.tagName!="IMG"&& document.getElementById("showinfo") &&g_pop==null) document.getElementById("showinfo").style.display="none"; 
+        }else
+        {
+            if(window.event.srcElement.tagName!="IMG" && document.getElementById("showinfo") && g_pop==null) document.getElementById("showinfo").style.display="none";}; 
+    }
+    setbg("<?php echo $blogconfig['Background'];?>","<?php echo $blogconfig['BgMode'];?>");
+</script>  
+</center>
+
+<?php if(!isset($ismanage) || $ismanage === false){?>
+
+
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+    _atrk_opts = { atrk_acct:"miaPi1a8Dy00w2", domain:"cnfol.com",dynamic: true};
+    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=miaPi1a8Dy00w2" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- End Alexa Certify Javascript -->
+
+<!--百度统计-->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc378c4854ec370c1c8438f72e19b7170' type='text/javascript'%3E%3C/script%3E"));
+    /*
+//站内信
+var num ='0';
+var url = 'http://passport.cnfol.com/index.php/getinfo/userinfo/<?php echo $user['userid']; ?>/getnewmsgcount/json?callback=?';
+ $.getJSON(url, function(json){
+ num = json.count; 
+ $('.LgMsg').html('('+num+')');
+ });  */
+    //站内信
+</script>
+<!-- End of LogMicroscope Code --> 
+<DIV style="DISPLAY: none"><!-- START AIYA Site Stat. -->
+    <SCRIPT language=JavaScript type="text/javascript" src="http://s.cnfolimg.com/v5.0/js/stat01-min.js"></SCRIPT>
+    <NOSCRIPT><img src="http://logs.cnfol.com/a?ci=cnfol" alt=""></NOSCRIPT><!-- END AIYA Site Stat. -->
+</DIV> 
+<?php } ?>
+
+<!--微信-->
+<!--  
+<div class="FixedRight" id="FixedRight">
+  <a href="javascript:;" onclick="document.getElementById('FixedRight').style.display='none'" class="Cls" title="关闭">X</a>
+  <iframe marginheight="0" marginwidth="0" frameborder="0" width="110" height="150" scrolling="no" src="http://cnfolimedia.allyes.com/main/s?user=cnfol|weixinyemian|weihangqingerweima&db=cnfolimedia&border=0&local=yes"></iframe>
+</div>
+-->
+<script charset="utf-8" src="http://hs.cnfol.com/Cm/Js/Base.js" type="text/javascript"></script>
+<!--[if lt IE 7]>
+  <script charset="utf-8" src="http://hs.cnfol.com/Cm/Js/Fixed.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  Fixed("FixedRight","R0","B100");
+  </script>
+<![endif]-->
+<!--微信-->
+
+
+<div class="NewFooter Footer" id="footer">
+    <center>博主昵称:<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" target="_blank" style="color:black;"><?php echo $bloginfo['NickName'];?></a></center>
+    <center>本站所有文章、数据仅供参考，使用前务请仔细阅读<a href="http://www.cnfol.com/info/law.shtml" target="_blank" style="color:#6C4B3A;">法律声明</a>，风险自负</center>
+    <center>Copyright &copy; 2004 -
+        <script type="text/javascript">
+            date=new Date();
+            year = date.getFullYear();
+            document.writeln(year);
+        </script>
+
+        福建中金在线网络股份有限公司.All Right Reserved
+
+    </center>
+</div>
+
+</body>
+</html>

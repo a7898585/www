@@ -1,0 +1,10 @@
+#
+# robots.txt for OLCMS
+#
+User-agent: * 
+Disallow: /caches
+Disallow: /olcms
+Disallow: /install
+Disallow: /uc_client
+Disallow: /api
+Disallow: /admin.php

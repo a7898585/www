@@ -1,0 +1,99 @@
+{php $l=$_GET[letter];}
+{php $SEO['title']="漫画_".$l."字母漫画_最新".$l."字母漫画_".$l."字母在线漫画-漫画城";}
+{php $SEO['keyword']="漫画,".$l."字母漫画,最新".$l."字母漫画,".$l."字母在线漫画，好看的".$l."字母漫画";}
+{php $SEO['description']="漫画城在线漫画网为您提供最全、最新的".$l."字母漫画、最新".$l."字母漫画、".$l."字母在线漫画、好看的".$l."字母漫画，漫画城在线漫画网是国内更新速度最快、漫画资源最全的专业在线漫画网站！";}
+{php $footer_txt = "漫画城".$l."字母频道为您提供最全、最新的".$l."字母漫画、最新".$l."字母漫画、".$l."字母在线漫画、好看的".$l."字母漫画，漫画城在线漫画网是国内更新速度最快、漫画资源最全的专业漫画网站！"}
+
+{template "content","header"}
+{template "content","mh_nav"}
+<div class="left c666">您现在的位置：&nbsp;<a href="." class="LinkPath">首页</a>&nbsp;&gt;&nbsp;<a href="/manhua" class="LinkPath">在线漫画</a>&nbsp;&gt;&nbsp;{$l}字母漫画列表</div>
+    <div class="middle_div2" style="margin-top:5px;">
+    	<div class="middle_div2_le">
+            <div class="today">
+                	<div class="today_tit">
+                    	<ul id ="tab_c">                
+                        	<li class="on" onmouseover="secBoard('tab_c','infolist_c',1,'on','');"><strong>连载漫画推荐</strong></li>                
+							<li onmouseover="secBoard('tab_c','infolist_c',2,'on','');"><strong>完结漫画推荐</strong></li>  
+                                 
+                        </ul>
+                    </div>
+                    <div class="today_txt">
+                    	<ul id="infolist_c_1" style="display:block">
+			{php $where_lianzai = $where." AND state = 0";}		
+			{pc:content action="table_list" table="Cartoon" where="$where_lianzai" order="views DESC" num="5" cache="3600" }
+			  {loop $data $r}
+				 <li>
+                    <a target="_blank" title = '{$r[title]}' href="/manhua{$r[id]}"><img width='100' height='135' src="{$r[thumb]}" ></a>
+                    <a target="_blank" title = '{$r[title]}' href="/manhua{$r[id]}">{str_cut($r[title],16,'')}</a>
+                 </li>
+			  {/loop}
+			{/pc}
+
+                        </ul>
+                        <ul id="infolist_c_2" style="display:none">
+			{php $where_wanjie = $where." AND state = 1";}		
+			{pc:content action="table_list" table="Cartoon" where="$where_wanjie" order="views DESC" num="5" cache="3600" }
+			  {loop $data $r}
+				 <li>
+                    <a target="_blank" title = '{$r[title]}' href="/manhua{$r[id]}"><img width='100' height='135' src="{$r[thumb]}" ></a>
+                    <a target="_blank" title = '{$r[title]}' href="/manhua{$r[id]}">{str_cut($r[title],16,'')}</a>
+                 </li>
+			  {/loop}
+			{/pc}
+                        </ul>
+                    </div>
+                </div>
+                <div class="inkk mato10"><div class="inbt2"><div class="new_h1">{$letter}字母漫画列表</div></div>
+				<div class="syzm syzm_lj">				
+				<span class="redzi">字母筛选：</span>
+					{php $Q=NULL;}
+					{php for ($i=65; $i<=90; $i++) $Q[]=chr($i);}
+					{loop $Q $r}
+						<a href="/index{$r}/">{$r}</a>
+					{/loop}
+				</div>		
+                <div class="innr3"> 
+                	<ul>
+                    	<li style="background: none repeat scroll 0 0 #F3F5F7; border-bottom:none; height:30px; line-height:30px;">
+							<span style="padding-left:5px;">漫画名称</span>
+							<span style="padding-left:300px;">作者</span>
+							<span>漫画人气</span>
+							<span>更新时间</span>
+                        </li>
+					{loop $chardata $r}
+                        <li>
+                        	<div class="mc"><a title="{$r[title]}" href="/manhua{$r[id]}" target="_blank">{$r[title]}</a></div>
+                            <div class="zz">{if !empty($r[Author])}{$r[Author]}{else}暂无{/if}</div>
+                            <div class="renqi">{$r[views]}</div>
+                            <div class="gxsj">{date('Y-m-d',$r[updatetime])}</div>
+                        </li> 
+					{/loop}
+				  </ul>
+                </div>    
+                 <div class=" clear1"></div>            
+                <div class="ad02" id="search_fy">{$pages}</div>		
+           </div>
+        </div>
+        
+        
+        <div class="middle_div2_ri">
+        	<div class="inkk mato5">			
+			<div class="inbt">				
+				<div class="inbt_title">漫画排行</div>				
+			</div>			
+			<div id="cbc_1" class="innr4">                	
+				<ul class="innr41">    					
+				{pc:content action="table_list" table="Cartoon" where="$where" order="views DESC" num="30" cache="3600" }
+				  {loop $data $r}
+	  				<li>
+						<a title="{$r[title]}" href="/manhua{$r[id]}">{str_cut($r[title],30,'')}</a>
+					</li>  
+				  {/loop}
+				{/pc}
+				</ul>
+			</div>					
+			</div>
+        </div>
+    </div>
+
+{template "content","footer"}

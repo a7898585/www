@@ -1,0 +1,1 @@
+<?php defined('IN_OLCMS') or exit('No permission resources.'); ?>

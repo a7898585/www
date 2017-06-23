@@ -1,0 +1,179 @@
+<ol class="breadcrumb" style="border-radius: 0px;">
+  <li><i class="fa fa-home fa-fw"></i> 当前位置：总管理后台</li>
+  <li>域名管理</li>
+  <li class="active">域名后缀列表</li>
+</ol>
+<div class="page-content">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-info">
+        <div class="panel-heading"><h6 class="panel-title">筛选</h6></div>
+        <div class="panel-body">
+          <form method="get" action="" role="form" class="form-inline" name="filter_form">
+            <div class="form-group">
+              <label>名称：</label>
+              <input type="text" name="name" class="form-control" placeholder="名称" value="{$Think.get.name}"/>
+            </div>
+            <div class="form-group">
+              <label>状态：</label>
+              <select name="status" class="form-control">
+                <option value="" <empty name="Think.get.status">selected</empty>>不限制</option>
+                <option value="0" <eq name="Think.get.status" value="0">selected</eq>>禁用</option>
+                <option value="1" <eq name="Think.get.status" value="1">selected</eq>>启用</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>是否常用后缀：</label>
+              <select name="usual" class="form-control">
+                <option value="" <empty name="Think.get.usual">selected</empty>>不限制</option>
+                <option value="0" <eq name="Think.get.usual" value="0">selected</eq>>否</option>
+                <option value="1" <eq name="Think.get.usual" value="1">selected</eq>>是</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search fa-fw"></i>&nbsp;搜 索</button>
+            <a href="{:U('Domain/add_suffix')}" class="btn btn-success btn-sm" data-btn="btn_suffix_add"><i class="fa fa-plus fa-fw"></i> 添加</a>
+          </form>
+        </div>
+      </div>
+      <table class="table table-striped table-bordered table-hover table-responsive">
+        <thead>
+        <tr>
+          <th>名称</th>
+          <th>国际域名</th>
+          <th>中文后缀</th>
+          <th>通用域名</th>
+          <th>注册接口</th>
+          <th>最小长度</th>
+          <th>可注册年限</th>
+          <th>可续费年限</th>
+          <th>常用后缀</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="page.data" id="item">
+          <tr>
+            <td>{$item.name|str_replace='idn','中文',###}</td>
+            <td>{$item['is_intl'] ? '是':'否'}</td>
+            <td>{$item['is_chn'] ? '是':'否'}</td>
+            <td>{$item['is_general'] ? '是':'否'}</td>
+            <td>{$item.registrar}</td>
+            <td>{$item.length_min}</td>
+            <td>{$item.allow_register_age}</td>
+            <td>{$item.allow_renew_age}</td>
+            <td>{$item['usual'] ? '是':'否'}</td>
+            <td>
+              <eq name="item.status" value="1">
+                <a href="{:U('Domain/status_suffix')}&name={$item.name}&status=0" title="禁用" data-btn="btn_status_edit"><i class="fa fa-check-circle fa-fw"></i></a>
+              <else/>
+                <a href="{:U('Domain/status_suffix')}&name={$item.name}&status=1" title="启用" data-btn="btn_status_edit"><i class="fa fa-times-circle fa-fw"></i></a>
+              </eq>
+            </td>
+            <td>
+              <a href="{:U('Domain/add_suffix')}&name={$item.name}" title="编辑" data-btn="btn_suffix_add"><i class="fa fa-edit fa-fw"></i></a>&nbsp;
+              <?php $price = getRegistrarPrice($item['name'],$item['registrar']);?>
+              <empty name="price">
+                <a href="{:U('Domain/add_price')}&suffix={$item.name}&registrar={$item.registrar}" title="设置价格" data-btn="btn_price_add"><i class="fa fa-yen fa-fw"></i> </a>
+                <else/>
+                <a href="{:U('Domain/add_price')}&id={$item.name}&suffix={$item.name}&registrar={$item.registrar}" title="修改价格" data-btn="btn_price_add"><i class="fa fa-yen fa-fw"></i> </a>
+              </empty>
+            </td>
+          </tr>
+        </volist>
+        </tbody>
+      </table>
+      <nav class="text-right">{$page.html}</nav>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //筛选
+        $('form[name="filter_form"]').on('submit', function(e){
+            e.preventDefault();
+            var query = "{:U('Domain/suffix')}";
+            if ($(':input[name="name"]').val() != ''){
+                query += '&name=' + $(':input[name="name"]').val();
+            }
+            if ($('select[name="status"]').val() != ''){
+                query += '&status=' + encodeURI($('select[name="status"]').val());
+            }
+            if ($('select[name="usual"]').val() != ''){
+                query += '&usual=' + encodeURI($('select[name="usual"]').val());
+            }
+            window.location = query;
+            return false;
+        });
+        $('a[data-btn="btn_suffix_add"]').on('click', function(e){
+            var that = this;
+            e.preventDefault();
+            BootstrapDialog.show({
+                draggable: true,
+                title: '添加后缀',
+                message: function(dialog){
+                    return $('<div></div>').addClass('row').load($(that).attr('href'));
+                },
+                buttons: [{
+                        label: BootstrapDialog.DEFAULT_TEXTS.OK,
+                        action: function(dialog) {
+                            //发送ajax请求
+                            $.post($(that).attr('href'), $('form[name="add_form"]').serialize(), function(result){
+                                if (result.status != 200){
+                                    BootstrapDialog.alert(result.message);
+                                }else{
+                                    window.location.reload(true);
+                                }
+                            });
+                        }
+                    }]
+            });
+            return false;
+        });
+    });
+   
+    $('a[data-btn="btn_status_edit"]').on('click', function(e){
+        e.preventDefault();
+        var that = this;
+        BootstrapDialog.confirm('确认执行此操作吗？', function(result){
+            if (result == true){
+                $.getJSON($(that).attr('href'), function(data){
+                    if (data.status == 500){
+                        BootstrapDialog.alert(data.message);
+                    }else if (data.status == 200){
+                        window.location.reload(true);
+                    }
+                });
+            }
+        });
+        return false;
+    });
+    
+    $('a[data-btn="btn_price_add"]').on('click', function(e){
+        var that = this;
+        e.preventDefault();
+        BootstrapDialog.show({
+            draggable: true,
+            title: '添加价格',
+            size: BootstrapDialog.SIZE_WIDE,
+            message: function(dialog){
+                return $('<div></div>').addClass('row').load($(that).attr('href'));
+            },
+            buttons: [{
+                    label: BootstrapDialog.DEFAULT_TEXTS.OK,
+                    action: function(dialog) {
+                        //发送ajax请求
+                        $.post($(that).attr('href'), $('form[name="add_form"]').serialize(), function(result){
+                            if (result.status != 200){
+                                BootstrapDialog.alert(result.message);
+                            }else{
+                                BootstrapDialog.alert(result.message);
+                                window.location.reload(true);
+                            }
+                        });
+                    }
+                }]
+        });
+        return false;
+    });
+</script>

@@ -1,0 +1,38 @@
+<div class="RgtBar TabsHH">
+    <h3>我的标签</h3>
+    <form method="post"  style="display:none;">
+        <input type="hidden" name="flashCode" id="flashCodeTag" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" />
+        <input type="hidden" name="memid" id="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+        <input type="hidden" name="currenttagid" id="currenttagid" value="" />
+        <input type="hidden" name="currentdomainname" id="currentdomainname" value="<?php echo($cuttrent_domainname); ?>" />
+        <input type="hidden" name="baseurl" id="baseurl" value="<?php echo($baseurl); ?>" />
+    </form>
+
+    <div id="s_taglist" class="MyTabs TabsH">数据加载中...</div>
+    <script language="javascript">
+        $(function(){
+            $('#s_taglist').load("<?php echo $baseurl.'/'.$cuttrent_domainname.'/articletag/mytagList/'.time(); ?>");
+
+            $('.tagidTurnPage').live('click',function(event){
+                if(event.target.tagName=='I')
+                {
+                    return false;
+                }
+		
+            })
+        });
+        var actdel = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articletag/Action";
+        function deltag(){
+	
+            $.post(actdel,{act:'deltag',flashCode:$('#flashCodeTag').val(), memid:$('#memberid').val(),TagID:$("#currenttagid").val()},function(data){
+		
+                if(data.errno == 'success')
+                {
+                    $('#s_taglist').load($('#baseurl').val()+"/"+$('#currentdomainname').val()+"/articletag/mytagList/"+new Date().getTime());
+			
+                    showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                }
+            },'json');
+        }
+    </script>
+</div>

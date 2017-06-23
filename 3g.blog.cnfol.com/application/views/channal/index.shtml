@@ -1,0 +1,140 @@
+<?php include $commonheader;?>
+<nav class="Nav">
+    <?php if(!empty($userid)){?>
+    <?php if(!empty($bloginfo['DomainName'])){?>
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'';?>" class="Cnfol_Bk ToBlock Fl Tc Fb16">我的博客</a>
+    <?php }else{ ?>
+    <a href="javascript:;" onclick="alert('您的账号尚未开通博客');" class="Cnfol_Bk ToBlock Fl Tc Fb16">我的博客</a>
+    <?php } ?>
+    <?php }else{ ?>
+    <a href="#" class="Cnfol_Bk ToBlock Fl Tc Fb16">中金博客</a>
+    <?php } ?>
+    <div href="#" class="More Fr" id="More">
+        <h2 class="M_title Fb16 Wrp" id="M_title">更多</h2>
+        <div class="M_cnt Hide" id="M_cnt">
+            <div class="M_jt"></div>
+            <div class="M_clses F14">
+                <a href="<?php echo $baseurl.'/more/masterHand'; ?>" class="Fl Tc">名家高手</a>
+                <a href="<?php echo $baseurl.'/more/hjby'; ?>" class="Fl Tc">黄金白银</a>
+                <a href="<?php echo $baseurl.'/more/cjzt'; ?>" class="Fl Tc">财经杂谈</a>
+                <a href="<?php echo $baseurl.'/more/gsjs'; ?>" class="Fl Tc">股市精萃</a>
+                <a href="<?php echo $baseurl.'/more/jjwh'; ?>" class="Fl Tc">基金外汇</a>
+                <a href="<?php echo $baseurl.'/more/xflc'; ?>" class="Fl Tc">消费理财</a>
+                <a href="<?php echo $baseurl.'/more/yhbx'; ?>" class="Fl Tc">银行保险</a>
+                <a href="<?php echo $baseurl.'/more/ggqh'; ?>" class="Fl Tc">港股期货</a>
+                <a href="<?php echo $baseurl.'/more/other'; ?>" class="Fl Tc">其   他</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<section class="Lst_lm">
+    <section class="Lst_lms">
+        <section class="Lm_one">
+            <div class="Lm_o_tit">
+                <h2 class="Fl F16">博客头条</h2>
+            </div>
+            <ul class="Lm_o_cnt F14">
+                <?php if(!empty($recomList)){
+                foreach($recomList as $val){ ?>
+                <li><a href="<?php echo $val['artUrl'];?>"><?php echo $val['title'];?></a><time class="Lmo_time F10 Hui_color"><?php echo $val['time'];?></time></li>
+                <?php }
+                }?>
+            </ul>
+        </section>
+        <section class="Lm_one">
+            <div class="Lm_o_tit">
+                <h2 class="Fl F16">名家高手</h2>
+                <a href="<?php echo $baseurl.'/more/masterHand'; ?>" class="Fr F14 Hui_color Mr10">更多&gt;</a>
+            </div>
+            <ul class="Lm_o_cnt F14">
+                <?php if(!empty($taglist['mjgs']['Record']) && $taglist['mjgs']['RetRecords'] > 0){ 
+                foreach($taglist['mjgs']['Record'] as $val){
+                $arturl = $baseurl.'/'.$val['DomainName'].'/article/'.strtotime($val['AppearTime']).'-'.$val['ArticleID'].'.html';
+                $artTitle = filter($val['Title']);
+                if(strlen($artTitle) > 30){
+                $artTitle = utf8_str($artTitle,30);
+                }
+    
+                ?>
+                <li>
+                    <a href="<?php echo $arturl;?>"><?php echo $artTitle;?></a>
+                    <time class="Lmo_time F10 Hui_color"><?php echo timeop($val['AppearTime']);?></time>
+                </li>
+                <?php }
+                }?>
+            </ul>
+        </section>
+        <section class="Lm_one">
+            <div class="Lm_o_tit">
+                <h2 class="Fl F16">黄金白银</h2>
+                <a href="<?php echo $baseurl.'/more/hjby'; ?>" class="Fr F14 Hui_color Mr10">更多&gt;</a>
+            </div>
+            <ul class="Lm_o_cnt F14">
+                <?php if(!empty($taglist['hjby']['Record']) && $taglist['hjby']['RetRecords'] > 0){ 
+                foreach($taglist['hjby']['Record'] as $val){
+                $arturl = $baseurl.'/'.$val['DomainName'].'/article/'.strtotime($val['AppearTime']).'-'.$val['ArticleID'].'.html';
+                $artTitle = filter($val['Title']);
+                if(strlen($artTitle) > 30){
+                $val['Title'] = utf8_str($artTitle,30);
+                }
+                ?>
+                <li>
+                    <a href="<?php echo $arturl;?>"><?php echo $val['Title'];?></a>
+                    <time class="Lmo_time F10 Hui_color"><?php echo timeop($val['AppearTime']);?></time>
+                </li>
+                <?php }
+                }?>
+            </ul>
+        </section>
+        <section class="Lm_one">
+            <div class="Lm_o_tit">
+                <h2 class="Fl F16">股市精萃</h2>
+                <a href="<?php echo $baseurl.'/more/gsjs'; ?>" class="Fr F14 Hui_color Mr10">更多&gt;</a>
+            </div>
+            <ul class="Lm_o_cnt F14">
+                <?php if(!empty($taglist['gsjs']['Record']) && $taglist['gsjs']['RetRecords'] > 0){ 
+                foreach($taglist['gsjs']['Record'] as $val){
+                $arturl = $baseurl.'/'.$val['DomainName'].'/article/'.strtotime($val['AppearTime']).'-'.$val['ArticleID'].'.html';$artTitle = filter($val['Title']);
+                if(strlen($artTitle) > 30){
+                $val['Title'] = utf8_str($artTitle,30);
+                }
+                ?>
+                <li>
+                    <a href="<?php echo $arturl;?>"><?php echo $val['Title'];?></a>
+                    <time class="Lmo_time F10 Hui_color"><?php echo timeop($val['AppearTime']);?></time>
+                </li>
+                <?php }
+                }?>
+            </ul>
+        </section>
+        <section class="Lm_one">
+            <div class="Lm_o_tit">
+                <h2 class="Fl F16">财经杂谈</h2>
+                <a href="<?php echo $baseurl.'/more/cjzt'; ?>" class="Fr F14 Hui_color Mr10">更多&gt;</a>
+            </div>
+            <ul class="Lm_o_cnt F14">
+                <?php if(!empty($taglist['cjzt']['Record']) && $taglist['cjzt']['RetRecords'] > 0){ 
+                foreach($taglist['cjzt']['Record'] as $val){
+                $arturl = $baseurl.'/'.$val['DomainName'].'/article/'.strtotime($val['AppearTime']).'-'.$val['ArticleID'].'.html';
+                $artTitle = filter($val['Title']);
+                if(strlen($artTitle) > 30){
+                $val['Title'] = utf8_str($artTitle,30);
+                }
+                ?>
+                <li>
+                    <a href="<?php echo $arturl;?>"><?php echo $val['Title'];?></a>
+                    <time class="Lmo_time F10 Hui_color"><?php echo timeop($val['AppearTime']);?></time>
+                </li>
+                <?php }
+                }?>
+            </ul>
+        </section>
+    </section>
+    <a href="javascript:void(0);" class="GetMore ToBlock Wrp Tc Mt10 B" id="GetMore" style="display:none;">点击获取更多</a>
+</section>
+<script type="text/javascript">
+    window.onload=function(){
+        Bk.app.toMore();
+    }
+</script>
+<?php  include $commonfooter; ?>

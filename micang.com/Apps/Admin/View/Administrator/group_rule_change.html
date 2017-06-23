@@ -1,0 +1,37 @@
+{__NOLAYOUT__}
+<div class="col-lg-12">
+  <form method="post" action="" role="form" name="add_form">
+    <volist name="rules" id="item1">
+      <dl class="list-group">
+        <dt class="list-group-item checkbox">
+          <label><input type="checkbox" name="rule[{$item1.id}]" value="{$item1.id}" <in name="item1.id" value="$groupRules">checked</in> <eq name="item1.default" value="1">data-read="only"</eq> /> {$item1.title}</label>
+        </dt>
+        <eq name="item1._child|is_array" value="1">
+          <dd class="list-group-item">
+            <ul class="list-inline" style="margin-bottom: 0px;">
+              <volist name="item1._child" id="item2">
+                <li class="checkbox"><label><input type="checkbox" name="rule[{$item2.id}]" value="{$item2.id}" data-parent="{$item2.pid}" <in name="item2.id" value="$groupRules">checked</in> <eq name="item1.default" value="1">data-read="only"</eq> /> {$item2.title}</label></li>
+              </volist>
+            </ul>
+          </dd>
+        </eq>
+      </dl>
+    </volist>
+  </form>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(document).off('click', ':checkbox').on('click', ':checkbox', function(e){
+        if ($(this).data('read') == 'only') return false;
+        if ($(this).parent().parent().is('dt')){
+            $(':checkbox[data-parent="'+$(this).val()+'"]').prop('checked', $(this).prop('checked'));
+        }else if ($(this).parent().parent().is('li')){
+            if ($(':checkbox[data-parent="'+$(this).data('parent')+'"]').length == $(':checkbox:checked[data-parent="'+$(this).data('parent')+'"]').length){
+                $(':checkbox[value="'+$(this).data('parent')+'"]').prop('checked', true);
+            }else if ($(':checkbox:checked[data-parent="'+$(this).data('parent')+'"]').length == 0){
+                $(':checkbox[value="'+$(this).data('parent')+'"]').prop('checked', false);
+            }
+        }
+    });
+});
+</script>

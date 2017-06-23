@@ -1,0 +1,70 @@
+{template "content","header"}
+<!--main-->    
+<script src="{JS_PATH}dww3.min.js"></script>
+<div class="middle_div1">
+    	<div class="middle_div1_le" style="border:none;">
+			   <div class="zixun_banner_le">
+				<!-- 幻灯片 -->
+				<div id="slider" class="mod-slide-s4">
+					{pc:content action="position" posid="17" order="updatetime DESC" sort="desc" num="4"}
+					<ul class="mod-slide-content J_content">
+						{php $i = 1;}
+						{loop $data $r}
+							<li {if $i > 1}style="display: none;"{else}style="display: block;"{/if}>
+							<a href="/zixun{$r['id']}/" title="{$r['title']}" target="_blank"><img alt="{$r['title']}" src="{$r['thumb']}" class="big_img"></a>
+							<div><h2>{str_cut($r[title],45,'')}</h2>{str_cut($r[description],80,'...')}</div>
+						</li>
+						{php $i++;}
+						{/loop}
+					</ul>
+					<ul class="mod-slide-trigger J_nav">
+						{php $i = 1;}
+						{loop $data $r}
+						<li {if $i == 1}class="hover"{/if}>
+							<a href="/zixun{$r['id']}/" title="{$r['title']}" target="_blank"><img src="{$r['thumb']}" class="thumb_img" ></a>
+						</li>
+						{php $i++;}
+						{/loop}
+					</ul>
+					{/pc}
+				</div>
+                                <div style="margin-bottom:10px;">{GetAd(4)}</div>
+				<script>
+					KISSDW.slide("#slider");
+				</script>
+				<!-- 幻灯片end -->
+			</div>
+
+        	<div class="mhzx middle_div1_ri">
+				<div class="rs_dm_tit" style="width:100%">
+					<h3>{$CATEGORYS[$catid]['catname']}</h3>
+				</div>
+			{pc:content action="lists" catid="$catid" num="7" moreinfo="1" order="id DESC" page="$page"}
+				{loop $data $r}
+					<div class="mhzx_txt">
+						<div class="mhzx_txt_le"><a href="/zixun{$r['id']}/" target="_blank"><img width='200' height='130' src="{thumb($r['thumb'], 200, 130, 0)}"/></a></div>
+						<div class="mhzx_txt_ri">
+
+							<div class="to">
+								<i class="icon"></i>
+								<h3>
+									[<a href="{$CATEGORYS[$r['catid']]['url']}" target="_blank" >{$CATEGORYS[$r[catid]]['catname']}</a>]
+									<a href="/zixun{$r['id']}/" target="_blank" title="{$r[title]}">{str_cut($r[title],55,'')}</a>
+								</h3>
+							</div>
+							<div class="pl_le2"><span>{date('Y-m-d H:i',$r[inputtime])}</span><span>来源:{if empty($r[copyfrom])}网络{else}{$r[copyfrom]}{/if}</span></div>
+							<p>{$r[description]}<a href="/zixun{$r['id']}/" target="_blank">[阅读全文]</a></p>
+						</div>
+					</div>
+				{/loop}
+			{/pc}
+
+                <div class="ad02 page" id="search_fy">
+				{$pages}     	   
+				</div>	
+            </div>
+        </div>
+
+		{template "content","block_right_zixun"}
+	</div>
+{template "content","footer"}

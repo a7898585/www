@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Insert title here</title>
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+        <script type="text/javascript" src="/function.js" ></script>
+    </head>
+    <body>
+        <div class="wzlbsz">
+            <div id="getarticlelist" class="modbox">数据加载中...</div>
+        </div>
+        <script language="javascript">
+            $(function(){
+                $('#getarticlelist').load("<?php echo '<?php echo(config_item('base_url')); ?>/index.php/devblog/articleList/'.$bloginfo['DomainName'].'?mid='.$bloginfo['MemberID'].'&mod='.$blogconfig['ShowMode'].'&page='.($_GET['page']>1?$_GET['page']:1);?>&r="+new Date().getTime());
+            })
+        </script>	
+    </body>
+</html>

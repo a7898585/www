@@ -1,0 +1,60 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="/deposit/account/">提现账户</a> 
+        <a class="navhl_q" href="/deposit/add/">添加账户</a>
+        <a class="navhl_q" href="/deposit/apply/">申请提现</a> 
+        <a class="navhl_q" href="/deposit/detail/">提现记录</a> 
+    </div>
+    <div style="display:block;" class="txzh" id="navhljs1_c0">
+        <div class="name_form fl">
+            <ul class="cl">
+                <li class="number_10">银行名称</li>
+                <li class="number_20">户名</li>
+                <li class="number_300">帐号</li>
+                <li class="number_30">开户行</li>
+                <li class="number_50">添加时间</li>
+                <li class="number_50">操作</li>
+            </ul>
+            <empty name="account">
+                <ul class="txzh_txt"><center>暂无提现账户，<a href="/deposit/add">点击添加</a>！</center></ul>
+                <else/>
+                <volist name="account" id="item">
+                    <ul class="txzh_txt">
+                        <li class="number_10"><span>
+                                <if condition="$item.type eq '1' ">支付宝
+                                    <else /> {$item.bankname}
+                                </if>
+                            </span></li>
+                        <li class="number_20">{$item.realname}</li>
+                        <li class="number_300">{$item.account}</li>
+                        <li class="number_30">{$item.address|default='&nbsp;--'}</li>
+                        <li>{$item.addtime|date="Y-m-d H:i",###}</li>
+                        <li class="number_50">&nbsp;&nbsp;<a href="/deposit/get?aid={$item.id}" class="listent_d">提现</a>
+                            &nbsp;&nbsp;<a href="/deposit/del_account?id={$item.id}" class="listent_d" data-btn="del_account">删除</a></li>
+                    </ul>
+                </volist>
+            </empty>
+            <ul class="txzh_txt">{$pager}</ul>
+        </div>
+    </div>	
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('a[data-btn="del_account"]').on('click', function(e){
+            var that = this;
+            layer.confirm('确认删除该账户吗？', function(){
+                $.getJSON($(that).attr('href'), function(data){
+                    if (data.status == 500){
+                        layer.msg(data.message);
+                    }else if (data.status == 200){
+                        layer.msg(data.message, function(){
+                            window.location.reload(true);
+                        })
+                    }
+                });
+                
+            });
+            return false;
+        });
+    });
+</script>

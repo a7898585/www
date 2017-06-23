@@ -1,0 +1,70 @@
+{if $state}
+{php $state="完结";}
+{else}
+{php $state="连载";}
+{/if}
+{php $SEO['title']=$state."动漫_在线动漫_在线动漫观看 - 漫画城";}
+{php $SEO['keyword']=$state."动漫,".$state."动漫观看，最新".$state."动漫,".$state."动漫";}
+{php $SEO['description']="漫画城为您提供".$state."动漫，".$state."动漫观看，最新".$state."动漫,".$state."动漫，漫画城是最齐全的动漫大全、国内最大的动漫城。";}
+{php $footer_txt = "漫画城".$state."动漫频道为您提供".$state."动漫，".$state."动漫观看，最新".$state."动漫,热门".$state."动漫，漫画城是最齐全的动漫大全、国内最大的动漫城。"}
+{template "content","header"}
+{template "content","dm_nav"}
+	<div class="left c666">您现在的位置：&nbsp;<a class="LinkPath" href="/">首页</a>&nbsp;&gt;&nbsp;<a class="LinkPath" href="/dongman">动漫城</a>&nbsp;&gt;&nbsp;{$state}动漫</div>
+    <div class="middle_div1">
+    	<div class="middle_div1_le" style="border:1px solid #AEDD5E">
+        	<div class="jingdian_tit">
+            	<i class="icon"></i>
+            	<h3>{$state}动漫列表</h3>
+            </div>
+            <div class="jingdian_txt">
+            	<ul>
+			 {pc:content  action="lists"  catid="32" where="$where"  order="updatetime DESC" num="16" page="$page"}	
+				 {loop $data $r}
+					<li>
+                       <a target="_blank" href="/dongman{$r[id]}"><img width='140' height='170' src="{$r[thumb]}"></a>
+                       <a target="_blank" title="{$r[title]}" href="/dongman{$r[id]}">{str_cut($r[title],35,'')}</a>
+					</li>
+				 {/loop}
+			 {/pc}
+                </ul>
+            </div>
+            <div id="search_fy" class="sy_tbb" style="margin:0;">{$pages}</div>
+        </div>
+        <div class="middle_div1_ri">
+        	<div class="tu">{template "content","250ad"}</div>
+            <div class="xh_man">
+				<div class="rs_dm_tit">
+					<h3>最新更新动漫</h3>
+				</div>
+                <div class="xh_man_txt">
+                	<ul>
+						{pc:content  action="table_list" table="dongman" order="updatetime DESC" num="4"}
+						  {loop $data $r}
+						  <li>
+                        	<a href="/dongman{$r[id]}" title="{$r[title]}" target="_blank"><img width='80' height='115' src="{$r[thumb]}"></a>
+                            <a href="/dongman{$r[id]}" title="{$r[title]}" target="_blank">{str_cut($r[title],15,'')}</a>
+						  </li>
+						  {/loop}
+						{/pc}
+                    </ul>
+                </div>
+            </div>
+            <div class="jiebao">
+				<div class="rs_dm_tit">
+					<h3>漫画资讯<span style="float: right;font-size: 12px;font-weight: normal;padding-right: 5px;"><a href="/zixun">更多&gt;&gt;</a></span></h3>
+				</div>
+				<div class="jiebao_txt">
+					<ul>
+						{php $where_jb = "catid ='19' AND status = '99'";}
+						{pc:content action="table_list" table="news" fields="id,title,url"  where="$where_jb" order="updatetime DESC" num="11" cache="3600" }
+							{loop $data $r}
+								<li><a target="_blank" href="{$r[url]}" title= "{$r[title]}">{str_cut($r[title],45,'..')}</a></li>
+							{/loop}
+						{/pc}
+					</ul>
+				</div>
+           </div>
+        </div>
+    </div>
+
+{template "content","footer"}

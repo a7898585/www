@@ -1,0 +1,86 @@
+<div class="qacon">
+    <div class="formlist">
+        <form class="fast_apply_ban" method="post">
+            <ul>
+                <li>
+                    <div class="item"><span class="lab2">您的姓名：</span>
+                        <input type="text" name="name"  datatype="s1-18" class="input-txt5" sucmsg=" " nullmsg="姓名不能为空" errormsg="您的姓名输入有误,长度1-18" />
+                    </div>
+                    <em class="Validform_label"></em></li>
+                <li>
+                    <div class="item"><span class="lab2">手机号码：</span>
+                        <input type="text" name="mobile" id="mobile" datatype="m" maxlength="11" class="input-txt5" sucmsg=" " nullmsg="手机号码不能为空" errormsg="手机号码错误,请核实" ajaxurl="/public/valid_mobile" />
+                    </div>
+                    <em class="Validform_label"></em></li>
+                <li>
+                    <div class="item"><span class="lab2">短信验证：</span>
+                        <input type="text" value="" name="code" datatype="/^\d{6}$/" class="input-txt5" style="width:100px"  maxlength="6" sucmsg=" " nullmsg="验证码不能为空" errormsg="验证码验证失败,请核实！"  />
+                        <a class="code" onclick="getSmsCode(this)" chk="1">获取验证码</a></div>
+                    <em class="Validform_label"></em></li>
+                <li>
+                    <div class="item"><span class="lab2">申请金额：</span>
+                        <input type="text" class="input-txt5" value="" name="money" datatype="n1-8" style="width:100px;" sucmsg=" " nullmsg="申请金额不能为空" errormsg="申请金额格式错误！" >
+                        &nbsp;万元</div>
+                    <em class="Validform_label"></em></li>
+            </ul>
+            <div class="subbtn2">
+                <input type="button" value="提交申请" class="btn2" id="fast_ban_apply" >
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    var fast_ban_apply = $(".fast_apply_ban").Validform({
+        tiptype:2
+    });
+    $('#fast_ban_apply').click(function(){
+        if(fast_ban_apply.check(false)==true){
+            $.ajax({
+                type: "post",
+                url: '__SELF__',
+                cache:false,
+                async:false,
+                data:$('.fast_apply_ban').serialize(),
+                dataType:'JSON',
+                success: function(data){
+                    if(data['code']==200){
+                        layer.msg('申请信息提交成功,24小时内万贷好客服会与您联系',1,1,function(){layer.closeAll();});
+                    }else{
+                        layer.msg(data['msg']);
+                    }
+                }
+            });
+        }
+    });
+    var count=90;
+    var timer;
+    function getSmsCode(t){
+        var mobile = $('#mobile').val();
+        if(!fast_ban_apply.check(false,$('#mobile'))){
+            return false;
+        }
+        if($(t).attr('chk')==0){
+            return false;
+        }
+        $(t).text('发送中');
+        $.get("/Public/send_sms", { mobile: mobile } ,function(data){
+            if(data!='ok'){
+                $(t).text('获取验证码');
+                layer.msg(data,1,3);
+                return false;
+            }
+            $(t).attr('chk',0);
+            timer = setInterval(function(){
+                count=count-1;
+                $(t).text(count+'秒后重新获取');
+                if(count==0){
+                    $(t).attr('chk',1);
+                    $(t).text('重新发送');
+                    count=90;
+                    clearInterval(timer);
+                }
+            },1000);
+        });
+    }
+
+</script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><?php echo $bloginfo['BlogName'];?>添加相册</title>
+        <link href="http://img.cnfol.com/style/card_style.css" rel="stylesheet" type="text/css" />
+        <script>
+            function $(d){
+                return document.getElementById(d);
+            }
+            function getdata(form)
+            {
+                var fname = $('filename').value;
+                if(fname.length < 2 || fname.length > 200){
+                    $('errorfilename').innerHTML = '<br>图片名应该在2-200字节'; return false;
+                }
+                var remark = $('remark').value;
+                if(fname.length < 0 || fname.length > 200){
+                    $('errorfilename').innerHTML = '<br>描述应该是0-200字节'; return false;
+                }
+                var b=$('sub');
+                b.disabled=true;
+                return true;
+            }
+        </script>
+    </head>
+    <body>
+        <table width="100%" height="136" border="0">
+            <form  method="post" enctype="multipart/form-data" name="form1" id="form1" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/photo/PhotoAction" onSubmit="return getdata(this)">
+                <tr>
+                    <td>
+                        <p>图片名：
+                            <input name="filename" type="text" id="filename" value="<?php echo $photo['Name'];?>"/>
+                            <span id="errorfilename" style="color: red;"></span>
+                        </p>
+                        <p> 描　述：
+                            <textarea name="remark" id="remark"><?php echo $photo['Remark'];?></textarea>
+                            <span id="errorremark" style="color: red;"></span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <input name="photoid" type="hidden" id="photoid" value="<?php echo $photo['PhotoID'];?>"/>
+                        <input name="act" type="hidden" id="act" value="editphoto"/>
+                        <input name="albumid" type="hidden" id="albumid" value="<?php echo $photo['AlbumID'];?>"/>
+                        <input name="flashCode" type="hidden" id="flashCode" value="<?php echo getVerifyStr($photo['AlbumID'].$photo['PhotoID']);?>"/>
+                        <input type="submit" name="Submit" value="提交" id="sub"/>
+                        <input type="reset" name="Submit2" value="重置" /></td>
+                </tr>
+            </form>
+        </table>
+    </body>
+</html>

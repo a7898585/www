@@ -1,0 +1,84 @@
+<!--页脚开始-->
+<div class="foot">
+    <div class="layout980">
+        <eq name="Think.const.CONTROLLER_NAME" value="Index">{:W('Cate/Links')}</eq>
+        <p><a href="/about">关于万贷好</a> | <a href="/contact">联系我们</a> | <a href="{:getDoMain('xindai')}/reg">信贷员免费注册</a> | <a href="/xdygy">信贷员公约</a> | <a href="/statement">网站使用条款与声明</a> | <a href="/navigation">网站导航</a> | <a href="/suggest">建议与投诉</a></p>
+        <p>Copyright © 2014 wandaihao.com Inc. All Rights Reserved. <a href="http://www.miitbeian.gov.cn/">闽ICP备10018231号</a></p>
+    </div>
+</div>
+<!--页脚结束-->
+<!--浮动导航 开始-->
+
+<div class="floatBar">
+    <div class="fb_item"><a href="#head"></a></div>
+    <div class="fb_sug"><a href="/suggest"></a></div>
+    <div class="bdsharebuttonbox">
+        <a class="bds_more" style="width:40px;height:46px;display:block;background:url(/Public/Common/images/icons.png) no-repeat -180px 0;margin:0;padding:0;" onmouseover="this.style.cssText='width:40px;height:46px;display:block;background:url(/Public/Common/images/icons.png) no-repeat -135px 0;margin:0;padding:0;'" onmouseout="this.style.cssText='width:40px;height:46px;display:block;background:url(/Public/Common/images/icons.png) no-repeat -180px 0;margin:0;padding:0;'" href="#" data-cmd="more"></a>
+    </div>
+    <div class="fb_ask"><a href="/wenda/ask"></a></div>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<!--浮动导航 结束-->
+</body>
+</html>
+<!--浮动导航控制-->
+
+<script type="text/javascript" src="__PUBLIC__/Common/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Common/js/validform.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Common/js/jquery.SuperSlide.2.1.js"></script>
+<!--快速申请贷款遮罩弹出控制JS-->
+<script type="text/javascript">
+    $(window).scroll(function() {
+        var scrolls = $(this).scrollTop();
+        if(scrolls >100 && scrolls < 3800){
+            $(".floatBar").show();
+        }else{
+            $(".floatBar").hide();
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    function apply_show(trid){
+        $.layer({
+            type: 1,   //0-4的选择,（1代表page层）
+            area: ['auto', 'auto'],
+            //shade: [0],  //不显示遮罩
+            border: [0], //不显示边框
+            fix: true,
+            title: [
+                '快速申请贷款',
+                'border:none; background:#006898; color:#fff;'
+            ],
+            page: {
+                html:$('#'+trid).html()
+            }
+        });
+    }
+    function fastApply(){
+        $.ajax({
+            type:'GET',
+            url:'/Public/fast_apply',
+            cache:true,
+            dataType:'html',
+            success:function(data){
+                $.layer({
+                    type: 1,   //0-4的选择,（1代表page层）
+                    area: ['auto', 'auto'],
+                    //shade: [0],  //不显示遮罩
+                    border: [0], //不显示边框
+                    fix: true,
+                    title: [
+                        '快速申请贷款',
+                        'border:none; background:#006898; color:#fff;'
+                    ],
+                    page: {
+                        html:data
+                    }
+                });
+            }
+        });
+    }
+</script>
+{:adInfo('tongji_js')}

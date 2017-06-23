@@ -1,0 +1,73 @@
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>链接管理</h3>
+    <div class="BgCont">
+        <h6 class="Pl10">添加链接</h6>
+        <form class="Fmsec Fmsz">
+            <label><i>链接名称：</i>
+                <input id="C1" class="W200" type="text" value="输入链接名称">
+            </label>
+            <label class="Mt10 LabSlc">
+                <i>链接分类：</i>
+                <select name="LinkCate" class="SlLW SlcWrp">
+                    <option value="">10</option>
+                </select>
+            </label>
+            <label class="Mt10"><i>链接排序：</i>
+                <input id="C1" class="W200" type="text" value="0">
+                <var>（显示的排序，值越大排列在越前面，默认为0）</var>
+            </label>
+            <label class="Mt10 LabSlc">
+                <i>是否公开：</i>
+                <select name="Public" class="SlLW SlcWrp">
+                    <option value="">公开</option>
+                </select>
+            </label>
+            <label class="Mt10"><i>链接地址：</i>
+                <input id="C1" class="W200" type="text" value="0">
+                <var>（如：http://www.cnfol.com）</var>
+            </label>
+            <label class="Pl70 Mt10">
+                <a href="javascript:;" class="Mr10 CoWht BtnA Ml2" onClick="Dialog('TMCjfz');">提交</a><a href="javascript:;" id="Cncle" class="Co666 BtnB">取消</a>
+            </label>
+        </form>
+        <h6 class="Pl10">链接列表</h6>
+        <ul class="LinkLst">
+            <li>
+                <label class="Title"><input name="" type="checkbox" value="">
+                    中金博客</label>
+                <span class="Cate">默认分类</span>
+                <a class="Link" href="#">http://blog.cnfol.com.cm/u/2344545</a>
+                <span class="Handle"><a onClick="Dialog('Update');" href="javascript:;">[修改]</a><a class="Mr30" onClick="Dialog('Confirm');" href="javascript:;">[删除]</a></span>
+            </li> 
+            <li>
+                <label class="Title"><input name="" type="checkbox" value="">
+                    中金博客</label>
+                <span class="Cate">默认分类</span>
+                <a class="Link" href="#">http://blog.cnfol.com.cm/u/2344545</a>
+                <span class="Handle"><a onClick="Dialog('Update');" href="javascript:;">[修改]</a><a class="Mr30" onClick="Dialog('Confirm');" href="javascript:;">[删除]</a></span>
+            </li> 
+            <li>
+                <label class="Title"><input name="" type="checkbox" value="">
+                    中金博客</label>
+                <span class="Cate">默认分类</span>
+                <a class="Link" href="#">http://blog.cnfol.com.cm/u/2344545</a>
+                <span class="Handle"><a onClick="Dialog('Update');" href="javascript:;">[修改]</a><a class="Mr30" onClick="Dialog('Confirm');" href="javascript:;">[删除]</a></span>
+            </li> 
+            <li>
+                <label class="Title"><input name="" type="checkbox" value="">
+                    中金博客</label>
+                <span class="Cate">默认分类</span>
+                <a class="Link" href="#">http://blog.cnfol.com.cm/u/2344545</a>
+                <span class="Handle"><a onClick="Dialog('Update');" href="javascript:;">[修改]</a><a class="Mr30" onClick="Dialog('Confirm');" href="javascript:;">[删除]</a></span>
+            </li> 
+            <li class="AllSelect"><label class="Title"><input name="" type="checkbox" value="">
+                    全选/反选</label><a onClick="Dialog('DeleteAll');" href="javascript:;">删除所选</a></li>             
+        </ul>
+        <!--分页-->
+        <div class="Page">
+            <div class="SelectPage">当前第<em>1/15</em>页，跳转至第<input name="" type="text" />页</div>
+            <div class="NextPage"><a href="#">首页</a>|<a href="#">上一页</a>|<a href="#">下一页</a>|<a href="#">尾页</a></div>
+        </div>
+        <!--end 分页-->
+    </div>
+</div>    

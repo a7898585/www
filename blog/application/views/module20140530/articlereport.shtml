@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script language="javascript" src="<?php echo $widget_url['jqueryurl']; ?>"></script>
+        <script language="javascript" src="<?php echo $widget_url['jsurl']; ?>"></script>
+        <style type="text/css">
+            <!--
+            body {
+                margin-top: 0px;
+            }
+            -->
+        </style></head>
+    <body>
+        <form name="sendMessage" method="post" action="" onSubmit="return getdata(this)">
+            <table width="100%" style="font-size:9pt">
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr id="hiddenresultMessage">
+                    <td width="102" height="27"></td>
+                    <td width="292"><label>
+                            <input name="title" type="text" id="resultMessage"  size="30"  maxlength="60" dataType="Require"  datatype="LimitB" min="1" max="50" style="border:0px solid white;color:red;" />
+                        </label></td>
+                </tr>
+            </table>
+            <input type="hidden" id="sign" value="<?php echo($sign); ?>" />
+            <input type="hidden" id="friendid" value="<?php echo($friendid); ?>" />
+        </form>
+    </body>
+    <script>
+        var sign=$('#sign').val();
+        var success=(sign==1)?'加入黑名单成功':'解除黑名单成功';
+        var fail=(sign==1)?'加入黑名单失败':'解除黑名单失败';
+        var friendid=$('#friendid').val();
+        var error = '<?php echo($error); ?>';
+        var blackid_1=(sign==1)?'delblack_':'addblack_';
+        var blackid_2=(sign==1)?'addblack_':'delblack_';
+
+        if('<?php echo($Code); ?>'=='00')
+        {
+            if(error != '' && error =='1'){
+                success='举报成功';
+            }
+            $('#resultMessage').val(success);
+            setTimeout(function()
+            {
+							
+                parent.$('.'+blackid_1+friendid).css('display','');
+                parent.$('.'+blackid_2+friendid).css('display','none');
+                parent.g_pop.close();
+            },2000);
+			
+        }
+        else
+        {
+            if(error != ''){
+                if(error=='1')
+                {
+                    fail='该文章已被举报过';
+                }
+                else if(error=='2')
+                {
+                    fail='系统繁忙,稍后再试';
+                }
+                else if(error=='3')
+                {
+                    fail='登录后才能举报';
+                }
+            }
+            $('#resultMessage').val(fail);
+            setTimeout(function()
+            {
+							
+                parent.$('.'+blackid_1+friendid).css('display','');
+                parent.$('.'+blackid_2+friendid).css('display','none');
+                parent.g_pop.close();
+            },2000);
+        }
+		
+		
+	
+	
+    </script>
+</html>

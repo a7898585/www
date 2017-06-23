@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>[t]</title>
+<meta name="Keywords" content="[k]"/>  
+<meta name="Description" content="[d]"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/com.css" />
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Common/css/zixun.css" />
+<script type="text/javascript" src="__PUBLIC__/Common/js/jquery-1.8.0.min.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<div class="topbar">
+    <div class="layout980">
+        <ul class="tb_nav">
+            <li><a href="/">首页</a></li>
+            <li><a href="/xiaofei">消费贷款</a></li>
+            <li><a href="/qiye">企业贷款</a></li>
+            <li><a href="/maiche">买车贷款</a></li>
+            <li><a href="/maifang">买房贷款</a></li>
+            <li><a href="/zixun">贷款资讯</a></li>
+            <li><a href="/wenda">贷款问答</a></li>
+            <!--<li><a href="#">贷款工具</a></li>-->
+        </ul>
+        <ul class="tb_info">
+            <li><empty name="MEMBER">
+                <a href="/login">请登录</a>
+            </empty>
+                <notempty name="MEMBER">
+                    <if condition="($MEMBER['roleid'] eq 1)">
+                        <a href="{:getDoMain('member')}">{$MEMBER.realname}</a> &nbsp;
+                        <a href="/logout">退出</a>
+                        <else />
+                        <a href="{:getDoMain('xindai')}">{$MEMBER.realname}</a> &nbsp;
+                        <a href="/logout">退出</a>
+                    </if>
+                </notempty></li>
+            <li>客服电话：<span class="cRed2"><b>400-8858-258</b></span></li>
+            <li><a href="/navigation">网站导航</a></li>
+        </ul>
+    </div>
+</div>
+<div class="head">
+    <div class="logo"><a href="/"><img src="__PUBLIC__/Common/images/logo.png" alt="万贷好" title="贷款就上万贷好！" /></a></div>
+    <div class="zx_city">
+        <h1><a href="/zixun">{$CITY.name_simple}贷款资讯</a></h1>
+        <span></span></div>
+    <div class="search">
+        <form action="/zixun/keywork" method="get">
+            <span class="search_box">
+                <input type="text" class="s_input_txt" name="kw" value="" />
+                </span><span class="search_btn">
+                <input type="submit" class="s_input_btn" value="搜索" />
+            </span>
+        </form>
+    </div>
+</div>
+<!--头部结束-->

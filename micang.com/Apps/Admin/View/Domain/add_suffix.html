@@ -1,0 +1,84 @@
+{__NOLAYOUT__}
+<div class="col-lg-12">
+  <form method="post" action="" role="form" class="form-horizontal" name="add_form">
+    <input type="hidden" value="{$suffix}" name="id">
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">域名后缀：</label>
+      <div class="col-sm-8">
+        <input type="text" value="{$suffix}" maxlength="10" name="name" class="form-control" placeholder="请填写域名后缀，最长10个字符" <notempty name="suffix">readonly</notempty> />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">国际域名：</label>
+      <div class="col-sm-8">
+        <div class="radio">
+          <label><input type="radio" name="is_intl" value="1" <eq name="info.is_intl" value="1">checked</eq>/> 是</label>
+          <label><input type="radio" name="is_intl" value="0" <eq name="info.is_intl" value="0">checked</eq>/> 否</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">中文后缀：</label>
+      <div class="col-sm-8">
+        <div class="radio">
+          <label><input type="radio" name="is_chn" value="1" <eq name="info.is_chn" value="1">checked</eq>/> 是</label>
+          <label><input type="radio" name="is_chn" value="0" <eq name="info.is_chn" value="0">checked</eq>/> 否</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">通用域名：</label>
+      <div class="col-sm-8">
+        <div class="radio">
+          <label><input type="radio" name="is_general" value="1" <eq name="info.is_general" value="1">checked</eq>/> 是</label>
+          <label><input type="radio" name="is_general" value="0" <eq name="info.is_general" value="0">checked</eq>/> 否</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">常用后缀：</label>
+      <div class="col-sm-8">
+        <div class="radio">
+          <label><input type="radio" name="usual" value="1" <eq name="info.usual" value="1">checked</eq>/> 是</label>
+          <label><input type="radio" name="usual" value="0" <eq name="info.usual" value="0">checked</eq>/> 否</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">注册接口：</label>
+      <div class="col-sm-8">
+        <div class="radio">
+          <label><input type="radio" name="registrar" value="webnic" <eq name="info.registrar" value="webnic">checked</eq>/> webnic</label>
+          <label><input type="radio" name="registrar" value="bizcn" <eq name="info.registrar" value="bizcn">checked</eq>/> bizcn</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">域名最小长度：</label>
+      <div class="col-sm-8">
+        <input type="text" name="length_min" class="form-control" placeholder="请填写域名最小长度，最长2个字符" value="{$info.length_min}" maxlength="2"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">允许的注册年限：</label>
+      <div class="col-sm-8">
+        <input type="text" value="{$info.allow_register_age}" maxlength="20" name="allow_register_age" class="form-control" placeholder="填写逗号分隔的年限,最大10年,如:1,2,3,4,5" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">允许的续费年限：</label>
+      <div class="col-sm-8">
+        <input type="text" value="{$info.allow_renew_age}" maxlength="20" name="allow_renew_age" class="form-control" placeholder="填写逗号分隔的年限,最大10年,如:1,2,3,4,5" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label text-nowrap">启用状态：</label>
+      <div class="col-sm-8">
+        <div class="radio">
+          <label><input type="radio" name="status" value="1" <eq name="info.status" value="1">checked</eq>/> 启用</label>
+          <label><input type="radio" name="status" value="0" <eq name="info.status" value="0">checked</eq>/> 暂停</label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

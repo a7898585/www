@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>黑名单管理</title>
+        <link href="http://img.cnfol.com/style/card_style.css" rel="stylesheet" type="text/css" />
+        <script src="http://img.cnfol.com/newblog/batev6.0/core/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+        <script language="javascript">
+            function add(uid,type,fuid,ftype){
+                $.post(parent.action,{act:'add',uid:uid,type:type,fuid:fuid,ftype:ftype},function(data){
+                    $('#'+fuid).html(data.error);
+                },'json');
+            }
+        </script>
+    </head>
+    <body>
+        <table align="conter" border="0">
+            <?php 
+            if(!isset($list) || (count($list) == 0))
+            {?>
+            <tr><td align="left">没有您要搜索的用户信息</td></tr>
+        </table>
+        <?php 
+        }
+        else
+        {
+        foreach($list as $v)
+        {?>
+        <tr align="center" cellpadding="5px"><td width="110" align="left"><?php echo $v['UserName'];?></td>
+            <td width="110" align="left"><?php echo $v['NickName'];?></td>
+            <td width="110" align="left" id="<?php echo $v['UserID']?>"><span style="cursor: pointer; color:#ff0000;"  onclick="javascript:add('<?php echo($userid); ?>','0','<?php echo $v['UserID']?>','1');">添&nbsp;&nbsp;加</span></td>
+        </tr>
+        <?php 
+        }
+        }?>
+        <tr cellpadding="5px"><td colspan="3"><?php echo $pagebars;?></td></tr>
+        <tr cellpadding="5px"><td colspan="3" align="conter"><input type="button" name="submit" value="确 认" onClick="window.top.location.reload();" /></td></tr>
+        </table>
+    </body>
+</html>

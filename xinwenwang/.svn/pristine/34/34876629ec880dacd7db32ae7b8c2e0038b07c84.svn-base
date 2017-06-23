@@ -1,0 +1,2097 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+        <link rel="shortcut icon" href="/Public/Home/images/favicon.ico" type="image/x-icon">
+
+        <meta name="baidu-site-verification" content="eKtLexAbn4" />
+        <meta property="qc:admins" content="2550121366601675671676375" />
+
+        <title>{$seo.t}</title>
+        <meta name="keywords" content="{$seo.k}"/>
+        <meta name="description" content="{$seo.d}"/>
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/main_news.css" />
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/main_news.css" />
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/detail_news.css"/>
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/base_ebda236.css">
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/core_f6e82af.css">
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/home_7d6d27a.css">
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/laypage.css" />
+        <link rel="stylesheet" type="text/css" href="/Public/Home/css/center.css" />
+        <script type="text/javascript">
+            var login_user = {:intval($USER['id'])};
+            function setTab(name,cursel,n){
+                for(i=1;i<=n;i++){
+                    var menu=document.getElementById(name+i);
+                    var con=document.getElementById("con_"+name+"_"+i);
+                    menu.className=i==cursel?"hover":"";
+                    con.style.display=i==cursel?"block":"none";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <!--头部开始-->
+            <div id="pagelet-nav">    	
+                <div class="nav-inner clearfix">
+                    <div class="nav-logo">
+                        <a href="http://www.xinwenwang.com" class="logo-box" ga_event="nav_icon">
+                            <img src="images/logo.png" class="logo">
+                        </a>
+                    </div>
+                    <div class="nav-title">
+                        <ul class="clearfix">
+                            <li>
+                                <a data-node="home" ga_event="nav_index" class="btn selected" href="http://www.xinwenwang.com">
+                                    <span>首页</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-node="dynamic" ga_event="nav_dynamic" class="btn" href="http://www.xinwenwang.com/updates">
+                                    <span>动态</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-node="dynamic" ga_event="nav_dynamic" class="btn" href="http://www.xinwenwang.com/updates">
+                                    <span>专题</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-subtitle">
+                        <ul class="nav-list clearfix">
+                            <li class="username-box nav-item" data-node="username">
+                                <a href="javascript:;" class="btn user-head" id="user_head">
+                                    <img src="http://xinwenwang.b0.upaiyun.com/Uploads/2015-02-13/default.png">
+                                    <span>北辰</span>
+                                </a>
+                                <i class="line"></i>
+                                <a ga_event="nav_register" class="btn " href="javascript:;" data-node="register">
+                                    <span>退出</span>
+                                </a>
+                            </li>                
+                        </ul>
+                    </div>
+                </div>        
+            </div>
+            <!--头部结束-->
+
+            <!--大导航 开始-->
+            <div id="pagelet-toolbar" class="">
+
+                <div data-node="toolbarInner" class="inner">
+                    <!--小导航 开始-->
+                    <div class="toolbar-inner clearfix">
+                        <div class="container clearfix">
+                            <ul class="hv-list left clearfix" data-node="curCategory">
+                                <ul id="defaultCategory" class="hv-list left clearfix">
+                                    <li data-category="__all__" data-node="category">
+                                        <a class="item selected" href="/" ga_label="推荐" ga_event="feed_category">
+                                            <span class="font-icon-add">+</span>推荐
+                                        </a>
+                                    </li>
+                                    <li ><a class="item " data_key="hot" data_value="热点" href="http://www.xinwenwang.com/hot">热点<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                    <li ><a class="item " data_key="shehui" data_value="社会" href="http://www.xinwenwang.com/shehui">社会<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                    <li ><a class="item " data_key="yule" data_value="娱乐" href="http://www.xinwenwang.com/yule">娱乐<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                    <li ><a class="item " data_key="tiyu" data_value="体育" href="http://www.xinwenwang.com/tiyu">体育<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                    <li ><a class="item " data_key="qiche" data_value="汽车" href="http://www.xinwenwang.com/qiche">汽车<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                    <li ><a class="item " data_key="caijing" data_value="财经" href="http://www.xinwenwang.com/caijing">财经<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>                    </ul>
+                            </ul>
+
+                            <ul class="hv-list btn-group clearfix">
+                                <li>
+                                    <a ga_event="feed_setting" href="javascript:;" class="btn" data-node="custom">
+                                        <i class="icon icon-customize btn-more"></i>
+                                    </a>
+                                </li>
+                                <li style="margin-right:0;">
+                                    <a ga_event="feed_refresh" href="javascript:;" class="btn" data-node="refresh">
+                                        <i class="icon icon-refresh"></i>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div data-node="searchBox" class="search-box">
+
+                            <form action="/search/" method="get" data-node="searchForm" target="_blank">
+                                <div class="input-group clearfix">
+                                    <input autocomplete="off" ga_event="nav_search_input" data-node="searchInput" name="keyword" type="text" placeholder="请输入搜索关键词" value="">
+                                    <div class="btn-submit">
+                                        <button ga_event="nav_search" type="submit" href="javascript:;">
+                                            <i class="icon icon-search icon-large"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="layer">
+                                <ul data-node="searchMenu">
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--小导航 结束-->
+
+                    <!--点击添加新闻分类 开始-->
+                    <div class="custom-box" data-node="customBox" style="display: none;">
+                        <div class="custom-inner">
+                            <p data-node="msg" class="msg ban-msg">点击添加新闻分类</p>
+                            <ul id="otherCategory" class="hv-list clearfix">
+                                <li ><a class="item" data_key="guoji" data_value="国际"  href="http://www.xinwenwang.com/guoji">国际<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="junshi" data_value="军事"  href="http://www.xinwenwang.com/junshi">军事<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="youxi" data_value="游戏"  href="http://www.xinwenwang.com/youxi">游戏<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="lvyou" data_value="旅游"  href="http://www.xinwenwang.com/lvyou">旅游<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="shichang" data_value="时尚"  href="http://www.xinwenwang.com/shichang">时尚<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="keji" data_value="科技"  href="http://www.xinwenwang.com/keji">科技<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="shuma" data_value="数码"  href="http://www.xinwenwang.com/shuma">数码<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="fangchan" data_value="房产"  href="http://www.xinwenwang.com/fangchan">房产<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="jiaju" data_value="家居"  href="http://www.xinwenwang.com/jiaju">家居<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="gaoxiao" data_value="搞笑"  href="http://www.xinwenwang.com/gaoxiao">搞笑<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="dongman" data_value="动漫"  href="http://www.xinwenwang.com/dongman">动漫<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="sousuo" data_value="探索"  href="http://www.xinwenwang.com/sousuo">探索<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="lishi" data_value="历史"  href="http://www.xinwenwang.com/lishi">历史<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="nvren" data_value="女人"  href="http://www.xinwenwang.com/nvren">女人<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="jiankang" data_value="健康"  href="http://www.xinwenwang.com/jiankang">健康<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="dianying" data_value="电影"  href="http://www.xinwenwang.com/dianying">电影<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="dushu" data_value="读书"  href="http://www.xinwenwang.com/dushu">读书<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="yangsheng" data_value="养生"  href="http://www.xinwenwang.com/yangsheng">养生<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="yulu" data_value="语录"  href="http://www.xinwenwang.com/yulu">语录<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="yuer" data_value="育儿"  href="http://www.xinwenwang.com/yuer">育儿<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="wenhua" data_value="文化"  href="http://www.xinwenwang.com/wenhua">文化<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="xingzuo" data_value="星座"  href="http://www.xinwenwang.com/xingzuo">星座<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="qinggan" data_value="情感"  href="http://www.xinwenwang.com/qinggan">情感<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="meishi" data_value="美食"  href="http://www.xinwenwang.com/meishi">美食<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>
+                                <li ><a class="item" data_key="jianfei" data_value="减肥"  href="http://www.xinwenwang.com/jianfei">减肥<span class="font-icon-add">+</span><i class="icon icon-customize-close"></i></a></li>                </ul>
+                        </div>
+                    </div>
+                    <!--点击添加新闻分类 结束-->
+                </div>
+
+            </div>    
+            <!--大导航 结束-->
+
+            <div class="inbanner">
+                <img src="images/in_banner.jpg">
+            </div>
+
+            <!--主体内容 开始-->
+            <div id="container" class="bg-white clearfix">        
+                <div class="base_info">
+                    <span class="in_avatar"><img src="images/in_avatar.jpg"></span>
+                    <b>北辰</b>
+                    <div class="in_tab">
+                        <a href="javascript:;" id="click1" class="hover" onclick="setTab('click',1,4);"><i class="cicon1"></i><span>我的收藏</span></a>
+                        <a href="javascript:;" id="click2" onclick="setTab('click',2,4);"><i class="cicon2"></i><span>我的评论</span></a>
+                        <a href="javascript:;" id="click3" onclick="setTab('click',3,4);"><i class="cicon3"></i><span>我的订阅</span></a>
+                        <a href="javascript:;" id="click4" onclick="setTab('click',4,4);"><i class="cicon4"></i><span>我的好友</span></a>
+                    </div>
+                </div>
+                <div class="empty"></div>
+                <div id="con_click_1" class="in_cont">
+                    <div class="in_cont_l">
+                        <div class="in_box_l">
+                            <span>最后登录时间：2015-05-22 12:55:22</span>
+                            <div class="fixbtn">
+                                <a href="#">修改密码</a>
+                                <a href="#">修改昵称</a>
+                            </div>	
+                            <span>这个家伙很懒，什么也没有留下...</span>
+                        </div>
+                    </div>
+
+                    <div class="in_cont_r">
+                        <ul class="favorite">
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>
+                            <li>
+                                <h2><a href="#">纯干货：国内App推广的37个终极渠道</a></h2>
+                                <p><b>凌云</b><a href="#" class="cancel">取消收藏</a></p>
+                            </li>                       
+                        </ul>
+                        <div style="text-align:center;padding: 10px 0;">
+                            <div class="laypage_main laypageskin_molv">  
+                                <span class="laypage_curr">1</span>
+                                <a class="num" href="/?p=2">2</a>
+                                <a class="num" href="/?p=3">3</a>
+                                <a class="num" href="/?p=4">4</a>
+                                <a class="num" href="/?p=5">5</a>
+                                <a class="next" href="/?p=2">></a>
+                                <a class="end" href="/?p=20782">>></a>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div id="con_click_2" class="in_cont" style="display:none;">
+                    <div class="in_cont_l">
+                        <div class="in_box_l">
+                            <span>最后登录时间：2015-05-22 12:55:22</span>
+                            <div class="fixbtn">
+                                <a href="#">修改密码</a>
+                                <a href="#">修改昵称</a>
+                            </div>	
+                            <span>这个家伙很懒，什么也没有留下...</span>
+                        </div>
+                    </div>
+
+                    <div class="in_cont_r">
+                        <div class="stab_tit">
+                            <a href="javascript:;" id="stab1" class="hover" onmouseover="setTab('stab',1,2);">我的评论</a>
+                            <a href="javascript:;" id="stab2" onmouseover="setTab('stab',2,2);">跟帖</a>
+                        </div>
+
+                        <div id="con_stab_1" class="stab_cont">
+                            <div class="comment-list" data-toggle="comment_pane" >
+                                <ul id="comment_list">
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                    <div class="bottom_pl clearfix">
+                                        <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                        <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                        <div class="fl w320">
+                                            <div><p><a href="javascript:;">上海 Ip为203.110.169.154的网友</a><i>2015年03月20日</i></div>                                   
+                                            <div class="comment_cont">
+                                                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                            </div>
+                                        </div>
+                                        <div class="comment_pic"><img src="images/commentpic.jpg"></div>
+                                    </div>
+                                </ul>
+                            </div>
+                            <div style="text-align:center;padding: 10px 0;">
+                                <div class="laypage_main laypageskin_molv">  
+                                    <span class="laypage_curr">1</span>
+                                    <a class="num" href="/?p=2">2</a>
+                                    <a class="num" href="/?p=3">3</a>
+                                    <a class="num" href="/?p=4">4</a>
+                                    <a class="num" href="/?p=5">5</a>
+                                    <a class="next" href="/?p=2">></a>
+                                    <a class="end" href="/?p=20782">>></a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="con_stab_2" class="stab_cont" style="display:none;">
+                            <div class="comment-list" data-toggle="comment_pane" >
+                                <ul id="comment_list">                                   
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+                                    <div class="bottom_pl clearfix follow">
+                                        <div class="ifollow">
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <p><b>跟贴人</b> 回复你</p>
+                                        </div>
+                                        <div class="upfloor">
+                                            <div class="dt_tit"><span>社会</span><h2><a href="#">解决办证问题，须疏通信息渠道</a></h2></div>
+                                            <div class="fl bottom_pl_touxiang"> <img src="images/default.png"></div>
+                                            <div class="fl w320">
+                                                <div><p><a href="javascript:;">上海网友</a><i>2015年03月20日</i></div>                                   
+                                                <div class="comment_cont">
+                                                    <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容给您阅读.记者从西藏自治区有关部门了解到，10日上午9时14分许，一辆旅游公司客车在西藏贡嘎县境内坠入山崖，车内包括司机在内实际乘.</p>
+                                                </div>
+                                            </div>
+                                            <div class="comment_pic"><img src="images/commentpic.jpg"></div>                                         
+                                        </div>
+                                        <p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>
+                                    </div>
+                                </ul>
+                            </div>
+                            <div style="text-align:center;padding: 10px 0;">
+                                <div class="laypage_main laypageskin_molv">  
+                                    <span class="laypage_curr">1</span>
+                                    <a class="num" href="/?p=2">2</a>
+                                    <a class="num" href="/?p=3">3</a>
+                                    <a class="num" href="/?p=4">4</a>
+                                    <a class="num" href="/?p=5">5</a>
+                                    <a class="next" href="/?p=2">></a>
+                                    <a class="end" href="/?p=20782">>></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="con_click_3" class="in_cont" style="display:none;">
+                    <div class="in_cont_l">
+                        <div class="in_box_l">
+                            <span>最后登录时间：2015-05-22 12:55:22</span>
+                            <div class="fixbtn">
+                                <a href="#">修改密码</a>
+                                <a href="#">修改昵称</a>
+                            </div>	
+                            <span>这个家伙很懒，什么也没有留下...</span>
+                        </div>
+                    </div>
+
+                    <div class="in_cont_r">
+                        <ul class="myfavorite">
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/favatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">网站分析公会</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新更新</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="upline"></a>
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div style="text-align:center;padding: 10px 0;">
+                            <div class="laypage_main laypageskin_molv">  
+                                <span class="laypage_curr">1</span>
+                                <a class="num" href="/?p=2">2</a>
+                                <a class="num" href="/?p=3">3</a>
+                                <a class="num" href="/?p=4">4</a>
+                                <a class="num" href="/?p=5">5</a>
+                                <a class="next" href="/?p=2">></a>
+                                <a class="end" href="/?p=20782">>></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="con_click_4" class="in_cont" style="display:none;">
+                    <div class="in_cont_l">
+                        <div class="in_box_l">
+                            <span>最后登录时间：2015-05-22 12:55:22</span>
+                            <div class="fixbtn">
+                                <a href="#">修改密码</a>
+                                <a href="#">修改昵称</a>
+                            </div>	
+                            <span>这个家伙很懒，什么也没有留下...</span>
+                        </div>
+                        <div class="in_box_l">
+                            <div class="inbox_tit">
+                                <h2>好友推荐</h2>
+                                <a href="#">换一组</a>
+                            </div>
+                            <ul class="myfavorite">
+                                <li>
+                                    <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                    <div class="group">
+                                        <h2><a href="#">一条根</a></h2>
+                                        <span>目前已经有超过30万的...</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                    <div class="group">
+                                        <h2><a href="#">一条根</a></h2>
+                                        <span>目前已经有超过30万的...</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                    <div class="group">
+                                        <h2><a href="#">一条根</a></h2>
+                                        <span>目前已经有超过30万的...</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                    <div class="group">
+                                        <h2><a href="#">一条根</a></h2>
+                                        <span>目前已经有超过30万的...</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                    <div class="group">
+                                        <h2><a href="#">一条根</a></h2>
+                                        <span>目前已经有超过30万的...</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                    <div class="group">
+                                        <h2><a href="#">一条根</a></h2>
+                                        <span>目前已经有超过30万的...</span>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <div class="in_cont_r">
+                        <ul class="myfavorite">
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="favatar"><img src="images/in_avatar.jpg"></span>
+                                <div class="group">
+                                    <h2><a href="#">一条根</a></h2>
+                                    <span>目前已经有超过30万的...</span>
+                                </div>
+                                <div class="f_news">
+                                    <span>最新动态</span>
+                                    <b>北京"朝阳群众"到底是谁：谜底终于揭开</b>
+                                    <p>近日，北京警方接朝阳群众报警：朝阳一居民区有人吸食毒品。警方赶往现场将嫌疑人边某（化名）抓获。平安北京10日晚间发布消息...</p>
+                                </div>
+                                <div class="edit_btn">
+                                    <a href="#" class="dele"></a>
+                                </div>
+                            </li>  
+                        </ul>
+                        <div style="text-align:center;padding: 10px 0;">
+                            <div class="laypage_main laypageskin_molv">  
+                                <span class="laypage_curr">1</span>
+                                <a class="num" href="/?p=2">2</a>
+                                <a class="num" href="/?p=3">3</a>
+                                <a class="num" href="/?p=4">4</a>
+                                <a class="num" href="/?p=5">5</a>
+                                <a class="next" href="/?p=2">></a>
+                                <a class="end" href="/?p=20782">>></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div id="pagelet-feedback">
+                    <ul>
+                        <li><a ga_event="gotop" class="btn" href="javascript:;" data-node="back"><i class="icon icon-back"></i> </a></li>
+                        <li><a ga_event="feedback" class="btn" href="javascript:;" data-node="feedback"><i class="icon icon-comment"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <!--主体内容 结束-->
+
+        </div>
+
+        <script id="hot_comments" type="text/html">
+
+            {{# for(var i = 0, len = d.data_list.length; i < len; i++){ }}
+
+        <li>
+
+            <p class="comment-title">
+
+                <a href="/u{{d.data_list[i].id}}/" ga_event="hotcomment_headimg">
+
+                    <img src="other/{{d.data_list[i].head_pic}}">
+
+                </a>
+
+                <a href="/u{{d.data_list[i].id}}/" class="name" ga_event="hotcomment_name">
+
+                    xmlijian            </a>
+
+                <a data-id="{{d.data_list[i].id}}" data-node="digg" href="javascript:;" class="btn" ga_event="hotcomment_dig">
+
+                    <i class="icon icon-like-blue icon-small"></i>
+
+                    <span data-node="likedNum" class="liked-num">{{d.data_list[i].good_sum}}</span>
+
+                </a>
+
+            </p>
+
+            <p class="comment">
+
+                <i class="arrow"></i>
+
+                {{d.data_list[i].title}}
+
+            </p>
+
+            <p class="label">评论于：</p>
+
+            <p class="source">
+
+                <a target="_blank" href="{{d.data_list[i].url}}" ga_event="hotcomment_title">
+
+                    {{d.data_list[i].content}}
+
+                </a>
+
+            </p>
+
+        </li>
+
+        {{# } }}
+
+    </script>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+    <script type="text/javascript" src="js/layer.min.js"></script>
+
+    <script type="text/javascript" src="js/laytpl.js"></script>
+
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+    <script type="text/javascript">
+
+        //点击展开分类
+
+        $('a[ga_event="feed_setting"]').click(function(){
+
+            if($('#pagelet-toolbar').attr('class')==''){
+
+                $(this).find('i').addClass('icon-customize-up');
+
+                $('#pagelet-toolbar').addClass('customize');
+
+                $('.custom-box').show();
+
+            }else{
+
+                $(this).find('i').removeClass('icon-customize-up');
+
+                $('#pagelet-toolbar').removeClass('customize');
+
+                $('.custom-box').hide();
+
+            }
+
+        });
+
+        //点击头部页面关闭分类
+
+        $('#container,#pagelet-nav').click(function(){
+
+            $('a[ga_event="feed_setting"]').find('i').removeClass('icon-customize-up');
+
+            $('#pagelet-toolbar').removeClass('customize');
+
+            $('.custom-box').hide();
+
+        });
+
+
+
+        //重载页面
+
+        $('.icon-refresh').click(function () {
+
+            $('.alert-msg').show();
+
+            window.location.reload();
+
+        });
+
+
+
+        //点击删除
+
+        $("#defaultCategory li").live("click", function () {
+
+            if ($('.customize').length && $(this).index()) {
+
+                $("#otherCategory").append("<li>" + $(this).html() + "</li>");
+
+                $(this).remove();
+
+                var i = $("#defaultCategory li").length;
+
+                if (i <= 6) {
+
+                    $('.ban-msg').removeClass('error').html('点击添加新闻分类');
+
+                    sysNav();
+
+                }
+
+                return false;
+
+            } else {
+
+                return true;
+
+            }
+
+        });
+
+        //点击添加
+
+        $("#otherCategory li").live("click", function () {
+
+            if ($('.customize').length) {
+
+                var i = $("#defaultCategory li").length;
+
+                if (i <= 6) {
+
+                    $("#defaultCategory").append("<li>" + $(this).html() + "</li>");
+
+                    $(this).remove();
+
+                    sysNav();
+
+                } else {
+
+                    $('.ban-msg').addClass('error').html('分类已满（最多7个），请先删除一些');
+
+                }
+
+                return false;
+
+            } else {
+
+                return true;
+
+            }
+
+        });
+
+        //未读新闻 点击查看
+
+        $('.unread').click(function () {
+
+            window.location.reload();
+
+        });
+
+        //点赞
+
+        $('a[data-node="digg"]').live('click', function () {
+
+            /*        var temp = is_login();
+
+    //        if (temp == false) return false;
+
+             */
+
+            var a = $(this).parent('span.disliked').length;
+
+            var b = $(this).parent('span.liked').length;
+
+            var gid=$(this).attr('data-groupid');
+
+            var c_id =$.cookie('_xw_dz'+gid);
+
+            if(!c_id){
+
+                $.cookie('_xw_dz'+gid,gid);
+
+            }
+
+            /*无操作*/
+
+            if (!a && !b && !c_id) {
+
+                $(this).parent('span').addClass('liked');
+
+                var liked_num = $(this).find('.liked-num');
+
+                $(liked_num).html(parseInt($(liked_num).html()) + 1);
+
+                $(this).attr('title', '已顶');
+
+                $.post("/news/good", {id: gid}, function (result) {
+
+                });
+
+            }
+
+        });
+
+        //踩楼
+
+        $('a[data-node="bury"]').live('click', function () {
+
+            /*        var temp = is_login();
+
+    //        if (temp == false) return false;
+
+             */       var a = $(this).parent('span.disliked').length;
+
+            var b = $(this).parent('span.liked').length;
+
+            var gid=$(this).attr('data-groupid');
+
+            var c_id =$.cookie('_xw_dz'+gid);
+
+            if(!c_id){
+
+                $.cookie('_xw_dz'+gid,gid);
+
+            }
+
+            if (!a && !b && !c_id) {
+
+                $(this).parent('span').addClass('disliked');
+
+                var disliked_num = $(this).find('.disliked-num');
+
+                $(disliked_num).html(parseInt($(disliked_num).html()) + 1);
+
+                $(this).attr('title', '已踩');
+
+                $.post("/news/bad", {id: gid}, function (result) {
+
+                });
+
+            }
+
+        });
+
+
+
+        //不喜欢此类文章
+
+        $('a[ga_event="feed_item_dislike"]').live('click', function () {
+
+            news_id = $(this).attr('data-groupid');
+
+            $.layer({
+
+                type: 1,
+
+                shade: [0.5, '#000'],
+
+                area: ['auto', 'auto'],
+
+                closeBtn: false,
+
+                shadeClose: true,
+
+                title: false,
+
+                border: [0],
+
+                page: {dom: '.confirm-dialog'}
+
+            });
+
+            return false;
+
+        });
+
+        //不喜欢取消
+
+        $('div[data-node="cancel"]').live('click', function () {
+
+            news_id = 0;
+
+            layer.closeAll();
+
+        });
+
+        //不喜欢确认
+
+        $('div[data-node="ok"]').live('click', function () {
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: '/public/nolike',
+
+                data: {id: news_id},
+
+                dataType: 'json',
+
+                success: function (msg) {
+
+                    if (msg.code == 200) {
+
+                        //成功
+
+                    }
+
+                }
+
+            });
+
+            layer.closeAll();
+
+        });
+
+
+
+        //评论点赞
+
+        $('a[data-node="c_digg"]').live('click', function () {
+
+            /* var temp = is_login();
+
+            if (temp == false) return false;
+
+             */
+
+            var cid=$(this).attr('data-id');
+
+            var c_id= $.cookie('_cm_dz'+cid);
+
+            if (!c_id) {
+
+                $.cookie('_cm_dz' + cid, cid);
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '/News/usergb',
+
+                    data: {id: cid, 'gb': 'good'},
+
+                    dataType: 'json',
+
+                    success: function (msg) {
+
+                    }
+
+                });
+
+                var liked_num = $(this).find('.liked-num');
+
+                $(liked_num).html(parseInt($(liked_num).html()) + 1);
+
+            }
+
+        });
+
+        //评论下一页
+
+        var comment_page = 1;
+
+        $('a[ga_event="hotcomment_change"]').click(function () {
+
+            comment_page++;
+
+            $.ajax({
+
+                type: 'POST',
+
+                url: '/hot_comments',
+
+                data: {p: comment_page},
+
+                dataType: 'json',
+
+                success: function (msg) {
+
+                    if (msg.data.data_list.length < 5) {
+
+                        comment_page = 1;
+
+                    }
+
+                    if (msg.code == 200) {
+
+                        laytpl($('#hot_comments').html()).render(msg.data, function (render) {
+
+                            $('.comment-list').html(render);
+
+                        });
+
+                    }
+
+                }
+
+            });
+
+            return false;
+
+        });
+
+
+
+        window.scrollTo(0, 0);
+
+        function sysNav() {
+
+            var str = new Array();
+
+            $('#defaultCategory li>a').each(function (t) {
+
+                var k = $(this).attr('data_key');
+
+                var v = $(this).attr('data_value');
+
+                if (k)
+
+                str += k + '_';
+
+        });
+
+        $.ajax({
+
+            type: 'POST',
+
+            url: '/public/sysnav',
+
+            data: {str: str},
+
+            dataType: 'json',
+
+            success: function (msg) {
+
+            }
+
+        });
+
+    }
+
+    </script>
+
+
+
+    <div class="company">
+
+        <p>
+            <span>© 2015 新闻王 xinwenwang.com</span>
+            <a href="http://www.miibeian.gov.cn/" target="_blank">闽ICP备11014391号-200</a>
+        </p>
+        <p>
+            <a href="#" class="icp" target="_blank">网络文化经营许可证</a>
+            <a href="#" target="_blank">跟帖评论自律管理承诺书 </a>
+            违法和不良信息举报电话：010-58733394
+            公司名称：厦门粉酷网络科技有限公司
+        </p>
+
+    </div>
+
+    <!--返回顶部-->
+
+    <div class="tools">
+
+        <a href="javascript:;" class="back_top" title="返回顶部" onClick="window.scrollTo(0,0); return false;"></a>
+        <!--<a href="#" class="feed_back hidden-xs" title="提点意见" ></a>-->
+
+    </div>
+
+    <!--意见反馈-->
+
+    <div style="position: fixed; right: -362px; display: none;" class="dialog feedback_dialog">
+        <div class="dialog-header">
+            <h3>意见反馈</h3>
+        </div>
+        <a class="btn-close" data-node="close" ga_event="login-dialog-close">
+            <i class="icon icon-close"></i>
+        </a>
+        <div data-node="inner" class="dialog-inner">
+            <div class="feedback_panel">
+                <form>
+                    <ul>
+                        <li>
+                            <p class="label">联系方式（必填）</p>
+                            <div class="input-group">
+                                <input type="text" name="feedback-email" placeholder="您的邮箱/QQ号" class="email">
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="label">您的意见（必填）</p>
+                            <div class="input-group">
+                                <textarea placeholder="请填写您的意见，不超过140字" maxlength="140" class="content" name="feedback-content" style="height:100px;"></textarea>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="input-group">
+                                <input type="submit" value="提交" class="submit-btn">
+                                <span data-node="msg" class="msg"></span>
+                                <a href="javascript:;" class="close" data-node="close">[关闭]</a>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!--不喜欢文章-->
+
+    <div style="width: 300px;display: none;" class="confirm-dialog">
+        <div data-node="inner" class="confirm-inner">不喜欢这类文章？</div>
+        <div class="btn-group">
+            <div data-node="cancel" class="btn cancel">取消</div>
+            <div data-node="ok" class="btn">确认</div>
+        </div>
+    </div>
+
+
+    <!--登录框-->
+
+    <div style="display: none;" id="login-dialog" class="login-dialog">
+
+        <div class="login-dialog-header">
+            <h3>邮箱登录</h3>
+        </div>
+        <a class="btn-close" data-node="close" ga_event="login-dialog-close">
+            <!--<i class="icon icon-close"></i>-->X
+        </a>
+
+        <div data-node="inner" class="login-dialog-inner">
+
+            <div class="login-pannel bottom-line">
+                <ul>
+                    <li>
+                        <div class="input-group">
+                            <div class="input">
+                                <label>邮箱</label>
+                                <input type="text" spellcheck="false" autocomplete="off" placeholder="请使用您的注册邮箱" name="name_or_email" value="" class="name">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="input-group">
+                            <div class="input">
+                                <label>密码</label>
+                                <input type="password" spellcheck="false" autocomplete="off" placeholder="密码" data-node="password" name="password" class="password">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="input-group">
+                            <input type="checkbox" id="remember_me" style="vertical-align:top" checked="" name="remember_me">
+                            <label class="label" for="remember_me">记住账号</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="text-align: center;" class="input-group">
+                            <input type="button" value="登录" class="submit-btn" id="btn_login">
+                            <p data-node="errorMsg" class="error"></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="login-dialog-header">
+                <h3>合作网站帐号登陆</h3>
+            </div>
+            <div class="login-pannel">
+                <ul class="sns_login_list clearfix">
+
+                    <li class="sinaweibo">
+                        <a data-pid="sina_weibo" data-node="snsLogin" href="javascript:;"> <i class="icon"></i>新浪微博</a>
+                    </li>
+
+                    <li class="qzone">
+                        <a data-pid="qzone_sns" data-node="snsLogin" href="javascript:;"><i class="icon"></i>QQ空间</a>
+                    </li>
+
+                    <li class="renren">
+                        <a data-pid="renren_sns" data-node="snsLogin" href="javascript:;"><i class="icon"></i> 人人网</a>
+                    </li>
+
+                    <li class="qqweibo">
+                        <a data-pid="qq_weibo" data-node="snsLogin" href="javascript:;" style="margin-right:0;"><i class="icon"></i>腾讯微博</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!--注册框-->
+
+    <div style="display: none;" class="login-dialog " id="register-dialog">
+
+        <div class="login-dialog-header">
+            <h3>用户注册</h3>
+        </div>
+
+        <a class="btn-close" data-node="close" ga_event="login-dialog-close">
+            <i class="icon icon-close"></i>
+        </a>
+
+        <div data-node="inner" class="login-dialog-inner">
+            <div class="login-pannel bottom-line">
+                <ul>
+                    <li>
+                        <div class="input-group">
+
+                            <div class="input">
+
+                                <label>邮箱</label>
+
+                                <input type="text" spellcheck="false" autocomplete="off" placeholder="请输入您的注册邮箱" name="email" class="name">
+
+                            </div>
+
+                        </div>
+
+                    </li>
+
+                    <li>
+                        <div class="input-group">
+                            <div class="input">
+                                <label>账户</label>
+                                <input type="text" spellcheck="false" autocomplete="off" placeholder="请输入您的账户" name="username" class="name">
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="input-group">
+                            <div class="input">
+                                <label>密码</label>
+                                <input type="password" spellcheck="false" autocomplete="off" placeholder="密码" data-node="password" name="password" class="password">
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div style="text-align: center;" class="input-group">
+                            <input type="button" value="完成注册" class="submit-btn" id="btn_register">
+                            <p data-node="errorMsg" class="error"></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
+
+<style>
+
+    /*用户反馈*/
+
+    #feed_back{ position:fixed; right:0; bottom:140px; padding:20px; padding-bottom:0; background:#f5f5f5; border: 1px solid #aaa; border-radius: 5px 0 0 5px; border-right: none; z-index:1000; display: none}
+
+    #feed_back form{ width:320px;}
+
+    #feed_back form .controls{ padding-bottom:10px;}
+
+    #feed_back form .form-control{ width:100%; margin-bottom:0}
+
+    #feed_back .feed_back_close{ float:right; padding-top:5px; }
+
+
+
+    .tools{ position:fixed; bottom:50px; right:20px; z-index:1000}
+
+    .feed_back,
+
+    .back_top{ display:block; height:32px; width:32px; background:url(images/01.gif) no-repeat; background-position:0 -64px;  margin-top:5px;}
+
+    .feed_back:hover{ background-position:0 -96px;}
+
+    .back_top{ background-position:0 0;}
+
+    .back_top:hover{ background-position:0 -32px}
+
+</style>
+
+
+
+<!--<script type="text/javascript" src="js/jquery.js"></script>-->
+
+<!--<script type="text/javascript" src="js/layer.min.js"></script>-->
+
+<!--<script type="text/javascript" src="js/laytpl.js"></script>-->
+
+
+
+<script type="text/javascript">
+
+$('li[data-node="username"]').mouseover(function(){
+
+    $(this).children('.layer').show();
+
+}).mouseout(function(){
+
+    $(this).children('.layer').hide();
+
+});
+
+
+
+var news_id = 0;
+
+$(document).ready(function () {
+
+    //分享
+
+    $('.share-list i').live('click', function () {
+
+        var ga_label = $(this).attr('ga_label');
+
+        var title = $(this).parent().parent('.share').attr('data-text');
+
+        var desc = $(this).parent().parent('.share').attr('data-desc');
+
+        var url = $(this).parent().parent('.share').attr('data-url');
+
+        var open_url = '';
+
+        if (ga_label == 'tsina') {
+
+            open_url = 'http://service.weibo.com/share/share.php?url=' + url + '&title=' + title + '&appkey=&searchPic=true';
+
+        } else if (ga_label == 'tqq') {
+
+            open_url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + '&title=' + title + '&desc=' + desc + '&summary=&site=';
+
+        } else if (ga_label == "qzone") {
+
+            open_url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + '&title=' + title + '&desc=' + desc + '&summary=&site=';
+
+        }
+
+        window.showModalDialog(open_url, window, "dialogWidth:650px;dialogHeight:570px;center:yes;status:no;scroll:no;help:no;");
+
+    });
+
+    $('a[ga_event="nav_login"]').click(function () {
+
+        is_login();
+
+    });
+
+    //注册框
+
+    $('a[ga_event="nav_register"]').click(function () {
+
+        $.layer({
+
+            type: 1,
+
+            shade: [0.5, '#000'],
+
+            area: ['auto', 'auto'],
+
+            closeBtn: false,
+
+            shadeClose: true,
+
+            title: false,
+
+            border: [0],
+
+            page: {dom: '#register-dialog'}
+
+        });
+
+    });
+
+    //注册
+
+    $('#btn_register').click(function () {
+
+        var login_dom = $('#register-dialog');
+
+        var username = $(login_dom).find('input[name="username"]').val();
+
+        var email = $(login_dom).find('input[name="email"]').val();
+
+        var password = $(login_dom).find('input[name="password"]').val();
+
+        layer.load('注册中...');
+
+        $.ajax({
+
+            type: 'POST',
+
+            url: '/register',
+
+            data: {username: username, email: email, password: password},
+
+            dataType: 'json',
+
+            success: function (msg) {
+
+                if (msg.code == 200) {
+
+                    layer.msg('注册成功,跳转中...', 0, 1);
+
+                    window.location.reload();
+
+                } else {
+
+                    layer.msg(msg.msg);
+
+                }
+
+            }
+
+        });
+
+    });
+
+    //退出登录
+
+    $('a[ga_event="nav_loginout"]').click(function () {
+
+        $.ajax({
+
+            type: 'POST',
+
+            url: '/loginout',
+
+            dataType: 'text',
+
+            success: function (msg) {
+
+                layer.msg('退出成功,跳转中...', 0, 1);
+
+                window.location.reload();
+
+            }
+
+        });
+
+    });
+
+
+
+    //登录
+
+    $('#btn_login').click(function () {
+
+        var login_dom = $('#login-dialog');
+
+        var name = $(login_dom).find('input[name="name_or_email"]').val();
+
+        var password = $(login_dom).find('input[name="password"]').val();
+
+        if (!name || !password) {
+
+            return false;
+
+        }
+
+        layer.load('登录中...');
+
+        $.ajax({
+
+            type: 'POST',
+
+            url: '/login',
+
+            data: {u: name, p: password},
+
+            dataType: 'json',
+
+            success: function (msg) {
+
+                if (msg.code == 200) {
+
+                    layer.msg('登录成功,跳转中...', 0, 1);
+
+                    window.location.reload();
+
+                } else {
+
+                    layer.msg(msg.msg);
+
+                }
+
+            }
+
+        });
+
+    });
+
+    function keyDown(e) {
+
+        var currKey = 0, e = e || event;
+
+        if (e.keyCode == 13)
+
+        $('#btn_login').click();
+
+}
+
+
+
+document.onkeydown = keyDown;
+
+
+
+
+
+/*        $('a[ga_event="hotcomment_name"]').live('click', function () {
+
+            if (!$(this).hasClass('liked')) {
+
+                $(this).html(parseInt($(this).text()) + 1).addClass('liked');
+
+            }
+
+            return false;
+
+        });
+
+ */
+
+
+
+//弹出层的关闭按钮
+
+$('a[ga_event="login-dialog-close"]').on('click', function () {
+
+    layer.closeAll();
+
+});
+
+
+
+});
+
+
+
+function is_login() {
+
+if (parseInt(login_user) < 1) {
+
+    $.layer({
+
+        type: 1,
+
+        shade: [0.5, '#000'],
+
+        area: ['auto', 'auto'],
+
+        closeBtn: false,
+
+        shadeClose: true,
+
+        title: false,
+
+        border: [0],
+
+        page: {dom: '#login-dialog'}
+
+    });
+
+    return false;
+
+} else {
+
+    return true;
+
+}
+
+}
+
+
+
+
+
+</script>
+
+<script src="js/xiaozhan.js" type="text/javascript"></script>
+
+<div style="display: none">
+
+    <script language="javascript" type="text/javascript" src="js/17700581.js"></script>
+
+</div>
+
+<noscript>
+
+<a href="http://www.51.la/?17700581" target="_blank" style="display:none;">
+
+    <img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="other/17700581.asp" style="border:none" />
+
+</a>
+
+</noscript>

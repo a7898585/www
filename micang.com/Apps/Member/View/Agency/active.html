@@ -1,0 +1,73 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="javascript:;">中介详情页</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c add_temp_d" id="navhljs1_c0">
+        <ul>
+            <li>
+                <p>域名</p>{$detail.domain}</li>
+            <li>
+                <p>价格</p>{$detail.pay_price}</li>
+            <li>
+                <p>中介费承担方</p><switch name="detail.sel_paytype">
+            <case value="1">买家支付</case>
+            <case value="2">卖家支付</case>
+            <case value="3">双方均摊</case>
+            </switch></li>
+            <li>
+            <li>
+                <p>您需承担中介费</p><div class="price">
+                    <?php if(($detail['sel_paytype']=='1') && ($detail['buy_email']==$Think['session']['MEMBERINFO']['username'])){
+                    echo $detail['counter_fee'];
+                    }elseif(($detail['sel_paytype'] =='2') && ($detail['sell_email'] == $Think['session']['MEMBERINFO']['username'])){
+                    echo $detail['counter_fee'];
+                    }elseif($detail['sel_paytype']=='3'){
+                    echo $detail['counter_fee'];
+                    }else{
+                    echo '0';
+                    }?>
+                    元</div>
+            </li>
+            <li>
+                <p>买家</p>{$detail.buy_email} </li>
+            <li>
+                <p>卖家</p>{$detail.sell_email} </li>
+            <li>
+                <p>有效期限</p>3天
+            </li>
+            <li>
+                <p>交付方式</p><switch name="detail.sel_delway">
+            <case value="1">注册机构站内push域名</case>
+            <case value="2">卖家提供域名转移密码</case>
+            </switch>
+            </li>
+            <li>
+                <p>申请时间</p>{$detail.addtime|date="Y-m-d H:i:s",###}
+            </li>
+            <li>
+                <p>更新状态时间</p>{$detail.uptime|date="Y-m-d H:i:s",###}
+            </li>
+            <li>
+                <p>激活码</p><input type="text" name="code" class="list_ctxt_a">
+            </li>
+            <li><input type="button" class="list_submit list_submit_marg" value="激活并同意">&nbsp;&nbsp;<input type="button" class="list_submit list_submit_marg" value="返回" onclick="javascript:history.go(-1);"></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[btn-name=cacel_agency]').click(function(){
+            var id= $(this).attr('btn-data');
+            layer.confirm('确定要取消中介吗?',function(){ 
+                $.post('/agency/cacel_agency/', {id:id}, function(result){
+                    if(result.status=='200'){
+                        layer.msg('取消成功',function(){
+                            location.href=result.url;
+                        })
+                    }
+                })
+            })
+        });
+    })
+
+</script>

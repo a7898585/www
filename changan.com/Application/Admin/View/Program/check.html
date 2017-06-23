@@ -1,0 +1,185 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/program">方案审核</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <form id="add_from" method="post" action="__SELF__" enctype="multipart/form-data">
+        <input type="hidden" class="am-form-field am-input-sm" name="id" value="{$info.id}">
+        <div class="am-margin">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="#tab1">基本信息</a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            名称
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['title']}</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            作者
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['uid']|getUserName}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            保险公司
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['company_name']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            保障特色
+                        </div>
+                        <div class="am-u-sm-6">{$info['main_concept']|getMainConcept}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            投保对象
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['insured_object']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            性别
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['insured_sex'] ? '男':'女'}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            有无社保
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['is_shebao']?'有':'无'}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            家庭情况
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info.family_status|getFamilyStatus}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            家庭月收入
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info.shouru|getShouru}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            家庭月支出
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info.zhichu|getZhichu}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            有无贷款
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['is_loan']?'有':'无'}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            未来五年计划
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['plans']|getFiveYearPlans}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">
+                <li class="am-active"><a href="#tab1">提供的保障 </a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th></th>
+                        <th>保障利益</th>
+                        <th>保障额度</th>
+                        <th>保障期限</th>
+                    </tr>
+                    <volist name="info.concept_arr" id="concept" >
+                        <tr>
+                            <td class="org">{$concept[0]}</td>
+                            <td>{$concept[0]}</td>
+                            <td class="org">{$concept[1]}</td>
+                            <td>终身</td>
+                        </tr>
+                    </volist> 
+                </table>
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">          
+                <li class="am-active"><a href="#tab1">补充说明   </a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                {$info.information}
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">          
+                <li class="am-active"><a href="#tab1">产品组合   </a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <volist name="info.pro_arr" id="pro" >
+                    <a href="{$base_url}chanpin/info/{$pro.id}">{$pro['name']}</a><br>
+                </volist>
+
+            </div>
+            <div class="am-margin">
+
+                <if condition="$info['status'] eq 1">
+                    <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="check('{$info.id}','0')">审核不通过</button>
+
+                    <else/>
+                    <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="check('{$info.id}','1')">审核通过</button>
+
+
+                </if>
+                <button type="button" onclick="window.history.back();" class="am-btn am-btn-primary am-btn-xs">返回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function check(id,s){
+        //        var id = $(t).attr('data-id');
+        var msg = "确认审核?";
+
+        if(confirm(msg)){
+            $.ajax({
+                type: 'POST',
+                url: '/program/upStatus/' ,
+                data: {id:id,status:s} ,
+                dataType: 'json',
+                success: function(data){
+                    if(data.s==1){
+                        layer.msg('操作成功!!!',2,1);
+                        location.reload();
+                    }else{
+                        layer.msg('操作失败!');
+                    }
+                }
+            });
+        }
+    }
+</script>

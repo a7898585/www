@@ -1,0 +1,18 @@
+<?php if ($CommentResult['RetRecords'] > 0) { ?>
+<?php foreach($CommentResult['Record'] as $val){?>
+
+<div class="bkwz06">
+    <div class="bkwz07"><?php echo filterEmoticon(filterURL(filter($val['Content']))); ?></div>
+    <div class="bkwz08 cl01">
+        发布者: <?php echo $val['NickName'].'('.$val['Address'].')'?></div>
+    <div class="bkwz08 cl02"><?php echo $val['DataTime']; ?></div>
+</div>
+<?php }?>
+<div class="wzlbsz11">
+    <?php echo $pagebars; ?>
+</div>
+<?php }else{ ?>
+<div class="bkwz06">
+    <div class="bkwz07">暂无网友对此文章进行相关评论！</div>	<div class="bkwz07"></div>
+</div>
+<?php } ?>

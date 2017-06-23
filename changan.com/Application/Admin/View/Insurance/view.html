@@ -1,0 +1,155 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/insurance">表单信息</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <div class="am-margin">
+        <ul class="am-tabs-nav am-nav am-nav-tabs">
+            <li class="am-active"><a href="#tab1">基本信息</a></li>
+        </ul>
+
+        <div class="am-tabs-bd">
+            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        称呼
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info['name']}</if>
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        性别
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info['sex']? '男':'女'}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        生日
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info['birth']}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        手机
+                    </div>
+                    <div class="am-u-sm-6">{$info['phone']}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        邮箱
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info['mail']}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        居住地
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.address}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">
+            <li class="am-active"><a href="#tab1">投保需求 </a></li>
+        </ul>
+        <div class="am-tabs-bd">
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    给谁投保
+                </div>
+                <div class="am-u-sm-6">
+                    {$info.to_who}
+                </div>
+            </div>
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    保障需求
+                </div>
+                <div class="am-u-sm-6">
+                    {$info.concept|getConcept=1}
+                </div>
+            </div>
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    其他信息
+                </div>
+                <div class="am-u-sm-6">
+                </div>
+            </div>
+        </div>
+        <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">          
+            <li class="am-active"><a href="#tab1">分配情况   </a></li>
+        </ul>
+        <div class="am-tabs-bd">
+
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    分配给
+                </div>
+                <div class="am-u-sm-6">
+                    {$info.daili_id|getUserName}
+                </div>
+            </div>
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    分配时间
+                </div>
+                <div class="am-u-sm-6">
+                    {$info.divide_time|date="Y-m-d H:i",###}
+                </div>
+            </div>
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    状态
+                </div>
+                <div class="am-u-sm-6">
+                    {$info['status']?'已联系':'未联系'}
+                </div>
+            </div>
+        </div>
+        <div class="am-margin">
+            <!--                <if condition="$info['check_status'] eq 1">
+                                <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="check('{$info.uid}','0')">审核不通过</button>
+                                  <else/>
+                                <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="check('{$info.uid}','1')">审核通过</button>
+                                
+                            </if>-->
+            <button type="button" onclick="window.history.back();" class="am-btn am-btn-primary am-btn-xs">返回</button>
+        </div>
+    </div>
+</div>
+<script>
+    function check(id,s){
+        //        var id = $(t).attr('data-id');
+        var msg = "确认审核?";
+
+        if(confirm(msg)){
+            $.ajax({
+                type: 'POST',
+                url: '/user/daili_shenhe' ,
+                data: {id:id,status:s} ,
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==200){
+                        layer.msg('操作成功!!!',2,1);location.reload();
+                    }else{
+                        layer.msg('操作失败!');
+                    }
+                }
+            });
+        }
+    }
+    
+</script>

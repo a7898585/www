@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>{$seo.title}</title>
+        <meta name="keywords" content="{$seo.keywords}">
+        <meta name="description" content="{$seo.description}">
+        <link type="text/css" rel="stylesheet" href="/Public/Home/css/style.css" />
+        <script type="text/javascript" src="/Public/Home/js/jquery.js"></script>
+
+    </head>
+    <body>
+        <!--head begin-->
+        <div class="w">
+
+            <div class="m_head">
+                <p><a href="/"><img class="u_logo" src="/Public/Home/images/logo.jpg" /></a>愿天下人人都有保险啦！</p>
+                <label class="u_sch"><input type="text" value="请输入产品名称" id="header_key"  onfocus="if(this.value == '请输入产品名称') this.value = ''" onblur="if(this.value == '') this.value = '请输入产品名称'"/><i class="ic_02" onclick="header_serach()">搜索</i></label>
+                <div class="m_top">
+                    <notempty name="userInfo">
+                        <a <if condition="$userInfo.type gt 0">href="/vipuserhome/"
+                                <else /> href="/member/"
+                            </if>>{$userInfo.mail}</a><span class="line">&nbsp;&nbsp;&nbsp;</span><a title="退出登录" href="/login/loginOut/">退出</a>
+                        <else /> 
+                        <a href="/login/" rel="nofollow">请登录</a><span class="line">&nbsp;&nbsp;&nbsp;</span><a href="/signup/" rel="nofollow">免费注册</a>
+                    </notempty> 
+                </div>
+            </div>
+        </div>
+        <!--head end-->
+
+        <!--nav begin-->
+        <div class="w s_bgc">
+            <div class="m_nav">
+                <ul>
+                    <li class="n1 <if condition="$params['c'] eq 'Index' ">z_in</if>"><a href="{$base_url}">首页</a></li>
+                    <li <if condition="$params['c'] eq 'chanpin' ">class="z_in"</if>><a href="{$base_url}chanpin">找产品</a></li>
+                    <li  <if condition="$params['c'] eq 'dailiren' ">class="z_in"</if>><a href="{$base_url}dailiren">找代理人</a></li>
+                    <li  <if condition="$params['c'] eq 'wenba' ">class="z_in"</if>><a href="{$base_url}wenba">保险问吧</a></li>
+
+                    <li class="nn  <if condition="$params['c'] eq 'News' ">z_in</if>"><a href="{$base_url}news">保险资讯</a></li>
+                </ul>
+                <a href="{$base_url}woshidailiren" class="w_dl">我是代理人</a>
+            </div>
+        </div>
+        <!--nav end-->

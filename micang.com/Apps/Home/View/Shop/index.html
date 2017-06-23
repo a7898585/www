@@ -1,0 +1,111 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <i>米铺淘米</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap">
+    <div class="wrap_jj_l fl">
+        <div id="navhljs1" class="navhl">
+            <a class="navhl_h" onclick="jdhddh(this,0)" href="javascript:void(0);">销量最多</a> 
+            <!--            <a class="navhl_q" onclick="jdhddh(this,1)" href="javascript:void(0);">com域名</a> 
+                        <a class="navhl_q" onclick="jdhddh(this,2)" href="javascript:void(0);">com域名</a> -->
+        </div>
+        <div style="display:block;" class="onlineplay_c22" id="navhljs1_c0">
+            <div class="bide">
+                <volist name="data" id="item">
+                    <div>
+                        <a class="box" href="{:getDoMain()}shop/{$item.id}">
+                            <div class="h-zi1"><em>{$item.title|msubstr=0,8}</em></div>
+                            <div class="h-zi2">成交：{$item.total}单</div>
+                            <div class="h-zi2">主营：{$item.main_category}</div>
+                            <div class="h-zi2">最新上架：{$item.mid|getNewMemberDomain}</div>
+                            <div class="h-orderbte">暂时领先</div>
+                        </a>
+                    </div>
+                </volist>
+            </div>
+        </div>
+        <div style="display:none;" class="add_tempp" id="navhljs1_c1">
+
+        </div>
+    </div>
+    <!--左侧缩展导航 结束-->
+    <div class="wrap_jj_r fl">
+        <div class="stes">
+            <ul class="fl">
+                <h3><span class="fl">访问量前10米铺</span></h3>
+                <volist name="topData" id="item">
+                    <li><i <if condition="$key lt 3 ">class="top"</if>>{$key+1}</i><span>{$item.title|msubstr=0,6}</span><span class="">{$item.view_count}次</span>
+                    <if condition="$Think.session.MEMBERINFO.id neq $item['mid']">
+                        <if condition="$item.notice_id gt 0">
+                            <a class="fr notice_item" href="javascript:;" rid="{$item.id}" nid="{$item.notice_id}">取消关注</a>
+                            <else />
+                            <a class="fr notice_item" href="javascript:;" rid="{$item.id}">关注</a>
+                        </if>
+                    </if>    
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+    <!--右侧缩展导航 结束--> 
+</div>
+<div class="wrap">
+    <div class="taomee mr20" id="data_loading">
+
+    </div>
+</div>
+<!--主体内容 结束-->
+
+<script type="text/javascript">
+    var mid ='{$Think.session.MEMBERINFO.id}';
+    getData('');
+    function s(){
+        key = $('#shop_key').val();
+        if(key=='请输入店铺关键词'){
+            layer.msg(key);return false;
+        }else{
+            getData(p,key);
+        }
+    }
+    function getData(p,key,xl,view,count,time){
+        $.post('/shop/all?p='+p, {xl:xl,view:view,count:count,time:time,key:key}, function(result){
+            if(result.status=200){
+                $('#data_loading').html(result.html);
+            }
+        });
+    }
+    $(document).ready(function () {
+        $('.notice_item').click(function(){
+            if(!mid){
+                layer.alert('请先登录',function(){
+                    location.href='public/login?refer_url=/shop'; 
+                });
+            }
+            var id = $(this).attr('rid');
+            var nid = $(this).attr('nid');
+            var obj = $(this);
+            if(id){
+                $.post('/shop/notice', {mid:mid,id:id,nid:nid}, function(result){
+                    layer.msg(result.message);
+                    if(result.status=200){
+                        if(nid){
+                            $(obj).html('关注');
+                            $(obj).attr('nid','');
+                        }else{
+                            $(obj).html('取消关注');
+                            $(obj).attr('nid',result.id);
+                        }
+                    }
+                });
+            }else{
+                layer.msg('参数不对');
+            }
+          
+        })
+    })
+</script>

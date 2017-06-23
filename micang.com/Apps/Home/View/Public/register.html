@@ -1,0 +1,94 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <i>会员中心</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap_border">
+    <div class="wrap_a_c fl">
+        <div class="title_b_icon2"><i class="iconfont">&#xe618;</i></div>
+        <span>会员注册</span>
+    </div>
+    <div class="list_d">
+        <form action="/public/register" method="post" name="form_reg">
+            <ul>
+                <li>
+                    <p>邮箱</p>
+                    <input type="text" class="list_ctxt_a" name="username" value="" maxlength="32" placeholder="请输入邮箱地址" datatype="e" errormsg="邮箱格式不正确" sucmsg=" " nullmsg="请输入邮箱地址"/>
+                </li>
+                <li>
+                    <p>密码</p>
+                    <input type="password" class="list_ctxt_a" name="password" placeholder="请输入密码" datatype="passwd" errormsg="密码至少6位" sucmsg=" " nullmsg="请输入密码"/>
+                </li>
+                <li>
+                    <p>密码确认</p>
+                    <input type="password" class="list_ctxt_a" name="password_confirm" placeholder="请再输入一次密码" datatype="passwd" recheck="password" errormsg="两次输入的密码不一致" nullmsg="请再输入一次密码" sucmsg=" "/>
+                </li>
+                <li>
+                    <p>验证码</p>
+                    <input type="text" class="list_ctxt_a"  name="verify_code" id="verify_code"/>
+                    <a href="javascript:;" style="float:left;margin-left:100px;padding-top: 5px;"><img width="70" height="32" title="点击更换" id="verify"></a>
+                </li>
+                <li><input type="checkbox" class="list_ctxt_c" name="argee" checked onclick="return false;"/><div class="list_ctxt_d">我已同意《<a href="{:getDoMain()}public/agreement" target="_blank">米仓网服务协议</a>》</div></li>
+                <li><input type="submit" class="list_ctbtn_b" value="" /></li>
+            </ul>
+        </form>
+    </div>
+    <div class="login_r">
+        <div class="login_r_t">
+            <!--其他方式登录注册-->
+        </div>
+<!--        <a href="#" class="login_ricon"><img src="/Public/Home/images/login_icon1.jpg" /></a>
+        <a href="#" class="login_ricon"><img src="/Public/Home/images/login_icon2.jpg" /></a>
+        <a href="#" class="login_ricon"><img src="/Public/Home/images/login_icon3.jpg" /></a>-->
+        <div class="login_r_m">
+            <img src="/Public/Home/images/7868658.jpg" />
+            <dl>
+                <dt>微信扫一扫，添加关注。</dt>
+                <dt>交易拍卖，通知信息直达手机。</dt>
+            </dl>
+        </div>
+        <div class="login_r_b"><a class="listent_d" title="导航内容" href="{:getDoMain()}public/login/">已有帐号，直接登录。</a>登录到米仓。</div>
+    </div>
+</div>
+<!--主体内容 结束-->
+<style type="text/css">
+    .Validform_checktip.Validform_wrong{color:red; margin-left:100px;padding:0px;}
+</style>
+<script type="text/javascript" src="/Public/Common/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_Datatype.js"></script>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('form[name="form_reg"]').Validform({
+            tiptype:3,
+            datatype:{
+                "passwd":/^[^\s]{6,}$/
+            },
+            beforeSubmit: function(curform){
+                //            curform.find(':submit').prop('disabled', true);
+                $.post(curform.attr('action'), curform.serialize(), function(result){
+                    if (result.status != 200){
+                        layer.msg(result.message);
+                    }else{
+                        layer.alert(result.message, function(){window.location='/public/login'});
+                    }
+                    curform.find(':submit').prop('disabled', false);
+                });
+                return false;
+            }
+        });
+    });
+    loadVerify();
+    function loadVerify (){
+        var rand = Math.random();
+        $("#verify").attr("src","{:getDoMain('member')}oper/verify?_id="+rand);
+    }
+    $("#verify").click(function(){
+        loadVerify();
+    })
+</script>

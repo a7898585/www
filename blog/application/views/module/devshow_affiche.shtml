@@ -1,0 +1,18 @@
+<div class="RgtBar" id="Mod_Affiche" rel="drag">
+    <h3>公告</h3>
+    <?php if(isset($dragable) && $dragable==1): ?>
+    <a style="cursor:move;" href="###" id="Mod_Affiche_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="NBDp4"></a><div class="NBDbx"><a class="NBDp1" href="###" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_Affiche_td3"></a><a class="NBDp2" href="###" onclick="clkmenu(this.id,2);return false;" style="DISPLAY: none" title="展开" id="Mod_Affiche_td4"></a><a class="NBDp3" href="###" onclick="removemod(this.id);setmod_input();return false;" title="删除" id="Mod_Affiche_td2"></a></div>
+    <?php endif; ?>   
+    <div class="modbox1">
+        <p class="Bulletin">
+        <div id="s_affiche" style="word-wrap: break-word;overflow:hidden;" class="gonggaocz00 Bulletin">数据加载中...</div>
+        <div class="gonggaocz01"></div>		
+        </p>
+    </div>
+    <script language="javascript">
+        $(function(){
+            $('#s_affiche').load("<?php echo $baseurl.'/ajaxgetmemberaffche/'.$bloginfo['MemberID'].'/'.time();?>");
+
+        });
+    </script>      
+</div>

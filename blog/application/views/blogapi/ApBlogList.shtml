@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><?php echo $title; ?></title>
+        <link href="http://img.cnfol.com/newblog/ap/css/style.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/core/js/jquery-1.3.2.min.js" ></script>
+    </head>
+
+    <body>
+        <div>
+            <div class="zt2 fla_l"><?php echo $bloginfo['BlogName']; ?></div>
+            <div class="lz2"><a href="javascript:history.back(-1);">返回</a></div>
+        </div>
+        <div class="lz1a boh" id="tbblogstat">
+            数据加载中...
+        </div>
+
+        <?php if($artlist['RetRecords'] > 0){ ?>
+        <?php foreach($artlist['Record'] as $article){ ?>
+        <div class="h03">
+            <div class="lz1" style="float:left"><a href="<?php $baseurl; ?>/ap/<?php echo $bloginfo['DomainName']; ?>/article/<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID']; ?>.html"><?php echo $article['Title']; ?></a></div>
+            <div class="h09">[ <?php if ($article['Property']=='1') echo '原创'; elseif ($article['Property']=='2') echo '转载'; echo $article['AppearTime']; ?> ]
+                评论(<?php echo $article['CommentNumber']; ?>) | 
+                <span id='atonclick_<?php echo $article['ArticleID'];?>'><?php echo $article['Click'];?></span>次浏览</div>
+        </div>
+        <?php } }?>
+
+        <div class="h02"><?php echo $pagebar; ?></div>
+
+        <script language="javascript">
+            $(function(){
+                $('#tbblogstat').load("<?php echo $baseurl?>/ap/ajaxgetblogstat/<?php echo $bloginfo['MemberID'];?>");
+            })
+        </script>
+    </body>
+</html>

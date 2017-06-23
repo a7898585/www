@@ -1,0 +1,99 @@
+{__NOLAYOUT__}
+<style>
+  @media (min-width: 768px) {
+    #member_head{width: 80px;}
+    #loadbox {
+      margin-left: 284px;
+      margin-top: 134px;
+      margin-bottom: 134px;
+    }
+  }
+  @media (min-width: 992px) {
+    #member_head{width: 120px;}
+    #loadbox {
+      margin-left: 434px;
+      margin-top: 134px;
+      margin-bottom: 134px;
+    }
+  }
+  .pagination{margin:0px;}
+</style>
+<div class="col-lg-12">
+  <div class="row">
+    <div class="col-sm-2">
+      <img src="{$memberInfo.head_url|default='/Public/Home/images/pic_user.jpg'}" class="img-circle" id="member_head" />
+    </div>
+    <div class="col-sm-6">
+      <ul class="list-group">
+        <li class="list-group-item">ID：{$memberInfo.id}（{$memberLevels[$memberInfo['level']]}）</li>
+        <li class="list-group-item">登录名：{$memberInfo.username}</li>
+        <li class="list-group-item">真实姓名：{$memberInfo.realname}</li>
+        <li class="list-group-item">联系地址：{$memberInfo.province}{$memberInfo.city}{$memberInfo.county}{$memberInfo.address}</li>
+      </ul>
+    </div>
+    <div class="col-sm-4">
+      <ul class="list-group">
+        <li class="list-group-item">认证状态：
+          <i class="fa fa-mobile fa-fw fa-lg" title="手机认证" <eq name="memberInfo.mobile_status" value="0">style="color: #b0b0b0;"</eq>>&nbsp;</i>
+          <i class="fa fa-envelope fa-fw" title="邮箱认证" <eq name="memberInfo.status" value="2">style="color: #b0b0b0;"</eq>>&nbsp;</i>
+          <i class="fa fa-weixin fa-fw" title="微信认证" <empty name="memberInfo.weixin">style="color: #b0b0b0;"</empty>>&nbsp;</i>
+          <i class="fa fa-credit-card fa-fw" title="实名认证" <neq name="memberInfo.auth_status" value="1">style="color: #b0b0b0;"</neq>>&nbsp;</i>
+          <i class="fa fa-qq fa-fw" title="QQ认证" <neq name="memberInfo.auth_status" value="1">style="color: #b0b0b0;"</neq>>&nbsp;</i>
+        </li>
+        <li class="list-group-item">账号状态：
+          <switch name="memberInfo.status">
+            <case value="1">正常</case>
+            <case value="2">未激活</case>
+            <case value="0">禁止登录</case>
+          </switch>
+        </li>
+        <li class="list-group-item">注册时间：{$memberInfo.register_time}</li>
+        <li class="list-group-item">最近登录：{$memberInfo.login_time}</li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation"><a href="#recharge" aria-controls="recharge" role="tab" data-toggle="tab">充值明细</a></li>
+      <li role="presentation"><a href="#consume" aria-controls="consume" role="tab" data-toggle="tab">消费明细</a></li>
+      <li role="presentation"><a href="#income" aria-controls="income" role="tab" data-toggle="tab">收入明细</a></li>
+      <li role="presentation"><a href="#deposit" aria-controls="deposit" role="tab" data-toggle="tab">提现明细</a></li>
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="recharge"></div>
+      <div role="tabpanel" class="tab-pane" id="consume"></div>
+      <div role="tabpanel" class="tab-pane" id="income"></div>
+      <div role="tabpanel" class="tab-pane" id="deposit"></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    var dialog = $('body').data('dialog');
+    var loading = function (id) {
+        var l = $('<div></div>').attr('id', 'loadbox');
+        l.append('<img src="/Public/Common/images/loading32.gif"/>');
+        l.css({zIndex: Number(dialog.getModal().css('zIndex'))+1});
+        $(id).append(l);
+    };
+    $(document).off('shown.bs.tab', 'a[data-toggle="tab"]').on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+        var targetId = e.target.hash;
+        if ($(targetId).html() == ''){
+            var url = '{:U("Member/URL_FLAG")}&mid={$Think.get.mid}';
+            loading(targetId);//loading加载提示
+            //动态载入数据
+            $(targetId).load(url.replace('URL_FLAG', 'ajax_get_'+(targetId.substr(1))+'_for_detail'));
+        }
+    });
+    $(document).off('click', '.pagination a').on('click', '.pagination a', function(e){
+        e.preventDefault();
+        var targetId = $(e.target).parents('div.active').eq(0).attr('id');
+        $('#'+targetId).empty();
+        loading('#'+targetId);//loading加载提示
+        $('#'+targetId).load($(e.target).attr('href'));
+        return false;
+    });
+    //默认激活第1个选项卡
+    $('a[data-toggle="tab"]').eq(0).click();
+});
+</script>

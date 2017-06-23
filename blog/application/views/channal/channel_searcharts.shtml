@@ -1,0 +1,46 @@
+<?php include $header;?>
+<div id="Content">
+
+    <div class="AllNav">
+        <!--加内容的地方-->
+        <div class="lmtsz">
+            <div class="lmtsz01">文章标签搜索</div>
+        </div>
+        <table cellspacing="1" cellpadding="5" border="0" bgcolor="#cccccc" width="960" class="m_t7">
+            <tbody>
+                <tr bgcolor="#eff0f2">
+                    <td align="left" bgcolor="#E4E6E9" width="621"><strong>文章标题</strong></td>
+                    <td align="left" bgcolor="#E4E6E9" width="208"><strong>博客名</strong></td>
+                    <td align="left" bgcolor="#E4E6E9" width="97"><strong>发表时间</strong></td>
+                </tr>
+                <?php
+                if($TolCnt < 1)
+                {?>
+            <td colspan="3">没有您要搜索的相关文章，请输入其他关键字！</td>
+            <?php
+            }
+            else
+            {
+            foreach($SearchRes as $val)
+            {
+            $Title = utf8_str(htmlspecialchars($val['Title']), 32, false);
+            $URL      = $baseurl.'/'.$val['DomainName'];
+            ?>
+            <tr>
+                <td align="left" bgcolor="#F6F6F6">&nbsp;· <a title="<?=htmlspecialchars($val['Title'])?>" href="<?=$URL.'/article/'.strtotime($val['AppearTime']).'-'.$val['ArticleID'].'.html'?>" target="_blank"><?=$Title?></a></td>
+                <td align="left" bgcolor="#F6F6F6">&nbsp;<a href="<?=$URL?>" target="_bank" title="<?=htmlspecialchars($val['BlogName'])?>"><?=utf8_str($val['BlogName'],48,'false')?></a></td>
+                <td align="left" bgcolor="#F6F6F6">&nbsp;<?=date('Y-m-d', strtotime($val['AppearTime']))?></td>
+            </tr>
+            <?php
+            }
+            }?>
+            </tbody>
+        </table>
+        <div class="dep01_960">
+            <div class="dep01m_3 dep01_r">
+
+                <div class="dep01m_3d"><?=$pagebar;?> </div>
+
+            </div>
+        </div>
+        <?php include $footer;?>

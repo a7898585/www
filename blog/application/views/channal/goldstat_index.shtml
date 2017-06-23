@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>贵金属集赞活动</title>
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Blog.css,uc/Css/Blog/Metals.css" />
+    </head>
+
+    <body>
+        <div class="MetalLogo"></div>
+        <div class="Metal">
+            <div class="MetalSL">
+
+                <div class="MetalLogin">
+                    <!--登录前-->
+                    <div id="noLogin">
+                        <p><span>欢迎您，游客！(请登录)</span></p>
+                        <p class="Btn">
+                            <a onclick = "showiframe('iframeSrc','popupIframe','<?php echo $loginurl;?>','','');" href="javascript:;">登录</a>
+                            <a target="_blank" href="http://passport.cnfol.com/accounts/Register">注册</a>
+                            <a class="QQ" href="javascript:Tn.Qzone();" >&nbsp;</a>
+                            <a class="XL" href="javascript:Tn.Sina();" >&nbsp;</a>
+                        </p>
+                    </div>
+                    <!--登录后-->
+                    <div id="isLogin">
+                        <input id="articlestatus" value="2" type="hidden">
+                            <p><a style="float:right" href="http://passport.cnfol.com/login/loginout?return=<?php echo(getCurUrl()); ?>">退出</a><span>欢迎您，<a href="#" target="_blank">xxx</a></span></p>
+                            <p><b>本期参赛博文：</b><a href="#" target="_blank"></a></p>
+                            <p><span>当前排名：</span></p>
+                            <div class="MetalCode">
+                                <img src="" title="二维码"/>
+                                <p>微信扫描二维码积赞</p>
+                            </div>
+                    </div>
+                    <form class="MSch" action="">
+                        <input type="text" class="Text Tinit" id="Tsearch" name="title" value="搜索参赛文章" /> 
+                        <input type="submit" value="查询" class="BtnSch" />
+                    </form>
+
+                    <p class="end">距离本期(第<?php echo getnTimes();?>期)参赛结束时间还有：</p>
+                    <ul id="MTime">
+                        <li>
+                            <div class="MliTime Mr3"></div>
+                            <div class="MliTime"></div>	
+                            <div class="MliP">Days</div>
+                        </li>
+                        <li>
+                            <div class="MliTime Mr3"></div>
+                            <div class="MliTime"></div>	
+                            <div class="MliP">Hours</div>
+                        </li>
+                        <li>
+                            <div class="MliTime Mr3"></div>
+                            <div class="MliTime"></div>	
+                            <div class="MliP">Mins</div>
+                        </li>
+                        <li>
+                            <div class="MliTime Mr3"></div>
+                            <div class="MliTime"></div>	
+                            <div class="MliP">Secs</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="MetalSMode">
+                    <script type="text/javascript" charset="utf-8" src="http://he.js.cnfol.com/index_new.php?id=1976"></script>
+                </div>
+                <div class="MetalSMode">
+                    <script type="text/javascript" charset="utf-8" src="http://he.js.cnfol.com/index_new.php?id=1977"></script>
+                </div>
+                <div class="MetalSMode">
+                    <script type="text/javascript" charset="utf-8" src="http://he.js.cnfol.com/index_new.php?id=1978"></script>
+                </div>
+                <div class="MetalSMode">
+                    <script type="text/javascript" charset="utf-8" src="http://he.js.cnfol.com/index_new.php?id=1979"></script>
+                </div>
+                <div class="MetalSMode">
+                    <script type="text/javascript" charset="utf-8" src="http://he.js.cnfol.com/index_new.php?id=1980"></script>
+                </div>
+                <div class="MetalSMode">
+                    <script type="text/javascript" charset="utf-8" src="http://he.js.cnfol.com/index_new.php?id=1981"></script>
+                </div>
+            </div>
+            <div class="MetalMR">
+                <div class="MetalRecom">
+                    <form class="MRecom">
+                        <label>博文标题：<input type="text" value="" id="arttitle"/></label>
+                        <label>博文链接：<input type="text" value="" id="arturl" /></label>
+                        <input class="BtnRecom" type="button" value="我要参加" onclick="addStat()">
+                    </form>
+                    <p>一个博客只能提交一篇哦~</p>
+                </div>
+                <div id="getstatlist">
+                    <div class="MetalRank">
+                        <h3>集赞排行榜</h3>
+                        <div class="Mterm">加载中...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="Mfoot">
+                <p>
+                    <a href="http://www.cnfol.com/info/job.shtml" target="_blank">诚聘英才</a> | <a href="http://www.cnfol.com/info/contact.shtml" target="_blank">联系我们</a> | <a href="http://www.cnfol.com/info/adservice/" target="_blank">广告服务</a> | <a href="http://www.cnfol.com/info/partner.shtml" target="_blank">合作伙伴</a> | <a href="http://www.cnfol.com/info/law.shtml" target="_blank">法律声明</a> | <a href="http://www.cnfol.com/info/zg.shtml" target="_blank">征稿启事</a> | <a href="http://www.cnfol.com/info/sitemap.shtml" target="_blank">网站地图</a>
+                </p>
+                Copyright &copy;  2003-<script language="javascript"> date=new Date();document.writeln(date.getFullYear()); </script>  中金在线网络股份有限公司.All Right Reserved 
+            </div>
+        </div>
+        <div class="Mask"></div>
+        <div class="Mwin">
+            <h3>提示信息</h3>
+            <p id="stat_msg">请先在左侧登录框登录</p>
+            <div><input class="WBtn" type="button" value="确定"></div>
+        </div>
+        <div id="ajaxdiv" style="display:none;"></div>
+        <div id="iframeSrc" class="HandIn PlusSucPop W200" >
+            <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+            <iframe id="popupIframe" name="iFrame1" width="100%"  height="260px" frameborder="0" scrolling="no"  src=""></iframe>
+        </div>
+
+        <script type="text/javascript" src="http://hs.cnfol.com/f=uc/Js/Forum/jquery-1.8.3.js,uc/Js/Blog/Metal.js"></script>
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery.cookie.js" ></script>
+        <script charset="utf-8" src="http://hs.cnfol.com/f=Cm/Js/Base.js,ua/js/Public/Login.js" type="text/javascript"></script> 
+        <script type="text/javascript" src="http://img.cnfol.com/newblog/js/popup.js"></script>
+        <script type="text/javascript" src="http://new.blog.cnfol.com/application/views/module/function.js" ></script>      
+        <script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Dialog.js"></script>
+        <script>
+            var baseurl = "<?php echo config_item('base_url');?>";
+            if($.cookie('cookie\\[passport\\]\\[userId\\]') == 0){	
+                $('#noLogin').show();
+                $('#isLogin').hide();
+            }else{
+                $('#isLogin').show();
+                $('#noLogin').hide();
+                var uid = $.cookie('cookie\\[passport\\]\\[userId\\]');
+                var nickname = decodeURI($.cookie('cookie\\[passport\\]\\[nickname\\]'));
+                $('#isLogin').find('p').eq(0).children('span').find('a').html(nickname);
+                $.ajax({
+                    type: "post",
+                    url: baseurl+"/index.php/bloggoldstat/ajaxgetstat",
+                    dataType: "json",
+                    //async: false,
+                    success: function(data){
+                        $('#isLogin').find('p').eq(0).children('span').find('a').attr('href', baseurl+'/'+data.domain);
+                        if(data.error == 0){
+                            $('#isLogin .MetalCode').hide();
+                            $('#isLogin').find('p').eq(1).children('a').html('无');
+                            $('#isLogin').find('p').eq(2).children('span').html('当前排名：0');
+                        }else{ 
+                            $('#isLogin').find('p').eq(1).children('a').attr('href',data.pcurl);
+                            $('#isLogin').find('p').eq(1).children('a').html(data.Title);
+                            $('#articlestatus').val(data.IsCheck);
+                            if(data.IsCheck == 2){
+                                $('#isLogin').find('p').eq(2).children('span').html('审核未通过');
+                                $('#isLogin .MetalCode').hide();        
+                            }else if(data.IsCheck == 1){
+                                $('#isLogin .MetalCode').show();
+                                $('#isLogin').find('p').eq(2).children('span').html('审核中');
+                                $('#isLogin .MetalCode').find('img').attr('src', data.pic);
+                            }else if(data.IsCheck == 0){
+                                $('#isLogin .MetalCode').show();
+                                $('#isLogin .MetalCode').find('img').attr('src', data.pic);
+                                $('#isLogin').find('p').eq(2).children('span').html('当前排名：'+data.Rank);
+                            }
+                        }
+                    }
+                });
+            }
+            function addStat(){
+                var status = $('#articlestatus').val();
+                if(status == 0 || status == 1){
+                    $('.BtnRecom').Mpop();
+                    $('#stat_msg').html('您已提交过参赛文章，不能重复提交！');
+                    return false;
+                }
+                if($.cookie('cookie\\[passport\\]\\[userId\\]') == 0){
+                    showiframe("iframeSrc","popupIframe",baseurl+"/index.php/widget/login",'','');
+                    return;
+                }
+
+                if($('#arttitle').val()=='' || $('#arturl').val()=='')
+                {
+                    $('.BtnRecom').Mpop();
+                    $('#stat_msg').html('请输入博文标题或者链接');
+                    return false;
+                }
+                var str = $('#arturl').val().match(/http:\/\/.+/);
+                if (str == null){ 
+                    $('.BtnRecom').Mpop();
+                    $('#stat_msg').html('你输入的URL无效');
+                    return false; 
+                }
+                var pattern = new RegExp("http:\/\/.*blog\.cnfol\.com\/([0-9a-zA-Z\-\_]+)\/article\/([0-9\-]+)\.html");
+                var match	= pattern.exec($('#arturl').val());
+                if(match == null){
+                    $('.BtnRecom').Mpop();
+                    $('#stat_msg').html('请输入的并非中金文章');
+                    return false;
+                }
+                var checkurl = baseurl+'/index.php/bloggoldstat/ajaxaddstat/'+match[1];
+                if(status == 2){
+                    $.post(checkurl,{
+                        articleid:match[2],
+                        title:$('#arttitle').val(),  
+                        arturl:$('#arturl').val()
+                    },function(data){
+                        $('.BtnRecom').Mpop();
+                        $('#stat_msg').html(data.error);
+                        if(data.errno == 'success'){
+                            $('#arttitle').val('');
+                            $('#arturl').val('');
+                            $('#articlestatus').val('1');
+                        }
+                    },'json');
+                }
+            }
+            
+            
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(function(){
+                    $('#getstatlist').load(baseurl+"/index.php/bloggoldstat/<?php echo $domain;?>/<?php echo $page;?>?title=<?php echo $title;?>&r="+new Date().getTime());
+                }) 
+            });
+            function TextSrch(){
+                var o = $('#Tsearch');
+                $(o).focus(function(){
+                    var str = $(this).val();
+                    if(str == '搜索参赛文章'){
+                        $(this).val('');
+                    }
+                    $(this).removeClass('Tinit');
+                });
+                $(o).blur(function(){
+                    var str = $(this).val();
+                    if(str == ''){
+                        $(this).val('搜索参赛文章');
+                        $(this).addClass('Tinit');
+                    }
+                });
+            }
+            TextSrch();
+            function submitvote(aid,memid,getcode,loginuserid,appeartime,domain){
+                $.post(baseurl+'/ajaxsetartvotecnt/'+appeartime+'-'+aid+'/'+memid,{code:getcode,userid:loginuserid,tnlvote:$('#ding_'+aid).html()},function(data){
+                    
+                    if(data.errno == 'succ'){
+                        var arturl = baseurl+'/'+domain+'/article/'+appeartime+'-'+aid+'.html#ding';
+                        var votetmp = parseInt($('#ding_'+aid).html()) + 1;
+                        $('#ding_'+aid).html(votetmp);
+//                        $('#ding_'+aid).attr('href',arturl).attr('target','_blank');
+                        $('#ding_'+aid).attr('onclick','javascript:;');
+                        $('#ding_'+aid).addClass('ready');
+                    }else{
+                        alert(data.error);
+                    }
+                },'json');
+            }
+        </script>
+    </body>
+</html>

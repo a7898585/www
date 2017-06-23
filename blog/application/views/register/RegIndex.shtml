@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>我的博客中心</title>
+        <script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,ua/js/Public/Base64.js"></script>
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,ua/css/Public/TopBarFoot.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css" />
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uj/Css/Jqita/BlogH.css,uc/Css/NewBlog/Blog.css,ua/css/Public/TopBarFoot.css" />
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/uh/Css/Cms/BlogNav.css" />
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/function.js" ></script><!--上线后改回-->
+
+        <script type="text/javascript" src="http://hs.cnfol.com/Cm/Js/ShowInfo.js"></script>
+        <script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Dialog.js"></script>
+
+    </head>
+    <body>
+
+        <!--导航-->
+        <ul class="CtNav">
+            <li class="Cur"><a class="Home First" href="<?php echo $baseurl;?>/register/Home">管理首页</a></li>
+            <li><a class="Guide" href="<?php echo $baseurl;?>/blogcnfol">用户指南</a></li>
+            <li><a class="Spread" href="<?php echo $baseurl;?>/blogcnfol/article/3576553.html">博客推广</a></li>
+            <li><a class="Blog" href="<?php echo $baseurl;?>">博客首页</a></li>
+            <li><a class="AImg" href="http://www.cnfol.com">中金在线</a></li>
+        </ul>
+        <!--end 导航-->
+        <div class="W960">
+            <?php
+            include 'module/'.$block;
+            ?>
+
+            <div class="Contlft W180 Mt15 L">
+                <ul class="TreMenus" id="Tre">
+                    <li>
+                        <h2 class="Pl15"><span>管理菜单</span></h2>
+                        <ul class="BdBt61 Pb5">
+                            <li><a href="http://passport.cnfol.com/v7/usercenter/edituserinfo" target="_blank">编辑个人资料</a></li>
+                            <li><a href="http://passport.cnfol.com/account/myaccount" target="_blank">我的帐户</a></li>
+                            <li><a href="http://passport.cnfol.com/account/editpassword" target="_blank">修改密码</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2 class="Pl15 BdTpwh"><span>帮助资源</span></h2>
+                        <ul class="BdBt61 Pb5">
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637774.html" target="_blank">如何注册申请博客？</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637790.html" target="_blank">如何让你的博客个性化?</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637796.html" target="_blank">如何在文章中添加、插入图片？</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637830.html" target="_blank">如何修改文章？</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637928.html" target="_blank">如何查看我的博客访问日志！</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637834.html" target="_blank">如何创建相册？</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637800.html" target="_blank">如何在文章中添加链接？</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637882.html" target="_blank">如何自定义CSS样式</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637858.html" target="_blank">如何添加相片到相册？</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637920.html" target="_blank">如何个性化设置自己的博客显示模块，如何布局？</a></li>
+                            <li><a href="<?php echo $baseurl;?>/blogcnfol/article/1637848.html" target="_blank">如何编辑相册？</a></li>
+                        </ul>
+                    </li>            
+                </ul>
+            </div>
+        </div>
+        <script src="http://hs.cnfol.com/f=Cm/Js/Cleaner.js,ui/Js/Select/Select.js,uj/Js/Reg/TreeMenu.js,Cm/Js/Forms.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            //Cleaner("C2");
+            //Selects('SlctFrst');
+            //TreeMenu("Tre");	
+        </script>
+
+        <div id="TMDeleteSuccess" class="HandIn PlusSucPop W200">
+            <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+            <div class="P20 Bgdfff Txtcntr">
+                <p class="CoRed Yzxxp" id="popupTip"></p>
+            </div>
+        </div>
+    </body>
+</html>

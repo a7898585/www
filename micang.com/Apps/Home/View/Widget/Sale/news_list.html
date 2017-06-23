@@ -1,0 +1,20 @@
+{__NOLAYOUT__}
+<ul>
+    <volist name="data" id="vo">
+        <li>
+            <div class="listb_a"><a class="listent_f" title="{$vo.domain}" href="{:getDoMain()}/Sell/detail?id={$vo.id}">{$vo.domain}</a></div>
+            <div class="listb_b">
+                <span>
+                    <if condition="$type eq '1' ">
+                        {$vo['seller_price']/100}元
+                        <else />
+                        {$vo['buyer_price']/100|max=1,###}
+                    </if>
+                </span>
+            </div>
+            <div class="listb_c"><em>
+                    {$vo.end_time|date="m/d H:i:s",###}
+                </em></div>
+        </li>
+    </volist>
+</ul>

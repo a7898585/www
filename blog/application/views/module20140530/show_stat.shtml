@@ -1,0 +1,17 @@
+<div class="RgtBar">
+    <div rel="drag" id="Mod_Stat" class="fwtjsz-ztdiv">
+        <h3>访问统计</h3>
+        <div class="fwtjsz">
+            <div class="modbox">
+                <div class="fwtjsz01" id="tbblogstat">
+                    数据加载中...
+                </div>
+            </div>
+        </div>
+    </div>
+    <script language="javascript">
+        $(function(){
+            $('#tbblogstat').load("<?php echo $baseurl?>/ajaxgetblogstat/<?php echo $bloginfo['MemberID'];?>"); 
+        })
+    </script>
+</div>

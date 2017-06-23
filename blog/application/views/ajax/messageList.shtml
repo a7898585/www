@@ -1,0 +1,137 @@
+<!--留言-->
+
+<?php $num = $tmpCnt-$StartNo; ?>
+
+<?php foreach($list as $k=>$v) { ?>
+<div class="MessageBox FirstMesg message_<?php echo $v['MsgID'];?>" >       
+    <div class="FaceBox">
+        <a href="<?php echo $baseurl.'/returnbolg/'.$v['FromUserID'].'.html';?>" target="_blank"><img src="<?php echo getUserHead($v['FromUserID'],48);?>" /></a>
+        <p>
+            <?php
+
+            if (utf8_strlen($v['NickName']) > 6) {
+            echo(utf8_str($v['NickName'],4,'false').'...');
+            }
+            else
+            {
+            echo $v['NickName'];
+            }
+
+            ?>
+        </p>
+        <input type="hidden" id="leavenickname_<?php echo $v['MsgID'];?>" value="<?php echo($v['NickName']); ?>" />
+    </div> 
+    <div class="DetailBox">
+        <div class="MessageInfo">
+            <!--操作-->
+            <?php if($isowner == true) {?>          
+            <div class="HandleBox">
+                <a href="javascript:;" class="reply" >回复</a>|
+
+                <a href="javascript:;" onclick="javascript:delMsg('<?php echo $v['MsgID'];?>')">删除</a>|
+                <a href="javascript:;" onclick="javascript:add('<?php echo($userid); ?>','0','<?php echo $v['FromUserID'];?>','1');">黑名单</a>
+            </div>
+            <?php }else{ ?>
+            <div class="HandleBox">
+                <a href="javascript:;" class="quote" name="<?php echo $v['MsgID'];?>" style="cursor:hand;">引用</a>&nbsp;&nbsp;&nbsp;
+            </div>
+            <?php } ?>
+            <!--end 操作-->
+            <p class="Num">第<em><?php echo $num-- ;?></em>楼</p>
+            <p class="Time">留言时间<em id="leavetime_<?php echo $v['MsgID'];?>"><?php echo $v['AddTime'];?></em></p>
+        </div>
+        <div class="Messages">
+            <div class="Cont" style="border:0px;" id="leavecontent_<?php echo $v['MsgID'];?>"><?php echo $v['Content'];?></div>
+        </div>
+        <div class="ReplyBox ReplyBoxSend" style="display:none">
+            <form action="" method="post" name="messageSend" class="form_<?php echo $v['MsgID'];?>">
+                <div class="Fl">
+                    <textarea id="Creply" name="content" cols="" rows="" onfocus="if(this.value=='请输入评论内容'){this.value='';}"  onblur="if(this.value==''){this.value='请输入评论内容';}">请输入评论内容</textarea>
+                </div>            
+                <input type="hidden" id="t_id" name="t_id" value="<?php echo $v['FromUserID']; ?>" />
+                <input type="hidden" name="act" value="sendmsg" />
+                <input type="hidden"  name="messageid" value="<?php echo $v['MsgID']; ?>" />		        	
+                <a class="SubmitBtn" href="javascript:void(0)" onclick="replyMessage(this)">提交</a>
+                <a class="CancelBtn" href="javascript:void(0)" onclick="cancel(this)">取消</a>		       
+            </form>
+
+        </div>
+
+        <?php if($v[ReplyCnts]>1) {?>
+        <?php foreach($v[Reply] as $val) {?>
+        <div class="ReplyBox message_<?php echo $val['MsgID'];?>" >
+            <div class="ReplyMesgBox">                  
+                <span class="Arrow"></span>
+                <div class="ReplyMesgInfo">
+                    <!--操作-->
+                    <div class="HandleBox"><a href="javascript:delMsg('<?php echo $val['MsgID'];?>');" >删除</a></div>
+                    <!--end 操作-->
+                    <p class="ReplyTime"><em class="Name">我</em>回复时间<em class="Time"><?php echo $val['AddTime']; ?></em></p>
+                </div>  
+                <div class="ReplyMesg">
+                    <p><?php echo $val['Content']; ?></p>
+                </div>
+            </div>    
+        </div>    
+        <?php } ?>
+        <?php }else  if($v[ReplyCnts] == 1) {?>     	
+        <div class="ReplyBox message_<?php echo $v[Reply]['MsgID'];?>">
+            <div class="ReplyMesgBox">                  
+                <span class="Arrow"></span>
+                <div class="ReplyMesgInfo">
+                    <!--操作-->
+                    <div class="HandleBox"><a href="javascript:delMsg('<?php echo $v[Reply]['MsgID'];?>');" >删除</a></div>
+                    <!--end 操作-->
+                    <p class="ReplyTime"><em class="Name">我</em>回复时间<em class="Time"><?php echo $v[Reply]['AddTime']; ?></em></p>
+                </div>  
+                <div class="ReplyMesg">
+                    <p><?php echo $val['Content']; ?></p>
+                </div>
+            </div>    
+        </div>  	         
+
+        <?php } ?>
+    </div>
+</div>
+<?php } ?>
+
+<script>
+    /*
+     * 引用
+     */
+    $(".quote").click(function(){
+			
+        var lid=$(this).attr('name');
+        var qname = $('#leavenickname_'+lid).val();
+        var qtime = $('#leavetime_'+lid).text();
+        var qcon = $('#leavecontent_'+lid).html();
+	        
+        //var qcontent = '引用：'+qname+'&nbsp;|&nbsp;'+qtime+'&nbsp;|&nbsp;'+qcon+'</span><br>';
+        var qcontent = '引用：'+qname+' | '+qtime+' | '+qcon+' ';
+        var str = '<blockquote class="kquote">'+SetString(qcontent,230)+'</blockquote>';
+	        
+        editor.html(str);
+    })
+		
+    //截取字符串(包括中文）
+    function SetString(str,len)
+    {
+        var strlen = 0; 
+        var s = "";
+        for(var i = 0;i < str.length;i++)
+        {
+            if(str.charCodeAt(i) > 128){
+                strlen += 2;
+            }else{ 
+                strlen++;
+            }
+            s += str.charAt(i);
+            if(strlen >= len){ 
+                return s+'...' ;
+            }
+        }
+        return s;
+    }
+</script>
+
+<!--end 留言-->

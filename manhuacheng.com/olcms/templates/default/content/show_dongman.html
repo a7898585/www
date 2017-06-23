@@ -1,0 +1,148 @@
+{php $SEO['title']= $title."_".$title."全集_".$title."在线观看_".$title."动画片";}
+{php $SEO['keyword']= $title."，".$title."动漫电影，".$title."动漫下载-漫画城";}
+{php $SEO['description']= $title."，".str_cut($description,130,'...');}
+{php $footer_txt = "漫画城动漫城频道为您提供".$title."动漫的第一时间更新，还有最新的".$title."动漫资讯、".$title."动漫捷报，漫画城是综合的".$title."在线动漫观看网站。"}
+
+{template "content","header"}
+{template "content","dm_nav"}
+    <div class="left c666">您现在的位置：&nbsp;<a href="/" class="LinkPath">首页</a>&nbsp;&gt;&nbsp;<a href="/dongman" class="LinkPath">动漫城</a>&nbsp;&gt;&nbsp;{$title}</div>
+    <div class="middle_div1">
+    	<div class="middle_div1_le" style="border:none;">
+        	<div class="tt">
+            	<div class="tt_t">
+                	<div class="tt_t_le"><img width=205 height=235 src="{$thumb}" /></div>
+                    <div class="tt_t_ri">
+                        	<h1 style="font-size:18px; font-weight:bold; padding:5px 15px 5px 0px;">{$title}</h1>
+                        <p>
+                        	<span><em style="font-size:12px; font-weight:bold;">类别：</em><a href="{$CATEGORYS[$catid][url]}">{$CATEGORYS[$catid][catname]}</a></span>
+                            <span style="margin-left:15px;"><em style="font-size:12px; font-weight:bold;">地区：</em><a href="dm_diqu{$CartoonArea['id']}" style="padding-right:20px; padding-left:10px;">{$CartoonArea['name']}</a></span>
+                        </p>
+                        <p style="height:auto; line-height:30px;">
+						<span id="hits" style="display:none">{$views} 次</span>
+                        	<em style="font-size:12px; font-weight:bold;">简介：</em> 
+							<em class="description">
+								{if !empty($content)}
+								{if strlen(strip_tags($content)) < 550}
+									<span>{strip_tags($content)}</span>
+									{else}
+									<span id="LM1">{str_cut(strip_tags($content),550,'...')}<a onClick="javascript:ShowFLT(2)" href="javascript:void(null)">详细</a></span>
+									<span id="LM2" style="display:none">{strip_tags($content)}<a onClick="javascript:ShowFLT(1) " href="javascript:void(null)">收起</a></span>
+									{/if}
+								{else}
+									<span>暂无动漫简介</span>
+								{/if}
+							</em>
+                        </p>
+                    </div>
+                </div>
+				<script type="text/javascript">
+/*漫画城动漫728*90，创建于2013-5-30*/
+var cpro_id = "u1294697";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                <div class="mh_copy1">
+                    {pc:get sql="select * from tt_dongmanDetail where CartoonID=$id group by title order by listorder asc" num="9999"}
+					{php $dm_list = array_chunk($data,100);}
+                	<div class="today_tit">
+                    	<ul id="tab_list"> 
+							{loop $dm_list $r}
+								{php $key ++}
+								{php $start= current($r);}
+								{php $end= end($r);}
+								<li title="{$start['title']}-{$end['title']}" class="{if ($key == 1)}on{/if}" onClick="secBoard('tab_list','infolist_list',{$key},'on','');GetSize();"><strong>{$start['title']}-{$end['title']}</strong></li>   
+							{/loop}
+						</ul>
+                    </div>
+                    <div class="today_t">
+						{loop $dm_list $key $v}
+							{php $key++}
+							<ul id="infolist_list_{$key}" class="nr6 lan2" style="display:{if ($key == 1)}block{else}none{/if}">		
+								{loop $v $val}
+									<li>
+										<a title="{$title}{$val[title]}" id="{$val[id]}" href="/dongman{$id}-{$val[id]}" target="_blank">{str_cut($val[title],25,'')}</a>
+									</li>  
+								{/loop}
+							</ul>
+						{/loop}
+                    </div>
+				   {/pc}
+		 </div>
+       </div>
+
+        </div>
+
+		<div class="middle_div1_ri">
+        	<div class="tu">{template "content","250ad"}</div>
+			
+			<div class="xh_man">
+				<div class="rs_dm_tit">
+						<h3>{$title}相关资讯</h3>
+					</div>
+
+					<div class="jiebao_txt">
+						<ul><?php $stitle= str_cutword($title,3,'');?>
+						{php $where_jb = "status = '99' AND title LIKE '%$stitle%'";}
+							{pc:content action="table_list" table="news" fields="id,title,url"  where="$where_jb" order="updatetime DESC" num="10" cache="3600" }
+								{if !empty($data)}
+								{loop $data $r}
+									<li><a target="_blank" href="{$r[url]}" title= "{$r[title]}">{str_cut($r[title],45,'...')}</a></li>
+								{/loop}
+								{else}
+									<li><p>暂无"{$title}"相关资讯</p></li>
+								{/if}
+							{/pc}
+						</ul>
+					</div>
+			</div>
+
+            <div class="xh_man ">
+				<div class="rs_dm_tit">
+					<h3>同类型推荐</h3>
+				</div>
+                <div class="xh_man_txt">
+                	<ul>		
+					{php $where_sql = "id != '$id' AND status=99 AND catid='$catid'";}
+					{pc:content action="lists" modelid="17" where="$where_sql" order="updatetime desc" num="6"}
+						{loop $data  $val}
+                    	<li>
+                        	<a target="_blank" title="{$val[title]}" href="/dongman{$val[id]}"><img width=80 height=115 src="{$val[thumb]}"></a>
+                            <a target="_blank" title="{$val[title]}" href="/dongman{$val[id]}">{str_cut($val[title],18,'')}</a>
+                        </li>
+						{/loop}
+					{/pc}
+                    </ul>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+	<script type="text/javascript">
+
+var number=2; //定义条目数
+
+function LMYC() {
+var lbmc;
+    for (i=1;i<=number;i++) {
+        lbmc = eval('LM' + i);
+        lbmc.style.display = 'none';
+    }
+}
+ 
+function ShowFLT(i) {
+    lbmc = eval('LM' + i);
+    if (lbmc.style.display == 'none') {
+        LMYC();
+        lbmc.style.display = '';
+    }
+    else {
+        lbmc.style.display = 'none';
+    }
+}
+function copyToClipBoard(el){
+	var clipBoardContent = document.title +'\r\n'+ location.href +'';
+	window.clipboardData.setData("Text",clipBoardContent);
+	alert(clipBoardContent+'\r\n复制成功,发给你的好友一起分享吧!');
+}
+</script>
+<script language="JavaScript" src="{APP_PATH}api.php?op=count&id={$id}&modelid={$modelid}&type={$parameters}"></script>
+{template "content","footer"}

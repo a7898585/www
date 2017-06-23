@@ -1,0 +1,33 @@
+<div class="RgtBar" id="Mod_Calendar" rel="drag">
+    <h3>日历</h3>
+    <?php if(isset($dragable) && $dragable==1): ?>
+    <a style="cursor:move;" href="###" id="Mod_Calendar_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="NBDp4"></a><div class="NBDbx"><a class="NBDp1" href="###" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_Calendar_td3"></a><a class="NBDp2" href="###" onclick="clkmenu(this.id,2);return false;" style="DISPLAY: none" title="展开" id="Mod_Calendar_td4"></a><a class="NBDp3" href="###" onclick="removemod(this.id);setmod_input();return false;" title="删除" id="Mod_Calendar_td2"></a></div>
+    <?php endif; ?>  
+    <div class="modbox1">
+        <div id="calendar" class="rlbfsz01">程序加载中，请稍等...</div>
+    </div>
+</div>
+<script language="javascript">
+    var calendercache =new Array();
+    function UpdateCalender(time)
+    {    
+        if(time=='')return;
+        if(typeof(calendercache[time])=='undefined')
+        {
+            var url = "<?php echo $baseurl.'/ajaxcalendar/'.$bloginfo['MemberID'].'/'.$bloginfo['DomainName'];?>/";
+            url   += time;
+            $('#calendar').load(url);
+        }else
+        {
+            $('#calendar').html(calendercache[time]);
+        }
+    }
+    function UpdateInner(time)
+    {
+        return function(httpRequest){
+            calendercache[time]=httpRequest.responseText;
+            $('#calendar').innerHTML=httpRequest.responseText;
+        }; 
+    }
+    UpdateCalender("<?php echo date('Ym');?>");
+</script>

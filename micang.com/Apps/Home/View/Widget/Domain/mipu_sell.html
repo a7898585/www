@@ -1,0 +1,22 @@
+{__NOLAYOUT__}
+<div class="navhl_b">
+    <div class="navhl_b_title" style="width:125px;">销量前10米铺</div> 
+    <a href="{:getDoMain()}shop/" class="navhl_b_link">more</a> 
+</div>
+<div class="list_b">
+    <ul>
+        <volist name="data" id="vo">
+            <li>
+                <div class="<switch name="key">
+                     <case value="0">stepdes_l_a</case>
+                    <case value="1">stepdes_l_b</case>
+                    <case value="2">stepdes_l_c</case>
+                    <default />stepdes_l
+                    </switch>"></div>
+                <a class="stepdes_m" href="{:getDoMain()}shop/{$vo.id}/">{$vo.title|msubstr=0,8}</a>
+                <div class="listb_e"><a href="{:getDoMain()}shop/{$vo.id}/" class="listent_d">进入>></a></div>
+                <div class="listb_e">{$vo.total|default=0}个</div>
+            </li>
+        </volist>
+    </ul>
+</div>

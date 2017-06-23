@@ -1,0 +1,202 @@
+<script language="javascript">
+	function Sale(type){
+		$('#type').val(type);
+		var is_select=false;
+		$(".checklBox").each(function(){
+			if($(this).is(':checked')){
+				is_select=true;
+			}
+		});
+		if(is_select==false){
+			layer.alert("请选择要操作的域名");
+			return;
+		}
+		$('#sale_form').submit();
+	}
+	function CheckEmail(domain){
+		$.post("/Domain/ajax", { d:"check_whois_email",domain:domain },function(data){
+      if(data.status=='1'){
+        layer.alert(data.message);
+      }else{
+        layer.alert(data.message);
+      }
+    });
+	}
+	function xiajia(x){
+		layer.confirm('确认要下架吗？', {
+    		btn: ['下架','不下架'] //按钮
+		}, function(){
+    			$.getJSON("/domain/ajax", { d:"del_sale",domain:$('#domain_'+x).text()},
+   				function(data){
+    				if(data.status=='1'){
+						$('#tr_'+x).remove();
+						layer.msg('下架成功',{icon:1});
+					}else{
+						layer.alert(data.message);
+					}
+   				} 
+			);
+		}, function(){
+    			layer.msg('取消下架成功', {
+        		time: 1000, //1s后自动关闭
+    	});
+		});
+	}
+</script>
+<div class="onlineplay">
+  <div id="navhljs1" class="navhl"> 
+  <a class="<empty name="op">navhl_h<else />navhl_q</empty>" href="/domain/my">全部域名</a>
+  <a class="<eq name="op" value="sell">navhl_h<else />navhl_q</eq>" href="/domain/my?op=sell">出售中</a>
+  <a class="<eq name="op" value="shenhe">navhl_h<else />navhl_q</eq>" href="/domain/my?op=shenhe">审核中</a>
+  <a class="<eq name="op" value="timeout">navhl_h<else />navhl_q</eq>" href="/domain/my?op=timeout">即将到期</a>
+  <!--<a href="/domain/add" style="float:right; color:red;">+域名导入</a>-->
+  </div>
+  <div style="display:block;" class="onlineplay_c2 chushou" id="navhljs1_c0">
+    <div class="airp_listc_left4">
+    <form id="my_form" action="/domain/my<notempty name="op">?op={$op}</notempty>" method="post">
+    <div><span>域名：<input class="mo-input width90"  name="domain" value="{$Think.request.domain}">&nbsp;<input type="checkbox" value="1" name="domain_tou" <notempty name="Think.request.domain_tou"> checked="checked"</notempty>><label for="start">开头</label>&nbsp;<input type="checkbox" value="1" name="domain_wei" <notempty name="Think.request.domain_wei"> checked="checked"</notempty>><label for="end">结尾</label></span>
+        <span class="fenlei">分类：
+            <select name="classify">
+                <option value="0">所有域名</option>
+                <volist name="domainClassify" id="item">
+                <option value="{$item.id}" <eq name="Think.request.classify" value="$item.id"> selected="selected"</eq>>{$item.name}</option>
+                </volist>
+            </select></span> 
+            <span>长度：<select name="length_from" style="width: 65px;">
+                                        <option value="1" <eq name="Think.request.length_from" value="1"> selected="selected"</eq>>1</option>
+                                        <option value="2" <eq name="Think.request.length_from" value="2"> selected="selected"</eq>>2</option>
+                                        <option value="3" <eq name="Think.request.length_from" value="3"> selected="selected"</eq>>3</option>
+                                        <option value="4" <eq name="Think.request.length_from" value="4"> selected="selected"</eq>>4</option>
+                                        <option value="5" <eq name="Think.request.length_from" value="5"> selected="selected"</eq>>5</option>
+                                        <option value="6" <eq name="Think.request.length_from" value="6"> selected="selected"</eq>>6</option>
+                                        <option value="7" <eq name="Think.request.length_from" value="7"> selected="selected"</eq>>7</option>
+                                        <option value="8" <eq name="Think.request.length_from" value="8"> selected="selected"</eq>>8</option>
+                                        <option value="9" <eq name="Think.request.length_from" value="9"> selected="selected"</eq>>9</option>
+                                        <option value="10" <eq name="Think.request.length_from" value="10"> selected="selected"</eq>>10</option>
+                                        <option value="11" <eq name="Think.request.length_from" value="11"> selected="selected"</eq>>11</option>
+                                        <option value="12" <eq name="Think.request.length_from" value="12"> selected="selected"</eq>>12</option>
+                                        <option value="13" <eq name="Think.request.length_from" value="13"> selected="selected"</eq>>13</option>
+                                        <option value="14" <eq name="Think.request.length_from" value="14"> selected="selected"</eq>>14</option>
+                                        <option value="15" <eq name="Think.request.length_from" value="15"> selected="selected"</eq>>15</option>
+                                        <option value="16" <eq name="Think.request.length_from" value="16"> selected="selected"</eq>>16</option>
+                                        <option value="17" <eq name="Think.request.length_from" value="17"> selected="selected"</eq>>17</option>
+                                    </select>&nbsp;-
+                                    <select name="length_to" style="width: 65px;">
+                                        <option value="200">不限</option>
+                                        <option value="1" <eq name="Think.request.length_to" value="1"> selected="selected"</eq>>1</option>
+                                        <option value="2" <eq name="Think.request.length_to" value="2"> selected="selected"</eq>>2</option>
+                                        <option value="3" <eq name="Think.request.length_to" value="3"> selected="selected"</eq>>3</option>
+                                        <option value="4" <eq name="Think.request.length_to" value="4"> selected="selected"</eq>>4</option>
+                                        <option value="5" <eq name="Think.request.length_to" value="5"> selected="selected"</eq>>5</option>
+                                        <option value="6" <eq name="Think.request.length_to" value="6"> selected="selected"</eq>>6</option>
+                                        <option value="7" <eq name="Think.request.length_to" value="7"> selected="selected"</eq>>7</option>
+                                        <option value="8" <eq name="Think.request.length_to" value="8"> selected="selected"</eq>>8</option>
+                                        <option value="9" <eq name="Think.request.length_to" value="9"> selected="selected"</eq>>9</option>
+                                        <option value="10" <eq name="Think.request.length_to" value="10"> selected="selected"</eq>>10</option>
+                                        <option value="11" <eq name="Think.request.length_to" value="11"> selected="selected"</eq>>11</option>
+                                        <option value="12" <eq name="Think.request.length_to" value="12"> selected="selected"</eq>>12</option>
+                                        <option value="13" <eq name="Think.request.length_to" value="13"> selected="selected"</eq>>13</option>
+                                        <option value="14" <eq name="Think.request.length_to" value="14"> selected="selected"</eq>>14</option>
+                                        <option value="15" <eq name="Think.request.length_to" value="15"> selected="selected"</eq>>15</option>
+                                        <option value="16" <eq name="Think.request.length_to" value="16"> selected="selected"</eq>>16</option>
+                                        <option value="17" <eq name="Think.request.length_to" value="17"> selected="selected"</eq>>17</option>
+                                    </select></span> <br> 
+                  <span>排除：<input type="text" class="mo-input width90"  name="filter" value="{$Think.request.filter}">&nbsp;<input type="checkbox" value="1" name="filter_tou" <notempty name="Think.request.filter_tou"> checked="checked"</notempty>><label for="skipstart2">开头</label>&nbsp;<input  type="checkbox" value="1" name="filter_wei" <notempty name="Think.request.filter_wei"> checked="checked"</notempty>><label for="skipend2">结尾</label></span>
+                 <span>后缀：
+                                        <select class="w80" name="suffix">
+                                            <option value="0">所有后缀</option>
+                                            <option value=".com" <eq name="Think.request.suffix" value=".com"> selected="selected"</eq>>.com</option>
+                                            <option value=".cn" <eq name="Think.request.suffix" value=".cn"> selected="selected"</eq>>.cn</option>
+                                            <option value=".com.cn" <eq name="Think.request.suffix" value=".com.cn"> selected="selected"</eq>>.com.cn</option>
+                                            <option value=".net" <eq name="Think.request.suffix" value=".net"> selected="selected"</eq>>.net</option>
+                                            <option value=".org" <eq name="Think.request.suffix" value=".org"> selected="selected"</eq>>.org</option>
+                                            <option value=".info" <eq name="Think.request.suffix" value=".info"> selected="selected"</eq>>.info</option>
+                                            <option value=".cc" <eq name="Think.request.suffix" value=".cc"> selected="selected"</eq>>.cc</option>
+                                            <option value=".co" <eq name="Think.request.suffix" value=".co"> selected="selected"</eq>>.co</option>
+                                            <option value=".asia" <eq name="Think.request.suffix" value=".asia"> selected="selected"</eq>>.asia</option>
+                                            <option value=".tv" <eq name="Think.request.suffix" value=".tv"> selected="selected"</eq>>.tv</option>
+                                            <option value=".mobi" <eq name="Think.request.suffix" value=".mobi"> selected="selected"</eq>>.mobi</option>
+                                            <option value=".me" <eq name="Think.request.suffix" value=".me"> selected="selected"</eq>>.me</option>
+                                            <option value=".biz" <eq name="Think.request.suffix" value=".biz"> selected="selected"</eq>>.biz</option>
+                                            <option value=".net.cn" <eq name="Think.request.suffix" value=".net.cn"> selected="selected"</eq>>.net.cn</option>
+                                            <option value=".org.cn" <eq name="Think.request.suffix" value=".org.cn"> selected="selected"</eq>>.org.cn</option>
+                                            <option value=".wang" <eq name="Think.request.suffix" value=".wang"> selected="selected"</eq>>.wang</option>
+                                            <option value=".中国" <eq name="Think.request.suffix" value=".中国"> selected="selected"</eq>>.中国</option>
+                                            <option value=".公司" <eq name="Think.request.suffix" value=".公司"> selected="selected"</eq>>.公司</option>
+                                            <option value=".网络" <eq name="Think.request.suffix" value=".网络"> selected="selected"</eq>>.网络</option>
+                                            <option value=".other" <eq name="Think.request.suffix" value=".other"> selected="selected"</eq>>其它</option>
+                                        </select>
+                                    </span> 
+                     <span><input type="submit" value="搜索" class="width90" id="search_button" style="margin-top:10px;"></span> 
+                 </div></form>    
+                     
+                     
+    <form id="sale_form" action="/domain/sale" method="post">
+      <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+        <tbody>
+          <tr class="table_title">
+            <td width="50"><input type="checkbox" value="0" id="selectBox" onclick="SelextAll();"/></td>
+            <td width="80">域名</td>
+            <td width="150">注册时间</td>
+            <td width="150">到期时间</td>
+            <td width="100" style="text-align:left;">状态</td>
+            <td width="120">是否接入</td>
+            <td>操作</td>
+          </tr>
+          <empty name="domains">
+          <tr>
+        <td class="table_bg_b" colspan="6">没有找到相关的域名，<a href="http://{$Think.server.HTTP_HOST|str_replace='member.','www.',###}/domain/register" target="_blank">立即注册</a>域名！</td>
+      </tr>
+          <else />
+          <volist name="domains" id="item" key="key">
+          <tr class="table_bg_b" id="tr_{$key}">
+            <td><input name="domainId[]" class="checklBox" type="checkbox" value="{$item.id}"<lt name="item.is_transfer" value="1"> disabled="disabled"</lt><neq name="item.status" value="100"> disabled="disabled"</neq>/></td>
+        	<td id="domain_{$key}" style="text-align:left;">{$item.domain}</td>
+        	<td>{$item.register_time}</td>
+        	<td>{$item.expire_time}</td>
+        	<td style="text-align:left;"><switch name="item.status">
+          		<case value="100">正常</case>
+          		<case value="101">push中...</case>
+                <case value="102">一口价出售中</case>
+                <case value="103">拍卖出售中</case>
+                <case value="104">询价出售中</case>
+        		</switch></td>
+            <td><eq name="item.is_transfer" value="-1">whois更新中...</eq>
+           		<eq name="item.is_transfer" value="0">whois邮箱未验证</eq>
+            	<eq name="item.is_transfer" value="1">已经转入</eq>
+                <eq name="item.is_transfer" value="2">接入中...</eq>
+                <eq name="item.is_transfer" value="3">whois邮箱已验证</eq>
+            </td>    
+            <td>
+              <a href="/dns/record?domain={$item.domain}">解析</a>
+              <a href="/domain/renew?domain={$item.domain}">续费</a>
+              <eq name="item.is_transfer" value="1">
+                <eq name="item.status" value="100"><a href="/domain/push_do?domain={$item.domain}">PUSH</a></eq>
+              <else />
+                <eq name="item.is_transfer" value="0"><a href="javascript:CheckEmail('{$item.domain}');">whois邮箱验证</a></eq>
+              </eq>
+              <gt name="item.status" value="101"><a href="javascript:check_seccode('xiajia','{$key}');">下架</a></gt>
+            </td>
+            
+          </tr>
+          </volist>
+          <tr>
+        <td colspan="7"><span style="float:left; margin-left:20px;">
+          <input name="type" id="type" type="hidden" value="0" />
+          <input name="" type="button" class="btn_cj fl" value="批量一口价" onclick="Sale(1)" style="float:left"/>
+          <input name="" type="button" class="btn_cj fl" value="批量拍卖" onclick="Sale(2)" style="float:left"/>
+          <input name="" type="button" class="btn_cj fl" value="批量买方报价" onclick="Sale(3)" style="width:100px;float:left;"/>
+          <input name="" type="button" class="btn_cj fl" value="批量PUSH" onclick="Sale(4)" style="width:100px;float:left;"/>
+          </span>
+        </td>
+      </tr>
+          </empty>
+          <tr>
+      		<td colspan="6">{$pager}</td>
+    	  </tr>
+        </tbody>
+      </table>
+      </form>
+    </div>
+  </div>
+</div>

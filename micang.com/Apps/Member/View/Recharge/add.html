@@ -1,0 +1,223 @@
+<div class="onlineplay">
+    <div class="navhl">
+        <if condition="$params.a eq 'add'">
+            <a class="navhl_h" href="/recharge/add/">在线充值</a> 
+            <a class="navhl_q" href="/recharge/bill/">充值记录</a> 
+            <else />
+            <a class="navhl_q" href="/recharge/add/">在线充值</a> 
+            <a class="navhl_h" href="/recharge/bill/">充值记录</a>
+        </if>    
+    </div>
+    <form name="form_add" action="/recharge/add" method="post" target="_blank">
+        <div style="display:block;" class="onlineplay_c" id="navhljs1_c0">
+            <div class="list_c">
+                <ul class="ml20">
+                    <li class="ml20">
+                        <span>我的余额</span>
+                        <em>{$memberMoney/100}元</em>
+                    </li>
+                    <li class="ml20">
+                        <span>充值金额</span>
+                        <input type="text" name="money" class="list_ctxt_b" value="{$money}">
+                        <em>元</em>
+                    </li>
+                </ul>
+            </div>
+            <div class="list_c">
+                <ul class="ml20">
+                    <li class="ml20">
+                        <span><i>选择支付方式</i></span>
+                    </li>
+                </ul>
+            </div>
+            <!--            <div class="out-right">
+                            <ul style="padding:30px 0 0 61px;" class="banks">
+                                <li>
+                                    <input type="radio" value="工商银行" name="bank" id="ICBC">
+                                    <label title="中国工商银行储蓄卡/信用卡" for="ICBC">
+                                        <span class="icbc out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="招商银行" name="bank" id="CMB">
+                                    <label title="招商银行储蓄卡/信用卡" for="CMB">
+                                        <span class="cmb out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="建设银行" name="bank" id="CCB">
+                                    <label title="中国建设银行储蓄卡/信用卡" for="CCB">
+                                        <span class="ccb out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="中国银行" name="bank" id="BOC">
+                                    <label title="中国银行" for="BOC">
+                                        <span class="boc out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="中国农业银行" name="bank" id="ABC">
+                                    <label title="中国银行" for="ABC">
+                                        <span class="abc out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="交通银行" name="bank" id="COMM">
+                                    <label title="交通银行" for="COMM">
+                                        <span class="comm out-right-bank"></span>
+            
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="中国邮政储蓄银行" name="bank" id="PSBC">
+                                    <label title="中国邮政储蓄银行" for="PSBC">
+                                        <span class="psbc out-right-bank"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="中国光大银行" name="bank" id="CEB">
+                                    <label title="中国光大银行" for="CEB">
+                                        <span class="ceb out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="上海浦东发展银行" name="bank" id="SPDB">
+                                    <label title="上海浦东发展银行" for="SPDB">
+                                        <span class="spdb out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="广东发展银行" name="bank" id="GDB">
+                                    <label title="广东发展银行" for="GDB">
+                                        <span class="gdb out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="中信银行" name="bank" id="CITIC">
+                                    <label title="中信银行" for="CITIC">
+                                        <span class="citic out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="兴业银行" name="bank" id="CIB">
+                                    <label title="兴业银行" for="CIB">
+                                        <span class="cib out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="深圳发展银行" name="bank" id="SDB">
+                                    <label title="深圳发展银行" for="SDB">
+                                        <span class="sdb out-right-bank"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="中国民生银行" name="bank" id="CMBC">
+                                    <label title="中国民生银行" for="CMBC">
+                                        <span class="cmbc out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="北京银行" name="bank" id="BJBANK">
+                                    <label title="北京银行" for="BJBANK">
+                                        <span class="bjbank out-right-bank"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="杭州银行" name="bank" id="HZCB">
+                                    <label title="杭州银行" for="HZCB">
+                                        <span class="hzcb out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="上海银行" name="bank" id="SHBANK">
+                                    <label title="上海银行" for="SHBANK">
+                                        <span class="shbank out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="北京农村商业银行" name="bank" id="BJRCB">
+                                    <label title="北京农村商业银行" for="BJRCB">
+                                        <span class="bjrcb out-right-bank"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="平安银行" name="bank" id="SPAB">
+                                    <label title="平安银行" for="SPAB">
+                                        <span class="spab out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="富滇银行" name="bank" id="FDB">
+                                    <label title="富滇银行" for="FDB">
+                                        <span class="fdb out-right-bank"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <input type="radio" value="宁波银行" name="bank" id="NBBANK">
+                                    <label title="宁波银行" for="NBBANK">
+                                        <span class="nbbank out-right-bank"></span>
+                                        <a title="同时支持信用卡支付，点击查看信用卡限额" target="_blank" href="/ipay/CreditPay/alipay.htm"><span class="credit-icon"></span></a>
+                                    </label>
+                                </li>                                           
+                            </ul>
+                        </div>-->
+
+            <!--            <div class="list_c">
+                            <ul class="ml20">
+                                <li class="ml20">
+                                    <span>其他支付方式</span>
+                                </li>
+                            </ul>
+                        </div>-->
+            <div class="out-right" style="border-bottom:none;">
+
+                <ul class="banks">
+                    <li style="height:50px; padding:10px 0 0 61px;">
+                        <input type="radio" value="支付宝余额支付" name="bank" id="alipay" checked="checked">
+                        <label title="支付宝余额支付" for="alipay">
+                            <span class="out-right-alipaycn out-right-bank"></span>
+                        </label>
+                    </li>
+                </ul></div>
+            <input type="button" class="list_submit m0" value="下一步" id="recharge_button">
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+   
+    $(document).ready(function(){
+        $('#recharge_button').click(function(){
+            var reg = /^[1-9]*[1-9][0-9]*$/;
+            if (!reg.test($(':input[name="money"]').val())){
+                layer.msg('请输入整数金额');
+                return false;
+            }else{
+                $('form[name="form_add"]').submit();
+                layer.confirm('&nbsp;&nbsp;&nbsp;是否完成支付？', {
+                    btn: ['完成支付','支付失败'] //按钮
+                }, function(){
+                    location.reload();
+                }, function(){
+                    layer.msg('请重新试下！');
+                });
+               
+            }
+            return true;
+        });
+    });
+</script>

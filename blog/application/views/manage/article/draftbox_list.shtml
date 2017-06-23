@@ -1,0 +1,123 @@
+
+<div class="RgtCont Bdreb R W760 Mt15">
+
+    <h3>
+        <?php if($totleRecords >0 ){?><a href="javascript:;" class="CoWht BtnC R Mr10 Mt10" onClick="delDraf();">删除</a> <?php }?>
+        <span class="SpCgx">共有草稿<i class="Tszt"><?php echo $totleRecords;?></i>条</span></h3>
+    <div class="BgCont">
+        <form name="form1" id="Fa1">
+            <p class="BdrBsh Pl10"><input type="checkbox" id="Ca" class="Chk" />&nbsp;&nbsp;全选</p>
+            <?php
+            if($artlist['UTopCnt'] > 0){
+            foreach($artlist['Record'] as $k=>$art) { ?>
+            <p class="BdrBsh Pl10">
+                <span class="R"><i class="Mr10"><?php echo $art['AppearTime'];?></i>|
+                    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/Add?articleid=<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>&draftsEdit=1" class="Aclk">编辑</a>|
+                    <a href="javascript:;" class="Aclk" onClick="delDraf('<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>')">删除</a></span>
+                <input type="checkbox" class="InpChck Mr10" name="ids[]" value="<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>">
+                <a class="Icgx" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html" target="_blank"><?php echo $art['Title'];?></a>
+            </p>
+            <?php } 
+            }else{ ?>
+            <p class="BdrBsh Pl10">&nbsp;&nbsp;暂无草稿箱</p>
+
+            <?php }?>
+
+            <!--            <p class="BdrBsh Pl10">
+                            <span class="R"><i class="Mr10">2013-02-22 22:22</i>|<a href="Bqsz.html" class="Aclk">编辑</a>|<a href="javascript:;" class="Aclk" onClick="Dialog('TMDelete');">删除</a></span>
+                            <input type="checkbox" class="InpChck Mr10"><a class="Icgx Icgxsp" href="####" target="_blank">张国荣，娱乐圈贵族</a>
+                        </p>
+                        <p class="BdrBsh Pl10">
+                            <span class="R"><i class="Mr10">2013-02-22 22:22</i>|<a href="Bqsz.html" class="Aclk">编辑</a>|<a href="javascript:;" class="Aclk" onClick="Dialog('TMDelete');">删除</a></span>
+                            <input type="checkbox" class="InpChck Mr10"><a class="Icgx Icgxpic" href="####" target="_blank">张国荣，娱乐圈贵族</a>
+                        </p>-->
+        </form>
+        <div class="Page Mt15">
+            <?php echo $pagebar;?>
+        </div>
+    </div>
+</div>
+
+
+<div id="TMDelete" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">您确定要删除这条信息？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:delDrafCom();" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">返回</a></p>
+    </div>
+</div>  
+
+<div id="TMDeleteSuccess" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp" id="popupTip"></p>
+    </div>
+</div>
+
+<script src="http://hs.cnfol.com/f=Cm/Js/Dialog.js,Cm/Js/Checkbox.js" type="text/javascript"></script>
+<script type="text/javascript">
+    Checkbox("Fa1");
+    var articleId = '';
+
+    function delDraf(id){
+        if(id){
+            articleId = id;
+        }else{
+            articleId = getIds(document.form1);
+        }
+        if(articleId == ''){
+            
+            showalertminute('无选择任何记录！',2000,'','popupTip','TMDeleteSuccess');
+        }else{
+            Dialog('TMDelete');
+        }
+        
+    }
+    function delDrafCom(){
+        Dialog.Close();
+        $.get("<?php echo $baseurl;?>/index.php/article/delDraf"+"/?id="+articleId+"&memid=<?php echo $bloginfo['MemberID'];?>&f="+Math.random(),null,function(msg) {
+            if(msg == 1){
+            	
+                showalertminute('文章草稿删除成功',2000,'1','popupTip','TMDeleteSuccess');
+                $('input[type="checkbox"]').attr('checked',false);
+                location.reload();
+            }else{
+            	
+                showalertminute('文章草稿删除失败',2000,'','popupTip','TMDeleteSuccess');
+            }
+        });
+    }
+    function getIds(form) {
+        var ids = 0;
+        var a = new Array();
+        for (var i=0;i<form.elements.length;i++) {
+            var e = form.elements[i];
+            if (e.checked==true && e.type=='checkbox' && e.name) {
+                a.push(e.value);
+            }
+        }
+        ids = a.join(',');
+        return ids;	
+    }
+    
+    /*
+     *  分页page跳转页面
+     */
+    function jump($url)
+    {	
+        if($(".Inpjump").val()=="")
+        {
+            return false;
+        }
+        var url = $url+$(".Inpjump").val();
+        window.location.href = url;		
+    }
+    function enterPress($url,e)
+    {
+        var e = e || window.event;
+        if(e.keyCode==13) {
+            jump($url);
+        }
+    }
+    
+</script>

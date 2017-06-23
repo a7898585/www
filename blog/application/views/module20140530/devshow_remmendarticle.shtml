@@ -1,0 +1,13 @@
+<div class="RgtBar">
+    <h3>推荐文章</h3>	
+
+    <ul class="RecomLst" id="selfrecommendart">
+        数据加载中...
+    </ul>
+
+    <script language="javascript">
+        $(function(){
+            $('#selfrecommendart').load("<?php echo $baseurl?>/ajaxselfrecomentdart/<?php echo $bloginfo['MemberID'].'/'.$pagesize['recommendlist'];?>?do=<?php echo $bloginfo['DomainName'];?>");
+        })
+    </script>
+</div>

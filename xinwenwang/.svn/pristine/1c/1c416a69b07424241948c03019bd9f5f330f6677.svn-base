@@ -1,0 +1,242 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>新闻王</title>
+
+        <!-- Set render engine for 360 browser -->
+        <meta name="renderer" content="webkit">
+
+        <!-- No Baidu Siteapp-->
+        <meta http-equiv="Cache-Control" content="no-siteapp"/>
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="新闻王"/>
+
+        <meta name="msapplication-TileColor" content="#0e90d2">
+        <link rel="stylesheet" href="/Public/Mobile/css/amazeui.flat.min.css">
+        <link rel="stylesheet" href="/Public/Mobile/css/app.css">
+
+
+    </head>
+    <body>
+        <header data-am-widget="header" class="am-header am-header-default">
+            <div class="am-header-left am-header-nav">
+                <a href="{$Think.Config.URL_DOMAIN}" class="">
+                    <i class="am-header-icon am-icon-home"></i>
+                </a>
+            </div>
+            <h1 class="am-header-title">新闻王</h1>
+            <div class="am-header-right am-header-nav">
+                <a onclick="login()">
+                    <i class="am-header-icon am-icon-user"></i>
+                </a>
+            </div>
+        </header>
+        <div class="am-g" style="padding: 0 10px;">
+            <article class="am-article">
+                <div class="am-article-hd">
+                    <h3 class="am-article-title">{$info.title}</h3>
+                    <div class="am-g" style="font-size: 1.3rem;padding: 10px 0;">
+                        <div class="am-u-sm-6">
+                            <a href="/m{$info.dingyue_id}">{$info.source_name}</a>
+                        </div>
+                        <div class="am-u-sm-6">
+                            {:date('Y-m-d H:i',$info['update_time'])}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="am-article-bd">{$info.html}</div>
+            </article>
+        </div>
+
+        <div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+            <h2 class="am-titlebar-title ">
+                相关阅读
+            </h2>
+        </div>
+
+        <div data-am-widget="list_news" class="am-list-news am-list-news-default">
+            <div class="am-list-news-bd">
+                <ul class="am-list" id="view8">
+                    <foreach name="hot_list" item="item">
+                        <switch name="item.show_type" >
+                        <case value="1">
+                            <li class="am-g am-list-item-desced am-list-item-thumbed ">
+
+                                <div class="am-u-sm-12 am-list-main">
+                                    <h3 class="am-list-item-hd">
+                                        <a href="{$item.url}">{$item.title}</a>
+                                    </h3>
+                                    <div class="am-g">
+                                        <div class="item_info">
+                                            <span class="hot_label space">热</span>
+                                            <span class="src  space">{$item.source_name}</span>
+                                            <span class="cmt">{$item.good_sum}</span>
+                                            <span title="{:date('Y-m-d',$item['update_time'])}" class="time fr canhide">{:date('Y-m-d',$item['update_time'])}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </case>
+                        <case value="2">
+                            <li class="am-g am-list-item-desced am-list-item-thumbed ">
+
+                                <div class="am-u-sm-8 am-list-main">
+                                    <h3 class="am-list-item-hd">
+                                        <a href="{$item.url}">{$item.title}</a>
+                                    </h3>
+                                    <div class="am-g">
+                                        <div class="item_info">
+                                            <span class="src  space">{$item.source_name}</span>
+                                            <span class="cmt">{$item.good_sum}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="am-u-sm-4 am-list-thumb">
+                                    <a href="{$item.url}" class="">
+                                        <img src="/Public/Mobile/i/loading.png" data-echo="{:setUpUrl($item['img_list'][0])}" alt="{$item.title}" title="{$item.title}"/>
+                                    </a
+                                </div>
+                            </li>
+                        </case>
+                        <case value="3">
+                            <li class="am-g am-list-item-desced am-list-item-thumbed">
+                                <div class="am-g">
+                                    <div class="am-u-sm-12" style="padding-top: 5px;">
+                                        <h3 class="am-list-item-hd am-text-truncate">
+                                            <a href="{$item.url}">{$item.title}</a>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="am-g">
+                                    <div class="am-u-sm-4 am-list-thumb">
+                                        <a href="{$item.url}">
+                                            <img src="/Public/Mobile/i/loading.png" data-echo="{$item['img_list'][0]}" alt="{$item.title}" title="{$item.title}"/>
+                                        </a>
+                                    </div>
+                                    <div class="am-u-sm-4 am-list-thumb">
+                                        <a href="{$item.url}">
+                                            <img src="/Public/Mobile/i/loading.png" data-echo="{$item['img_list'][1]}" alt="{$item.title}" title="{$item.title}"/>
+                                        </a>
+                                    </div>
+                                    <div class="am-u-sm-4 am-list-thumb">
+                                        <a href="{$item.url}">
+                                            <img src="/Public/Mobile/i/loading.png" data-echo="{$item['img_list'][2]}" alt="{$item.title}" title="{$item.title}"/>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="am-g">
+                                    <div class="item_info">
+                                        <span class="hot_label space">热</span>
+                                        <span class="src  space">{$item.source_name}</span>
+                                        <span class="cmt">{$item.good_sum}</span>
+                                        <span title="{:date('Y-m-d',$item['update_time'])}" class="time fr canhide">{:date('Y-m-d',$item['update_time'])}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </case>
+                        <default />
+                        </switch>
+                    </foreach>
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="am-modal-actions" id="my-actions">
+            <div class="am-modal-actions-group">
+                <ul class="am-list">
+                    <li class="am-modal-actions-header">快速分享</li>
+                    <li class="am-modal-actions-danger">
+                        <a target="_blank" href="http://service.weibo.com/share/share.php?url={$home_url}__SELF__'&title={$info.title}&appkey=&searchPic=true"><i class="am-icon-weibo"></i> 分享到新浪微博</a>
+                    </li>
+
+                    <li class="am-modal-actions-success">
+                        <a target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={$home_url}__SELF__&title={$info.title}&desc={$info.title}&summary=&site="><i class="am-icon-wechat"></i> 分享到QQ</a>
+                    </li>
+                    <li class="am-modal-actions-danger">
+                        <a target="_blank" href="http://widget.renren.com/dialog/share?resourceUrl={$home_url}__SELF__&srcUrl={$home_url}__SELF__&title={$info.title}{$home_url}__SELF__&description="><i class="am-icon-renren"></i> 分享到人人网</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="am-modal-actions-group">
+                <button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
+            </div>
+        </div>
+
+        <div id="amz-toolbar" class="amz-toolbar" style="right: 20px;position: fixed;bottom: 20px;z-index: 99999;">
+            <a id="amz-go-top" onclick="$('html, body').animate({scrollTop: 0}, '500');" class="am-icon-btn am-icon-arrow-up am-active" title="回到顶部" href="#top"></a>
+            <!--<a class="am-icon-faq am-icon-btn am-icon-question-circle" title="常见问题" href="/getting-started/faq"></a>-->
+        </div>
+        <div class="am-alert am-alert-danger am-text-center" data-am-alert>
+            <a href="http://www.xinwenwang.com/Public/d/app-xww.apk" target="_blank">都翻到这了就下个新闻王吧</a>
+        </div>
+        <!--底部-->
+        <footer data-am-widget="footer" class="am-footer am-footer-default" style="background: #333333;color:#fff;">
+            <div class="am-footer-switch">
+                <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">云适配版</span>
+                <span class="am-footer-divider">|</span>
+                <a id="godesktop" data-rel="desktop" class="am-footer-desktop "
+                   href="#">电脑版</a>
+            </div>
+            <div class="am-footer-miscs ">
+                <p>由
+                    <a href="http://www.yunshipei.com/" title="诺亚方舟" target="_blank">诺亚方舟</a>提供技术支持</p>
+                <p>CopyRight©2014 AllMobilize Inc.</p>
+                <p>京ICP备13033158</p>
+            </div>
+        </footer>
+        <div id="am-footer-modal" class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd am-modal-footer-hd">
+                    <a href="javascript:void(0)" data-dismiss="modal" class="am-close am-close-spin "
+                       data-am-modal-close>&times;</a>
+                </div>
+                <div class="am-modal-bd">您正在浏览的是
+                    <span class="am-switch-mode-owner">云适配</span>
+                    <span class="am-switch-mode-slogan">为您当前手机订制的移动网站。</span>
+                </div>
+            </div>
+        </div>
+        <!--[if (gte IE 9)|!(IE)]><!-->
+        <script src="/Public/Mobile/js/jquery.min.js"></script>
+        <!--<![endif]-->
+        <script src="/Public/Mobile/js/amazeui.js"></script>
+        <script src="/Public/Mobile/js/echo.min.js"></script>
+
+        <script type="text/javascript">
+            $('.btn-loading-example').click(function () {
+                var $btn = $(this)
+                $btn.button('loading');
+                setTimeout(function(){
+                    $btn.button('reset');
+                }, 5000);
+            });
+            $(document).ready(function(){
+                echo.init({
+                    offset: 100,
+                    throttle: 250,
+                    unload: false,
+                    callback: function(element, op) {
+
+                        console.log(element, 'has been', op + 'ed')
+                    }
+                });
+            });
+        </script>
+        {:W('Mobile/tongji')}
+    </body>
+</html>

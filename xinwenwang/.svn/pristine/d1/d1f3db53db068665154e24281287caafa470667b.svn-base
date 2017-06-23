@@ -1,0 +1,16 @@
+<div class="blank20"></div>
+<!--页脚开始-->
+<div class="foot">
+    <div class="layout980">
+        <p>Copyright © 2014 wandaihao.com Inc. All Rights Reserved. <a href="http://www.miitbeian.gov.cn/">闽ICP备10018231号</a></p>
+    </div>
+</div>
+<!--页脚结束-->
+<!--可输入下拉框-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/input_drop.js"></script>
+<!--输入框验证-->
+<script type="text/javascript" src="__PUBLIC__/Home/js/select.js"></script>
+
+</body>
+</html>
+{:adInfo('tongji_js')}

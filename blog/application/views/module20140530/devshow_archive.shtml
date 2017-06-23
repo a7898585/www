@@ -1,0 +1,26 @@
+
+<h3>文章存档</h3>
+<ul class="CountLst" id="articlearchive">
+    数据加载中...
+</ul>
+
+<script language="javascript">
+    $(function(){
+        $('#articlearchive').load("<?php echo $baseurl?>/ajaxgetarticlearchivelist/<?php echo $bloginfo['MemberID'];?>/<?php echo $bloginfo['DomainName'];?>");
+    });
+
+    function toggleFun(obj){
+        var f = $(obj).attr('rel');
+        if(f == '1'){
+            $('#archiveDiv').css({ 'height': ''});
+            $(obj).html('点击收起↑');
+            $(obj).attr('rel','2');
+        }else{
+            $('#archiveDiv').css({ 'height': '300px'});
+            $(obj).html('点击展开↓');
+            $(obj).attr('rel','1');
+        }
+    }
+</script>
+
+

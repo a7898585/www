@@ -1,0 +1,40 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_q" href="/agency/purchase/">申请委托购买</a> 
+        <a class="navhl_h" href="/agency/purchase_list/">域名委托购买</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c add_temp_d" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody><tr class="table_title">
+                        <td>域名</td>
+                        <td>类型</td>
+                        <td>联系人</td>
+                        <td>价格</td>
+                        <td>状态</td>
+                        <td>更新时间 </td>
+                        <td>详细</td>
+                    </tr>
+                <empty name="data">
+                    <tr class="table_bg_b">
+                        <td colspan="5">暂无申请购买域名记录</td>
+                    </tr>
+                    <else/>
+                    <volist name="data" id="item">
+                        <tr class="table_bg_b">
+                            <td>{$item.domain}</td>
+                            <td>{$item['role'] ? '出售':'购买'}</td>
+                            <td> {$item['contacts']}</td> <td>&yen; {$item['pay_price']}</td>
+                            <td>{$item['status']|getPurchaseParam}</td>
+                        <td>{$item.addtime|date="Y-m-d H:i:s",###} </td>
+                        <td><a href="/agency/purchase_view?id={$item.id}">查看</a></td>
+                        </tr>
+                    </volist>
+                    <tr>
+                        <td colspan="5">{$pager}</td>
+                    </tr>
+                </empty>
+                </tbody></table>
+        </div>
+    </div>
+</div>

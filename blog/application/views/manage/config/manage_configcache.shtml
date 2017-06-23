@@ -1,0 +1,55 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：同步管理</div>
+    </div>
+    <div class="szym06" style="height:500px">
+        <form name="popFormSubmit" id="popFormSubmit" method="post" onsubmit="return false;">
+            <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid'].$bloginfo['DomainName']);?>" />
+            <input type="hidden" name="MemberID" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="hidden" name="DomainName" value="<?php echo $bloginfo['DomainName'];?>" />
+            <input type="hidden" name="CacheAct" id="cacheact" value="" />
+            <div class="szym-nr01">
+                <div class="szym-nr02">文章内容同步：</div>
+                <div class="szym-nr03">(文章ID)：<input class="txt" type="text" name="ArticleID" /> <input class="input"  type="button" value="同步" onclick="cacheset('articleinfo');"/><span > 清除缓存耗时将会比较长。</span></div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02">文章列表同步：</div>
+                <div class="szym-nr03"><input class="input"  type="button" value="同步" onclick="cacheset('articlelist');"/><span > 清除缓存耗时将会比较长。</span></div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02">公告内容同步：</div>
+                <div class="szym-nr03"><input class="input"  type="button" value="同步" onclick="cacheset('affiche');"/><span > </span></div>
+            </div>
+            <!--
+            
+            
+            <div class="szym-nr01">
+                    <div class="szym-nr02">文章评论缓存：</div>
+                    <div class="szym-nr03">(文章ID)：<input class="txt" type="text" name="ArticleID" /> <input class="input"  type="button" value="清空缓存" onclick="cacheset('articlecomment');"/><span style="color:#999;"> </span></div>
+            </div>
+            
+            
+            <div class="szym-nr01">
+                    <div class="szym-nr02">友情链接缓存：</div>
+                    <div class="szym-nr03"><input class="input"  type="button" value="清空缓存" onclick="cacheset('bloglink');"/><span style="color:#999;"> </span></div>
+            </div>
+            <div class="szym-nr01">
+                    <div class="szym-nr02">博客配置缓存：</div>
+                    <div class="szym-nr03"><input class="input"  type="button" value="清空缓存" onclick="cacheset('blogconfig');"/><span style="color:#999;"> </span></div>
+            </div>
+            -->
+        </form>
+    </div>
+</div>
+<script language="javascript">
+    actionurl = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/cacheconfig/Action";
+    function cacheset(act){
+        showloading();
+        $('#cacheact').val(act);
+        $.post(actionurl,$('#popFormSubmit').serialize(),function(data){
+            showalert(data.error);
+        },'json');
+        return false;
+    }
+</script>

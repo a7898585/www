@@ -1,0 +1,180 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a <if condition="$Think.get.t eq '' ">class="navhl_h"<else />class="navhl_q"</if>  onclick="jdhddh(this,0)" href="javascript:void(0);">安全设置</a> 
+        <a <if condition="$Think.get.t eq '1' ">class="navhl_h"<else />class="navhl_q"</if> onclick="jdhddh(this,1)" href="javascript:void(0);">常用提醒</a>
+        <a <if condition="$Think.get.t eq '2' ">class="navhl_h"<else />class="navhl_q"</if> onclick="jdhddh(this,2)" href="javascript:void(0);">默认设置</a> 
+    </div>
+    <div <if condition="$Think.get.t eq '' ">style="display:block;" <else />style="display:none;" </if> class="onlineplay_c6" id="navhljs1_c0">
+        <form name="form_add_safe" action="/set/add_safe/" method="post">
+            <input name="stype" value="0" type="hidden">
+            <div class="airp_listc_left4">
+                <table width="930" height="34" cellspacing="1" cellpadding="0" border="0" align="center" class="tablelist" style="margin:20px auto;">
+                    <tbody><tr class="onlineplay_c6_title">
+                            <td width="90"><div class="on_c6_icontxt">操作步骤</div></td>
+                            <td width="67"><div class="on_c6_icon on_c6_iconbg_1"><i class="iconfont">&#xe61c;</i></div><div class="fl">邮箱验证</div></td>
+                            <td width="25"><div class="on_c6_icon on_c6_iconbg_2"><i class="iconfont">&#xe61e;</i></div><div class="fl">短信验证</div></td>
+                            <td width="25"><div class="on_c6_icon on_c6_iconbg_3"><i class="iconfont">&#xe61d;</i></div><div class="fl">安全码验证</div></td>
+                        </tr>
+                    <volist name="safe" id="item">
+                        <tr>
+                            <td>
+                                <switch name="item.mode" >
+                        <case value="0">购买结算</case>
+                        <case value="1">发起PUSH</case>
+                        <case value="2">接收PUSH</case>
+                        <case value="3">一口价</case>
+                        <case value="4">限时竞价</case>
+                        <case value="5">域名转出</case>
+                        <case value="6">域名解析</case>
+                        <case value="7">DNS设置</case>
+                        <case value="8">修改登录密码</case>
+                        <case value="9">修改操作设置</case>
+                        <case value="10">修改账户资料</case>
+                        <default />购买结算
+                        </switch>
+                        <input value="{$item.mode}" name="mode[]" type="hidden">
+                        </td>
+                        <td><input type="checkbox" value="1" name="email[{$item.mode}]" <eq name='item.email' value='1'>checked</eq>/></td>
+                        <td><input type="checkbox" value="1" name="mobile[{$item.mode}]" <eq name='item.mobile' value='1'>checked</eq>/></td>
+                        <td><input type="checkbox" value="1" name="code[{$item.mode}]" <eq name='item.code' value='1'>checked</eq>/></td>
+                        </tr>     
+                    </volist> 
+                    </tbody></table>
+            </div>
+            <input type="button" class="list_submit fr oc6_input" btn-name="safe_reset_default" value="恢复默认设置">
+            <input type="submit" class="list_submit_b fr oc6_input" value="保存当前设置">
+        </form>
+    </div>
+    <div <if condition="$Think.get.t eq '1' ">style="display:block;" <else />style="display:none;" </if> class="onlineplay_c6" id="navhljs1_c1">
+        <form name="form_add_notice" action="/set/add_notice/" method="post">
+            <input name="ntype" value="0" type="hidden">
+            <div class="airp_listc_left4">
+                <table width="930" height="34" cellspacing="1" cellpadding="0" border="0" align="center" class="tablelist" style="margin:20px auto;">
+                    <tbody><tr class="onlineplay_c6_title">
+                            <td width="134"><div class="on_c6_icontxt">触发条件</div></td>
+                            <td width="67"><div class="on_c6_iconb on_c6_iconbg_1"><i class="iconfont">&#xe61c;</i></div><div class="fl">邮件提醒</div></td>
+                            <td width="25"><div class="on_c6_iconb on_c6_iconbg_2"><i class="iconfont">&#xe61e;</i></div><div class="fl">手机短信提醒</div></td>
+                        </tr>
+                    <volist name="notice" id="item">
+                        <tr>
+                            <td> <switch name="item.mode" >
+                        <case value="0">异常登录</case>
+                        <case value="1">一口价出价（<em>买家</em>）</case>
+                        <case value="2">一口价出价（<i>卖家</i>）</case>
+                        <case value="3">拍卖结拍（<em>买家</em>）</case>
+                        <case value="4">拍卖结拍（<i>卖家</i>）</case>
+                        <case value="5">发起PUSH</case>
+                        <case value="6">接收PUSH</case>
+                        <case value="7">域名转出</case>
+                        <case value="8">密码修改</case>
+                        <case value="9">安全码修改</case>
+                        <case value="10">活动消息通知</case>
+                        <default />安全码修改
+                        </switch>
+                        <input value="{$item.mode}" name="mode[]" type="hidden"></td>
+                        <td><input type="checkbox" value="1" name="email[{$item.mode}]" <eq name='item.email' value='1'>checked</eq>/></td>
+                        <td><input type="checkbox" value="1" name="mobile[{$item.mode}]" <eq name='item.mobile' value='1'>checked</eq>/></td>
+                        </tr> 
+                    </volist>
+                    </tbody></table>
+            </div>
+            <input type="button" class="list_submit fr oc6_input" btn-name="notice_reset_default" value="恢复默认设置">
+            <input type="submit" class="list_submit_b fr oc6_input" value="保存当前设置">
+        </form>
+    </div>
+    <div <if condition="$Think.get.t eq '2' ">style="display:block;" <else />style="display:none;" </if> class="onlineplay_c" id="navhljs1_c2">
+        <div class="height30"></div>
+        <div class="mrsz_title">DNS设置</div>
+        <form name="form_add_default" action="/set/add_default/" method="post">
+            <input name="dtype" value="0" type="hidden">
+            <div class="list_d">
+                <input value="0" name="mode[]" type="hidden">
+                <ul>
+                    <li>
+                        <p>DNS 1 :</p> 
+                        <input type="text" class="list_ctxt_a" name="other[0][dns1]" value="{$default.0.other_data.dns1}" btn-name="dns1" >
+                    </li>
+                    <li>
+                        <p>DNS 2 :</p>
+                        <input type="text" class="list_ctxt_a" name="other[0][dns2]" value="{$default[0][other_data][dns2]}" btn-name="dns2" >
+                    </li>
+                    <li>
+                        <p>DNS 3 :</p>
+                        <input type="text" class="list_ctxt_a" name="other[0][dns3]" value="{$default[0][other_data][dns3]}">
+                    </li>
+                    <li>
+                        <p>DNS 4 :</p>
+                        <input type="text" class="list_ctxt_a" name="other[0][dns4]" value="{$default[0][other_data][dns4]}">
+                    </li>
+                    <li><input type="checkbox" class="list_ctxt_c"  btn-name="default_dns" ><div class="list_ctxt_d">米仓DNS</div></li>
+                </ul>
+            </div>
+            <div class="input_list">
+                <ul><input value="1" name="mode[]" type="hidden">
+                    <li>
+                        <div class="mrsz_title">注册模板设置</div>
+                        <span>国际域名注册默认模版</span>
+                        <select class="select_sty" name="other[1][com]">
+                            <option value="">请选择</option>
+                            <volist name="templates_com" id="item">
+                                <option value="{$key}" <if condition='$default[1][other_data][com] eq $key'>selected</if>>{$item}</option>
+                            </volist>
+                        </select>
+                        <span>国内域名注册默认模板 </span>
+                        <select class="select_sty" name="other[1][cn]">
+                            <option value="">请选择</option>
+                            <volist name="templates_cn" id="item">
+                                <option value="{$key}" <if condition='$default[1][other_data][cn] eq $key'>selected</if>>{$item}</option>
+                            </volist>
+                        </select>
+                    </li><input value="2" name="mode[]" type="hidden">
+                    <li>
+                        <div class="mrsz_title">过户模板设置</div>
+                        <span>国际域名过户默认模版</span>
+                        <select class="select_sty" name="other[2][com]">
+                            <option value="">请选择</option>
+                            <volist name="templates_com" id="item">
+                                <option value="{$key}" <if condition='$default[2][other_data][com] eq $key'>selected</if>>{$item}</option>
+                            </volist>
+                        </select>
+                        <span>国内域名过户默认模版</span>
+                        <select class="select_sty" name="other[2][cn]">
+                            <option value="">请选择</option>
+                            <volist name="templates_cn" id="item">
+                                <option value="{$key}" <if condition='$default[2][other_data][cn] eq $key'>selected</if>>{$item}</option>
+                            </volist>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <input type="button" class="list_submit fr oc6_input" btn-name="reset_default" value="恢复默认设置">
+            <input type="submit" class="list_submit_b fr oc6_input" value="保存当前设置">
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('[btn-name=safe_reset_default]').click(function(){
+            $('input[name=stype]').val('1');
+            $('form[name=form_add_safe]').submit();
+        })  
+        $('[btn-name=notice_reset_default]').click(function(){
+            $('input[name=ntype]').val('1');
+            $('form[name=form_add_notice]').submit();
+        })  
+        $('[btn-name=reset_default]').click(function(){
+            $('input[name=dtype]').val('1');
+            $('form[name=form_add_default]').submit();
+        })  
+        $('[btn-name=default_dns]').click(function(e){
+            if($('[btn-name=default_dns]').attr('checked')=='checked'){
+                $('[btn-name=dns1]').val('ns1.micang.com')
+                $('[btn-name=dns2]').val('ns2.micang.com')
+            }else{
+                $('[btn-name=dns1]').val('')
+                $('[btn-name=dns2]').val('')
+            }
+        })  
+    })
+    
+</script>

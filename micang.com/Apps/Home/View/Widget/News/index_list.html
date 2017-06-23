@@ -1,0 +1,6 @@
+{__NOLAYOUT__}
+<ul>
+    <volist name="data" id="vo">
+        <li><a title="{$vo.title}" href="{:getDoMain()}news/{$vo.id}/">{$vo.title|msubstr=0,28}</a><span>{$vo.create_time|date="m月d日",###}</span></li>
+    </volist>
+</ul>

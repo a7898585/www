@@ -1,0 +1,93 @@
+<form class="Fmsec frmajax" id="linkForEdit" name="frmajax">
+    <input type="hidden" name="act" value="updLink"/>
+    <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>"/>
+    <input type="hidden" name="MemberID" class="MemberID" value="<?php echo $bloginfo['MemberID'];?>"/>    
+    <?php if(isset($link) && $link['SortID'] >0){?>
+    <input type="hidden" name="LinkID" value="<?php echo $link['LinkID'];?>"/>
+    <input type="hidden" id="OldLinkName" value="<?php echo trim($link['Name']);?>"/>
+    <?php
+    }?>		
+    <label><i>链接名称：</i>
+        <input id="C1" name="name" class="linkname" type="text" value="<?php if(isset($link)) echo trim($link['Name']);?>" size="20">          
+    </label>
+    <label class="Mt10 LabSlc">
+        <i>链接分类：</i>
+
+        <select name="sortId" id="sortId"  class="select SlLW SlcWrp" >
+            <?php 
+            if($sortlist['RetRecords'] > 1)
+            {
+            foreach($sortlist['Record'] as $val)
+            {?>
+            <option value="<?php echo $val['LinkSortID'];?>" <?php 
+                    if(isset($link) && ($val['LinkSortID'] == $link['SortID']))
+                    {
+                    echo 'selected="selected"';
+                    }
+                    else if($val['LinkSortID'] == 5)
+                    {
+                    echo 'selected="selected"';
+                    }?>><?php echo $val['Name']?></option>
+            <?php
+            }
+            }else if($sortlist['RetRecords'] == 1)
+            {?>
+            <option value="<?php echo $sortlist['Record']['LinkSortID'];?>" <?php if(isset($link) && ($sortlist['Record']['LinkSortID'] == $link['SortID'])) echo 'selected="selected"';?>><?php echo $sortlist['Record']['Name'];?></option>
+            <?php
+            }?>
+        </select>            
+
+    </label>
+    <label class="Mt10"><i>链接排序：</i>
+        <input name="rank" id="C1"  type="text" value="<?php if(isset($link)) echo intval($link['Rank']); else echo '0';?>">
+    </label> 
+    <label class="Mt10 LabSlc">
+        <i>是否公开：</i>
+        <select name="isPublic" class="SlLW SlcWrp">
+            <option value="0" <?php if(isset($link) && ($link['IsPublic'] == 0)) echo 'selected';?>>公开</option>
+            <option value="1" <?php if(isset($link) && ($link['IsPublic'] == 1)) echo 'selected';?>>不公开</option>                        
+        </select>
+    </label>
+    <label class="Mt10"><i>链接地址：</i>
+        <input name="path"  id="C1"  class="linkpath"  type="text" value="<?php if(isset($link)) echo $link['Path'];?>">   
+    </label>
+    <label class="Pl70 Mt10">
+        <a href="javascript:;" class="Mr10 CoWht BtnA Ml2 subform"  >提交</a><a class="SetCancel" onClick="Dialog.Close();" href="javascript:;">取消</a>
+    </label>
+</form>
+<script>
+
+    $('.frmajax .linkname').blur(function(){
+        if(mb_strlen($('.frmajax .linkname').val())>30 || mb_strlen($('.frmajax .linkname').val())<3){
+            showalert("链接名称长度应该在3-30个字节之间"); return false;
+        }
+        if($('.frmajax .linkname').val() != $("#OldLinkName").val()){
+            $.post(checkurl,{act:'linkinfo',memberid:$('.MemberID').val(),name:$('.frmajax .linkname').val()},function(data){
+                if(data.errno != 'success')
+                    showalert(data.error); return false;
+            },'json');
+        }
+    });
+    $('.frmajax .subform').click(function(){
+
+        if(mb_strlen($('.frmajax .linkname').val())>30 || mb_strlen($('.frmajax .linkname').val())<3){
+            showalert("链接名称长度应该在1-30个字节之内"); return;
+        }else if(! /^https?:\/\/[\d\-\_a-zA-Z]+((\.[\d\-\_a-zA-Z]+)*\/?)+[\.\/\d\-\_a-zA-Z]*$/g.test($('.frmajax .linkpath').val())){
+            showalert("链接地址不合法链接规则"); return;
+        }else if(mb_strlen($('.frmajax .linkpath').val()) > 250){
+            showalert("链接地址长度超过了250字节的限制"); return;
+        }else{
+            $('.frmajax .subform').attr('disabled','disabled');
+			
+            $.post(actionurl+'?r='+new Date().getTime(),$("form[id='linkForEdit']").serialize(),function(data){
+                showalert(data.error);
+                if(data.errno == 'success'){
+                    setTimeout(function(){
+                        window.location.reload();
+                    },1000)
+                }
+            },'json');	
+        }
+    });	
+	
+</script>

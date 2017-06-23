@@ -1,0 +1,13 @@
+<div id="footer">
+{pc:content action="category" catid="1" num="15" order="listorder ASC"}
+{loop $data $r}
+<a href="{$r[url]}" target="_blank">{$r[catname]}</a> |  
+{/loop}
+{/pc}
+<a href="{APP_PATH}index.php?m=link" target="_blank">友情链接</a>
+
+<p class="cp">Powered by <strong>OLCMS</strong> <em> Beta</em> &copy; 2010 <img src="{IMG_PATH}copyright.gif"/>
+</p>
+</div>
+</body>
+</html>

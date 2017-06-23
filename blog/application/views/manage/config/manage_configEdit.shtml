@@ -1,0 +1,102 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：博客设置</div>
+    </div>
+    <div class="szym06" style="height:500px">
+        <form name="popFormSubmit" id="popFormSubmit" method="post" onsubmit="return false;">
+            <input type="hidden" name="oldname" value="<?php echo $bloginfo['BlogName'];?>" />
+            <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid'].$bloginfo['IsPrimary'].$bloginfo['BlogName']);?>" />
+            <input type="hidden" name="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="hidden" name="oldPrimary" value="<?php echo $bloginfo['IsPrimary'];?>" />
+            <div class="szym-nr01">
+                <div class="szym-nr02">博 客 名：</div>
+                <div class="szym-nr03"><input class="input" id="blogname" name="name" type="text" value="<?php echo $bloginfo['BlogName'];?>" size="40" class="szym-bd01"/><span style="color:#999;"> 博客名信息长度应该在1-30个字符之间！</span></div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02">博客描述：</div>
+                <div class="szym-nr03"><input id="subtitle" name="subtitle" class="input" type="text" require="false" value="<?php echo $blogconfig['Subtitle'];?>" size="40" class="szym-bd01"/><span style="color:#999"> 博客描述信息长度应该在1-200个字符以内！</span></div>
+            </div>
+            <!--
+            <div class="szym-nr01">
+                    <div class="szym-nr02">是否默认博客：</div>
+                    <div class="szym-nr03"><input type="radio" value="0" name="isPrimary" >否 <input type="radio" value="1" name="isPrimary" checked >是</div>
+            </div>
+            -->
+            <div class="szym-nr01">
+                <div class="szym-nr02">文章显示方式：</div>
+                <div class="szym-nr03"><input type="radio" name="showMode" value="0" <?php if($blogconfig['ShowMode']==0) echo 'checked';?> /> 标题　　
+                                              <input type="radio" name="showMode" value="1" <?php if($blogconfig['ShowMode']==1) echo 'checked';?> /> 标题+摘要</div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02">每页文章数：</div>
+                <div class="szym-nr03"><select name="displayNumber" id="displayNumber" class="szym-bd02" dataType="Require" msg="每页文章数"> 
+                        <option value="5" <?php if($blogconfig['DisplayNumber']==5) echo 'selected';?>>5条</option>
+                        <option value="10" <?php if($blogconfig['DisplayNumber']==10) echo 'selected';?>>10条</option>
+                        <option value="15" <?php if($blogconfig['DisplayNumber']==15) echo 'selected';?>>15条</option>
+                    </select> 
+                </div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02">每页评论数：</div>
+                <div class="szym-nr03">
+                    <select name="commentNumber" id="commentNumber" class="szym-bd02" dataType="Require" msg="每页评论数"> 
+                        <option value="5" <?php if($blogconfig['CommentNumber']==5) echo 'selected';?>>5条</option>
+                        <option value="10" <?php if($blogconfig['CommentNumber']==10) echo 'selected';?>>10条</option>
+                        <option value="15" <?php if($blogconfig['CommentNumber']==15) echo 'selected';?>>15条</option>
+                        <option value="20" <?php if($blogconfig['CommentNumber']==20) echo 'selected';?>>20条</option>
+                    </select> </div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02">推荐文章数：</div>
+                <div class="szym-nr03">
+                    <select name="recommendNumber" id="commentNumber" class="szym-bd02" dataType="Require" msg="推荐文章数"> 
+                        <option value="5" <?php if($blogconfig['RecommendNumber']==5) echo 'selected';?>>5条</option>
+                        <option value="10" <?php if($blogconfig['RecommendNumber']==10) echo 'selected';?>>10条</option>
+                        <option value="15" <?php if($blogconfig['RecommendNumber']==15) echo 'selected';?>>15条</option>
+                    </select> </div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02">文章评论框：</div>
+                <div class="szym-nr03"><input type="radio" class="input" name="allowComment" value="0" <?php if($blogconfig['AllowComment']==0) echo 'checked';?>/>关闭 （不允许评论） </div>
+            </div>
+            <div class="szym-nr02"></div>
+            <div class="szym-nr03">开启： 
+                <input type="radio" name="allowComment" value="1" <?php if($blogconfig['AllowComment']==1) echo 'checked';?>/>
+                       允许所有用户评论 
+                       <input type="radio" class="input" name="allowComment" value="2" <?php if($blogconfig['AllowComment']==2) echo 'checked';?>/>
+                       不允许未登录用户或匿名用户评论 
+            </div>
+            <div class="szym-nr01"></div>
+            <div class="szym-nr01">
+                <div class="szym-nr02">相册评论：</div>
+                <div class="szym-nr03"><input type="radio" class="input" name="photoProperty" value="0" <?php if($blogconfig['PhotoProperty']==0) echo 'checked';?>/>不允许 <input type="radio" name="photoProperty" value="1" <?php if($blogconfig['PhotoProperty']==1) echo 'checked';?>/>允许</div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02"></div>
+                <div class="szym-nr03"><input type="submit" onclick="savesetup();return false;" class="szym-bd03" value=" 保存设置" />　<input type="button" class="szym-bd03" value=" 返回 " onclick="window.location.href='<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>'" /></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script language="javascript">
+    actionurl = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/config/Action";
+    var pop = null;
+    function savesetup(){
+        pop=new Popup({ contentType:4,isReloadOnClose:true,width:340,height:80});
+        pop.setContent("title","信息提示");
+        if(mb_strlen($('#blogname').val())>100 || mb_strlen($('#blogname').val())<1){
+            pop.setContent("alertCon","博客名称长度应该在1-100个字节之间");
+            pop.build(); pop.show(); return false;
+        }
+        else if(mb_strlen($('#subtitle').val())>200 || mb_strlen($('#subtitle').val())<3){
+            pop.setContent("alertCon","博客副标题长度应该在3-200个字节之间");
+            pop.build(); pop.show(); return false;
+        }else{
+            $.post(actionurl,$('#popFormSubmit').serialize(),function(data){
+                pop.setContent("alertCon",data.error);
+                pop.build(); pop.show(); return false;
+            },'json');
+        }
+    }
+</script>

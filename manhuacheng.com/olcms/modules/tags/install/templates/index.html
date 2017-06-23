@@ -1,0 +1,29 @@
+{template "content","header"}
+<style>
+<!--
+.search-list {font-size:14px;}
+.search-list a{display:inline-block;padding:10px;font-size:14px; height:20px;line-height:20px;}
+.font_16{font-size:16px;font-weight:bold;}
+.font_18{font-size:18px;font-weight:bold;}
+.color_16{color:red;}
+.color_18{color:blue;}
+
+-->
+</style>
+<!--main-->
+<div class="main cat-search">
+	<div class="col-auto">
+    <div class="crumbs"><a href="{APP_PATH}">首页</a><span> > </span>热门标签</div>
+        <div class="search-point">共找到符合条件的标签 <strong class="red">{$total}</strong> 个</div>
+          <ul class="search-list">
+           	<li style="margin:0">
+				{loop $tagdata $r}
+				<a href="?m=tags&tag={urlencode($r['tag'])}" class="font_1{rand(6, 8)} color_1{rand(6, 8)}" target="_blank">{$r['tag']}({$r['usetimes']})</a>
+				{/loop}
+			</li>
+
+        </ul>
+        <div id="pages" class="text-c">{$pages}</div>
+  </div>
+</div>
+{template "content","footer"}

@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+        <title>登录用户中心</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="pragma" content="no-cache">
+        <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+        <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+        <script type="text/javascript" src="http://images.cnfol.com/login_js/core_js/jquery-1.3.2.min.js"></script>
+        <script type="text/javascript" src="http://images.cnfol.com/login_js/login_js/function.js"></script>
+        <script type="text/javascript">
+            $(function() {	
+                //刷新验证码
+                $('#username').focus();
+
+                $('#verifypic').click(function() { $(this).attr('src', 'http://passport.cnfol.com/check?loginverifypic' + timeStamp()); });
+                $('#fleshvc').click(function() { $('#verifypic').attr('src', 'http://passport.cnfol.com/check?loginverifypic' + timeStamp()); });
+                if(GetCookie('loginerrnu') == 1){
+                    $('#yanzheng').css('display', 'block');
+                    $('#verifypic').attr('src', 'http://passport.cnfol.com/check?loginverifypic' + timeStamp());
+                }
+                // 表单提交时执行
+                $('#login').submit(function() {
+                    if(! lusernamecheck() || ! lpasswdcheck){
+                        return false;
+                    }else if(GetCookie('loginerrnu') == 1){
+                        if(! /^[0-9a-z]{4}$/i.test($('#verifycode').val())){
+                            $('#error').html('验证码格式错误').addClass('red').show(); $('#verifycode').focus(); return false;
+                        }
+                    }else if($('#error').html() != ''){
+                        return false;
+                    }
+                    var reurl = 'act=login&username='+$('#username').val()+'&password='+$('#password').val()+'&verifycode='+$('#verifycode').val()+'&platform=0&channel=2&force=1'+'&jsoncallback=?';
+		
+                    jQuery.getJSON('http://passport.cnfol.com/index.php/userlogin/ajaxlogin?'+reurl,function(data){
+			
+                        if(data.flag != '111'){
+                            $('#error').html(data.info).addClass('red').show();
+                            if(data.lognum > 2){
+                                GetCookie('loginerrnu', 1, {expires:1});
+                                $('#yanzheng').css('display', 'block');
+                                $('#verifypic').attr('src', 'http://passport.cnfol.com/check?loginverifypic' + timeStamp());
+                            }
+                            return false;
+                        }else{
+                            $('#error').html('本次登入成功,正在请求跳转…').addClass('red').show();
+                            var returnstr = parent.location.href;
+                            var begin     = returnstr.indexOf("#");
+                            var reurl     = returnstr.substring(begin+1);
+				
+                            GetCookie("loginerrnu", null, {expires:-1});
+                            setTimeout("window.parent.location.href='"+reurl+"'",1000);
+                        }
+			
+                    });
+                    return false;
+                });
+            });
+        </script>
+        <style type="text/css">
+
+            .red { padding-left:35px; font-size:12px; color:red }
+
+            .infobar{
+                width:300px;
+                height:180px;
+                padding:6px 0px 6px 0px;
+                background:#ffffff;
+            }
+            .logintitle{
+                float:left;color:#197CAE;font-size:14px;padding-top:5px;padding-left:20px;padding-bottom:10px;
+            }
+            .loginbody{
+                float:left;width:100%;padding:6px 0 0 0;font-size:14px;border-top:1px solid #ccc;height:180px;
+                border-bottom:1px solid #ccc;
+
+            }
+            .pointer{float:right;margin:5px 20px 5px 6px}
+            .loginform div{float:left;}
+            .username1{padding:10px 0 5px 30px;font-size:12px}
+            .username2{width:150px;padding:15px 20px 10px 0}
+            .password1{padding:5px 0 10px 30px;font-size:12px}
+            .password2{width:150px;padding:0 20px 10px 0}
+            .u1{width:150px;}
+            .p1{width:150px;margin-left:2px}
+            .loginbotton1{padding:0px 0 5px 20px}
+            .loginbotton2{padding:5px 0 5px 20px;font-size:12px}
+
+            .loginerror{font-size:12px;color:red;padding:8px 0 0 30px}
+            .loginerror{margin-top:0px}
+            *+html .loginerror{margin-top:-18px}
+            * html .loginerror{margin-top:-18px}
+            .forgetpass{width:100%;padding-left:20px}
+            .forgetpass a{color:#197CAE;}
+            .forgetpass a:link{color:#197CAE;}
+            .forgetpass a:visited {
+                color:#197CAE;
+            }
+            .forgetpass a:hover {
+                color:#197CAE;
+            }
+            .forgetpass a:active {
+                color:#197CAE;
+            }
+            a:link {
+                color:#003399;
+                text-decoration:none;
+            }
+            a:visited {
+                color:#0033FF;;
+                text-decoration:none;
+            }
+            a:hover {
+                color:#993300;
+                text-decoration:none;
+            }
+
+            a:active {
+                color:#003399;
+                text-decoration:none;
+            }
+
+            #blogurl {letter-spacing:0px;}
+            * html #blogurl {letter-spacing:2px;}
+            *+html #blogurl {letter-spacing:2px;}
+
+        </style>
+    </head><body>
+        <center>
+            <form id="login" method="post">
+                <div id="downloadPanel" class="infobar">
+
+                    <div class="logintitle">中金在线用户登录</div>
+                    <div class="loginbody">
+                        <div class="username1">
+                            <table border="0" height="70">
+                                <tbody><tr><td><strong>用户名:</strong></td><td align="left" width="210px"><input class="u1" name="username" id="username" type="text" onblur="lusernamecheck();" onkeydown="document.getElementById('error').innerHTML='';" /></td></tr>
+                                    <tr><td><strong>密　码:</strong></td><td align="left" width="210px"><input class="u1" name="password" id="password" type="password" onblur="lpasswdcheck();" onkeydown="document.getElementById('error').innerHTML='';" /></td></tr>
+                                </tbody></table>
+
+                            <table id="yanzheng" style="display:none; margin-top: -2px;" border="0" height="30">
+                                <tbody><tr><td><strong>验证码:</strong></td><td width="210px">
+
+                                            <table style="margin-left: -3px;" align="left" border="0" height="30">
+                                                <tbody><tr><td>
+                                                            <input class="u1" name="verifycode" id="verifycode" maxlength="4" style="width: 60px" /></td><td><img id="verifypic" style="cursor: pointer; width: 70px" title="看不清?" src="">&nbsp;&nbsp;<span style="cursor:pointer" id="fleshvc" href="">看不清？</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody></table>
+
+                                        </td></tr>
+                                </tbody></table>
+                        </div>
+                        <div id="error" style="text-align:left;padding-bottom:10px;"></div>
+                        <div class="loginbotton1">
+                            <input id="submit" style="width: 50px; height: 23px;" value="登录" type="submit"><a target="_blank" href="http://passport.cnfol.com/forgetpassword">&nbsp;&nbsp;&nbsp;&nbsp;忘记密码了？</a></div>
+
+                        <div class="forgetpass">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </center>
+    </body></html>

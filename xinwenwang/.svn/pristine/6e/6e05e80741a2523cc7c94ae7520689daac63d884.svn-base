@@ -1,0 +1,76 @@
+<foreach name="list" item="item">
+    <switch name="item.show_type" >
+        <case value="1">
+            <li data-node="item" class="item clearfix">
+                <div ga_event="feed_item" style="width: 100%;" class="info">
+                    <p class="title ">
+                        <a target="_blank" ga_event="feed_title" href="{$item.url}">
+                            {$item.title}
+                        </a>
+                    </p>
+                </div>
+        </case>
+        <case value="2">
+            <li data-node="item" class="item clearfix">
+                <div ga_label="hasImg" ga_event="feed_item" class="info">
+                    <p class="title ">
+                        <a target="_blank" ga_event="feed_title" href="{$item.url}">
+                            {$item.title}
+                        </a>
+                    </p>
+                </div>
+                <div class="thumbnail">
+                    <div class="img-box">
+                        <a target="_blank" href="{$item.url}" ga_event="feed_img" class="feed-img">
+                            <img rel="nofollow" src="{:setUpUrl($item['img_list'][0])}">
+                        </a>
+                    </div>
+                </div>
+        </case>
+        <case value="3">
+            <li data-node="item" class="item clearfix">
+                <div ga_event="feed_item" style="width: 100%;" class="info">
+                    <p class="title img-list">
+                        <a target="_blank" ga_event="feed_title" href="{$item.url}">
+                            {$item.title}
+                        </a>
+                    </p>
+                </div>
+                <div class="thumbnail-list">
+                    <a target="_blank" href="{$item.url}" ga_event="feed_img" class="feed-img"><img rel="nofollow" src="{:setUpUrl($item['img_list'][0])}"></a>
+                    <a target="_blank" href="{$item.url}" ga_event="feed_img" class="feed-img"><img rel="nofollow" src="{:setUpUrl($item['img_list'][1])}"></a>
+                    <a style="margin-right: 0;" target="_blank" href="{$item.url}" ga_event="feed_img" class="feed-img"><img rel="nofollow" src="{:setUpUrl($item['img_list'][2])}"></a>
+                </div>
+        </case>
+        <default />
+    </switch>
+    <p style="<if condition="($item['show_type'] eq 1) ">width: 100%;</if>" class="footer">
+        <span class="other">
+            <span class="btn-group" data-node="likeGroup">
+                <a title="顶" href="javascript:;" class="btn line" data-groupid="{$item.id}" data-node="digg" ga_event="feed_item_digg">
+                    <i class="icon icon-like icon-small"></i>
+                    <span data-node="num" class="liked-num">{$item.good_sum}</span>
+                </a><a title="踩" href="javascript:;" class="btn" data-groupid="{$item.id}" data-node="bury" ga_event="feed_item_bury">
+                <i class="icon icon-dislike icon-small"></i>
+                <span data-node="num" class="disliked-num">{$item.bad_sum}</span>
+            </a>
+            </span>
+        </span>
+        <span class="footer-right">
+            <a target="_blank" href="{$item.url}" class="btn datetime">
+                <span data-publishtime="{$item.update_time}">{$item.show_time}</span>
+            </a>
+            <a href="javascript:;" class="btn share" data-pic="" data-text="【{$item.title}】（分享来自 @新闻王）" data-desc="来自头条 http://www.xinwenwang.com" data-url="{$item.url}" data-node="share">
+                <i class="icon icon-share"></i>
+                <span class="share-list">
+                    <i title="分享到新浪微博" href="javascript:;" class="icon icon-tsina" data-type="tsina" ga_label="tsina" ga_event="feed_item_share"></i>
+                    <i title="分享到腾讯微博" href="javascript:;" class="icon icon-tqq" data-type="tqq" ga_label="tqq" ga_event="feed_item_share"></i>
+                    <i title="分享到ＱＱ空间" href="javascript:;" class="icon icon-qzone" data-type="qzone" ga_label="qzone" ga_event="feed_item_share"></i>
+                </span>
+            </a>
+        </span>
+    </p>
+    <a data-groupid="{$item.id}" data-node="close" href="javascript:;" title="不感兴趣" class="btn close" ga_event="feed_item_dislike">
+        <i class="icon icon-close icon-small"></i>
+    </a>
+</foreach>

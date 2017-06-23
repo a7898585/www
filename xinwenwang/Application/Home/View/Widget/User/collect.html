@@ -1,0 +1,39 @@
+<div class="in_cont_r">
+    <ul class="favorite">
+        <volist name="collect" id="vo">
+            <li>
+                <h2>
+                    <a href="{$vo.url}/" target="_blank">{$vo.title}</a>
+                </h2>
+                <p>
+                    <b><a href="{$base_url}/m{$vo.dingyue_id}" target="_blank">{$vo.source_name}</a></b>
+                    <a href="javascript:del_col('{$vo.c_id}');" class="cancel">取消收藏</a>
+                </p>
+            </li>
+        </volist>
+        <!--分页-->
+        {$page_html}
+</div>
+<script>
+    function del_col(id){
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        if(id && confirm('确认取消收藏？')){
+            $.ajax({
+                type: 'POST',
+                url: '/user/del_col',
+                data: {id: id},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('取消收藏成功', 0, 1);
+                        window.location.reload();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        }
+    }
+</script>

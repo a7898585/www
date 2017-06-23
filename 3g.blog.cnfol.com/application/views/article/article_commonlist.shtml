@@ -1,0 +1,183 @@
+<?php include $commonheader;?>
+
+<nav class="Nav TextHeader">
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID'];?>.html" class="BackPage ToBlock" ></a>
+    <h2 class="Text-title F16 Tc">评论（<span id="ArticleCommentNum"><?php echo $total;?></span>）</h2>
+    <?php if($blogconfig['AllowComment'] > 0){?><a href="#PL_form" class="WritePL ToBlock" ></a><?php } ?>
+</nav>
+
+<section class="PingLun">
+    <section class="PL_Box" id="PL_Box">
+        <?php 
+        if(!empty($commonList)){
+        foreach($commonList as $key=>$art){
+        ?>
+        <?php  if(isset($isowner) && $isowner==true){?>
+        <div class="List_o_pl" id="Content<?php echo $art['CommentID'];?>">
+            <div class="Pl_o_title">
+                <span class="Fl F14 Pl10 MyPLtit"><?php echo $art['NickName'];?></span>
+                <a href="javascript:;" class="Fr DelPL" onclick="if(confirm('确定将此评论删除?'))DelSingleComment('<?php echo $art['CommentID'];?>','<?php echo $articleid;?>','<?php echo $flashCode;?>',1);"></a>
+                <time class="Fr Tr Hui_color"><?php echo timeop($art['CommentAppearTime']);?></time>
+            </div>
+            <p class="Pl_o_content Pl10 Pr10 F14" ><?php echo filterEmoticon(filterURL(filter($art['Content'])));?></p>
+        </div>
+        <?php } else {?>
+        <div class="List_o_pl" id="Content<?php echo $art['CommentID'];?>">
+            <div class="Pl_o_title">
+                <span class="Pl_o_name F14"><?php echo $art['NickName'];?></span>
+                <time class="Pl_o_time Tr Hui_color"><?php echo timeop($art['CommentAppearTime']);?></time>
+            </div>
+            <p class="Pl_o_content Pl10 Pr10 F14" ><?php echo filterEmoticon(filterURL(filter($art['Content'])));?></p>
+        </div>
+        <?php } 
+        }?>
+        <?php  }else{ ?>
+        <div class="List_o_pl">
+            &nbsp; &nbsp; &nbsp;该文章暂无评论
+        </div>
+        <?php } ?>
+    </section>
+
+    <input type="hidden" name="pl_artid" id="pl_artid" value="<?php echo $article['ArticleID'];?>"/>
+    <input type="hidden" name="pl_co" id="pl_co" value="<?php echo getVerifyStr($article['ArticleID'].$bloginfo['UserID']);?>"/>
+    <input type="hidden" name="pl_cnum" id="pl_cnum" value="<?php echo $pagesize;?>"/>
+    <input type="hidden" name="pl_count" id="pl_count" value="<?php echo $pagecount;?>"/>
+    <?php if($total >10){ ?>
+    <a href="javascript:getAricleList();" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore" >查看更多评论</a>	
+    <?php }elseif(0 < $total && $total<10){?>
+    <a href="javascript:void(0);" class="GetMore ToBlock Wrp Tc Mt10">已经显示全部评论</a>	
+    <?php }?>
+</section>
+<?php if($blogconfig['AllowComment'] > 0){?>
+<?php if(empty($user)){?>
+<section class="NL_msg Tc Mt10">您还未登录只能<a href="javascript:void(0);" id="NL_send">匿名发表评论</a>。您可以<a href="<?php echo $this->config->item('usercenter_url').curPageURL();?>">登录</a>丨<a href="#">注册</a>后发表</section>
+<?php }?>
+<form class="PL_form Wrp Feedback" id="PL_form" method="get" >
+    <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($blogconfig['AllowComment'].$bloginfo['MemberID'].$article['ArticleID'].$article['Title']);?>">
+    <input type="hidden" name="allowcomment" value="<?php echo $blogconfig['AllowComment'];?>">
+    <input type="hidden" name="memberid" value="<?php echo $bloginfo['MemberID'];?>">
+    <input type="hidden" name="userdomain" value="<?php echo getPrimariBlogDomain($bloglist);?>">
+    <input type="hidden" name="address" value="<?php echo $baseurl;?>">
+    <input type="hidden" name="loginuserid" value="<?php echo($loginuserid); ?>" />
+    <input type="hidden" name="userid" value="<?php echo($bloginfo['UserID']); ?>" />
+    <input type="hidden" name="articleId" value="<?php echo $article['ArticleID'];?>"/>
+    <input type="hidden" name="act" value="addcomment"/>
+    <input type="hidden" name="appeartime" value="<?php echo $article['AppearTime'];?>" />
+    <input name="articleSubject" type="hidden" id="articleSubject"  value="<?php echo $article['Title'];?>"/>
+    <?php if(empty($user)){?><input type="hidden" name="username" value="中金在线网友"><?php }?>
+    <textarea class="PL_textarea " preset="Rqd" id="PLtxt" name="content">请输入评论内</textarea><i></i>
+    <div class="PL_Btn">
+        <input type="button" class="PL_submit" value="评论" onclick="checkcmtformComment('PL_form')"/>
+    </div> 
+</form>
+<?php }?>
+<?php  include $commonfooter; ?>
+<input type="hidden" name="currentpage" id="currentpage" value="2" />
+<input type="hidden" name="scrolltopflag" id="scrolltopflag" value="2" />
+
+<script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Forms.js"></script>
+<script language="javascript">
+    var baseurl = "<?php echo $baseurl; ?>";
+    var memid   = "<?php echo $bloginfo['MemberID'];?>";
+    var oGetMore=C.G('GetMore');
+    var oLst_news=C.G('PL_Box')
+    var Btn=true;
+    
+    window.onload=function(){
+        Forms("PL_form");
+        Bk.app.YzPL();
+    }
+    
+    //    if(Btn && oGetMore){
+    //        window.onscroll=function(){
+    //            var top=Bk.tools.getPos(oGetMore).t + oGetMore.offsetHeight;
+    //            var Viewh=document.documentElement.clientHeight||document.body.clientHeight;
+    //            var ScrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+    //        
+    //            if(top < (Viewh + ScrollTop)){    
+    //                getAricleList();
+    //            }  
+    //        }
+    //    }
+    
+    function getAricleList(){
+        var flashCode = $('#pl_co').val();
+        var num = $('#pl_cnum').val();
+        var articleid = $('#pl_artid').val();
+        var pl_count = $('#pl_count').val();
+        var page=document.getElementById("currentpage").value;  
+        if($('#scrolltopflag').val()=='2'){
+            $('#scrolltopflag').val('1');
+            
+            if(Btn){    
+                $.getJSON(baseurl+'/ajaxcomment/list/'+articleid+'/'+page,{'flashCode':flashCode,'num':num,'count':pl_count, 'replaceid':'PL_Box','r':new Date().getTime()}, function(json){
+                    $('#scrolltopflag').val('2');
+
+                    if(json.page != ''){
+                        document.getElementById('currentpage').value=json.page;
+                    }
+                    if(json.data != '' && json.error == 1){
+                        $('#PL_Box').append(json.data);
+                    }else{
+                        oGetMore.innerHTML= '已经显示全部评论';
+                        Btn=false;
+                    }
+            
+                });
+            }	
+        }
+    }
+    
+    function checkcmtformComment(id){
+        var $total = '<?php echo $total;?>';
+        var page=document.getElementById("currentpage").value;
+        var content = $('#PLtxt').val();
+        if(content == '' || content == '请输入评论内'){
+            alertDialog('请输入评论'); return false;
+        }else{
+            
+        
+            $.post(baseurl+'/ajaxcomment/Action',$('#'+id).serialize(),function callback(data){
+                alertDialog(data.error);
+                if((data.errno == '200036') || (data.errno == '200037') || (data.errno == 'check')){
+                    $('#PLtxt').val('');  
+                }else{
+                    $('#PLtxt').val('');
+                    if(data.errno == 'succ'){
+                        var focusNum = parseInt($("#ArticleCommentNum").first().text())+1;
+                        $('#ArticleCommentNum').html(focusNum);
+                        if($total < 10 && page == 2){
+                            $('#PL_Box').html('');
+                            $('#currentpage').val('1');
+                            getAricleList();
+                        }
+                    }
+                
+                }
+            
+                $('#PL_form i').removeClass('Ok');
+            
+            },'json');   
+        }
+    }
+    
+    function DelSingleComment(cid,artid,co,page){ 
+        if(page == undefined) page = 1;
+        $.post(baseurl+'/ajaxcomment/Action',{
+            'act':'delcomment',
+            'cid':cid,
+            'artid':artid,
+            'flashcode':co,
+            'memid':memid
+        },function callback(data){
+            alertDialog(data.error);
+            if('succ' == data.errno){
+                $('#Content'+cid).addClass('Hide');
+                var focusNum = parseInt($("#ArticleCommentNum").first().text())-1;
+                $('#ArticleCommentNum').html(focusNum);
+            }
+        },'json');
+        return false;    
+    }
+    
+</script>

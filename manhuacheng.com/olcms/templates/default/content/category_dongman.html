@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{if $area<>''}{$area}动漫_{$area}动画片大全_{$area}好看的动漫-漫画城{else}{$SEO['title']} {/if}</title>
+<meta name="keywords" content="{if $area<>''}{$area}动漫,{$area}动画片大全,{$area}动漫电影{else}{$SEO['keyword']}{/if}"/>
+<meta name="description" content="{if $area<>''}{$area}动漫是漫画城为{$area}动漫迷提供{$area}动漫在线观看{$area}动漫电影和{$area}最新动漫排行榜，{$area}动漫频道推出{$area}动漫图片，{$area}动漫头像以及{$area}动画片。{else}{$SEO['description']}{/if}"/>
+<link href="/statics/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/statics/css/main.css" rel="stylesheet" type="text/css" />
+<LINK media=screen href="{CSS_PATH}3dprotect.css" type=text/css rel=stylesheet >
+<link rel="stylesheet" href="{CSS_PATH}css.css" type="text/css"/>
+
+<div class="top">
+  <div class="mainborder">
+    <div class="logo"><a href="/"><img src="{IMG_PATH}pctutu/logo.gif" alt="漫画城官网网站" longdesc="/" /></a></div>
+    <div class="language"><a href="javascript:window.external.AddFavorite('http://www.manhuacheng.com/', '看漫画软件-漫画城')" target=_self>收藏本站</a>&nbsp;<a href="/index.php?m=feedback" target="_blank">用户反馈</a></div>
+  </div>
+</div>
+<div class="mainborder" style="background:none;">
+  <div class="menu">
+    <ul>
+      
+    	{pc:content action="category" catid="0" num="25" order="listorder ASC"}
+			<li {if (!$catid)}class="on"{/if}><a href="{siteurl()}"><span>首页</span></a></li>
+			{loop $data $r}
+			<li {if ($r[catid]==$catid)}class="on"{/if}><a href="{$r[url]}"><span>{$r[catname]}</span></a></li>
+			{/loop}
+			
+			<li ><a href="/manhua"><span>漫画捷报</span></a></li>
+			<li ><a href="/freegif"><span>免费奖品</span></a></li>
+			<li ><a href="/point"><span>奖品兑换</span></a></li>
+			
+        {/pc}
+
+    </ul>
+  </div>
+</div>
+</head>
+
+
+
+<body>
+<div class="max_div">
+	<div class="clear" style="height:10px;"></div>
+    <div class="dm_list01">
+    	<div class="dm_list01_con01">
+        	<div class="dm_list01_con01_row01">当前位置：<a href="/dongman/">看动漫</a>&nbsp;&nbsp;>&nbsp;&nbsp;</div>
+          <form name="form1" method="get" action="/index.php">
+			<input type="hidden" name="m" value="content" />
+			<input type="hidden" name="c" value="index" />
+			<input type="hidden" name="a" value="search" />
+			<input type="hidden" name="catdir" value="dongman" />
+            <div class="dm_list01_con01_row02"><input type="text" class="dm_list_input" name="key" value="{$key}"></div>
+            <div class="dm_list01_con01_row03"><input type="submit" class="dm_list_btn" name="" value=" "></div>
+			</form>
+        </div>
+        <div class="clear" style="height:5px;"></div>
+        
+		 <div class="dm_type02_con">
+        	<div class="clear" style="height:10px; _height:5px;"></div>
+        	<div class="dm_type02_con_title">按地区</div>
+            <div class="dm_type02_con_con">
+            	<ul>
+                	<li><a href="/diqu_台湾/">台湾</a></li>
+                    <li><a href="/diqu_日本/">日本</a></li>
+                    <li><a href="/diqu_美国/">美国</a></li>
+					<li><a href="/diqu_韩国/">韩国</a></li>
+					<li><a href="/diqu_大陆/">大陆</a></li>
+                    <li><a href="/diqu_其它/">其它</a></li>   
+                </ul>
+            </div>
+            <div class="clear" style="height:5px; _height:2px;"></div>
+        </div>
+ 		
+    	<div class="clear" style="height:5px; _height:2px;"></div>
+        <div class="dm_type02_con">
+        	<div class="clear" style="height:5px; _height:2px;"></div>
+        	<div class="dm_type02_con_title">按类型</div>
+            <div class="dm_type02_con_con">
+            	<ul>
+                	<li><a href="/rexue/">热血</a></li>
+                    <li><a href="/gaoxiao/">搞笑</a></li>
+                    <li><a href="/shenmo/">神魔</a></li>
+                    <li><a href="/jizhan/">机战</a></li>
+                    <li><a href="/jingji/">竞技</a></li>
+                    <li><a href="/chongwu/">宠物</a></li>
+                    <li><a href="/aiqing/">爱情</a></li>
+                    <li><a href="/xuanyi/">悬疑</a></li>
+                    <li><a href="/shehui/">社会</a></li>
+                    <li><a href="/lizhi/">励志</a></li>
+                    <li><a href="/huanxiang/">幻想</a></li>
+                    <li><a href="/lishi/">历史</a></li>
+                    <li><a href="/langman/">浪漫</a></li>
+                    <li><a href="/chuanqi/">传奇</a></li>
+                    <li><a href="/youqing/">友情</a></li>
+                    <li><a href="/qinqing/">亲情</a></li>
+                    <li><a href="/maoxian/">冒险</a></li>
+                    <li><a href="/kongbu/">恐怖</a></li>
+                    <li><a href="/qita/">其它</a></li>
+                </ul>
+            </div>
+            <div class="clear" style="height:5px; _height:2px;"></div>
+        </div>
+    	<div class="clear" style="height:5px; _height:2px;"></div>
+        
+    	<div class="clear" style="height:25px;"></div>
+    </div>
+    <div class="clear" style="height:10px;"></div>
+{if $area==''}
+	<div class="dm_list02">
+	<div class="dm_box_title">热播动漫 </div>
+    	<div class="clear" style="height:15px;"></div>
+    	<ul>
+		
+        	{pc:content action="lists" catid="32" order="id ASC"  num="8" }
+				
+{loop $data  $val}
+
+                	<li>
+                    	<div class="dm_box_con01"><a href="/dongman{$val[id]}/"><img src="{$val[thumb]}" border="0" height="85" width="130" /></a></div>
+                        <div class="dm_box_con02">{$val[title]}</div>
+                        <div class="dm_box_con03">
+                        	<div><input type="button" class="dm_grey01" name="" value="" />&nbsp;&nbsp;地区</div>
+                            <div><input type="button" class="dm_grey02" name="" value="" />&nbsp;{$val[CartoonArea]}</div>
+                        </div>
+                    </li>
+					{/loop}
+{/pc}
+        </ul>
+    	<div class="clear" style="height:10px;"></div>
+    
+    <div class="clear" style="height:20px;"></div>
+    </div>
+{/if}	 
+    <div class="dm_list02">
+	<div class="dm_box_title">{if $area==''}最新动漫{else}{$area}动漫{/if}</div>
+    	<div class="clear" style="height:15px;"></div>
+    		<ul>
+			{if $area<>''}
+		{php $wh="CartoonArea='".$area."'"}
+		{pc:content action="lists" catid="32" where="$wh" order="updatetime DESC"  num="16" page="$page"}
+		{else}
+		{pc:content action="lists" catid="32" order="updatetime DESC"  num="16" page="$page"}
+		{/if}
+				
+{loop $data  $val}
+                	<li>
+                    	<div class="dm_box_con01"><a href="/dongman{$val[id]}/"><img src="{$val[thumb]}" border="0" height="85" width="130" /></a></div>
+                        <div class="dm_box_con02">{php echo str_cut($val[title],20,'...')}</div>
+                        <div class="dm_box_con03">
+                        	<div><input type="button" class="dm_grey01" name="" value="" />&nbsp;&nbsp;地区</div>
+                            <div><input type="button" class="dm_grey02" name="" value="" />&nbsp;{$val[CartoonArea]}</div>
+                        </div>
+                    </li>
+					
+                    		{/loop}
+{/pc}
+                </ul>
+				
+    	<div class="clear" style="height:10px;"></div>
+        <div class="turn_page_div"  style="text-align:center">
+		{if $area<>''}
+		  {php echo preg_replace('/dongman_([0-9]+)/','diqu_'.$area.'_$1',$pages)}
+		{else}
+          {$pages}
+		{/if}
+        </div>
+    <div class="clear" style="height:20px;"></div>
+    </div> 
+    <div class="clear" style="height:10px;"></div>
+</div> 
+</body>
+{template "content","footer"}

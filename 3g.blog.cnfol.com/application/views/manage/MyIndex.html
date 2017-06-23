@@ -1,0 +1,266 @@
+<?php include $commonheader;?>
+<!--顶部start-->
+<?php include $personalhead; ?>
+<!--顶部end-->
+<!--内容start-->
+
+<?php if(!empty($artList)){ ?>
+<?php if($friendsnumber['FollowingNum'] == 0){ ?>
+<section class="GuanZhu F14 Tc"><a href="<?php echo $blogurl.'/'.$bloginfo['DomainName'].'/recomblog';?>">关注你感兴趣的人，</a>他的动态将会展示在这里 </section>
+<?php }?>
+<section id="Lst_news">
+    <?php 
+    foreach($artList as $key=>$art){
+    $arturl = $blogurl.'/'.$art['DomainName'].'/article/'.strtotime($art['AppearTime']).'-'.$art['ArticleID'].'.html';
+    $artTitle = filter($art['Title']);
+    $artContent = filter(filter($art['Summary']));
+    if(strlen($artTitle) > 28){
+    $artTitle = utf8_str($artTitle,28);
+    }
+    if(strlen($artContent) > 70){
+    $artContent = utf8_str($artContent,70);
+    }
+    ?>
+    <div class="Lst-o-new Mt10">
+        <a href="<?php echo $blogurl.'/'.$art['DomainName']; ?>" class="Tou_img Tc ToBlock Fl"><img src="<?php echo getUserHead($art['UserID']);?>" width="30" height="30" /></a>
+        <div class="Tou_desc">
+            <div class="ZhuanZai">
+                <h3 class="ZZ-zi F14">
+                    <span><a href="<?php echo $blogurl.'/'.$art['DomainName']; ?>"><?php echo ($art['NickName'] == $user['nickname'])? '我' : $art['NickName'];?></a></span>
+                    <font class="Hui_color"><?php
+                    if($art['Property']==5){
+                    echo '保存了草稿';
+                    }else{
+                    echo($art['Property']==0?'发表':'');
+                    echo($art['Property']==2?'转载':'');
+                    echo($art['Property']==4?'收藏':'');
+                    ?>了博文
+                    <?php }?></font>
+                </h3>
+                <time class="ZZ-time Hui_color Pr10"><?php echo timeop($art['AppearTime']); ?></time>
+            </div>
+            <div class="Lst-new-tit Red_color">
+                <h3 class="Fl F16 ">
+                    <font class="Red_color">
+                    <?php if($art['Recommend'] == 2 || $art['Recommend'] == 3 || $art['IsUsed'] == 1) {?>
+                    [荐]
+                    <?php } ?>
+                    <?php
+                    echo $art['IsTop']==1?'[顶]':'';
+                    echo($art['Property']==2?'[转]':'');
+                    echo($art['Property']==4?'[收藏]':'');
+                    echo($art['Property']==5?'[草稿]':'');
+                    ?>
+                    </font>
+                    <a href="<?php echo $arturl;?>"><?php echo $artTitle;?></a>
+                </h3>
+                <?php if($art['PictureUrl']!='0' && !empty($val['PictureUrl'])){ ?><span class="Bh_img Fl"></span><?php } ?>
+            </div>
+
+            <p class="Lst-new-desc F16 Pr10"><a href="<?php echo $arturl;?>"><?php echo $artContent;?></a></p>
+        </div>
+    </div>
+    <?php }?>
+    <a href="javascript:void(0);" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore" ><span id="GetMoreSpan">获取更多</span></a>	
+
+</section>
+<input type="hidden" name="currentpage" id="currentpage" value="2" />
+<input type="hidden" name="scrolltopflag" id="scrolltopflag" value="2" />
+<!--内容end-->
+<script type="text/javascript">	
+    var DataFields={
+        name:"name",
+        title:"title",
+        content:"content",
+        topSrc:"topSrc",
+        blogUrl:"blogUrl",
+        arturl:"arturl",
+        time:"time",
+        isContainImg:"isContainImg",
+        isZhuan:"isZhuan",
+        isJian:"isJian",
+        isDing:"isDing"		
+    }
+    var url="";
+	
+    var oGetMore=C.G('GetMore');
+    var oLst_news=C.G('Lst_news')
+    var oNews=document.querySelectorAll('#Lst_news .Lst-o-new');
+    var oLastNew=oNews[oNews.length-1];
+    var Num=0; //默认条数
+    var Btn=true;
+    var Limit=10; //第次返回的条数
+    var baseurl="<?php echo $baseurl; ?>";
+    var showFans = '<?php echo $friendsnumber['FollowingNum'];?>';
+    if(Btn && oGetMore){
+        window.onscroll=function(){
+            var top=Bk.tools.getPos(oGetMore).t + oGetMore.offsetHeight;
+            var Viewh=document.documentElement.clientHeight||document.body.clientHeight;
+            var ScrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+        
+            if(top < (Viewh + ScrollTop)){
+                var page=document.getElementById("currentpage").value;         
+                if($('#scrolltopflag').val()=='2'){
+                    $('#scrolltopflag').val('1');
+                    if(Btn && oGetMore.style.display!=='none'){
+                        oGetMore.innerHTML= '正在加载更多...';
+                        $.getJSON(baseurl+"/index.php/blog/morenewlist?limit=<?php echo($limit); ?>&page="+page+"&currentid=<?php echo($bloginfo['UserID']); ?>&domainname=<?php echo($bloginfo['DomainName']); ?>&showfans="+showFans+"&r="+new Date().getTime(), function(json) {
+                        
+                            $('#scrolltopflag').val('2');
+                            if(json.page != ''){
+                                document.getElementById('currentpage').value=json.page;
+                            }
+                        
+                            if(json.data != '' && json.error == 1){
+                                ToLoadDate(json.data);
+                            }else if(json.error == 2){
+                                oGetMore.innerHTML= '已经显示全部动态';
+                                Btn=false;
+                            }
+                        
+                        });
+                    }	
+                }
+            }
+        
+        }
+//        oGetMore.onclick=ToLoadDate;
+    }
+    function ToLoadDate(data){ 
+        Btn=false;	
+		
+        for(var i=0; i<data.length; i++){
+            var str='<a href="{%blogUrl%}" class="Tou_img Tc ToBlock Fl"><img src="{%topSrc%}" width="30" height="30" /></a>'+
+                '<div class="Tou_desc">'+
+                '<div class="ZhuanZai">'+
+                '<h3 class="ZZ-zi F14"><span><a href="{%blogUrl2%}">{%name%}</a></span><font class="Hui_color">{%isType%}了博文</font></h3>'+
+                '<time class="ZZ-time Hui_color Pr10">{%time%}</time>'+
+                '</div>'+
+                '<div class="Lst-new-tit Red_color">'+
+                ' <h3 class="Fl F16 ">{%isDing%}{%isJian%}{%isZhuan%}<a href="{%arturl%}">{%title%}</a></h3>'+
+                '{%isContainImg%}'+
+                '</div>'+
+                '<p class="Lst-new-desc F16 Pr10"><a href="{%arturl2%}">{%content%}</a></p>'+
+                '</div>';
+            for(var attr in data[i]){
+                var row=data[i];
+				
+                if(attr==DataFields.blogUrl){
+                    str=str.replace("{%blogUrl%}", row[attr]);
+                    str=str.replace("{%blogUrl2%}", row[attr]);
+                }; 
+                if(attr==DataFields.arturl){
+                    str=str.replace("{%arturl%}", row[attr]);
+                    str=str.replace("{%arturl2%}", row[attr]);
+                }; 
+                if(attr==DataFields.time){
+                    str=str.replace("{%time%}", row[attr]);
+                }; 
+                if(attr==DataFields.name){
+                    str=str.replace("{%name%}", row[attr]);
+                };
+                
+				
+                if(attr==DataFields.title){
+                    str=str.replace("{%title%}", row[attr]);
+                };
+				
+                if(attr==DataFields.content){
+                    str=str.replace("{%content%}", row[attr]);	
+                };
+				
+                if(attr==DataFields.topSrc){
+                    str=str.replace("{%topSrc%}", row[attr]);
+                };
+				
+                if(attr==DataFields.isContainImg){
+                    if(parseInt(row[attr])){
+                        str=str.replace("{%isContainImg%}", '<span class="Bh_img Fl"></span>');
+                    }else{
+                        str=str.replace("{%isContainImg%}", '');
+                    }
+                };
+				
+                if(attr==DataFields.isZhuan){
+					
+                    if(parseInt(row[attr])){
+                        str=str.replace("{%isType%}", '转载');
+                        str=str.replace("{%isZhuan%}", '<font class="Red_color">[转]</font>');
+                    }else{
+                        str=str.replace("{%isZhuan%}","");
+                    }
+					
+                };
+				
+                if(attr==DataFields.isJian){
+					
+                    if(parseInt(row[attr])){
+                        str=str.replace("{%isType%}", '推荐');
+                        str=str.replace("{%isJian%}", '<font class="Red_color">[荐]</font>');
+                    }else{
+                        str=str.replace("{%isJian%}", '');
+                    }
+                };
+				
+                if(attr==DataFields.isDing){
+					
+                    if(parseInt(row[attr])){
+                        str=str.replace("{%isType%}", '顶');
+                        str=str.replace("{%isDing%}", '<font class="Red_color">[顶]</font>');
+                    }else{
+                        str=str.replace("{%isDing%}", '');
+                    }
+                };
+                if(row['property'] == 0){
+                    str=str.replace("{%isType%}", '发表');
+                }
+                if(row['property'] == 4){
+                    str=str.replace("{%isType%}", '收藏');
+                }
+				
+            }
+            var oDiv=document.createElement('div');
+            oDiv.className="Lst-o-new Mt10";
+            oDiv.innerHTML=str;
+            oLst_news.insertBefore(oDiv, oGetMore);
+        };
+		
+        Btn=true;
+    }
+</script>
+<?php  include $commonfooter; ?>	
+<?php }else{ ?>
+<?php  include $commonfooter; ?>	
+<section class="GuanZhu2 F14 Tc" id="GuanZhu2">
+    <a href="<?php echo $blogurl.'/'.$bloginfo['DomainName'].'/recomblog';?>" >关注你感兴趣的人，</a>他的动态将会展示在这里
+    <p></p>
+</section>
+<script type="text/javascript">
+    function getByClass(oParent, sClass)
+    {
+        var aEle=oParent.getElementsByTagName('*');
+        var reg=new RegExp("\\b"+sClass+"\\b","gi");
+        var aResult=[];
+	
+        for(var i=0; i<aEle.length; i++){
+		
+            if(reg.test(aEle[i].className)){
+                aResult.push(aEle[i]);
+            };
+        }
+	
+        return aResult;
+    }
+    var oGuanZhu2=C.G('GuanZhu2');
+    var ViewH=document.documentElement.clientHeight||document.body.clientHeight;
+    var oHeader=getByClass(document,'Header')[0];
+    var oFooter=getByClass(document,'Footer')[0];
+    var oHeaderH=oHeader.offsetHeight;
+    var oFooterH=oFooter.offsetHeight;
+	
+    oFooter.style.position=oGuanZhu2.style.position="absolute";
+    oFooter.style.bottom=0;
+    oGuanZhu2.style.top=(ViewH-oHeaderH-oFooterH)/2+oGuanZhu2.offsetHeight+"px";
+</script>
+<?php }?>
+

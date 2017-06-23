@@ -1,0 +1,70 @@
+<div class="in_cont_r">
+    <div class="stab_tit">
+        <a href="{$base_url}/user/subscribe?msg=comment" id="stab1" <if condition="$Think.get.type eq 0 ">class="hover"</if>>我的评论</a>
+        <a href="{$base_url}/user/subscribe?msg=comment&type=2" id="stab2" <if condition="$Think.get.type eq 2 ">class="hover"</if>>跟帖</a>
+    </div>
+    <if condition="$Think.get.type eq 2 ">
+        <div id="con_stab_2" class="stab_cont">
+            <div class="comment-list" data-toggle="comment_pane" >
+                <ul id="comment_list">
+                    <volist name='comment' id='vo'>
+
+                        <div class="bottom_pl clearfix follow">
+                            <div class="ifollow">
+                                <div class="fl bottom_pl_touxiang"> <img src="/Public/Home/images/default.png"></div>
+                                <p><b>{$vo['username']}</b> 回复你</p>
+                            </div>
+                            <div class="upfloor">
+                                <div class="dt_tit"><span>{$vo.news_msg.typename}</span><h2><a href="{$base_url}/r{$vo.news_id}" target="_blank">{$vo.news_title}</a></h2></div>
+                                <div class="fl bottom_pl_touxiang"> <img src="{:setUpUrl($vo['head_pic'])}"></div>
+                                <div class="fl w320">
+                                    <div><p><a href="javascript:;">{$vo['username']}</a><i>{:fnewdate($vo['add_time'])}</i></div>                                   
+                                    <div class="comment_cont">
+                                        <p>{$vo.content}</p>
+                                    </div>
+                                </div>
+                                <notempty name='vo.news_msg.pic'>
+                                    <div class="comment_pic"><a href="{$base_url}/r{$vo.news_id}" target="_blank">
+                                            <img width='120px;' height="80px;" src="{$vo.news_msg.pic}">
+                                        </a></div>
+                                </notempty>                                    
+                            </div>
+                        </div>
+                    </volist>
+                    <!--<p class="follow_tip">使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内</p>-->
+
+                </ul>
+            </div>
+            {$page_html}
+        </div>
+        <else />
+        <div id="con_stab_1" class="stab_cont">
+            <div class="comment-list" data-toggle="comment_pane" >
+                <ul id="comment_list">
+                    <volist name='comment' id='vo'>
+                        <div class="bottom_pl clearfix">
+                            <div class="dt_tit"><span>{$vo.news_msg.typename}</span><h2><a href="{$base_url}/r{$vo.news_id}" target="_blank">{$vo.news_title}</a></h2></div>
+                            <div class="fl bottom_pl_touxiang"> <img src="{:setUpUrl($USER['head_pic'])}"></div>
+                            <div class="fl w320">
+                                <div><p><a href="javascript:;">时间:</a><i>{:fnewdate($vo['add_time'])}</i></div>                                   
+                                <div class="comment_cont">
+                                    <p>{$vo.content}</p>
+                                </div>
+                            </div>
+                            <notempty name='vo.news_msg.pic'>
+                                <div class="comment_pic"><a href="{$base_url}/r{$vo.news_id}" target="_blank">
+                                        <img width='120px;' height="80px;" src="{$vo.news_msg.pic}">
+                                    </a></div>
+                            </notempty>
+                        </div>
+                    </volist>
+                </ul>
+            </div>
+            {$page_html}
+        </div>
+
+    </if>
+
+    <!--回复-->
+
+</div>

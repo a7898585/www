@@ -1,0 +1,102 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="kavascript:;">接收域名</a>
+    </div>
+    <div class="add_temp" id="navhljs1_c1">
+        <div class="add_temp_b">
+            <ul>
+                <li>
+                    <p>类型：</p>
+                    {$pushInfo.title}
+                </li>
+                <li>
+                    <p>域名：</p>{$pushInfo.domains|nl2br}
+                </li>
+                <li>
+                    <p>来源ID：</p>
+                    {$pushInfo.mid_from}
+                </li>
+                <li>
+                    <p>索要金额：</p>
+                    {$pushInfo.money}
+                </li>
+                <li>
+                    <p>发起时间：</p>
+                    {$pushInfo.create_time|date='Y-m-d H:i:s',###}
+                </li>
+                <li>
+                    <p>附言：</p>
+                    {$pushInfo.talkto}
+                </li>
+            </ul>
+            <div class="clear"></div>
+            <form id="form_push_accept" name="form_push_accept" action="" method="post">
+                <ul>
+                    <li>
+                        <p>选择模板：</p>
+                        <select name="tmpl">
+                            <volist name="templates" id="title">
+                                <option value="{$key}">{$title}</option>
+                            </volist>
+                        </select>
+                    </li>
+                    <li style="width:500px;">
+                        <p>&nbsp;</p>
+                        <label style="width: auto;"><input type="checkbox" name="agree" value="yes" checked />&nbsp;我已阅读并同意《<a href="#">米仓网域名PUSH服务协议</a>》</label>
+                    </li>
+                    <li>
+                        <input type="button" onclick="check_seccode('form_push_accept')" value="确定提交" class="list_submit" />
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    var code_url = '{$res.url}';
+    var code_msg = '{$res.msg}';
+    if(code_url){
+        layer.alert(code_msg, function(){location.href=code_url; });
+    }
+    function getCode(){
+        var t = '#getcode';
+        var id = $('#member_id').val();
+        var weixin = $('#member_weixin').val();
+        if(!id || !weixin){
+            return false;
+        }
+        $(t).val('发送中');
+        $.get("/oper/send_weixin_sms", { id: id,weixin:weixin} ,function(data){
+            if(data!='ok'){
+                $(t).val('发送验证码');
+                layer.msg(data,1,3);
+                return false;
+            }
+            $(t).attr('disabled','true');
+            var count1 =60;
+            timer1 = setInterval(function(){
+                count1=count1-1;
+                $(t).val(count1+'秒后');
+                if(count1==0){
+                    $(t).attr('disabled',false);
+                    $(t).val('重新发送');
+                    count1=60;
+                    clearInterval(timer1);
+                }
+            },1000);
+        });
+    }
+
+</script>
+<literal>
+    <script type="text/javascript">
+       function form_push_accept(){
+                if ($(':checkbox[name="agree"]').prop('checked') == false){
+                    layer.msg('您必要阅读并同同意《米仓网域名PUSH服务协议》后,方便提交PUSH请求。');
+                    return false;
+                }
+                $(':submit').attr('disabled', true);
+                $('#form_push_accept').submit();
+	   }
+    </script>
+</literal>

@@ -1,0 +1,27 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：高级设置</div>
+    </div>
+    <form action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/template/Index" target="_blank" id="toIndex" name="toIndex" method="get">
+    </form>
+    <div class="szym06" style="height:500px">
+        <div class="szym-nr01">自定义模板可以让您：</div>
+        <table cellspacing="0" cellpadding="3" width="95%" border="0">
+            <tbody>
+                <tr>
+                    <td valign="top"><img border="0" alt="" src="http://images.cnfol.com/uploads/mod_blog/1/03.gif" WIDTH=200 height=200/></td>
+                    <td valign="top"><img border="0" alt="" src="http://images.cnfol.com/uploads/mod_blog/1/02.gif" WIDTH=200 height=200/></td>
+                    <td valign="top"><img border="0" alt="" src="http://images.cnfol.com/uploads/mod_blog/1/01.gif" WIDTH=200 height=200/></td>
+                </tr>
+                <tr>
+                    <td>　　　　自由打开和关闭内容模块</td>
+                    <td>　　　　选择不同版式</td>
+                    <td>　　　　选择喜欢的背景</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="szym-nr01"><img align="absMiddle" border="0" alt="" src="http://img.cnfol.com/images/advan_setcss.gif" /> 自定义完毕后，点击&ldquo;保存修改&rdquo;按钮，设置才可生效。</div>
+        <div align="center"><input class="but_1" type="button" name="sub" value="进入高级设置" onclick="javacript:void(document.getElementById('toIndex').submit())"/></div>
+    </div>
+</div>

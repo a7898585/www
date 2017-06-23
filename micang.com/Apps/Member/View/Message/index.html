@@ -1,0 +1,35 @@
+<div class="onlineplay">
+    <div class="navhl">
+        <a class="navhl_h" href="javascript:;">所有消息</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody><tr class="table_title">
+                        <td width="80">标题</td>
+                        <td width="80">时间</td>
+                        <td width="80">状态</td>
+                        <td width="80">操作</td>
+                    </tr>
+                <volist name="lists" id="item">
+                    <tr>
+                        <td>{$item.title}</td>
+                        <td>{$item.create_time|date='Y-m-d H:i:s',###}</td>
+                        <td><switch name="item.status">
+                    <case value="0">未读</case>
+                    <case value="1">已读</case>
+                    </switch></td>
+                    <td><a href="/message/detail?id={$item.id}">查看</a></td>
+                    </tr>
+                </volist>
+                <tr>
+                    <td colspan="4">
+                        {$pager}
+                    </td>
+                </tr>
+                </empty>
+                </tbody></table>
+            <!--<div class="wrap_a_b"><a class="doma_d_btn2" href="#"></a></div>-->
+        </div>
+    </div>
+</div>

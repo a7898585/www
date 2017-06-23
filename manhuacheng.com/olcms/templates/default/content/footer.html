@@ -1,0 +1,79 @@
+<div class="clear1"></div>
+<!--抢票王-->
+<div style="margin: auto; width:1000px;">
+                                                          
+<div class="footer">  
+  <div class="footernew">
+    <div class="footerbox_1">
+      <div class="footerbox_1a">网站导航</div>
+      <div class="footerbox_1b"> {pc:content action="category" catid="0" num="5" order="listorder ASC"}
+        {loop $data $r} <a target="_blank" href="{$r[url]}">{$r[catname]}</a><br>
+        {/loop}
+        {/pc} </div>
+    </div>
+    <div class="footerbox_1">
+      <div class="footerbox_1a">关于我们</div>
+      <div class="footerbox_1b"> {pc:content action="category" catid="58" num="5" order="listorder ASC"}
+        {loop $data $r} <a target="_blank" href="{$r[url]}">{$r[catname]}</a><br>
+        {/loop}
+        {/pc} </div>
+    </div>
+    <div class="footerbox_3">
+      <div class="footerbox_3a">漫画城</div>
+      <div class="footerbox_3b">
+        <div class="image">
+          <div class="imagebox"><img src="{IMG_PATH}img/u269_normal.png"></div>
+          <div class="textbox"><a target="_blank" href="http://weibo.com/manhuacheng">新浪微博</a></div>
+        </div>
+        <div class="clear"></div>
+        <div class="imagetext">扫描二维码，关注漫画城</div>
+      </div>
+    </div>
+    <div class="footerbox_1">
+      <div class="footerbox_1a">动漫交流</div>
+      <div class="footerbox_1b"> {pc:content action="category" catid="70" num="5" order="listorder ASC"}
+        {loop $data $r} <a target="_blank" href="{$r[url]}">{$r[catname]}</a><br>
+        {/loop}
+        {/pc} </div>
+    </div>
+    <div class="footerbox_1" >
+      <div class="footerbox_1a">更多</div>
+      <div class="footerbox_1b" style="border-right:none;"> {pc:content action="category" catid="63" num="5" order="listorder ASC"}
+        {loop $data $r} <a target="_blank" href="{$r[url]}">{$r[catname]}</a><br>
+        {/loop}
+        {/pc} <a target="_blank" href="/index.php?m=feedback">留言建议</a><br>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+ 
+  <div class="footerheight">
+    <p>{$footer_txt}</p>
+    <?php  if($_SERVER['REQUEST_URI'] != "/"){ ?>
+{GetAd(1)}
+{GetAd(2)}
+
+<?php } ?>
+{GetAd(5)}
+    <p>如有侵权作品或是违反国家法律作品，请联系448176171@qq.com审核无误后我们会立即删掉!</p>
+    <p>{COPYRIGHT}</p>
+    <p><a href="{siteurl()}">{$SEO['site_name']}</a>&nbsp;|&nbsp;<a href="#" style="padding-right:20px;">推荐给朋友</a>&nbsp;&nbsp;广告合作 QQ:448176171  &nbsp;&nbsp;{COMPANY}<a href="http://www.miibeian.gov.cn/" target="_blank" style="padding-left:20px;">{MIIBEIAN}</a></p>
+  </div>
+  <div style="display:none"> 
+    <script language="javascript" type="text/javascript" src="http://js.users.51.la/15855535.js"></script>
+    <noscript>
+    <a href="http://www.51.la/?15855535" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/15855535.asp" style="border:none" /></a>
+    </noscript>
+  </div>
+</div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?5b770694dd85461e90a74c644ecd2647";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body></html>

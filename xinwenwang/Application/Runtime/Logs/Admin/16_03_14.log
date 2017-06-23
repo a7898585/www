@@ -1,0 +1,693 @@
+[ 2016-03-14T11:12:13+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.009254s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.024141s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.024500s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+
+[ 2016-03-14T11:12:13+08:00 ] 127.0.0.1 /public/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000448s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000529s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000654s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000135s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000329s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.082945s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.083134s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.010214s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.010381s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.022388s ]
+INFO: [ app_end ] --END-- [ RunTime:0.022594s ]
+
+[ 2016-03-14T11:12:16+08:00 ] 127.0.0.1 /public/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000036s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000719s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000786s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000966s ]
+SQL: SHOW COLUMNS FROM `xw_admin` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `xw_admin` WHERE `username` = 'xmlijian' LIMIT 1   [ RunTime:0.0039s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000170s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.034848s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035019s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000783s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000920s ]
+
+[ 2016-03-14T11:12:16+08:00 ] 127.0.0.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000595s ]
+
+[ 2016-03-14T11:12:16+08:00 ] 127.0.0.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000423s ]
+
+[ 2016-03-14T11:12:17+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000582s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000842s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001034s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000190s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000351s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 99 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.103926s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.104057s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000364s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000472s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000537s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000626s ]
+
+[ 2016-03-14T11:12:20+08:00 ] 127.0.0.1 /friends/all
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000038s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000603s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000773s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000961s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0060s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `xw_friend_links` LIMIT 1   [ RunTime:0.0037s ]
+SQL: SELECT * FROM `xw_friend_links` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0059s ]
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000153s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000310s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 99 行.
+NOTIC: [8] Undefined index: name D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022717s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022853s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000478s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000620s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000763s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000925s ]
+
+[ 2016-03-14T11:17:19+08:00 ] 127.0.0.1 /friends/edit?id=25
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000581s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000565s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000689s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0062s ]
+SQL: SELECT * FROM `xw_friend_links` WHERE `id` = 25 LIMIT 1   [ RunTime:0.0048s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000108s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000217s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 172 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 179 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 180 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 182 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 183 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.061113s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.061276s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000480s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000565s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000703s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000797s ]
+
+[ 2016-03-14T11:17:30+08:00 ] 127.0.0.1 /friends/edit?id=25
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000522s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000526s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000653s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0050s ]
+SQL: UPDATE `xw_friend_links` SET `title`='军事前沿网',`url`='http://www.junshiqianyanwang.com/',`order`='0',`status`='0',`remark`='fsdfas' WHERE `id` = 25 [ RunTime:0.0042s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000068s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000194s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007662s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007793s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000266s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000350s ]
+
+[ 2016-03-14T11:17:31+08:00 ] 127.0.0.1 /friends/edit?id=25
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000486s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000699s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000883s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0055s ]
+SQL: SELECT * FROM `xw_friend_links` WHERE `id` = 25 LIMIT 1   [ RunTime:0.0078s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000167s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000270s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 172 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 179 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 180 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 182 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 183 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012523s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012621s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000256s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000336s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000511s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000592s ]
+
+[ 2016-03-14T11:17:38+08:00 ] 127.0.0.1 /friends/edit?id=25
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000446s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000540s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000640s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0053s ]
+SQL: SELECT * FROM `xw_friend_links` WHERE `id` = 25 LIMIT 1   [ RunTime:0.0188s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000109s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000262s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 172 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 179 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 180 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 182 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 183 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012341s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012441s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000389s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000472s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000591s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000672s ]
+
+[ 2016-03-14T11:19:20+08:00 ] 127.0.0.1 /friends/all
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000459s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000599s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000708s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0072s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `xw_friend_links` LIMIT 1   [ RunTime:0.0041s ]
+SQL: SELECT * FROM `xw_friend_links` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0050s ]
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000098s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000197s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 99 行.
+NOTIC: [8] Undefined index: name D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014351s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014448s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000379s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000460s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000556s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000641s ]
+
+[ 2016-03-14T11:19:24+08:00 ] 127.0.0.1 /friends/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000530s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000681s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000800s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000099s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000195s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 136 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 145 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 154 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 163 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 172 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 179 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 180 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 182 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 183 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014153s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014938s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001331s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001451s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000694s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000789s ]
+
+[ 2016-03-14T11:19:33+08:00 ] 127.0.0.1 /friends/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000559s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000550s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000651s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+
+[ 2016-03-14T11:19:56+08:00 ] 127.0.0.1 /friends/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000562s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000671s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000782s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+
+[ 2016-03-14T11:20:25+08:00 ] 127.0.0.1 /friends/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000544s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000523s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000634s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0047s ]
+SQL: INSERT INTO `xw_friend_links` (`title`,`url`,`order`,`status`,`remark`) VALUES ('万年历','www.wannianli.com','0','1','无') [ RunTime:0.0051s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000068s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000174s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006681s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006792s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000354s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000441s ]
+
+[ 2016-03-14T11:20:26+08:00 ] 127.0.0.1 /Friends/all
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000043s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000719s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000642s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000775s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0054s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `xw_friend_links` LIMIT 1   [ RunTime:0.0041s ]
+SQL: SELECT * FROM `xw_friend_links` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0047s ]
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000204s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 99 行.
+NOTIC: [8] Undefined index: name D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013481s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013583s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000454s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000561s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000652s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000744s ]
+
+[ 2016-03-14T11:20:36+08:00 ] 127.0.0.1 /friends/edit?id=25
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000546s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000534s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000641s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0064s ]
+SQL: SELECT * FROM `xw_friend_links` WHERE `id` = 25 LIMIT 1   [ RunTime:0.0042s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000104s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000203s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 172 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 179 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 180 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 182 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 183 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012959s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013060s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000342s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000424s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001408s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001506s ]
+
+[ 2016-03-14T11:31:13+08:00 ] 127.0.0.1 /friends/edit?id=25
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000609s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000719s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000864s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0040s ]
+SQL: UPDATE `xw_friend_links` SET `title`='军事前沿网',`url`='http://www.junshiqianyanwang.com/',`order`='0',`status`='1',`remark`='' WHERE `id` = 25 [ RunTime:0.0027s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000064s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000162s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007686s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007794s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000446s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000528s ]
+
+[ 2016-03-14T11:31:14+08:00 ] 127.0.0.1 /friends/edit?id=25
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000697s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000591s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000718s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0034s ]
+SQL: SELECT * FROM `xw_friend_links` WHERE `id` = 25 LIMIT 1   [ RunTime:0.0173s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000164s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000263s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 172 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 179 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 180 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 182 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 183 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013426s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013535s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000487s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000570s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000733s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000814s ]
+
+[ 2016-03-14T11:31:20+08:00 ] 127.0.0.1 /friends/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000039s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000482s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000602s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000720s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000159s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000291s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 136 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 145 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 154 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 163 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 172 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 179 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 180 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 182 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 183 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014211s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014333s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000474s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000560s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000722s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000832s ]
+
+[ 2016-03-14T11:31:22+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000501s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000673s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000804s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000122s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000233s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\b595b808c2ebeeeb0478ffc30bb4e87a.php 第 99 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019081s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019201s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000557s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000689s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000891s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001060s ]
+
+[ 2016-03-14T11:31:24+08:00 ] 127.0.0.1 /friends/all
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000674s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000512s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000640s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+SQL: SHOW COLUMNS FROM `xw_friend_links` [ RunTime:0.0060s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `xw_friend_links` LIMIT 1   [ RunTime:0.0025s ]
+SQL: SELECT * FROM `xw_friend_links` ORDER BY id desc LIMIT 0,10   [ RunTime:0.0039s ]
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+NOTIC: [8] Undefined index: query D:\258\xinwenwang\Application\Common\Extend\Page.class.php 第 78 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000111s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000218s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 99 行.
+NOTIC: [8] Undefined index: name D:\258\xinwenwang\Application\Runtime\Cache\Admin\fe6c0d3bdd0babe15d606a42d12cf81e.php 第 149 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014029s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014148s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000465s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000555s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000675s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000785s ]
+
+[ 2016-03-14T11:31:26+08:00 ] 127.0.0.1 /friends/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000399s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000479s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000612s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000118s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000227s ]
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 73 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 74 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 83 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 84 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 92 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 93 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 98 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: nav D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 99 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 136 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 145 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 154 行.
+NOTIC: [8] Undefined variable: friendInfo D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 163 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 172 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 179 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 180 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 182 行.
+NOTIC: [8] Undefined variable: info D:\258\xinwenwang\Application\Runtime\Cache\Admin\988a1820cd72570a20c5357fa4cc4fb0.php 第 183 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012659s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012751s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000394s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000481s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000593s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000678s ]
+
+[ 2016-03-14T11:31:31+08:00 ] 127.0.0.1 /friends/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000330s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000715s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000447s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000562s ]
+NOTIC: [8] Use of undefined constant fasle - assumed 'fasle' D:\258\xinwenwang\ThinkPHP\Common\functions.php 第 652 行.
+

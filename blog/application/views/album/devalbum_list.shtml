@@ -1,0 +1,111 @@
+<?php  include $devmyblogloginheader;?>	
+<!--顶部end-->
+<!--内容-->
+<div class="Wrap Cf Mt15">
+    <!--左-->
+    <div class="MaLft MyAlbums">
+        <h3>我的相册</h3>
+        <?php if(isset($isowner) && ($isowner == true)){?>
+        <a class="UploadBtn" style="cursor: pointer;" onclick="javascript:addphoto('<?php echo $bloginfo['DomainName'];?>','');">上传照片</a>
+        <a class="GreateBtn" style="cursor: pointer;" onclick="javascript:addalbum('<?php echo $bloginfo['DomainName'];?>');" >创建相册</a>
+        <?php }?>
+        <form name="autorform" id="autorform" method="post">
+            <input type="hidden" name="albumID" id="albumID">
+            <input type="hidden" name="act" id="act" value="delalbum">
+            <input type="hidden" name="flashCode" id="flashCode">
+        </form>
+        <ul class="AlbumsLst Cf">
+            <?php
+            if(!empty($album['list']))
+            {
+            foreach($album['list'] as $aval)
+            {
+
+            if(!preg_match('/http:\/\/(0*)/', $aval['CoverURL']))
+            {
+            $aval['CoverURL'] = 'http://images.cnfol.com/uploads/mod_blog/1/nothing.gif';
+            }
+
+            $dot = '';
+
+            if(strlen($aval['Name']) > 15) {
+            $dot = '..';
+            $aval['Name']=utf8_str($aval['Name'],15,'false').$dot;
+            }
+            ?>
+            <li>
+                <a class="AlbumsWrap" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/photolist/<?php echo $aval['AlbumID'];?>">
+                    <img src="<?php echo $aval['CoverURL'];?>" onerror="this.src='http://images.cnfol.com/uploads/mod_blog/1/nothing.gif';error=null; this.style.display='none'"  border="0" onload="SetImgWidth(this,'200','145');this.style.display='';">
+                </a>
+                <p class="AlbumsIntro"><span class="Title"><?php echo filter_word($aval['Name']);?></span><span class="Sum"><?php echo $aval['PhotoNum'];?>张</span></p>
+                <?php 
+                if(isset($isowner) && ($isowner == true))
+                {?>
+                <p class="AlbumsHandle">
+                    <a class="Edit" href="javascript:;" onclick="javascript:editalbum('<?php echo $aval['AlbumID'];?>','<?php echo $bloginfo['DomainName'];?>');">编辑</a>
+                    <a class="Del" href="javascript:;" onclick="javascript:delalbum('<?php echo $aval['AlbumID'];?>','<?php echo $bloginfo['DomainName'];?>', '<?php echo getVerifyStr($bloginfo['UserID'].$aval['AlbumID']);?>');">删除</a>
+                </p>
+                <?php
+                }?>
+            </li>
+            <?php
+            }
+            }
+            else
+            {?>
+            <li>
+                <a class="AlbumsWrap" href="javascript:;"><img src="http://images.cnfol.com/uploads/mod_blog/1/nothing.gif" onerror="this.src='http://images.cnfol.com/uploads/mod_blog/1/nothing.gif';error=null; this.style.display='none'"  border="0" onload="SetImgWidth(this,'200','145');this.style.display='';"></a>
+                <p class="AlbumsIntro"><span class="Title">默认相册</span><span class="Sum">0张</span></p>
+            </li>
+            <?php
+            }?>
+
+        </ul>    
+        <!--        分页
+                <div class="Page">
+                    <div class="SelectPage">当前第<em>1/15</em>页，跳转至第<input name="" type="text" />页</div>
+                    <div class="NextPage"><a href="#">首页</a>|<a href="#">上一页</a>|<a href="#">下一页</a>|<a href="#">尾页</a></div>
+                </div>
+                end 分页-->
+    </div>
+    <!--end左-->
+    <!--右-->
+    <div class="MaRgt">
+    <?php  include $devmyblogcommonright; ?>
+    </div>
+    <!--end 右--> 
+</div>
+
+
+<div id="DeterminePop" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">是否确认删除该标签在前台的展示？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="deltag();Dialog.Close();" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">取消</a></p>
+    </div>
+</div>
+
+<input type="hidden" id="abid" />
+<input type="hidden" id="domain" />
+<input type="hidden" id="co" />
+<div id="TMDelete" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">您确定要删除该相册？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="delalbumSure();" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">返回</a></p>
+    </div>
+</div>
+
+<div id="TMDeleteSuccess" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp" id="popupTip">删除成功</p>
+    </div>
+</div>
+
+<div id="iframeSrc" class="HandIn PlusSucPop W200" >
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <iframe id="popupIframe" name="iFrame1" width="495px"  height="260px" frameborder="0" scrolling="no"  src=""></iframe>
+</div>
+
+<?php include $peronalfoot;?>

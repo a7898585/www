@@ -1,0 +1,68 @@
+
+
+<div class="W960">
+    <div class="RgtCont Bdreb R W760 Mt15">
+        <h3>
+            <a href="javascript:;" class="CoWht BtnC R Mr10 Mt10" onClick="Dialog('TMDelete');">删除</a>
+            <span class="SpCgx">共有草稿<i class="Tszt">15</i>条</span></h3>
+        <div class="BgCont">
+            <?php
+            if($artList['RetRecords'] > 0){
+            if($artList['RetRecords'] == 1){
+            $artList['Record'] = array(0=>$artList['Record']);
+            }
+            foreach($artList['Record'] as $art)
+            {?>
+            <p class="BdrBsh Pl10">
+                <span class="R"><i class="Mr10"><?php echo $art['AppearTime'];?></i>|<a href="Bqsz.html" class="Aclk">编辑</a>|
+                    <a href="javascript:;" class="Aclk" onClick="delDraf('<?php echo $art['ArticleID'];?>')">删除</a></span>
+                <input type="checkbox" class="InpChck Mr10">
+                <a class="Icgx" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html" target="_blank"><?php echo $art['Title'];?></a>
+            </p>
+            <?php
+            }
+            }?>
+            <p class="BdrBsh Pl10">
+                <span class="R"><i class="Mr10">2013-02-22 22:22</i>|<a href="Bqsz.html" class="Aclk">编辑</a>|<a href="javascript:;" class="Aclk" onClick="Dialog('TMDelete');">删除</a></span>
+                <input type="checkbox" class="InpChck Mr10"><a class="Icgx Icgxsp" href="####" target="_blank">张国荣，娱乐圈贵族</a>
+            </p>
+            <p class="BdrBsh Pl10">
+                <span class="R"><i class="Mr10">2013-02-22 22:22</i>|<a href="Bqsz.html" class="Aclk">编辑</a>|<a href="javascript:;" class="Aclk" onClick="Dialog('TMDelete');">删除</a></span>
+                <input type="checkbox" class="InpChck Mr10"><a class="Icgx Icgxpic" href="####" target="_blank">张国荣，娱乐圈贵族</a>
+            </p>
+            <p class="BdrBsh Pl10">
+                <span class="R"><i class="Mr10">2013-02-22 22:22</i>|<a href="Bqsz.html" class="Aclk">编辑</a>|<a href="javascript:;" class="Aclk" onClick="Dialog('TMDelete');">删除</a></span>
+                <input type="checkbox" class="InpChck Mr10"><a class="Icgx" href="####" target="_blank">张国荣，娱乐圈贵族</a>
+            </p>
+            <div class="Page Mt15">
+                <?php echo $pagebar;?>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="TMDelete" class="HandIn PlusSucPop W200">
+        <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+        <div class="P20 Bgdfff Txtcntr">
+            <p class="CoRed Yzxxp">您确定要删除这条信息？</p>
+            <p class="Mt10 Yzxxp"><a href="javascript:return true;" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">返回</a></p>
+        </div>
+    </div>  
+
+</div>
+<script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Cleaner.js,ui/Js/Select/Select.js,uj/Js/Reg/TreeMenu.js,Cm/Js/Dialog.js" type="text/javascript"></script>
+<script type="text/javascript">
+    Cleaner("C2");
+    Selects('SlctFrst');
+    TreeMenu("Tre");
+    function delDraf(id){
+        if(Dialog('TMDelete')){
+            alert(1);
+        }
+    }
+</script>
+<script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,ua/js/Public/Base64.js,ua/js/Public/Login.js"></script>
+<script type="text/javascript">
+    Tn.TopLogin();
+</script>

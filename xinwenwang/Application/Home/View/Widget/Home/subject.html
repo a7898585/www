@@ -1,0 +1,21 @@
+<notempty name="list_first">
+    <h3><a href="{$list_first.url}" target="_blank" title="{$list_first.title}">
+            {$list_first.title}</a><i>{$list_first.update_time|fnewdate}</i>
+    </h3>
+    <div class="text">
+        <span><img src="{$list_first['img_list'][0]|setUpUrl}"alt="{$list_first.title}" width="95" height="95"></span>
+        <p>{$list_first.intro|msubstr=0,40}<a href="{$list_first.url}" target="_blank" title="{$list_first.title}">【详情】</a></p>
+    </div>
+</notempty>
+<notempty name="list">
+    <ul>
+        <volist name="list" id="vo">
+            <li>
+                <a href="{$vo.url}" target="_blank" title="{$vo.title}">
+                    {$vo.title|msubstr=0,18}
+                </a>
+                <i>{$vo.show_time}</i>
+            </li>
+        </volist>              
+    </ul>
+</notempty> 

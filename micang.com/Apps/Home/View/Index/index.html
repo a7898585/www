@@ -1,0 +1,94 @@
+<div class="wrap">
+    <!--焦点图 开始-->
+    {:W('Cate/index_photo')}
+    <!--焦点图 结束-->
+    <div class="tabbox">
+        <div class="navhl" id="navhljs1">
+            <a href="javascript:void(0);" onclick="jdhddh(this,0)" class="navhl_h">最新资讯</a>
+            <a href="javascript:void(0);" onclick="jdhddh(this,1)" class="navhl_q">热门资讯</a>
+        </div>
+        <div id="navhljs1_c0" class="list" style="display:block;">
+            {:W('News/tab_list',array('7'))}
+        </div>
+        <div id="navhljs1_c1" class="list" style="display:none;">
+            {:W('News/tab_list',array('7', array('click_nums'=>'DESC')))}
+        </div>
+    </div>
+</div>
+<div class="wrap">
+    <div class="price_list">
+        <div class="title">
+            <h3 class="titleh3"><i class="iconfont">&#xe601;</i>限时竞价</h3>
+            <a href="{:getDoMain()}sell/page?type=2" class="more">more</a>
+        </div>
+        {:W('Sale/sale_list',array('2'))}
+    </div>
+    <div class="price_list ml20">
+        <div class="title">
+            <h3 class="titleh3"><span></span><em class="fl">一口价</em></h3>
+            <a href="{:getDoMain()}sell/page?type=1" class="more">more</a>
+        </div>
+        {:W('Sale/sale_list',array('1'))}
+    </div>
+    <div class="price_list">
+        <div class="title">
+            <h3 class="titleh3"><i class="iconfont">&#xe60b;</i>一元起拍</h3>
+            <a href="{:getDoMain()}sell/page?type=2&price_from=0&price_to=0" class="more">more</a>
+        </div>
+        {:W('Sale/certify')}
+    </div>
+    <div class="price_list ml20">
+        <div class="title">
+            <h3 class="titleh3"><i class="iconfont">&#xe605;</i>询价域名</h3>
+            <a href="{:getDoMain()}sell/page?type=3" class="more">more</a>
+        </div>
+        {:W('Sale/sale_list',array('3'))}
+    </div>
+</div>
+<div class="mt20"></div>
+<div class="wrap adva">
+    <img src="/Public/Home/images/74237.jpg" class="pic" />
+    <ul>
+        <li>
+            <p>顶级域名服务商</p>
+            <div class="adva_a"><i class="iconfont">&#xe60f;</i></div>
+            <div class="adva_b">国家核心注册商</div>
+            <div class="adva_b">五星级注册商资质</div>
+        </li>
+        <li>
+            <p>域名自由过户转出</p>
+            <div class="adva_c"><i class="iconfont">&#xe60c;</i></div>
+            <div class="adva_b">转出可以立即放出</div>
+            <div class="adva_b">站内带价PUSH可提现</div>
+        </li>
+        <li>
+            <p>域名隐私保护</p>
+            <div class="adva_d"><i class="iconfont">&#xe60a;</i></div>
+            <div class="adva_b">完全免费</div>
+            <div class="adva_b">保护个人隐私</div>
+        </li> 
+        <li>
+            <p>专业的经纪服务</p>
+            <div class="adva_e"><i class="iconfont">&#xe604;</i></div>
+            <div class="adva_b">专业、尽责、贴心</div>
+            <div class="adva_b">一键委托，省心又省钱</div>
+        </li>
+        <li>
+            <p>安全快捷的交易</p>
+            <div class="adva_f"><i class="iconfont">&#xe608;</i></div>
+            <div class="adva_b">便捷的交易方式</div>
+            <div class="adva_b">完善的安全交易制度</div>
+        </li>
+        <li>
+            <p>免费SSL证书</p>
+            <div class="adva_g"><i class="iconfont">&#xe602;</i></div>
+            <div class="adva_b">马上领取</div>
+            <div class="adva_b">免费赠送SSL证书</div>
+        </li>   
+    </ul>
+</div>
+<div class="logolink">
+    <div class="logolink_title"><p>合作伙伴</p></div>
+    {:W('Cate/index_partner')}
+</div>
+{:W('Cate/friend_links')}

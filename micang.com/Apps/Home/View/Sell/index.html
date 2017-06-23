@@ -1,0 +1,95 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <i>卖域名</i>
+</div>
+<!--面包屑 结束-->
+<script>
+    function LoginMicang(){
+        layer.alert("请先登录米仓网",function(){
+            window.location.href="/public/login";
+        });
+    }
+</script>
+<!--主体内容 开始-->
+<div class="wrap">
+    <div class="price_list_d">
+        <div class="title_c">
+            <h3 class="titleh3_c">选择域名出售方式</h3>
+        </div>
+        <div class="list_fs">
+            <ul>
+                <li>
+                    <div class="list_fsc">
+                        <img src="/Public/Home/images/icon_mym_b.png" class="list_fsc1" />
+                        <span>一口价</span>
+                        <p>直接购买，快速套现</p>
+                        <a href="<empty name="mid">javascript:LoginMicang();<else />{:str_replace('www.','member.',getDoMain())}domain/my</empty>">选择出售</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="list_fsc">
+                        <img src="/Public/Home/images/icon_mym_d.png" class="list_fsc2"/>
+                        <span>限时竞价</span>
+                        <p>即拍即卖，价高者得</p>
+                        <a href="<empty name="mid">javascript:LoginMicang();<else />{:str_replace('www.','member.',getDoMain())}domain/my</empty>">选择出售</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="list_fsc">
+                        <img src="/Public/Home/images/icon_mym_a.png"  class="list_fsc3"/>
+                        <span>买方询价</span>
+                        <p>双方协商，合理买卖</p>
+                        <a href="<empty name="mid">javascript:LoginMicang();<else />{:str_replace('www.','member.',getDoMain())}domain/my</empty>">选择出售</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="list_fsc">
+                        <img src="/Public/Home/images/icon_mym_c.png" class="list_fsc4"/>
+                        <span>中介担保</span>
+                        <p>米仓担保，安全保障</p>
+                        <a href="javascript:alert('近期内推出');">选择出售</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="list_fsc">
+                        <img src="/Public/Home/images/icon_mym_e.png" class="list_fsc4"/>
+                        <span>域名代售</span>
+                        <p>多种渠道，卖米不愁</p>
+                        <a href="{:getDoMain()}domain/purchase_sell/">选择出售</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="title_c">
+            <h3 class="titleh3_c">出售规则方式</h3>
+        </div>
+        <div class="list_fs_b">
+            <ul>
+                <li>
+                    一口价是指卖家对自己的域名设置一个固定的出售价格，并指定一个出售周期，在出售周期内，域名展示在一口价频道，如果有买家喜欢该域名，出价并付款即可。
+                    <p>手续费 {:FeePercent(2)}</p>
+                </li>
+                <li>
+                    限时竞价是指卖家对自己的域名设置一个起拍价格，并指定一个拍卖周期，在拍卖周期内，域名展示在米仓网的拍卖频道，如果有买家喜欢该域名，出价参与拍卖即可，拍卖支持一人或者多人参与出价，最终出价最高 者得标该域名。
+                    <p>手续费 {:FeePercent(3)}</p>
+                </li>
+                <li>
+                    买方询价是指卖家设置域名对所有买家公开接受报价，卖家对于收到的报价可以同意，可以拒绝，也可以议价直到满意为止。
+                    <p>手续费 {:FeePercent(4)}</p>
+                </li>
+                <li>
+                    中介担保是指域名交易双方约定好域名及交易价格，通过米仓网来保障双方的资金和域名安全的一种第三方担保服务。
+                    <p>手续费 5%</p>
+                </li>
+            </ul>
+        </div>
+        <div class="title_c">
+            <h3 class="titleh3_c">域名出售流程</h3>
+        </div>
+        <img src="/Public/Home/images/lct_e.jpg" class="list_fsc5" />
+    </div>
+</div>
+<!--主体内容 结束-->

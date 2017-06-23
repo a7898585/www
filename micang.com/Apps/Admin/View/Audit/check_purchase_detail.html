@@ -1,0 +1,49 @@
+{__NOLAYOUT__}
+<div class="col-lg-12">
+    <form method="post" action="" role="form" class="form-horizontal" name="add_form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">申请类型：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info['role'] ? '代售':'代购'}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">申请会员：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info['mid']? $info['mid'] : '游客'}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">申请域名：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info['domain']}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">当前状态：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info['status']|getPurchaseParam}</p>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane active">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>审核账号(审核人)</th>
+                        <th>备注</th>
+                        <th>审核时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <volist name="data" id="item">
+                    <tr>
+                        <td>{$item['account']['account']}
+                    <if condition="$item['account']['realname'] eq '' ">
+                        <else /> ({$item['account']['realname']})
+                    </if>
+                    </td>
+                    <td>{$item.oper_remark}</td>
+                    <td>{$item.addtime|date='Y-m-d H:i:s',###}</td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><?php echo($tip); ?></title>
+        <script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,ua/js/Public/Base64.js"></script>
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uj/Css/Jqita/BlogH.css,uc/Css/NewBlog/Blog.css,ua/css/Public/TopBarFoot.css" />
+
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/function.js" ></script><!--上线后改回-->
+
+        <script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Dialog.js"></script>
+    </head>
+
+    <body>
+
+        <div id="TMDeleteSuccess" class="HandIn PlusSucPop W200">
+            <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+            <div class="P20 Bgdfff Txtcntr">
+                <p class="CoRed Yzxxp" id="popupTip"></p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            showalertminute('<?php echo($tip); ?>',2000,'<?php echo($url); ?>','popupTip','TMDeleteSuccess');
+        </script>
+    </body>
+</html>

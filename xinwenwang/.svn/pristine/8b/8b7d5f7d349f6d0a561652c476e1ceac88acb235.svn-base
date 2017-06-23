@@ -1,0 +1,113 @@
+<include file="Public:head" t="切换城市-万贷好-贷款就上万贷好,让贷款更简单快捷" k="" d=""/>
+{:W('Cate/Menu',array('i'))}
+<div class="main">
+    <div class="city_select">
+        <div class="xuanxiang">
+            <div class="xx">
+                <div class="left"> 万贷好猜您在{$real_city['name_full']}<a href="{:getDoMain($real_city['pinyin'])}">进入{$real_city['name_full']}贷款</a> </div>
+                <div class="right">
+                    <div class="lab3">省份</div>
+                    <div>
+                        <select id="province_list"  class="op">
+                            <option value="">请选择</option>
+                            <foreach name="province" item="item">
+                                <option value="{$item.area_id}">{$item.name_full}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                    <div class="lab3">城市</div>
+                    <div>
+                        <select class="op" id="city_list">
+                            <option value="">城市/地区/自治州</option>
+                        </select>
+                    </div>
+                    <div class="s_btn" style="margin:0;">
+                        <input type="button"  class="btn3" id="city_serach" value="确定" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="daohang">
+            <ul>
+                <li><a href="#A">A</a> </li>
+                <li><a href="#B">B</a> </li>
+                <li><a href="#C">C</a> </li>
+                <li><a href="#D">D</a> </li>
+                <li><a href="#E">E</a> </li>
+                <li><a href="#F">F</a> </li>
+                <li><a href="#G">G</a> </li>
+                <li><a href="#H">H</a> </li>
+                <li><a href="#J">J</a> </li>
+                <li><a href="#K">K</a> </li>
+                <li><a href="#L">L</a> </li>
+                <li><a href="#M">M</a> </li>
+                <li><a href="#N">N</a> </li>
+                <li><a href="#P">P</a> </li>
+                <li><a href="#Q">Q</a> </li>
+                <li><a href="#R">R</a> </li>
+                <li><a href="#S">S</a> </li>
+                <li><a href="#T">T</a> </li>
+                <li><a href="#W">W</a> </li>
+                <li><a href="#X">X</a> </li>
+                <li><a href="#Y">Y</a> </li>
+                <li><a href="#Z">Z</a> </li>
+            </ul>
+        </div>
+        <div class="city_con">
+            <p class="ct"><b class="hot_title">热门城市推荐：</b><foreach name="hot_citys" item="city"><a href="{:getDoMain($item.pinyin)}">{$city.name}</a></foreach></p>
+            <ul class="city_all">
+                <foreach name="citys" item="item" key='k'>
+                    <li>
+                        <div class="tg"><a name="{$k}"></a><label>{$k}</label></div>
+                        <div class="ct2" >
+                            <foreach name='item' item="item2"><a href="{:getDoMain($item2['pinyin'])}">{$item2.name}</a></foreach>
+                        </div>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+
+    <!--合作机构 开始-->
+    {:W('Cate/banks',array('count'=>24))}
+    <!--任凭机构 结束-->
+
+    <!--热门城市贷款 开始-->
+    {:W('Cate/hot_city')}
+    <!--热门城市贷款 结束-->
+
+    <!--当前城市贷款推荐 开始-->
+    {:W('Cate/recommend_daikuan',array('count'=>27))}
+    <!--当前城市贷款推荐 结束-->
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#province_list').change(function(){
+            $('#city_list').empty();
+            var id = $(this).val();
+            $.ajax({
+                type: "get",
+                url: '/Public/city_list',
+                cache:false,
+                async:false,
+                data:{id:id},
+                dataType:'JSON',
+                success: function(data){
+                    $.each(data, function (i, n) {
+                        $("#city_list").append('<option value="' + n.pinyin + '">' + n.name_full + '</option>');
+                    });
+                }
+            });
+        });
+        $('#city_serach').click(function(){
+            var pinyin = $('#city_list').val();
+
+            if(pinyin){
+                window.location.href="http://"+pinyin+".wandaihao.com";
+            }
+        });
+    });
+
+</script>
+<include file="Public:foot" />

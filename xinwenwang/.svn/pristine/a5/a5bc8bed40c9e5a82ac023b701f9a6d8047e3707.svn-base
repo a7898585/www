@@ -1,0 +1,510 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="《新闻王》是一款会自动学习的资讯软件，它会聪明地分析你的兴趣爱好，自动为你推荐喜欢的内容，并且越用越懂你。新闻王 - 你关心的，才是头条！ - 头条网 TouTiao.com">
+    <meta name="keywords" content="新闻王,头条,头条网">
+
+    <link rel="shortcut icon" href="/Public/Home/images/favicon.ico" type="image/x-icon">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://s2.pstatp.com/r2/js/lib/html5shim.js"></script>
+    <![endif]-->
+
+    <title>{$info.title} - 新闻王 XinWenWang.com 网罗,天下事！</title>
+    <style>
+        .comment-pane .comment-list .comment-item ul.comment-content { width:610px;}
+        #related_news{ display:none}
+        .pin-pane{ min-height:1200px}
+        #menu,#erweima,.header-nav{ display:none}
+        #content{ margin-top:50px!important;}
+        p.media_description {padding: 10px 20px;text-align:left;word-wrap: break-word;}
+        .side-pane hr {margin: 18px 10px;}
+        .mp_home {margin: 0 10px 20px;padding-bottom: 20px;border-bottom: 1px solid #d9d9d9;}
+        .mp_home a {color: #b50808;}
+    </style>
+    <!--[if lt IE 8 ]><script src="/Public/Common/js/json2.js"></script><![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="http://s2.pstatp.com/r2/css/ie_fix.css" />
+    <![endif]-->
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="http://s2.pstatp.com/r2/css/toutiao_ie6.css" />
+    <script src="/Public/Common/js/ie6.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/main_toutiao.css"/>
+    <script type="text/javascript">
+        var login_user = {:intval($USER['id'])};
+    </script>
+</head>
+<body>
+
+
+
+
+
+
+<div id="profile-header">
+    <div class="header-bar">
+        <div class="container">
+            <div id="profile"  data-id="3346748448">
+                <div class="profile_avatar">
+                    <a href="/m{$info.dingyue_id}/"><img src="/Public/Home/images/app.png"/></a>
+                </div>
+                <div class="profile_info">
+                    <span class="profile_name"> <a href="/m{$info.dingyue_id}/">{$info.source_name}</a></span>
+                    <span class="profile_follow">
+                    <a href="#" data-id="{$info.dingyue_id}" data-action="like">+ 订阅</a>
+                	</span>
+                </div>
+                <!--<div class="profile_desc"><a href="/m3346748448/">三九网是一家集数码产品销售、咨询，维修售后为一体的专业化公司，是电子商务领域最受消费者欢迎和最具影响力的电子商务网站之一。</a></div>-->
+                <div class="profile_menu">
+
+                    <div class="profile_item">
+
+                        <notempty name="USER">
+                            <div class="menu profile_item">
+                                <div class="trigger">
+                                    <a class="ava" href="javascript:;"><img id="user_header" width="20" height="20" src="{:setUpUrl($USER['head_pic'])}"></a>
+                                    <a class="sig" href="javascript:;">&nbsp;{$USER.username}</a>
+                                </div>
+                                <div class="dropdown">
+                                    <ul>
+                                        <li><a ga_label="personal_tab" ga_event="nav_loginout" rel="nofollow" >退出</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </notempty>
+                        <empty name="USER">
+                                <a ga_event="nav_login" class="login-btn" href="javascript:;" data-node="login">
+                                    <span>登录</span>
+                                </a>
+                        </empty>
+                    </div>
+                    <div class="profile_item profile_about">
+                        <a href="{$base_url}" target="_blank">首页</a>
+                    </div>
+                    <div class="profile_item profile_about">
+                        <a href="#" target="_blank">关于新闻王</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="content">
+<div id="content_wrapper">
+<div class="container">
+<div class="pin-pane" id="pin_container"  data-type="context" group_id="">
+    <!-- pin -->
+    <div class="pin">
+        <div class="article-detail">
+            <h1>{$info.title}</h1>
+            <div class="subtitle">
+                <span class="time">{$info.show_time}</span>
+                <span class="src">{$info.source_name}</span>
+            </div>
+            <div class="article-content  pgc_top_banner">
+                <div>
+                    {$info.html}
+                </div>
+            </div>
+
+            <p style="color:#aaa; font-size:12px; text-align:right"  class="jubao"><span data-toggle="tooltip" data-placement="top" data-original-title="新闻王媒体平台一直致力于为广大用户提供良好健康的信息分享与交流平台，信息内容来源于注册媒体账户，我们坚决反对和抵制违法、色情、欺诈、侵权等内容，请信息发布方自觉自律，同时，我们也欢迎广大读者积极举报不良的文章或信息，我们将根据事实和法律规定及时作出相应处理。举报联系方式：jubao@xinwenwang.com">版权问题请联系 jubao@xinwenwang.com</span></p>
+
+        </div>
+    </div>
+    <!-- end pin -->
+    <a name="comments-anchor"></a>
+    <div class="spliter" id="comment_line"></div>
+
+
+    <div class="pin-content">
+        <div class="control-line fix-control" style="float:none; padding:10px 10px 10px 20px">
+    <span action_count="comment" class="comment" title="评论" action_type='comment' comments_count=""  comments_shown='false' style="float:right">
+            {$info.comment_sum}条评论<i></i>
+    </span>
+    <span class="like action" data-id="{$info.id}" data-toggle="action" action_type="digg" action_count="digg" title="顶">{$info.good_sum}</span>
+    <span class="hate action" data-id="{$info.id}" data-toggle="action" action_type="bury" action_count="bury" title="踩">{$info.bad_sum}</span>
+    <span class="fav action" data-id="{$info.id}" data-toggle="action" action_type="repin" action_count="repin" title="收藏">{$info.collect_sum}</span>
+    <span class="share action" style="display: inline-block">分享
+    <div id="bdshare" class="bds_tools share_list bdshare_t get-codes-bdshare" data="{'url':'http://web.toutiao.com/i/group/article/3791873407/?app=news_article','bdDes':'来自头条 www.toutiao.com','text':'【年末热门机型荟萃 买到就是赚到】（分享来自 @新闻王）三九资讯频道：新年自然有新气象，相信大家也非常期待今年各品牌推出的新产品，不过这些新产品几个月内还不会出现很多，所以去年出色的产品在今年依然值得关注，尤其是一些性价比超群，又不太好买的产品。那么小编为大家推荐六款2015年你必须关注的神机，......','pic':''}">
+        <a class="bds_tsina" href="#" title="分享到新浪微博"></a>
+        <a class="bds_tqq" href="#" title="分享到腾讯微博"></a>
+        <a class="bds_qzone" href="#" title="分享到ＱＱ空间"></a>
+        <a class="bds_renren" href="#" title="分享到人人网"></a>
+        <a class="bds_kaixin001" href="#" title="分享到开心网"></a>
+    </div>
+    </span>
+        </div>
+    </div>
+    <div class='comment-pane' id="comments">
+        <div class="comment-box" style="padding-left:0">
+            <table width="100%">
+                <tr>
+                    <td width="60" valign="top">
+                        <div class="user-pic">
+                            <notempty name="USER">
+                                <img data-context="user-pic" src="{:setUpUrl($USER['head_pic'])}" width="50" height="50"/>
+                            </notempty>
+                            <empty name="USER">
+                                <img data-context="user-pic" src="{:C('DEFAULT_HEAD')}" width="50" height="50"/>
+                            </empty>
+
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-box">
+                            <form>
+                                <textarea maxlength="140" placeholder="直接转发或写评论..." id="comment-box" style="height:70px;"></textarea>
+                                <div class="clearfix"></div>
+
+                                <div id="post_div"><button id="post_comment_btn" type="button" class="comment-btn" ga_event='post_comment'>发送</button></div>
+                                <div id="comment_tip" class="comment-tip"></div>
+                                <!--<div id="platform_div"><ul class="platform-box pull-left">-->
+                                    <!--<li title="分享到新浪微博" data-toggle="sns_platform" name="sina_weibo">-->
+                                        <!--<a class="platform_icon sina_wb" rel="nofollow"></a>-->
+                                        <!--<span class="follow_icon" style="display:none"></span>-->
+                                    <!--</li>-->
+
+                                    <!--<li title="分享到腾讯微博" data-toggle="sns_platform" name="qq_weibo">-->
+                                        <!--<a class="platform_icon qq_wb unlogin" rel="nofollow"></a>-->
+                                        <!--<span class="follow_icon" style="display:none"></span>-->
+                                    <!--</li>-->
+
+                                    <!--<li title="分享到人人网" data-toggle="sns_platform" name="renren_sns">-->
+                                        <!--<a class="platform_icon renren_sns unlogin" rel="nofollow"></a>-->
+                                        <!--<span class="follow_icon" style="display:none"></span>-->
+                                    <!--</li>-->
+
+                                    <!--<li title="分享到开心网" data-toggle="sns_platform" name="kaixin_sns">-->
+                                        <!--<a class="platform_icon kaixin_sns unlogin" rel="nofollow"></a>-->
+                                        <!--<span class="follow_icon" style="display:none"></span>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                                <!--</div>-->
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class='clearfix'></div>
+        <div class="spliter"></div>
+        <div class="comment-list" data-toggle="comment_pane"></div>
+        <div data-toggle="comment_pane" class="comment-list">
+        <ul id="comment_list">
+        <foreach name="comments" item="item">
+        <li data-comment-id="{$item.id}" class="comment-item">
+            <div class="avatar">
+                <a style="display: block; height: 50px; overflow: hidden;" target="_blank" href="/u{$item.uid}/" rel="nofollow">
+                    <img src="{:setUpUrl($item['head_pic'])}">
+                </a>
+            </div>
+            <ul class="comment-content">
+                <li>
+            <span class="name">
+                <a target="_blank" href="/u{$item.uid}/" rel="nofollow">
+                    {$item.username}
+                </a>
+                :
+            </span>
+                    <span class="content">{$item.content}</span>
+                </li>
+                <li class="comment_actions">
+                    <span status="" class="action">
+                      <a class="comment_digg " data-id="{$item.id}" href="javascript:;">{:intval($item.good_sum)}</a>
+                      <a class="comment_bury " data-id="{$item.id}" href="javascript:;">{:intval($item.bad_sum)}</a>
+                      <a href="javascript:;" data-id="{$item.id}" class="recomment" data-id="{$item.id}" data-content="//@{$item.username} :{$item.content}">评论/ 转发</a>
+                    </span>
+                    <span class="time">{$item.show_time}</span>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </li>
+        </foreach>
+
+            </ul>
+
+            <div class="clearfix"></div>
+        <div class="comment_paginator">
+
+
+            <span class="">1</span> &nbsp;/&nbsp;
+            <span class="">1</span>
+
+
+            <!--<a ga_event="comment_next_page" action_type="next_page" href="?count=10&amp;offset=10"> 下一页&gt;&gt;</a>-->
+
+        </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="side-pane">
+    <div style="padding:15px 0 100px; text-align:center">
+        <div class="mp-info">
+            <img src="/Public/Home/images/app.png">
+            <p></p>
+        </div>
+        <p class="media_description" >每天24小时滚动报道国内，国际及社会新闻，网络天下事尽在新闻王。</p>
+        <hr>
+        <!--<img src="">-->
+    </div>
+</div>
+
+
+
+
+
+</div>
+</div>
+<div class="modal hide login-dialog" id="auth_modal">
+    <div id="myModal">
+        <a class="close" data-dismiss="modal"></a>
+        <div class="modal-header">
+            <h3>登录</h3>
+        </div>
+        <div class="modal-body">
+            <div class="pull-left">
+                <form action="/auth/login/" method="POST" id="modal_login_form" name="modal_login_form" style="margin:0">
+                    <ul style="margin-bottom:0">
+                        <li>
+                            <span><input name="name_or_email" type="text" value=""  id='email' placeholder="用户名/注册邮箱" /></span>
+                            <span class="error"></span>
+                        </li>
+                        <li>
+                            <span><input name="password" type="password" value="" id='password' placeholder='密码' /></span>
+                            <span class="error"></span>
+                        </li>
+                        <li style="margin-bottom:15px; _margin-bottom:0">
+                            <input type="checkbox" id="remember_me" name="remember_me" checked style="vertical-align:top"/>
+                            <label for="remember_me" style="display:inline">记住我</label>
+                        </li>
+                        <li>
+                            <input type="button" id='submit_btn'value="登录"/>
+                            <span id="login_msg" style="color:red; padding-left:5px"></span>
+                        </li>
+                        <input type="HIDDEN" value="" name="next" />
+                    </ul>
+                </form>
+            </div>
+            <div class="pull-right" style="float:left;" >
+                <h4>合作网站帐号登陆</h4>
+                <ul class="modal_login_list">
+                    <li class="sinaweibo"><a href="#" rel="nofollow" data-toggle="sns_login" name='sina_weibo' onClick="return false;">新浪微博</a></li>
+                    <li class="qqweibo"><a href="#" rel="nofollow" data-toggle="sns_login" name="qq_weibo" onClick="return false;">腾讯微博</a></li>
+                    <li class="renren"><a href="#" rel="nofollow" data-toggle="sns_login" name="renren_sns" onClick="return false;">人人网</a></li>
+                    <li class="kaixin"><a href="#" rel="nofollow" data-toggle="sns_login" name="kaixin_sns" onClick="return false;">开心网</a></li>
+                    <li class="qzone"><a href="#" rel="nofollow" data-toggle="sns_login" name="qzone_sns" onClick="return false;">QQ空间</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<input type="hidden" id='news_id' value="{$info.id}">
+
+<style>
+    /*用户反馈*/
+    #feed_back{ position:fixed; right:0; bottom:140px; padding:20px; padding-bottom:0; background:#f5f5f5; border: 1px solid #aaa; border-radius: 5px 0 0 5px; border-right: none; z-index:1000; display: none}
+    #feed_back form{ width:320px;}
+    #feed_back form .controls{ padding-bottom:10px;}
+    #feed_back form .form-control{ width:100%; margin-bottom:0}
+    #feed_back .feed_back_close{ float:right; padding-top:5px; }
+
+    .tools{ position:fixed; bottom:50px; right:20px; z-index:1000}
+    .feed_back,
+    .back_top{ display:block; height:32px; width:32px; background:url(http://s0.pstatp.com/image/pgc/01.gif) no-repeat; background-position:0 -64px;  margin-top:5px;}
+    .feed_back:hover{ background-position:0 -96px;}
+    .back_top{ background-position:0 0;}
+    .back_top:hover{ background-position:0 -32px}
+</style>
+<div class="tools">
+    <a href="#" class="back_top" title="返回顶部" onClick="back_top(); return false;"></a>
+    <a href="#" class="feed_back hidden-xs" title="提点意见" onClick="feebback_togger(); return false"></a>
+    <!--<a href="mailto:kefu@bytedance.com" class="feed_back visible-xs" title="提点意见"></a>-->
+</div>
+
+<div id="feed_back" class="hidden-xs"  action="/post_message/">
+    <form  method="post">
+        <div class="form-group">
+            <label class="control-label" for="input01">联系方式 <span class="text-danger"> (必填)</span></label>
+            <div class="controls">
+                <input type="text"  id="feedback-email" name="feedback-email" placeholder="您的邮箱/QQ号" class="form-control required" value="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">您的意见 <span class="text-danger">  (必填)</span></label>
+            <div class="controls">
+                <div class="textarea">
+                    <textarea name="feedback-content" type="" id="feedback-content" class="form-control" style="margin: 0; height: 100px;" maxlength="140" placeholder="请填写您的意见，不超过140字"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="controls">
+                <a class="feed_back_close" href="#" onClick="feebback_togger(); return false;">[关闭]</a>
+                <a class="btn btn-danger"  onClick="feedback_submit(); return false;" id="feedback-submit">提交</a>
+                <span id="feedback-form-tip"></span>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>
+<script id="comment_demo" type="text/html">
+    <li data-comment-id="{{ d.id }}" class="comment-item">
+        <div class="avatar">
+            <a style="display: block; height: 50px; overflow: hidden;" target="_blank" href="{{ d.user_url }}" rel="nofollow">
+                <img src="{{ d.head_pic }}">
+            </a>
+        </div>
+        <ul class="comment-content">
+            <li>
+                <span class="name"><a target="_blank" href="{{ d.user_url }}" rel="nofollow">{{ d.username }}</a>:</span>
+                <span class="content">{{ d.content }}</span>
+            </li>
+            <li class="comment_actions">
+                <span status="" class="action">
+                <a class="comment_digg " data-id="{{ d.id }}" href="javascript:;">0</a>
+                <a class="comment_bury " data-id="{{ d.id }}" href="javascript:;">0</a>
+                <a href="javascript:;" class="recomment" data-id="{{ d.id }}" data-content="//@{{ d.username }} :{{ d.content }}">评论/ 转发</a>
+                </span>
+                <span class="time">刚刚</span>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </li>
+</script>
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript">
+    $.fn.extend({
+        position:function( value ){
+            var elem = this[0];
+            if (elem&&(elem.tagName=="TEXTAREA"||elem.type.toLowerCase()=="text")) {
+                if($.browser.msie){
+                    var rng;
+                    if(elem.tagName == "TEXTAREA"){
+                        rng = event.srcElement.createTextRange();
+                        rng.moveToPoint(event.x,event.y);
+                    }else{
+                        rng = document.selection.createRange();
+                    }
+                    if( value === undefined ){
+                        rng.moveStart("character",-event.srcElement.value.length);
+                        return  rng.text.length;
+                    }else if(typeof value === "number" ){
+                        var index=this.position();
+                        index>value?( rng.moveEnd("character",value-index)):(rng.moveStart("character",value-index))
+                        rng.select();
+                    }
+                }else{
+                    if( value === undefined ){
+                        return elem.selectionStart;
+                    }else if(typeof value === "number" ){
+                        elem.selectionEnd = value;
+                        elem.selectionStart = value;
+                    }
+                }
+            }else{
+                if( value === undefined )
+                    return undefined;
+            }
+        }
+    });
+</script>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/layer/laytpl.js"></script>
+
+<script type="text/javascript">
+    /*
+     * 设置输入域(input/textarea)光标的位置
+     * @param {HTMLInputElement/HTMLTextAreaElement} elem
+     * @param {Number} index
+     */
+    function setCursorPosition(elem, index) {
+        var val = elem.value
+        var len = val.length
+
+        // 超过文本长度直接返回
+        if (len < index) return
+        setTimeout(function() {
+            elem.focus()
+            if (elem.setSelectionRange) { // 标准浏览器
+                elem.setSelectionRange(index, index)
+            } else { // IE9-
+                var range = elem.createTextRange()
+                range.moveStart("character", -len)
+                range.moveEnd("character", -len)
+                range.moveStart("character", index)
+                range.moveEnd("character", 0)
+                range.select()
+            }
+        }, 10)
+    }
+    $(function(){
+        $('#post_comment_btn').click(function(){
+            var temp = is_login();
+            if(temp==false) return false;
+            var comment_box = $('#comment-box').val();
+            $.ajax({
+                type: 'POST',
+                url: '/news/add_comment' ,
+                data: {c:comment_box,news_id:$('#news_id').val()} ,
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==200){
+                        var data = {content:comment_box,
+                            head_pic:$('.ava').find('img').attr('src'),
+                            id:data.news_id,
+                            user_url:'/u'+login_user+'/',
+                            username:$('.sig').text()
+
+                        };
+                        laytpl($('#comment_demo').html()).render(data, function(html){
+                            $('#comment_list').prepend(html);
+                        });
+                        $('#comment-box').val('');
+                    }else{
+                        layer.msg('回复评论错误~');
+                    }
+
+                }
+            });
+        });
+
+        //评论/转发
+        $('.recomment').live('click',function(){
+            $('#comment-box').val($(this).attr('data-content'));
+            setCursorPosition(document.getElementById('comment-box'),0);
+        });
+        $('.profile_follow a').click(function(){
+            var temp = is_login();
+            if(temp==false) return false;
+            var c = $(this).attr('data-action');
+            var t = '';
+
+            if(c=='unlike'){
+                c='like';
+                t='+ 订阅';
+            }else {
+                c = 'unlike';
+                t = '已订阅';
+            }
+            $.aj

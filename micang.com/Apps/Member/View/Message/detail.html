@@ -1,0 +1,20 @@
+<div class="onlineplay">
+    <div class="navhl">
+        <a class="navhl_h" href="javascript:;">查看消息</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c" id="navhljs1_c0">
+        <div class="add_temp_b">
+            
+            <ul>
+                <li><h3>{$detail.title}</h3></li>
+                <li>时间：{$detail.create_time|date='Y-m-d H:i:s',###}</li>
+                <li></li>
+                <li>{$detail.content}</li>
+                <li>
+                    <input type="button" value="返 回" class="list_submit" onclick="window.location='/message'">
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,225 @@
+<include file="Public:head" />
+<include file="Public:navi" />
+<!--主体内容 开始-->
+<div id="container" class="bg-white clearfix">
+    <!--左侧内容 开始-->
+    <div class="container-main">
+        <div id="pagelet-feedlist">
+            <empty name="USER">
+                <span class="tip">
+                    <a ga_event="nav_login" class="btn user-head" href="javascript:;" data-node="login">
+                        <span style="color: blue;">登录</span>
+                    </a>
+                    后可查看好友评论，关注更多达人</span>
+            </empty>
+            <foreach name="list" item="item">
+                <div class="bottom_pl clearfix">
+                    <div class="dt_tit">
+                        <span>社会........</span>
+                        <h2>
+                            <a href="{$item.url}">{$item.title}</a>
+                        </h2>
+                    </div>
+                    <!--头像-->
+                    <div class="fl bottom_pl_touxiang">
+                        <empty name="item.head_pic">
+                            <img src="/Public/Home/images/default.png">
+                            <else/>
+                            <img src="{:setUpUrl($item['head_pic'])}">
+                        </empty>
+                    </div>
+
+                    <div class="fl w540">
+                        <div><p>
+                                <a href="javascript:;">
+                                    <empty name="item.username">
+                                        <php> $city=get_city_by_ip($item['ip']);</php>
+                                        {$city['city']} ip为 {$item.ip}的网友
+                                        <else/>
+                                        {$item['username']}
+                                    </empty>
+                                </a>
+                                <i>{$item['show_time']}</i>
+                        </div>                                   
+                        <div class="comment_cont">
+                            <p>{$item['content']}</p>
+                        </div>
+                        <div class="comment_actions clearfix">
+                            <div class="fl">
+                                <span class="actio" status="">
+                                    <a href="javascript:;" data-id="396" class="bottom_pl_digg  comment_digg">{$item['goods']}</a>
+                                    <a href="javascript:;" data-id="396" class="bottom_pl_bury  comment_bury">{$item['bads']}</a>
+                                    <a data-content="" class="recomment bottom_pl_recomment" data-id="396" href="javascript:;">跟贴</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </foreach>
+        </div>
+        <!--                    <span class="loading">努力加载中……</span>-->
+    </div>
+    <!--左侧内容 结束-->
+    <!--右侧内容 开始-->
+    <div class="container-right">
+        <div class="main_r_box app">
+            <div class="title"><h2>手机应用</h2></div>
+            <div class="main_r_cont phoneapp">
+                <span><img src="/Public/Home/images/xwwicon.png"></span>
+                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容，给你阅读。</p>
+                <a href="{$base_url}/app_server/">Anroid</a><a href="{$base_url}/app_server/">iPhone</a>
+            </div>
+        </div>         
+        <!--广告位-->
+        <div class="main_r_box adpic">
+            {:W('Ad/common')}
+        </div>
+        <div class="main_r_box clicktoday">
+            <div class="title"><h2>一周最热</h2><a href="{$base_url}/hot">+</a></div>
+            <div class="main_r_cont hotword">
+                <volist name='hot_list' id='vo'>
+                    <a href="{$vo.url}" class="sbg1">{$vo.title}</a>
+                </volist>
+            </div>
+        </div>
+        <div id="pagelet-feedback">
+            <ul>
+                <li><a ga_event="gotop" class="btn" href="javascript:;" data-node="back"><i class="icon icon-back"></i> </a></li>
+                <li><a ga_event="feedback" class="btn" href="javascript:;" data-node="feedback"><i class="icon icon-comment"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!--右侧内容 结束-->
+</div>
+</div>
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/laytpl.js"></script>
+<include file="Public:foot" />
+<script id="updates_list" type="text/html">
+    {{# for(var i = 0, len = d.data_list.length; i < len; i++){ }}
+    <li>
+        <div class="head">
+            <a href="/u{{d.data_list[i].uid}}/" target="_blank" ga_event="dynamic_icon">
+                <img src="{:setUpUrl($item['head_pic'])}">
+            </a>
+        </div>
+        <p class="dynamic-title">
+            <a href="/u{{d.data_list[i].uid}}/" class="name" target="_blank" ga_event="dynamic_name">
+                {$item.username}
+            </a>
+        </p>
+        <p class="content">
+            {{d.data_list[i].content}}
+        </p>
+        <div class="dynamic clearfix">
+            <i class="arrow"></i>
+            {{# if(d.data_list[i]==2||d.data_list[i]==3){ }}
+            <div class="img-box">
+                <a href="{{d.data_list[i].url}}" target="_blank" ga_event="dynamic_img">
+                    <img src="{{d.data_list[i].img_list[0]}}">
+                </a>
+            </div>
+            {{# } }}
+            <div class="msg">
+                <a href="{{d.data_list[i].url}}" target="_blank" ga_event="dynamic_title">
+                    {{d.data_list[i].title}}
+                </a>
+            </div>
+        </div>
+        <span class="label">
+            <i class="tag-icon hot"></i>
+            <span>{{d.data_list[i].show_time}}</span>
+            <a data-id="{{d.data_list[i].id}}" data-node="digg" href="javascript:;" class="btn" ga_event="dynamic_dig">
+                <i class="icon icon-like-blue icon-small"></i>
+                <span data-node="likedNum" class="liked-num">{{d.data_list[i].goods}}</span>
+            </a>
+        </span>
+    </li>
+    {{# } }}
+</script>
+<script type="text/javascript">
+    function nextPage() {
+        loading = true;
+        $('.loadmore').show();
+        page++;
+        $.ajax({
+            type: 'POST',
+            url: '__SELF__',
+            data: {p: page},
+            dataType: 'JSON',
+            success: function (msg) {
+                var count = msg.data.data_list.length;
+                if (count != 20) {
+                    $('.loadmore').remove();
+                    loading = true;
+                }
+                if (msg.code == 200) {
+                    laytpl($('#updates_list').html()).render(msg.data, function (render) {
+                        $('.dynamic-list').prepend(render);
+                    });
+                    loading = false;
+                } else {
+                    $('.loadmore').remove();
+                    loading = true;
+                }
+            }
+        });
+    }
+    //点击展开分类
+    $('a[ga_event="feed_setting"]').click(function () {
+        if ($('#pagelet-toolbar').attr('class') == '') {
+            $(this).find('i').addClass('icon-customize-up');
+            $('#pagelet-toolbar').addClass('customize');
+            $('.custom-box').show();
+        } else {
+            $(this).find('i').removeClass('icon-customize-up');
+            $('#pagelet-toolbar').removeClass('customize');
+            $('.custom-box').hide();
+        }
+    });
+    //点击头部页面关闭分类
+    $('#container,#pagelet-nav').click(function () {
+        $('a[ga_event="feed_setting"]').find('i').removeClass('icon-customize-up');
+        $('#pagelet-toolbar').removeClass('customize');
+        $('.custom-box').hide();
+    });
+
+    //重载页面
+    $('.icon-refresh').click(function () {
+        $('.alert-msg').show();
+        window.location.reload();
+    });
+
+    //点击删除
+    $("#defaultCategory li").live("click", function () {
+        if ($('.customize').length && $(this).index()) {
+            $("#otherCategory").append("<li>" + $(this).html() + "</li>");
+            $(this).remove();
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $('.ban-msg').removeClass('error').html('点击添加新闻分类');
+                sysNav();
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //点击添加
+    $("#otherCategory li").live("click", function () {
+        if ($('.customize').length) {
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $("#defaultCategory").append("<li>" + $(this).html() + "</li>");
+                $(this).remove();
+                sysNav();
+            } else {
+                $('.ban-msg').addClass('error').html('分类已满（最多7个），请先删除一些');
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+</script>

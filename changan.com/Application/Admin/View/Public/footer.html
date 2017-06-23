@@ -1,0 +1,185 @@
+<script type="text/javascript" src="/Public/Home/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+
+    function header_serach(){
+        if($('#header_key').val() && $('#header_key').val()!='请输入产品名称')
+            window.location.href='/chanpin/search?key='+$('#header_key').val();
+    }
+
+    function addPro(t){
+        var show = $('#tck_contrast').css('display');
+        if(show=='none'){
+            $('#tck_contrast').show();
+        }
+        var id = $(t).attr('data-id');
+        var str_list = $.cookie('pro_list');
+        if(str_list.indexOf(id)>=0){
+            return;
+        }
+
+        var name = $(t).attr('data-name');
+        var url = $(t).attr('data-url');
+        var str='<a class="bx_tite" href="'+url+'" data-id="'+id+'" data-name="'+name+'" data-url="'+url+'" target="_blank">'+name+'</a><a class="bx_del" onclick="delPro(this)">删除</a>';
+        var i = $('.bx_tite').size();
+        if(i==3){
+            $('.con_tip').show();
+            setTimeout(function(){
+                $('.con_tip').hide();
+            },2000);
+            return;
+        }
+        $('.contrast_num').html(i+1);
+        $('.con_tbl_div').eq(i).html(str);
+        savePro();
+    }
+    function delPro(t){
+        var i = $('.bx_del').index(t);
+        $('.con_tbl_div').eq(i).html('');
+        var i = $('.bx_tite').size();
+        $('.contrast_num').html(i+1);
+        var test = $('.bx_tite') ;
+        clearPro();
+        test.each(function(i,t){
+            var id = $(t).attr('data-id');
+            var name = $(t).attr('data-name');
+            var url = $(t).attr('data-url');
+            var str='<a class="bx_tite" href="'+url+'" data-id="'+id+'" data-name="'+name+'" data-url="'+url+'" target="_blank">'+name+'</a><a class="bx_del" onclick="delPro(this)">删除</a>';
+            $('.con_tbl_div').eq(i).html(str);
+        });
+        savePro();
+    }
+    $(document).ready(function(){
+
+        //关闭按钮
+        $('.tite_div_ops').click(function(){
+            $('#tck_contrast').hide();
+            clearPro();
+        });
+        $('.con_empty').click(function(){
+            clearPro();
+        });
+        var i = $('.bx_tite').size();
+        $('.contrast_num').html(i);
+        if(i){
+            $('#tck_contrast').show();
+        }
+    });
+    function bx_tite(){
+        $('.contrast_num').html($('.bx_tite').size());
+    }
+    function clearPro(){
+        $('.con_tbl_div').each(function(i,t){
+            $(t).html('<p class="bx_tip" href="#" target="_blank">'+(i+1)+'.您还可以继续添加</p>');
+        });
+        $.cookie('pro_list',null,{expires: 7, path: '/'});
+    }
+    function savePro(){
+        var pro_list = new Array();
+        $('.bx_tite').each(function(i,t){
+            var id = $(t).attr('data-id');
+            var name = $(t).attr('data-name');
+            var url = $(t).attr('data-url');
+            pro_list[i] = id;
+            console.log(id);
+        });
+        $.cookie('pro_list',pro_list,{expires: 7, path: '/'});
+    }
+    function gotopk(){
+        var pro = $.cookie('pro_list');
+        var arr = pro.split(",");
+
+        if(arr.length<2){
+            alert('必须添加至少两个产品');        
+        }else{
+            var str= arr.join('_');
+            window.location.href='/chanpin/pk/'+str;
+        }
+    }    
+</script>
+
+<div id="tck_contrast" class="tck_contrast" style="display: none;" data="">
+    <div class="con_tip">
+        对比栏已满，您可以删除一些产品再添加哦！
+    </div>
+    <div class="con_main">
+        <div class="tite_div">
+            保险产品对比（<span class="cl_text contrast_num">1</span>/3）
+            <span class="tite_div_ops">关闭</span>
+        </div>
+        <table class="con_tbl">
+            <tr class="con_tbl_tr">
+                <td class="con_tbl_td">
+                    <div class="con_tbl_div con_tbl_div1">
+                        <if condition="$cookie_pro_list[0]['id'] gt 0">
+                            <a class="bx_tite" href="{$cookie_pro_list[0]['url']}" data-id="{$cookie_pro_list[0]['id']}" data-name="{$cookie_pro_list[0]['name']}" data-url="{$cookie_pro_list[0]['url']}" target="_blank">{$cookie_pro_list[0]['name']}</a><a class="bx_del" onclick="delPro(this)">删除</a>
+                            <else />
+                            <p class="bx_tip" href="#" target="_blank">1.您还可以继续添加</p>
+                        </if>
+                    </div>
+                </td>
+                <td class="con_tbl_td">
+                    <div class="con_tbl_div con_tbl_div2">
+                        <notempty  name="cookie_pro_list.1">
+                            <a class="bx_tite" href="{$cookie_pro_list[1]['url']}" data-id="{$cookie_pro_list[1]['id']}" data-name="{$cookie_pro_list[1]['name']}" data-url="{$cookie_pro_list[1]['url']}" target="_blank">{$cookie_pro_list[1]['name']}</a><a class="bx_del" onclick="delPro(this)">删除</a>
+                            <else /> 
+                            <p class="bx_tip" href="#" target="_blank">2.您还可以继续添加</p>
+                        </notempty>
+                    </div>
+                </td>
+                <td class="con_tbl_td">
+                    <div class="con_tbl_div con_tbl_div3">
+                        <notempty  name="cookie_pro_list.2">
+                            <a class="bx_tite" href="{$cookie_pro_list[2]['url']}" data-id="{$cookie_pro_list[2]['id']}" data-name="{$cookie_pro_list[2]['name']}" data-url="{$cookie_pro_list[2]['url']}" target="_blank">{$cookie_pro_list[2]['name']}</a><a class="bx_del" onclick="delPro(this)">删除</a>
+                            <else /> 
+                            <p class="bx_tip" h
+                        <p class="bx_tip" href="#" target="_blank">3.您还可以继续添加</p>
+                    </notempty>
+                </div>
+                </div>
+            </td>
+            <td>
+                <div class="con_td_ops">
+                    <a class="con_begin cl_btn" onclick="gotopk()" href="javascript:;">开始对比</a>
+                    <a class="con_empty" >清空对比栏</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+<!-- 对比框 end-->
+
+<div class="m_copy">
+    <p>
+        <a href="#">关于我们</a>|
+        <a href="#">人寿保险</a>|
+        <a href="#">财产保险</a>|
+        <a href="#">保险中介</a>|
+        <a href="#">保险代理人</a>|
+        <a href="#">保险问答</a>|
+        <a href="#">会员服务</a>|
+        <a href="#">保险机构</a>|
+        <a href="#">保险资料</a>
+    </p>
+    <div>
+        <p>Copyright&copy;2008-2014 常安保险 厦门保啦有限公司版权所有</p>
+        <p>增值电信业务经营许可证(ISP/ICP) 闽ICP备08003619号 客服热线：4006-258-258</p>
+    </div>
+    <div>
+        <img src="/Public/Home/images/chengxin.png">
+        <img src="/Public/Home/images/dianziyingye.png">
+        <img src="/Public/Home/images/wangluo.png">
+    </div>
+    <!--font end-->
+    <div class="m_gotp">
+        <ul>
+            <li><a href="/chanpin" class="ic_cp">保险产品</a></li>
+            <li><a href="/dailiren" class="ic_zj">保险专家</a></li>
+            <li><a href="/wenba" class="ic_wd">保险问答</a></li>
+            <li><a href="/baoxianzixun" class="ic_zx">保险资讯</a></li>
+            <li><a href="#" class="gotop"></a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

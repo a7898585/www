@@ -1,0 +1,579 @@
+<include file="Public:head" />
+<link rel="stylesheet" type="text/css" href="/Public/Home/css/main_toutiao.css">
+<include file="Public:navi" />
+<style>
+    .comment-pane .comment-list .comment-item ul.comment-content { width:610px;}
+    #related_news{ display:none}
+    .pin-pane{ min-height:1200px}
+    #menu,#erweima,.header-nav{ display:none}
+    #content{ margin-top:50px!important;}
+    p.media_description {padding: 10px 10px;text-align:left;word-wrap: break-word;}
+    .side-pane hr {margin: 18px 10px;}
+    .mp_home {margin: 0 10px 20px;padding-bottom: 20px;border-bottom: 1px solid #d9d9d9;}
+    .mp_home a {color: #b50808;}
+</style>
+<!--面包屑 开始-->
+<div class="crumbs">
+    <a href="/" class="crumbs_sy"></a>
+    <em>您的位置：</em>
+    <span>></span>
+    <a href="{$base_url}" class="crumbs_c">首页</a>
+    <span>></span>
+    <a href="{$base_url}/{$nav}" class="crumbs_c">{$type_name}</a>
+    <span>></span>
+    <i>{$info.title}</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div id="container" class="bg-white clearfix">
+    <!--左侧内容 开始-->
+    <div class="container-main">
+        <div class="container-main">
+            <div group_id="" data-type="context" id="pin_container" class="pin-pane">
+                <!-- pin -->
+                <div class="pin">
+                    <div class="article-detail">
+                        <h1>{$info.title}</h1>
+                        <div class="subtitle">
+                            <span class="time">{$info.show_time}</span>
+                            <span class="src">{$info.source_name}</span>
+                        </div>
+                        <div class="article-content  pgc_top_banner">
+                            <div class="Summary">
+                                <!--<span>[摘要]</span>{$info.intro}-->
+                            </div>
+                            <div>
+                                <span style="color:#5a524d; margin:10px auto;"><p>{$info.html}</p><br></span>
+                            </div>
+                        </div>
+                        {$pageHtml}
+                        <!--分页功能取消-->
+                        <!--                        <div style="text-align:center;padding: 10px 0;">
+                                                    <div class="laypage_main laypageskin_molv">  
+                                                        <span class="laypage_curr">1</span>
+                                                        <a class="num" href="/?p=2">2</a>
+                                                        <a class="num" href="/?p=3">3</a>
+                                                        <a class="num" href="/?p=4">4</a>
+                                                        <a class="num" href="/?p=5">5</a>
+                                                        <a class="next" href="/?p=2">></a>
+                                                        <a class="end" href="/?p=20782">>></a>
+                                                    </div>
+                                                </div>-->
+                        <!--上一篇下一篇 开始--> 
+                        <div class="article">
+                            <ul>
+                                <li>上一篇：{$pn_news['shang']}</li>
+                                <li>上一篇：{$pn_news['xia']}</li>
+                            </ul>
+                        </div>  
+                        <!--上一篇下一篇 结束--> 
+                    </div>
+                </div>
+                <!-- end pin -->
+                <div class="comment-count"><span>相关推荐</span></div>
+                <div style="" class="read_list">
+                    <foreach name="read_list" item="item">
+                        <div class="read_item"><a href="{$base_url}/r{$item.id}">{$item.title|msubstr=0,20}</a></div>
+                    </foreach>
+                </div>
+                <a name="comments-anchor"></a>
+                <div class="comment-count"><span>相关评论</span></div>
+                <div style="clear: both"></div>
+                <div id="comments" class="comment-pane">
+                    <div style="padding-left:0" class="comment-box">
+                        <table width="100%">
+                            <tbody>
+                                <tr>
+                                    <td width="60" valign="top">
+                                        <div class="user-pic">
+                                            <img height="50" width="50" src="/Public/Home/images/default_head.jpg" data-context="user-pic">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-box">
+                                            <form>
+                                                <textarea style="height:70px;" id="comment-box" placeholder="直接转发或写评论..." maxlength="140"></textarea>
+                                                <div class="clearfix"></div>
+                                                <div class="pin-content">
+                                                    <div style="float:left; padding:10px 10px 10px 0px" class="control-line fix-control">
+                                                        <span title="顶" action_count="digg" action_type="digg" data-toggle="action" data-id="1221122" class="like action">{$info.good_sum}</span>
+                                                        <span title="踩" action_count="bury" action_type="bury" data-toggle="action" data-id="1221122" class="hate action">{$info.bad_sum}</span>
+                                                        <span title="收藏" action_count="repin" action_type="repin" data-toggle="action" data-id="1221122" class="fav action">{$info.collect_sum}</span>
+                                                        <!--<a href="javascript:;" class="btn share" data-pic="" data-text="11（分享来自 @新闻王官网）" data-desc="来自新闻王 http://www.xinwenwang.com" data-url="fsdfsf" data-node="share">-->
+                                                        <span style="display: inline-block" class="share action share-list">分享
+                                                            <div data-node="share" data-text="来自新闻王 {$base_url}" data-url="{$base_url}/r{$info.id}/" class="share bds_tools share_list bdshare_t get-codes-bdshare" id="bdshare">
+                                                                <a ga_event="feed_item_share" ga_label="tsina" data-type="tsina" class="bds_tsina" href="javascript:;" title="分享到新浪微博"></a>
+                                                                <a ga_event="feed_item_share" ga_label="tqq" data-type="tqq" class="bds_tqq" href="javascript:;" title="分享到腾讯微博"></a>
+                                                                <a ga_event="feed_item_share" ga_label="qzone" data-type="qzone" class="bds_qzone" href="javascript:;" title="分享到ＱＱ空间"></a>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div id="post_div">
+                                                    <button ga_event="post_comment" class="comment-btn" type="button" id="post_comment_btn">发送</button></div>
+                                                <div class="comment-tip" id="comment_tip"></div>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="spliter"></div>
+                    <div class="comment-list" data-toggle="comment_pane">
+                        <ul id="comment_list"> </ul>
+                    </div>
+                </div>
+                <div class="comment-list" data-toggle="comment_pane">
+                    <ul id="comment_list">
+                        <volist name ='comments' id ='vo'>
+                            <div class="bottom_pl clearfix">
+                                <div class="fl bottom_pl_touxiang">
+                                    <empty name="vo.head_pic">
+                                        <img src="/Public/Home/images/default.png">
+                                        <else/>
+                                        <img src="{:setUpUrl($vo['head_pic'])}">
+                                    </empty>
+                                </div>
+                                <div class="fl">
+                                    <div>
+                                        <p>
+                                            <a href="javascript:;">
+                                                <empty name="vo.username">
+                                                    <php>$city=get_city_by_ip($vo['ip'])</php>
+                                                    {$city['city']} Ip为{$vo.ip}的网友
+                                                    <else/>
+                                                    {$vo.username}
+                                                </empty>
+                                            </a>:
+                                        </p>
+                                    </div>
+                                    <div class="comment_actions clearfix">
+                                        <div class="fl"><p class="time">{$vo.show_time}</p></div>
+                                        <div style=" width:500px; text-align:right;" class="fr">
+                                            <span class="actio" status="">
+                                                <a href="javascript:;" data-id="396" class="bottom_pl_digg  comment_digg"> {$vo.goods}</a>
+                                                <a href="javascript:;" data-id="396" class="bottom_pl_bury  comment_bury"> {$vo.bads}</a>
+                                                <a data-content="//@{$vo.username} :{$vo.content}" class="recomment bottom_pl_recomment"  data-id="{$vo.id}" href="javascript:;">评论/ 转发</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="comment_cont">
+                                        {$vo.content}
+                                    </div>
+                                </div>
+                            </div>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--左侧内容 结束-->
+    <!--右侧内容 开始-->
+    <div class="container-right">
+        <div class="main_r_box app">
+            <div class="main_r_cont phoneapp ">
+                <span><img src="/Public/Home/images/xwwicon.png"></span>
+                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容，给你阅读。</p>
+                <!--<a href="javascript:;" data-id="{$info.dingyue_id}" data-action="like"  class="order" id="profile_follow">+ 订阅</a>-->
+                <a href="javascript:;" data-id="{$info.dingyue_id}" data-action="{$islike}" class="order2" id="profile_follow">{$isdingyue}</a>
+            </div>
+        </div>
+        <!--广告位-->
+        <div class="main_r_box adpic">
+            <script type="text/javascript">
+                /*新闻王列表页右侧矩形广告250*250 创建于 2015-07-23*/
+                var cpro_id = "u2224251";
+            </script>
+            <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+        </div>
+        <div class="main_r_box clicktoday hot_rec">
+            <div class="title"><h2>热门推荐</h2><a href="#">+</a></div>
+            <div class="main_r_cont ">
+                <ul>
+                    <volist name="hot_list" id="vo">
+                        <li><a href="{$base_url}/r{$vo.id}">{$vo.title}</a><i>{$vo.comment_sum}</i></li>
+                    </volist>           
+                </ul>
+            </div>
+        </div>
+        <div id="pagelet-feedback">
+            <ul>
+                <li><a ga_event="gotop" class="btn" href="javascript:;" data-node="back"><i class="icon icon-back"></i> </a></li>
+                <li><a ga_event="feedback" class="btn" href="javascript:;" data-node="feedback"><i class="icon icon-comment"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!--右侧内容 结束-->
+</div>
+<!--主体内容 结束-->
+<input type="hidden" id='news_id' value="{$info.id}">
+<input type="hidden" id='com_id' value="0">
+<script id="comment_demo" type="text/html">
+    <div class="bottom_pl clearfix comment-item" data-comment-id="{{ d.id }}">
+        <div class="fl bottom_pl_touxiang">
+            <a target="_blank" href="{{ d.user_url }}" rel="nofollow">
+                <img src="{{ d.head_pic }}">
+            </a>
+        </div>
+        <div class="fl">
+            <div>
+                <p>
+                    <a target="_blank" href="{{ d.user_url }}" rel="nofollow">
+                        {{ d.username }}
+                    </a>:
+                </p>
+            </div>
+            <div class="comment_actions clearfix">
+                <div class="fl"><p class="time">刚刚</p></div>
+                <div style=" width:500px; text-align:right;" class="fr">
+                    <span class="actio" status="">
+                        <a class="bottom_pl_digg  comment_digg" data-id="{{ d.id }}" href="javascript:;">0</a>
+                        <a class="bottom_pl_bury  comment_bury " data-id="{{ d.id }}" href="javascript:;">0</a>
+                        <a href="javascript:;" class="recomment bottom_pl_recomment" data-id="{{ d.id }}" data-content="//@{{ d.username }} :{{ d.content }}">评论/ 转发</a>
+                    </span>
+                </div>
+            </div>
+            <div class="comment_cont">
+                {{ d.content }}
+            </div>
+        </div>
+    </div>
+    <!--    <li data-comment-id="{{ d.id }}" class="comment-item">
+            <div class="avatar">
+                <a style="display: block; height: 50px; overflow: hidden;" target="_blank" href="{{ d.user_url }}" rel="nofollow">
+                    <img src="{{ d.head_pic }}">
+                </a>
+            </div>
+            <ul class="comment-content">
+                <li>
+                    <span class="name"><a target="_blank" href="{{ d.user_url }}" rel="nofollow">
+                            {{ d.username }}
+                        </a>:</span>
+                    <span class="content">{{ d.content }}</span>
+                </li>
+                <li class="comment_actions">
+                    <span status="" class="action">
+                        <a class="comment_digg " data-id="{{ d.id }}" href="javascript:;">0</a>
+                        <a class="comment_bury " data-id="{{ d.id }}" href="javascript:;">0</a>
+                        <a href="javascript:;" class="recomment" data-id="{{ d.id }}" data-content="//@{{ d.username }} :{{ d.content }}">评论/ 转发</a>
+                    </span>
+                    <span class="time">刚刚</span>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </li>-->
+</script>
+
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/laytpl.js"></script>
+<script type="text/javascript" src="/Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    /*
+     * 设置输入域(input/textarea)光标的位置
+     * @param {HTMLInputElement/HTMLTextAreaElement} elem
+     * @param {Number} index
+     */
+    function setCursorPosition(elem, index) {
+        var val = elem.value
+        var len = val.length
+        // 超过文本长度直接返回
+        if (len < index)
+            return
+        setTimeout(function () {
+            elem.focus()
+            if (elem.setSelectionRange) { // 标准浏览器
+                elem.setSelectionRange(index, index)
+            } else { // IE9-
+                var range = elem.createTextRange()
+                range.moveStart("character", -len)
+                range.moveEnd("character", -len)
+                range.moveStart("character", index)
+                range.moveEnd("character", 0)
+                range.select()
+            }
+        }, 10)
+    }
+    //点击展开分类
+    $('a[ga_event="feed_setting"]').click(function () {
+        if ($('#pagelet-toolbar').attr('class') == '') {
+            $(this).find('i').addClass('icon-customize-up');
+            $('#pagelet-toolbar').addClass('customize');
+            $('.custom-box').show();
+        } else {
+            $(this).find('i').removeClass('icon-customize-up');
+            $('#pagelet-toolbar').removeClass('customize');
+            $('.custom-box').hide();
+        }
+    });
+    //点击头部页面关闭分类
+    $('#container,#pagelet-nav').click(function () {
+        $('a[ga_event="feed_setting"]').find('i').removeClass('icon-customize-up');
+        $('#pagelet-toolbar').removeClass('customize');
+        $('.custom-box').hide();
+    });
+
+    //重载页面
+    $('.icon-refresh').click(function () {
+        $('.alert-msg').show();
+        window.location.reload();
+    });
+
+    //点击删除
+    $("#defaultCategory li").live("click", function () {
+        if ($('.customize').length && $(this).index()) {
+            $("#otherCategory").append("<li>" + $(this).html() + "</li>");
+            $(this).remove();
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $('.ban-msg').removeClass('error').html('点击添加新闻分类');
+                sysNav();
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //点击添加
+    $("#otherCategory li").live("click", function () {
+        if ($('.customize').length) {
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $("#defaultCategory").append("<li>" + $(this).html() + "</li>");
+                $(this).remove();
+                sysNav();
+            } else {
+                $('.ban-msg').addClass('error').html('分类已满（最多7个），请先删除一些');
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //input框获取焦点时候判断是否登录
+    $('#comment-box').focus(function () {
+        //        var temp = is_login();
+        //        if (temp == false)
+        //            return false;
+    });
+
+    //提交评论
+    $('#post_comment_btn').click(function () {
+        //        var temp = is_login();
+        //        if (temp == false) return false;
+        var comment_box = $('#comment-box').val();
+        if (comment_box.length < 1) {
+            layer.msg('请填写评论内容', 1);
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/news/add_comment',
+            data: {c: comment_box, news_id: $('#news_id').val(), com_id: $('#com_id').val()},
+            dataType: 'json',
+            success: function (data) {
+                var info = data.data;
+                if (data.code == 200) {
+                    var _data = {
+                        content: comment_box,
+                        head_pic: info.head_pic,
+                        id: info.news_id,
+                        user_url: 'javascript:;',
+                        username: info.username
+                    };
+                    laytpl($('#comment_demo').html()).render(_data, function (html) {
+                        $('#comment_list').prepend(html);
+                    });
+                    $('#comment-box').val('');
+                    var comment_num = parseInt($('span[action_count="comment"]').text())
+                    $('span[action_count="comment"]').html(comment_num + 1 + '条评论');
+                } else if (data.code == 202) {
+                    is_login();
+                } else {
+                    if (data.msg) {
+                        layer.msg(data.msg);
+                    } else
+                        layer.msg('回复评论错误~');
+                }
+            }
+        });
+    });
+
+    //评论/转发
+    $('.recomment').live('click', function () {
+        $('#comment-box').val($(this).attr('data-content'));
+        $('#com_id').val($(this).attr('data-id'))
+        setCursorPosition(document.getElementById('comment-box'), 0);
+    });
+    //订阅
+    $('#profile_follow').click(function () {
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        var c = $(this).attr('data-action');
+        var t = '';
+        if (c == 'unlike') {
+            c = 'like';
+            t = '+ 订阅';
+        } else {
+            c = 'unlike';
+            t = '已订阅';
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/News/add_dingyue',
+            data: {id: $(this).attr('data-id'), status: c},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg == 1) {
+                    $('#profile_follow').attr('data-action', c).html(t);
+                }
+            }
+        });
+        return false;
+    });
+    //文章顶
+    $('.control-line > .like').click(function () {
+        /*        var temp = is_login();
+     //        if (temp == false) return false;
+         */
+        var gid = $(this).attr('data-id');
+        var c_id = $.cookie('_xw_dz' + gid);
+        if (!c_id) {
+            $.cookie('_xw_dz' + gid, gid);
+            $.ajax({
+                type: 'POST',
+                url: '/public/newsTool',
+                data: {id: gid, 't': 'like'},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                    }
+                }
+            });
+            $(this).text(parseInt($(this).text()) + 1);
+        }
+    });
+    //文章踩
+    $('.control-line > .hate').click(function () {
+        /*        var temp = is_login();
+     //        if (temp == false) return false;
+         */
+        var gid = $(this).attr('data-id');
+        var c_id = $.cookie('_xw_dz' + gid);
+        if (!c_id) {
+            $.cookie('_xw_dz' + gid, gid);
+            $.ajax({
+                type: 'POST',
+                url: '/public/newsTool',
+                data: {id: gid, 't': 'hate'},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+
+                    }
+                }
+            });
+            $(this).text(parseInt($(this).text()) + 1);
+        }
+    });
+    //评论顶
+    $('.comment_digg').live('click', function () {
+        /*        var temp = is_login();
+     if (temp == false) return false;
+         */
+        var cid = $(this).attr('data-id');
+        var c_id = $.cookie('_cm_dz' + cid);
+        if (!c_id) {
+            $.cookie('_cm_dz' + cid, cid);
+            $.ajax({
+                type: 'POST',
+                url: '/News/usergb',
+                data: {id: cid, 'gb': 'good'},
+                dataType: 'json',
+                success: function (msg) {
+                }
+            });
+            $(this).text(parseInt($(this).text()) + 1);
+        }
+    });
+    //评论踩
+    $('.comment_bury').live('click', function () {
+        /* var temp = is_login();
+     if (temp == false) return false;*/
+        var cid = $(this).attr('data-id');
+        var c_id = $.cookie('_cm_dz' + cid);
+        if (!c_id) {
+            $.cookie('_cm_dz' + cid, cid);
+            $.ajax({
+                type: 'POST',
+                url: '/News/usergb',
+                data: {id: cid, 'gb': 'bad'},
+                dataType: 'json',
+                success: function (msg) {
+                }
+            });
+            $(this).text(parseInt($(this).text()) + 1);
+        }
+    });
+    //文章收藏
+    $('.control-line > .fav').click(function () {
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        var t = $(this);
+        $.ajax({
+            type: 'POST',
+            url: '/public/newsTool',
+            data: {id: $(t).attr('data-id'), 't': 'fav'},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.code == 200) {
+                    $(t).text(parseInt($(t).text()) + 1);
+                } else if (msg.code == 201) {
+                    $(t).text(parseInt($(t).text()) - 1);
+                }
+            }
+        });
+    });
+
+    $.fn.extend({
+        position: function (value) {
+            var elem = this[0];
+            if (elem && (elem.tagName == "TEXTAREA" || elem.type.toLowerCase() == "text")) {
+                if ($.browser.msie) {
+                    var rng;
+                    if (elem.tagName == "TEXTAREA") {
+                        rng = event.srcElement.createTextRange();
+                        rng.moveToPoint(event.x, event.y);
+                    } else {
+                        rng = document.selection.createRange();
+                    }
+                    if (value === undefined) {
+                        rng.moveStart("character", -event.srcElement.value.length);
+                        return  rng.text.length;
+                    } else if (typeof value === "number") {
+                        var index = this.position();
+                        index > value ? (rng.moveEnd("character", value - index)) : (rng.moveStart("character", value - index))
+                        rng.select();
+                    }
+                } else {
+                    if (value === undefined) {
+                        return elem.selectionStart;
+                    } else if (typeof value === "number") {
+                        elem.selectionEnd = value;
+                        elem.selectionStart = value;
+                    }
+                }
+            } else {
+                if (value === undefined)
+                    return undefined;
+            }
+        }
+    });
+</script>
+
+<include file="Public:foot" />

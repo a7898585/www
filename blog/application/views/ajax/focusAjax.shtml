@@ -1,0 +1,67 @@
+<!--关注筛选-->
+<div class="FilterBox">
+    <div class="Sum">共关注<em><?php echo $total; ?></em>人</div>
+    <div class="SearchBox">
+        <!--搜索框-->
+        <div class="SearchBar"><input id="Csearch" name="" type="text" value="输入昵称或备注" /><a class="SearchBtn" href="javascript:;"></a></div> 
+        <!--end 搜索框-->
+        <label class="LabSlc">			
+            <form action="" method="get" name="frm1">
+                <select name="TitleCate" class="SlLW SlcWrp" id="titleSelect" onChange="document.frm1.submit()">
+                    <option value="0">全部</option>
+                    <option value="1">互相关注</option>
+                </select>
+            </form>
+        </label>            
+    </div>
+</div>
+<!--end 关注筛选-->        
+<!--关注列表-->
+<!--end 关注筛选-->        
+<?php if($total) { ?>
+<?php foreach($list as $key => $val) {?>
+<!--关注列表-->
+
+
+<div class="MyFollowBox FirstMesg friend<?php echo $val['UserID']; ?>" >                    
+    <div class="FaceBox">
+        <a href="<?php echo $this->config->item('base_url').'/'.$bloginfo[$val['UserID']]['DomainName'];?>" target="_blank" ><img src="<?php  echo getUserHead($val['UserID']);?>" ></a>
+    </div> 
+    <div class="DetailBox">
+        <div class="HandleBox">
+            <?php if($isowner) { ?>
+            <?php
+            $status = $friendStatus[$val['UserID']][0]['FriendStatus'];
+            if($status == '1')
+            {
+            ?>
+            <a style="cursor:pointer" onClick="checkdelete_dialog('<?php echo $val['UserID']?>')">取消关注</a>
+            <?php
+            } 
+            else if($status == '3')
+            {
+            ?>
+            <span>互相关注</span>|<a  style="cursor:pointer" onClick="checkdelete_dialog('<?php echo $val['UserID']?>')">取消关注</a>	
+            <?php
+            }
+            ?>
+            <?php } ?>
+        </div>
+        <p class="Name"><a href="<?php echo $this->config->item('base_url').'/'.$bloginfo[$val['UserID']]['DomainName'];?>" target="_blank"><?php echo $val['NickName']; ?> </a></p>
+        <p class="FollowInfo"><span>关注<em><?php echo $friendNum[$val['UserID']]['FllowerNum']; ?></em></span>|<span>粉丝<em><?php echo $friendNum[$val['UserID']]['FollowingNum']; ?></em></span><?php if($blogcount[$val['UserID']]) { ?>|<span>文章<em><?php $memberid = $bloginfo[$val['UserID']]['MemberID']; ; echo $stat1[$val['UserID']][$memberid]['TotalArticle']  ; ?></em></span></p>
+        <p class="Intro"></p>
+        <p class="News">最新动态：发表一篇文章<a href="<?php $urlprefix = $this->config->item('base_url').'/'.$bloginfo[$val['UserID']]['DomainName']; echo $urlprefix;?>/article/<?php echo strtotime($article[$memberid]['AppearTime']).'-'.$article[$memberid]['ArticleID'];?>.html"><?php  echo $article[$memberid]['Title']; ?></a></p>
+        <?php } ?>
+    </div>           
+</div>
+
+<?php } ?>
+<?php  } else {?>
+暂时还没有关注的好友
+<?php } ?>
+<!--end 关注列表-->
+
+<!--分页-->
+<div class="Page">
+    <?php echo $pagebar; ?>
+</div>

@@ -1,0 +1,81 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <i>会员中心</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap_border login_dl">
+    <div class="wrap_a_c fl">
+        <div class="title_b_icon2"><i class="iconfont">&#xe618;</i></div>
+        <span>会员登录</span>
+    </div>
+    <img src="/Public/Home/images/login_pic.jpg" class="login_pic" />
+    <div class="list_d">
+        <form method="post" action="/public/login" name="form_login">
+            <input type="hidden" id="refer_url" value="{$refer}">
+            <ul>
+                <li>
+                    <p>邮箱/ID</p>
+                    <input type="text" name="username" maxlength="32" value="邮箱或米仓ID"  onblur="if(this.value=='')this.value='邮箱或米仓ID';" onfocus="if(this.value=='邮箱或米仓ID')this.value='';" class="list_ctxt_a"/>
+                </li>
+                <li>
+                    <p>密码</p>
+                    <input type="password" class="list_ctxt_a" name="password"/>
+                </li>
+                <li>
+                    <p>验证码</p>
+                    <input type="text" class="list_ctxt_a" name="verify_code" id="verify_code"/><a href="javascript:;" style="float:left;padding-left:5px;"><img width="70" height="32" title="点击更换" id="verify"></a>
+                </li>
+                <li><input type="submit" class="list_ctbtn_c" value="" /></li>
+                <li><input type="checkbox" class="list_ctxt_e"/><div class="list_ctxt_d fl">记住帐号</div><a href="{:getDoMain()}public/forget/" class="listent_e">忘记密码</a><a href="{:getDoMain()}public/register/" class="listent_e">注册账号</a></li>
+            </ul>
+        </form>
+        <div class="login_r">
+            <!--            <div class="login_r_t">其他方式登录注册</div>
+                        <a href="#" class="login_ricon"><img src="/Public/Home/images/login_icon1.jpg" /></a>
+                        <a href="#" class="login_ricon"><img src="/Public/Home/images/login_icon2.jpg" /></a>
+                        <a href="#" class="login_ricon"><img src="/Public/Home/images/login_icon3.jpg" /></a>-->
+        </div>
+    </div>
+</div>
+<!--主体内容 结束-->
+
+<script type="text/javascript" src="/Public/Common/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('form[name="form_login"]').submit(function(e){
+            e.preventDefault();
+            $.post($(this).attr('action'), $(this).serialize(), function(result){
+                if (result.status != 200){
+                    layer.msg(result.message,{icon: 7 });
+                }else{
+                    if($('#refer_url').val()!=''){
+                        window.location = $('#refer_url').val();
+                    }else{
+                        window.location = "{:getDoMain('member')}";
+                    }
+                 
+                }
+            });
+            return false;
+        });
+        $(document).on('click', 'a[data-btn="btn_resend"]', function(e){
+            e.preventDefault();
+            $.getJSON($(this).attr('href'), {user:$('input[name="username"]').val()}, function(result){
+                layer.msg(result.message);
+            });
+        });
+    });
+    loadVerify();
+    function loadVerify (){
+        var rand = Math.random();
+        $("#verify").attr("src","{:getDoMain('member')}oper/verify?_id="+rand);
+    }
+    $("#verify").click(function(){
+        loadVerify();
+    })
+</script>

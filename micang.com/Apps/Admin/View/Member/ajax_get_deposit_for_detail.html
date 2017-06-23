@@ -1,0 +1,33 @@
+{__NOLAYOUT__}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th width="80">提现金额</th>
+            <th width="80">手续费</th>
+            <th width="80">联系电话</th>
+            <th>提现银行</th>
+            <th>提现账户</th>
+            <th>申请时间</th>
+            <th>状态</th>
+            <th>处理时间</th>
+        </tr>
+    </thead>
+    <tbody>
+    <volist name="page.data" id="item">
+        <tr>
+            <td>{$item['money']/100}元</td>
+            <td>{$item['counterfee']/100}元</td>
+            <td>{$item.mobile}</td> <td>{$item.account.bankname}</td>
+            <td>{$item.account.account}</td>
+            <td>{$item.addtime}</td>
+            <td> <switch name="item.status">
+        <case value="0">待汇款</case>
+        <case value="1">汇款成功</case>
+        <case value="2">汇款关闭</case>
+        <default /></switch></td>
+        <td>{$item.notify_time}</td>
+        </tr>
+    </volist>
+</tbody>
+</table>
+{$page.html}

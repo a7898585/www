@@ -1,0 +1,211 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/insurance">表单信息</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <div class="am-margin">
+        <ul class="am-tabs-nav am-nav am-nav-tabs">
+            <li class="am-active"><a href="#tab1">基本信息</a></li>
+        </ul>
+
+        <div class="am-tabs-bd">
+            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        称呼
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info['name']}</if>
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        性别
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info['sex']? '男':'女'}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        生日
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info['birth']}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        手机
+                    </div>
+                    <div class="am-u-sm-6">{$info['phone']}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        邮箱
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info['mail']}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        居住地
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.address}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">
+            <li class="am-active"><a href="#tab1">投保需求 </a></li>
+        </ul>
+        <div class="am-tabs-bd">
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    给谁投保
+                </div>
+                <div class="am-u-sm-6">
+                    {$info.to_who}
+                </div>
+            </div>
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    保障需求
+                </div>
+                <div class="am-u-sm-6">
+                    {$info.concept|getConcept=1}
+                </div>
+            </div>
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    其他信息
+                </div>
+                <div class="am-u-sm-6">
+                </div>
+            </div>
+        </div>
+        <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;" <if condition="$info.daili_id eq 0 ">style="display:none;"<else />style="display:block;"</if>>          
+            <li class="am-active"><a href="#tab1">分配情况   </a></li>
+        </ul>
+        <div class="am-tabs-bd" <if condition="$info.daili_id eq 0 ">style="display:none;"<else />style="display:block;"</if>>
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    分配给
+                </div>
+                <div class="am-u-sm-6">
+                    {$info.daili_id|getUserName}
+                </div>
+            </div>
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    分配时间
+                </div>
+                <div class="am-u-sm-6">
+                    {$info.divide_time|date="Y-m-d H:i",###}
+                </div>
+            </div>
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    状态
+                </div>
+                <div class="am-u-sm-6">
+                    {$info['status']?'已联系':'未联系'}
+                </div>
+            </div>
+        </div>
+
+        <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">          
+            <li class="am-active"><a href="#tab1">分配保单   </a></li>
+        </ul>
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-2 am-text-right">所在地</div>
+            <div class="am-u-sm-6">
+                <select name="province_id" id="province_list">
+                    <option value="0">请选择</option>
+                    <foreach name="province" item="item">
+                        <option value="{$item.id}" <eq name="item.id" value="$info.province_id"> selected</eq> >{$item.name}</option>
+                    </foreach>
+                </select>
+
+                <select name="city_id" id="city_list">
+                    <option value="0">请选择</option>
+                    <foreach name="city" item="item">
+                        <option value="{$item.id}" <eq name="item.id" value="$info.city_id"> selected</eq> >{$item.name}</option>
+                    </foreach>
+                </select>
+            </div>
+            <div class="am-u-sm-4"></div>
+        </div>
+        <div class="am-tabs-bd">
+
+            <div class="am-g am-margin-top" id="user_list" style="padding-left: 40px;">
+
+
+            </div>
+
+        </div>
+        <div class="am-margin">
+            <button type="button" onclick="saveset();" class="am-btn am-btn-primary am-btn-xs">分配</button>
+            <button type="button" onclick="window.history.back();" class="am-btn am-btn-primary am-btn-xs">返回</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript"> 
+    $("#province_list").bind("change",function(){
+        var areaID = $(this).val();
+        $.ajax({
+            type: "post",
+            url: "/api/area?level=2&id="+areaID,
+            dataType:"json",
+            success: function(data){
+                $('#city_list').html('<option value="-1">-请选择-</option>');
+                $.each(data,function(i,t){
+                    $('#city_list').append('<option value="'+i+'">'+t+'</option>');
+                });
+            }
+        });
+    }); 
+    $("#city_list").bind("change",function(){
+        var areaID = $(this).val();
+        $.ajax({
+            type: "post",
+            url: "/insurance/getDaili?id="+areaID,
+            dataType:"json",
+            success: function(data){
+                $('#user_list').html('');
+                if(data.s==1){
+                    $('#user_list').html(data.data);
+                }else{
+                    $('#user_list').html('该城市暂时无代理人');
+                }
+            }
+        });
+    }); 
+    
+    function saveset(){
+        var id='{$info.id}';
+        var daili_id = $('input[name=daili_id]:checked').val();
+        if(id && daili_id){
+            $.ajax({
+                type: "post",
+                url: "/insurance/divide",
+                data:{id:id,did:daili_id},
+                dataType:"json",
+                success: function(data){
+                    if(data.s==1){
+                        layer.msg('操作成功!!!',2,1);location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            });
+        }else{
+            layer.msg('参数不对!请选择分配代理人。');
+        }
+    }
+</script>

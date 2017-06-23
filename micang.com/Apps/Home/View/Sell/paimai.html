@@ -1,0 +1,300 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <a href="{:getDoMain()}sell/page" class="crumbs_c">域名交易</a>
+    <span>></span>
+    <i>{$detail.domain}域名拍卖</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap jjv2">
+    <div class="wrap_jj_l fl">
+        <div class="bidding">
+            <h3><span>正在竞价</span></h3>
+            <div class="bidding_n">
+                <div class="ding_l fl">
+                    <p>{$detail.domain}</p>
+                    <ul>
+                        <li><span>域名释义：</span>{$detail.summary|default="暂无简介"}</li>
+                        <li><span>注册时间：</span>{$domainDetail.register_time}<em class="fr">百度权重<span style="border:none;"><img border=0 src="http://br.links.cn/getbr.asp?url={$detail.domain}&style=2"></span></em></li>
+                        <li><span>备 案 号：</span><empty name="domainDetail.beian">暂无备案<else />{$domainDetail.beian}</empty><em class="fr">Google<span><img border=0 src="http://tool.baiwanzhan.com/t1/prImg.aspx?s=3&mode=pic&url={$detail.domain}"></span></em></li>
+                    </ul>
+                </div>
+                <div class="ding_r fr">
+                    <ul>
+                        <p><span><a class="tg1" href="javascript:Notice('{$detail.id}');">关注</a><a>提醒</a></span></p>
+                        <p>当前价格：<em>{:Fen2Yuan(max($detail[buyer_price],$detail[seller_price]))}</em>元</p>
+                        <li>领先出价ID：<span class="yse1">{$detail.buyer_mid|default="暂无"}</span></li>
+                        <li>您的状态：<span class="yse2"><eq name="mid" value="$detail.buyer_mid">您已经领先<else />暂时落后</eq></span></li>
+                        <li>剩余时间：<span class="yse2">
+                                <span id="t_d">00天</span>
+                                <span id="t_h">00时</span>
+                                <span id="t_m">00分</span>
+                                <span id="t_s">00秒</span></span></li>
+                        <li>结束时间：<span class="yse1">{$detail.end_time|date='Y/m/d H:i:s',###}</span></li>
+                        <li>起拍价格：<span class="yse3">{$detail.seller_price|Fen2Yuan}  元</span></li>
+                        <li>加价幅度：<span class="yse3">{:IncreaseRange(max($detail[seller_price],$detail[buyer_price]),1)}  元</span></li>
+                        <li>参与人数：<span class="yse3">{$count}  人</span></li>
+                        <li>加价次数：<span class="yse3">{$num} 次</span></li>
+                        <neq name="detail.mid" value="$mid"><li class="eyur"><span class="fl">你的出价</span><input id="price" type="hidden" value="" /><input id="chujia" class="name_3 fl" type="text" value="{$minPrice|Fen2Yuan}" onClick="if(this.value=='输入你的竞价报价')this.value='';"><input id="button_chujia" onclick="check_seccode('Buy');" type="button" class="btn_cj fl" value="立即出价" /></span></li></neq>
+                        <neq name="detail.mid" value="$mid"><li class="eyur"><span class="fl">代理出价</span>
+                        <input class="name_3 fl" id="daili" type="text" value="<empty name="daili_price">输入你的代理报价<else />{$daili_price}</empty>" onClick="if(this.value=='输入你的代理报价')this.value='';">
+                        <input id="button_daili" onclick="check_seccode('DaiLi','{$detail.id}');" type="button" class="btn_cj fl" value="设置代理" /></span></li></neq>
+                    </ul>
+                </div>
+            </div>
+            <!--内容结束 结束-->
+        </div>
+        <div class="clear height20"></div>
+        <div class="title">
+            <h3 class="titleh3_c">参与竞价用户列表</h3>
+        </div>
+        <div class="piclist">
+            <ul>
+                <volist name="tradeLog" id="item" k="key" offset="0" length='5'>       
+                    <li>
+                        <a href="javascript:;"><img src="{$item.uid|getUserHeadByMid}" alt="{$item.uid}" /></a>
+                        <div class="piclist_txt">ID:{$item.uid}{$item.memo}</div>
+                        <div class="piclist_txt"><span>出价：</span><em>{$item.price|MoneyFormat}</em></div>
+                        <div class="piclist_txtb"><span>排行榜：</span>
+                            <switch name="key">
+                            <case value="0"><p class="pitx_bg_a">TOP.1</p></case>
+                            <case value="1"><p class="pitx_bg_b">TOP.2</p></case>
+                            <case value="2"><p class="pitx_bg_c">TOP.3</p></case>
+                            <case value="3"><p class="pitx_bg_d">TOP.4</p></case>
+                            <case value="4"><p class="pitx_bg_e">TOP.5</p></case>
+                            <default />
+                            </switch>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+        <div class="mipu_category mr20">
+            <div style="border-top:#E2E2E2 solid 1px; margin-top:0;" class="navh2_c2" id="navhljs2_c0">
+                <div class="mipu_form fl" style="padding-top:0;">
+                    <ul class="cr">
+                        <li class="number_1">竞拍用户ID</li>
+                        <li class="number_3">买家出价</li>
+                        <li class="number_2">出价时间</li>
+                        <li class="number_4">累积次数</li>
+                        <li class="number_5">当前状态</li>
+                    </ul>
+                    <volist name="tradeLog" id="item" k="key" offset="5" length='15'>    
+                        <ul <if condition="$key%2 eq 0">class="cl"</if>>
+                            <li class="numbee_1">MC—{$item.uid}</li>
+                            <li class="numbee_3">{$item.price|MoneyFormat}</li>
+                            <li class="numbee_2">{$item.update_time|date="Y/m/d H:i:s",###}</li>
+                            <li class="numbee_4">{$item.uid|countTradeNum=$item['pid']}次</li>
+                            <li class="numbee_5">暂时落后</li>
+                        </ul>
+                    </volist>
+                </div>
+            </div>
+            <!--内容结束-->
+        </div>  
+
+    </div>
+
+    <!--左侧缩展导航 结束-->
+    <div class="wrap_jj_r fl">
+        <notempty name="detailShop">
+            <div class="store">
+                <a href="{:getDoMain()}shop/{$detailShopid}/" target="_blank">
+                    <div class="store_l fl"><img src="{$detailShop.logo|default='/Public/Home/images/pic_user.jpg'}"/></div>
+                    <div class="store_r fl">
+                        <ul>
+                            <h3>{$detailShop.title}的店铺</h3>
+                            <li>卖家信誉</li>
+                            <li><span>{$detailShop.view_count}<em><img src="/Public/Home/images/wrap_jj_03.png"/></em><em><img src="/Public/Home/images/wrap_jj_03.png"/></em></span></li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </notempty>
+
+        <div class="steps <notempty name="detailShop">mt20 </notempty>">
+            <h3><span class="fl"><img src="/Public/Home/images/wrap_jj_04.png"/></span>拍卖流程</h3>
+            <ul>
+                <li><a>参与竞价</a></li>
+                <li><a>持续竞价</a></li>
+                <li><a>竞价结束</a></li>
+                <li><a>最高出价者得标</a></li>
+                <li><a>平台自动发起交易</a></li>
+                <h4>拍卖规则</h4>
+                <p>竞价时间00:00-23:00</p>
+                <p>竞价时间与结束时间以米仓系统提示时间为准。</p>
+                <p><span>代理竞价</span></p>
+                <p>当您的出价大于"当前价格+加价幅度"系统将记录您的出价(为代理价)。</p>
+            </ul>
+        </div>
+        <div class="clear height30"></div>
+        <div class="tabbox_b">
+            <div class="navhl_b">
+                <div class="navhl_bl">拍卖价格</div>
+                <div class="fl">保证金</div>
+            </div>
+            <div class="list_b">
+                <ul>
+                    <li>
+                        <div class="listb_d"><span>1—199</span></div>
+                        <em>20元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>200—999</span></div>
+                        <em>50元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>1000—4999</span></div>
+                        <em>100元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>5000—19999</span></div>
+                        <em>500元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>20000—49999</span></div>
+                        <em>1000元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>50000—99999</span></div>
+                        <em>2000元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>100000—499999</span></div>
+                        <em>5000元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>大于 499999</span></div>
+                        <em>10000元</em>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear height30"></div>
+        <div class="tabbox_b">
+            <div class="navhl_b">
+                <div class="navhl_bl">拍卖出价</div>
+                <div class="fl">加价幅度</div>
+            </div>
+            <div class="list_b">
+                <ul>
+                    <li>
+                        <div class="listb_d"><span>1—49</span></div>
+                        <em>1元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>50—499</span></div>
+                        <em>10元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>500—999</span></div>
+                        <em>50元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>1000—4999</span></div>
+                        <em>100元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>5000—9999</span></div>
+                        <em>200元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>10000—29999</span></div>
+                        <em>500元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>30000—99999</span></div>
+                        <em>1000元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>100000—299999</span></div>
+                        <em>2000元</em>
+                    </li>
+                    <li>
+                        <div class="listb_d"><span>大于 299999</span></div>
+                        <em>5000元</em>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear height30"></div>
+        <!--流程 结束-->
+    </div>
+    <!--右侧缩展导航 结束-->             
+</div>
+<!--主体内容 结束-->
+<script language="javascript">
+    function DaiLi(x){
+        var mid='{$mid}';
+        var daili=parseInt($('#daili').val());
+        if(!daili){
+            layer.alert("请填写代理价");
+            return;
+        }
+        if(!mid){
+            layer.alert("请先登录米仓网");
+            return;
+        }
+        $('#button_daili').attr('disabled',"disabled");
+        $.post("/Sell/ajax", { d:"daili",sale_id:x,daili:daili },
+        function(data){
+            $('#button_daili').removeAttr('disabled');
+            if(data.status=='1'){
+                layer.alert('代理出价设置成功');
+            }else{
+                layer.alert(data.message);
+            }
+        } 
+    );
+    }
+    function Buy(){
+        var mid='{$mid}';
+        var chujia=parseInt($('#chujia').val());
+        if(!chujia){
+            layer.alert("请填写出价");
+            return;
+        }
+        $('#price').val(chujia);
+        var minprice=parseInt({:Fen2Yuan($minPrice)});
+        if(chujia<minprice){
+            layer.alert('出价金额不能小于'+minprice+'元');
+            return;
+        }
+        if(!mid){
+            layer.alert('请先登录米仓网');
+            return;
+        }
+        $('#button_chujia').attr('disabled',"disabled");
+        $.post("/Sell/ajax", { d:"chujia",sale_id:'{$detail.id}',price:$('#price').val() },
+        function (result){
+            $('#button_chujia').removeAttr('disabled');
+            if(result.status=='1'){
+                layer.msg('出价成功');
+                window.location.reload();
+            }
+            layer.msg(result.message);
+        }
+    );
+    }
+    function getRTime(){
+        var EndTime= new Date('{$detail.end_time|date='Y/m/d H:i:s',###}'); //截止时间 前端路上 http://www.51xuediannao.com/qd63/
+        var NowTime = new Date();
+        var t =EndTime.getTime() - NowTime.getTime();
+        var d=Math.floor(t/1000/60/60/24);
+        var h=Math.floor(t/1000/60/60%24);
+        var m=Math.floor(t/1000/60%60);
+        var s=Math.floor(t/1000%60);
+        if(d==0 && h==0 && m<5 && s%10==0){
+            window.location.reload();
+        }
+        document.getElementById("t_d").innerHTML = d + "天";
+        document.getElementById("t_h").innerHTML = h + "时";
+        document.getElementById("t_m").innerHTML = m + "分";
+        document.getElementById("t_s").innerHTML = s + "秒";
+    }
+    setInterval(getRTime,1000);
+</script>
+</div>

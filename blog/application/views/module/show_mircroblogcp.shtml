@@ -1,0 +1,158 @@
+<div rel="drag" id="Mod_MicroBlog" class="gonggaocz-ztdiv">
+    <div id="Mod_MircBlog_t" class="gonggaocz-top01">
+        <div class="gonggaocz-top02"></div>
+        <div class="gonggaocz-top03">微博</div>
+        <?php if(isset($dragable) && $dragable==1)
+        {?>
+        <div class="gjsz01"><a href="#" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_MircBlog_td3"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz12.gif"></a><a href="#" onclick="clkmenu(this.id,2);return false;" style="display: none;" title="展开" id="Mod_MircBlog_td4"><img border="0" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz15.gif"></a><a href="#" onclick="removemod(this.id);return false;" title="删除" id="Mod_MircBlog_td2"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz14.gif"></a></div>
+        <div style="cursor: move;" id="Mod_MircBlog_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="gjsz02"><img height="16" width="33" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz11.gif"></div>
+        <?php
+        }?>
+    </div>
+    <div class="gonggaocz">
+        <div class="modbox">	
+            <div class="Wb1Name lj1"><a href="http://t.cnfol.com/<?php echo $bloginfo['UserName']; ?>" target="_blank"><b><u><?php echo $bloginfo['NickName']; ?></u> 的微博</b> </a></div>
+            <?php if($isowner){?>
+            <div class="Wb1Name lj1">(<label id="nums">140</label>/140)字</div>
+            <div class="Wb1Textarea"><textarea name="contentbox" id="contentbox" style="width:200px;height:50px"></textarea>				
+            </div>
+            <div class="Wb1TextareaBot">
+                <div class="Wb1TextareaBotText lj1"><a href="#topic" id="inserttopic">#插入话题</a></div>
+                <div class="Wb1TextareaBotBut"><input type="button" value="发送" id="formbutton" disabled="disabled">
+                    <a name='#topic'></a></div>
+            </div>
+            <?php }?>
+
+            <div id="contentzone" style="overflow:hidden;"></div>
+            <div class="WbMore lj1"><a href="http://t.cnfol.com/<?php echo $bloginfo['UserName'] ?>" target="_blank">进入查看更多微博>></a></div>
+            <?php if(!$isowner){?>
+            <div class="WbMore lj1"><a href="http://t.cnfol.com/" target="_blank">我也去逛逛中金在线微博</a><br>（在微博首页登录您的中金帐号即可开通您的微博）</div>
+            <?php }?>
+            <div class="gonggaocz01"></div>		
+        </div>
+    </div>
+</div>
+<script language="javascript">
+    $(function(){
+        getContent();
+    });
+
+    function getContent()
+    {
+        var uname    = "<?php echo $bloginfo['UserName'];?>";
+        var count    = 3;
+
+        $.ajax({
+            url: "<?php echo $baseurl.'/index.php/microblog/getmicroblogcontent/'; ?>" + uname + "/" + count+'?r='+new Date().getTime(),
+            type:"GET",
+            success: function(msg) {
+                if (msg=='0')
+                {
+                    $('#contentzone').html('最近没有发布微博');
+                    $('#contentzone').css({"margin":"0 12px"});
+				
+                }
+                else
+                {
+                    <!----微博兼容--->
+                    var afficheWidth=$('#contentzone').css('width');
+                    <!----微博兼容--->
+				
+                    $('#contentzone').html(msg);
+				
+				
+                    <!----微博兼容--->
+                    if(afficheWidth=='23px'||afficheWidth=='24px'||afficheWidth=='133px')
+                    {
+                        $('#contentzone').css('width','224px');
+                    }
+                    else
+                    {
+                        $('#contentzone').css('width',afficheWidth);
+                    }
+                    <!----微博兼容--->
+				
+	
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                //alert("系统服务忙，请稍后再试");
+                return;
+            }
+        });
+    }
+
+    //$('#inserttopic')
+    $("#inserttopic").live("click",function(){
+        var g="请在此处输入自定义话题";
+        var f=$("#contentbox").val();
+        var d=0;
+        var i=0;
+        var h=0;
+        if(f==""){
+            $("#contentbox").val("#"+g+" ");
+            i=1;
+            d=$("#contentbox")[0].value.length;
+            end=g.length+1
+        }else{
+            h=f.indexOf("#"+g);
+            if(h==-1){
+                $("#contentbox").val(f+" #"+g+" ");
+                d=$("#contentbox")[0].value.length;
+                i=d-g.length-1;
+                end=d-1
+            }else{
+                d=$("#contentbox")[0].value.length;
+                i=h+1;
+                end=h+g.length+1
+            }
+        }
+
+        if(document.getElementById("contentbox").createTextRange){
+            end=end-d;
+            var e=document.getElementById("contentbox").createTextRange();
+            e.moveStart("character",i);
+            e.moveEnd("character",end);
+            e.select()
+        }else{
+            document.getElementById("contentbox").setSelectionRange(i,end);
+            document.getElementById("contentbox").focus()
+        }
+    });
+
+    $('#contentbox').keyup(function(){
+        var len = $('#contentbox').val().length;
+
+        if(0<len && len< 141)
+        {
+            $('#formbutton').removeAttr('disabled');
+        }
+        else
+        {
+            $('#formbutton').attr('disabled', 'disabled');
+        }
+        $('#nums').html(140-len);
+    });
+
+    $('#formbutton').click(function(){
+        var content  = $('#contentbox').val();
+        var userid   = "<?php echo $bloginfo['UserID'];?>";
+
+        $.ajax({
+            url: "<?php echo $baseurl.'/ajaxsendmicroblogcontent'; ?>",
+            type:"POST",
+            data: "userid="+userid+"&content="+content,
+            success: function(msg) {
+                $('#contentbox').val('');
+                $('#nums').html(140);
+                $('#formbutton').attr('disabled', 'disabled');
+                getContent();
+                showalert(msg);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                showalert("系统服务忙，请稍后再试");
+                return;
+            }
+        });
+    });
+</script>

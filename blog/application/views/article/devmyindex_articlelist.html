@@ -1,0 +1,206 @@
+
+<?php
+
+$articleidList='';
+foreach($artList as $key=>$art): 
+
+
+?>
+<?php $arturl = config_item("base_url").'/'.$art['DomainName'].'/article/'.strtotime($art['AppearTime']).'-'.$art['ArticleID'].'.html';?>
+<!--置顶博文-->
+<?php
+
+$style='';
+if($display=='none')
+{
+$style='style="display:none;"';
+}
+
+echo('<div class="ArticleBox" '.$style.' >');
+
+?>
+<!--操作-->
+<?php
+
+$addClick='1';
+$own='';
+$separate='|';
+if($UserID==$art['UserID'])
+{
+$addClick='2';
+?>
+<div class="HandleBtn">
+    <?php
+    if($isowner === true  && $art['ArticleID'] !== 0)
+    {
+    $own='none';
+    $separate='';
+    ?>
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/Add?articleid=<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>"   target="_blank">编辑</a><a onclick="javascript:delThisArticle('<?php echo $art['ArticleID']; ?>','<?php echo($bloginfo['DomainName']); ?>');" style="cursor: pointer;">删除</a>
+    <?php
+    }?>
+</div>
+<!--
+<form id="article_action_form_<?php echo($art['ArticleID']); ?>" name="article_action_form" method="post" target="_blank">
+    <input type="hidden" name="act" id="act"/>
+    <input type="hidden" name="articleid" id="articleid" value="<?php echo $art['ArticleID'];?>" />
+    <input type="hidden" name="memberid" id="memberid" value="<?php echo $art['MemberID'];?>" />
+    <input type="hidden" name="flashcode" id="flashcode" value="<?php echo getVerifyStr($art['MemberID'].$art['UserID'].$art['ArticleID']);?>" />
+</form>
+-->
+<form id="article_action_form_<?php echo($art['ArticleID']); ?>" name="article_action_form" method="post" target="_blank">
+    <input type="hidden" name="act" value="del"/>
+    <input type="hidden" name="id"  value="<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID']; ?>" />
+    <input type="hidden" name="memid" id="memberid" value="<?php echo $art['MemberID'];?>" />
+    <input type="hidden" name="flashCode" id="flashcode" value="<?php echo getVerifyStr($art['MemberID'].$art['UserID']);?>" />
+</form>
+
+<?php
+}
+?>
+<!--end 操作-->
+<div class="ArticleTitle">
+    <div class="FaceBox"><a href="<?php echo $blogurl.'/'.$art['DomainName']; ?>" target="_blank"><img src="<?php echo(getUserHead($art['UserID'])); ?>"  /></a></div>
+    <p class="MyName"><a href="<?php echo $blogurl.'/'.$art['DomainName']; ?>" class="nam" target="_blank"><?php echo ($UserID==$art['UserID'])? '我' : $art['NickName'];?></a></p>
+    <h2>
+        <?php if($art['Recommend'] == 2 || $art['Recommend'] == 3 || $art['IsUsed'] == 1) {?>
+        <i class="Recom">荐</i>
+        <?php 
+        }
+        echo $art['IsTop']==1?'<i class="Top">置顶</i>':'';
+
+        $dot = '';
+        if (strlen($art['Title']) > 60) {
+        $dot = ' ...';
+        }
+        ?>
+        <a href="<?php echo $arturl;?>" target="_blank"><?php echo filter(utf8_str($art['Title'],60,'false')).$dot;?></a>
+        <?php
+
+        echo($art['Property']==2?'&nbsp;&nbsp;<span>[转载]</span>':'');
+        echo($art['Property']==4?'&nbsp;&nbsp;<span>[收藏]</span>':'');
+
+        $iscollect='0';
+        $istransshipment='0';
+        if($addClick=='2')
+        {
+        $istransshipment=1;
+        if($art['Property']=='4')
+        {
+        $iscollect=1;
+        }
+        }
+
+
+        echo($art['Property']==5?'&nbsp;&nbsp;<span>[草稿]</span>':'');
+
+        ?>
+    </h2>
+</div>  
+<!--博文内容-->
+<div class="ArticleCont">
+    <div class="strContent"  style="display:block">
+        <?php if($art['PictureUrl']!='0'){ ?>
+        <a  href="<?php echo($arturl); ?>" target="_blank"><?php echo($blogurl.$art['PictureUrl']); ?></a>
+        <?php }  echo filter($art['Summary']);?>...<input type="hidden" value="<?php echo $ajaxlmcount.'duid='.$art['UserID'].'&mid='.$art['MemberID'].'&dom='.$art['DomainName'].'&aid='.$art['ArticleID'].'&vuid='.$bloginfo['UserID'].'&un='.$bloginfo['UserName'].'&nn='.$bloginfo['NickName']; ?>" class="viewUrl"><a class="spread" onclick="spread2(this,'<?php echo($art["MemberID"]); ?>','<?php echo($art["ArticleID"]); ?>','<?php echo($art["AppearTime"]); ?>','<?php echo($addClick); ?>','intact_');" >【展开全部】</a><a href="<?php echo $arturl;?>" class="readMore" target="_blank">【阅读全文】</a>
+    </div>
+</div>
+<div class="all" style="display:none"><div id="intact_<?php echo($art['ArticleID']); ?>"></div><a href="javascript:;" class="packUp" style="cursor:hand;"></span>【收起】</span><a href="<?php echo $arturl;?>">【阅读全文】</a></div>
+<!--end 博文内容-->
+<!--功能-->
+<div class="FuncBox">
+    <div class="TimeBox"><span class="Time"><?php echo timeop($art['AppearTime']); ?></span>|<span class="Times"><em id="atonclick_<?php echo $art['ArticleID'];?>">0</em>次浏览</span></div>
+    <div class="HandleBox" id="showAll_<?php echo $art['ArticleID']; ?>" onmouseover="showAll('<?php echo $own; ?>','<?php echo $art['ArticleID']; ?>','showAll_','showAfter_');" ><a href="javascript:;" onclick="javascript:articlereport('2','<?php echo($art['ArticleID']); ?>','<?php echo($art['MemberID']); ?>','<?php echo($loginuserid); ?>');" style="display:none;cursor:hand;">举报</a><a href="javascript:;" onclick="articlecollectlist('2','<?php echo(strtotime($art['AppearTime'])); ?>','<?php echo($art['ArticleID']); ?>','<?php echo $art['MemberID'];?>','<?php echo $bloginfo['MemberID']; ?>','<?php echo 'collect_'.$art['ArticleID']; ?>','<?php echo($iscollect); ?>');" style="cursor:hand;display:none;">收藏（<span id="collect_<?php echo $art['ArticleID'];?>"><?php echo $art['CollectCount'];?></span>）</a><a class="NoSupport" href="javascript:submitvote('<?php echo($art["ArticleID"]); ?>','<?php echo $art['MemberID'];?>','<?php echo getVerifyStr($art['ArticleID']);?>','<?php echo($loginuserid); ?>','<?php echo(strtotime($art['AppearTime'])); ?>');" id="ding_<?php echo($art["ArticleID"]); ?>" style="cursor:hand;" >（<span id="showvotes_<?php echo($art['ArticleID']); ?>"><?php echo $art['TotleVote'];?></span>）</a>|
+
+
+        <a href="javascript:;" style="cursor:hand;" class="jiathis jiathis_txt jiathis_separator" ><span onmouseover="jiaarray('<?php echo($arturl); ?>','<?php echo($art['Title']); ?>');" >分享到</span><input type="hidden" id="showAfter_<?php echo $art['ArticleID'];?>" value="0" /></a>|
+
+
+        <a href="javascript:;" onclick="transshipmentlist('2','<?php echo(strtotime($art['AppearTime'])); ?>','<?php echo($art['ArticleID']); ?>','<?php echo $art['MemberID'];?>','<?php echo $bloginfo['MemberID'];?>','<?php echo 'attransshipment_'.$art['ArticleID']; ?>','<?php echo($istransshipment); ?>');" style="cursor:hand;">转载（<span id="attransshipment_<?php echo $art['ArticleID'];?>"><?php echo $art['ReprintCount'];?></span>）</a>|<a href="<?php echo($arturl.'#commentList'); ?>" target="_blank">评论(<span class="comCount<?php echo $art['ArticleID']; ?>"><?php echo $art['CommentNumber']<0?0:$art['CommentNumber']; ?></span>)</a></div>
+</div>
+<!--end 功能-->
+</div>
+<!--end 置顶博文-->
+<!--第一条结束-->
+<?php 
+$articleidList.=$art['ArticleID'].',';
+$dingParam.=$art['ArticleID'].'-'.$art['MemberID'].'-'.strtotime($art['AppearTime']).',';
+endforeach;
+$articleidList=trim($articleidList,',');
+$dingParam=trim($dingParam,',');
+?>
+<!--
+<script src="http://www.google.com?r=<?php echo($dingParam); ?>" ></script>
+-->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(function(){
+            if('<?php echo(!empty($articleidList)); ?>')
+            {
+                var articleidList='<?php echo($articleidList); ?>';
+                articleidList=articleidList.split(',');
+                for(i=0;i<articleidList.length;i++)
+                {
+        		 
+                    if($.cookie('blogartvote'+articleidList[i]) == 1){
+        			
+                        $('#ding_'+articleidList[i]).attr('href',ding1).attr('target','_blank');
+                        $('#ding_'+articleidList[i]).attr('class','Support');
+                 	
+                    }
+                }
+            }
+            $('#ajaxdiv2').load("<?php echo(config_item('base_url')); ?>/ajaxomcount/art/,<?php echo($articleidList); ?>");
+		
+            //文章顶，置顶等赋值
+            //$('#ajaxdiv3').load("http://blog.cnfol.com/index.php/widget/getarticlelist?dingParam=<?php echo($dingParam); ?>");
+		
+            //获取并赋值文章转载数
+            //$('#transshipmentdiv').load("http://blog.cnfol.com/ajaxomcount/tran/<?php echo($articleidList); ?>");
+		
+            //获取并赋值文章收藏数
+            //$('#transshipmentdiv').load("http://blog.cnfol.com/ajaxomcount/col/<?php echo($articleidList); ?>");
+        })
+    });
+       function submitvote(aid,memid,getcode,loginuserid,appeartime){
+        showalert('加载中...','popupTip','TMDeleteSuccess');
+        $.post(baseurl+'/ajaxsetartvotecnt/'+appeartime+'-'+aid+'/'+memid,{code:getcode,userid:loginuserid,tnlvote:$('#ding_'+aid).html()},function(data){
+            if(data.errno == 'succ'){
+                showalertminute('操作成功',1000,'','popupTip','TMDeleteSuccess');
+                $('#ding_'+aid).attr('href',ding1).attr('target','_blank');
+                var votetmp = parseInt($('#showvotes_'+aid).html()) + 1;
+                $('#showvotes_'+aid).html(votetmp);
+                $('#ding_'+aid).attr('class','Support');
+            }else{
+                
+                showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                $('#ding_'+aid).attr('href',ding1).attr('target','_blank');
+            }
+        },'json');
+    }
+
+</script>
+
+<?php 
+unset($dingParam);
+?>
+
+
+
+<!--jiathis-->
+<script type="text/javascript" >
+    var jiathis_config={
+        url:'',
+        title:'',
+        siteNum:6,
+        sm:"tsohu,kaixin001,qzone,t163,renren,douban",
+        summary:"",
+        boldNum:0,
+        hideMore:true
+    }
+                        
+                       
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!--jiathis-->

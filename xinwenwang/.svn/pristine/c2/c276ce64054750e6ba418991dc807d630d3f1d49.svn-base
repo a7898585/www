@@ -1,0 +1,329 @@
+<include file="Public:head" />
+<link rel="stylesheet" type="text/css" href="/Public/Home/css/main_toutiao.css">
+<include file="Public:navi" />
+<!--面包屑 开始-->
+<div class="crumbs">
+    <a href="/" class="crumbs_sy"></a>
+    <em>您的位置：</em>
+    <span>></span>
+    <a href="{$base_url}" class="crumbs_c">首页</a>
+    <span>></span>
+    <a href="{$base_url}/subject" class="crumbs_c">专题</a>
+    <span>></span>
+    <i>{$type_name}</i>
+</div>
+<!--面包屑 结束-->
+<div id="container" class="bg-white clearfix">
+    <div class="container-main">
+        <div class="container-main">
+
+            <div group_id="" data-type="context" id="pin_container" class="pin-pane">
+
+                <!-- 新闻内容列表页 开始 -->
+                <div class="newlistc">
+                    <if condition="count($list) gt 0 ">
+                        <ul>
+                            <volist name="list" id="item" offset="0" length='8'>
+                                <li><a href="{$item.url}" title="{$item.title}" class="listent" target="_blank">{$item.title}</a><span>{$item.show_time}</span></li>
+                            </volist>
+                        </ul>
+                    </if>
+                    <if condition="count($list) gt 8 ">
+                        <ul>
+                            <volist name="list" id="item" offset="8" length='8'>
+                                <li><a href="{$item.url}" title="{$item.title}" class="listent" target="_blank">{$item.title}</a><span>{$item.show_time}</span></li>
+                            </volist>
+                        </ul>
+                    </if>
+                    <if condition="count($list) gt 16 ">
+                        <ul>
+                            <volist name="list" id="item" offset="16" length='8'>
+                                <li><a href="{$item.url}" title="{$item.title}" class="listent" target="_blank">{$item.title}</a><span>{$item.show_time}</span></li>
+                            </volist>
+                        </ul>
+                    </if>
+                    <if condition="count($list) gt 24 ">
+                        <ul>
+                            <volist name="list" id="item" offset="24" length='8'>
+                                <li><a href="{$item.url}" title="{$item.title}" class="listent" target="_blank">{$item.title}</a><span>{$item.show_time}</span></li>
+                            </volist>
+                        </ul>
+                    </if>
+                </div>
+                <!-- 新闻内容列表页 结束 -->
+                {$page_html}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-right">
+        <div class="main_r_box app">
+            <div class="title"><h2>手机应用</h2></div>
+            <div class="main_r_cont phoneapp">
+                <span><img src="/Public/Home/images/xwwicon.png"></span>
+                <p>使用《新闻王》，它会根据你的兴趣自动推荐你喜欢的内容，给你阅读。</p>
+                <a href="{$base_url}/app_server/" class="btn_download">Anroid</a><a href="{$base_url}/app_server/" class="btn_download">iPhone</a>
+            </div>
+        </div>
+        <!--广告位-->
+        <div class="main_r_box adpic">
+            {:W('Ad/common')}
+        </div>
+        <div class="main_r_box clicktoday hot_rec">
+            <div class="title"><h2>热门推荐</h2><a href="#">+</a></div>
+            <div class="main_r_cont ">
+                <ul>
+                    <volist name="hot_list" id="vo">
+                        <li><a href="{$base_url}/r{$vo.id}">{$vo.title}</a><i>{$vo.comment_sum}</i></li>
+                    </volist>           
+                </ul>
+            </div>
+        </div>
+        <div id="pagelet-feedback">
+            <ul>
+                <li><a ga_event="gotop" class="btn" href="javascript:;" data-node="back"><i class="icon icon-back"></i> </a></li>
+                <li><a ga_event="feedback" class="btn" href="javascript:;" data-node="feedback"><i class="icon icon-comment"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<script id="hot_comments" type="text/html">
+    {{# for(var i = 0, len = d.data_list.length; i < len; i++){ }}
+    <li>
+        <p class="comment-title">
+            <a href="/u{{d.data_list[i].id}}/" ga_event="hotcomment_headimg">
+                <img src="{{d.data_list[i].head_pic}}">
+            </a>
+            <a href="/u{{d.data_list[i].id}}/" class="name" ga_event="hotcomment_name">
+                {$item['username']}
+            </a>
+            <a data-id="{{d.data_list[i].id}}" data-node="digg" href="javascript:;" class="btn" ga_event="hotcomment_dig">
+                <i class="icon icon-like-blue icon-small"></i>
+                <span data-node="likedNum" class="liked-num">{{d.data_list[i].good_sum}}</span>
+            </a>
+        </p>
+        <p class="comment">
+            <i class="arrow"></i>
+            {{d.data_list[i].title}}
+        </p>
+        <p class="label">评论于：</p>
+        <p class="source">
+            <a target="_blank" href="{{d.data_list[i].url}}" ga_event="hotcomment_title">
+                {{d.data_list[i].content}}
+            </a>
+        </p>
+    </li>
+    {{# } }}
+</script>
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/laytpl.js"></script>
+<script type="text/javascript" src="/Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    //点击展开分类
+    $('a[ga_event="feed_setting"]').click(function () {
+        if ($('#pagelet-toolbar').attr('class') == '') {
+            $(this).find('i').addClass('icon-customize-up');
+            $('#pagelet-toolbar').addClass('customize');
+            $('.custom-box').show();
+        } else {
+            $(this).find('i').removeClass('icon-customize-up');
+            $('#pagelet-toolbar').removeClass('customize');
+            $('.custom-box').hide();
+        }
+    });
+    //点击头部页面关闭分类
+    $('#container,#pagelet-nav').click(function () {
+        $('a[ga_event="feed_setting"]').find('i').removeClass('icon-customize-up');
+        $('#pagelet-toolbar').removeClass('customize');
+        $('.custom-box').hide();
+    });
+
+    //重载页面
+    $('.icon-refresh').click(function () {
+        $('.alert-msg').show();
+        window.location.reload();
+    });
+
+    //点击删除
+    $("#defaultCategory li").live("click", function () {
+        if ($('.customize').length && $(this).index()) {
+            $("#otherCategory").append("<li>" + $(this).html() + "</li>");
+            $(this).remove();
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $('.ban-msg').removeClass('error').html('点击添加新闻分类');
+                sysNav();
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //点击添加
+    $("#otherCategory li").live("click", function () {
+        if ($('.customize').length) {
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $("#defaultCategory").append("<li>" + $(this).html() + "</li>");
+                $(this).remove();
+                sysNav();
+            } else {
+                $('.ban-msg').addClass('error').html('分类已满（最多7个），请先删除一些');
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //未读新闻 点击查看
+    $('.unread').click(function () {
+        window.location.reload();
+    });
+    //点赞
+    $('a[data-node="digg"]').live('click', function () {
+        /*        var temp = is_login();
+     //        if (temp == false) return false;
+         */
+        var a = $(this).parent('span.disliked').length;
+        var b = $(this).parent('span.liked').length;
+        var gid = $(this).attr('data-groupid');
+        var c_id = $.cookie('_xw_dz' + gid);
+        if (!c_id) {
+            $.cookie('_xw_dz' + gid, gid);
+        }
+        /*无操作*/
+        if (!a && !b && !c_id) {
+            $(this).parent('span').addClass('liked');
+            var liked_num = $(this).find('.liked-num');
+            $(liked_num).html(parseInt($(liked_num).html()) + 1);
+            $(this).attr('title', '已顶');
+            $.post("/news/good", {id: gid}, function (result) {
+            });
+        }
+    });
+    //踩楼
+    $('a[data-node="bury"]').live('click', function () {
+        /*        var temp = is_login();
+     //        if (temp == false) return false;
+         */       var a = $(this).parent('span.disliked').length;
+        var b = $(this).parent('span.liked').length;
+        var gid = $(this).attr('data-groupid');
+        var c_id = $.cookie('_xw_dz' + gid);
+        if (!c_id) {
+            $.cookie('_xw_dz' + gid, gid);
+        }
+        if (!a && !b && !c_id) {
+            $(this).parent('span').addClass('disliked');
+            var disliked_num = $(this).find('.disliked-num');
+            $(disliked_num).html(parseInt($(disliked_num).html()) + 1);
+            $(this).attr('title', '已踩');
+            $.post("/news/bad", {id: gid}, function (result) {
+            });
+        }
+    });
+
+    //不喜欢此类文章
+    $('a[ga_event="feed_item_dislike"]').live('click', function () {
+        news_id = $(this).attr('data-groupid');
+        $.layer({
+            type: 1,
+            shade: [0.5, '#000'],
+            area: ['auto', 'auto'],
+            closeBtn: false,
+            shadeClose: true,
+            title: false,
+            border: [0],
+            page: {dom: '.confirm-dialog'}
+        });
+        return false;
+    });
+    //不喜欢取消
+    $('div[data-node="cancel"]').live('click', function () {
+        news_id = 0;
+        layer.closeAll();
+    });
+    //不喜欢确认
+    $('div[data-node="ok"]').live('click', function () {
+        $.ajax({
+            type: 'POST',
+            url: '/public/nolike',
+            data: {id: news_id},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.code == 200) {
+                    //成功
+                }
+            }
+        });
+        layer.closeAll();
+    });
+
+    //评论点赞
+    $('a[data-node="c_digg"]').live('click', function () {
+        /* var temp = is_login();
+     if (temp == false) return false;
+         */
+        var cid = $(this).attr('data-id');
+        var c_id = $.cookie('_cm_dz' + cid);
+        if (!c_id) {
+            $.cookie('_cm_dz' + cid, cid);
+            $.ajax({
+                type: 'POST',
+                url: '/News/usergb',
+                data: {id: cid, 'gb': 'good'},
+                dataType: 'json',
+                success: function (msg) {
+                }
+            });
+            var liked_num = $(this).find('.liked-num');
+            $(liked_num).html(parseInt($(liked_num).html()) + 1);
+        }
+    });
+    //评论下一页
+    var comment_page = 1;
+    $('a[ga_event="hotcomment_change"]').click(function () {
+        comment_page++;
+        $.ajax({
+            type: 'POST',
+            url: '/hot_comments',
+            data: {p: comment_page},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.data.data_list.length < 5) {
+                    comment_page = 1;
+                }
+                if (msg.code == 200) {
+                    laytpl($('#hot_comments').html()).render(msg.data, function (render) {
+                        $('.comment-list').html(render);
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+    window.scrollTo(0, 0);
+    function sysNav() {
+        var str = new Array();
+        $('#defaultCategory li>a').each(function (t) {
+            var k = $(this).attr('data_key');
+            var v = $(this).attr('data_value');
+            if (k)
+                str += k + '_';
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/public/sysnav',
+            data: {str: str},
+            dataType: 'json',
+            success: function (msg) {
+            }
+        });
+    }
+</script>
+{:W('Cate/links')}
+<include file="Public:foot" />
+

@@ -1,0 +1,51 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="/template/">模版列表</a> 
+        <a class="navhl_q" href="/template/international/">添加模版</a> 
+        <!--<a class="navhl_q" href="javascript:void(0);">模版过户</a>--> 
+    </div>
+    <div class="onlineplay_c2" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody>
+                    <tr class="table_title">
+                        <td width="80">模版名称</td>
+                        <td width="80">模版类型</td>
+                        <td width="80">所有人</td>
+                        <!--<td width="80">授权域名数</td>-->
+                        <td width="80">模版状态</td>
+                        <td width="80">模版操作</td>
+                    </tr>
+                <empty name="templates">
+                    <tr class="table_bg_b">
+                        <td colspan="5">暂无充值记录，<a href="/recharge/add">点击充值</a>！</td>
+                    </tr>
+                    <else/>
+                    <volist name="templates" id="item">
+                        <tr class="table_bg_b">
+                            <td>{$item.title}</td>
+                            <td>
+                                <switch name="item.type">
+                        <case value="0">国际域名(Com/Cc/cx)</case>
+                        <case value="1">国内域名(Cn/中国)</case>
+                        </switch>
+                        </td>
+                        <td>{$item.cn_reg_firstname}{$item.cn_reg_lastname}</td>
+                        <!--<td>{$item.mid|countMemberDomain}</td>-->
+                        <td>{$item['status'] ? '白名单':'审核中'}</td>
+                        <td><a href="/template/international?id={$item.id}&type={$item.type}">编辑</a> &nbsp;<a href="/template/international?cid={$item.id}&type={$item.type}">克隆</a></td>
+                        </tr>
+                    </volist>
+                    <tr>
+                        <td colspan="5">
+                            <div class="pages">
+                                {$pager}
+                            </div>
+                        </td>
+                    </tr>
+                </empty>  
+                </tbody></table>
+            <div class="wrap_a_b"><a class="doma_d_btn2" href="#"></a></div>
+        </div>
+    </div>
+</div>

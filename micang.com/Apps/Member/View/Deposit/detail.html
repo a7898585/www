@@ -1,0 +1,54 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_q" href="/deposit/account/">提现账户</a> 
+        <a class="navhl_q" href="/deposit/add/">添加账户</a>
+        <a class="navhl_q" href="/deposit/apply/">申请提现</a> 
+        <a class="navhl_h" href="/deposit/detail/">提现记录</a> 
+    </div>
+    <div class="txzh" id="navhljs1_c3">
+        <div class="name_form fl">
+            <ul class="cl">
+                <li class="number_10">流水号</li>
+                <li class="number_20">银行名称</li>
+                <li class="number_30">账号</li>
+                <li class="number_40">申请日期</li>
+                <li class="number_50">提现金额</li>
+                <li class="number_60">手续费</li>
+                <li class="number_40">处理日期</li>
+                <li class="number_80">提现状态</li><li>操作</li>
+            </ul>
+            <empty name="detail">
+                <ul class="txzh_txt"><center>暂无提现记录，<a href="/deposit/get">点击提现</a>！</center></ul>
+                <else/>
+                <volist name="detail" id="item">
+                    <ul class="txzh_txt">
+                        <li class="number_10"><span>{$item.id}</span></li>
+                        <li class="number_20"><if condition="$item['account']['type'] eq '1'">支付宝
+                                    <else /> {$item['account']['bankname']}
+                                </if></li>
+                        <li class="number_30">{$item['account']['account']}</li>
+                        <li class="number_40"><span>{$item.addtime|substr=0,-3}</span></li>
+                        <li class="number_50"><span>{$item.money}元</span></li>
+                        <li class="number_60">{$item.counterfee}元</li>
+                        <li class="number_40"><span><if condition="$item.notify_time eq '0000-00-00 00:00:00' ">--<else />{$item.notify_time|substr=0,-3}</if></span></li>
+                        <li class="number_80"><span><switch name="item.status">
+                                <case value="0">待汇款</case>
+                                <case value="1">汇款成功</case>
+                                <case value="2">汇款关闭</case>
+                                <default /></switch></span></li>
+                                <li><a href="/deposit/view/?id={$item.id}">查看</a></li>
+                    </ul>
+                </volist>
+            </empty>
+            <div class="wrap_a_b">{$pager}</div>
+        </div>
+        <div class="explain">
+            <div class="title_b_icon3"><i class="iconfont">&#xe625;</i></div>
+            <div class="txt_c">注意事项</div>
+            <dl>
+                <dd>跨行转账，款项转移以后一般需要1-5个工作日到账，请耐心等待。</dd>
+            </dl>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,54 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/extend/">群发功能</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <div class="am-margin">
+        <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="email()">邮件群发</button>
+    </div>
+    <div class="am-margin">
+        <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="mobile()">短信群发</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function email(){ 
+        if(confirm('是否群发邮件')){
+            layer.load('邮件群发中...');
+            $.ajax({
+                type: 'POST',
+                url: '/extend/send_email' ,
+                data: {} ,
+                dataType: 'json',
+                success: function(data){
+                    layer.closeAll();
+                    if(data.code==200){
+                        layer.msg('邮件发送成功',{shift:6,success:function(){window.location.reload();}});
+                    }else{
+                        layer.msg(data.msg,{shift:6});
+                    }
+                }
+            });
+        }
+    }
+    function mobile(){
+        if(confirm('是否群发短信')){
+            layer.load('短信群发中...');
+            $.ajax({
+                type: 'POST',
+                url: '/extend/send_mobile' ,
+                data: {} ,
+                dataType: 'json',
+                success: function(data){
+                    layer.closeAll();
+                    if(data.code==200){
+                        layer.msg('短信发送成功',{shift:6,success:function(){window.location.reload();}});
+                    }else{
+                        layer.msg(data.msg,{shift:6});
+                    }
+                }
+            });
+        }
+    }
+</script>

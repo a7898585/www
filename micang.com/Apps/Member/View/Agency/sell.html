@@ -1,0 +1,131 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="/agency/sell/">中介出售</a> 
+        <a class="navhl_q" href="/agency/sell_list/">域名中介出售</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c add_temp_d" id="navhljs1_c0">
+        <form name="form_purchase" action="" method="post">
+            <ul>
+                <li>
+                    <p>中介域名</p>
+                    <input type="text" name="domain" placeholder="请输入中介域名" datatype="*" errormsg="中介域名不正确" sucmsg=" " nullmsg="请输入中介域名" class="list_ctxt_a">
+                </li>
+                <li>
+                    <p>对方接收邮件</p>
+                    <input type="text" name="email" value="" placeholder="请输入邮箱地址" datatype="e" errormsg="邮箱格式不正确" sucmsg=" " nullmsg="请输入邮箱地址" class="list_ctxt_a">
+                </li>
+                <li>
+                    <p>您的角色</p>卖家
+                </li>
+                <li>
+                    <p>中介金额</p><input type="text" onblur="price_onchange()" id="tbx_Price" name="pay_price" placeholder="请输入中介金额" datatype="n" errormsg="中介金额不正确" sucmsg=" " nullmsg="请输入中介金额" class="list_ctxt_a"><em>元</em><span><i>*</i> 请填写与对方协商后的域名中介金额并选择货币单位。</span>
+                </li>
+                <li>
+                    <p>由谁承担中介费</p>
+                    <div class="select_main_3 select_main_a">
+                        <select id="sel_payType" onchange="price_onchange()" name="sel_paytype" class="select_sty fl">
+                            <option selected="selected" value="1">买家承担</option>
+                            <option  value="2">卖家承担</option>
+                            <option value="3">双方平摊</option>
+                        </select>
+                    </div>
+                </li>
+
+                <li>
+                    <p>您需支付的中介费</p><span id="InterFee" style="color:red;">0</span>元
+                </li>
+                <li>
+                    <p>域名交付方式</p>
+                    <div class="select_main_3 select_main_a">
+                        <select id="sel_delway" name="sel_delway" class="select_sty fl">
+                            <option value="0">请选择域名交付方式</option>
+                            <option value="1">注册机构站内push域名</option>
+                            <option value="2">卖家提供域名转移密码</option>
+                        </select>
+                    </div>
+                </li> 
+                <li>
+                    <div class="doma_d_b">
+                        <input type="checkbox" checked="checked"><span>我已同意米仓网域名中介业务服务条款</span>
+                    </div>
+                </li>
+                <input type="submit" class="list_submit list_submit_marg" value="提交申请">
+            </ul>
+        </form>
+    </div>
+</div>
+
+<style type="text/css">
+    .Validform_checktip.Validform_wrong{color:red; margin-left:10px;padding:0px;}
+    .doma .apply li span {
+        width:100px;
+    }
+</style>
+<script type="text/javascript" src="/Public/Common/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_Datatype.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('form[name="form_purchase"]').Validform({
+            tiptype:3,
+            beforeSubmit: function(curform){
+                var msg ='';
+                if (!$(':input[type="checkbox"]').prop('checked')){
+                    msg='需要同意米仓网域名中介业务服务条款';
+                }
+                if(msg!=''){
+                    layer.msg(msg);
+                    return false;
+                }else{
+                    curform.find(':submit').prop('disabled', true);
+                    $.post(curform.attr('action'), curform.serialize(), function(result){
+                        curform.find(':submit').prop('disabled', false);
+                        if(result.mid){
+                            layer.alert(result.message,function(){ 
+                                location.reload();
+                            });
+                        }else{
+                            layer.msg(result.message);
+                        }
+                        
+                    });
+                    return false;
+                }
+            }
+        });
+    });
+    var rate = '0.04';
+    var minfee = '1';
+    var type = '2';
+    function price_onchange() {
+        if (isNaN($("#tbx_Price").val())) {
+            layer.msg("价格格式不正确");
+            return false;
+        }else {
+            PriceValid = true;
+            fee = $("#tbx_Price").val() * rate;
+            fee = totalfee = Math.round((Math.floor(fee * 1000) / 10) / 100);
+            var sel_payType = $("#sel_payType option:selected").val();
+            if (sel_payType == "3") {
+                fee = fee / 2;
+                if (fee < minfee) {
+                    fee = minfee;
+                }
+            }
+            else if (sel_payType == "2") {
+                if (type == 1) {
+                    fee = 0;
+                }
+            }
+            else if (sel_payType == "1") {
+                if (type == 2) {
+                    fee = 0;
+                }
+            }
+
+            if (fee < minfee && fee != 0) {
+                fee = minfee;
+            }
+            $("#InterFee").html(fee);
+        }
+    }
+</script>

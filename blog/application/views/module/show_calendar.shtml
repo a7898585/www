@@ -1,0 +1,41 @@
+<div rel="drag" id="Mod_Calendar" class="rlbfsz-ztdiv">
+    <div id="Mod_Calendar_t" class="rlbfsz-top01">
+        <div class="rlbfsz-top02"></div>
+        <div class="rlbfsz-top03">日历</div>
+        <?php if(isset($dragable) && $dragable==1)
+        {?>
+        <div class="gjsz01"><a href="#" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_Calendar_td3"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz12.gif"></a><a href="#" onclick="clkmenu(this.id,2);return false;" style="display: none;" title="展开" id="Mod_Calendar_td4"><img border="0" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz15.gif"></a><a href="#" onclick="removemod(this.id);return false;" title="删除" id="Mod_Calendar_td2"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz14.gif"></a></div>
+        <div style="cursor: move;" id="Mod_Calendar_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="gjsz02"><img height="16" width="33" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz11.gif"></div>
+        <?php
+        }?>
+    </div>
+    <div class="rlbfsz">
+        <div class="modbox">
+            <div id="calendar" class="rlbfsz01">程序加载中，请稍等...</div>
+        </div>
+    </div>
+</div>
+<script language="javascript">
+    var calendercache =new Array();
+    function UpdateCalender(time)
+    {    
+        if(time=='')return;
+        if(typeof(calendercache[time])=='undefined')
+        {
+            var url = "<?php echo $baseurl.'/ajaxcalendar/'.$bloginfo['MemberID'].'/'.$bloginfo['DomainName'];?>/";
+            url   += time;
+            $('#calendar').load(url);
+        }else
+        {
+            $('#calendar').html(calendercache[time]);
+        }
+    }
+    function UpdateInner(time)
+    {
+        return function(httpRequest){
+            calendercache[time]=httpRequest.responseText;
+            $('#calendar').innerHTML=httpRequest.responseText;
+        }; 
+    }
+    UpdateCalender("<?php echo date('Ym');?>");
+</script>

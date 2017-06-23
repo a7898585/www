@@ -1,0 +1,25 @@
+<?php include $header;?>
+<div id="Content">
+    <div class="AllNav">
+        <!--加内容的地方-->
+        <div class="dep01_960">
+            <div class="dep01_l dep475">
+                <div class="lmtsz_a">
+                    <div class="lmtsz01_a">日 排 行</div>
+                </div>
+                <div class="lmtsz_101">
+                    <?php include $shtml.'runcront_topclick24rank.shtml';?>  
+                </div>
+            </div>
+
+
+            <div class="dep01_r dep475">
+                <div class="lmtsz_a">
+                    <div class="lmtsz01_a">总 排 行</div>
+                </div>
+                <div class="lmtsz_101">
+                    <?php include $shtml.'runcront_clicktoprank.shtml';?>
+                </div>
+            </div>
+        </div>
+        <?php include $footer;?>

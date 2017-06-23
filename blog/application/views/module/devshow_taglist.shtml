@@ -1,0 +1,45 @@
+<div class="RgtBar" id="Mod_Label" rel="drag">
+    <h3>我的标签</h3>
+    <?php if(isset($dragable) && $dragable==1): ?>
+    <a style="cursor:move;" href="###" id="Mod_Label_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="NBDp4"></a><div class="NBDbx"><a class="NBDp1" href="###" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_Label_td3"></a><a class="NBDp2" href="###" onclick="clkmenu(this.id,2);return false;" style="DISPLAY: none" title="展开" id="Mod_Label_td4"></a><a class="NBDp3" href="###" onclick="removemod(this.id);setmod_input();return false;" title="删除" id="Mod_Label_td2"></a></div>
+    <?php endif; ?>  
+    <div class="modbox1">
+        <form   method="post"  style="display:none;">
+            <input type="hidden" name="flashCode" id="flashCodeTag" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" />
+            <input type="hidden" name="memid" id="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="hidden" name="currenttagid" id="currenttagid" value="" />
+            <input type="hidden" name="currentdomainname" id="currentdomainname" value="<?php echo($cuttrent_domainname); ?>" />
+            <input type="hidden" name="baseurl" id="baseurl" value="<?php echo($baseurl); ?>" />
+        </form>
+
+        <div id="s_taglist" class="MyTabs">数据加载中...</div>
+    </div>
+    <script language="javascript">
+        $(function(){
+            $('#s_taglist').load("<?php echo $baseurl.'/'.$cuttrent_domainname.'/articletag/mytagList/'.time(); ?>");
+
+            $('.tagidTurnPage').live('click',function(event){
+                if(event.target.tagName=='I')
+                {
+                    return false;
+                }
+		
+            })
+        });
+
+
+        var actdel = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articletag/Action";
+        function deltag(){
+	
+            $.post(actdel,{act:'deltag',flashCode:$('#flashCodeTag').val(), memid:$('#memberid').val(),TagID:$("#currenttagid").val()},function(data){
+		
+                if(data.errno == 'success')
+                {
+                    $('#s_taglist').load($('#baseurl').val()+"/"+$('#currentdomainname').val()+"/articletag/mytagList/"+new Date().getTime());
+			
+                    showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                }
+            },'json');
+        }
+    </script>
+</div>

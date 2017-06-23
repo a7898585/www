@@ -1,0 +1,10 @@
+    <div class="base_info">
+        <span class="in_avatar"><a href="{$base_url}/user/head/"><img src="{:setUpUrl($USER['head_pic'])}"></a></span>
+        <b>{$USER.username}</b>
+        <div class="in_tab">
+            <a href="javascript:;" id="click1" <eq name='msg' value='collect'>class="hover"</eq> onclick="location='{$base_url}/user/subscribe?msg=collect'"><i class="cicon1"></i><span>我的收藏</span></a>
+            <a href="javascript:;" id="click2" <eq name='msg' value='comment'>class="hover"</eq> onclick="location='{$base_url}/user/subscribe?msg=comment'"><i class="cicon2"></i><span>我的评论</span></a>
+            <a href="javascript:;" id="click3" <eq name='msg' value='dingyue'>class="hover"</eq> onclick="location='{$base_url}/user/subscribe?msg=dingyue'"><i class="cicon3"></i><span>我的订阅</span></a>
+            <a href="javascript:;" id="click4" <eq name='msg' value='friends'>class="hover"</eq> onclick="location='{$base_url}/user/subscribe?msg=friends'"><i class="cicon4"></i><span>我的好友</span></a>
+        </div>
+    </div>

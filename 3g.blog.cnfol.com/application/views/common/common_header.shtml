@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <meta id="viewport" name="viewport" content="width=320, initial-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="baidu-tc-cerfication" content="514a234c252ea9c06b9c0b37a11ff5f0" />
+        <link rel="apple-touch-icon-precomposed" href="logo.png" />
+        <link rel="apple-touch-startup-image" href="/startup.png" />
+        <title><?php echo $title;?></title>
+        <link href="http://" rel="stylesheet" type="text/css" />
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,ub/Css/MobileBoKe/index.css" />
+        <script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Base.js,ub/Js/MobileBoKe/Bk.js"></script>
+        <script type="text/javascript" src="http://hs.cnfol.com/f=uc/Js/Mobile/zepto.min.js,uc/Js/Mobile/Swipe.min.js"></script>
+
+    </head>
+
+    <body>
+        <header class="Header">
+            <div class="H_left Fl">
+                <a href="<?php echo(config_item('3g_cnfol_url')); ?>" class="Lft_icon Wrp ToBlock"></a>
+            </div>
+            <div class="H_mid Fl Tc Fb16 Bai_color">
+                <a class="Logo Va Wrp" href="<?php echo DEFAULT_CNFOL_URL;?>"></a>
+                <a class="LogopL" href="<?php echo(config_item('base_url')); ?>" id="channelname">博客</a>
+            </div>
+            <div class="H_right Fr">
+                <a href="<?php echo $this->config->item('usercenter_url').curPageURL();?>" class="Rgt_icon Wrp ToBlock"></a>
+            </div>	
+        </header>
+        <main>
+            <div class="Msg" id="Msg">
+                <div id="Msg_info">操作成功！</div>
+            </div>
+            <script type="text/javascript">
+                function alertDialog(name){
+                    $('#Msg_info').html(name);
+                    Bk.app.toMsg();  
+                }
+                
+                function countDownHref(urlRefer){
+                    var num = 3;
+                    var fn = function(){
+                        --num;
+                        num = num>=0 ? num : 0;
+                        if(num<=0){
+                            clearInterval(st);
+                            location.href = urlRefer; 
+                        } 
+                    };
+                    var st=setInterval(fn,1000); 
+                }
+            </script>

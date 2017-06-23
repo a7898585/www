@@ -1,0 +1,83 @@
+{__NOLAYOUT__}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>会员中心_域名查询_域名申请_域名交易-米仓网</title>
+        <meta name="keywords" content="域名,域名注册,域名查询,域名注册查询" />
+        <meta name="description" content="米仓网_中国顶级域名注册与中介交易商;提供域名注册,域名查询,域名申请,域名交易。专业服务,多重域名安全保障，服务超百万域名注册申请交易"/>
+        <meta name="copyright" content="网站版权申明"/>
+        <link href="/Public/Home/css/layout.css" rel="stylesheet" type="text/css" />
+        <script src="/Public/Home/js/jquery.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <!--主体内容 开始-->
+        <div class="wrap" style="width:600px;">
+            <form name="form_add" action="/recharge/add" method="post">
+                <input type="hidden" name="show" value="frame">
+                <div style="display:block;" class="onlineplay_c" id="navhljs1_c0">
+                    <div class="list_c">
+                        <ul class="ml20">
+                            <li class="ml20">
+                                <span>我的余额</span>
+                                <em>{$memberMoney/100}&nbsp;元</em>
+                            </li>
+                            <li class="ml20">
+                                <span>充值金额</span>
+                                <input type="text" name="money" class="list_ctxt_b" value="{$money}">
+                                    <em>元</em>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="list_c">
+                        <ul class="ml20">
+                            <li class="ml20">
+                                <span><i>选择支付方式</i></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="out-right" style="border-bottom:none;">
+
+                        <ul class="banks">
+                            <li style="height:50px; padding:10px 0 0 61px;">
+                                <input type="radio" value="支付宝余额支付" name="bank" id="alipay" checked="checked">
+                                    <label title="支付宝余额支付" for="alipay">
+                                        <span class="out-right-alipaycn out-right-bank"></span>
+                                    </label>
+                            </li>
+                        </ul></div>
+                    <input type="button" class="list_submit m0" value="下一步" id="recharge_button">
+                </div>
+            </form>
+        </div>
+
+        <script type="text/javascript" src="/Public/Common/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#recharge_button').click(function(){
+                    var reg = /^[1-9]*[1-9][0-9]*$/;
+                    if (!reg.test($(':input[name="money"]').val())){
+                        layer.msg('请输入整数金额');
+                        return false;
+                    }else{
+                        $('form[name="form_add"]').submit();
+                        layer.confirm('是否完成支付？', {
+                            btn: ['完成支付','支付失败'] //按钮
+                        }, function(){
+                            location.reload();
+                        }, function(){
+                            layer.msg('请重新试下！', {
+                                time: 20000, //20s后自动关闭
+                                btn: ['明白了']
+                            });
+                        });
+               
+                    }
+                    return true;
+                });
+            });
+        </script>
+
+    </body>
+</html>

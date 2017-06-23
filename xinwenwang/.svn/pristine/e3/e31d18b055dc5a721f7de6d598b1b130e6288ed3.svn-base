@@ -1,0 +1,72 @@
+<include file="Public:forget_header" />
+<div class="main">
+    <div class="wrap">
+        <div class="reg_titbar"><span class="tit"></span></div>    
+        <div class="box clearfix">
+            <ul class="box-ul clearfix">
+                <li class="one-mo"><a class="current">1.输入登录名</a></li>
+                <li class="two-que"><a>2.信息确认</a></li>
+                <li class="three-chong"><a>3.重置密码</a></li>
+                <li class="four-gai"><a>4.密码修改成功</a></li>
+            </ul>
+            <form action="/forget/" method="post" id="forgetForm">
+                <ul class="getBack">
+
+                    <li><div class="box_item2">
+                            <div class="box_items"><span class="box_lab2">手机号：</span>
+                                <input id="loginname" onkeyup="valid.account('loginname','forget')" onblur="valid.account('loginname','forget')" name="loginname" type="text" class="input-txt" value="{$mobile}" />
+                            </div>
+                            <div class="<empty name="msg">box_tip3<else />box_tip2</empty>" id="loginname_msg">{$msg?$msg:'输入您的手机号'}</div>
+                        </div></li>
+                    <li><div class="box_item2">
+                            <div class="box_items">
+                                <span class="box_lab2">验证码：</span>
+                                <input type="text" name="verify" class="input-txt" style="width:110px;margin-right:10px;" />
+                                <a href="javascript:void(0);" onclick="loadVerify();"><img width="100" height="32" id="verify" title="点击更换" /></a>
+                            </div>
+                            <div class="" id="verify_msg"></div>
+                            <!--<span><a href="javascript:void(0);" onclick="loadVerify();" class="cBlue">看不清？<br/>换一张</a></span>-->
+                        </div></li>
+                    <li class="btn_reg"><div class="box_item2"><span class="box_lab2"></span><a id="nextbutton" class="box_btn">下一步</a></div></li>
+                </ul>
+            </form>    
+
+            <div class="tishi">
+                <p>. 忘记帐号？试试您的常用邮箱、手机号。<br>
+                    · 如果该电子邮箱地址不正确，或者您已经忘记注册时填写的邮箱地址，那我们无法帮您找回密码，建议创建一个新帐户。<br>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $("#nextbutton").click(function(){
+            if(!valid.account('loginname','forget')) return false;
+            $.post("/public/imgcheck",{verify:$('input[name=verify]').val()},function(data){
+                if(data==1){
+                    $("#forgetForm").submit();
+                    $('#verify_msg').html('');
+                    $('#verify_msg').removeClass();
+                }else{
+                    $('#verify_msg').html('验证码错误');
+                    $('#verify_msg').addClass('box_tip2');
+                }
+            })
+            
+        });
+        $("#verify").click(function(){
+            loadVerify();
+        })
+        loadVerify();
+    })
+
+    loadVerify = function(){
+        var rand = Math.random();
+        $("#verify").attr("src","/verify?_id="+rand);
+    }
+</script>
+
+<include file="Public:foot" />
+

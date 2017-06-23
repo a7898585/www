@@ -1,0 +1,84 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：添加栏目</div>
+    </div>
+    <div class="szym06" style="height:500px">
+        <form id="popFormSubmit" name="popFormSubmit" method="post"  onSubmit="return false;"  >
+            <input id="act" name="act" value="<?php if(isset($sortinfo)) echo 'updsort'; else echo 'addsort';?>" type="hidden"/>
+            <input id="memid" name="memid" value="<?php echo $bloginfo['MemberID'];?>" type="hidden"/>
+            <input id="sortid" name="sortid" value="<?php if(isset($sortinfo['SortID'])) echo $sortinfo['SortID'];?>" type="hidden"/>
+            <input id="flashCode" name="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" type="hidden"/>
+            <input id="oldname" name="oldname" value="<?php if(isset($sortinfo['Name'])) echo $sortinfo['Name'];?>" type="hidden"/>
+            <div class="szym-nr01">
+                <div class="szym-nr02">栏目名称：</div>
+                <div class="szym-nr03"><input name="name" type="text" id="name" size="20" class="form" value="<?php if(isset($sortinfo['Name'])) echo $sortinfo['Name'];?>" onblur="check();"></div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02">副 标 题：</div>
+                <div class="szym-nr03"><input name="subtitle" type="text" id="subtitle" size="20"  class="form" value="<?php if(isset($sortinfo['SubTitle'])) echo $sortinfo['SubTitle'];?>"></div>
+            </div>
+            <div class="txt">
+                <div class="szym-nr02">栏目简介：</div>
+                <div class="szym-nr03"><textarea name="intro" cols="30" rows="3" id="intro"><?php if(isset($sortinfo['Intro'])) echo $sortinfo['Intro'];?></textarea></div>
+            </div>
+
+
+            <div class="szym-nr01" style="padding-top:10px;">
+                <div class="szym-nr02">排　　序：</div>
+                <div class="szym-nr03">
+                    <input name="rank" type="text" class="form"  id="rank" onkeyup="value=value.replace(/[^\d]/g,'')" value="<?php if(isset($sortinfo['Rank'])) echo $sortinfo['Rank']; else echo '0';?>" size="10">
+                    (文章分类显示的顺序，值越大排列在越前面。默认为0)
+                </div>
+            </div>
+
+            <div class="szym-nr01">
+                <div class="szym-nr02"></div>
+                <div class="szym-nr03"><input class="but_1" type="submit" name="sub" value="提交" id="submitform" />
+                    &nbsp;
+                    <input class="but_1"  type="reset" name="Submit2" value="重置" /></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script language="javascript">
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var action = baseuri + "/articlesort/Action";
+    var checkurl = "<?php echo $baseurl;?>/register/Check";
+    var flag = false;
+    function check(){
+        if($('#name').val() != $('#oldname').val()){
+            $.post(checkurl,{act:'asort',memberid:$('#memid').val(),name:$('#name').val()},function(data){
+                if(data.errno != 'success'){
+                    showalert(data.error); return false;
+                }else{ flag = true;}
+            },'json');
+        }else{
+            flag = true;
+        }
+        return flag;
+    };
+
+    $('#submitform').click(function(){
+        if(mb_strlen($('#name').val()) > 30 || mb_strlen($('#name').val()) < 1){
+            showalert("栏目名称长度应该在1-30个字节之内"); return false;
+        }else if(mb_strlen($('#subtitle').val()) > 50){
+            showalert("栏目副标题长度应该在0-50个字节之内"); return false;
+        }else if(mb_strlen($('#intro').val()) > 100){
+            showalert("栏目简介长度应该在0-100个字节之内"); return false;
+        }else if(parseInt($('#rank').val()) > 99 || parseInt($('#rank').val()) < 0){
+            showalert("文章排序应该在0-99之内"); return false;
+        }
+        if(check()){
+            $('#submitform').attr('disabled','disabled');
+            $.post(action,$('#popFormSubmit').serialize(),function(data){
+                showalert(data.error);
+                if(data.errno == 'success'){
+                    setTimeout(function(){
+                        window.location.href=baseuri+"/articlesort/List";
+                    },3000);
+                }
+            },'json');
+        }
+    });
+</script>

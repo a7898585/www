@@ -1,0 +1,275 @@
+<script language="javascript">
+    function xiajia(x){
+        if(confirm("确认要下架吗？")){
+            $.getJSON("/domain/ajax", { d:"del_sale",id:x },
+            function(data){
+                if(data.status=='1'){
+                    $('#tr_'+x).remove();
+                }else{
+                    layer.alert(data.message);
+                }
+            } 
+        );
+        }
+    }
+    function edit(id){
+        $('#edit_domainName').text($('#domain_'+id).text());
+        $('#edit_id').val(id);
+        $('#txt_memo').val($("#summary_"+id).text());
+        $('#txt_price').val($("#price_"+id).text());
+        var windowWidth = document.documentElement.clientWidth;   
+        var windowHeight = document.documentElement.clientHeight;   
+        var popupHeight = $("#dialog").height();   
+        var popupWidth = $("#dialog").width();   
+        //居中设置   
+        $("#dialog").css({   
+            "position": "absolute",   
+            "top": windowHeight/2-popupHeight/2,   
+            "left": windowWidth/2-popupWidth/2   
+        });   	
+        $('#dialog').show();
+        $('#yinying').show();
+    }
+    function edit_confirm(){
+        var txt_price=$('#txt_price').val();
+        var txt_memo=$('#txt_memo').val();
+        var edit_id=$('#edit_id').val();
+        $.post("/domain/ajax", { d:"update",id:edit_id,summary:txt_memo,price:txt_price },
+        function(data){
+            if(data.status=='1'){
+                $('#summary_'+edit_id).text(txt_memo);
+                $('#price_'+edit_id).text(txt_price);
+                $('#dialog').hide();
+                $('#yinying').hide();
+            }else{
+                layer.alert(data.message);
+            }
+					
+        } 
+    );
+    }
+    function BacthXiaJia(){
+        var is_select=false;
+        $(".checklBox").each(function(){
+            if($(this).is(':checked')){
+                is_select=true;
+            }
+        });
+        if(is_select==false){
+            layer.alert("请选择要下架的域名");
+            return;
+        }
+        var path = "/domain/batch_xiajia";  
+        $('#sale_form').attr("action", path).submit();;
+    }
+    function BacthEdit(){
+        var is_select=false;
+        $(".checklBox").each(function(){
+            if($(this).is(':checked')){
+                is_select=true;
+            }
+        });
+        if(is_select==false){
+            layer.alert("请选择要修改的域名");
+            return;
+        }
+        var path = "/domain/batch_sale_edit";  
+        $('#sale_form').attr("action", path).submit();
+    }
+	
+</script>
+<style>
+    .width50{ width:50px;}
+    .width90{ width:90px;}
+</style>
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl"> 
+        <a <empty name="pst"> class="navhl_h"<else /> class="navhl_q"</empty> href="/domain/salelist/">正在出售</a> 
+        <a <eq name="pst" value="suc"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/salelist?pst=suc">出售成功</a> 
+        <a <eq name="pst" value="liupai"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/salelist?pst=liupai">流拍</a>   
+    </div>
+    <div style="display:block;" class="onlineplay_c2 chushou" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <form id="sale_form" action="/domain/salelist" method="post">
+                <div>
+                    <span>域名：<input class="mo-input width90"  name="domain" value="{$Think.request.domain}">&nbsp;<input type="checkbox" value="1" name="domain_tou" <notempty name="Think.request.domain_tou"> checked="checked"</notempty>><label for="start">开头</label>&nbsp;<input type="checkbox" value="1" name="domain_wei" <notempty name="Think.request.domain_wei"> checked="checked"</notempty>><label for="end">结尾</label></span>
+                    <span class="fenlei">分类：
+                        <select name="classify">
+                            <option value="0">所有域名</option>
+                            <volist name="domainClassify" id="item">
+                                <option value="{$item.id}" <eq name="Think.request.classify" value="$item.id"> selected="selected"</eq>>{$item.name}</option>
+                            </volist>
+                        </select></span> 
+                    <span>长度：<select name="length_from" style="width: 65px;">
+                            <option value="1" <eq name="Think.request.length_from" value="1"> selected="selected"</eq>>1</option>
+                            <option value="2" <eq name="Think.request.length_from" value="2"> selected="selected"</eq>>2</option>
+                            <option value="3" <eq name="Think.request.length_from" value="3"> selected="selected"</eq>>3</option>
+                            <option value="4" <eq name="Think.request.length_from" value="4"> selected="selected"</eq>>4</option>
+                            <option value="5" <eq name="Think.request.length_from" value="5"> selected="selected"</eq>>5</option>
+                            <option value="6" <eq name="Think.request.length_from" value="6"> selected="selected"</eq>>6</option>
+                            <option value="7" <eq name="Think.request.length_from" value="7"> selected="selected"</eq>>7</option>
+                            <option value="8" <eq name="Think.request.length_from" value="8"> selected="selected"</eq>>8</option>
+                            <option value="9" <eq name="Think.request.length_from" value="9"> selected="selected"</eq>>9</option>
+                            <option value="10" <eq name="Think.request.length_from" value="10"> selected="selected"</eq>>10</option>
+                            <option value="11" <eq name="Think.request.length_from" value="11"> selected="selected"</eq>>11</option>
+                            <option value="12" <eq name="Think.request.length_from" value="12"> selected="selected"</eq>>12</option>
+                            <option value="13" <eq name="Think.request.length_from" value="13"> selected="selected"</eq>>13</option>
+                            <option value="14" <eq name="Think.request.length_from" value="14"> selected="selected"</eq>>14</option>
+                            <option value="15" <eq name="Think.request.length_from" value="15"> selected="selected"</eq>>15</option>
+                            <option value="16" <eq name="Think.request.length_from" value="16"> selected="selected"</eq>>16</option>
+                            <option value="17" <eq name="Think.request.length_from" value="17"> selected="selected"</eq>>17</option>
+                        </select>&nbsp;-
+                        <select name="length_to" style="width: 65px;">
+                            <option value="200">不限</option>
+                            <option value="1" <eq name="Think.request.length_to" value="1"> selected="selected"</eq>>1</option>
+                            <option value="2" <eq name="Think.request.length_to" value="2"> selected="selected"</eq>>2</option>
+                            <option value="3" <eq name="Think.request.length_to" value="3"> selected="selected"</eq>>3</option>
+                            <option value="4" <eq name="Think.request.length_to" value="4"> selected="selected"</eq>>4</option>
+                            <option value="5" <eq name="Think.request.length_to" value="5"> selected="selected"</eq>>5</option>
+                            <option value="6" <eq name="Think.request.length_to" value="6"> selected="selected"</eq>>6</option>
+                            <option value="7" <eq name="Think.request.length_to" value="7"> selected="selected"</eq>>7</option>
+                            <option value="8" <eq name="Think.request.length_to" value="8"> selected="selected"</eq>>8</option>
+                            <option value="9" <eq name="Think.request.length_to" value="9"> selected="selected"</eq>>9</option>
+                            <option value="10" <eq name="Think.request.length_to" value="10"> selected="selected"</eq>>10</option>
+                            <option value="11" <eq name="Think.request.length_to" value="11"> selected="selected"</eq>>11</option>
+                            <option value="12" <eq name="Think.request.length_to" value="12"> selected="selected"</eq>>12</option>
+                            <option value="13" <eq name="Think.request.length_to" value="13"> selected="selected"</eq>>13</option>
+                            <option value="14" <eq name="Think.request.length_to" value="14"> selected="selected"</eq>>14</option>
+                            <option value="15" <eq name="Think.request.length_to" value="15"> selected="selected"</eq>>15</option>
+                            <option value="16" <eq name="Think.request.length_to" value="16"> selected="selected"</eq>>16</option>
+                            <option value="17" <eq name="Think.request.length_to" value="17"> selected="selected"</eq>>17</option>
+                        </select></span>   
+
+                    <span>类型： <select class=" width100" id="drlbidway" name="type">
+                            <option value="0">所有</option>
+                            <option value="2" <eq name="Think.request.type" value="2"> selected="selected"</eq>>拍卖</option>
+                            <option value="1" <eq name="Think.request.type" value="1"> selected="selected"</eq>>一口价</option>
+                            <option value="3" <eq name="Think.request.type" value="3"> selected="selected"</eq>>买方报价</option>
+                        </select></span><br> 
+                    <span>排除：<input type="text" class="mo-input width90"  name="filter" value="{$Think.request.filter}">&nbsp;<input type="checkbox" value="1" name="filter_tou" <notempty name="Think.request.filter_tou"> checked="checked"</notempty>><label for="skipstart2">开头</label>&nbsp;<input  type="checkbox" value="1" name="filter_wei" <notempty name="Think.request.filter_wei"> checked="checked"</notempty>><label for="skipend2">结尾</label></span>
+                    <span>后缀：
+                        <select class="w80" name="suffix">
+                            <option value="0">所有后缀</option>
+                            <option value=".com" <eq name="Think.request.suffix" value=".com"> selected="selected"</eq>>.com</option>
+                            <option value=".cn" <eq name="Think.request.suffix" value=".cn"> selected="selected"</eq>>.cn</option>
+                            <option value=".com.cn" <eq name="Think.request.suffix" value=".com.cn"> selected="selected"</eq>>.com.cn</option>
+                            <option value=".net" <eq name="Think.request.suffix" value=".net"> selected="selected"</eq>>.net</option>
+                            <option value=".org" <eq name="Think.request.suffix" value=".org"> selected="selected"</eq>>.org</option>
+                            <option value=".info" <eq name="Think.request.suffix" value=".info"> selected="selected"</eq>>.info</option>
+                            <option value=".cc" <eq name="Think.request.suffix" value=".cc"> selected="selected"</eq>>.cc</option>
+                            <option value=".co" <eq name="Think.request.suffix" value=".co"> selected="selected"</eq>>.co</option>
+                            <option value=".asia" <eq name="Think.request.suffix" value=".asia"> selected="selected"</eq>>.asia</option>
+                            <option value=".tv" <eq name="Think.request.suffix" value=".tv"> selected="selected"</eq>>.tv</option>
+                            <option value=".mobi" <eq name="Think.request.suffix" value=".mobi"> selected="selected"</eq>>.mobi</option>
+                            <option value=".me" <eq name="Think.request.suffix" value=".me"> selected="selected"</eq>>.me</option>
+                            <option value=".biz" <eq name="Think.request.suffix" value=".biz"> selected="selected"</eq>>.biz</option>
+                            <option value=".net.cn" <eq name="Think.request.suffix" value=".net.cn"> selected="selected"</eq>>.net.cn</option>
+                            <option value=".org.cn" <eq name="Think.request.suffix" value=".org.cn"> selected="selected"</eq>>.org.cn</option>
+                            <option value=".wang" <eq name="Think.request.suffix" value=".wang"> selected="selected"</eq>>.wang</option>
+                            <option value=".中国" <eq name="Think.request.suffix" value=".中国"> selected="selected"</eq>>.中国</option>
+                            <option value=".公司" <eq name="Think.request.suffix" value=".公司"> selected="selected"</eq>>.公司</option>
+                            <option value=".网络" <eq name="Think.request.suffix" value=".网络"> selected="selected"</eq>>.网络</option>
+                            <option value=".other" <eq name="Think.request.suffix" value=".other"> selected="selected"</eq>>其它</option>
+                        </select>
+                    </span> 
+                    <span>价格：<input type="text" name="price_from"  value="{$Think.request.price_from}" maxlength="11" class="width50 mo-input" style="width: 53px;">&nbsp;-&nbsp;<input type="text" name="price_to" value="{$Think.request.price_to}" maxlength="11" class="width50 mo-input" style="width: 53px;"></span>
+                    <span><input type="submit" value="搜索" class="width90" id="search_button" style="margin-top:10px;"></span>                                                             
+
+                </div>
+                <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                    <tbody>
+                        <tr class="table_bg_b">
+                            <td width="50"><input type="checkbox" value="0" id="selectBox" onclick="SelextAll();"/></td>
+                            <td>域名</td>
+                            <td>域名简介</td>
+                            <td>类型</td>
+                            <td>您的报价</td>
+                            <td>当前价格</td>
+                            <td>出价次数</td>
+                            <td>结束时间</td>
+                            <td>操作</td>
+                        </tr>
+                    <empty name="domains">
+                        <tr>
+                            <td colspan="9">没有找到符合条件的域名！</td>
+                        </tr>
+                        <else/>
+                        <volist name="domains" id="item">
+                            <tr  class="table_bg_b" id="tr_{$item.id}">
+                                <td> <input name="saleIds[]" class="checklBox" type="checkbox" value="{$item.id}"<eq name="item.type" value="1"><gt name="item.times" value="0">  disabled="disabled" </gt></eq><eq name="item.type" value="2"><gt name="item.times" value="0">  disabled="disabled" </gt></eq>/></td>
+                                <td id="domain_{$item.id}">{$item.domain}</td>
+                                <td id="summary_{$item.id}">{$item.summary}</td>
+                                <td><eq name="item.type" value="1">一口价</eq>
+                                    <eq name="item.type" value="2">拍卖</eq>
+                                    <eq name="item.type" value="3">买方出价</eq></td>
+                                <td id="price_{$item.id}">{$item.seller_price|Fen2Yuan}</td>
+                                <td>{$item.buyer_price|Fen2Yuan}</td>
+                                <td>{$item.times}</td>
+                                <td><eq name="item.end_time" value="0">--
+                            <else />
+                            {$item.end_time|date='Y-m-d H:I:s',###}</eq></td>
+                            <td><eq name="item.type" value="1"><a class="bnt" href="javascript:check_seccode('edit','{$item.id}')">修改</a><else />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</eq>&nbsp;&nbsp;<a href="javascript:check_seccode('xiajia','{$item.id}');" class="bnt">下架</a></td>
+                            </td>
+                            </tr>
+                        </volist>
+                    </empty>
+                    <tr class="table_bg_b">
+                        <td colspan="9"><span style="float:left; margin-left:20px;">
+                                <input onclick="check_seccode('BacthEdit');" type="button" class="btn_cj" value="批量修改" style="float:left;"/>
+                                <input onclick="check_seccode('BacthXiaJia');" type="button" class="btn_cj" value="批量下架" style="float:left;"/></span>
+                        </td>
+                    </tr>
+                    <tr class="table_bg_b">
+                        <td colspan="9"><div class="pages">{$pager}</div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="dialog" class="ui-dialog" style="display:none; width:280px; z-index:10001;">
+    <div class="ui-dialog-arrow-a"></div>
+    <div class="ui-dialog-arrow-b"></div>
+    <table class="ui-dialog-grid">
+        <tbody>
+            <tr>
+                <td i="header" class="ui-dialog-header"><button i="close" class="ui-dialog-close" title="取消" onclick="$('#dialog').hide();$('#yinying').hide();">×</button>
+                    <div i="title" class="ui-dialog-title" id="title:14479914677572">修改</div></td>
+            </tr>
+            <tr>
+                <td i="body" class="ui-dialog-body"><div i="content" class="ui-dialog-content" id="content:14479914677572">
+                        <div>域名： <span id="edit_domainName"></span>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>价格：</td>
+                                        <td><input class="mo-input width100" type="txt" value="500" id="txt_price">
+                                            元</td>
+                                    </tr>
+                                    <tr>
+                                        <td>介绍：</td>
+                                        <td><textarea style="margin:10px 0 0 0;width:190px; height:65px; border:1px solid #e5e5e5;" id="txt_memo"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><div class="fail-jingjia" style="display:none; margin-left:44px; width:71.8%;margin-top:8px;" id="errmsg"><s class="left"></s>出价失败</div></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input name="edit_id" id="edit_id" type="hidden" value="" />
+                                            <a class="bnt-green width100" style="margin:10px 0 0 70px; display:block; color:white; text-align:center;" href="javascript:edit_confirm();">修改</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="yinying" style="display: none; z-index: 1000; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; -webkit-user-select: none; opacity: 0.5; background: rgb(0, 0, 0);" tabindex="0"></div>

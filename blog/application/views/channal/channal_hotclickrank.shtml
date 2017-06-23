@@ -1,0 +1,20 @@
+<?php include $header;?>
+<div id="Content">
+    <div class="AllNav">
+        <!--加内容的地方-->
+        <div class="lmtsz">
+            <div class="lmtsz01">博客人气排行榜</div>
+        </div>
+        <table cellspacing="1" cellpadding="5" border="0" bgcolor="#cccccc" width="960" class="m_t7">
+            <tbody>
+                <tr bgcolor="#eff0f2">
+                    <td bgcolor="#e4e6e9" align="left" width="47" class="table_colspan1"><b>名次</b></td>
+                    <td bgcolor="#e4e6e9" align="left" width="205" class="table_colspan2"><b>昵称</b></td>
+                    <td bgcolor="#e4e6e9" align="left" width="437" class="table_colspan3"><b>博客名</b></td>
+                    <td bgcolor="#e4e6e9" align="left" width="97" class="table_colspan4"><b>文章数</b></td>
+                    <td bgcolor="#e4e6e9" align="left" width="118" class="table_colspan5"><b>浏览量</b></td>
+                </tr>
+                <?php include $shtml.'runcront_renqipaihangban.shtml';?>
+            </tbody>
+        </table>
+        <?php include $footer;?>

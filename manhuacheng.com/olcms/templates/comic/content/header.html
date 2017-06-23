@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+<meta name="keywords" content="{$SEO['keyword']}">
+<meta name="description" content="{$SEO['description']}">
+<link href="{CSS_PATH}css.css" rel="stylesheet" type="text/css" />
+<!-- 
+<link href="{CSS_PATH}default_blue.css" rel="stylesheet" type="text/css" />
+ -->
+</head>
+
+<body>
+<div class="main">
+	<div class="top">
+    	<div class="logo"><img src="{IMG_PATH}img/logo.gif" /></div>
+        <div class="language">
+        	<div class="headinfo">
+					<div class="search_content">
+					<form target="_blank" method="get" action="http://www.bengou.com/Result">
+					<input type="text" value="请输入关键字" onmouseover="javascript:if(this.value=='请输入关键字'){this.value='';this.select();}" name="searchstr">
+					<a id="search_submit" href="javascript:;" style="right: 85px;">搜名称</a>
+                    <a id="search_submit" href="javascript:;">搜作者</a>
+					</form>
+					</div>				
+                    <div class=""></div>
+				</div>
+        	<div class="language_tit">
+            	<a target="_blank" href="#">登陆</a>&nbsp;|&nbsp;<a target="_blank" href="#">免费注册</a>&nbsp;|&nbsp;<a target="_self" href="#">收藏本站</a>&nbsp;|&nbsp;<a target="_blank" href="#">用户反馈</a>
+            </div>
+        </div>
+        <div style="background:none;" class="mainborder">
+			  <div class="menu">    	
+				{pc:content action="category" catid="0" num="25" order="listorder ASC"}
+					<ul class="nav-site">
+						<li {if $_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/index.php'}class="on"{/if}><a href="{siteurl()}"><span>首页</span></a></li>
+					{loop $data $r}
+						<li {if $catid == $r[catid]}class="on"{/if}><a href="{$r[url]}"><span>{$r[catname]}</span></a></li>
+					{/loop}
+					</ul>
+				{/pc}
+  			 </div>
+		</div>
+    </div>
+	{if $top_parentid}
+		{pc:content action="category" catid="$top_parentid" num="15" order="listorder ASC"}
+			{if $data}
+			<div class="x_nav">
+				  {loop $data $r}
+					<a href="{$r[url]}">{$r[catname]}</a>
+					{if $r != end($data)}&nbsp;|&nbsp;{/if}
+				  {/loop}
+				<span><a href="#" target="_blank"><img src="{IMG_PATH}img/btn-chrlist.png" /></a></span>
+			</div>
+			{/if}
+		{/pc}
+	{/if}
+
+<div class="left c666" style="padding-top:5px;">您现在的位置：&nbsp;<a class="LinkPath" href="{siteurl()}">首页</a>{if !empty($catid)}&nbsp;&gt;&nbsp;{catpos($catid)}{/if}</div>

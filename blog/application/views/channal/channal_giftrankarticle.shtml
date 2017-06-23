@@ -1,0 +1,22 @@
+<?php include $header;?>
+<div id="Content">
+    <div class="AllNav">
+        <!--加内容的地方-->
+        <div class="lmtsz">
+            <div class="lmtsz01">博客鲜花排行文章</div>
+        </div>
+
+        <table cellspacing="1" cellpadding="5" border="0" bgcolor="#cccccc" width="960" class="m_t7">
+            <tbody>
+                <tr>
+                    <td height="20" bgcolor="#f6f6f6" align="center" colspan="4"><a href="<?= $baseurl;?>/shtml/giftrankarticle,12.html"><font<?=$Rank_12?>><b>12小时鲜花排行</b></font></a>   <a href="<?= $baseurl;?>/shtml/giftrankarticle,24.html"><font<?=$Rank_24?>><b>24小时鲜花排行</b></font></a>   <a href="<?= $baseurl;?>/shtml/giftrankarticle,168.html"><font<?=$Rank_168?>><b>本周鲜花排行</b></font></a></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#e4e6e9" align="left" width="580">文章标题</td>
+                    <td bgcolor="#e4e6e9" align="left" width="200">作者</td>
+                    <td bgcolor="#e4e6e9" align="left" width="135">鲜花数</td>
+                </tr>
+                <?php include $shtml.$incRank;?>
+            </tbody>
+        </table>
+        <?php include $footer;?>

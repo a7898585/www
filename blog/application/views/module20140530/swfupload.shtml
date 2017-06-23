@@ -1,0 +1,164 @@
+
+<script charset="utf-8" src="http://hs.cnfol.com/uc/Js/Blog/upload/swfupload.js" type="text/javascript"></script>
+<script charset="utf-8" src="http://hs.cnfol.com/uc/Js/Blog/upload/handlers.js" type="text/javascript"></script>
+<script charset="utf-8" src="http://hs.cnfol.com/uc/Js/Blog/upload/fileprogress.js" type="text/javascript"></script>
+<style>
+    .progressWrapper {
+        width: 200px;
+        overflow: hidden;
+    }
+
+    .progressContainer {
+        padding: 4px;
+        border: solid 1px #E8E8E8;
+        background-color: #F7F7F7;
+        overflow: hidden;
+    }
+    .progressContainer div{
+        float:left;
+    }
+    /* Message */
+    .message {
+        margin: 1em 0;
+        padding: 10px 20px;
+        border: solid 1px #FFDD99;
+        background-color: #FFFFCC;
+        overflow: hidden;
+    }
+    /* Error */
+    .red {
+        border: solid 1px #B50000;
+        background-color: #FFEBEB;
+    }
+
+    /* Current */
+    .green {
+        border: solid 1px #DDF0DD;
+        background-color: #EBFFEB;
+    }
+
+    /* Complete */
+    .blue {
+        border: solid 1px #CEE2F2;
+        background-color: #F0F5FF;
+    }
+
+    .progressName {
+        font-size: 8pt;
+        font-weight: 700;
+        color: #555;
+        height: 14px;
+        text-align: left;
+        white-space: nowrap;
+        margin-right:5px;
+        overflow: hidden;
+    }
+
+    .progressBarInProgress,
+    .progressBarComplete,
+    .progressBarError {
+        font-size: 0;
+        width: 0%;
+        height: 10px;
+        background-color: blue;
+        margin-top: 2px;
+    }
+
+    .progressBarComplete {
+        width: 100%;
+        background-color: green;
+        visibility: hidden;
+    }
+
+    .progressBarError {
+        width: 100%;
+        background-color: red;
+        visibility: hidden;
+    }
+
+    .progressBarStatus {
+        margin-top: 2px;
+        font-size: 9pt;
+        font-family: Arial;
+        text-align: left;
+        white-space: nowrap;
+        line-height:7px;
+    }
+
+    a.progressCancel {
+        font-size: 0;
+        display: block;
+        height: 14px;
+        width: 14px;
+        background-repeat: no-repeat;
+        background-position: -14px 0px;
+        float: right;
+    }
+
+    a.progressCancel:hover {
+        background-position: 0px 0px;
+    }
+</style>
+<script type="text/javascript">
+    $(".fileUload").each(function(){
+        var $this = $(this);
+        var setting = {
+            flash_url: $this.attr('flash_url'),
+            upload_url: $this.attr('upload_url'),
+            //post_params: $this.attr('post_params'),
+            post_params: {},
+            file_size_limit: $this.attr('file_size_limit'),
+            file_types: $this.attr('file_types'),
+            file_types_description: $this.attr('file_types_description'),
+            file_upload_limit: $this.attr('file_upload_limit'),
+            file_queue_limit: $this.attr('file_queue_limit'),
+            custom_settings:{
+                uploadTarget: $this.attr('uploadTarget'),
+                progressTarget: $this.attr('progressTarget'),
+                cancelButtonId: $this.attr('cancelButtonId')
+            },
+            debug: $this.attr('debug'),
+            button_image_url: $this.attr('button_image_url'),
+            button_width: $this.attr('button_width'),
+            button_height: $this.attr('button_height'),
+            button_placeholder_id: $this.attr('button_placeholder_id'),
+			
+            file_queued_handler : fileQueued,
+            file_queue_error_handler : fileQueueError,
+            file_dialog_complete_handler : fileDialogComplete,
+            upload_start_handler : uploadStart,
+            upload_progress_handler : uploadProgress,
+            upload_error_handler : uploadError,
+            upload_success_handler : uploadSuccess,
+            upload_complete_handler : uploadComplete,
+            queue_complete_handler : queueComplete	// Queue plugin event
+        }
+        if($this.attr('upload_start_handler')){
+			
+            setting.upload_start_handler = eval($this.attr("upload_start_handler"));
+        }
+        if($this.attr('upload_progress_handler')){
+			
+            setting.upload_progress_handler = eval($this.attr("upload_progress_handler"));
+        }
+        if($this.attr('upload_error_handler')){
+			
+            setting.upload_error_handler = eval($this.attr("upload_error_handler"));
+        }
+        if($this.attr('upload_success_handler')){
+			
+            setting.upload_success_handler = eval($this.attr("upload_success_handler"));
+        }
+        if($this.attr('upload_complete_handler')){
+			
+            setting.upload_complete_handler = eval($this.attr("upload_complete_handler"));
+        }
+        if($this.attr('queue_complete_handler')){
+			
+            setting.queue_complete_handler = eval($this.attr("queue_complete_handler"));
+        }
+        $this.after("<span id='"+setting.button_placeholder_id+"'></span>");
+        new SWFUpload(setting);
+        $this.hide();
+    });
+</script>

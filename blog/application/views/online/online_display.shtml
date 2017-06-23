@@ -1,0 +1,177 @@
+<?php include $peronalhead;?>
+<!-- 中间部分 -->
+<div class="zjddiv">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="250" valign="top" id="modtd_4"> 
+                <!-- 公告部分 -->
+                <?php include $modulepath.'show_affiche.shtml';?>
+                <!-- 推荐文章部分 -->
+                <?php include $modulepath.'show_remmendatrile.shtml';?>
+
+                <!-- 文章分类部分 -->
+                <?php include $modulepath.'show_articlesort.shtml';?>
+                <!-- 文章存档部分 -->
+                <?php include $modulepath.'show_archive.shtml';?>
+                <!-- 访问统计部分 -->
+                <?php include $modulepath.'show_stat.shtml';?>
+                <!-- 友情链接部分 -->
+                <?php include $modulepath.'show_friendlinks.shtml';?>
+
+            </td>
+            <td width="20"></td>
+            <td valign="top" valign="top">
+                <!-- 查看文章部分 -->
+                <div class="wzjtymsz-ztdiv" id="article_content">
+                    <div class="wzjtymsz-top01" id="menu_bg">
+                        <div class="wzjtymsz-top02"></div>
+                        <div class="wzjtymsz-top03">查看直播</div>
+                    </div>
+
+                    <div class="wzjtymsz">
+                        <!--标题-->
+                        <div style="text-align:center">
+                            <h1><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/online/Display/<?php echo $Online['OnlineID'];?>.html"><?php echo $Online['Subject'];?></a>
+                            </h1>
+                        </div>
+                        <!--时间-->
+                        <div class="wzjtym02">[  <?php echo $Online['AppearTime'];?> ]</div>
+                        <!--内容-->
+                        <div id="onlinecontent" class='wzjtymsz-ztdiv'>
+                            <?php
+                            if(!empty($subContent) && is_array($subContent))
+                            {
+                            foreach($subContent as $value)
+                            {?>
+                            <div class="zjfksz">	
+                                <div style="font-size:14px;line-height:18px;padding:5px 20px;text-align:left;"><?php echo date('H:i:s',strtotime($value['AppearTime'])).'    '.$value['Content'];?></div>
+                            </div>
+                            <?php
+                            }
+                            }?>
+                        </div>
+                        <?php 
+                        if(isset($isowner) && $isowner == true && (date('Ymd',strtotime($Online['AppearTime'])) == date('Ymd')))
+                        {?>
+                        <div id="wrapper" style="margin:auto; width:438px;padding:10px;">
+                            <fieldset>
+                                <legend>发送直播信息</legend>
+                                <form id="chatform" onsubmit="return false;" method="post">
+                                    <textarea id="msgcontent" cols="50" rows="1" name="message"></textarea><br />
+                                    <div style="padding:5px;"></div>
+                                    <input type="submit" value="提 交" id="subbnt"/>
+                                </form>
+                            </fieldset>
+                        </div>
+                        <script language="javascript">
+                            var onlinesort = <?php echo $OrderType?>; //直播的排序 0 降序 默认  1 升序
+                            var memid   = <?php echo $bloginfo['MemberID'];?>;
+                            var subjectid  = <?php echo $Online['OnlineID'];?>;
+                            var vCode  = "<?php echo getVerifyStr($bloginfo['MemberID'].$Online['OnlineID'].$bloginfo['UserID']);?>";
+                            var baseuri   = "<?php echo $baseurl . '/' . $bloginfo['DomainName'];?>";
+                            var onlineadd = baseuri + '/online/ActionBlock';
+                            var blocklimit = <?php echo maxonlineblocklimit;?>;
+                            $(function(){
+                                $('#subbnt').click(function(){
+                                    var msglen = mb_strlen($('#msgcontent').val());
+                                    if(msglen > 500 || msglen < 2){
+                                        showalert('直播内容必须在2-500字节之间'); return;
+                                    }else if(blocklimit < $('div[class="zjfksz"]').length){
+                                        showalert('直播信息板块最多200条信息'); return;
+                                    }
+                                    $.post(onlineadd, {message:$('#msgcontent').val(), flashCode:vCode, memberid:memid, subjectid:subjectid, act:'addblock'}, function(data){
+                                        if(data.errno == 'succ'){
+                                            if(onlinesort == 0){
+                                                $('<div class="zjfksz"><div style="font-size:14px;line-height:18px;padding:5px 20px;text-align:left;">'+getTime()+'    '+$('#msgcontent').val()+'</div></div>').prependTo('#onlinecontent');
+                                            }else{
+                                                $('<div class="zjfksz"><div style="font-size:14px;line-height:18px;padding:5px 20px;text-align:left;">'+getTime()+'    '+$('#msgcontent').val()+'</div></div>').appendTo('#onlinecontent');
+                                            }
+                                            $('#msgcontent').val('');
+                                        }else{
+                                            showalert(data.error);
+                                        }
+                                    },'json');
+                                });
+                            })
+                            function getTime()
+                            {
+                                var date = new Date();
+                                var hour = date.getHours();
+                                var min  = date.getMinutes();
+                                var sec  = date.getSeconds();
+                                var ret  = (hour > 9)? hour:'0'+hour;
+                                ret += (min > 9)? ':'+min:':0'+min;
+                                ret += (sec > 9)? ':'+sec:':0'+sec;
+                                return ret;
+                            }
+                        </script>
+                        <?php
+                        }
+                        else if(date('Ymd',strtotime($Online['AppearTime'])) == date('Ymd'))
+                        {
+                        ?>
+                        <script language="javascript">
+                            var lastreqtime = "<?php echo $lastreqtime;?>";
+                            var onlinesort = <?php echo $OrderType?>; //直播的排序 0 降序 默认  1 升序
+                            var hasnotdatanum = 1; //记录请求无数据的次数
+                            var setdureing = 5000;
+                            var memid   = <?php echo $bloginfo['MemberID'];?>;
+                            var subjectid  = <?php echo $Online['OnlineID'];?>;
+                            var baseuri   = "<?php echo $baseurl . '/' . $bloginfo['DomainName'];?>";
+                            var getlist   = baseuri+'/getOnlineBlock';
+                            var timeoutid = null;
+                            function getTime(datestr){
+                                var fetchpattern = new RegExp("[0-9]{2}:[0-9]{2}:[0-9]{2}","g");
+                                var ret = fetchpattern.exec(datestr);
+                                return ret[0];
+                            }
+                            function dateTime(date){
+                                var dateformat = date.getFullYear() + '-';
+                                var mon  = date.getMonth() + 1;
+                                dateformat += (mon > 9)? mon:'0'+mon;
+                                var day  = date.getDate();
+                                dateformat += '-';
+                                dateformat += (day > 9)? day:'0'+day;
+                                var hour = date.getHours();
+                                var min  = date.getMinutes();
+                                var sec  = date.getSeconds();
+                                dateformat += ' ';
+                                dateformat += (hour > 9)? hour:'0'+hour;
+                                dateformat += (min > 9)? ':'+min:':0'+min;
+                                dateformat += (sec > 9)? ':'+sec:':0'+sec;
+                                return dateformat;
+                            }
+                            function reqOnlineBlock(){
+                                $.post(getlist, {reqtime:lastreqtime, onlineid:subjectid, memberid:memid, orderby: onlinesort},function(data, status){
+                                    if((status == "success") && data.TolCnt > 0){
+                                        hasnotdatanum = 1;
+                                        lastreqtime	  = dateTime(new Date());
+
+                                        $.each(data.Record,function(i,v){
+                                            if(onlinesort == 0){
+                                                $('<div class="zjfksz"><div style="font-size:14px;line-height:18px;padding:5px 20px;text-align:left;">'+getTime(v.AppearTime)+'    '+ v.Content+'</div></div>').prependTo('#onlinecontent');
+                                            }else{
+                                                $('<div class="zjfksz"><div style="font-size:14px;line-height:18px;padding:5px 20px;text-align:left;">'+getTime(v.AppearTime)+'    '+v.Content+'</div></div>').appendTo('#onlinecontent');
+                                            }
+                                        });
+                                    }else{
+                                        hasnotdatanum += 1;	
+                                    }
+                                },"json");
+                                clearTimeout(timeoutid);
+                                timeoutid = setTimeout(reqOnlineBlock, setdureing*hasnotdatanum);
+                            }
+                            timeoutid = setTimeout(reqOnlineBlock, setdureing*hasnotdatanum);
+                        </script>
+                        <?php
+                        }?>
+                    </div>
+                </div>
+
+
+            </td>
+        </tr>
+    </table>
+</div>
+<!--footer begin-->
+<?php include $peronalfoot;?>

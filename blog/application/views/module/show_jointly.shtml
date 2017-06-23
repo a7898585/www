@@ -1,0 +1,17 @@
+<?php
+
+if($bloginfo['UserID']!=$userid)
+{
+?>
+<div class="RgtBar">
+    <h3>共同关系</h3>
+    <ul class="PicLst" id="jointlyFriends">
+        数据加载中...
+    </ul>
+    <script language="javascript">
+        $(function(){
+            $('#jointlyFriends').load("<?php echo $baseurl?>/index.php/module/jointly?UserID=<?php echo $bloginfo['UserID']; ?>&VisitantID=<?php echo $userid; ?>&r="+new Date().getTime()); 
+        })
+    </script>
+</div>
+<?php } ?>

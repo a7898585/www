@@ -1,0 +1,87 @@
+{__NOLAYOUT__}
+<div class="col-lg-12">
+    <form method="post" action="" role="form" class="form-horizontal" name="add_form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">申请类型：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info['role'] ? '代售':'申请代购'}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">申请会员：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info['mid']? $info['mid'] : '游客'}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">申请域名：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{$info['domain']}</p>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">心里价位：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info.pay_price}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">手续费：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info.counter_fee}</p></div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">联系人：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info.contacts}</p></div>
+            <label class="col-sm-2 control-label text-nowrap">电话：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info['mobile']}</p></div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">邮箱：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info['email']}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">qq：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$info['qq']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">留言：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{$info['message']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">添加时间：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{$info['addtime']|date="y年m月d日 H:i:s",###}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">当前状态：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{$info['status']|getPurchaseParam}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">审核操作：</label>
+            <div class="col-sm-5">
+                <select class="form-control" name="status">
+                    <volist name=":getPurchaseParam()" id="item">
+                        <option value="{$key}" <eq name="info.status" value="$key">selected</eq>>{$item}</option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">备注：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    <textarea class="form-control" rows="3" name="remark">{$info['remark']}</textarea>
+                </p>
+            </div>
+        </div>
+    </form>
+</div>

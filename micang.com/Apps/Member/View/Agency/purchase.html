@@ -1,0 +1,85 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="/agency/purchase/">申请委托购买</a> 
+        <a class="navhl_q" href="/agency/purchase_list/">域名委托购买</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c add_temp_d" id="navhljs1_c0">
+        <form name="form_purchase" action="" method="post">
+            <ul>
+                <li>
+                    <p>代购域名</p><input type="text" class="list_ctxt_a" name="domain" placeholder="请输入代购域名" datatype="*" errormsg="代购域名不正确" sucmsg=" " nullmsg="请输入代购域名">
+                </li>
+                <li>
+                    <p>预算费用</p><input type="text" class="list_ctxt_a" name="pay_price" placeholder="请输入预算费用" datatype="n" errormsg="预算费用不正确" sucmsg=" " nullmsg="请输入预算费用">
+                </li>
+                <li>
+                    <p>手续费</p><div class="price">300元</div>
+                </li>
+                <li>
+                    <p>您的称呼</p><input type="text" class="list_ctxt_a" name="contacts" value="{$profile.realname}" placeholder="请输入真实姓名" datatype="*" errormsg="真实姓名不准确" sucmsg=" " nullmsg="请输入真实姓名">
+                </li>
+                <li>
+                    <p>您是手机</p><input type="text" class="list_ctxt_a" name="mobile" value="{$profile.mobile}" placeholder="请输入手机号码" datatype="m" errormsg="手机号码不正确" sucmsg=" " nullmsg="请输入手机号码">
+                </li>
+                <li>
+                    <p>您的QQ</p><input type="text" class="list_ctxt_a" name="qq" value="{$profile.qq}" placeholder="请输入QQ地址" datatype="n" errormsg="QQ格式不正确" sucmsg=" " nullmsg="请输入QQ">
+                </li>
+                <li>
+                    <p>您的邮箱</p><input type="text" class="list_ctxt_a" name="email" value="{$profile.email}" placeholder="请输入邮箱地址" datatype="e" errormsg="邮箱格式不正确" sucmsg=" " nullmsg="请输入邮箱地址">
+                </li>
+                <li>
+                    <p>其它备注</p><textarea class="list_ctxt_g" name="message"></textarea>
+                </li>
+                <li>
+                    <p></p>
+                    <div class="doma_d_b">
+                        <input type="checkbox" checked="checked"><span>我已同意米仓网域名代购协议</span>
+                    </div>
+                </li>
+                <input type="submit" class="list_submit list_submit_marg" value="提交申请">
+            </ul>
+        </form>
+    </div>
+</div>
+
+<style type="text/css">
+    .Validform_checktip.Validform_wrong{color:red; margin-left:10px;padding:0px;}
+    .doma .apply li span {
+        width:100px;
+    }
+</style>
+<script type="text/javascript" src="/Public/Common/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_Datatype.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('form[name="form_purchase"]').Validform({
+            tiptype:3,
+            beforeSubmit: function(curform){
+                var msg ='';
+                if($(':input[name=pay_price]').val()<500){
+                    msg='预算费用不能低于500';
+                }
+                if (!$(':input[type="checkbox"]').prop('checked')){
+                    msg='需要同意米仓网域名代购协议';
+                }
+                if(msg!=''){
+                    layer.msg(msg);
+                    return false;
+                }else{
+                    curform.find(':submit').prop('disabled', true);
+                    $.post(curform.attr('action'), curform.serialize(), function(result){
+                        curform.find(':submit').prop('disabled', false);
+                        if(result.status==200){
+                            layer.alert(result.message,function(){ 
+                                location.href='/agency/purchase_list/';
+                            });
+                        }else{
+                            layer.msg(result.message);
+                        }
+                    });
+                    return false;
+                }
+            }
+        });
+    });
+</script>

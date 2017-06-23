@@ -1,0 +1,44 @@
+<!--最新新版登陆条-->
+<?php  include 'common_login.shtml'; ?>	
+<!--最新新版登陆条end-->
+<!--start 导航-->
+<div class="W960 Nav NewNav">
+    <!-- 
+    
+<form class="R Mr10">
+    <input type="text" id="C2" class="Srinput L" value="搜索博文/博主">
+    <label class="LabSlc L Ml10">
+        <select name="SlctFrst" class="SlSW SlcWrp">
+            <option value="本博客">本博客</option>
+        </select>
+    </label>
+    <a href="javascript:;" class="Asrch Ml10"></a>
+</form>	
+    -->
+
+    <!-- 
+    <a class="AHome Mr30" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" target="_blank">我的首页</a>
+    <a class="ABlog" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" target="_blank">我的博客</a>
+    <a class="APhoto" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/albumlist' ?>" target="_blank">相 册</a>
+    <a class="ASet ANow" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/config/Edit'?>" target="_blank">设 置</a>
+     
+    -->
+    <?php if(isset($isowner) && $isowner==true) {?>
+    <a class="AHome Mr30 <?php if($navConfig=='myindex') {?>ANowhm<?php } ?>" href="<?php echo $baseurl.'/my/'.$bloginfo['DomainName'];?>" >我的首页</a>
+    <a class="ABlog <?php if($navConfig=='myblog') {?>ANowbg<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" >我的博客</a>
+    <a class="APhoto <?php if($navConfig=='album') {?>ANowph<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/albumlist' ?>" >相 册</a>
+    <a class="ASet ANow <?php if($navConfig=='') {?>ANowst<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/config/Edit'?>" >设 置</a>	
+    <?php }else{ ?>
+
+    <a class="ABlog <?php if($navConfig=='myblog') {?>ANowbg<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" >博 客</a>
+    <a class="APhoto <?php if($navConfig=='album') {?>ANowph<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/albumlist' ?>" >相 册</a>
+    <?php } ?>
+
+    <!--博客文章导航条-->
+    <?php include config_item('shtml_path').'blog_header_nav1.shtml';?>
+    <?php if(isset($isowner) && $isowner==true) {?><?php }else{ ?>
+    <?php include config_item('shtml_path').'blog_header_nav2.shtml';?>
+    <script src="http://he.js.cnfol.com/index_8.php/id=313&amp;charset=utf8"></script>
+    <?php } ?>
+</div>
+<!--end 导航-->

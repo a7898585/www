@@ -1,0 +1,79 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：文章列表</div>
+    </div>
+    <div class="szym06"><table cellpadding="0" cellspacing="0" border="0" class="bd_tab" width="100%">
+            <tr>
+                <td class="bg_tab"> 文章标题</a></td>
+                <td class="bg_tab">所属分类</td>
+                <td class="bg_tab">发表时间</td>
+                <td class="bg_tab">管理选项</td>
+            </tr>
+            <?php
+            if($artList['RetRecords'] > 0)
+            {
+            if($artList['RetRecords'] == 1)
+            {
+            $artList['Record'] = array(0=>$artList['Record']);
+            }
+            foreach($artList['Record'] as $art)
+            {
+            ?>
+            <tr class="sort">
+                <td height="30"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html" target="_blank"><?php echo $art['IsTop']==1 ? '<span style="color:red;">[顶]</span>'.$art['Title']:$art['Title'];?></a></td>
+                <?php
+                if(trim($art['SortName']) != "")
+                {?>
+                <td>&nbsp;<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/manage/article/SortList/<?php echo $art['SortID'];?>" ><?php echo $art['SortName'];?></a></td>
+                <?php
+                }
+                else
+                {?>
+                <td>&nbsp;<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/SortList/<?php echo $default['articlesort'][0];?>" ><?php echo $default['articlesort'][1];?></a></td>
+                <?php
+                }?>
+                <td><?php echo $art['AppearTime'];?>&nbsp;</td>
+                <td>
+                    <?php if($art['IsTop']==0){?>
+                    <a href="javascript:;" onclick="javascript:;blogtoparticle('<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>',1)">置顶</a>
+                    <?php } else{?>
+                    <a href="javascript:;" onclick="javascript:;blogtoparticle('<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>',0)">取消置顶</a>
+                    <?php } ?>
+                    <a href="javascript:submit_form('action_form','<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>');">修改</a> <a href="javascript:void(0)" onclick="javascript:del('<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>');">删除</a>
+                    <a href='javascript:void(0)' onclick="javascript:Show('trackback<?php echo $art['ArticleID'];?>','Link','Manage');UpdateTrackbackPage('<?php echo $art['ArticleID'];?>','1');" co="<?php echo  getVerifyStr($bloginfo['UserID'].$art['ArticleID']);?>" id="co<?php echo $art['ArticleID'];?>">引用</a>
+                </td>
+
+            </tr>
+            <tr class="sort" id="trackback<?php echo $art['ArticleID'];?>" style="display:none">
+                <td colspan="4"><div id="tbl<?php echo $art['ArticleID'];?>">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <?php
+            }
+            }
+            else
+            {?>
+            <tr class="sort">
+                <td colspan="4" height="30"><p>您暂时还没有该分类的文章记录</p></td>
+            </tr>
+            <?php
+            }?>
+            <tr class="sort">
+                <td colspan="4"><?php echo $pagebar;?></td>
+            </tr>
+        </table>
+        <form id="action_form" name="action_form" method="post" target="_self" action="">
+            <input type="hidden" name="act" id="act" value="edit" />
+            <input type="hidden" name="articleid" id="articleid" />
+        </form>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<script language="javascript">
+    var memberid = <?php echo $bloginfo['MemberID'];?>;
+    var flashCode = "<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>";
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var action = baseuri+'/article/Action';
+    var editurl = baseuri+'/article/Edit';
+</script>

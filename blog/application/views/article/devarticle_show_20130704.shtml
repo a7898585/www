@@ -1,0 +1,662 @@
+<?php include $peronalhead; ?>
+<!-- 中间部分 -->
+<div class="zjddiv">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="250" valign="top" id="modtd_4"> 
+
+                <!-- 个人档案 -->
+                <?php include $modulepath.'show_profile.shtml';?>
+
+                <!-- 推荐文章部分 -->
+                <?php include $modulepath.'show_remmendatrile.shtml';?>
+
+                <!-- 浏览过该文章的人还浏览过 -->
+                <?php include $modulepath.'show_guesteverbrowse.shtml';?>
+
+
+                <!-- 文章分类部分 -->
+                <?php include $modulepath.'show_articlesort.shtml';?>
+                <!-- 文章存档部分 -->
+                <?php include $modulepath.'show_archive.shtml';?>
+
+
+            </td>
+            <td width="20"></td>
+            <td valign="top">
+
+                <?php if(!$isowner) {?>
+                <!-- 提醒层 --> 
+                <div id="tips" style="display:none;text-align:left;text-indent:12px;background:url(http://img.cnfol.com/newblog/Version2/images/light2.png) no-repeat scroll 4px 7px #FFFDDD;border:1px solid #F1E8B7;padding:8px 10px 6px 10px;margin-top:10px;">
+                    <a title="关闭" onclick="$('#tips').hide()" href="javascript:;" style="float:right;height:7px;width:7px;display:inline-block;margin-right:-4px;background:url(http://img.cnfol.com/newblog/Version2/images/x2.png) no-repeat "></a>
+                    涉及私下收费服务请务必谨慎，谨防上当受骗！
+                </div>
+                <?php }?>
+
+                <!-- 头部滚动广告部分 -->
+                <link rel="stylesheet" href="http://hs.cnfol.com/ui/Css/Blog/Old/OldBlog.css" />
+                <!-- 头部滚动广告部分 -->
+
+                <!-- 查看文章部分 -->
+                <div class="wzjtymsz-ztdiv" id="article_content">
+                    <div class="wzjtymsz-top01" id="menu_bg">
+                        <div class="wzjtymsz-top02"></div>
+                        <?php if(isset($isowner) && ($isowner == true)) {?>
+                        <div class="wzjtymsz-top03" style="float:right; margin-right:20px;">
+                            <a href="<?php echo $urlprefix;?>/article/Add">发表新文章</a>
+                        </div>
+                        <?php }?>
+                        <div class="wzjtymsz-top03">查看文章</div>
+                        <!-- 头部滚动广告部分 -->
+                        <!--<div class="wzlbsz-top03-blog ScrWp" style="<?php if($blogconfig['StyleID']=='1'||$blogconfig['StyleID']=='4'||$blogconfig['StyleID']=='2002'){echo('display:none;word-wrap:normal;');}else{echo('padding-top:4px;text-align:center;font-weight:bold;overflow:hidden;display:;word-wrap:normal;');} ?>">-->
+                        <div class="wzlbsz-top03-blog ScrWp" style="<?php if($blogconfig['StyleID']!='1'){echo('padding-top:4px;');}else{echo('padding-top:-5px;');} ?>text-align:center;font-weight:bold;overflow:hidden;display:;word-wrap:normal;">
+
+                            <span id="ScrDiv" class="ScrDiv">
+                                <span id="ScrBgn" style="border:0px solid black;"><?php include($shtml.'/blog_article_scrollad.shtml'); ?></span>
+                                <span  style="margin-left:-7px;display:inline;"><?php include($shtml.'/blog_article_scrollad.shtml'); ?></span>
+                                <span  style="margin-left:-7px;display:inline;"><?php include($shtml.'/blog_article_scrollad.shtml'); ?></span>
+                                <span id="ScrEnd" style="margin-left:-7px;"></span>
+                            </span>
+
+                        </div>
+                        <!-- 头部滚动广告部分 -->
+
+                    </div>
+
+                    <!-- 头部滚动广告部分 -->
+                    <script type="text/javascript" src="http://hs.cnfol.com/ui/Js/Blog/Old/ScrlLft.js"></script>
+                    <script type="text/javascript">ScrolLft("ScrBgn","ScrEnd","ScrDiv");</script>
+                    <!-- 头部滚动广告部分 -->
+
+                    <div class="wzjtymsz">
+                        <div class="wzjtym02">
+                            <!--标题-->
+
+                            <h2>
+                                <?php if($article['Recommend'] == 2 || $article['Recommend'] == 3 || $articlestat['IsUsed'] == 1) {?>
+                                <img align="absmiddle" title="该文章已被采用到博客首页" alt="该文章已被采用到博客首页" border="0" src="http://img.cnfol.com/newblog/Version2/images/tui24.png" />
+                                <?php }?>
+                                <?php if($articlestat['IsTop'] == 1) {?>
+                                <span>顶</span>
+                                <?php }?>
+                                <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID'];?>.html"><?php echo $article['Title'];?></a>	
+                            </h2>
+
+
+                            <!--时间-->
+                            [ <?php echo $article['AppearTime'];?> ]
+
+                            <?php if($isowner === true  && $article['ArticleID'] !== 0)
+                            {?>
+                            | <span style="cursor: pointer" onclick="javascript:submit_form('article_action_form','<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID'];?>');">编辑</span> | 
+                            <span style="cursor: pointer" onclick="javascript:del('<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID'];?>');">删除</span> 
+                            <?php
+                            }?>
+
+                            <!--标签-->
+                            <p>标签：
+                                <?php if(empty($tag)) {?>
+                                &nbsp;
+                                <?php } else { ?>
+                                <?php foreach($tag as $tagv) {?>
+                                <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/tag/<?php echo $tagv[0];?>"><?php echo filter_word($tagv[1]);?></a>&nbsp;
+                                <?php }?>
+                                <?php }?>
+                            </p>
+                        </div>
+                        <!--内容-->
+
+                        <div class="wzjtym03" style="overflow:hidden;word-break:break-all;font-size:16px;line-height:1.5;" >
+
+                            <?php
+
+                            if(isset($loginform) && $loginform == 1 && !$isowner)
+                            {
+                            ?>
+                            该文章需要注册用户才能查阅，请先 <span style="cursor:pointer;color:red;" onclick="lrPopup('log', 500, 300, 'http://images.cnfol.com/login_js/login.html', 700, 670, 'http://images.cnfol.com/login_js/register.html');">登录</span>
+                            <?php
+                            }
+                            else if($article['GiftPrice'] > 0 && $article['CheckGift'] != 1 && !$isowner)
+                            {
+                            ?>
+                            您必须一次性赠送≥ <?php echo $article['GiftPrice'];?> 朵鲜花才可查看该篇文章，
+                            <span onclick="tipsWindown('我要给<?php echo $bloginfo['NickName'];?>送鲜花', 'ToUserID=<?php echo $bloginfo['UserID']; ?>&GiftID=1&SourceURL=<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/article/'.strtotime($article['AppearTime']).'-'.$article['ArticleID'].'.html'; ?>&SourceTypeID=1&SourceTypeDesc=blog&SourceTabID=<?php echo $article['ArticleID'];?>&LimitCnt=<?php echo $article['GiftPrice'];?>',320,200,'true','','false','','true');" style="cursor:pointer;color:red;">点击赠送</span>
+                            <?php
+                            }
+                            else
+                            {
+
+                            $searchArray=array('/(现\s*货\s*金)/','/(现\s*货\s*黄\s*)(金)/','/(现\s*货\s*银)/','/(现\s*货\s*白\s*)(银)/','/(t\s*d\s*金)/i','/(t\s*d\s*银)/i','/(天\s*通\s*银)/','/(黄)(\s*金\s*t\s*d)/i','/(白)(\s*银\s*t\s*d)/i','/(纸\s*黄\s*)(金)/','/(纸\s*白\s*)(银)/','/(黄\s*)(金)(\s*价\s*格)/','/(白\s*)(银)(\s*价\s*格)/','/(黄\s*金)/','/(白\s*银)/','/(金\s*价)/','/(银\s*价)/');
+
+                            $repalceArray=array('<a href="http://gold.cnfol.com" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://gold.cnfol.com" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://silver.cnfol.com/" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://silver.cnfol.com" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">-1203replace3021-$1-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">-1203replace3021-$1-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-$3</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-$2-1203replace3021-$3</a>','<a href="http://gold.cnfol.com" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://silver.cnfol.com/" target="_blank" style="color:#B20000;text-decoration:underline;">$1-1203replace3021-</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1</a>','<a href="http://gold.cnfol.com/fol_inc/v6.0/Gold/Hqtb.shtml" target="_blank" style="color:#B20000;text-decoration:underline;">$1</a>');
+
+                            $article['Content']=preg_replace($searchArray, $repalceArray,$article['Content'],1);
+                            $article['Content']=preg_replace('/-1203replace3021-/','',$article['Content']);
+
+                            echo $article['Content']; 
+                            }
+                            ?>
+                            <br/>
+                            <input type="hidden" value="<?php echo $article['Property'];?>" />
+                            <?php if($article['Property'] == '3'): ?>
+                            <link href="http://img.cnfol.com/2010blogvote/css/bok.css" rel="stylesheet" type="text/css" />
+                            <script language="javascript" src="http://i0.cnfolimg.com/uploads/2011blogvote/js/jquery-impromptu.3.1.min.js"></script>
+
+                            <!--<script src="http://doing.cnfol.com/zw/index.php/gjs/js?url=http://blog.cnfol.com/zhongxian/article/1346904270-59040904.html" charset=utf-8></script>-->
+
+
+                            <script language="javascript" src="http://doing.cnfol.com/zw/js/zw.js" reload=1></script>
+                            <?php endif;?>
+
+
+
+
+                            <script type="text/javascript">
+                                var sharetitle = "分享 <?php echo $bloginfo['BlogName'];?> 的博文： <?php echo $article['Title'];?>";
+                            </script>
+                            <div style="text-align:right; padding:35px 30px 10px 0px; clear:both;">
+
+                                <div style="float:right;">
+                                    <a href="javascript:void((function(s,d,e,r,l,p,t,z,c){ var f='http://t.cnfol.com/share.php?',u=z||d.location,p=['url=',e(u),'&title=',e(t||d.title),'&source=',e(r),'&sourceUrl=',e(l),'&content=',c||'gb2312','&pic=',e(p||'')].join('');function a(){ if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('')};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else a()})(screen,document,encodeURIComponent,'blog','<?php echo $baseurl;?>','',sharetitle,'','UTF-8'));"><img src="http://img.cnfol.com/minuteblog/images/default/s_red.gif" id="viewimg" border="0"><span id="textShare">分享到中金在线微博</span></a>
+
+                                </div>
+                                <div style="float:right;">
+                                    <FORM METHOD="POST" ACTION="http://home.cnfol.com/search.php" target="_blank" name="cnfol_searchform" id="cnfol_searchform">
+                                        <div style="float:left; padding-top:0px; padding-left:10px;" class="input"><input name="keyword" type="text" value="请输入关键字搜索" onclick='this.value=""'/>
+                                            <input type="hidden" name="charset" value="utf-8"/>
+                                            <input type="hidden" name="searchselect" value="page"></div>
+                                        <div style="float:left; padding-top:3px; padding-left:3px; padding-right:20px;">
+                                            <input name="image" type="image" src="http://i0.cnfolimg.com/uploads/v5.0/gold/gdxw-03.gif"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <?php if($article['SysTagID'] == 1471){?>
+                            <div style="text-align:right; padding:10px 30px 10px 0px; clear:both;"><script src="http://he.js.cnfol.com/index.php/id=1859&charset=utf8" ></script></div>
+                            <?php }else{ ?>
+                            <div style="text-align:right; padding:10px 30px 10px 0px; clear:both;"><?php include $shtml.'blog_article_bottom.shtml';?></div>
+                            <?php } ?>
+                            <div style="text-align:right; padding:0px 30px 10px 0px; clear:both;"><script src="http://he.js.cnfol.com/index.php/id=1696&charset=utf8" ></script></div>
+                            <div style="text-align:right; padding:0px 30px 10px 0px; clear:both;"><?php include $shtml.'blog_article_bottom2.shtml';?></div>	
+
+                            <div style="padding:8px 0px 0px 20px; height:60px;">
+
+                                <div class="wzjtym05" style="width:100%">
+                                </div>
+
+
+                                <script language="javascript">
+                                    var baseurl = "<?php echo $baseurl;?>";
+                                    var domain  = "<?php echo $article['Domainname'];?>";
+                                    var baseuri = baseurl +'/'+ domain;
+                                    var url= baseuri + "/Action";
+                                    var aid = "<?php echo $article['ArticleID'];?>";
+                                    var getcode = "<?php echo getVerifyStr($article['ArticleID']);?>";
+                                    var memid   = "<?php echo $bloginfo['MemberID'];?>";
+                                    var subject = "<?php echo $article['Title'];?>";
+                                    var aurl   = baseuri+"/article/<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID'];?>.html";
+                                    var ding1 = '<a href="<?php echo $baseurl;?>/shtml/hotvotearticle,24.html" target="_blank"  style="text-decoration:none"><img src="http://i2.cnfolimg.com/uploads/blog/ck.gif" border="0"/></a>';
+                                    $(function(){
+                                        if($.cookie('blogartvote'+aid) == 1){
+                                            $('#ding').html(ding1);
+                                        }
+                                    });
+                                    function submitvote(){
+                                        $.post(baseurl+'/ajaxsetartvotecnt/'+aid+'/'+memid,{code:getcode,tnlvote:$('#showvotes').html()},function(data){
+                                            if(data.errno == 'succ'){
+                                                $('#ding').html(ding1);
+                                                var votetmp = parseInt($('#showvotes').html()) + 1;
+                                                $('#showvotes').html(votetmp);
+                                            }else{
+                                                showalert(data.error); $('#ding').html(ding1);
+                                            }
+                                        },'json');
+                                    }
+                                </script>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="wzjtym07"></div>
+                        <div class="wzjtym08">
+                            栏目：<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/sort/<?php echo (empty($article['SortName'])? $default['articlesort'][0]:$article['SortID']);?>"><?php echo (empty($article['SortName'])? $default['articlesort'][1]:$article['SortName']);?></a> | 
+
+                            <span id="atonclick_<?php echo $article['ArticleID'];?>">-</span>次浏览 </a>|
+                            <span style="cursor:pointer;color:" onclick="tipsWindown('我要给<?php echo $bloginfo['NickName'];?>送鲜花', 'ToUserID=<?php echo $bloginfo['UserID']?>&GiftID=1&SourceURL=<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/article/'.strtotime($article['AppearTime']).'-'.$article['ArticleID'].'.html'; ?>&SourceTypeID=1&SourceTypeDesc=blog&SourceTabID=<?php echo $article['ArticleID'];?>',320,200,'true','','false','','true');">送鲜花</span>  
+
+                            <span id="ding"><span  style="cursor:pointer" onclick="javascript:submitvote()"><img src="http://i2.cnfolimg.com/uploads/blog/d.gif"/></span></span> 
+                            <span  id="showvotes"><?php echo (isset($articlestat['TotleVote'])? $articlestat['TotleVote']:'0');?></span>　
+
+                            <!-- JiaThis Button BEGIN -->
+                            <div class="jiathis_style"><span class="jiathis_txt">分享到：</span>
+                                <a class="jiathis_button_cnfol"></a>
+                                <a class="jiathis_button_tsina"></a>
+                                <a class="jiathis_button_tqq"></a>
+                                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+                            </div>
+                            <script type="text/javascript" >
+                                var jiathis_config={
+                                    siteNum:6,
+                                    sm:"tsohu,kaixin001,qzone,t163,renren,douban",
+                                    summary:"",
+                                    boldNum:0,
+                                    hideMore:true
+                                }
+                            </script>
+                            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                            <!-- JiaThis Button END -->
+
+
+
+
+                            <span onclick="javascript:transshipment('2','<?php echo($publisharticle); ?>','<?php echo($bloginfo['DomainName']); ?>','<?php echo(strtotime($article['AppearTime'])); ?>','<?php echo($article['ArticleID']); ?>');" >转载</span>
+                            <span>(<span id="transshipmentnum"><?php echo(empty($transshipmentnum)?0:$transshipmentnum); ?></span>)</span>|
+
+                            <span onclick="javascript:articlecollect('2','<?php echo($publisharticle); ?>','<?php echo($bloginfo['DomainName']); ?>','<?php echo(strtotime($article['AppearTime'])); ?>','<?php echo($article['ArticleID']); ?>');" >收藏</span>
+                            <span>(<span id="collectnum"><?php echo(empty($articlecollectnum)?0:$articlecollectnum); ?></span>)</span>|
+
+
+                            评论(<span id="ArticleCommentNum"><?php echo (isset($article['CommentNumber']) && $article['CommentNumber'] > 1 ? $article['CommentNumber'] : '0');?></span>) |
+
+                            <span onclick="javascript:articlereport('2','<?php echo($publisharticle); ?>','<?php echo($bloginfo['DomainName']); ?>','<?php echo(strtotime($article['AppearTime'])); ?>','<?php echo($article['ArticleID']); ?>');" >举报</span>
+
+                        </div>
+
+                        <!--隐藏部分-->
+                        <div id="Link" style="display:none;padding-left:20px;" class="sort"><span id="copyLink<?php echo $article['ArticleID'];?>"><?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($article['AppearTime']).'-'.$article['ArticleID'];?>.html</span>　<a href='javascript:void(0)' onclick="javascript:copy('copyLink<?php echo $article['ArticleID'];?>')"  style="cursor:pointer">复制链接</a><br/><span style="color:#999">(请复制文章连接，您可以粘贴至QQ、MSN、EMAIL等发给您的好友！)</span></div>
+
+
+                        <div id="trackback" style="display:none; padding-left:20px;text-align:left;">
+                            本文引用地址:<span id="copytrack<?php echo $article['ArticleID'];?>"><?php echo TrackbackUrl($article['ArticleID']);?></span>　<span style="cursor: pointer" onclick="javascript:copy('copytrack<?php echo $article['ArticleID'];?>')"  style="cursor:pointer">复制链接</span><br/>
+                            <div id="tbl<?php echo $article['ArticleID'];?>">正在请求中...</div>
+                        </div>
+
+                        <!--上下页-->
+                        <div class="wzjtym09" style="margin:10px 20px;padding:0" >
+
+                            <div style="width:50%;float:right;">
+                                <?php if(isset($article['NextArticleID']) && $article['NextArticleID'] > 0) {?>
+                                后一篇：<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($article['NextArticleAppearTime']).'-'.$article['NextArticleID'];?>.html"><?php echo filter_word($article['NextTitle']);?></a>　
+                                <?php } ?>
+                            </div>
+
+                            <div style="width:50%;text-align:left;">
+                                <?php if(isset($article['PreArticleID']) && $article['PreArticleID'] > 0) {?>
+                                前一篇：<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($article['PreArticleAppearTime']).'-'.$article['PreArticleID'];?>.html"><?php echo filter_word($article['PreTitle']);?></a>　
+                                <?php } ?>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <form id="article_action_form" name="article_action_form" method="post" target="_self">
+                        <input type="hidden" name="act" id="act"/>
+                        <input type="hidden" name="articleid" id="articleid" value="<?php echo $article['ArticleID'];?>" />
+                        <input type="hidden" name="memberid" id="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+                        <input type="hidden" name="flashcode" id="flashcode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID'].$article['ArticleID']);?>" />
+                    </form>
+                </div>
+                <!-- 最近访客 begin -->
+                <div class="zjfksz-ztdiv">
+                    <div class="zjfksz-top01">
+                        <div class="zjfksz-top02"></div>
+                        <div class="zjfksz-top03">最近访客</div>
+                    </div>
+                    <div class="zjfksz">	
+                        <div class="zjfksz02" id='ArticleNearVisitors' >
+                            <table border=0><tr><td>加载中...</td></tr></table>	
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    blockquote{
+                        background: url("http://img.cnfol.com/newblog/batev6.0/images/blockquote.gif") no-repeat scroll left top #F4F5F7;
+                        border: 2px solid #EEEEEE;
+                        color: #999999;
+                        font-size: 9pt;
+                        margin: 15px 10px;
+                        padding: 5px 5px 5px 35px;
+                    }
+                </style>
+
+                <script language="javascript">
+                    $(function(){
+                        $('#ArticleNearVisitors').load("<?php echo $baseurl;?>/ajaxblogarticlevisitor/<?php echo $article['ArticleID']?>/<?php echo $bloginfo['UserID'];?>?"+new Date().getTime());
+                        //doShowCard('.refid');
+                    })</script>
+                <!-- 最近访客 end -->
+
+                <!-- 网友评论 begin -->
+                <div class="wzjtym50">
+                    <div class="wzjtym51"></div>
+                    <div class="wzjtym52">网友评论</div>
+                </div>
+                <div class="wzjtym53">
+                    <form id="formc" name="formc" method="post" onsubmit='return CheckSelect("formc");'>
+                        <div id="commentList" artid="<?php echo $article['ArticleID'];?>" co="<?php echo getVerifyStr($article['ArticleID'].$bloginfo['UserID']);?>" cnum="<?php echo $blogconfig['CommentNumber'];?>">
+                            <div class="wangyoup2">加载中...</div>	<div class="wzjtym07"></div>
+                        </div>
+                    </form>
+                </div>
+
+
+                <script language="javascript">
+
+                    $(function(){
+                        updateCommentPage('commentList','<?php echo $lastpage; ?>');
+                    })
+                    //截取字符串(包括中文）
+                    function SetString(str,len)
+                    {
+                        var strlen = 0; 
+                        var s = "";
+                        for(var i = 0;i < str.length;i++)
+                        {
+                            if(str.charCodeAt(i) > 128){
+                                strlen += 2;
+                            }else{ 
+                                strlen++;
+                            }
+                            s += str.charAt(i);
+                            if(strlen >= len){ 
+                                return s+'...' ;
+                            }
+                        }
+                        return s;
+                    }
+                    function repQuote(cid)
+                    {
+                        if(0 == <?php echo $blogconfig['AllowComment'];?>){
+                            alert('博主关闭了评论');return false;
+                        }
+                        var qname = $('#NickName'+cid).text();
+                        var qcontent = $('#Content'+cid).text();
+                        var str = '<blockquote class="kquote">'+SetString(qcontent,120)+'</blockquote><br/>';
+                        editor.html(str);
+                    }
+
+                    function postOwnerComment(cid){
+                        $('#divOwnerComment'+cid).hide();
+                        $('#divOwnerComment'+cid).append('<img id="LoadImg'+cid+'" src="http://img.cnfol.com/newblog/batev6.0/images/load.gif" />');
+                        var aid = "<?php echo $article['ArticleID']?>";
+                        var mid = "<?php echo $bloginfo['MemberID'];?>";
+                        var appeartime = "<?php echo $article['AppearTime'];?>";
+                        var content = $('#txtOwnerComment'+cid).val();
+                        var articleSubject = $('#articleSubject').val();
+                        var userdomain = $('input[name="userdomain"]').val();
+                        $.post(baseurl+'/ajaxcomment/Action',{'act':'ownercomment','CommentID':cid,'ArticleID':aid,'Content':content,'MemberID':mid,'articleSubject':articleSubject,'userdomain':userdomain,'appeartime':appeartime},function(data){
+                            $('#LoadImg'+cid).remove();
+                            if(data.errno == 'succ'){
+                                $('#txtOwnerComment'+cid).val('');
+                                showOwnerComment(aid,cid,0);
+                                computeNum('CommentCommentNum'+cid,'+',1);
+                                computeNum('ArticleCommentNum'+cid,'+',1);
+                                computeNum('ArticleCommentNum','+',1);
+                            }else{
+                                showalert(data.error);
+                            }
+                        },'json');
+                    }
+                    function showOwnerComment(aid,cid,starno){
+                        $('#btnShowOwnerComment'+cid).hide();
+                        $('#CommentCommentList'+cid).html('<img src="http://img.cnfol.com/newblog/batev6.0/images/load.gif" />');
+                        var co  = "<?php echo getVerifyStr($article['ArticleID'].$bloginfo['UserID']);?>";
+                        $.post(baseurl+"/ajaxcomment/clist",{'ArticleID':aid,'CommentID':cid,'flashCode':co},function(data){
+                            if(data.erron == 'success')
+                            {
+                                $('#CommentCommentList'+cid).html('<a href="javascript:;" onclick="closeOwnerComment('+aid+','+cid+')">关闭</a><ul id="ulCommentCommentList'+cid+'" style="border-top:1px solid #DCDCDC"></ul>');
+                                $('#ulCommentCommentList'+cid).html(data.error);
+                                $('#CommentCommentList'+cid).css({'background-color':'#FFFDDD','border':'1px solid #F1E8B7','padding':'0px 10px'});
+                            }
+                            else
+                            {
+                                showalert(data.error);
+                            }
+                        },'json');	
+                    }
+                    function showOwnerCommentAll(aid,cid){
+                        if($('#CommentCommentNum'+cid).text() <= $('#ulCommentCommentList'+cid+' li').size()){ showalert('已经全部显示');return false;}
+                        $('#CommentCommentList'+cid).append('<img id="LoadImg'+cid+'" src="http://img.cnfol.com/newblog/batev6.0/images/load.gif" />');
+                        var size = $('#ulCommentCommentList'+cid+' li').size();
+                        var co  = "<?php echo getVerifyStr($article['ArticleID'].$bloginfo['UserID']);?>";
+                        $.post(baseurl+"/ajaxcomment/clist",{'ArticleID':aid,'CommentID':cid,'StartNo':size,'flashCode':co},function(data){
+                            $('#ulCommentCommentList'+cid).append(data);
+                            $('#LoadImg'+cid).remove();
+                        });
+                    }
+                    function closeOwnerComment(aid,cid){
+                        $('#btnShowOwnerComment'+cid).show();
+                        $('#CommentCommentList'+cid).html('');
+                        $('#CommentCommentList'+cid).css({'background-color':'','border':'0','padding':'0'});
+                    }
+                    function DelSingleOwnerComment(pcid,cid,aid,co){
+                        $.post(baseurl+'/ajaxcomment/Action',{'act':'delparentcomment','cid':cid,'artid':aid,'flashcode':co,'memid':memid,'pcid':pcid},function(data){
+                            if('succ' == data.errno){
+                                $('#li'+cid).remove();
+                                computeNum('CommentCommentNum'+pcid,'-',1);
+                                if(parseInt($('#CommentCommentNum'+pcid).text())==0){
+                                    $('#btnShowOwnerComment'+pcid).hide();
+                                    $('#CommentCommentList'+pcid).html('&nbsp;');
+                                    $('#CommentCommentList'+pcid).css({'background-color':'','border':'0','padding':'0'});
+                                    computeNum('ArticleCommentNum','-',1);
+                                }
+                            }else{
+                                showalert(data.error);
+                            }
+                        },'json');
+                        return false;
+	
+                    }
+
+                    function computeNum(id,op,n){
+                        if(op == '+'){
+                            $('#'+id).text(parseInt($('#'+id).text())+n);
+                        }else if(op == '-'){
+                            $('#'+id).text(parseInt($('#'+id).text())-n);
+                        }else{
+                            showalert('error');
+                        }
+                    }
+
+                </script>
+
+                <?php if($blogconfig['AllowComment'] > 0){?>
+                <link rel="stylesheet" href="<?php echo $baseurl; ?>/ke4/themes/default/default.css"/>
+                <link rel="stylesheet" href="<?php echo $baseurl; ?>/ke4/themes/simple/simple.css"/>
+                <script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/kindeditor-min.js"></script>
+                <script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/lang/zh_CN.js"></script>
+
+                <style>
+                    .ke-icon-quote {
+                        background-image: url(http://blog.cnfol.com/ke4/themes/common/quote.gif);
+                        background-position: 0px;
+                        width: 16px;
+                        height: 16px;
+                    }
+                    .ke-toolbar{text-align:left;}
+                </style>
+
+                <script language="javascript">
+                    var editor;
+                    KindEditor.ready(function(K) {
+                        editor = K.create('#content', {
+                            resizeType : 1,
+                            items: ['emoticons','quote','|','selectall'],
+                            allowFlashUpload: false,
+                            allowMediaUpload: false,
+                            pasteType:1,
+                            themeType : 'simple',
+                            isComment : true,
+                            emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+                            newlineTag: 'br',
+                            afterFocus : function(url) {
+                                K('#tdvalidate').show();
+                                Valipic();
+                            }
+                        });
+                    });
+
+                    function checkcmtformComment(id){
+
+                        if(editor.count() < 1 || editor.count() > 3000){
+                            showalert('评论内容长度应该在1-3000个字节之内'); return false;
+                        }
+		
+                        var checkvalidate=$('#checkvalidate').val();
+                        if(checkvalidate==0)
+                        {
+                            var validatedata = $('#validate').val();
+                            if(! /[0-9a-z]{4}/i.test(validatedata)){
+                                $('#spanvalidate').show();$('#spanvalidate').focus(); return false;
+                            }
+                        }
+		
+                        $('#sub').attr('disabled','disabled');
+                        $('#sub').attr('value','提交中...');
+                        //showloading();
+                        editor.sync();
+		
+                        $.post(baseurl+'/ajaxcomment/Action',$('#'+id).serialize(),function callback(data){
+                            alert(data.error);
+                            if((data.errno == '200036') || (data.errno == '200037') || (data.errno == 'check')){
+                                editor.html('');  
+                                Valipic();
+                            }else if('succ' != data.errno){
+                                Valipic();
+                            }else{
+                                delete commentpage[<?php echo $lastpage; ?>]; 
+                                updateCommentPage('commentList','<?php echo $lastpage; ?>');
+                                editor.html('');
+                                Valipic();
+                                computeNum('ArticleCommentNum','+',1);
+                                $('#tdvalidate').hide();
+                            }
+                            $('#sub').attr('value','提 交');
+                            $('#sub').attr('disabled','');
+                        },'json');     
+                    }
+                </script>
+
+                <!--评论框 begin-->
+                <div class="wzjtym70"><div class="wzjtym71"></div><div class="wzjtym72">发表评论：<span id="loading" style="color: #ff0000"></span></div><span style="width:470px;float:right;text-align:left; padding-top:10px;padding-left:20px;font-size:12px;">
+                    </span>
+                </div>
+                <div class="fnpl">
+                    <form name="myComment" id="myComment" method="post" onsubmit="return false;">
+                        <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($blogconfig['AllowComment'].$bloginfo['MemberID'].$article['ArticleID'].$article['Title']);?>">
+                        <input type="hidden" name="allowcomment" value="<?php echo $blogconfig['AllowComment'];?>">
+                        <input type="hidden" name="memberid" value="<?php echo $bloginfo['MemberID'];?>">
+                        <input type="hidden" name="userdomain" value="<?php echo getPrimariBlogDomain($bloglist);?>">
+                        <?php 
+                        if(empty($user))
+                        {?>
+                        <div class="fnpl01">您还未登录，只能匿名发表评论。或者您可以<a href="javascript:;" onclick="lrPopup('log', 500, 300, 'http://images.cnfol.com/login_js/login.html', 700, 670, 'http://images.cnfol.com/login_js/register.html');" >登录</a> <a href="javascript:;" onclick="lrPopup('reg', 500, 300, 'http://images.cnfol.com/login_js/login.html', 700, 670, 'http://images.cnfol.com/login_js/register.html');">注册</a> 后发表。</div> 
+                        <div class="fnpl-xm01"><div class="fnpl-xm02">用 户 名：</div><div class="fnpl-xm03"><input type="text" name="username"  value="中金在线网友" size="20" class="form" disabled><input type="hidden" name="username" value="中金在线网友"></div></div>
+                        <div class="fnpl-xm01"><div class="fnpl-xm02">网站地址：</div><div class="fnpl-xm03"><INPUT name="address" type="text" class="form" value="<?php echo $baseurl;?>" size=50 maxlength="255" disabled><input type="hidden" name="address" value="<?php echo $baseurl;?>"></div></div>
+
+                        <?php
+                        }
+                        else
+                        {?>
+                        <div class="fnpl-xm01"><div class="fnpl-xm02"></div><div class="fnpl-xm03" align="center"><input name="anonymous" type="checkbox" value="1" /> 我要匿名评论</div></div>
+                        <?php
+                        }?>
+
+
+                        <div class="fnpl-xm01"><div class="fnpl-xm02">评　　论：</div><div class="fnpl-xm03">
+                                <input type="hidden" name="loginuserid" value="<?php echo($loginuserid); ?>" />
+                                <input type="hidden" name="userid" value="<?php echo($bloginfo['UserID']); ?>" />
+                                <input type="hidden" name="articleId" value="<?php echo $article['ArticleID'];?>"/>
+                                <input type="hidden" name="act" value="addcomment"/>
+                                <input type="hidden" name="appeartime" value="<?php echo $article['AppearTime'];?>" />
+                                <input name="articleSubject" type="hidden" id="articleSubject"  value="<?php echo $article['Title'];?>"/>
+                                <textarea name="content"  id="content" rows="8" cols="50"  min="1" max="3000"  msg="评论内容长度应该在1-3000个字节之内" ></textarea></div>
+                        </div>
+
+                        <div class="fnpl-xm01" id="tdvalidate" style="display:none">
+                            <div class="fnpl-xm02"  style="display:<?php echo(($checkvalidate)?'none':''); ?>" >验 证 码：</div>
+                            <div class="fnpl-xm03" style="display:<?php echo(($checkvalidate)?'none':''); ?>" >
+                                <input name="checkvalidate" type="hidden" id="checkvalidate" value="<?php echo(($checkvalidate)?'1':'0'); ?>" />
+
+                                <input name="validate" type="text" id="validate" size="8" maxlength="4" msg="请输入四位验证码" /> 
+                                <img alt="看不清？" id="varifycode" style="cursor: pointer" align="absmiddle" onclick="javascript:Valipic();" src="<?php echo $baseurl;?>/register/varify"/>
+                                <a href="javascript:Valipic();">看不清楚？</a>
+                                <span id="spanvalidate" style="display:none;color:Red;" >验证码错误，请重新输入！</span>
+                            </div>
+                        </div>
+                        <div class="fnpl-xm01">
+                            <div class="fnpl-xm04"><input type="button" name="sub" id="sub" value="提 交" onclick="checkcmtformComment('myComment')"/></div>
+                        </div> 
+                    </form>
+                </div>
+                <!-- 评论框 end -->
+                <?php } ?>
+                <!-- 网友评论 end -->
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<script>
+
+    var width=$('.top-head02').css('width');
+    width=Number(width.replace(/px/g,""));
+
+    //var widthleft=$('#Mod_Profile').css('width');
+    //widthleft=Number(widthleft.replace(/px/g,""))+20;
+
+    width=width-200;
+
+
+    var articlewidth=$('.wzjtym03').css('width');
+    articlewidth=Number(articlewidth.replace(/px/g,""));
+
+    if(width<articlewidth)
+    {
+        width=width-100;
+	
+        $('.wzjtym03').css('width',width+'px')
+    }
+
+</script>
+
+<div id="showinfo" style=" height:140px; width:290px;display:none;position:absolute;text-align:left" ></div>
+<div id="ajaxdiv"></div>
+<script language="javascript">
+    var memberid = <?php echo $bloginfo['MemberID'];?>;
+    var flashCode = "<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>";
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var action = baseuri+'/article/Action';
+    var editurl = baseuri+'/article/Edit';
+    $(function(){
+        $('#ajaxdiv').load("<?php echo $baseurl.'/ajaxomcount/art/'.$article['ArticleID'];?>?"+new Date().getTime());
+    });
+
+    /*
+var domainname="<?php echo $bloginfo['DomainName']; ?>";
+var articleid="<?php echo $article['ArticleID']; ?>";
+var appeartime="<?php echo strtotime($article['AppearTime']); ?>";
+var userid="<?php echo $user['userid']; ?>";
+if(userid!='')
+{
+        var domainname="<?php echo $bloginfo['DomainName']; ?>";
+        var articleid="<?php echo $article['ArticleID']; ?>";
+        var appeartime="<?php echo strtotime($article['AppearTime']); ?>";
+        var a="<?php echo time(); ?>";
+	
+        window.onbeforeunload = function(e){
+        $.get("<?php echo $baseurl; ?>"+"/index.php/article/keyWord/"+userid+"/"+domainname+"/"+appeartime+"/"+articleid+"/"+a+"/<?php echo $bloginfo['UserID']?>?r="+new Date().getTime(),function(data) {
+       });
+}
+}
+     */
+</script>
+<!--footer begin-->
+<?php include $peronalfoot;?>

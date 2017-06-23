@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="Keywords" content="<?php echo $channelKeywords; ?>" />
+        <meta name="Description" content="<?php echo $channelDescription; ?>" />
+        <meta name="Author" content="中金在线" />
+        <meta name="from" content="中金在线互动中心" />
+        <meta name="Copyright" content="中金在线版权所有" />
+        <title><?php echo $channelTitle; ?></title>
+        <link href="<?php echo config_item('estbase');?>newblog/batev6.0/css/cnFolBlog.css" rel="stylesheet" rev="stylesheet" media="all" />
+        <link href="<?php echo config_item('estbase');?>newblog/batev6.0/css/mjbk_style.css" rel="stylesheet" type="text/css" />
+        <link type="text/css" rel="stylesheet" href="http://img.cnfol.com/osapi/css/newcard.v3.css" />
+
+        <script type="text/javascript" src="<?php echo config_item('estbase');?>newblog/batev6.0/core/js/jquery-1.3.2.min.js"></script>
+        <script type="text/javascript" src="<?php echo config_item('estbase');?>newblog/batev6.0/core/js/jquery.cookie.js"></script>
+
+        <script type="text/javascript" src="http://img.cnfol.com/osapi/js/newcard.v3.js"></script>
+        <script type="text/javascript" src="http://images.cnfol.com/login_js/login_js/lrPopup.js"></script>
+        <script type="text/javascript" src="<?php echo config_item('estblog');?>/js/mjbk_home.js"></script>
+        <script type="text/javascript" src="<?php echo config_item('estblog');?>/js/function.js"></script>
+        <script src="http://images.cnfol.com/uploads/v5.0/passportweb/script/tipswindown.js" language="javascript"></script>
+
+    </head>
+
+    <body>
+        <center>
+            <!-- 头部部分 -->
+            <!-- 头部部分 -->
+            <div class="tb01 lj1">
+                <?php include $shtml.'blog_topnav.shtml'?>
+            </div>
+            <div class="tb02">
+                <?php include $shtml.'header_logo.shtml'?>
+            </div>
+
+            <!-- 导航部分Start -->
+            <div class="W960 NavBg">
+                <div class="NavUp lj3">
+                    <div class="logoc" style="width:128px;height:21px;float: left;"></div>
+                    <a href="<?php echo $baseurl;?>/list/1461.html" target="_blank">股市精粹</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1463.html" target="_blank">财经杂谈</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1460.html" target="_blank">收 藏</a> ｜
+                    <a href="<?php echo $baseurl;?>/list/1453.html" target="_blank">黄 金</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1462.html" target="_blank">白 银</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1445.html" target="_blank">基 金</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1465.html" target="_blank">外 汇</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1433.html" target="_blank">期指期货</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1464.html" target="_blank">港 股</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1451.html" target="_blank">银 行</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1449.html" target="_blank">保 险</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1459.html" target="_blank">休闲区</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1455.html" target="_blank">汽 车</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1447.html" target="_blank">理财消费</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1469.html" target="_blank">权 证</a>｜
+                    <a href="<?php echo $baseurl;?>/list/1457.html" target="_blank">债 券</a>
+                </div>
+                <div class="NavMid">
+                    <div class="logoc" style="width:116px;height:21px;float: left;"></div>
+                    <div class="NavMid1 fl_l lj4">
+                        <a href="<?php echo $baseurl;?>/shtml/giftrankarticle,12.html" target="_blank" style="color:red;">网友最支持文章</a>&nbsp;
+                        <a href="<?php echo $baseurl;?>/shtml/day50topclick.html" target="_blank">今日点击Top50</a>&nbsp;
+                        <a href="<?php echo $baseurl;?>/shtml/dayhotcomment.html" target="_blank">今日热门回复</a>&nbsp;
+                        <a href="<?php echo $baseurl;?>/shtml/newupdateblog.html" target="_blank">最新更新</a>&nbsp;
+                        <a href="<?php echo $baseurl;?>/shtml/hotclickrank.html" target="_blank">人气排行榜</a>&nbsp;
+                        <a href="<?php echo $baseurl;?>/shtml/bloglist.html" target="_blank">博客列表</a>&nbsp;
+                        <a href="<?php echo $baseurl;?>/shtml/hotvotearticle,24.html" target="_blank" >顶排行</a>
+                    </div>
+                    <div class="NavMidIcon fl_l"><img src="http://img.cnfol.com/newblog/batev6.0/images/mjbk/icon-01.gif" /></div>
+                    <div class="NavMid2 fl_l lj5"><a href="<?php echo $baseurl;?>/shtml/online.html" target="_blank" class="style01">直播</a></div>
+                    <form action="<?php echo $baseurl;?>/ajaxblogsearch" onsubmit="return blogsearch(this);" name="searchform" method="post">
+                        <div class="NavMidInput_box fl_l"><input name="searchvalue" type="text" class="NavMidInput_From"/></div>
+                        <div class="NavMidSelect_box fl_l">
+                            <select name="searchtype" class="NavMidSelect_From">
+                                <option value="title">标题</option>
+                                <option value="tags">标签</option>
+                                <option value="blogname">博客名</option>
+                                <option value="nickname">昵称</option>
+                            </select>   
+
+                        </div>
+                        <div class="NavMidSearch_but fl_l"><input name="" type="submit" value="" class="btn01" /></div>
+                    </form>
+                </div>
+                <div class="NavBot">
+                    <script language="javascript">
+                        var host = window.location.href;
+                        if($.cookie('cookie\\[passport\\]\\[userId\\]') == 0){	
+                            document.writeln('<form id="index_login" action="http://passport.cnfol.com/accounts/Login" method="post" name="loginform" target="_top">');
+                            document.writeln('<div style="float:left; height:30px; line-height:30px;">用户名：');
+                            document.writeln('<input class="tb10" name="username" id="username" type="text"  />');
+                            document.writeln('密码：');
+                            document.writeln('<input class="tb10" name="password" type="password" id="password" size="10" />');
+                            document.writeln('<input style="vertical-align:middle" type="image" src="http://i2.cnfolimg.com/uploads/v4.0/home/mew8-dr.gif"/>');
+                            document.writeln('<a href="http://passport.cnfol.com/accounts/Register" target="_blank"><img style="vertical-align:middle" src="http://i2.cnfolimg.com/uploads/v4.0/home/mew8-zc.gif" border="0" alt="注册" /></a></div>');
+                            document.writeln('<div style="float:left; width:130px; vertical-align:middle;margin-left:3px;"><a href="javascript:toQzoneLogin();"><img src="http://images.cnfol.com/uploads/v5.0/passportweb/images/qq_login.png" style="vertical-align:bottom;border:0 none"/></a></div>');
+                            document.writeln('<input type="hidden" name="act" value="login" />');
+                            document.writeln('<input type="hidden" name="usertype" value="0" />');
+                            document.writeln('<input type="hidden" name="force" value="" />');
+                            document.writeln('<input type="hidden" name="return" value="'+host+'" />');
+                            document.writeln('</form>');
+
+                            document.write('<div class="NavBot1 fl_l lj4">&nbsp;&nbsp;&nbsp;<a href="<?php echo $baseurl;?>/zhongj/article/6801676.html" target="_blank">帐户安全须知</a> | <a href="http://passport.cnfol.com/forgetpassword" target="_blank">忘记密码</a></div>');
+                            document.write('<div class="NavBot2 fl_r lj4"><a href="<?php echo $baseurl;?>/blogcnfol" target="_blank">用户指南</a></div>');
+                            document.write('<div class="NavBotIcon fl_r"><img src="http://img.cnfol.com/newblog/batev6.0/images/mjbk/icon-02.gif" /></div>');
+                            document.write('<div class="NavBotBut fl_r"><a href="http://passport.cnfol.com/register" target="_blank"><img src="http://img.cnfol.com/newblog/batev6.0/images/mjbk/but-05.gif" border="0" /></a></div>');
+                        }
+                        else{
+                            document.write('<div class="NavBot1 fl_l lj4">'+$.cookie('cookie\\[passport\\]\\[username\\]')+'&nbsp;&nbsp;&nbsp;中金博客欢迎您！ | <a href="<?php echo $baseurl;?>/zhongj/article/6801676.html" target="_blank">帐户安全须知</a> | <a href="http://passport.cnfol.com/accounts/myAccount" target="_blank">我的账户</a> | <a href="http://passport.cnfol.com/login/loginout?return=<?php echo $baseurl;?>">退出</a></div>');
+                            document.write('<div class="NavBot2 fl_r lj4"><a href="<?php echo $baseurl;?>/blogcnfol" target="_blank">用户指南</a></div>');
+                            document.write('<div class="NavBotIcon fl_r"><img src="http://img.cnfol.com/newblog/batev6.0/images/mjbk/icon-02.gif" /></div>');
+                            document.write('<div class="NavBotBut fl_r"><a href="javascript:addarticle('+$.cookie('cookie\\[passport\\]\\[userId\\]')+');" ><img src="http://img.cnfol.com/newblog/batev6.0/images/mjbk/but-04.gif" border="0" /></a></div>');
+                            document.write('<div class="NavBotBut fl_r"><a href="<?php echo $baseurl;?>/register/Home" target="_blank"><img src="http://img.cnfol.com/newblog/batev6.0/images/mjbk/but-03.gif" border="0" /></a></div>')
+                        }
+			
+			
+                        $(function(){
+                            $('#logo,.logoc').click(function(){
+                                window.open( '<?php echo $baseurl;?>' );
+                            }).css({cursor:"pointer"}).hover(function(){
+                                $(this).attr("title","中金博客");
+                            });
+                        });
+                    </script>    
+                </div>
+            </div><!-- 导航部分End -->
+            <!-- 内容部分Start -->
+            <div class="W960 MarginB8">
+                <!-- 内容部分（左边Start） -->
+                <div class="ConL fl_l">
+                    <div class="ConLTop">
+                        <div class="ConLTopL fl_l">
+                            <link href="http://i0.cnfolimg.com/uploads/js/blogpic3.css" rel="stylesheet" type="text/css" />
+
+                            <div class="picto">
+                                <div id="f_menu"> <span class="" id="f_now"></span> </div>
+                                <div id="f_div">
+                                    <!--图片区域-->
+                                    <div id="f_imgDiv"></div>
+                                </div>
+                                <div id="f_infoDiv">
+                                    <!--数字按钮区域-->
+                                    <div id="f_buttonDiv"></div>
+                                    <div id="f_text"></div>
+                                </div>
+
+                                <!--焦点文字区域-->
+                            </div>
+
+                            <script>
+                                var imgUrl = new Array();
+                                var imgText = new Array();
+                                var imgLink = new Array();
+                                var ver=2; 
+                                var firstTime=true;
+                                var n =-1;	
+				
+                                    <?php 
+                                echo file_get_contents('http://he.js.cnfol.com/index05.php/id=1860&jstype=1&charset=utf8');
+				
+                                    ?>
+				
+                            </script>
+                            <script src="http://i0.cnfolimg.com/uploads/js/pic3.js" charset=gb2312></script>
+                        </div>
+                        <div class="ConLTopR fl_r  lj5"> 
+                            <script src="http://he.js.cnfol.com/index.php/id=1861&charset=utf8"></script>
+                        </div>
+                    </div>
+                    <!-- 内容部分（左边第二块内容Start） -->
+                    <div class="clear">
+                        <!-- 内容部分（左边第二块内容左边Start） -->
+                        <div  class="W223 fl_l">
+                            <div class="clear MarginB8">
+                                <div class="ConLBotLSortTitle">分类文章汇总</div>
+                                <div class="ConLBotLSortCon">
+                                    ·<a href="<?php echo $baseurl; ?>/r2List/1.html" target="_blank">名家看市</a>　　　　·<a href="<?php echo $baseurl; ?>/list/1453.html" target="_blank">黄金</a><br />
+                                    ·<a href="<?php echo $baseurl; ?>/r3List/1.html" target="_blank">高手看盘</a>　　　　·<a href="<?php echo $baseurl ?>/list/1451.html" target="_blank">银行</a><br />
+                                    ·<a href="<?php echo $baseurl; ?>/list/1461.html" target="_blank">股市天地</a>　　　　·<a href="<?php echo $baseurl; ?>/list/1447.html" target="_blank">理财消费</a><br />
+                                    ·<a href="<?php echo $baseurl; ?>/list/1445.html" target="_blank">基金</a>　　　　　　·<a href="<?php echo $baseurl; ?>/list/1449.html" target="_blank">保险</a><br />
+                                    ·<a href="<?php echo $baseurl; ?>/list/1463.html" target="_blank">财经杂谈</a>　　　　·<a href="<?php echo $baseurl; ?>/list/1457.html" target="_blank">债券</a><br />
+                                    ·<a href="<?php echo $baseurl; ?>/list/1433.html" target="_blank">期指期货</a>　　　　·<a href="<?php echo $baseurl; ?>/list/1459.html" target="_blank">休闲</a><br />
+                                    ·<a href="<?php echo $baseurl; ?>/list/1464.html" target="_blank">港股</a>　　　　　　·<a href="<?php echo $baseurl; ?>/list/1455.html" target="_blank">汽车</a><br />
+                                    ·<a href="<?php echo $baseurl; ?>/list/1465.html" target="_blank">外汇</a>　　　　　　·<a href="<?php echo $baseurl; ?>/list/1460.html" target="_blank">投资收藏</a> </div>
+                            </div>
+                            <div id="ConLBotLBlog">
+                                <div class="ConLBotLBlog-top">
+                                    <ul>
+                                        <li class="ConLBotLBlog_active" id="ta0" style="cursor: pointer" onmouseover="javascript:TabShow('0','2	','ta','ConLBotLBlog_active','ConLBotLBlog_unactive')">博客排行榜</li>
+                                        <li class="ConLBotLBlog_unactive" id="ta1" style="cursor: pointer" onmouseover="javascript:TabShow('1','2','ta','ConLBotLBlog_active','ConLBotLBlog_unactive')">活跃用户</li>	
+                                    </ul>
+                                </div>
+                                <div id="ConLBotLBlog_content">
+                                    <div id="ta0_nr">
+                                        <div class="content">
+                                            <ul class="livot">
+                                                <?php include $shtml.'runcront_systagblogrank.shtml';?>  
+                                            </ul>
+                                        </div>
+                                        <div class="ConLBotLBlogMore lj5"><a href="<?=$baseurl?>/shtml/hotclickrank.html" target="_blank">更多>></a></div>
+                                    </div>
+                                    <div id="ta1_nr" style="display:none;">
+                                        <div class="content">
+                                            <ul class="livot">
+                                                <?php include $shtml.'runcront_ranktactiveblog.shtml';?>
+                                            </ul>
+                                        </div>
+                                        <div class="ConLBotLBlogMore"><a href="<?=$baseurl?>/shtml/newupdateblog.html" target="_blank">更多>></a></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- 内容部分（左边第二块内容左边End） -->
+                        <!-- 内容部分（左边第二块内容右边Start） -->
+                        <div  class="ConLBotR fl_r">
+                            <div class="ConLBotRTitleBg">
+                                <div class="fl_l"><img src="http://img.cnfol.com/newblog/batev6.0/images/mjbk/icon-03.gif" /></div>
+                                <div class="ConLBotRTitle fl_l"><?=$TagTitle;?></div>
+                                <div class="fl_r">
+                                    <a href="<?=$RssURL;?>" target="_blank"><img src="<?=config_item('estblog');?>/images/XML.gif" border="0" /></a>
+                                    <a href="http://www.emailrss.cn/?rss=<?=$RssURL;?>" target="_blank"><img src="<?=config_item('estblog');?>/images/Email_read.gif" border="0" /></a>
+                                </div>
+                            </div>
+                            <div class="ConLBotRCon">
+                                <table width="100%" cellspacing="0" cellpadding="0">
+                                    <?php include $shtml.$ArtListUrl; ?> 
+                                </table>
+                            </div>
+                            <div class="PageNav">
+                                <?=$pagebar;?>
+                            </div>
+                        </div><!-- 内容部分（左边第二块内容左边End） -->
+                        <div class="clear"></div>
+                    </div><!-- 内容部分（左边第二块内容End） -->
+                </div><!-- 内容部分（左边End） -->
+                <!-- 内容部分（右边Start） -->
+                <div class="W223 fl_r">
+                    <div class="MarginB8">
+                        <div class="ConRPostTitle">公告</div>
+                        <div class="ConRPostCon">
+                            <?php include $shtml.'blog_bulletin.shtml';?>
+                        </div>
+                    </div>
+                    <div class="MarginB8">
+                        <div class="ConRRecommendedTitle">推荐博客</div>
+                        <div class="ConRRecommendedCon"><script src="http://he.js.cnfol.com/index.php/id=1862&charset=utf8"></script></div>
+                    </div>
+                    <div class="ConR1 lj5"><script src="http://he.js.cnfol.com/index.php/id=1863&charset=utf8"></script></div>
+                    <div id="ConLBotLBlog">
+                        <div class="ConLBotLBlog-top">
+                            <ul>
+                                <li class="ConLBotLBlog_active" id="tb0" style="cursor: pointer" onmouseover="javascript:TabShow('0','2	','tb','ConLBotLBlog_active','ConLBotLBlog_unactive')">鲜花排行榜</li>
+                                <li class="ConLBotLBlog_unactive" id="tb1" style="cursor: pointer" onmouseover="javascript:TabShow('1','2','tb','ConLBotLBlog_active','ConLBotLBlog_unactive')">今日热门</li>	
+                            </ul>
+                        </div>
+                        <div id="ConLBotLBlog_content" style="padding-top:0px;">
+                            <div id="tb0_nr">
+                                <div class="tab">
+                                    <ul>
+                                        <li class="ConLBotLBlog_active" id="gift0" onmouseover="javascript:TabShow('0','3','gift','ConLBotLBlog_active','ConLBotLBlog_unactive')" style="cursor: pointer">12小时</li>
+                                        <li class="ConLBotLBlog_unactive" id="gift1" onmouseover="javascript:TabShow('1','3','gift','ConLBotLBlog_active','ConLBotLBlog_unactive')" style="cursor: pointer">24小时</li>	
+                                        <li class="ConLBotLBlog_unactive" id="gift2" onmouseover="javascript:TabShow('2','3','gift','ConLBotLBlog_active','ConLBotLBlog_unactive')" style="cursor: pointer">周排行</li>	
+                                    </ul>
+                                </div>
+                                <div class="content2" id="gift0_nr"><?php include $shtml.'runcront_mjbk_rankgifts12.shtml';?></div>
+                                <div class="content2" id="gift1_nr" style="display:none;"><?php include $shtml.'runcront_mjbk_rankgifts24.shtml';?></div>
+                                <div class="content2" id="gift2_nr" style="display:none;"><?php include $shtml.'runcront_mjbk_rankgiftsweek.shtml';?></div>
+                                <div class="ConLBotLBlogMore lj5"><a href="#" target="_blank">更多>></a></div>
+                            </div>
+                            <div id="tb1_nr" style="display:none; padding-top:10px;" >
+                                <div class="content">
+                                    <ul class="livot">
+                                        <?php 
+                                        if (isset($TagID) && file_exists($shtml.'runcront_artclickday24rank_'.$TagID.'.shtml')){
+                                        include $shtml.'runcront_artclickday24rank_'.$TagID.'.shtml';
+                                        }else{
+                                        include $shtml.'runcront_artclickday24rank.shtml';
+                                        } ?>
+                                    </ul>
+                                </div>
+                                <div class="ConLBotLBlogMore"><a href="<?=$baseurl?>/shtml/day50topclick.html" target="_blank">更多>></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- 内容部分（右边End） -->
+                <div class="clear"></div>
+            </div><!-- 内容部分End -->
+            <!-- 图片博客Start -->
+            <div class="W960 Pic_blog">
+                <div class="Pic_blogTitle">图片博客</div>
+                <div class="Pic_blogCon">
+                    <script src="http://he.js.cnfol.com/index.php/id=1864&charset=utf8&br=0"></script>
+                </div>
+            </div><!-- 图片博客End -->
+            <!--底部部分 -->
+            <div class="both wth960 websz">
+                <div class="wth80 fla_r websz02"><img src="http://img.cnfol.com/newblog/batev6.0/images/mjbk/mew8-web02.gif" width="37" height="43" /></div>
+                <div class="websz01 fla_l">
+                    <div class="websz03"><a href="http://www.cnfol.com/info/job.shtml" target="_blank">诚聘英才</a> | <a href="http://www.cnfol.com/info/contact.shtml" target="_blank">联系我们</a> | <a href="http://www.cnfol.com/info/adservice/" target="_blank">广告服务</a> | <a href="http://www.cnfol.com/info/partner.shtml" target="_blank">合作伙伴</a> | <a href="http://www.cnfol.com/info/law.shtml" target="_blank">法律声明</a> | <a href="http://www.cnfol.com/info/zg.shtml" target="_blank">征稿启事</a> | <a href="http://www.cnfol.com/info/sitemap.shtml" target="_blank">网站地图</a></div>
+                    <div class="websz04">---------------------------------------------------------------------------------------------</div>
+                    <div class="websz05">本站所有文章、数据仅供参考，使用前务请仔细阅读<a href="http://www.cnfol.com/info/law.shtml" target="_blank">法律声明</a>，风险自负<br />
+                        《中华人民共和国增值电信业务经营许可证》编号：闽 B2-20050010 号<br />
+                        证券资讯提供:福建天信投资咨询顾问有限公司 [证书：ZX0151]<br />
+                        <a href="http://news.cnfol.com/100511/101,1587,7680282,00.shtml" target="_blank">网络视听许可证1310422号</a><br />
+                        <a href="http://news.cnfol.com/100517/101,1587,7710153,00.shtml" target="_blank">广播电视节目制作经营许可证 编号：(闽)字第091号</a><br/>
+                        证券资讯提供:福建天信投资咨询顾问有限公司 [证书：ZX0151]<br/>
+                        Copyright &copy; 2003-<script language="javascript"> date=new Date();document.writeln(date.getFullYear()); </script>  福建中金在线网络股份有限公司. All Right Reserved.<br/>
+                    </div>
+                    <div class="websz06"><img src="http://img.cnfol.com/newblog/batev6.0/images/mjbk/mew8-web03.gif" width="101" height="30" /></div>
+                </div>
+            </div>
+        </center>
+        <!--广告-->		
+        <script type="text/javascript" src="http://partner.googleadservices.com/gampad/google_service.js"></script>
+
+        <script type="text/javascript">
+            GS_googleAddAdSenseService("ca-pub-3738071758743360");
+            GS_googleEnableAllServices();
+        </script>
+
+        <script type="text/javascript">
+            GA_googleUseIframeRendering();
+        </script>
+
+
+        <!--ads1  logo-->
+        <span id="span_ads1" style="display:none;">
+            <script type="text/javascript">
+                GA_googleFillSlotWithSize("ca-pub-3738071758743360", "00342", 728, 90);
+            </script>
+        </span>
+
+        <script>
+            document.getElementById('ads1').innerHTML = document.getElementById('span_ads1').innerHTML;
+            document.getElementById('span_ads1').innerHTML = "";
+        </script>
+        <!--广告 end-->	
+    </body>
+</html>

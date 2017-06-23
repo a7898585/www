@@ -1,0 +1,479 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_q" href="/template/">模版列表</a> 
+        <a class="navhl_h" href="/template/international/">{$id ? '修改模版':'添加模版'}</a> 
+        <!--<a class="navhl_q" href="javascript:void(0);">模版过户</a>--> 
+    </div>
+    <div class="add_temp" id="navhljs1_c1">
+        <form name="form_international" action="" method="post">
+            <div class="add_temp_a">
+                <div class="title_b_icon3"><i class="iconfont">&#xe61a;</i></div>
+                <div class="txt_c">模版信息</div>
+                <div class="list_d">
+                    <ul>
+                        <li style="padding-bottom: 10px;">
+                            <p>模板类型</p>
+                            <select name="type" class="select_sty" onchange="select_tem_type()">
+                                <option value="0" <if condition="$Think.get.type eq '' or $Think.get.type eq '0'">selected</if>>国际域名(Com/Cc/cx)</option>
+                                <option value="1" <if condition="$Think.get.type eq '1'">selected</if>>国内域名(Cn/中国)</option>
+                            </select>
+                        </li>
+                        <li>
+                            <p>模版名称</p>
+                            <input type="text" name="title" value="" datatype="*" nullmsg="模板名称不能为空" sucmsg=" " class="list_ctxt_a">
+                            <p class="ml20">选择模板</p>
+                            <select name="template" class="select_sty">
+                                <option value="0">创建新模板</option>
+                                <optgroup label="现有模板">
+                                <volist name="templates" id="title">
+                                    <option value="{$key}">{$title}</option>
+                                </volist>
+                                </optgroup>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="add_temp_b" id="form_reg_data">
+                <ul>
+                    <li><i class="iconfont">&#xe61f;</i><div class="add_temp_title">域名所有者中文信息</div></li>
+                    <li>
+                        <p>所有者姓名</p>
+                        <input type="text" style="width:50px;" name="cn_reg_firstname" class="list_ctxt_a" maxlength="8" placeholder="中文姓" datatype="zh" nullmsg="姓不能为空" errormsg="请填写中文姓" sucmsg=" " />
+                        <input type="text" style="width:145px;" name="cn_reg_lastname" class="list_ctxt_a" maxlength="16" placeholder="中文名字" datatype="zh" nullmsg="名字不能为空" errormsg="请填写中文名字" sucmsg=" " />
+                        &nbsp;
+                        <input type="button" id="btn_transfrom_reg_1" name="btn_transform" data-from="cn_reg_firstname,cn_reg_lastname" data-to="en_reg_firstname,en_reg_lastname" value="转换成英文&raquo;" />
+                    </li>
+                    <li>
+                        <p>地区</p>
+                        <select name="cn_reg_province" class="select_sty fl">
+                            <option value="">请选择省份</option>
+                        </select>
+                        <select name="cn_reg_city" datatype="*" nullmsg="请选择地区" sucmsg=" " class="select_sty fl">
+                            <option value="">请选择城市</option>
+                        </select>
+                    </li>
+                    <li>
+                        <p>详细地址</p>
+                        <input type="text" name="cn_reg_address" class="list_ctxt_a" maxlength="64" placeholder="中文地址，不包括省市" datatype="*" nullmsg="详细地址不能为空" sucmsg=" " />   &nbsp;
+                        <input type="button" class="button28" id="btn_transfrom_reg_2" name="btn_transform" data-from="cn_reg_address" data-to="en_reg_address" value="转换成英文&raquo;" />
+                    </li>
+                    <li>
+                        <p>邮编</p>
+                        <input type="text" name="cn_reg_postcode" class="list_ctxt_a" maxlength="6" placeholder="邮编" datatype="p" nullmsg="邮编不能为空" errormsg="请填写6位数字邮编" sucmsg=" " />                    
+                    </li>
+                    <li>
+                        <p>电话号码</p>
+                        <input type="text" name="cn_reg_telephone" class="list_ctxt_a" maxlength="11" placeholder="例如：5922211350或13800000000" datatype="n9-11" nullmsg="电话号码不能为空" errormsg="请填写正确格式的电话号码" sucmsg=" " /> 
+                    </li>
+                    <li>
+                        <p>传真</p>
+                        <input type="text" name="cn_reg_fax" class="list_ctxt_a" maxlength="11" placeholder="5922211351" datatype="n9-11" nullmsg="传真号码不能为空" errormsg="请填写正确格式的传真号码" sucmsg=" " />
+
+                    </li>
+                    <li>
+                        <p>邮件地址</p>
+                        <input type="text" name="cn_reg_email" class="list_ctxt_a" maxlength="64" placeholder="邮件地址" datatype="e" nullmsg="邮件地址不能为空" errormsg="请填写正确格式的邮件地址" sucmsg=" " />           
+                    </li>
+                    <li>
+                        <p>身份证号码</p>
+                        <input type="text" name="cn_reg_idcard" class="list_ctxt_a" maxlength="18" placeholder="18位身份证号码" datatype="idcard" nullmsg="身份证号不能为空" errormsg="请填写正确格式的身份证号" sucmsg=" " />   
+                    </li>
+                </ul>
+                <ul>
+                    <li><i class="iconfont">&#xe61f;</i><div class="add_temp_title">域名所有者英文信息</div></li>
+                    <li>
+                        <p>所有者姓名</p>
+                        <input type="text" style="width:50px;"  name="en_reg_firstname" class="list_ctxt_a" maxlength="16" placeholder="英文姓" datatype="*" nullmsg="姓不能为空" errormsg="请填写中文姓" sucmsg=" " />
+                        <input type="text" style="width:150px;"  name="en_reg_lastname" class="list_ctxt_a" maxlength="16" placeholder="英文名" datatype="*" nullmsg="名字不能为空" errormsg="请填写中文名字" sucmsg=" " />
+                    </li>
+                    <li>
+                        <p>&nbsp;</p>
+                        &nbsp;
+                    </li>
+                    <li>
+                        <p>详细地址</p>
+                        <input type="text" name="en_reg_address" class="list_ctxt_a" maxlength="128" placeholder="英文地址，不包括省市" datatype="*" nullmsg="详细地址不能为空" sucmsg=" " />        
+                    </li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="add_temp_b" id="form_adm_data">
+                <ul>
+                    <li><i class="iconfont">&#xe61f;</i><div class="add_temp_title">域名管理人中文信息</div>(<a href="javascript:formCopy('reg','adm')" style="color:blue;">复制域名所有者资料</a>)</li>
+                    <li>   
+                        <p>所有者姓名</p>
+                        <input type="text" style="width:50px;" name="cn_adm_firstname" class="list_ctxt_a" maxlength="8" placeholder="中文姓" datatype="zh" nullmsg="姓不能为空" errormsg="请填写中文姓" sucmsg=" " />
+                        <input type="text" style="width:145px;" name="cn_adm_lastname" class="list_ctxt_a" maxlength="16" placeholder="中文名字" datatype="zh" nullmsg="名字不能为空" errormsg="请填写中文名字" sucmsg=" " />
+                        &nbsp;
+                        <input type="button" id="btn_transfrom_adm_1" name="btn_transform" data-from="cn_adm_firstname,cn_adm_lastname" data-to="en_adm_firstname,en_adm_lastname" value="转换成英文&raquo;" />   
+                    </li>
+                    <li>
+                        <p>地区</p>
+                        <select name="cn_adm_province" class="select_sty fl">
+                            <option value="">请选择省份</option>
+                        </select>
+                        <select name="cn_adm_city" datatype="*" nullmsg="请选择地区" sucmsg=" " class="select_sty fl">
+                            <option value="">请选择城市</option>
+                        </select>
+                    </li>
+                    <li>
+                        <p>详细地址</p>
+                        <input type="text" name="cn_adm_address" class="list_ctxt_a" maxlength="64" placeholder="中文地址，不包括省市" datatype="*" nullmsg="详细地址不能为空" sucmsg=" " />   &nbsp;
+                        <input type="button" class="button28" id="btn_transfrom_reg_2" name="btn_transform" data-from="cn_reg_address" data-to="en_reg_address" value="转换成英文&raquo;" />
+                    </li>
+                    <li>
+                        <p>邮编</p>
+                        <input type="text" name="cn_adm_postcode" class="list_ctxt_a" maxlength="6" placeholder="邮编" datatype="p" nullmsg="邮编不能为空" errormsg="请填写6位数字邮编" sucmsg=" " />                    
+                    </li>
+                    <li>
+                        <p>电话号码</p>
+                        <input type="text" name="cn_adm_telephone" class="list_ctxt_a" maxlength="11" placeholder="例如：5922211350或13800000000" datatype="n9-11" nullmsg="电话号码不能为空" errormsg="请填写正确格式的电话号码" sucmsg=" " /> 
+                    </li>
+                    <li>
+                        <p>传真</p>
+                        <input type="text" name="cn_adm_fax" class="list_ctxt_a" maxlength="11" placeholder="5922211351" datatype="n9-11" nullmsg="传真号码不能为空" errormsg="请填写正确格式的传真号码" sucmsg=" " />
+
+                    </li>
+                    <li>
+                        <p>邮件地址</p>
+                        <input type="text" name="cn_adm_email" class="list_ctxt_a" maxlength="64" placeholder="邮件地址" datatype="e" nullmsg="邮件地址不能为空" errormsg="请填写正确格式的邮件地址" sucmsg=" " />           
+                    </li>
+                    <li>
+                        <p>身份证号码</p>
+                        <input type="text" name="cn_adm_idcard" class="list_ctxt_a" maxlength="18" placeholder="18位身份证号码" datatype="idcard" nullmsg="身份证号不能为空" errormsg="请填写正确格式的身份证号" sucmsg=" " />   
+                    </li>
+                </ul>
+                <ul>
+                    <li><i class="iconfont">&#xe61f;</i><div class="add_temp_title">域名管理人英文信息</div></li>
+                    <li>
+                        <p>所有者姓名</p>
+                        <input type="text" style="width:50px;"  name="en_adm_firstname" class="list_ctxt_a" maxlength="16" placeholder="英文姓" datatype="*" nullmsg="姓不能为空" errormsg="请填写中文姓" sucmsg=" " />
+                        <input type="text" style="width:150px;"  name="en_adm_lastname" class="list_ctxt_a" maxlength="16" placeholder="英文名" datatype="*" nullmsg="名字不能为空" errormsg="请填写中文名字" sucmsg=" " />
+                    </li>
+                    <li>
+                        <p>&nbsp;</p>
+                        &nbsp;
+                    </li>
+                    <li>
+                        <p>详细地址</p>
+                        <input type="text" name="en_adm_address" class="list_ctxt_a" maxlength="128" placeholder="英文地址，不包括省市" datatype="*" nullmsg="详细地址不能为空" sucmsg=" " />        
+                    </li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="add_temp_b" id="form_tec_data">
+                <ul>
+                    <li><i class="iconfont">&#xe61f;</i><div class="add_temp_title">域名技术联系人中文信息</div></li>
+                    <li>&nbsp;&nbsp;(<a href="javascript:formCopy('reg','tec')" style="color:blue;">复制域名所有者资料</a>)&nbsp;&nbsp;
+                        (<a href="javascript:formCopy('adm','tec')" style="color:blue;">复制域名管理人资料</a>)</li>
+                    <li>   
+                        <p>所有者姓名</p>
+                        <input type="text" style="width:50px;" name="cn_tec_firstname" class="list_ctxt_a" maxlength="8" placeholder="中文姓" datatype="zh" nullmsg="姓不能为空" errormsg="请填写中文姓" sucmsg=" " />
+                        <input type="text" style="width:145px;" name="cn_tec_lastname" class="list_ctxt_a" maxlength="16" placeholder="中文名字" datatype="zh" nullmsg="名字不能为空" errormsg="请填写中文名字" sucmsg=" " />
+                        &nbsp;
+                        <input type="button" id="btn_transfrom_tec_1" name="btn_transform" data-from="cn_tec_firstname,cn_tec_lastname" data-to="en_tec_firstname,en_tec_lastname" value="转换成英文&raquo;" />    
+                    </li>
+                    <li>
+                        <p>地区</p>
+                        <select name="cn_tec_province" class="select_sty fl">
+                            <option value="">请选择省份</option>
+                        </select>
+                        <select name="cn_tec_city" datatype="*" nullmsg="请选择地区" sucmsg=" " class="select_sty fl">
+                            <option value="">请选择城市</option>
+                        </select>
+                    </li>
+                    <li>
+                        <p>详细地址</p>
+                        <input type="text" name="cn_tec_address" class="list_ctxt_a" maxlength="64" placeholder="中文地址，不包括省市" datatype="*" nullmsg="详细地址不能为空" sucmsg=" " />   &nbsp;
+                        <input type="button" id="btn_transfrom_tec_2" name="btn_transform" data-from="cn_tec_address" data-to="en_tec_address" value="转换成英文&raquo;" />
+                    </li>
+                    <li>
+                        <p>邮编</p>
+                        <input type="text" name="cn_tec_postcode" class="list_ctxt_a" maxlength="6" placeholder="邮编" datatype="p" nullmsg="邮编不能为空" errormsg="请填写6位数字邮编" sucmsg=" " />                    
+                    </li>
+                    <li>
+                        <p>电话号码</p>
+                        <input type="text" name="cn_tec_telephone" class="list_ctxt_a" maxlength="11" placeholder="例如：5922211350或13800000000" datatype="n9-11" nullmsg="电话号码不能为空" errormsg="请填写正确格式的电话号码" sucmsg=" " /> 
+                    </li>
+                    <li>
+                        <p>传真</p>
+                        <input type="text" name="cn_tec_fax" class="list_ctxt_a" maxlength="11" placeholder="5922211351" datatype="n9-11" nullmsg="传真号码不能为空" errormsg="请填写正确格式的传真号码" sucmsg=" " />
+
+                    </li>
+                    <li>
+                        <p>邮件地址</p>
+                        <input type="text" name="cn_tec_email" class="list_ctxt_a" maxlength="64" placeholder="邮件地址" datatype="e" nullmsg="邮件地址不能为空" errormsg="请填写正确格式的邮件地址" sucmsg=" " />           
+                    </li>
+                    <li>
+                        <p>身份证号码</p>
+                        <input type="text" name="cn_tec_idcard" class="list_ctxt_a" maxlength="18" placeholder="18位身份证号码" datatype="idcard" nullmsg="身份证号不能为空" errormsg="请填写正确格式的身份证号" sucmsg=" " />   
+                    </li>
+                </ul>
+                <ul>
+                    <li><i class="iconfont">&#xe61f;</i><div class="add_temp_title">域名技术联系人英文信息</div></li>
+                    <li>&nbsp;</li>
+                    <li>
+                        <p>所有者姓名</p>
+                        <input type="text" style="width:50px;"  name="en_tec_firstname" class="list_ctxt_a" maxlength="16" placeholder="英文姓" datatype="*" nullmsg="姓不能为空" errormsg="请填写中文姓" sucmsg=" " />
+                        <input type="text" style="width:150px;"  name="en_tec_lastname" class="list_ctxt_a" maxlength="16" placeholder="英文名" datatype="*" nullmsg="名字不能为空" errormsg="请填写中文名字" sucmsg=" " />
+                    </li>
+                    <li>
+                        <p>&nbsp;</p>
+                        &nbsp;
+                    </li>
+                    <li>
+                        <p>详细地址</p>
+                        <input type="text" name="en_tec_address" class="list_ctxt_a" maxlength="128" placeholder="英文地址，不包括省市" datatype="*" nullmsg="详细地址不能为空" sucmsg=" " />        
+                    </li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="add_temp_b" id="form_bil_data">
+                <ul>
+                    <li><i class="iconfont">&#xe61f;</i><div class="add_temp_title">域名缴费联系人中文信息</div></li>
+                    <li>(<a href="javascript:formCopy('reg','bil')" style="color:blue;">复制域名所有者资料</a>)
+                        (<a href="javascript:formCopy('adm','bil')" style="color:blue;">复制域名管理人资料</a>)
+                    </li>
+                    <li>  (<a href="javascript:formCopy('tec','bil')" style="color:blue;">复制域名技术联系人资料</a>)
+                    </li>
+                    <li>   
+                        <p>所有者姓名</p>
+                        <input type="text" style="width:50px;" name="cn_bil_firstname" class="list_ctxt_a" maxlength="8" placeholder="中文姓" datatype="zh" nullmsg="姓不能为空" errormsg="请填写中文姓" sucmsg=" " />
+                        <input type="text" style="width:145px;" name="cn_bil_lastname" class="list_ctxt_a" maxlength="16" placeholder="中文名字" datatype="zh" nullmsg="名字不能为空" errormsg="请填写中文名字" sucmsg=" " />
+                        &nbsp;
+                        <input type="button" id="btn_transfrom_bil_1" name="btn_transform" data-from="cn_bil_firstname,cn_bil_lastname" data-to="en_bil_firstname,en_bil_lastname" value="转换成英文&raquo;" />    
+                    </li>
+                    <li>
+                        <p>地区</p>
+                        <select name="cn_bil_province" class="select_sty fl">
+                            <option value="">请选择省份</option>
+                        </select>
+                        <select name="cn_bil_city" datatype="*" nullmsg="请选择地区" sucmsg=" " class="select_sty fl">
+                            <option value="">请选择城市</option>
+                        </select>
+                    </li>
+                    <li>
+                        <p>详细地址</p>
+                        <input type="text" name="cn_bil_address" class="list_ctxt_a" maxlength="64" placeholder="中文地址，不包括省市" datatype="*" nullmsg="详细地址不能为空" sucmsg=" " />   &nbsp;
+                        <input type="button" id="btn_transfrom_tec_2" name="btn_transform" data-from="cn_tec_address" data-to="en_tec_address" value="转换成英文&raquo;" />
+                    </li>
+                    <li>
+                        <p>邮编</p>
+                        <input type="text" name="cn_bil_postcode" class="list_ctxt_a" maxlength="6" placeholder="邮编" datatype="p" nullmsg="邮编不能为空" errormsg="请填写6位数字邮编" sucmsg=" " />                    
+                    </li>
+                    <li>
+                        <p>电话号码</p>
+                        <input type="text" name="cn_bil_telephone" class="list_ctxt_a" maxlength="11" placeholder="例如：5922211350或13800000000" datatype="n9-11" nullmsg="电话号码不能为空" errormsg="请填写正确格式的电话号码" sucmsg=" " /> 
+                    </li>
+                    <li>
+                        <p>传真</p>
+                        <input type="text" name="cn_bil_fax" class="list_ctxt_a" maxlength="11" placeholder="5922211351" datatype="n9-11" nullmsg="传真号码不能为空" errormsg="请填写正确格式的传真号码" sucmsg=" " />
+
+                    </li>
+                    <li>
+                        <p>邮件地址</p>
+                        <input type="text" name="cn_bil_email" class="list_ctxt_a" maxlength="64" placeholder="邮件地址" datatype="e" nullmsg="邮件地址不能为空" errormsg="请填写正确格式的邮件地址" sucmsg=" " />           
+                    </li>
+                    <li>
+                        <p>身份证号码</p>
+                        <input type="text" name="cn_bil_idcard" class="list_ctxt_a" maxlength="18" placeholder="18位身份证号码" datatype="idcard" nullmsg="身份证号不能为空" errormsg="请填写正确格式的身份证号" sucmsg=" " />   
+                    </li>
+                </ul>
+                <ul>
+                    <li><i class="iconfont">&#xe61f;</i><div class="add_temp_title">域名缴费联系人英文信息</div></li>
+                    <li>&nbsp;</li><li>&nbsp;</li>
+                    <li>
+                        <p>所有者姓名</p>
+                        <input type="text" style="width:50px;"  name="en_bil_firstname" class="list_ctxt_a" maxlength="16" placeholder="英文姓" datatype="*" nullmsg="姓不能为空" errormsg="请填写中文姓" sucmsg=" " />
+                        <input type="text" style="width:150px;"  name="en_bil_lastname" class="list_ctxt_a" maxlength="16" placeholder="英文名" datatype="*" nullmsg="名字不能为空" errormsg="请填写中文名字" sucmsg=" " />
+                    </li>
+                    <li>
+                        <p>&nbsp;</p>
+                        &nbsp;
+                    </li>
+                    <li>
+                        <p>详细地址</p>
+                        <input type="text" name="en_bil_address" class="list_ctxt_a" maxlength="128" placeholder="英文地址，不包括省市" datatype="*" nullmsg="详细地址不能为空" sucmsg=" " />        
+                    </li>
+                </ul>
+                <div class="clear"></div>
+                <input type="submit" value="确认提交" class="list_submit list_submit_marg"/>
+            </div>
+        </form>
+        <div class="add_temp_c">* 确认信息的准确度,不可有不确切信息。</div>
+        <div class="height30"></div>
+        <div class="height30"></div>
+    </div>
+
+</div>
+<style type="text/css">
+    .Validform_checktip.Validform_wrong{color:red; margin-left:10px;padding:0px;}
+</style>
+<script type="text/javascript" src="/Public/Common/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_Datatype.js"></script>
+<script type="text/javascript">
+    var template_id = '{$id}'
+    var copy_template_id = '{$cid}';
+    
+    function copyTemplate(tid){
+        $.getJSON('/template/ajax_get_template_by_id', {id: tid}, function(detail){
+            $(':input').not(':button').each(function(){
+                if ($(this).is(':text')){
+                    $(this).val(detail[$(this).attr('name')]);
+                    if ($(this).attr('name').indexOf('title') != -1 && copy_template_id >0){
+                        $(this).val(detail[$(this).attr('name')]+'2');
+                    }
+                }else if ($(this).is('select')){
+                    if ($(this).attr('name').indexOf('province') != -1){
+                        $(this).val(detail[$(this).attr('name')]);
+                    }else if ($(this).attr('name').indexOf('city') != -1){
+                        area($(this).attr('name'), detail[$(this).attr('name')].substr(0, 6), detail[$(this).attr('name')]);
+                    }
+                }
+            });
+        });
+    }
+    function select_tem_type(){
+        var type = $('select[name=type]').val();
+        location.href='/template/international/?type='+type;
+    }
+</script>
+<literal>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('form[name="form_international"]').Validform({
+                tiptype:3
+            });
+            //选择模板
+            $(':input[name="template"]').change(function(){
+                if (this.value == 0){//清空所有输入框
+                    $(':input').not(':button').each(function(){
+                        if ($(this).is(':text')){
+                            $(this).val('');
+                        }else if ($(this).is('select')){
+                            if ($(this).attr('name').indexOf('province') != -1){
+                                $(this).val('');
+                            }else if ($(this).attr('name').indexOf('city') != -1){
+                                $(this).empty().append('<option value="">请选择城市</option>');
+                            }
+                        }
+                    });
+                }else{//填充所选模板的内容
+                    $.getJSON('/template/ajax_get_template_by_id', {id: this.value}, function(detail){
+                        $(':input').not(':button').each(function(){
+                            if ($(this).is(':text')){
+                                $(this).val(detail[$(this).attr('name')]);
+                            }else if ($(this).is('select')){
+                                if ($(this).attr('name').indexOf('province') != -1){
+                                    $(this).val(detail[$(this).attr('name')]);
+                                }else if ($(this).attr('name').indexOf('city') != -1){
+                                    area($(this).attr('name'), detail[$(this).attr('name')].substr(0, 6), detail[$(this).attr('name')]);
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+            //转换为拼音按钮
+            $(':button[name="btn_transform"]').click(function(){
+                $(this).val('正在转换...').attr('disabled', true);
+                var from = [],to = [];
+                if ($(this).data('from').indexOf(',') != -1){
+                    //需要操作多个对象
+                    from = $(this).data('from').split(',');
+                    to = $(this).data('to').split(',');
+                }else{
+                    from = [$(this).data('from')];
+                    to = [$(this).data('to')];
+                }
+                translate(from, to, 0, $(this).attr('id'));
+            });
+            //地区选择列表框
+            $(':input[name="cn_reg_province"],:input[name="cn_adm_province"],:input[name="cn_tec_province"],:input[name="cn_bil_province"]').change(function(){
+                if ($(this).attr('name') == 'cn_reg_province'){
+                    area('cn_reg_city', this.value, '');
+                }else if ($(this).attr('name') == 'cn_adm_province'){
+                    area('cn_adm_city', this.value, '');
+                }else if ($(this).attr('name') == 'cn_tec_province'){
+                    area('cn_tec_city', this.value, '');
+                }else if ($(this).attr('name') == 'cn_bil_province'){
+                    area('cn_bil_city', this.value, '');
+                }
+            });
+            area('cn_reg_province', '001', '');
+            area('cn_adm_province', '001', '');
+            area('cn_tec_province', '001', '');
+            area('cn_bil_province', '001', '');
+            if(template_id >0){
+                $(':input[name="template"]').val(template_id);
+                copyTemplate(template_id);
+            }
+            if(copy_template_id >0){
+                copyTemplate(copy_template_id);
+            }
+        });
+        function translate(from, to, index, btn){
+            if ($.trim($(':text[name="'+from[index]+'"]').val()) == ''){
+                $('#'+btn).val("转换成英文»").attr('disabled', false);
+                return false;
+            }
+            $.getJSON('/public/ajax_translate_solarwind', {content:$(':text[name="'+from[index]+'"]').val(), type:(from[index].indexOf('address')==-1)?'name':'addr'}, function(result){
+                if (result.status == 200){
+                    $(':text[name="'+to[index]+'"]').val(result.message);
+                    if (index >= from.length-1){
+                        $('#'+btn).val("转换成英文»").attr('disabled', false);
+                        return;
+                    }
+                    translate(from, to, index+1, btn);
+                }
+            });
+        }
+        function area(target, parent, selected){
+            if (parent == '') return false;
+            if ($.inArray(target, ['cn_reg_city','cn_adm_city','cn_tec_city','cn_bil_city'])!=-1 && $.inArray(parent, ['001001','001002','001003','001004'])!=-1){
+                var citys = {'001001':'北京','001002':'上海','001003':'天津','001004':'重庆'};
+                var option = '<option value="">请选择城市</option>';
+                if (selected != ''){
+                    option += '<option value="'+parent+'" selected>'+citys[parent]+'</option>';
+                }else{
+                    option += '<option value="'+parent+'">'+citys[parent]+'</option>';
+                }
+                $(':input[name="'+target+'"]').empty().append(option);
+                return false;
+            }
+            var type = $.inArray(target, ['cn_reg_province','cn_adm_province','cn_tec_province','cn_bil_province'])!=-1?'province':'city';
+            $.getJSON('/public/ajax_get_area', {type:type, parent:parent}, function (result) {
+                var option = '';
+                if (type == 'province'){
+                    option = '<option value="">请选择省份</option>';
+                }else if (type == 'city'){
+                    option = '<option value="">请选择城市</option>';
+                }
+                $.each(result, function(id, item){
+                    if (selected == item['areaID']){
+                        option += '<option value="' + item['areaID'] + '" selected="selected">' + item['simple'] + '</option>';
+                    }else {
+                        option += '<option value="' + item['areaID'] + '">' + item['simple'] + '</option>';
+                    }
+                });
+                $(':input[name="'+target+'"]').empty().append(option);
+            });
+        }
+        function formCopy(from, to){
+            $('#form_'+from+'_data').find('input,select').not(':button').each(function(){
+                var fromItemName = $(this).attr('name');
+                var toItemName = fromItemName.replace(from, to);
+                if ($(this).is(':text')){
+                    $(':input[name="'+toItemName+'"]').val($(':input[name="'+fromItemName+'"]').val());
+                }else if ($(this).is('select')){
+                    if (fromItemName.indexOf('province') != -1){
+                        $(':input[name="'+toItemName+'"]').val($(':input[name="'+fromItemName+'"]').val());
+                    }else if (fromItemName.indexOf('city') != -1){
+                        area(toItemName, $(':input[name="'+fromItemName+'"]').val().substr(0, 6), $(':input[name="'+fromItemName+'"]').val());
+                    }
+                }
+            });
+        }
+    </script>
+</literal>

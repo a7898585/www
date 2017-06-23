@@ -1,0 +1,101 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：黑名单管理</div>
+    </div>		
+    <div class="szym06"><input type="text" id="searchinfo" size="10" /> 搜索条件：
+        <select name="searchtype" id="searchtype">
+            <option value="username">用户名</option>
+            <option value="nickname">昵&nbsp;&nbsp;称</option>
+        </select>
+        <input type="button" name="search" onClick="javascript:search();" value="搜 索">
+    </div>
+    <div class="szym06">
+        <form id="popFormSubmit" name="popFormSubmit" method="post" onSubmit="return false;">
+            <input type="hidden" name="act" value="DelAll">
+            <table width="100%">
+                <?php
+                if($blackuser['RetRecords'] > 0)
+                {?>
+                <tr><td width="5%" align="conter">选择</td><td width="20%" align="conter">头像图标</td><td width="15%" align="conter">用户名</td><td width="15%" align="conter">昵  称</td><td width="*" align="left" colspan="2">操 作</td></tr>
+                <?php
+                }
+                if($blackuser['RetRecords'] > 0)
+                {
+                if($blackuser['RetRecords'] == 1)
+                {
+                $blackuser['Record'] = array(0=>$blackuser['Record']);
+                }
+                foreach($blackuser['Record'] as $val)
+                {?>
+                <tr id="<?php echo $val['UserID'];?>">
+                    <td><input type="checkbox" name="checkbox[]" value="<?php echo $val['BlackID'];?>" /></td><td><img src="<?php echo getUserHead($val['BlackUserID']);?>" onerror="this.onerror='';this.src='http://head.cnfolimg.com/man_48.png';" border="0" height="48" width="48"></img></td><td><?php echo $val['UserName'];?></td><td><?php echo $val['NickName'];?></td><td><?php echo $val['DataTime'];?></td><td><span style="cursor: pointer"  onclick="javascript:delaction('<?php echo($user['userid']); ?>','0','1','<?php echo $val['UserID'];?>');">删除</span></td></tr>
+                <tr><td align="conter" colspan="6"></td>
+                </tr>
+                <?php
+                }
+                }
+                if($blackuser['RetRecords'] > 0)
+                {?>
+                <tr><td align="conter" colspan="6"><?php echo $pagebar;?></td></tr>
+                <tr><td colspan="6" align="left">
+                        <input type="button" onClick="selectall('popFormSubmit','checkbox','checked');" value="全 选">
+                        <input type="button" onClick="selectall('popFormSubmit','checkbox',false);" value="反 选">
+                        <input type="submit" name='sub' id='suball' value="删 除"></td></tr>
+                <?php
+                }
+                else
+                {?>
+                <tr><td colspan="6" align="left">您暂时还没有黑名单记录</td></tr>	
+                <?php
+                }?>
+            </table>
+        </form>
+        <div style="padding-top:10px; padding-bottom:10px;color:#999999;line-height:22px;">
+            黑名单管理功能说明：<br />
+            将某用户加入黑名单后，将禁止某固定注册用户评论您的博客。<br />
+            您可以进行黑名单管理，可删除、添加黑名单用户。
+            <br />
+            添加搜索时请输入精确的用户名或昵称（友情提醒：不能带空格），本功能暂不支持模糊搜索。</div>  
+    </div>
+</div> 
+<script language="javascript">
+    var memid = <?php echo $bloginfo['MemberID'];?>;
+    var flashCode = "<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>";
+    var searchurl = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/module/usearch";
+    var blacklist = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/blackuser/list";
+    var action = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/blackuser/Action";
+
+    function search(){
+        if($.trim($('#searchinfo').val()) == ""){
+            showalert("请输入要查询的信息", false);
+            return false;
+        }
+        searchurl += '?stype='+$('#searchtype').val()+'&sdata='+$('#searchinfo').val();
+        showiframe(searchurl, 340, 250, "用户名单列表", false);
+    }
+
+    function delaction(uid,type,ftype,frienddata){
+	
+        $.post(action,{act:'del',uid:uid,Type:type,fType:ftype,FriendData:frienddata},function(data){
+            showalert(data.error, false); 
+            if(data.errno == 'success'){ $('#'+frienddata).remove();}
+        },'json');
+    }
+
+    $(function(){
+        $('#suball').click(function(){
+            var uid = new Array();
+            if($('#popFormSubmit input:checked').size() <1){
+                showalert("请选择要删除的选项", false); return;
+            }
+            $('#popFormSubmit input:checked').each(function(i){
+                uid[i] = $(this).val();
+            });
+            $.post(action,{act:'del',memberid:memid, verify: flashCode, userid:uid.join(',')},function(data){
+                showalert(data.error, false); 
+                if(data.errno == 'success'){ setTimeout(function(){ location.href=blacklist;},3000);}
+            },'json');
+        });
+    });
+</script>

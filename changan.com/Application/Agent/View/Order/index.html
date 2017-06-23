@@ -1,0 +1,121 @@
+<div class="bar_r">
+    <div class="u_tle"><span class="side_l">订单管理</span><!--<a  class="side_r" htref="产品管理-添加.html">添加</a>--></div>
+    <div class="box_deta">
+        <div class="search">
+            <label><span>状态</span>
+                <select name="status" id="status">
+                    <option value="0">请选择</option>
+                    <option value="1">已付</option>
+                    <option value="2">未付</option>
+                </select>
+            </label>
+            <label>
+                <select id="type">
+                    <option value="name">姓名</option>
+                    <option value="orderid">订单号</option>
+                </select>
+            </label>
+            <label>
+                <!--<span>姓名</span>-->
+                <input type="text" value="" name="k" placeholder="姓名/订单号"/>
+            </label>
+            <input class="u_btn" type="button" value="查找" id="search"/>
+        </div>
+        <table class="detail" cellpadding="0" cellspacing="0">
+            <tr>
+                <th width="70px">订单号</th>
+                <th width="50px">姓名</th>
+                <th width="60px">产品</th>
+                <th width="50px">金额</th>
+                <th width="50px">状态</th>
+                <th width="100px">下单时间</th>
+                <th width="60px">年限</th>
+            </tr>
+            <volist name="data['list']" id="vo">
+                <tr>
+                    <td>{$vo.orderid}</td>
+                    <td>{$vo.buy_id|getUserName}</td>
+                    <td>{$vo.descn}</td>
+                    <td>￥{$vo.money}元</td>
+                    <td>{$vo['status']?'已付款':'未付款'}</td>
+                    <td>{$vo.ctime}</td>
+                    <td>{$vo.year}年</td>
+                </tr>
+            </volist>
+        </table>
+        <div class="clear" style="margin-top: 20px;"></div>
+        {$data['pagehtml']}
+    </div>
+</div>
+<div class="box_popup box_popup2"  style="display:none;" id="popbox_three">
+    <div class="tite"><b>用户下单</b><span class="tite_ops" onclick="close_pop('popbox_three')">x</span></div>
+    <div class="bd small_wind textcen">
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td>恭喜您，下单成功！</td>
+            </tr>
+            <tr>
+                <td>已从您的账户扣款<span id="k_money"></span>元，您的账户余额<span id="t_money"></span>元。</th>
+            </tr>
+            <tr>
+                <td colspan="2" class="btnbox"><a href="javascript:;" onclick="close_pop('popbox_three')" class="adminbtn">关闭</a><a href="{$base_url}customer/pay/" class="adminbtn" target="_blank">充值</a></td>
+            </tr>
+        </table>
+    </div>
+</div>  
+
+<div class="box_popup box_popup2"  style="display:none;" id="popbox_four">
+    <div class="tite"><b>余额不足</b><span class="tite_ops" onclick="close_pop('popbox_four')">x</span></div>
+    <div class="bd small_wind textcen">
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td>很抱歉，扣款失败，</td>
+            </tr>
+            <tr>
+                <td>您的余额不足，当前可用余额<span id="four_money"></span>元，还差<span id="dis_money"></span>元，请充值！</th>
+            </tr>
+            <tr>
+                <td colspan="2" class="btnbox"><a href="{$base_url}customer/pay/" class="adminbtn" target="_blank">充值</a><a href="javascript:;" onclick="close_pop('popbox_four')" class="adminbtn">关闭</a></td>
+            </tr>
+        </table>
+    </div>
+</div>  
+<script>
+    $(document).ready(function(e) {
+        $('#search').click(function(e){ 
+            var status = $('#status').val();
+            var k = $('input[name=k]').val();
+            if(k||status){
+                window.location = '{$base_url}order?status='+status+'&type='+$('#type').val()+'&k='+encodeURI($(':input[name="k"]').val());
+            }
+        });
+    });
+    function go_to_buy(bid,oid){
+        if(bid&&oid){
+            if(confirm('确定付款？')){
+                $.ajax({
+                    type: "post",
+                    url: "/order/buy",
+                    data:{bid:bid,oid:oid},
+                    dataType:"json",
+                    success: function(data){
+                        if(data.s=="-1"){
+                            layer.msg(data.m, 2, 3);
+                        } if(data.s=="-2"){
+                            $('#popbox_four').toggle();
+                            $('#four_money').html(data.data.money);
+                            $('#dis_money').html(data.data.price);
+                        }else{
+                            $('#popbox_three').toggle();
+                            $('#k_money').html(data.data.price);
+                            $('#t_money').html(data.data.money);
+                        }
+                    }
+                });
+            }
+        }
+    }
+    function close_pop(id){
+        $('#'+id).toggle();location.reload();
+    }
+</script>

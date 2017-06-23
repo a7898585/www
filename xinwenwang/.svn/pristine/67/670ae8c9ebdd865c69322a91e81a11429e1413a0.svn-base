@@ -1,0 +1,68 @@
+<?php
+return array(
+	'ERROR_MESSAGE'         => '页面错误！请稍后再试～',
+    'SHOW_ERROR_MSG'        => true,
+    'TMPL_ACTION_ERROR'     => THINK_PATH.'Tpl/dispatch_jump.tpl', // 默认错误跳转对应的模板文件
+    'TMPL_ACTION_SUCCESS'   => THINK_PATH.'Tpl/dispatch_jump.tpl', // 默认成功跳转对应的模板文件
+    'TMPL_EXCEPTION_FILE'   => THINK_PATH.'Tpl/think_exception.tpl',// 异常页面的模板文件
+    'URL_MODEL' => 2,
+    'LAYOUT_ON'             =>  false, // 是否启用布局
+    'AUTOLOAD_NAMESPACE' => array(),
+    'URL_ROUTER_ON' => true,
+    'TMPL_PARSE_STRING' => array('__APP__' => '/Mobile/',),
+    'APP_SUB_DOMAIN_DEPLOY' => 1,
+    'URL_DOMAIN' => 'http://m.xinwenwang.com',
+    'URL_ROUTE_RULES' => array(
+        'register'         => 'Public/register',
+        'login'         => 'Public/login',
+        'loginout'         => 'Public/loginout',
+        'hot'=>'News/hot?n=hot',
+        'shehui'=>'News/lists?type_id=1802&n=shehui',
+        'yule'=>'News/lists?type_id=1803&n=yule',
+        'tiyu'=>'News/lists?type_id=1804&n=tiyu',
+        'qiche'=>'News/lists?type_id=1808&n=qiche',
+        'caijing'=>'News/lists?type_id=1805&n=caijing',
+        #其他分类
+        'guoji'        => 'News/lists?type_id=1807&n=guoji',
+        'junshi'        => 'News/lists?type_id=1806&n=junshi',
+        'youxi'        => 'News/lists?type_id=1810&n=youxi',
+        'lvyou'        => 'News/lists?type_id=1811&n=lvyou',
+        'shishang'        => 'News/lists?type_id=1826&n=shishang',
+        'keji'        => 'News/lists?type_id=1809&n=keji',
+        'shuma'        => 'News/lists?type_id=1827&n=shuma',
+        'fangchan'        => 'News/lists?type_id=1815&n=fangchan',
+        'jiaju'        => 'News/lists?type_id=1823&n=jiaju',
+        'gaoxiao'        => 'News/lists?type_id=1828&n=gaoxiao',
+        'dongman'        => 'News/lists?type_id=1833&n=dongman',
+        'tansuo'        => 'News/lists?type_id=1820&n=tansuo',
+        'lishi'        => 'News/lists?type_id=1830&n=lishi',
+        'nvren'        => 'News/lists?type_id=1813&n=nvren',
+        'jiankang'        => 'News/lists?type_id=1814&n=jiankang',
+        'dianying'        => 'News/lists?type_id=1816&n=dianying',
+        'dushu'        => 'News/lists?type_id=1817&n=dushu',
+        'yangsheng'        => 'News/lists?type_id=1818&n=yangsheng',
+        'yulu'        => 'News/lists?type_id=1819&n=yulu',
+        'yuer'        => 'News/lists?type_id=1821&n=yuer',
+        'wenhua'        => 'News/lists?type_id=1824&n=wenhua',
+        'xingzuo'        => 'News/lists?type_id=1825&n=xingzuo',
+        'qinggan'        => 'News/lists?type_id=1829&n=qinggan',
+        'meishi'        => 'News/lists?type_id=1831&n=meishi',
+        'jianfei'        => 'News/lists?type_id=1832&n=jianfei',
+        'giftu'        => 'News/lists?type_id=1834&n=giftu',
+        'qutu'        => 'News/lists?type_id=1812&n=qutu',
+        'meitu'        => 'News/lists?type_id=1822&n=meitu',
+        'updates'         => 'Index/updates',
+        'search'        =>'Index/search',
+        'hot_comments'         => 'Index/hot_comments',
+        'app_server'=>'app/index',
+        'user/pin'=>'User/pin',
+        'user/subscribe/'=>'User/subscribe',
+
+        '/^r(\d+)$/'=>'News/info?id=:1',
+        '/^m(\d+)$/'=>'News/dingyue?id=:1',
+        '/^show-(.*)$/'=>'Index/index',
+    ),
+    'URL_MAP_RULES' => array(
+    ),
+
+);

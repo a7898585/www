@@ -1,0 +1,413 @@
+<?php include $peronalhead;?>
+<!--end 顶部-->
+<link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=uc/Css/NewBlog/Skin.css" />
+<!--内容-->
+<div class="Wrap Cf Mt15">
+    <!--左-->
+    <div class="MaLft">
+        <!--关注筛选-->
+        <div class="FilterBox">
+            <div class="Sum"><?php echo $_GET['TitleCate']==1? "互相关注":共关注; ?><em class="focusNum"><?php echo $total; ?></em>人</div>
+            <div class="SearchBox">
+                <!--搜索框-->
+                <div class="SearchBar">
+                    <form action="" method="get" name="frm">
+                        <input id="Csearch" name="nickname" type="text" value="输入昵称或备注" />
+                        <input name="type" type="hidden" value="focusSearch" />	        	
+                        <a class="SearchBtn" href="javascript:;" onClick="document.frm.submit()"></a>        	
+                    </form>
+                </div> 	        
+                <!--end 搜索框-->
+                <label class="LabSlc">			
+                    <form action="" method="get" name="frm1">
+                        <select name="TitleCate" class="SlLW SlcWrp" id="titleSelect" onChange="document.frm1.submit()">
+                            <option value="0">全部</option>
+                            <option value="1">互相关注</option>
+                        </select>
+                    </form>
+                </label>            
+            </div>
+        </div>
+        <!--end 关注筛选-->        
+        <!--关注列表-->
+        <!--end 关注筛选-->        
+        <?php if($total) { ?>
+        <?php 
+        if(!empty($list)) 
+        { 
+        //print_r($list);
+        ?>
+        <?php
+        $userids='';
+        foreach($list as $key => $val) 
+        {
+
+        if(empty($val['UserID']))
+        {
+        continue;
+        }
+        $userids.=$val['UserID'].',';
+        ?>
+        <!--关注列表-->
+
+
+        <div class="MyFollowBox FirstMesg friend<?php echo $val['UserID']; ?>" >                    
+            <div class="FaceBox">
+                <a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$val['UserID'].'.html';?>" target="_blank" ><img src="<?php  echo getUserHead($val['UserID']);?>" ></a>
+            </div> 
+            <div class="DetailBox">
+                <div class="HandleBox">
+                    <?php 
+                    $status = $friendStatus[$val['UserID']][0]['FriendStatus'];
+                    if($isowner) { ?>
+                    <?php
+                    if($status == '1')
+                    {
+                    ?>
+                    <a style="cursor:pointer" class="unfocus<?php echo $val['UserID'];?>"  onClick="checkdelete_dialog('<?php echo $val['UserID']?>', 'unfocus')">取消关注</a>|<a href="javascript:;"  onClick="checkdelete_dialog('<?php echo $this->config->item('base_url');?>/index.php/myfocus/followAjax?friendIDs=<?php echo $val['UserID'] ;?>&FType=1', 'black')">黑名单</a>	
+                    <?php
+                    } 
+                    else if($status == '3')
+                    {
+                    ?>
+                    <span>互相关注</span>|<a  class="unfocus<?php echo $val['UserID'];?>" style="cursor:pointer" onClick="checkdelete_dialog('<?php echo $val['UserID']?>', 'unfocus')">取消关注</a>|<a href="javascript:;"  onClick="checkdelete_dialog('<?php echo $this->config->item('base_url');?>/index.php/myfocus/followAjax?friendIDs=<?php echo $val['UserID'] ;?>&FType=1', 'black')">黑名单</a>		
+                    <?php
+                    }
+                    ?>
+                    <?php }else{ ?>
+                    <?php 
+                    if($status == '1'){ ?>
+                    <span class="status"><span>已关注</span></span>
+                    <?php
+                    } 
+                    else if($status == '3')
+                    {
+                    ?>
+                    <span class="status"><span>互相关注</span></span>
+                    <?php }else{ ?>
+                    <span class="status"><a class="Attention  unfocus<?php echo $val['UserID'];?>" href="javascript:;"   onClick="checkdelete_dialog('<?php echo $val[UserID];?>', 'focus','<?php echo $status;?>')">关注</a></span>
+                    <?php
+                    }
+                    ?>
+                    <?php } ?>
+                </div>
+                <p class="Name"><a href="<?php echo $this->config->item('pass_base_url').'/otherpersoninfo'.$val['UserID'].'.html';?>" target="_blank"><?php echo $val['NickName']; ?> </a></p>
+                <p class="FollowInfo">
+                    <?php
+                    if($val['domainname']!='')
+                    {
+                    ?>
+                    <span>关注<a href="<?php echo $this->config->item('base_url').'/'.$val['domainname'].'/myfocus/friend';?>" target="_blank"><em><?php echo $friendNum[$val['UserID']]['FollowingNum']; ?></em></a></span>|<span>粉丝<a href="<?php echo $this->config->item('base_url').'/'.$val['domainname'].'/myfocused/friend';?>" target="_blank"><em><?php echo $friendNum[$val['UserID']]['FllowerNum']; ?></em></a></span>
+                    <?php
+                    }
+                    else
+                    {
+                    ?>
+                    <span>关注<a href="<?php echo $this->config->item('base_url').'/returnbolg/'.$val['UserID'].'.html';?>" target="_blank"><em><?php echo $friendNum[$val['UserID']]['FollowingNum']; ?></em></a></span>|<span>粉丝<a href="<?php echo $this->config->item('base_url').'/returnbolg/'.$val['UserID'].'.html';?>" target="_blank"><em><?php echo $friendNum[$val['UserID']]['FllowerNum']; ?></em></a></span>
+                    <?php
+                    }
+                    ?>
+                    |<span>文章<a href="<?php echo $this->config->item('base_url').'/returnbolg/'.$val['UserID'].'.html';?>" target="_blank"><em id="articleNum_<?php echo($val['UserID']); ?>">0</em></a></span>
+                </p>
+                <!--<p class="Intro"></p>-->
+                <p class="News" id="dynamic_<?php echo($val['UserID']); ?>">该用户暂时没有动态</p>
+
+            </div>           
+        </div>
+        <?php } ?>
+        <?php }else{ ?>
+
+        <div class="MyFollowBox FirstMesg" ><a href="javascript:history.back(-1);">无您要查找的数据或数据为空，点击返回</a></div>
+
+        <?php  } } else {?>
+        <div class="MyFollowBox FirstMesg" ><a href="javascript:history.back(-1);">暂时还没有关注的好友，点击返回</a></div>
+        <?php } ?>
+        <!--end 关注列表-->
+
+        <!--分页-->
+        <div class="Page">
+            <?php if(!empty($list)){echo $pagebar;} ?>
+        </div>
+        <!--end 分页-->      
+
+        <?php if($userids!=''){ ?>   
+        <input type="hidden" id="userids" value="<?php echo($userids); ?>" />
+        <div id="dynamic_num_get" style="display:none;"></div>
+        <?php } ?>
+    </div>
+    <!--end 左-->
+    <!--右-->
+    <div class="MaRgt">
+        <div class="BloggerFaceBox">
+            正在加载中......
+        </div>
+    </div>
+    <!--end 右-->
+</div>
+<input type="hidden" name="actionurl" value="" class="actionurl">
+<input type="hidden" name="actionmyfocus" value="" class="actionmyfocus">
+<!--end 内容--> 
+<!--============= 弹窗 ================-->
+<!--关注成功弹窗-->
+<div class="PlusSucPop" id="PlusSucPop">
+    <h4>关注成功</h4>
+    <a class="Close" href="javascript:;" onClick="Dialog.Close();"></a>
+    <div class="Cont">
+        <p>为<b>张三四</b>选择分组</p>
+        <p class="CheckBox">
+            <label>
+                <input type="checkbox" name="复选框组1" value="f" id="复选框组1_0" />
+                朋友</label>
+            <label>
+                <input type="checkbox" name="复选框组1" value="s" id="复选框组1_1" />
+                同学</label>
+            <label>
+                <input type="checkbox" name="复选框组1" value="o" id="复选框组1_2" />
+                其他</label>
+            <label>
+                <input type="checkbox" name="复选框组1" value="c" id="复选框组1_3" />
+                圈友</label>
+            <label>
+                <input type="checkbox" name="复选框组1" value="co" id="复选框组1_4" />
+                同事</label>
+            <label>
+                <input type="checkbox" name="复选框组1" value="b" id="复选框组1_5" />
+                博友</label>  
+        </p>            
+        <!--<p class="NewGroup"><a class="Creat" href="#">创建新分组</a></p>-->
+        <!--创建-->
+        <p class="NewGroup Cf">
+            <input name="" type="text" value="新分组" style="color:#999999;"/><a class="CreatBtn" href="#">创建</a><a class="CancelBtn" href="#">取消</a>
+            <span class="Tip">请输入新分组名称！</span>
+            <!--<span class="Tip">该分组已经存在，请重新输入新分组名称！</span>-->
+        </p>
+        <!--end 创建-->
+        <p class="BtnBox"><a class="SaveBtn" href="#">保存</a><a class="CancelBtn" href="javascript:;" onClick="Dialog.Close();">取消</a></p>
+    </div>
+</div>
+<!--end 关注成功弹窗-->
+<!--移除粉丝后提示框-->
+
+
+<div id="DelFansPop" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">是否确认移除这个粉丝？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" class="SubmitBtn Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">取消</a></p>
+    </div>
+</div>
+<!--end 移除粉丝后提示框-->
+<!--黑名单提示框-->
+
+<div id="BlacklistPop" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">是否确认将这个粉丝放进黑名单？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" class="Mr10 CoWht BtnA" onclick="newblacklist();" >确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">取消</a></p>
+    </div>
+</div>
+<!--end 黑名单提示框-->
+<!--取消关注提示框-->
+
+
+<div id="UnfollowPop" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">是否取消关注这个粉丝？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" class="Mr10 CoWht BtnA" onclick="unfocus();" >确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">取消</a></p>
+    </div>
+</div>
+
+
+<div id="FollowPop" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">是否关注这个粉丝？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" class="Mr10 CoWht BtnA" onclick="unfocus();" >确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">取消</a></p>
+    </div>
+</div>
+<!--end 取消关注提示框--> 
+<!--============= end 弹窗 ================-->  
+<script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Dialog.js,ui/Js/Select/Select.js,Cm/Js/Cleaner.js" type="text/javascript"></script>
+<script type="text/javascript">
+    Selects('TitleCate','SlctFrst');
+    Cleaner("Csearch");
+</script>    
+<!--点击统计-->
+<script type="text/javascript" src="<?php echo $viewurl;?>"></script>
+<script type="text/javascript">
+    //    Tn.TopLogin();
+
+    /*
+     *  跳转页面
+     */
+    function jump($url)
+    {	
+        if($(".Inpjump").val()=="")
+        {
+            return false;
+        }
+        var url = $url+$(".Inpjump").val();
+        window.location.href = url;		
+    }
+    function enterPress($url,e)
+    {
+        var e = e || window.event;
+        if(e.keyCode==13) {
+            jump($url);
+        }
+    }
+	
+    function checkdelete_dialog(url, type, who)
+    {	
+        var $userid = '<?php echo $userid;?>';	
+        if($userid == 0){
+            //showiframe("<?php echo(config_item('base_url')); ?>/index.php/widget/login",500,300,"",false);
+            showiframe("iframeSrc","popupIframe","<?php echo(config_item('base_url')); ?>/index.php/widget/login",'','');
+            return;
+        }
+
+        $('input[name=actionurl]').val(url);
+        if(who){
+            $('input[name=actionmyfocus]').val(who);
+        }
+		
+        switch(type)
+        {
+            case 'focus':
+                Dialog('FollowPop');
+                break;
+            case 'unfocus':
+                Dialog('UnfollowPop');
+                break;		
+            case 'black':
+                Dialog('BlacklistPop');
+                break;							
+        }		
+
+
+    }			
+	
+	
+    //拉入黑名单	
+    function newblacklist()
+    {
+        var $url = $('.actionurl').val();
+        var str = $url.split("?");
+        var strs = str[1].split('&');
+        var arr = strs[0].split('=');
+		
+        $.getJSON($url, function(json){
+            if(json.erron == "01")
+            {
+                Dialog.Close();
+                $(".friend"+arr[1]).remove();				
+                var focusNum = parseInt($(".focusNum").first().text())-1;
+                $(".focusNum").each(function(){
+                    $(this).text(focusNum);		
+                })
+            }
+            else
+            {
+                alert("拉入黑名单失败，请稍后再试");
+            }
+
+        })					
+    }	
+
+    //好友取消关注//
+    function unfocus()
+    {
+        Dialog.Close()
+        var userid = $("input[name='actionurl']").val();
+        var actionmyfocus = $("input[name='actionmyfocus']").val();
+        var word = $(".unfocus"+userid).text();
+        if(word.indexOf("取消关注") >= 0)
+        {
+            var type = "del";
+            var url = "<?php echo $this->config->item('base_url');?>/index.php/myfocus/unfollowajax";			
+        }
+        else if(word.indexOf("关注") >= 0)
+        {
+            var type="add";
+            var url = "<?php echo $this->config->item('base_url');?>/index.php/myfocus/followajax";				
+        }
+        if(userid == ""){
+            return false;
+        }
+		
+        var params = {"friendIDs":userid};
+        var obj=$(this);
+		
+        $.getJSON(url+"?r="+new Date().getTime(), params, function(json){
+            if(json.erron == "01")
+            {
+                if(type == "add"){
+                    var $html = "";
+                    if(actionmyfocus == '2'){
+                        $html = "<span>互相关注</span>";
+                    }else{
+                        $html = "<span>已关注</span>";
+                    }
+                    $(".unfocus"+userid).parent().html($html);
+                }else{
+                    $(".friend"+userid).remove();	
+                    var focusNum = parseInt($(".focusNum").first().text())-1;
+                    $(".focusNum").each(function(){
+                        $(this).text(focusNum);		
+                    })	
+                }
+                				
+            }
+            else
+            {
+                alert(json.error);
+            }
+        }
+			
+    );	
+	
+    }
+	
+    /*
+     *   下拉款选项发生变化，触发的事件
+     */
+    $("#titleSelect").change(function(){
+		
+	
+    })
+
+    $(".BloggerFaceBox").load("<?php echo BLOG_FACE_INFO.$bloginfoOwner['DomainName'].'?r='.time(); ?>");
+
+    $(document).ready(function(){
+        $('#dynamic_num_get').load("<?php echo $this->config->item('base_url'); ?>/index.php/myfocus/dynamicGet?userids="+$('#userids').val()+'&r='+new Date().getTime());
+		
+    });
+</script>
+<div id="iframeSrc" class="HandIn PlusSucPop W200" >
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <iframe id="popupIframe" name="iFrame1" width="100%"  height="260px" frameborder="0" scrolling="no"  src=""></iframe>
+</div>
+
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+    _atrk_opts = { atrk_acct:"miaPi1a8Dy00w2", domain:"cnfol.com",dynamic: true};
+    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=miaPi1a8Dy00w2" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- End Alexa Certify Javascript -->
+
+<!--百度统计-->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc378c4854ec370c1c8438f72e19b7170' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- End of LogMicroscope Code --> 
+<DIV style="DISPLAY: none"><!-- START AIYA Site Stat. -->
+    <SCRIPT language=JavaScript type="text/javascript" src="http://s.cnfolimg.com/v5.0/js/stat01-min.js"></SCRIPT>
+    <NOSCRIPT><img src="http://logs.cnfol.com/a?ci=cnfol" alt=""></NOSCRIPT><!-- END AIYA Site Stat. -->
+</DIV> 
+
+</body>
+</html>

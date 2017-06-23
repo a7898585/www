@@ -1,0 +1,145 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <i>买域名</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap">
+    <!--主体左边 开始-->
+    <div class="wrap_l">
+        <div class="txt_lc">
+            <ul>
+                <li class="txt_lc_cur">1、注册查询</li>
+                <li>2、查询结果</li>
+                <li>3、选择模板</li>
+                <li>4、注册成功</li>
+            </ul>
+        </div>
+        <form name="form_query" method="post" action="/domain/register?op=query_result">
+            <div class="doma">
+                <div class="doma_a">域名注册</div>
+                <div class="search_b">
+                    <textarea class="search_txt_d" name="domain" id="domain"></textarea>
+                </div>
+                <div class="com">
+                    <ul>
+                        <volist name="suffixs_usual" id="vo">
+                            <li>
+                                <input name="suffix[]" type="checkbox" value="{$vo.name}" checked="checked" title="{$vo.name}"/><span>{$vo.name}</span>
+                            </li>
+                        </volist>
+                    </ul>
+                    <ul style="display: none;" id="more_suffix">
+                        <volist name="suffixs_unusual" id="vo">
+                            <li>
+                                <input name="suffix[]" type="checkbox" value="{$vo.name}" title="{$vo.name}"/><span>{$vo.name}</span>
+                            </li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="doma_d">
+                    <input type="checkbox" name="checked_all"/>
+                    <span>全选</span>
+                    <a href="javascript:;" class="listent_d fl ml20" id="more_suffix_button">显示更多后缀&raquo;</a>
+                </div>
+                <div class="doma_d_mym"><a href="/domain/batch">域名批量注册</a><a href="#">域名价格列表</a></div>
+                <div class="doma_d_mym"><input type="button" id="submit_button" name="" value="" class="search_btn_c"/></div>
+            </div>
+        </form>
+        <div class="xspm">
+            <div class="navhl" id="navhljs1">
+                <a href="javascript:void(0);" onclick="jdhddh(this,0)" class="navhl_h">限时竞价</a>
+                <a href="javascript:void(0);" onclick="jdhddh(this,1)" class="navhl_q">一口价</a>
+                <a href="javascript:void(0);" onclick="jdhddh(this,2)" class="navhl_q">询价</a>
+            </div>
+            <div id="navhljs1_c0" class="price_list" style="display:block;">
+                {:W('Sale/sale_list_domain',array('2'))}
+            </div>
+            <div id="navhljs1_c1" class="price_list" style="display:none;">
+                {:W('Sale/sale_list_domain',array('1'))}
+            </div>
+            <div id="navhljs1_c2" class="price_list" style="display:none;">
+                {:W('Sale/sale_list_domain',array('3'))}
+            </div>
+        </div>
+    </div>
+    <!--主体左边 结束-->
+    <!--主体右边 开始-->
+    <div class="wrap_r">
+        <div class="tabbox_b">
+            <!--米铺域名-->
+            {:W('Domain/mipu')}
+        </div>
+        <div class="height30"></div>
+        <div class="tabbox_b">
+            <div class="navhl_b">
+                <div class="navhl_b_title">域名代购</div>
+            </div>
+            <div class="list_c">
+                {:W('Cate/purchase')}
+            </div>
+        </div>
+        <div class="height30"></div>
+        <div class="tabbox_b">
+            <!--精品域名-->
+            {:W('Domain/do_list3',array('3'))}
+        </div>
+    </div>
+    <!--主体右边 结束-->
+</div>
+<!--主体内容 结束-->
+<script type="text/javascript" src="/Public/Common/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+<script type="text/javascript">
+    var domainNameTip = "-友情提示：|- 支持批量查询，同时查询20个域名；|- 用换行分隔，每个域名占一行；|- 允许带后缀。|- 允许输入中文。";
+    $(document).ready(function () {
+        $("#domain").val(domainNameTip.replace(/\|/g, "\r\n")).css("color", "#b5b5b5");
+        $("#domain").focus(function () {
+            var thisval = $(this).val().replace(/[\r\n]/g, "|");
+            if (thisval == domainNameTip) {
+                $(this).val("").css("color", "black");
+            }
+        });
+        $("#domain").blur(function () {
+            var pre = $(this).val();
+            if (pre == "") {
+                $(this).val(domainNameTip.replace(/\|/g, "\r\n")).css("color", "#b5b5b5");
+            }
+        });
+        $('.option_select li').click(function () {
+            $(this).parent().parent().find('input').val($(this).attr('tid'));
+            $(this).parent().prev().find('input').val($(this).html());
+            $(this).parent().toggle();
+            $(this).parent().next().toggle();
+        });
+        $('#more_suffix_button').click(function () {
+            $('#more_suffix').toggle();
+            if ($('#more_suffix').is(':visible')) {
+                $(this).html('隐藏更多后缀&raquo;');
+            } else {
+                $(this).html('显示更多后缀&raquo;');
+            }
+        });
+        $('#submit_button').click(function () {
+            var domain = $("#domain").val().replace(/[\r\n]/g, "|");
+            if (domain == "") {
+                layer.msg('请填写要查询的域名。');
+            } else if (domain == domainNameTip) {
+                layer.msg('请填写要查询的域名。');
+            } else {
+                if (domain.indexOf('.') > 0) {
+                    $('form[name=form_query]').submit();
+                } else {
+                    if ($(':checkbox:checked').not('[name="checked_all"],:disabled').length > 0) {
+                        $('form[name=form_query]').submit();
+                    } else {
+                        layer.msg('请选择要查询的域名后缀！');
+                    }
+                }
+            }
+        });
+    });
+</script>

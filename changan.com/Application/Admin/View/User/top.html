@@ -1,0 +1,217 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/user/top">代理人置顶管理</a></li>
+        <li class="am-active">代理人列表</li>
+    </ol>
+
+    <div class="am-g">
+        <form action="__SELF__" method="get">
+            <div class="am-u-md-6 am-cf">
+                <div class="am-fl am-cf">
+                    <div class="am-btn-toolbar am-fl">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <a href="/user/daili" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</a>
+                        </div>
+
+                        <div class="am-form-group am-margin-left am-fl">
+                            <select name="company_id">
+                                <option value="0">全部</option>
+                                <foreach name="companys" item="item">
+                                    <option value="{$item.id}" <if condition="$item.id eq $Think.get.company_id ">selected="selected"</if>>{$item.name}</option>
+
+                                </foreach>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-3 am-cf">
+                <div class="am-fr">
+                    <div class="am-input-group am-input-group-sm">
+                        <input type="text" class="am-form-field" name="name" value="{$Think.get.name}">
+                        <span class="am-input-group-btn">
+                            <button class="am-btn am-btn-default" type="submit">搜索</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="am-g">
+        <form class="am-form">
+            <div class="am-u-sm-12">
+                <table class="am-table am-table-striped am-table-hover table-main ">
+                    <thead>
+                        <tr class="">
+                            <th class="table-check"><input type="checkbox" /></th>
+                            <th class="table-id">编号</th>
+                            <th class="table-title">名称</th>
+                            <th class="table-type">电话</th>
+                            <th class="table-author">公司</th>
+                            <th class="table-author">VIP</th>
+                            <th class="table-date">积分数</th>
+                            <th class="table-date">经验值</th>
+                            <th class="table-date">时间</th>
+                            <th class="table-date ">状态</th>
+                            <th class="table-date ">排序</th>
+                            <th class="table-set">操作</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                    <foreach name="list" item="item">
+                        <tr>
+                            <td><input type="checkbox" /></td>
+                            <td>{$item.id}</td>
+                            <td>{$item.name}</td>
+                            <td>{$item.phone}</td>
+                            <td>{$item.company_name}</td>
+                            <td>&nbsp;
+                                <switch name="item.vip">
+                        <case value="0"><span class="am-badge am-icon-times-circle"> </span></case>
+                        <case value="1"><span class="am-badge am-badge-success am-icon-check-circle"> </span></case>
+                        <default />
+                        </switch>
+                        </td>
+                        <td>{$item['score']}</td>
+                        <td>{$item['exp']}</td>
+                        <td>{$item['utime']}</td>
+                        <td>
+                            <switch name="item.check_status">
+                        <case value="0"><span class="am-badge am-icon-times-circle" > </span></case>
+                        <case value="1"><span class="am-badge am-badge-success am-icon-check-circle" > </span></case>
+                        <default />
+                        </switch>
+                        </td>
+                        <td><input id="sorts_{$item.id}" size="2" value="{$item['sorts']}" onblur="upSorts('{$item.id}')"></td>
+                        <td>
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <span class="am-badge am-badge-success am-icon-check-circle" data-id="{$item.id}" data-name="{$item.name}" onclick="open_vip(this)"> VIP</span>
+
+                                    <switch name="item.check_status">
+                                    <case value="1"><span class="am-badge  am-icon-times-circle" data-id="{$item.id}" onclick="unShenhe(this)"> 审核</span></case>
+                                    <case value="0"><span class="am-badge am-badge-success am-icon-check-circle" data-id="{$item.id}" onclick="shenhe(this)"> 审核</span></case>
+                                    <default />
+                                    </switch>
+                                    <switch name="item.top">
+                                    <case value="1"><span class="am-badge  am-icon-times-circle" data-id="{$item.id}" onclick="setTop(this,'0')"> 取消置顶</span></case>
+                                    <case value="0"><span class="am-badge am-badge-success am-icon-check-circle" data-id="{$item.id}" onclick="setTop(this,'1')"> 置顶</span></case>
+
+                                    </switch>
+                                </div>
+                            </div>
+                        </td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                <div class="am-cf">
+                    共 {$page.totalCount} 条记录
+                    <div class="am-fr">
+                        {$pager}
+                    </div>
+                </div>
+                <hr />
+                <p>注：请勿删除!!!</p>
+
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function upSorts(id){
+        var sorts = $('#sorts_'+id).val();
+        if(sorts){
+            $.ajax({
+                type: 'POST',
+                url: '/user/upSorts' ,
+                data: {id:id,sorts:sorts} ,
+                dataType: 'json',
+                success: function(data){
+                    
+                }
+            });
+        }
+    }
+    function setTop(t,s){
+        var id = $(t).attr('data-id');
+        var msg = "确认您的操作?";
+        if(confirm(msg)){
+            $.ajax({
+                type: 'POST',
+                url: '/user/daili_setTop' ,
+                data: {id:id,top:s} ,
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==200){
+                        layer.msg('操作成功!!!',1,1,function(){window.location.reload();});
+                    }else{
+                        layer.msg('操作失败!');
+                    }
+                }
+            });
+        }
+    }
+    function shenhe(t){
+        var id = $(t).attr('data-id');
+        var msg = "确认审核通过?";
+
+        if(confirm(msg)){
+            $.ajax({
+                type: 'POST',
+                url: '/user/daili_shenhe' ,
+                data: {id:id,status:'1'} ,
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==200){
+                        layer.msg('审核成功!!!',1,1,function(){window.location.reload();});
+                    }else{
+                        layer.msg('操作失败!');
+                    }
+                }
+            });
+        }
+    }
+    function unShenhe(t){
+        var id = $(t).attr('data-id');
+        var msg = "确认取消审核?";
+
+        if(confirm(msg)){
+            $.ajax({
+                type: 'POST',
+                url: '/user/daili_shenhe' ,
+                data: {id:id,status:'0'} ,
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==200){
+                        layer.msg('取消审核成功!!!',1,1,function(){window.location.reload();});
+                    }else{
+                        layer.msg('操作失败!');
+                    }
+                }
+            });
+        }
+    }
+    function open_vip(t){
+        var id = $(t).attr('data-id');
+        var msg = "将为<<"+$(t).attr('data-name')+">>开通一个月VIP?";
+        if(confirm(msg)){
+            $.ajax({
+                type: 'POST',
+                url: '/user/upgrade_vip' ,
+                data: {id:id,status:'1'} ,
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==200){
+                        layer.msg('开通成功!!!',1,1,function(){window.location.reload();});
+                    }else{
+                        layer.msg('操作失败!');
+                    }
+                }
+            });
+        }
+    }
+
+</script>

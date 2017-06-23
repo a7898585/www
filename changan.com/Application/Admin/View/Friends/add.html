@@ -1,0 +1,64 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/friends/add">添加友情链接</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <form id="form1" name="form1" method="post" action="__SELF__">
+        <input type="hidden" class="am-form-field am-input-sm" name="id" value="{$friendInfo.id}">
+        <div class="am-margin">
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            网站名称
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="title" value="{$friendInfo.title}" placeholder="最长32个字符。" maxlength="32">
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            网站链接
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="url" value="{$friendInfo.url}" placeholder="完整链接，需要以“http://”开头。" maxlength="100">
+                        </div>
+                        <div class="am-u-sm-4">*必填 完整链接，需要以“http://”开头</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            显示顺序
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="order" value="{$friendInfo.order}" placeholder="数值越大，显示越靠后。" maxlength="32">
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            显示模块
+                        </div>
+                        <div class="am-u-sm-6">
+                            <select name="type">
+                                <option value="0">首页</option>
+                                <option value="1" <if condition="$friendInfo.show_type eq 1 ">selected="selected"</if>>找产品</option>
+                                <option value="2" <if condition="$friendInfo.show_type eq 2 ">selected="selected"</if>>找代理人</option>
+                                <option value="3" <if condition="$friendInfo.show_type eq 3 ">selected="selected"</if>>定制方案</option>
+                                <option value="4" <if condition="$friendInfo.show_type eq 4 ">selected="selected"</if>>保险问吧</option>
+                                <option value="5" <if condition="$friendInfo.show_type eq 5 ">selected="selected"</if>>保险资讯</option>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+
+                    <div class="blank20"></div>
+                </div></div>
+            <div class="am-margin">
+                <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+            </div>
+        </div>
+    </form>
+
+</div>

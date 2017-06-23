@@ -1,0 +1,238 @@
+<link rel="stylesheet" href="/Public/Home/html/css/style.css">
+<link rel="stylesheet" href="/Public/Home/html/css/iconfont.css">
+<div class="crumbs">
+    <em>您的位置：</em>
+    <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+    <span>></span>
+    <i>忘记密码</i>
+</div>
+<div class="login-box">
+    <div class="box-con tran">
+        <div class="login-con f-l">
+            <div class="form-group">
+                <input type="text" placeholder="请输入您的注册邮箱" id="email" onblur="verify.verifyEmail(this)">
+                <span class="error-notic">邮箱格式不正确</span>
+            </div>
+            <div class="form-group">
+                <a href="javascript:;" class="move-signup a-tag tran blue-border">下一步<i class="iconfont tran">&#xe606;</i></a>
+            </div>
+            <div class="from-line"></div>
+        </div>
+        <div class="signup f-l">
+            <div class="form-group" id="mobile-send0">
+                <div class="signup-form">
+                    <input type="text" placeholder="手机号码" id="mobile" class="email-mobile" onBlur="verify.verifyMobile(this)">
+                </div>
+                <span class="error-notic">手机号码格式不正确</span>
+            </div>
+            <div class="signup-tel" id="mobile-send">
+                <div class="signup-form form-group" id="message-inf"  style="display:none">
+                    <input type="text" placeholder="短信验证码" id="code" style="width:180px;" onBlur="verify.VerifyCount(this)">
+                    <a href="javascript:;" class="reacquire" id="sms_resend">重新获取<b id="sms_count">(59)</b></a>
+                    <span class="error-notic">验证码输入错误</span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="tran get-message pr">
+                        <a href="javascript:;" class="tran">获取短信验证码</a>
+                        <img class="loading" src="/Public/Home/html/images/loading.gif">
+                    </button>
+                </div>
+            </div>
+            <div class="form-group" id="message-send"  style="display:none">
+                <button type="submit" class="tran pr move-other">
+                    <a href="javascript:;" class="tran">发送重置密码邮件</a>
+                    <img class="loading" src="/Public/Home/html/images/loading.gif">
+                </button>
+            </div>
+            <div class="form-group" id="message-send2"  style="display:none">
+                <button type="submit" class="tran pr move-info">
+                    <a href="javascript:;" class="tran">发送重置密码邮件</a>
+                    <img class="loading" src="/Public/Home/html/images/loading.gif">
+                </button>
+            </div>
+            <div class="from-line"></div>
+        </div>
+        <div class="mobile-success f-l">
+            <p>恭喜！找回密码成功，请到您的注册邮箱 <span id="email_show" class="special_msg"></span>获取修改密码地址！</p>
+        </div>
+    </div>
+
+
+</div>
+
+<script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+<script>
+    var _handle=$('#mobile').val();//储存电话是否填写正确
+    var _email=$('#email').val();//储存邮箱是否填写正确
+    var _code = $('#code').val();//储存验证码是否填写正确
+    var _realmobile = '';
+    $(function(){
+        $(".signup-form input").on("focus",function(){
+            $(this).parent().addClass("border");
+        });
+        $(".signup-form input").on("blur",function(){
+            $(this).parent().removeClass("border");
+        });
+        //步骤切换
+        var _boxCon=$(".box-con");
+        $(".move-login").on("click",function(){
+            $(_boxCon).css({
+                'marginLeft':0
+            })
+        });
+        $(".move-signup").on("click",function(){
+            if(_email){
+                $.post('/oper/getMobile/', {email:_email}, function(result){
+                    if (result.status != 200){
+                        layer.msg(result.message);
+                    }else{
+                        _realmobile = result.mobile;
+                        if(result.mobile_status==0){
+                            $('#message-send2').show();
+                            $('#mobile-send').hide();
+                            $('#mobile-send0').hide(); 
+                        }
+                        $(_boxCon).css({
+                            'marginLeft':-320
+                        })
+                    }
+                });
+                
+            }else{
+                verify.verifyEmail('#email');
+            }
+           
+        });
+        $(".move-other").on("click",function(){
+            if(_code){
+                $.post('/oper/validSms/', {code:_code,mobile:_handle,email:_email}, function(result){
+                    if (result.status != 200){
+                        layer.msg(result.message);
+                    }else{
+                        $('#email_show').html(_email);
+                        $(_boxCon).css({
+                            'marginLeft':-640
+                        })
+                    }
+                });
+            }else{
+                verify.VerifyCount('#code');
+            }
+            
+        });
+        $(".move-info").on("click",function(){
+            if(_email){
+                $.post('/oper/send_email/', {email:_email}, function(result){
+                    if (result.status != 200){
+                        layer.msg(result.message);
+                    }else{
+                        $('#email_show').html(_email);
+                        $(_boxCon).css({
+                            'marginLeft':-640
+                        })
+                    }
+                });
+            }else{
+                verify.verifyEmail('#email');
+            }
+        });
+        $("#sms_resend").on("click",function(){
+            if($("#sms_count").html()==''){
+                sms_send();
+            }
+        });
+        
+
+        //获取短信验证码
+        var messageVerify=function (){
+            $(".get-message").on("click",function(){
+                if(_handle){
+                    if(_realmobile==_handle){
+                        sms_send(this);
+                    }else{
+                        layer.msg('你输入的手机号码不是认证的号码，请重新输入');
+                    }
+                }else{
+                    verify.verifyMobile('#mobile');
+                }
+            });
+        }();
+    });
+    function sms_send(obj){
+        $.get("/oper/send_sms", { mobile: _handle} ,function(data){
+            if(data!='ok'){
+                layer.msg(data);
+                return false;
+            }
+            if(obj){
+                $("#message-inf").show();
+                $(obj).hide();
+                $('#message-send').show();
+            }
+            var count1 =6;
+            timer1 = setInterval(function(){
+                count1=count1-1;
+                $('#sms_count').text('('+count1+')');
+                if(count1==0){
+                    $('#sms_count').html('');
+                    count1=6;
+                    clearInterval(timer1);
+                }
+            },1000);
+        });
+    }	
+    //表单验证
+    function showNotic(_this){
+        $(_this).parents(".form-group").find(".error-notic").fadeIn(100);
+        $(_this).focus();
+    }//错误提示显示
+    function hideNotic(_this){
+        $(_this).parents(".form-group").find(".error-notic").fadeOut(100);
+    }//错误提示隐藏
+    var verify={
+        verifyEmail:function(_this){
+            var validateReg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            var _value=$(_this).val();
+            if(!validateReg.test(_value)){
+                showNotic(_this);
+                _email=false;
+            }else{
+                hideNotic(_this);
+                _email=_value;;
+            }
+            return _email;
+        },//验证邮箱
+        verifyMobile:function(_this){
+            var validateReg = /^((\+?86)|(\(\+86\)))?1\d{10}$/;
+            var _value=$(_this).val();
+            if(!validateReg.test(_value)){
+                showNotic(_this);
+                _handle=false;
+            }else{
+                hideNotic(_this);
+                _handle=_value;
+            }
+            return _handle
+        },//验证手机号码
+        PasswordLenght:function(_this){
+            var _length=$(_this).val().length;
+            if(_length<6){
+                showNotic(_this)
+            }else{
+                hideNotic(_this)
+            }
+        },//验证设置密码长度
+        VerifyCount:function(_this){
+            var _value=$(_this).val();
+            if(isNaN(_value)==true || _value=='' ||_value.toString().length!=6){
+                showNotic(_this);
+                _code = false;
+            }else{
+                hideNotic(_this);
+                _code=_value;
+            }
+            return _code;
+        }//验证验证码
+    }
+</script>
+

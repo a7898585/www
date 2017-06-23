@@ -1,0 +1,37 @@
+<ul data-node="cList" class="comment-list" style="display: block;">
+    <foreach name="comments" item="item">
+        <li>
+            <p class="comment-title">
+                <a href="javascript:;" >
+                    <empty name="item.head_pic">
+                        <img src="/Public/Home/images/default.png">
+                        <else/>
+                        <img src="{:setUpUrl($item['head_pic'])}">
+                    </empty>
+                </a>
+                <a href="javascript:;" class="name" ga_event="hotcomment_name">
+                    <empty name="item.username">
+                        <php> $city=get_city_by_ip($item['ip']);</php>
+                        {$city['city']} ip为 {$item.ip}的网友
+                        <else/>
+                        {$item['username']}
+                    </empty>
+                </a>
+                <a data-id="{$item.id}" data-node="c_digg" href="javascript:;" class="btn" ga_event="hotcomment_dig">
+                    <i class="icon icon-like-blue icon-small"></i>
+                    <span data-node="likedNum" class="liked-num">{$item.good_sum}</span>
+                </a>
+            </p>
+            <p class="comment">
+                <i class="arrow"></i>
+                {$item.content}
+            </p>
+            <p class="label">评论于：</p>
+            <p class="source">
+                <a target="_blank" href="{$item.url}" ga_event="hotcomment_title">
+                    {$item.title}
+                </a>
+            </p>
+        </li>
+    </foreach>
+</ul>

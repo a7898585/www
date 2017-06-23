@@ -1,0 +1,83 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl"> 
+        <a <eq name="pst" value="paimai"> class="navhl_h" <else /> class="navhl_q"</eq>  href="/domain/paimailist?pst=paimai">参与竞拍</a> 
+    </div>
+    <div style="display:block;" class="onlineplay_c2" id="navhljs1_c0">
+        <div class="airp_listc_left4">
+            <table width="960" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody>
+                    <tr class="table_title">
+                        <td>域名</td>
+                        <td>类型</td>
+                        <td>领先出价</td>
+                        <td>领先ID</td>
+                        <td>结束时间</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                <empty name="domains">
+                    <tr class="table_bg_b">
+                        <td colspan="7">没有找到符合条件的交易信息！</td>
+                    </tr>
+                    <else/>
+                    <volist name="domains" id="item">
+                        <tr id="tr_{$item.id}" class="table_bg_b">
+                            <td>{$item.domain}</td>
+                            <td>拍卖</td>
+                            <td>{$item.buyer_price|Fen2Yuan}元</td>
+                            <td>{$item.buyer_mid}</td>
+                            <td>{$item.end_time|date='Y-m-d H:i:s',###}</td>
+                            <td><eq name="item.buyer_mid" value="$mid"><font color="green">领先</font><else /><font color="red">落后</font></eq></td>
+                        <td><a href="{:str_replace('member.','www.',getDoMain())}/Sell/detail?id={$item.id}" target="_blank">[查看]</a></td>
+                        </tr>
+                    </volist>
+                </empty>
+                <tr>
+                    <td colspan="7">{$pager}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="yinying" style="display: none; z-index: 1000; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; -webkit-user-select: none; opacity: 0.5; background: rgb(0, 0, 0);" tabindex="0"></div>
+<div id="dialog" class="ui-dialog" style="display:none; width:500px; z-index:10001;">
+    <div class="ui-dialog-arrow-a"></div>
+    <div class="ui-dialog-arrow-b"></div>
+    <form id="trade_form" action="/domain/deal_buyer" method="post">
+        <table class="ui-dialog-grid" width="500">
+            <tbody>
+                <tr>
+                    <td i="header" class="ui-dialog-header"><button i="close" class="ui-dialog-close" title="取消" onclick="$('#dialog').hide();$('#yinying').hide();">×</button>
+                        <div i="title" class="ui-dialog-title">安全码验证</div></td>
+                </tr>
+                <tr>
+                    <td i="body" class="ui-dialog-body"><div i="content" class="ui-dialog-content">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>安全码：</td>
+                                        <td><input type="password" id="seccode"  name="seccode" value="" autocomplete="off"><font class="txt999">请输入您的安全密码</font>[<a href="#" target="_blank" style="color:blue;">忘记安全码？</a>]</td>
+                                    </tr>
+                                    <tr><td>提醒：</td><td align="left" colspan="2"><div class="out_right"><a href="#" target="_blank" style="color: blue;">什么是安全码？</a></div></td></tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input name="trade_id" id="trade_id" type="hidden" value="" />
+                                            <a class="bnt-green width100" style="margin:10px 0 0 70px; display:block; color:white; text-align:center; float:left; height:22px;" href="javascript:TradeConfirm();">确认</a>
+                                            <a class="bnt-hui width100" style="margin:10px 0 0 70px; display:block; color:white; text-align:center; float:left; height:22px;" onclick="$('#dialog').hide();$('#yinying').hide();">取消</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<div class="clear"></div>

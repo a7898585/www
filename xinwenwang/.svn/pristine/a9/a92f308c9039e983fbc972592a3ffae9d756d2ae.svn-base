@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>系统管理后台</title>
+    <link type="text/css" rel="stylesheet" href="/Public/Admin/css/admin.css"/>
+    <script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+    <script type="text/javascript" src="/Public/Common/js/validform.js"></script>
+    <script type="text/javascript" src="/Public/Common/js/layer/layer.min.js"></script>
+    <script type="text/javascript" src="/Public/Admin/js/main.js"></script>
+    <script type="text/javascript">
+        var up_path = "{:C('YOU_PAI_YUN')}";
+    </script>
+</head>
+<body>
+<!--head begin-->
+<div class="w">
+    <div class="m m_head"><a href="/"><img class="u_logo" src="/Public/Admin/images/logo.jpg"></a><b>系统管理后台</b></div>
+</div>
+<!--head end-->
+<div class="f_solid"></div>
+<!--contain begin-->
+<div class="w s_bgc_0">
+    <div class="m m_cont">
+        <!--bar_l begin-->
+        <div class="bar_l">
+            <ul class="nav">
+                <li <if condition="$nav=='s1'||$nav==''">class="z_in"</if> ><a href="{$base_url}">系统管理后台</a></li>
+                <li <if condition="$nav=='tuiguang'">class="z_in"</if> ><a href="推广管理.html">推广管理</a></li>
+                <li <if condition="$nav=='dailiren'">class="z_in"</if> ><a href="代理人管理.html">代理人管理</a></li>
+                <li <if condition="$nav=='user'">class="z_in"</if> ><a href="普通会员管理.html">普通会员管理</a></li>
+                <li <if condition="$nav=='agent'">class="z_in"</if> ><a href="代理商管理.html">代理商管理</a></li>
+                <li <if condition="$nav=='insure'">class="z_in"</if> ><a href="投保单管理.html">投保单管理</a></li>
+                <li><a href="充值消费.html">充值消费</a></li>
+                <li <if condition="$nav=='pro'">class="z_in"</if> ><a href="/pro">产品管理</a></li>
+                <li <if condition="$nav=='company'">class="z_in"</if> ><a href="/company">保险机构管理</a></li>
+                <li <if condition="$nav=='zixun'">class="z_in"</if> ><a href="/news">资讯管理</a></li>
+                <li <if condition="$nav=='fangan'">class="z_in"</if> ><a href="方案管理.html">方案管理</a></li>
+                <li <if condition="$nav=='wenda'">class="z_in"</if> ><a href="问答管理.html">问答管理</a></li>
+                <li <if condition="$nav=='pinglun'">class="z_in"</if> ><a href="评论管理.html">评论管理</a></li>
+                <li><a href="保险资料管理.html">保险资料管理</a></li>
+            </ul>
+        </div>
+        <!--bar_l end-->
+        <!--bar_r begin-->
+        {__CONTENT__}
+        <!--bar_r end-->
+    </div>
+</div>
+<!--contain end-->
+<!--font begin-->
+<div class="w s_bgc_1">
+    <div class="m m_foot">
+        <p>Copyright&copy;2008-2014 保险啦 厦门保啦有限公司版权所有</p>
+        <p>增值电信业务经营许可证(ISP/ICP) 闽ICP备08003619号 客服热线：4006-258-258</p>
+    </div>
+</div>
+<!--font end-->
+</body>
+</html>

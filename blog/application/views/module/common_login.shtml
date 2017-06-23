@@ -1,0 +1,323 @@
+<script charset="utf-8" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,Cm/Js/Cleaner.js,Cm/Js/Tabs.js,ua/js/Public/Base64.js,ua/js/Public/Login.js" type="text/javascript"></script> 
+<script type="text/javascript" src="http://hs.cnfol.com/Cm/Js/ShowInfo.js"></script>
+<script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Dialog.js"></script>
+
+<link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=Cm/Css/HdFter.css,uj/Css/Brokerage/Common.css,uj/Css/Bloghead/Blogcom.css,ue/Css/NewBlog/NewBlog.css" />
+
+<!--<link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ua/css/Public/TopBarFoot.css" />-->
+<!-- 法律声明 -->
+<link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/uh/Css/Cms/BlogNav.css" />
+<!-- 法律声明 -->
+<?php if($blogconfig['StyleID']<1000 && $blogconfig['StyleID']>100){ ?>
+<link type="text/css" rel="stylesheet"  id="SkLink" href="http://hs.cnfol.com/ue/Css/NewBlog/Skin/Skin_<?php echo $blogconfig['StyleID'];?>.css" />
+<!--更换的模版样式，101-->
+<?php }elseif($blogconfig['StyleID']>1000&&$blogconfig['StyleID']<1020){?>
+<link type="text/css" rel="stylesheet"  id="SkLink" href="http://hs.cnfol.com/ue/Css/NewBlog/DiySkin/Skin_<?php echo $blogconfig['StyleID'];?>.css" />
+<!--更换的DIY模版样式，1001-->
+<?php }else{?>
+<link type="text/css" rel="stylesheet" id="SkLink" href="http://hs.cnfol.com/ue/Css/NewBlog/Skin/Skin_503.css" />
+<?php }?>
+<!--[if IE]> 
+   <script src="http://hs.cnfol.com/Cm/Js/Html5.js"></script>
+<![endif]-->
+<style type="text/css">	
+    #lovexin12,#lovexin14 { visibility: visible !important; }
+
+    a.alinkblack,a.alinkdanhei
+    {
+        color:#000000;
+    }
+    a.alinkhelp
+    {
+        color:#0E4682;
+    }
+    a.linkcnfol
+    {
+        color:#000000;
+        text-decoration:none;
+    }
+    .NewloginDiv input.Wrt
+    {
+        color:#000000;
+    }
+    div.rTempNav ul.ellipsis li a
+    {
+        width:230px;
+    }
+    span.Hlft
+    {
+        width:630px;
+    }
+
+
+    NewloginDiv form,.NewloginDiv a.NewFgP{color:#333;font:12px/24px Arial,Helvetica,sans-serif,'宋体';}a{text-decoration:none;color:#333}a:link{text-decoration:none;color:inherit}em,i{text-decoration:none;font-style:normal}.Cf:before,.Cf:after{content:"";display:table}.Cf:after{clear:both}.Cf{zoom:1}.Trs{filter:alpha(opacity=80);opacity:0.8}.Fb,.Fb14,.Fb16,.Fb20{font-weight:bold}.F14,.Fb14{font-size:14px}.F16,.Fb16{font-size:16px}.F20,.Fb20{font-size:20px}.Tc{text-align:center}.Tr{text-align:right}.Wrp{margin:0
+                                                                                                                                                                                                        auto}.Fl{float:left;display:inline}.Fr{float:right;display:inline}.Mt10{margin-top:10px}.Ml10{margin-left:10px}.P10{padding:10px}.Pt10{padding-top:10px}.Pr10{padding-right:10px}.Pb10{padding-bottom:10px}.Pl10{padding-left:10px}.Ld{display:block;background:url(http://hs.cnfol.com/Cm/Imgs/Load.gif) no-repeat center center;position:relative}.Nrp{overflow:hidden;white-space:nowrap;word-break:keep-all;text-overflow:ellipsis}
+
+
+
+
+
+    .R{float:right}.L{float:left}.Newtopbar{margin:0
+                                                auto;height:38px;background:url(http://hs.cnfol.com/ue/Imgs/Cms/TopMbg.gif) 0 0 repeat-x;position:relative;overflow:visible}.NewloginDiv{height:33px}.NewloginDiv
+    form{display:block;float:left;height:26px;line-height:26px;padding-top:3px;padding-left:6px}*body .NewloginDiv
+    form{height:27px;padding-top:5px}.NewloginDiv form
+    input{width:120px;border:0;height:22px;line-height:22px;background:url(http://hs.cnfol.com/ue/Imgs/Cms/TopMbg.gif) 0 -39px no-repeat;text-indent:2px;border-left:#E3E9EF 1px solid;border-right:#E3E9EF 1px solid;vertical-align:middle;margin-right:10px;color:#C1C1C1;font-size:12px;letter-spacing:1px;font-family:Tahoma,Geneva,sans-serif}.NewvipName{margin-right:4px}.NewvipPw{font-size:10px}.Newlogin{width:42px;height:20px;line-height:20px;text-align:center;display:block;background:url(http://hs.cnfol.com/ue/Imgs/Cms/TopMbg.gif) 0 -149px no-repeat;float:left;color:#fff !important;margin-top:8px;margin-top:6px\0;*margin-top:7px;*line-height:22px;line-height:23px\0;_line-height:22px;padding-left:1px;margin-right:6px;overflow:hidden}@-moz-document url-prefix(){.Newlogin{margin-top:7px}}.Newlogin:hover{background-position:-43px -149px;color:#fff !important;text-decoration:none !important}.NewqqLogin{width:85px;height:21px;margin-right:10px;margin-top:6px}
+    a.alinkzhinan
+    {
+        color:#FCA61C;
+    }
+    a.alinkmargin
+    {
+        margin-right:5px;
+        color:#3D88E8;
+    }
+
+
+    /*LoginLogo*/
+    span.Hlft{padding-left:0;width:680px;}
+    span.Hlft a.LogoLink{display:inline-block;height:34px;width:58px;overflow:hidden;text-indent:-9999px;}
+    .GoldenMl8{width:278px;}
+
+</style>
+
+<div class="Wrap">
+    <div class="LoginBox LgBe" id="index_login">
+        <div class="LoginBar">
+            <div class="LgBes Cf LgBesNw">
+                <a href="http://help.cnfol.com/" target="_blank" class="R" tabindex="12">客服帮助</a>
+                <span class="R Mr10">|</span><a href="http://tuiguang.cnfol.com/" target="_blank" class="Exten R" tabindex="11">我要推广</a>
+
+                <a class="LgPocket Ntladd Mt3 Qiehuan" href="http://www.cnfol.com" tabindex="9"  target="_blank">中金在线</a>
+                <!--<a href="javascript:;" class="LgSel" name="Slg" tabindex="10"></a><span class="LgShowSe2"><a class="Acell Clapp" target="_blank" href="http://p.cnfol.com/index.php?t=iphone">Apple ios</a><a class="Acell Cladd" target="_blank" href="http://p.cnfol.com/index.php?t=android">Android</a><a class="Acell ClPhn" target="_blank" href="http://3g.cnfol.com/">手机网</a></span>
+                <a class="LgPocket Ntladd Mt3" target="_blank" href="http://p.cnfol.com/" tabindex="9">移动中金</a>-->
+
+                <a href="javascript:;" class="LgSel" name="Slg" tabindex="8"></a><span class="LgShowSel"><a href="javascript:Tn.Sina();"></a></span>
+                <a href="javascript:Tn.Qzone();" title="QQ登录" class="LgQQ" tabindex="7"></a>
+                <a href="http://passport.cnfol.com/accounts/Register" target="_blank" title="快速注册" tabindex="6">注册</a>
+                <a href="http://passport.cnfol.com/forgetpassword" target="_blank" title="忘记密码?" tabindex="5">忘记密码?</a>
+
+                <a class="LgBtn" onclick="javascript:$('#TopLogin').submit();" style="cursor:pointer;" tabindex="4">登录</a>
+
+                <form id="TopLogin" action="http://passport.cnfol.com/accounts/Login" method="post" name="loginform" target="_top" >
+                    <a href="<?php echo(config_item('base_url')); ?>" class="Strong Logo" target="_blank"></a>我的中金:<input type="text"  class="LoginName" id="LoginName" name="username" value="用户名/邮箱/手机" tabindex="1" />
+                    <input class="LoginPass" id="PwPrest" value="密码" tabindex="2"/>
+                    <input class="LoginPass DisNone" id="LoginPass" type="password" name="password" tabindex="3" />
+                    <input type="hidden" name="platform" id="platform" value="0" />
+                    <input type="hidden" name="channel" id="channel" value="2" />
+                    <input type="hidden" name="force" id="force" value="0" />
+                    <input type="hidden" name="auto" id="auto" value="0" />
+                    <input type="hidden" name="return" id="return" value="<?php echo(getCurUrl());?>" />
+                    <input type="hidden" name="act" id="act" value="login" />
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="Bgrx W" id="loginSpan2" style="display:none;">
+        <div class="Bghct Wb960">
+            <span class="R Hrgt">
+                <a class="LgPocket Ntladd Mt3 Qiehuan" href="http://www.cnfol.com" tabindex="9" target="_blank">中金在线</a>
+                <!--<a class="LgPocket Ntladd" target="_blank" href="http://p.cnfol.com/">移动中金</a>
+                <a href="javascript:;" class="LgSel" name="Slg"></a><span class="LgShowSe2"><a class="Acell Clapp" target="_blank" href="http://p.cnfol.com/index.php?t=iphone">Apple ios</a><a class="Acell Cladd" target="_blank" href="http://p.cnfol.com/index.php?t=android">Android</a><a class="Acell ClPhn" target="_blank" href="http://3g.cnfol.com/">手机网</a></span>-->
+
+                <a target="_blank" href="<?php echo(config_item('base_url')); ?>/blogcnfol" class="Coff8 Uhp Middle alinkzhinan">用户指南</a><i class="Codc Mr10">|</i><a target="_blank" href="http://help.cnfol.com" class="Co1b3 alinkhelp">客服帮助</a>
+                <!-- DEl by Guxt   a onclick="C.SetHome('http://blog.cnfol.com')" class="alinkdanhei" href="javascript:void(0);">设为首页</a><a onclick="C.Collect('http://blog.cnfol.com','中金在线')" class="alinkdanhei" href="javascript:void(0);">加入收藏</a-->
+            </span>
+
+            <span class="Hlft L Ml8 Strong"><i class="GoldenMl8" id="L_UN"><a class="LogoLink" target="_blank" href="<?php echo(config_item('base_url')); ?>">中金博客</a><a class="linkcnfol" target="_blank" href="<?php echo(config_item('base_url')); ?>">中金博客</a>
+
+                    <!--<span class="Hlft L Ml8 Strong"><i id="L_UN" class="Ml8 GoldenMl8"><a class="linkcnfol" target="_blank" href="<?php echo(config_item('base_url')); ?>">中金博客</a>-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎您，谷粒儿</i><i class="Mr10 Codc">|</i><a target="_blank" href="<?php echo(config_item('base_url')); ?>/register/Home" class="alinkmargin">我的博客</a><i class="Codc Mr10 alinkmargin">|</i><a target="_blank" href="<?php echo(config_item('base_url')); ?>/register/Register" id="addarcBtn" class="alinkmargin">发表文章</a><i class="Codc Mr10 alinkmargin">|</i><a target="_blank" href="<?php echo(config_item('i_base_url')); ?>" class="alinkmargin">个人中心</a><i class="Codc Mr10 alinkmargin">|</i><a target="_blank" href="http://passport.cnfol.com" class="alinkmargin">我的帐户</a><i class="Codc Mr10 alinkmargin">|</i>
+                <!--DEl by Guxt a style="margin-top:6px;" target="_blank" href="http://passport.cnfol.com/messages/inbox" class="alinkmargin LgMsg">(0)</a-->
+                <a href="http://tuiguang.cnfol.com/" target="_blank" class="Exten alinkmargin">我要推广</a>
+                <i class="Codc Mr10 alinkmargin">|</i><a style="width:25px;" class="Mr10 Co7 alinkblack" href="http://passport.cnfol.com/login/loginout?return=<?php echo(getCurUrl()); ?>">退出</a><i class="Codc">|</i></span>
+        </div>
+
+    </div>
+
+</div><!--End .AllNav-->
+
+<script language="javascript">
+    var baseurl = "<?php echo config_item('base_url');?>";
+    var host = window.location.href.split('?');
+    host = host[0];
+
+    if($.cookie('cookie\\[passport\\]\\[userId\\]') == 0){	
+        $("input[name='return']").val(host);
+        $('#index_login').show();
+    }
+    else{
+        $('#index_login').hide();
+				
+        var uid = $.cookie('cookie\\[passport\\]\\[userId\\]');
+        var nickname = decodeURI($.cookie('cookie\\[passport\\]\\[nickname\\]'));
+        $('#L_UN').html('<a class="LogoLink" href="<?php echo(config_item("base_url")); ?>" target="_blank">中金博客</a><a href="<?php echo(config_item("base_url")); ?>" target="_blank" class="linkcnfol">中金博客</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎您，'+nickname);				
+        $.ajax({
+            type: "post",
+            url: "<?php echo $baseurl;?>/ajaxgetbloglistbyuid/"+uid,
+            dataType: "json",
+            //async: false,
+            success: function(data){
+                if(data.errno == 'login' || data.errno == 'nouser'){
+                    showalert(data.error);
+                    setTimeout(function(){
+                        window.location.reload();
+                    },1000);
+                }else{
+                    var domain = $.trim(data.error);
+                    if(domain == ''){
+                        $('#addarcBtn').attr('href',baseurl+'/register/Register'); 
+                    }else{
+                        $('#addarcBtn').attr('href',baseurl+'/'+domain+'/article/Add');
+                    }
+                }
+            }
+        });
+        $('#loginSpan2').show();
+    }
+    //    $(function(){
+    //        $('#logo, .openindex').click(function(){
+    //            window.open( '<?php echo $baseurl;?>' );
+    //        }).css({cursor:"pointer"}).hover(function(){
+    //            $(this).attr("title","中金博客");
+    //        });
+    //    });
+    //doShowCard('.refid');
+    function submitonkey(event)
+    {
+        if(event.keyCode=='13')
+        {
+            $('#TopLogin').submit();
+        }
+    }
+
+
+
+    function getCookie(cookieName) {
+        var strCookie = document.cookie;
+        var arrCookie = strCookie.split("; ");
+        for(var i = 0; i < arrCookie.length; i++){
+            var arr = arrCookie[i].split("=");
+            if(cookieName == arr[0]){
+                return arr[1];
+            }
+        }
+        return "";
+    }
+
+    var tmpuser=getCookie("cookie[passport][tmpuser]");
+    if(tmpuser!='')
+    {
+        $('#LoginName').val(tmpuser);
+    }
+
+    $('#LoginName').live('blur',function(){
+        if(tmpuser==''&&$(this).val()=='')
+        {
+            $(this).val('用户名/邮箱/手机');
+        }
+        else if($(this).val()=='')
+        {
+            $(this).val(tmpuser);
+        }
+        else if($(this).val()=='用户名/邮箱/手机')
+        {
+            if(tmpuser!='')
+            {
+                $(this).val(tmpuser);
+            }
+        }
+        $(this).css('color','#C1C1C1');
+    });
+
+    $('#LoginName').live('focus',function(){
+        if($(this).val()=='用户名/邮箱/手机')
+        {
+            $(this).val('');
+        }
+        $(this).css('color','#000000');
+    });
+
+    $('#PwPrest').live('focus',function(){
+        $(this).css('display','none');
+        $('#LoginPass').css('display','inline').focus();
+    })
+
+    $('#LoginPass').live('blur',function(){
+	
+        if($(this).val().replace(/\s*/g,'')=='')
+        {
+            $('#PwPrest').css('display','inline');
+            $(this).css('display','none');
+            $(this).val('');
+        }
+    })
+			
+    
+//    var newUrl='http://blog.cnfol.com';
+//    var newUrl2='blog.cnfol.com';
+//    var url=window.location.href;
+//    var regex = /.*\:\/\/(.*)/;
+//    var match = url.match(regex);
+//    if(typeof match != "undefined"&& null != match)
+//    {
+//        host = match[1];
+//        host=host.replace(/^new\./,'');
+//        	
+//        var regex2 = /blog\.cnfol\.com\/my\//;
+//        var match2 = host.match(regex2);
+//        if(typeof match2 != "undefined"&& null != match2)
+//        {
+//            host=host.replace(/\/my\//,'/');
+//        }
+//            
+//        var regex3=/\/articlelist\/alist/;
+//        var match3= host.match(regex3);
+//        if(typeof match3 != "undefined"&& null != match3)
+//        {
+//            host=host.replace(/\/articlelist\/a/,'/');
+//        }
+//            
+//        var regex4=/\/articlelist\/archive/;
+//        var match4= host.match(regex4);
+//        if(typeof match4 != "undefined"&& null != match4)
+//        {
+//            host=host.replace(/\/articlelist\//,'/');
+//        }
+//            
+//            
+//        var regex5=/\/myfocus\/friend|\/myfocused\/friend/;
+//        var match5= host.match(regex5);
+//        if(typeof match5 != "undefined"&& null != match5)
+//        {
+//            	
+//            host=newUrl2;
+//        }
+//            
+//        	
+//    }
+//    else
+//    {
+//        host=newUrl;
+//    }
+//        
+//    $('.Qiehuan').attr('href','http://'+host);
+        
+        
+</script>
+<!--[if IE 6]>
+<script type="text/javascript" src="http://hs.cnfol.com/Cm/Js/TransPng.js" ></script>
+<script type="text/javascript">
+TransPng.fix('.Strong, .Middle, .Week, .ArrRight, .ArrLeft');
+</script>
+<![endif]-->
+<script type="text/javascript">
+    Menus("Slg");
+</script>
+
+<script type="text/javascript">
+    ShowInfo(C.Gsn("Slg"));
+    SetOutLn(C.Cls("LgBtn")[0]);
+</script>

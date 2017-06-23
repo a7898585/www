@@ -1,0 +1,20 @@
+<ul class="categoryList">
+    <li><a href="<?=$baseurl?>/r2List/1.html" target="_blank">名家看市</a></li>
+    <li><a href="<?=$baseurl?>/r3List/1.html" target="_blank">高手看盘</a></li>
+    <li><a href="<?=$baseurl?>/list/1461.html" target="_blank">股市天地</a></li>
+    <li><a href="<?=$baseurl?>/list/1445.html" target="_blank">基金</a></li>
+    <li><a href="<?=$baseurl?>/list/1463.html" target="_blank">财经杂谈</a></li>
+    <li><a href="<?=$baseurl?>/list/1433.html" target="_blank">期指期货</a></li>
+    <li><a href="<?=$baseurl?>/list/1464.html" target="_blank">港股</a></li>
+    <li><a href="<?=$baseurl?>/list/1465.html" target="_blank">外汇</a></li>
+    <li><a href="<?=$baseurl?>/list/1453.html" target="_blank">黄金</a></li>
+    <li><a href="<?=$baseurl?>/list/1451.html" target="_blank">银行</a></li>
+    <li><a href="<?=$baseurl?>/list/1447.html" target="_blank">理财消费</a></li>
+    <li><a href="<?=$baseurl?>/list/1449.html" target="_blank">保险</a></li>
+    <li><a href="<?=$baseurl?>/list/1457.html" target="_blank">债券</a></li>
+    <li><a href="<?=$baseurl?>/list/1459.html" target="_blank">休闲</a></li>
+    <li><a href="<?=$baseurl?>/list/1455.html" target="_blank">汽车</a></li>
+    <li><a href="<?=$baseurl?>/list/1460.html" target="_blank">投资收藏</a></li>
+    <li><a href="<?=$baseurl?>/list/1462.html" target="_blank">白银</a></li>
+    <li><a href="<?=$baseurl?>/list/1446.html" target="_blank">信托</a></li>
+</ul>

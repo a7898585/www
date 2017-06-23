@@ -1,0 +1,84 @@
+<div class="onlineplay">
+    <div class="member">
+        <div class="member_top">
+            <div class="member_l fl"><img src="{$profile.head_url}"/></div>
+            <div class="member_r fl">
+                <ul>
+                    <h3>尊敬的<span>{$profile.realname}</span>，您好!</h3>
+                    <li>会员ID/E-mail： {$memberInfo.id} ( {$memberInfo.username} )</li>
+                    <li>会员等级：{$memberLevel}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="member_fe">
+            <ul>
+                <!--<li class="t1 fl"><span>会员积分:<i>312分</i></span></li>-->
+                <li class="t2 fl"><span>可用余额：{$memberMoney['total_money']/100}元，冻结款：{$memberMoney['lock_money']/100}元，
+                        可提现余额：<?php if($memberMoney['lock_money']>$memberMoney['recharge_money']){
+                        echo ($memberMoney['trade_money']-($memberMoney['lock_money']-$memberMoney['recharge_money']))/100;
+                        }else{
+                        echo $memberMoney['trade_money']/100;
+                        }?>元，
+                        不可提现余额：<?php  if($memberMoney['lock_money']>$memberMoney['recharge_money']){
+                        echo $memberMoney['lock_money']/100;
+                        }else{
+                        echo $memberMoney['recharge_money']/100;
+                        }?>元<br>
+                        总资产：<?php echo ($memberMoney['total_money']+$memberMoney['lock_money'])/100;?>元
+                        <a href="/recharge/add/">立即充值</a>
+                        <a href="/deposit/get/">余额提现</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="infor mt20">
+        <ul class="fl">
+            <h3><span class="fl">最新资讯</span><em class="fr"><a href="{:getDoMain('www')}news/">more</a></em></h3>
+            {:W('News/tab_list',array('7'))}
+        </ul>
+        <ul class="fl">
+            <h3><span class="fl">热门资讯</span><em class="fr"><a href="{:getDoMain('www')}news/">more</a></em></h3>
+            {:W('News/tab_list',array('7', array('click_nums'=>'DESC')))}
+        </ul>
+    </div>
+    <div id="navhljs1" class="navhl mt20">
+        <a class="navhl_h" href="/domain/my/"><span class="word1">域名相关</span></a> 
+        <p class="more fr"><a href="">more</a></p>
+    </div>
+    <div class="onlineplay_c2" id="navhljs1_c0">
+        <div class="member_form">
+            <ul class="cr">
+                <li class="number_1">即将到期的域名</li>
+                <li class="number_2">到期时间</li>
+                <li class="number_3">相关操作</li>
+            </ul>
+            {:W('Domain/expire_domain',array($memberInfo['id']))}
+        </div>
+        <div class="member_form">
+            <ul class="cr">
+                <li class="number_1">我购买的域名</li>
+                <li class="number_2">当前状态</li>
+                <li class="number_3">相关操作</li>
+            </ul>
+            {:W('Domain/my_buy_domain',array($memberInfo['id']))}
+        </div>
+        <div class="member_form">
+            <ul class="cr">
+                <li class="number_1">我关注的域名</li>
+                <li class="number_2">当前状态</li>
+                <li class="number_3">相关操作</li>
+            </ul>
+            {:W('Domain/my_notice_domain',array($memberInfo['id']))}
+        </div>
+        <div class="member_form">
+            <ul class="cr">
+                <li class="number_1">我出售的域名</li>
+                <li class="number_2">当前状态</li>
+                <li class="number_3">相关操作</li>
+            </ul>
+            {:W('Domain/my_sale_domain',array($memberInfo['id']))}
+        </div>
+
+    </div>
+</div>

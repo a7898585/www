@@ -1,0 +1,75 @@
+<div class="in_cont_r">
+    <ul class="myfavorite">
+        <volist name="dingyue" id="vo">
+            <li>
+                <span class="favatar">
+                    <empty name="vo.pic">
+                        <img src="/Public/Home/images/app.png">
+                        <else/>
+                        <img src="{$vo.pic}">
+                    </empty>
+                </span>
+                <div class="group">
+                    <h2><a href="{$base_url}/m{$vo.dingyue_id}" target="_blank">{$vo.source_name}</a></h2>
+                    <span>目前已经有{$vo.count}篇新闻</span>
+                </div>
+                <div class="f_news">
+                    <span>最新更新</span>
+                    <b><a href="{$base_url}/r{$vo.id}" target="_blank">{$vo.title}</a></b>
+                    <p>{$vo.intro}</p>
+                </div>
+                <div class="edit_btn">
+                    <a href="javascript:sort_dy('{$vo.did}','{$vo.sort_id}');" class="upline"></a>
+                    <a href="javascript:del_dy('{$vo.dingyue_id}');" class="dele"></a>
+                </div>
+            </li>
+        </volist>
+    </ul>
+    {$page_html}
+</div>
+<script>
+    function sort_dy(id,sortid){
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        if(id && sortid && confirm('确认移动订阅？')){
+            $.ajax({
+                type: 'POST',
+                url: '/user/sort_dy',
+                data: {id: id,sort_id:sortid},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('操作成功', 0, 1);
+                        window.location.reload();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        }else{
+            layer.msg('参数不对，请联系管理员');
+        }
+    }
+    function del_dy(did){
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        if(did && confirm('确认删除订阅？')){
+            $.ajax({
+                type: 'POST',
+                url: '/user/del_dy',
+                data: {did: did},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('订阅删除成功', 0, 1);
+                        window.location.reload();
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        }
+    }
+</script>

@@ -1,0 +1,861 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link type="text/css" rel="stylesheet" href="http://img.cnfol.com/osapi/css/newcard.v3.css" />
+
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css,ua/css/Public/TopBarFoot.css" />
+        <script src="http://passport.cnfol.com/getOnline.php?type=jsvar&t=uid&d=<?php echo $bloginfo['UserID'];?>" language="javascript"></script>
+        <!--<script src='http://blog.cnfol.com/myblog_files/data.js'></script>导致ie出错-->
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery.cookie.js" ></script>
+        <script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/core/js/function.js" ></script>
+        <script type="text/javascript" src="http://images.cnfol.com/login_js/login_js/lrPopup.js" ></script> 
+        <!--<script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/js/popup.js" ></script>-->
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/function.js" ></script>
+        <!--<script type="text/javascript" src="http://img.cnfol.com/osapi/js/newcard.v3.js"></script>-->
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/newcard.v3.js" ></script>
+        <script src="http://images.cnfol.com/uploads/v5.0/passportweb/script/tipswindown.js" language="javascript"></script>
+        <script charset="utf-8" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,Cm/Js/Cleaner.js,Cm/Js/Tabs.js" type="text/javascript"></script> 
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/Functioner.js"></script><!--上线后改回-->
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/function.js?" ></script><!-- 上线后改回 -->
+
+        <meta name="Keywords" content="<?php echo isset($keywords2) ? strip_tags($keywords2) : $keywords; ?>" />
+        <meta name="Description" content="<?php echo isset($description) ?strip_tags($description) : ''; ?>" />
+
+        <title><?php echo $title; ?></title>
+        <!--[if ie 6.0]>
+        <script src="http://hs.cnfol.com/uc/Js/Finance/iepng.js" type="text/javascript"></script>
+        <script type="text/javascript">
+           EvPNG.fix('.RecomLst li,.CommLst li'); 
+        </script>   
+        <![endif]-->
+    </head>
+    <body>
+        <div class="Bigbg Cf" id="Bigbg" style="background-position:center 300px;">
+            <?php  include $logintool; ?>
+
+            <!--高级设置 start-->
+            <script language="javascript" type="text/javascript">
+                //在模板拖动效果中赋的初值
+                //定义
+                var bdg_conf_layoutNum=<?php echo count($layoutlist);?>;	//布局总数
+                var bdg_conf_bgurlNum=<?php echo count($bglist);?>;	//背景图总数
+                var bdg_conf_modNum=<?php echo count($sysmodules);?>;		//模块总数
+                var spLayoutID="<?php echo $blogconfig['GlobalCssID'];?>";	//布局id
+                var spLayoutID_temp=spLayoutID;	//布局id_临时值
+                var flashCode="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>";
+                var memberid="<?php echo $bloginfo['MemberID'];?>";
+                var spBgURL="<?php echo $blogconfig['Background'];?>";
+                var spBgURL_temp=spBgURL;
+                var spFormAction="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/template/LayoutAction";//保存地址
+
+                function mod(modida,modvaluea,modnamea){
+                    this.modid = modida;		
+                    this.modvalue = modvaluea;	
+                    this.modname = modnamea;
+                }
+                var bdg_cols = 1;
+                var bdg_allmod = new Array();
+                    <?php foreach($sysmodules as $key=>$value){?>
+                        bdg_allmod[<?php echo $key;?>] = new mod("<?php echo $value[0];?>","<?php echo $value[1];?>","<?php echo $value[2];?>");
+                        <?php }?>
+                
+               function SendStyleMod(){
+                    SendMod2();
+                    var bgimg   = $("#DiyImgId").val();//diy背景图片地址
+                    var styleid = $("#StyleId").val();//模板id
+                    var layout  = $("#ThmId").val();//页面板式
+                    var lmod    = $("#ModIdL").val();;
+                    var rmod    = $("#ModIdR").val();;
+                    $.post(spFormAction,{bgimg:bgimg,styleid:styleid,layoutid:layout,lfmod:lmod,rtmod:rmod,MemberID:memberid,flashCode:flashCode,act:'updLayout'},function(data){
+                        alert(data.error);
+                        if(data.errno == 'success'){
+                            setTimeout(function(){
+                                  window.location.href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+                            },3000);
+                        }
+                    },'json');
+                }
+            </script>
+            <dl class="StlBg" id="C1Stl">
+                <dt class="StlTit">
+                    <a href="javascript:;" class="CM">风格设置</a>
+                    <a href="javascript:;" class="">自定义风格</a>
+                    <a href="javascript:;" class="" onclick="setmod_input();">内容模块</a>
+                    <a href="javascript:;" class="" onclick="setlayout_input();">页面版式</a>
+                    <form>
+                        <a href="javascript:;" class="StlBtn1" onclick="location.reload();">取消</a>
+                        <a href="javascript:;" class="StlBtn2" onclick="SendStyleMod();">保存</a>
+                        <input type="hidden" id="StyleId" value="<?php echo $blogconfig['StyleID'];?>" /><!--默认模版id，可为空-->
+                        <input type="hidden" id="DiyImgId" value="<?php echo $blogconfig['Background'];?>" /><!--DIY图片id，可为空-->
+                        <input type="hidden" id="ThmId" value="<?php echo ($blogconfig['GlobalCssID'] == 2 ? $blogconfig['GlobalCssID'] : '1');?>" /><!--版式id,默认为1-->
+                        <input type="hidden" id="ModIdL" value="<?php echo $blogconfig['LModules'];?>" /><!--左侧模块ID数组-->
+                        <input type="hidden" id="ModIdR" value="<?php echo $blogconfig['RModules'];?>" /><!--右侧模块ID数组-->
+                    </form>
+                </dt>
+                <!--风格设置 start-->
+                <dd class="StlDbx">
+                    <dl class="S1Bx" id="C1s1">
+                        <dt>
+                            <a href="javascript:;" class="CM">全部</a> |
+                            <a href="javascript:;" class="">休闲</a> |
+                            <a href="javascript:;" class="">娱乐</a> |
+                            <a href="javascript:;" class="">自然</a> |
+                            <a href="javascript:;" class="">感情</a> |
+                            <a href="javascript:;" class="">财经</a> |
+                            <a href="javascript:;" class="">其他</a>
+                        </dt>
+                        <dd class="Cf">
+                            <a href="javascript:Use('101');" data="101"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP1.png" />静静地女孩</a>
+                            <a href="javascript:Use('102');" data="102"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP2.png" />滑雪运行</a>
+                            <a href="javascript:Use('103');" data="103"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP3.png" />可爱温馨</a>
+                            <a href="javascript:Use('104');" data="104"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP4.png" />海边的五彩伞</a>
+                            <a href="javascript:Use('105');" data="105"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP5.png" />可爱女生</a>
+                            <a href="javascript:Use('201');" data="201"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP1.png" />音乐时间</a>
+                            <a href="javascript:Use('202');" data="202"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP2.png" />炫色音调</a>
+                            <a href="javascript:Use('203');" data="203"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP3.png" />摩登热舞</a>
+                            <a href="javascript:Use('204');" data="204"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP4.png" />摇滚天团</a>
+                            <a href="javascript:Use('205');" data="205"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP5.png" />活力青春</a>
+                            <a href="javascript:Use('206');" data="206"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP6.png" />旋转飞椅</a>
+                            <a href="javascript:Use('301');" data="301"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP1.png" />今夕月夕</a>
+                            <a href="javascript:Use('302');" data="302"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP2.png" />蝶恋花</a>
+                            <a href="javascript:Use('303');" data="303"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP3.png" />眺望大海</a>
+                            <a href="javascript:Use('304');" data="304"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP4.png" />静谧矿冶</a>
+                            <a href="javascript:Use('305');" data="305"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP5.png" />夜泊</a>
+                            <a href="javascript:Use('306');" data="306"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP6.png" />春天的约会</a>
+                            <a href="javascript:Use('401');" data="401"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP1.png" />相濡以沫</a>
+                            <a href="javascript:Use('402');" data="402"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP2.png" />父子情</a>
+                            <a href="javascript:Use('403');" data="403"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP3.png" />致青春</a>
+                            <a href="javascript:Use('404');" data="404"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP4.png" />老来伴</a>
+                            <a href="javascript:Use('405');" data="405"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP5.png" />美好瞬间</a>
+                            <a href="javascript:Use('406');" data="406"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP6.png" />情意绵绵</a>
+                            <a href="javascript:Use('407');" data="407"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP7.png" />放飞的爱</a>
+                            <a href="javascript:Use('501');" data="501"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP1.png" />牛气冲天</a>
+                            <a href="javascript:Use('502');" data="502"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP2.png" />深思熟虑</a>
+                            <a href="javascript:Use('503');" data="503"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP3.png" />精益求精</a>
+                            <a href="javascript:Use('504');" data="504"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP4.png" />招财进宝</a>
+                            <a href="javascript:Use('505');" data="505"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP5.png" />傲视群雄</a>
+                            <a href="javascript:Use('506');" data="506"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP6.png" />新天地</a>
+                            <a href="javascript:Use('507');" data="507"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP7.png" />日进斗金</a>
+                            <a href="javascript:Use('901');" data="901"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP1.png" />光影都市</a>
+                            <a href="javascript:Use('902');" data="902"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP2.png" />黑板上的青春</a>
+                            <a href="javascript:Use('903');" data="903"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP3.png" />阳光独奏</a>
+                            <a href="javascript:Use('904');" data="904"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP4.png" />银色纯真</a>
+                            <a href="javascript:Use('905');" data="905"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP5.png" />运动激情</a>
+                            <a href="javascript:Use('906');" data="906"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP6.png" />蝴蝶飞飞</a>
+                        </dd>
+                        <dd class="Cf"><!--休闲-->
+                            <a href="javascript:Use('101');" data="101"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP1.png" />静静地女孩</a>
+                            <a href="javascript:Use('102');" data="102"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP2.png" />滑雪运行</a>
+                            <a href="javascript:Use('103');" data="103"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP3.png" />可爱温馨</a>
+                            <a href="javascript:Use('104');" data="104"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP4.png" />海边的五彩伞</a>
+                            <a href="javascript:Use('105');" data="105"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/StlP5.png" />可爱女生</a>
+                        </dd>
+                        <dd class="Cf"><!--娱乐-->
+                            <a href="javascript:Use('201');" data="201"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP1.png" />音乐时间</a>
+                            <a href="javascript:Use('202');" data="202"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP2.png" />炫色音调</a>
+                            <a href="javascript:Use('203');" data="203"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP3.png" />摩登热舞</a>
+                            <a href="javascript:Use('204');" data="204"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP4.png" />摇滚天团</a>
+                            <a href="javascript:Use('205');" data="205"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP5.png" />活力青春</a>
+                            <a href="javascript:Use('206');" data="206"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/YtlP6.png" />旋转飞椅</a>
+                        </dd>
+                        <dd class="Cf"><!--自然-->
+                            <a href="javascript:Use('301');" data="301"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP1.png" />今夕月夕</a>
+                            <a href="javascript:Use('302');" data="302"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP2.png" />蝶恋花</a>
+                            <a href="javascript:Use('303');" data="303"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP3.png" />眺望大海</a>
+                            <a href="javascript:Use('304');" data="304"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP4.png" />静谧矿冶</a>
+                            <a href="javascript:Use('305');" data="305"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP5.png" />夜泊</a>
+                            <a href="javascript:Use('306');" data="306"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/ZtlP6.png" />春天的约会</a>
+                        </dd>
+                        <dd class="Cf"><!--情感-->
+                            <a href="javascript:Use('401');" data="401"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP1.png" />相濡以沫</a>
+                            <a href="javascript:Use('402');" data="402"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP2.png" />父子情</a>
+                            <a href="javascript:Use('403');" data="403"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP3.png" />致青春</a>
+                            <a href="javascript:Use('404');" data="404"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP4.png" />老来伴</a>
+                            <a href="javascript:Use('405');" data="405"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP5.png" />美好瞬间</a>
+                            <a href="javascript:Use('406');" data="406"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP6.png" />情意绵绵</a>
+                            <a href="javascript:Use('407');" data="407"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/QtlP7.png" />放飞的爱</a>
+                        </dd>
+                        <dd class="Cf"><!--财经-->
+                            <a href="javascript:Use('501');" data="501"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP1.png" />牛气冲天</a>
+                            <a href="javascript:Use('502');" data="502"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP2.png" />深思熟虑</a>
+                            <a href="javascript:Use('503');" data="503"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP3.png" />精益求精</a>
+                            <a href="javascript:Use('504');" data="504"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP4.png" />招财进宝</a>
+                            <a href="javascript:Use('505');" data="505"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP5.png" />傲视群雄</a>
+                            <a href="javascript:Use('506');" data="506"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP6.png" />新天地</a>
+                            <a href="javascript:Use('507');" data="507"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/CtlP7.png" />日进斗金</a>
+                        </dd>
+                        <dd class="Cf"><!--其他-->
+                            <a href="javascript:Use('901');" data="901"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP1.png" />光影都市</a>
+                            <a href="javascript:Use('902');" data="902"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP2.png" />黑板上的青春</a>
+                            <a href="javascript:Use('903');" data="903"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP3.png" />阳光独奏</a>
+                            <a href="javascript:Use('904');" data="904"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP4.png" />银色纯真</a>
+                            <a href="javascript:Use('905');" data="905"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP5.png" />运动激情</a>
+                            <a href="javascript:Use('906');" data="906"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Skin/OtlP6.png" />蝴蝶飞飞</a>
+                        </dd>
+                    </dl>
+                </dd>
+                <!--风格设置 end-->
+                <!--自定义风格 start-->
+                <dd class="StlDbx">
+                    <div class="StlDiyL">
+                        <b>修改头图：</b>
+                        <div class="SDtop Cf">
+                            <span id="UseBgSpan"><img src="<?php echo $blogconfig['Background'];?>" id="UseBgImg" /></span>
+                            <!--上传图片按钮 start  -->
+                            <?php
+                            //获取项目跟路径  '
+                            $baseURL = config_item('base_url').'/upload/swfupload';
+                            $uploadTURL = config_item('base_url');
+                            //设置swfupload参数
+                            $flashvars = 'uploadURL=' . urlencode($uploadTURL.'/index.php/template/uploadSave');   						   #上传提交地址
+                            $flashvars.= '&buttonImageURL=' . urlencode('http://hs.cnfol.com/ue/Imgs/NewBlog/upload.png');        	   #按钮背景图片,'http://hs.cnfol.com/ue/Imgs/NewBlog/upload.png'
+                            $flashvars.= '&btnWidth=79';                                                               #按钮宽度
+                            $flashvars.= '&btnHeight=25';                                                              #按钮高度
+                            $flashvars.= '&fileNumber=20';                                                             #每次最多上传20个文件
+                            $flashvars.= '&fileSize=1';                                                              #单个文件上传大小为20M
+                            $flashvars.= '&bgColor=#ffffff';                                                           #背景颜色
+                            $flashvars.= '&fileTypesDescription=Images';                                               #选择文件类型
+                            $flashvars.= '&fileType=*.jpg;*.png;*.gif;*.jpeg';                           #选择文件后缀名	
+                            ?>
+                              <object class="SdtBtn1" width="79" height="25" data="<?php echo $baseURL;?>/images/upload.swf" type="application/x-shockwave-flash">
+                                <param value="transparent" name="wmode">
+                                    <param value="<?php echo $baseURL;?>/images/upload.swf" name="movie">
+                                        <param value="high" name="quality">
+                                            <param value="false" name="menu">
+                                                <param value="always" name="allowScriptAccess">
+                                                    <param value="<?php echo $flashvars;?>" name="flashvars">
+                                                        </object>
+                            <!--上传图片按钮 end-->
+                            <a href="javascript:;" class="SdtBtn2" onclick="CsSetFp();">取消</a>
+                        </div>
+                        <p class="StlAtt">建议尺寸：960*330像素，大小不超过500k的jpg、gif、png图片上传。</p>
+                    </div>
+                    <div class="StlDiyR">
+                        <b>配色方案：</b>
+                        <div class="SDrBx Cf" id="DiySkin">
+                            <a href="javascript:UseDiy('1001');" data="1001"><i class="Clo1">1</i></a>
+                            <a href="javascript:UseDiy('1002');" data="1002"><i class="Clo2">2</i></a>
+                            <a href="javascript:UseDiy('1003');" data="1003"><i class="Clo3">3</i></a>
+                            <a href="javascript:UseDiy('1004');" data="1004"><i class="Clo4">4</i></a>
+                            <a href="javascript:UseDiy('1005');" data="1005"><i class="Clo5">5</i></a>
+                            <a href="javascript:UseDiy('1006');" data="1006"><i class="Clo6">6</i></a>
+                            <a href="javascript:UseDiy('1007');" data="1007"><i class="Clo7">7</i></a>
+                            <a href="javascript:UseDiy('1008');" data="1008"><i class="Clo8">8</i></a>
+                            <a href="javascript:UseDiy('1009');" data="1009"><i class="Clo9">9</i></a>
+                            <a href="javascript:UseDiy('1010');" data="1010"><i class="Clo10">10</i></a>
+                            <a href="javascript:UseDiy('1011');" data="1011"><i class="Clo11">11</i></a>
+                            <a href="javascript:UseDiy('1012');" data="1012"><i class="Clo12">12</i></a>
+                        </div>
+                        <p class="StlAtt">选择配色方案可更改您的模板颜色</p>
+                    </div>
+                </dd>
+                <!--自定义风格 end-->
+                <!--内容模块 start-->
+                <dd class="StlDbx">
+                    <script type="text/javascript">
+                        <!--
+                        //修改内容模块
+                        var len = parseInt((bdg_allmod.length-1) / bdg_cols);
+                        var htmlcon = [];
+                        var k = 0;
+                        htmlcon.push('<ul class="SInBx">');
+                        for(var i = 0; i < len; i ++){
+                            for(var j=0;j<bdg_cols;j++){
+                                k = i * bdg_cols + j + 1;
+                                if(k==0){
+                                    continue;
+                                }
+                                htmlcon.push('<li id="l_'+k+'"><label class="Clo'+k+'" onclick="setmod_value();"><input id="'+bdg_allmod[k].modid+'_input" name="" type="checkbox" value="'+bdg_allmod[k].modid+'"></label>'+bdg_allmod[k].modname+'</li>');
+                            }
+                        }
+                        htmlcon.push('</ul>');
+                        document.write(htmlcon.join(''));
+                        -->
+                    </script>
+                </dd>
+                <!--内容模块 end-->
+                <!--页面版式 start-->
+                <dd class="StlDbx">
+                    <p class="SFrmP">请选择您喜欢的版式（通过点击布局图片选择）</p>
+                    <label class="SFrmLb"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Stls1.png" onClick="chglayout('1');setlayout_value()" /><input type="radio" name="ss" value="1" onclick="chglayout('1');setlayout_value()" id="templayout1" <?php if(1 == $blogconfig['GlobalCssID']) echo 'checked';?> ></label>
+                    <label class="SFrmLb"><img src="http://hs.cnfol.com/ue/Imgs/NewBlog/Stls2.png" onClick="chglayout('2');setlayout_value()" /><input type="radio" name="ss" value="2" onclick="chglayout('2');setlayout_value()" id="templayout2" <?php if(2 == $blogconfig['GlobalCssID']) echo 'checked';?> ></label>
+                </dd>
+                <!--页面版式 end-->
+            </dl>
+            <!--高级设置 end-->
+
+
+            <!--<link type="text/css" rel="stylesheet" id="SkLink" href="" />模版样式文件,默认null-->
+            <!--博主主页信息-->
+            <div class="Wrap Cf BloggerWrap">
+                <!--新增搜索框 start-->                                
+                <form action="http://zhannei.baidu.com/cse/search" target="_blank" class="NbSearch" id="NbSearch">
+                    <input name="s" type="hidden" value="16986161372852025264">
+                            <a href="javascript:document.getElementById('NbSearch').submit();" class="NbsSub"></a>
+                            <input type="text" name="q" size="30" class="NbsTxt"  value="中金博客搜索">
+                                </form>
+                                <!-- 新增搜索框 end-->
+                                <!--博主头像-->
+                                <div class="BloggerPicBox">
+                                    <div class="BloggerPic"><img src="<?php echo getUserHeadbig($bloginfo['UserID'],192);?>"/></div>
+                                    <ul class="BloggerAtten">
+                                        <li>
+                                            <a href="<?php echo $baseurl.'/'.$cuttrent_domainname.'/myfocus/friend'; ?>" target="_blank" style="text-decoration:none;cursor:hand;">
+                                                <p><?php echo substr($friendsnumber['FollowingNum'],0,8); ?></p>
+                                                <p>关注</p>
+                                            </a>
+                                        </li>
+                                        <li class="Fans">  
+                                            <a href="<?php echo $baseurl.'/'.$cuttrent_domainname.'/myfocused/friend'; ?>" target="_blank" style="text-decoration:none;cursor:hand;">
+                                                <p><?php echo substr($friendsnumber['FllowerNum'],0,8); ?></p>
+                                                <p>粉丝</p>
+                                            </a>
+                                        </li>
+                                        <li>  
+                                            <a href="<?php echo $baseurl.'/'.$cuttrent_domainname.'/articlelist/alist'; ?>" target="_blank" style="text-decoration:none;cursor:hand;">
+                                                <p><?php echo $TotalArticle; ?></p>
+                                                <p>文章</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!--认证图标-->
+                                    <?php if($auth!=2&&$auth) {?>
+                                    <i class="ApproveIco"></i>
+                                    <?php } ?>
+                                    <!--end 认证图标-->
+                                </div>
+                                <!--end 博主头像-->
+                                <!--博主信息-->
+                                <div class="BloggerInfo">
+                                    <div class="BloggerName"><strong><?php echo $bloginfo['NickName'];?></strong>
+                                        <i class="<?php echo $userinfo['user_gender']=='0'?'Male':'Female';?>" id="onlinediv"></i>
+
+                                        <!--<i class="Female"></i>--><!--<a class="Plus" href="#">加关注</a>-->
+
+                                        <div class="focus">   
+                                            <?php  if(isset($isowner) && $isowner==true){?>
+
+                                            <?php } else {?>
+                                            <?php if($isFrends == 0 || $isFrends == 2){ ?>
+                                            <!--<a href="javascript:Open('1','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['UserID'];?>')">加关注</a>-->
+                                            <?php if($isFrends!=''){ ?>
+                                            <a class="Plus" href="javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','add') ;" onclick="Dialog('PlusSucPop')">加关注</a>
+                                            <?php }else{ ?>
+                                            <a class="Plus" href="javascript:;" onclick="showiframe('iframeSrc','popupIframe','<?php echo(config_item('base_url')); ?>/index.php/widget/login','','');">加关注</a>
+                                            <?php }}else{ ?>
+                                            <a class="HasPlus" href="javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','del');">取消关注</a>
+                                            <?php } ?>
+                                            <?php } ?>
+                                        </div>
+
+
+                                        <!--  <a class="HasPlus" href="javascript:;" onclick="Dialog('PlusSucPop')">加关注</a></div>--> 
+                                    </div>
+                                    <div id="BlogNameCP_C">
+                                        <p class="BlogName">
+                                            <a id="BlogNameLoad" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" target="_blank" title="<?php echo filter_word(strip_tags($bloginfo['BlogName'])); ?>" style="cursor:hand;">
+                                                <?php
+
+
+                                                if (strlen($bloginfo['BlogName']) > 30) {
+
+                                                echo filter_word(utf8_str(strip_tags($bloginfo['BlogName']),30,'false')).'...';
+                                                }
+                                                else
+                                                {
+                                                echo filter_word(strip_tags($bloginfo['BlogName']));
+                                                }
+
+
+                                                ?>
+                                            </a>    
+
+                                            <?php if($isconfig != 1&&$isowner == true) {?>
+                                            <a href="javascript:;" onclick="showEditCP('BlogNameCP')">[编辑]</a>
+                                            <?php } ?>
+                                        </p>
+                                    </div>
+                                    <?php if($isconfig != 1&&$isowner == true) {?>
+                                    <div id="BlogNameCP" style="display:none">
+                                        <input type="text" name="BlogName" id="BlogName" class="input" size="40" value="<?php echo filter_word($bloginfo['BlogName']);?>" /><input type="button" value="保存" onclick="saveEditValue('BlogName')" /><input type="button" value="取消" onclick="hideEditCP('BlogNameCP')"/>
+                                    </div>
+                                    <?php }?>       		
+                                    <div class="BlogDesc">   
+                                        <div id="SubtitleCP_C">
+
+
+                                            <a href="javascript:;" id="SubtitleLoad" style="color:rgb(237, 106, 0);cursor:hand;" title="
+                                               <?php
+                                               if($blogconfig['Subtitle'] !='')
+                                               {
+
+                                               echo filter_word(strip_tags($blogconfig['Subtitle']));
+
+                                               }
+                                               else
+                                               {
+                                               echo '中金博客，最专业的财经博客';
+                                               }
+                                               ?>
+                                               ">
+
+
+                                                <?php
+                                                if($blogconfig['Subtitle'] !='')
+                                                {
+
+                                                if (strlen($blogconfig['Subtitle']) > 36) {
+
+                                                echo filter_word(utf8_str(strip_tags($blogconfig['Subtitle']),36,'false')).'...';
+                                                }
+                                                else
+                                                {
+                                                echo filter_word(strip_tags($blogconfig['Subtitle']));
+                                                }
+                                                }
+                                                else
+                                                {
+                                                echo '中金博客，最专业的财经博客';
+                                                }
+                                                ?>
+
+                                            </a>&nbsp;
+                                            <?php if($isconfig != 1&&$isowner == true) {?>   
+                                            <span style="font-size:12px;"><a href="javascript:;" onclick="showEditCP('SubtitleCP')">[编辑]</a></span>
+                                            <?php }?>
+                                        </div>			 
+                                        <?php if($isconfig != 1&&$isowner == true) {?>
+                                        <div id="SubtitleCP" style="display:none">
+                                            <input type="text" name="Subtitle" id="Subtitle" class="input" size="40" value="<?php if($blogconfig['Subtitle'] !='') echo filter_word($blogconfig['Subtitle']); else echo '中金博客，最专业的财经博客';?>"/><input type="button" value="保存" onclick="saveEditValue('Subtitle')"/><input type="button" value="取消" onclick="hideEditCP('SubtitleCP')"/>
+                                        </div>
+                                        <?php }?>	    
+                                    </div>
+                                    <ul class="BloggerHandle">
+                                        <?php if(isset($isowner) && $isowner==true): ?>
+                                        <li><a href="<?php echo($baseurl.'/'.$bloginfo['DomainName'].'/article/Add');?>">写博</a></li>
+                                        <?php endif; ?>
+                                        <li><a href="<?php echo($baseurl.'/'.$bloginfo['DomainName'].'/leaveme/message');?>">留言</a></li>
+                                        <li>		
+                                            <?php if(isset($isowner) && $isowner==true): ?>
+                                            <a target="_blank" href="http://passport.cnfol.com/giftmall">我的礼物</a>
+                                            <?php else: ?> 
+                                            <a onclick="tipsWindown('我要给<?php echo $bloginfo['NickName'];?>送鲜花', 'ToUserID=<?php echo $bloginfo['UserID']?>&GiftID=1&SourceURL=<?php echo $baseurl.'/'.$bloginfo['DomainName']; ?>&SourceTypeID=1&SourceTypeDesc=blog&SourceTabID=0',320,200,'true','','false','');return false;" href="javascript:;" title="我要给<?php echo $bloginfo['NickName'];?>送鲜花" class="sendgift">鲜花</a>
+                                            <?php endif; ?>
+                                        </li>
+                                    </ul>       
+                                </div>
+                                <!--end 博主信息-->
+                                <!--认证博主-->
+
+                                <?php if($auth!=2&&$auth) {?>
+                                <div class="BloggerTitle">
+                                    <p class="VipBlogger">认证博主</p>
+                                    <p class="Title"><?php echo $auth['describle']; ?></p>
+                                </div>
+                                <?php } ?>
+                                <!--end 认证博主-->
+                                </div>
+                                <!--end 博主主页信息-->
+                                <!--导航-->
+                                <div class="Wrap Nav NewNav">
+                                    <form class="R Mr10" style="display:none;">
+                                        <input type="text" id="C2" class="Srinput L" value="搜索博文/博主">
+                                            <label class="LabSlc L Ml10">
+                                                <select name="SlctFrst" class="SlSW SlcWrp">
+                                                    <option value="本博客">本博客</option>
+                                                </select>
+                                            </label>
+                                            <a href="javascript:;" class="Asrch Ml10"></a>
+                                    </form>
+                                    <?php if(isset($isowner) && $isowner==true) {?>
+                                    <a class="AHome Mr30" href="<?php echo $baseurl.'/my/'.$bloginfo['DomainName'];?>">我的首页</a>
+                                    <a class="ABlog <?php if($navConfig=='myblog') {?>ANowbg<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>">我的博客</a>
+                                    <a class="APhoto <?php if($navConfig=='album') {?>ANowph<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/albumlist' ?>" >相 册</a>
+                                    <a class="ASet ANow" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/config/Edit'?>" >设 置</a>
+                                    <?php }else{ ?>
+                                    <!--a class="AHome Mr30" href="<?php echo $baseurl.'/my/'.$bloginfo['DomainName'];?>" target="_blank">首页</a>-->
+                                    <a class="ABlog <?php if($navConfig=='myblog') {?>ANowbg<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>">博客</a>
+                                    <a class="APhoto <?php if($navConfig=='album') {?>ANowph<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/albumlist' ?>">相 册</a>
+                                    <?php } ?>
+                                    <?php include config_item('shtml_path').'blog_header_nav1.shtml';?>
+                                    <?php if(isset($isowner) && $isowner==true) {?><?php }else{ ?>
+                                    <?php include config_item('shtml_path').'blog_header_nav2.shtml';?>
+                                    <script src="http://he.js.cnfol.com/index_8.php/id=313&amp;charset=utf8"></script>
+                                    <?php } ?>
+                                </div>
+                                <!--end 导航-->
+                                </div>
+                                <!--内容-->
+                                <div class="Wrap Cf Mt15" id="stage">
+                                    <!--左-->
+                                    <div class="MaLft MMl<?php echo $blogconfig['GlobalCssID'];?>" id="modtd_0">
+                                        <?php if(isset($module['lmods'])){
+                                        foreach($module['lmods'] as $mods){
+                                        include $modulepath.$mods;
+                                        }
+                                        }?>
+                                        <div class="NoBor" id="mod_bottom0" rel="fordrag" readme="这是垫底的" pos="1_3"></div>    
+                                    </div>  
+
+                                    <!--end 左-->
+                                    <!--右-->
+                                    <div class="MaRgt MMr<?php echo $blogconfig['GlobalCssID'];?>" id="modtd_1">
+                                        <?php if(isset($module['rmods'])){
+                                        foreach($module['rmods'] as $mods){
+                                        include $modulepath.$mods;
+                                        }
+                                        }?>
+                                        <!--共同关系-->
+                                        <?php include $tmp_jointly; ?>
+                                        <!--end 共同关系-->
+                                        <div id="modbottommodtd_2" class="NoBor NoMb" rel="fordrag">&nbsp;</div>
+                                    </div>
+                                    <!--end 右-->
+                                </div>
+                                <!--end 内容-->
+                                <div class="mod2" id="fordrag" style="display: none; z-index: 65535; FILTER: alpha(opacity=70); left: 30px; position: absolute; top: 10px; moz-opacity: 0.7" pos="1_0">用来拖动的</div>
+                                <div id="dragbak" style="display: none" href="#">12345667889</div>
+                                <div id="dragstatic" style="display: none" href="#">拖动中</div>
+                                <form id="action_form" name="action_form" method="post" target="_self" action="">
+                                    <input type="hidden" name="act" id="act" value="edit" />
+                                    <input type="hidden" name="articleid" id="articleid" />
+                                </form>
+                                <script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Tabs.js,Cm/Js/Dialog.js,ue/Js/NewBlog/DiyMod.js,ue/Js/NewBlog/Drag.js" type="text/javascript"></script>
+                                <script type="text/javascript">
+                                    //new Tabs("C1fans");
+                                    new Tabs("C1Stl");//高级设置
+                                    new Tabs("C1s1");//风格设置
+                                    //大背景自适应宽度
+                                    window.onresize = BcwAuto;
+                                    window.onload = BcwAuto;
+                                    //自定义背景图swf
+                                    /*上传错误信息提示*/
+                                    function showmessage(message){
+                                        if(message == '单个文件大小不能超过1M！'){
+                                            alert('单个文件大小不能超过500K！');
+                                        }else{
+                                            alert(message);
+                                        }
+                                    }
+                                    /*显示文件名称*/
+                                    function setfilename(ID,filename){
+                                        ID = replaceStr(ID);
+                                        setfilepath('UseBgImg','http://localhost/swfupload/upload/');//图像显示ID，图片储存路径
+                                    }
+                                    /*显示上传进度*/
+                                    function setfileload(ID,load){
+                                        ID = replaceStr(ID);
+                                        $("#"+ID+" .load").html(load);//#UseBgSpan
+                                    }
+                                    /*返回服务上传的数据*/
+                                    function setfilepath(ID,data){
+                                        
+                                        ID = replaceStr(ID);
+                                        var s = eval('('+data+')');
+                                        if(s.result=="true"){
+                                            CsUse();//取消模版风格选中
+                                            Cs2bg();//判断，为主题模版则取消，为自定义模版则保
+                                            $('#DiyImgId').val(s.imgurl);//设置保存后的图片value，data可改
+                                            $('.BloggerWrap').css('background','url('+s.filepath+') no-repeat center center');//预览背景
+                                            $("#UseBgImg").attr('src',s.filepath);//小图预览显示
+                                        }else{
+                                            alert(s.error);
+                                        }
+               
+                                    }
+                                    /*替换特殊字符*/
+                                    function replaceStr(ID){
+                                        var reg = new RegExp("[=,/,\,?,%,#,&,(,),!,+,-,},{,:,>,<]","g"); //创建正则RegExp对象
+                                        var ID = ID.replace(reg,"");
+                                        return ID;
+                                    }
+        
+        
+                                </script>
+
+                                <script type="text/javascript"> 
+                                    var ding1 = "<?php echo $baseurl;?>/shtml/hotvotearticle,24.html";
+
+                                    $(function(){
+                                        for(var $i=0; $i<8; $i++)
+                                        {	
+                                            var $firstTime = parseInt($(".time_"+$i).val());
+                                            var $j = $i+1;
+                                            var $secondTime = parseInt($(".time_"+$j).val());
+                                            var $cut = $firstTime - $secondTime;	            		
+                                            if($firstTime - $secondTime ==1)
+                                            {
+                                                $(".time_"+$i).parent().css("border-bottom", "1px red solid");		            	
+
+                                            }
+                                        }
+                                    })
+
+                                    $(function(){
+	
+                                        $('#signature').load("<?php echo $baseurl.'/ajaxgetuserprofile/'.$bloginfo['UserID'];?>");
+	
+                
+                                        var checkUserId=<?php echo $bloginfo['UserID'];?>;
+                                        if(typeof(online_<?php echo $bloginfo['UserID'];?>)!='undefined')
+                                        {
+                                            var temOnline = online_<?php echo $bloginfo['UserID'];?>;
+                                            if(temOnline != 'offline')//在线
+                                            {	
+                                                if($('#onlinediv').hasClass("OffMale"))
+                                                {
+                                                    $('#onlinediv').removeClass().addClass("Male");				
+                                                }
+                                                else
+                                                {
+                                                    $('#onlinediv').removeClass().addClass("Female");						
+                                                }
+
+
+                                            }
+                                        }
+                
+                                    })	
+
+
+
+
+                                    function delAttention(userid,act)
+                                    {
+                                        var url = baseurl+"/index.php?c=myfocus&m=action&act="+act;
+                                        var params = {"friendIDs":userid};
+	
+                                        $.getJSON(url+"&r="+new Date().getTime(), params, function(json){
+	    
+                                            if(json.erron=='01')
+                                            {
+                                                if(act == "del")
+                                                {
+                                                    var focusNum = parseInt($(".fansNum").first().text())-1;
+                                                    $(".fansNum").each(function(){
+                                                        $(this).text(focusNum);		
+                                                    })			
+                                                    $(".focus").html("<a class=\"Plus\"  href=\"javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','add');\">加关注</a>");
+		
+                                                }
+                                                else
+                                                {
+                                                    var focusNum = parseInt($(".fansNum").first().text())+1;
+                                                    $(".fansNum").each(function(){
+                                                        $(this).text(focusNum);		
+                                                    })						
+                                                    $(".focus").html("<a class=\"HasPlus\"  href=\"javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','del');\">取消关注</a>");
+				
+                                                }
+                                            }
+                                            else
+                                            {
+                                                alert(json.error);
+                                            }
+		
+                                        });
+                                    }
+
+
+
+
+
+                                        <?php if($isowner == true){ ?>
+                                            function showEditCP(id){
+                                            $('#'+id).show();
+                                            $('#'+id+'_C').hide();
+                                        }
+                                        function hideEditCP(id){
+                                            $('#'+id).hide();
+                                            $('#'+id+'_C').show();
+                                        }
+                                        function saveEditValue(id){
+                                            var val = $('#'+id).val();
+                                            if(val == ""){
+                                                return false;
+                                            }
+	
+                                            if($('#'+id).val().length>42)
+                                            {
+                        
+                                                showalertminute('博客副标题长度不能大于42个字节',2000,'','popupTip','TMDeleteSuccess');
+                                                return false;
+                                            }
+                                            else
+                                            {
+	
+	
+                                                //showloading();
+                                                showalert('载入中...','popupTip','TMDeleteSuccess');
+                                                var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+                                                var action = baseuri+'/config/HeadEdit';
+                                                if(id == 'Subtitle') {
+                                                    $.post(action,{Subtitle:val},function(data){
+                                                        if(data.errno == 'success'){
+                                                            $('#'+id).val(data.error);
+                                                            $('#'+id+'Load').text(data.error);
+                                
+                                                            showalertminute('博客副标题更新成功！',2000,'','popupTip','TMDeleteSuccess');
+                                                        }else{
+                                
+                                                            showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                                                        }
+                                                        return false;
+                                                    },'json');
+                                                }else{
+                                                    $.post(action,{BlogName:val},function(data){
+                                                        if(data.errno == 'success'){
+                                                            $('#'+id).val(data.error);
+                                                            $('#'+id+'Load').text(data.error);
+                               
+                                                            showalertminute('博客标题更新成功！',2000,'','popupTip','TMDeleteSuccess');
+                                                        }else{
+                                
+                                                            showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                                                        }
+                                                        return false;
+                                                    },'json');
+                                                }
+                                                hideEditCP(id+'CP');
+                                            }
+                                        }
+                                            <?php } ?>
+
+                                        function submitvote(aid,memid,getcode,loginuserid){
+                                        $.post(baseurl+'/ajaxsetartvotecnt/'+aid+'/'+memid,{code:getcode,userid:loginuserid,tnlvote:$('#ding_'+aid).html()},function(data){
+                                            if(data.errno == 'succ'){
+        	
+                                                $('#ding_'+aid).attr('href',ding1).attr('target','_blank');
+                                                var votetmp = parseInt($('#showvotes_'+aid).html()) + 1;
+                                                $('#showvotes_'+aid).html(votetmp);
+                                                $('#ding_'+aid).attr('class','Support');
+                                            }else{
+                        
+                                                showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                                                $('#ding_'+aid).attr('href',ding1).attr('target','_blank');
+                                            }
+                                        },'json');
+                                    }
+
+
+                                </script>
+
+                                <script type="text/javascript">
+                                    date=new Date();
+                                    year = date.getFullYear();
+                                    document.writeln(year);
+                                </script>
+                                &copy;
+                                <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" target="_blank"><?php echo $bloginfo['NickName'];?></a>
+                                </center>
+                                </div>
+                                <!--点击统计-->
+                                <script type="text/javascript" src="<?php echo $viewurl;?>"></script>
+                                <script language="javascript">
+
+
+                                    function killErrors() { 
+                                        return true; 
+                                    } 
+                                    window.onmouseover=function()
+                                    {
+                                        window.onerror = killErrors; 
+                                    }
+
+                                    function setbg(url){
+                                        $('.BloggerWrap').css('background','url('+url+') no-repeat center center');//预览背景
+                                    }
+                                    document.body.onclick=function(event) {
+                                        var browser=navigator.appName;
+                                        if(browser=="Netscape")
+                                        {
+                                            obj =event.srcElement?event.srcElement:event.target;
+                                            if(obj.tagName!="IMG"&& document.getElementById("showinfo") &&g_pop==null) document.getElementById("showinfo").style.display="none"; 
+                                        }else
+                                        {
+                                            if(window.event.srcElement.tagName!="IMG" && document.getElementById("showinfo") && g_pop==null) document.getElementById("showinfo").style.display="none";}; 
+                                    }
+                                     var bgurl = "<?php echo $blogconfig['Background'];?>";
+                                        if(bgurl){
+                                            setbg(bgurl);
+                                        }
+                                </script>  
+                                </center>
+
+                                <?php if(!isset($ismanage) || $ismanage === false){?>
+                                <!--google统计-->
+                                <script type="text/javascript">
+                                    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+                                    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+                                </script>
+                                <script type="text/javascript">
+                                    var pageTracker = _gat._getTracker("UA-197044-9");
+                                    pageTracker._trackPageview();
+                                </script>
+                                <!--百度统计-->
+                                <script type="text/javascript">
+                                    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                                    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc378c4854ec370c1c8438f72e19b7170' type='text/javascript'%3E%3C/script%3E"));
+
+                                    //站内信
+                                    var num ='0';
+                                    var url = 'http://passport.cnfol.com/index.php/getinfo/userinfo/<?php echo $user['userid']; ?>/getnewmsgcount/json?callback=?';
+                                    var url = 'http://passport.cnfol.com/api/msginfo/getusermsgcount?callback=?';
+                                    var param = {'uid':'<?php echo $user['userid'];?>', 'key': '<?php echo md5($user['userid'].'hello_cnfol');?>'};
+
+                                    //$.getJSON(url,param, function(json){
+                                    //	alert("@@@@@@");
+                                    //	alert(json.total);
+                                    //num = json.count; 
+                                    // $('.LgMsg').html('('+num+')');
+                                    // });
+                                    //站内信
+                                </script>
+                                <!-- End of LogMicroscope Code --> 
+                                <DIV style="DISPLAY: none"><!-- START AIYA Site Stat. -->
+                                    <SCRIPT language=JavaScript type="text/javascript" src="http://s.cnfolimg.com/v5.0/js/stat01-min.js"></SCRIPT>
+                                    <NOSCRIPT><img src="http://logs.cnfol.com/a?ci=cnfol" alt=""></NOSCRIPT><!-- END AIYA Site Stat. -->
+                                </DIV> 
+                                <?php } ?>
+                                <!--微信-->
+                                <!--  
+                                <div class="FixedRight" id="FixedRight">
+                                  <a href="javascript:;" onclick="document.getElementById('FixedRight').style.display='none'" class="Cls" title="关闭">X</a>
+                                  <iframe marginheight="0" marginwidth="0" frameborder="0" width="110" height="150" scrolling="no" src="http://cnfolimedia.allyes.com/main/s?user=cnfol|weixinyemian|weihangqingerweima&db=cnfolimedia&border=0&local=yes"></iframe>
+                                </div>
+                                -->
+                                <script charset="utf-8" src="http://hs.cnfol.com/Cm/Js/Base.js" type="text/javascript"></script>
+
+                                <!--[if lt IE 7]>
+                                  <script charset="utf-8" src="http://hs.cnfol.com/Cm/Js/Fixed.js" type="text/javascript"></script>
+                                  <script type="text/javascript">
+                                  //Fixed("FixedRight","R0","B100");//导致ie出错
+                                  </script>
+                                <![endif]-->
+                                <script type="text/javascript">
+                                 $(function(){
+                                    $('.NbsTxt').each(function(){
+                                        var str = '';
+                                        $(this).css('color','#999');
+                                        $(this).focus(function(){
+                                            str = $(this).val();
+                                            if(str == '中金博客搜索'){
+                                                $(this).val('');
+                                            }
+                                            $(this).css('color','#000');
+                                        });
+                                        $(this).blur(function(){
+                                            str = $(this).val();
+                                            if(str == ''){
+                                                $(this).val('中金博客搜索');
+                                                $(this).css('color','#999');
+                                            }
+                                        })
+                                    })
+                                })
+                            </script>
+
+                                </body>
+                                </html>

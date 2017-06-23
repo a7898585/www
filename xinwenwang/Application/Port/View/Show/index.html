@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{$info.title}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="alternate icon" type="image/png" href="/Public/Mobile/assets/i/favicon.png">
+    <link rel="stylesheet" href="/Public/Mobile/css/amazeui.min.css"/>
+    <style>
+        @media only screen and (min-width: 1200px) {
+            .blog-g-fixed {
+                max-width: 1200px;
+            }
+        }
+
+        @media only screen and (min-width: 641px) {
+            .blog-sidebar {
+                font-size: 1.4rem;
+            }
+        }
+
+        .blog-main {
+            padding: 20px 0;
+        }
+
+        .blog-title {
+            margin: 10px 0 20px 0;
+        }
+
+        .blog-meta {
+            font-size: 14px;
+            margin: 10px 0 20px 0;
+            color: #222;
+        }
+
+        .blog-meta a {
+            color: #27ae60;
+        }
+
+        .blog-pagination a {
+            font-size: 1.4rem;
+        }
+
+        .blog-team li {
+            padding: 4px;
+        }
+
+        .blog-team img {
+            margin-bottom: 0;
+        }
+
+        .blog-footer {
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<div class="am-g am-g-fixed blog-g-fixed" id="div1" style="display: none;">
+    <div class="am-u-md-12">
+        <article class="blog-main">
+            <h3 class="am-article-title blog-title">
+                <a href="" id="title"></a>
+            </h3>
+            <h4 class="am-article-meta blog-meta" id="source_name"><a href="">{$info.source_name}</a>&nbsp;&nbsp;&nbsp;{$info.update_time}</h4>
+
+            <div class="am-g blog-content">
+                <div class="am-u-lg-12" id="html"></div>
+            </div>
+        </article>
+        <hr class="am-article-divider blog-hr">
+    </div>
+
+</div>
+<div data-am-widget="list_news" class="am-list-news am-list-news-default" id="div2" style="display: none;">
+    <!--列表标题-->
+    <div class="am-list-news-hd am-cf">
+        <!--带更多链接-->
+        <a href="##" class="">
+            <h2>相关阅读</h2>
+        </a>
+    </div>
+    <div class="am-list-news-bd">
+        <ul class="am-list" id="news_ul">
+        </ul>
+    </div>
+</div>
+
+<div data-am-widget="list_news" class="am-list-news am-list-news-default"  id="div3" style="display: none;">
+    <!--列表标题-->
+    <div class="am-list-news-hd am-cf">
+        <!--带更多链接-->
+        <a href="##" id="commentList" class="">
+            <h2>评论列表</h2>
+        </a>
+    </div>
+    <div class="am-list-news-bd">
+        <ul class="am-comments-list am-comments-list-flip" id="comments_ul"></ul>
+    </div>
+</div>
+<script type="text/html" id="comments_tpl">
+    {{# for(var i = 0, len = d.length; i < len; i++){ }}
+    <li class="am-comment ">
+        <a href="#link-to-user-home"><img width="48" height="48" class="am-comment-avatar" alt="" src="{{d[i].head_pic}}"></a>
+        <div class="am-comment-main">
+            <header class="am-comment-hd"><div class="am-comment-meta"><a class="am-comment-author" href="#link-to-user">{{d[i].username}}</a> 评论于 <time title="{{d[i].show_time}}" datetime="{{d[i].show_time}}">{{d[i].show_time}}</time></div></header>
+            <div class="am-comment-bd"><p>{{d[i].content}}</p></div>
+        </div>
+    </li>
+    {{# } }}
+</script>
+
+<script type="text/html" id="news_tpl">
+    {{# for(var i = 0, len = d.length; i < len; i++){ }}
+    <li class="am-g am-list-item-dated">
+        <a onclick="openNewsDetail('{{d[i].url}}','{{d[i].source_url}}','{{d[i].title}}','{{d[i].id}}')" data-url="{{d[i].url}}" data-source_url="{{d[i].source_url}}" data-title="{{d[i].title}}" class="am-list-item-hd ">{{d[i].title}}</a>
+        <span class="am-list-date">{{d[i].update_time}}</span>
+    </li>
+    {{# } }}
+</script>
+
+<script type="text/javascript" src="/Public/Mobile/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/Mobile/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Mobile/js/layer/laytpl.js"></script>
+<script type="text/javascript">
+    function toComment(){
+        $('body').animate({scrollTop: $('#commentList').offset().top}, 500);
+        return false;
+    }
+    //评论记录ID，内容，用户头像，昵称
+    function addComment(id,content,pic,nickname){
+        var str = '<li class="am-comment "><a href="#link-to-user-home"><img width="48" height="48" class="am-comment-avatar" alt="" src="'+pic+'"></a><div class="am-comment-main"><header class="am-comment-hd"><div class="am-comment-meta"><a class="am-comment-author" href="#link-to-user">'+nickname+'</a> 评论于 <time title="刚刚" datetime="刚刚">刚刚</time></div></header><div class="am-comment-bd"><p>'+content+'</p></div></div></li>';
+        $('#comments_ul').prepend(str);
+    }
+
+    //android
+    function showFavAndCommentNum(fav, commentNum){
+        xinwenwang.showFavAndCommentNum(fav, commentNum);
+    }
+    function showComment(content){
+        xinwenwang.showComment(content);
+    }
+    function openNewsDetail(showUrl, sourceUrl, title, newsID){
+        xinwenwang.openNewsDetail(showUrl, sourceUrl, title, newsID);
+    }
+//    $(document).ready(function(){
+//        showFavAndCommentNum('{$is_collect}','{$info["comment_sum"]}');
+//    });
+</script>
+<script type="text/javascript">
+    function getUrlParam(name){
+        var url = window.location.href;
+        var pattern = new RegExp("[?&]"+name+"\=([^&]+)", "g");
+        var matcher = pattern.exec(url);
+        var items = null;
+        if(null != matcher){
+            try{
+                items = decodeURIComponent(decodeURIComponent(matcher[1]));
+            }catch(e){
+                try{
+                    items = decodeURIComponent(matcher[1]);
+                }catch(e){
+                    items = matcher[1];
+                }
+            }
+        }
+        return items;
+    }
+    $(document).ready(function(){
+        layer.load('加载中...');
+        $.ajax({
+            url:'/show/info',
+            data:{news_id:getUrlParam('news_id'),'d':new Date()},
+            dataType:"json",
+            jsonp:"jsonpcallback",
+            success:function(data){
+//                showFavAndCommentNum(data.is_collect,data.comment_sum);
+                layer.closeAll();
+                $('#div1').show();
+                $('#title').html(data.title);
+                $('#source_name').html('<a href="">'+data.source_name+'</a>&nbsp;&nbsp;&nbsp;'+data.update_time);
+                $('#html').html(data.html);
+                comments(data.comments);
+                news(data.news)
+            }
+        });
+    });
+
+    function comments(data){
+        var gettpl = document.getElementById('comments_tpl').innerHTML;
+        laytpl(gettpl).render(data, function(html){
+
+            document.getElementById('comments_ul').innerHTML = html;
+            $('#div3').show();
+        });
+    }
+    function news(data){
+        var gettpl = document.getElementById('news_tpl').innerHTML;
+        laytpl(gettpl).render(data, function(html){
+
+            document.getElementById('news_ul').innerHTML = html;
+            $('#div2').show();
+        });
+    }
+
+
+
+</script>
+</body>
+</html>

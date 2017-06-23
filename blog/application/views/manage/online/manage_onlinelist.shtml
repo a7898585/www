@@ -1,0 +1,77 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03"<?php  if(isset($isowner) && $isowner == true) echo 'style="width:210px;"';?>>当前位置：直播列表 
+             <?php 
+             if(isset($isowner) && $isowner == true)
+             {?>
+             <span style="cursor: pointer;" onclick="javascript:CreateOnleSubject();">创建直播主题</span>
+            <?php
+            }?>
+        </div>
+    </div>
+    <div class="szym06"><table cellpadding="0" cellspacing="0" border="0" class="bd_tab" width="100%">
+            <tr>
+                <td class="bg_tab">直播主题</td>
+                <td class="bg_tab">直播时间</td>
+                <td class="bg_tab">权限选项</td>
+            </tr>
+            <?php
+            if(!empty($Subject['Record']))
+            {
+            foreach($Subject['Record'] as $art)
+            {?>
+            <tr class="sort">
+                <td height="30"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/online/Display/<?php echo $art['OnlineID'];?>.html" target="_blank"><?php echo $art['Subject'];?></a></td>
+                <td><?php echo $art['AppearTime'];?>&nbsp;</td>
+                <td>
+                    <?php if(isset($isowner) && $isowner == true)
+                    {?>
+                    <a href="javascript:void(0);" onclick="javascript:editsub('<?php echo $art['OnlineID'];?>');">修改</a> <span onclick="javascript:delsub('<?php echo $art['OnlineID'];?>');">删除</span>
+                    <?php
+                    }?>
+                    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/online/Display/<?php echo $art['OnlineID'];?>.html" target="_blank">进入直播室</a>
+                </td>
+            </tr>
+            <?php
+            }
+            }
+            else
+            {?>
+            <tr class="sort">
+                <td colspan="4" height="30"><p>暂无直播主题信息</p></td>
+            </tr>
+            <?php
+            }?>
+            <tr class="sort">
+                <td colspan="4"><?php echo $pagebar;?></td>
+            </tr>
+        </table>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<?php 
+if(isset($isowner) && $isowner == true)
+{?>
+<script language="javascript">
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var action  = baseuri+'/online/Action';
+    var addsuburl = baseuri+'/createonline';
+    function CreateOnleSubject(){
+        title = "创建直播主题";
+        showiframe(addsuburl, 450, 120, title, false);
+    }
+    function delsub(subid){
+        $.post(action,{act:'delsub',subjectid:subid},function(data){
+            showalert(data.error);if(data.errno == 'success'){
+                setTimeout(function(){ window.location.reload();},2000);
+            }
+        },'json');
+    }
+    function editsub(subid){
+        title = "编辑直播主题";
+        showiframe(addsuburl+'?subjectid='+subid, 450, 120, title, false);
+    }
+</script>
+<?php
+}?>

@@ -1,0 +1,348 @@
+<script charset="utf-8" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,Cm/Js/Tabs.js,Cm/Js/Dialog.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/Functioner.js"></script><!--上线后改回-->
+
+<script type="text/javascript">
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName']; ?>";
+    var action = baseuri+"/article/Action";
+</script>
+<script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/Article.js"></script><!--上线后改回-->
+<style type="text/css">
+    .show
+    {
+        display:block !important;
+    }
+</style>
+<!--top-->
+<div class="editBg Trans"></div><!--高级编辑背景-->
+
+<input type="hidden" value="sim"  id="simsupCut" />
+<input type="hidden" value="0"  id="timingSaveControl" /><!--确保自动保存js只运行一个-->
+
+<!--简易编辑器-->
+<div class="edit">
+    <form id="simForm" action="" method="post" onsubmit="return false;">
+        <input type="hidden" value="" name="timestamp" id="simTimestamp" />
+
+        <input type="hidden" name="memid" id="memid" value="<?php echo $bloginfo['MemberID'];?>" />
+        <input type="hidden" name="act" id="act" value="add" />
+        <input type="hidden" name="sortId"  value="18295" />
+        <input type="hidden" name="groupStr" value="<?php echo trim($bloginfo['GroupID'],',');?>" />
+        <input type="hidden" name="blogName" value="<?php echo $bloginfo['BlogName'];?>" />
+        <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" />
+        <input type="hidden" value="0"  id="simSaveEditControl" name="draftsArticleid" /><!--第一次保存草稿箱后定时保存的就只做修改-->
+        <input type="hidden" value="0"  id="simSaveEditTimeControl" name="draftsAppeartime" />
+
+        <div class="editBt TitleBox">
+            <label class="LabSlc"> 
+                <select name="tagId" class="SlLW SlcWrp" id="simTagid" >
+                    <option value="0">选择分类</option>
+                    <?php foreach($systaglist as $tagid => $tag): ?>
+                    <option value="<?php echo $tagid;?>" ><?php echo $tag;?></option>
+                    <?php endforeach; ?>
+                </select>
+            </label>
+            <input class="Bt timingkey" type="text" name="title" id="simTitle" />
+            <span class="font14b cogrey" onclick="toggleEditor('editBox','super','simTagid');vifdata('sup');" style="cursor:pointer;">高级模式 <span class="Ico editSupIco" alt="高级模式"></span><span id="simTimingSave" style="font-size:12px;font-weight:normal;display:none;"></span></span>
+        </div>
+        <textarea name="content" id="simContent"></textarea>
+        <div class="AppendFunc">
+
+            <span class="Fr cogrey" id="simMemberidBlog" style="display:none;">发表到 :<input type="hidden" name="memberid" id="simMemberid" value="<?php echo $bloginfo['MemberID']; ?>" />
+                <?php echo $bloginfo['BlogName']?> 的博客</span>
+
+            <label class="Fl"><input type="checkbox" class="cnfolck" id="simCnfolck" /></label>
+            <span class="lockBtn lock">用户需要赠送 <input type="text" id="simGiftPrice" name="GiftPrice" class="coSmart num lock" value="0" disabled="true" /> 朵鲜花才能查看博文!</span>
+        </div>
+        <div class="BtnBox">
+            <p class="PostBtn">
+                <a href="javascript:void(0);" onclick="javascript:submitfun('sim',<?php echo $user['userid']; ?>,'');" class="Post">发布博文</a>
+                <a href="javascript:void(0);" onclick="javascript:submitfuntTiming('sim','handSave');" class="Save">保存草稿箱</a>
+            </p>
+            <input type="hidden" name="isvalidate" id="simisvalidate" value="<?php echo($isvalidate?'1':'0'); ?>" />
+            <p class="CodeImgBox" id="simLastIt" <?php if($isvalidate){echo("style='display:none;'");} ?>><label>验证码：</label><input type="text" class="Txt" name="validate" id="simValidate" alt="输入验证码" /> 
+                <span class="CodeImg" id="simVarifySpan"><img src="<?php echo $baseurl; ?>/register/varify?r=<?php echo(time()); ?>" style="cursor:pointer;" id="simVifdataImg" onclick="javascript:vifdata('sim');" /></span><a href="javascript:void(0);" onclick="javascript:vifdata('sim')" id="simIndistinct" >&nbsp;看不清</a></p>
+        </div>
+    </form>
+</div>
+<!--高级编辑器-->
+<div class="supEdit">
+    <form id="supForm" name="" action="" method="post" onsubmit="return false;">
+        <input type="hidden" value="" name="timestamp" id="supTimestamp" />
+
+        <input type="hidden" name="memid" id="memid" value="<?php echo $bloginfo['MemberID'];?>" />
+        <input type="hidden" name="act" id="act" value="add" />
+        <input type="hidden" name="groupStr" value="<?php echo trim($bloginfo['GroupID'],',');?>" />
+        <input type="hidden" name="blogName" value="<?php echo $bloginfo['BlogName'];?>" />
+        <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" />
+        <input type="hidden" value="0"  id="supSaveEditControl" name="draftsArticleid" /><!--第一次保存草稿箱后定时保存的就只做修改-->
+        <input type="hidden" value="0"  id="supSaveEditTimeControl" name="draftsAppeartime" />
+
+
+        <div class="editBt TitleBox">
+            <label class="LabSlc"> 
+                <select name="tagId" id="supTagid">
+                    <option value="0">选择分类</option>
+                    <?php foreach($systaglist as $tagid => $tag): ?>
+                    <option value="<?php echo $tagid;?>" ><?php echo $tag;?></option>
+                    <?php endforeach; ?>
+                </select>
+            </label>
+            <input class="Bt timingkey" type="text" name="title" id="supTitle" onclick="javascript:vifdata('sup')" />
+            <span class="font14b cogrey" onclick="toggleEditor('editBox','super','supTagid');vifdata('sim')" style="cursor:pointer;">简易模式 <span class="Ico editIco" alt="简易模式"></span><span id="supTimingSave" style="font-size:12px;font-weight:normal;display:none;"></span></span>
+        </div>
+        <div class="row border">
+            <span class="L">标签：</span>
+            <div class="ML40 cogrey">
+                <!--新增标签选项修改于0623---->
+                <input class="Bt" type="text" name="tag" id="tag" /> <a href="javascript:toggle('LabelBar');" class="addIco Ico"></a>（选择已经有的标签）<a href="javascript:autoget();"  class="Btn2">自动提取标签</a><br />
+                <div class="LabelBox" id="LabelBar"></div>
+                <!--end 0623--->
+                <!--<label class="Pl70 Mt15 Psrltv" id="Autotiqu">-->
+                <label id="Autotiqu">
+                    <span class="Sparow"></span>
+                    <div class="Bqremind">
+                        <p class="Mt2">多个标签用逗号分隔，单个标签最大长度30个字节</p>
+                        <p>添加标签可在中金在线博客首页获得更多的展示机会</p>
+                        <h6>热门标签：</h6><div class="MyTabs" id="s_hottaglist"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="row border">
+            <span class="L">摘要：</span>
+            <div class="ML40 cogrey">
+                <textarea class="brief" name="summary"></textarea><br />
+                <a href="javascript:cutSummary()" class="btnDiaY Btn1">自动截取</a> <span class="cogrey">(摘要是对文章主要内容的精炼概括，只支持文本格式分类)</span>
+            </div>
+        </div>
+        <!--高级编辑器项目修改于0623---->
+        <div class="row border PL40">
+            <div class="Mb9"><textarea name="content" id="supContent" style="width:652px; height:352px;"></textarea></div>
+
+            <span id="supMemberidBlog" style="display:none;">发表到：<input type="hidden" name="memberid" id="supMemberid" value="<?php echo $bloginfo['MemberID']; ?>" />
+                <?php echo $bloginfo['BlogName']?> 的博客</span>
+
+        </div>
+        <div class="row border PL40">
+            个人分类：<select name="sortId" id="sortid"><option value="18295">默认分类</option></select> <span class="cogrey">(中金在线个人用户对自己发布的文章进行分类)</span>
+        </div>
+        <!--end 0623--->
+        <div class="row border PL40">
+            <input class="cnfolck" type="checkbox" id="supCnfolck" />
+            <span class="lockBtn lock">用户需要赠送 <input name="GiftPrice" id="supGiftPrice" type="text" class="num coSmart" value="0" disabled="true" /> 朵鲜花才可查看该文章！（1朵鲜花=0.1元人民币）</span>
+            <br />
+            <a href="#" class="coSmart">兑换鲜花&gt;&gt;</a> <span class="cogrey">（当鲜花大于10000朵即可将其兑换成人民币）</span>
+        </div>
+        <div class="row border PL40">
+            阅读对象： <select name="readStatus">
+                <option value="0">所有人</option>
+                <option value="1">注册用户</option>
+                <option value="3">不公开</option>
+            </select>
+        </div>
+        <div class="row border PL40">
+            是否推荐：
+            <label for="Y">
+                <input id="Y" type="radio" value="1" name="memberRecommend" checked /> 是
+            </label>
+            <label for="N">
+                <input id="N" type="radio" value="0" name="memberRecommend" /> 否
+            </label>
+        </div>
+        <div class="row PL40 border">
+            引用通告：<input class="Bt" name="trackback" type="text" onkeyup="value=value.replace(/[，,\s]/g,';');" />
+            <p class="cogrey PL60">
+                要引用另一个用户的网络日志项，请输入以上网络日志项的引用通告地址。用分号分隔多个地址。<br />
+                例如：<?php echo(config_item('base_url')); ?>/1373/1049126d04.trackback;
+            </p>
+        </div>
+        <div class="row PL40 LastRow">
+            <input type="hidden" name="isvalidate" id="supisvalidate" value="<?php echo($isvalidate?'1':'0'); ?>" />
+            <p class="LastIt" id="supLastIt" <?php if($isvalidate){echo("style='display:none;'");} ?> >验证码：<input class="code" type="text" name="validate" id="supValidate"  />
+                <span id="supVarifySpan">
+                    <img onclick="javascript:vifdata('sup')" id="supVifdataImg" alt="输入验证码" src="" style="cursor:pointer"/>
+
+                </span><a href="javascript:void(0);" onclick="javascript:vifdata('sup')" id="supIndistinct" >&nbsp;看不清</a></p>
+            <!--<p style="border:0px solid white;height:3px;" <?php if($isvalidate){echo("style='display:none;'");} ?> id="supLastIt_2" >&nbsp;</p>-->
+
+            <a href="javascript:void(0);" onclick="javascript:submitfuntTiming('sup','handSave');" class="Btn1 R">保存草稿箱</a>
+            <a href="javascript:submitfun('sup',<?php echo $user['userid']; ?>,'');" class="BtnSub Btn1">发表博文</a>
+
+            <a href="javascript:void(0);" onclick="javascript:resetForm('supForm')" class="BtnXz btn">重置</a>
+            <a href="javascript:preview();" class="BtnXz btn">预览</a>
+        </div>
+    </form>
+</div>
+
+<?php
+$MemberID=$bloginfo['MemberID'];
+?>
+
+<script type="text/javascript" src="<?php echo($baseurl); ?>/ke4/kindeditor-min.js"></script>
+<script type="text/javascript">
+
+
+    var editor;
+    var editorsimple;
+
+    KindEditor.ready(function(K) {
+        //高级编辑框用
+        editor = K.create('#supContent',{
+            resizeType : 0,
+            uploadJson : '<?php echo(config_item("base_url")); ?>/ajaxeditorupload/attupload/<?php echo $bloginfo['UserID']; ?>',
+            emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+            items: ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+                'flash', 'media', 'table', 'hr', 'emoticons', 'code', 'link', 'unlink','|','about'],
+            allowFlashUpload: false,
+            allowMediaUpload: false,
+            afterCreate : function() {
+                KindEditor.ctrl(this.edit.doc, 13, function() {
+                    submitfun('sup',"<?php echo $user['userid']; ?>",'');
+				
+                });
+                syncEdit('sim2sup',this.edit);
+            } 
+        });
+        //高级编辑框用
+	
+        //简易编辑框用
+        editorsimple = K.create('#simContent',{
+            resizeType : 0,
+            uploadJson : '<?php echo(config_item("base_url")); ?>/ajaxeditorupload/attupload/<?php echo $bloginfo['UserID']; ?>',
+            emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+            items: [ 'emoticons','image', 'media','|','about'],
+            allowFlashUpload: false,
+            allowMediaUpload: false,
+            afterCreate : function() {
+                KindEditor.ctrl(this.edit.doc, 13, function() {
+                    submitfun('sim',"<?php echo $user['userid']; ?>",'');
+				
+                });
+                syncEdit('sim2sup',this.edit);
+            } 
+        });
+        //简易编辑框用
+	
+    });
+
+		
+    function resetForm(form){
+        document.forms[form].reset();
+        editor.html('');
+    }
+    function preview(){
+        editor.clickToolbar('preview');
+    }
+
+    //自动提取标签用
+    function autoget()
+    {
+        showalert('标签提取中...','popupTip','TMDeleteSuccess');
+    	
+        var action='<?php echo(config_item("base_url")); ?>/f/utf8.php';
+        var content=editor.html();
+        content=content.replace(/(\&nbsp\;)+|(^\s*)|(\s*$)|(\<br\s*\/>)+/g,'');
+        //content=content.replace(/(\<p\>)+|(\<\/p\>)+|(\<br\s*\/>)+|(\&nbsp\;)+/gi,'');
+        //content=content.replace(/\&nbsp\;/g,'');
+		
+        var result=content.match(/^[0-9A-Za-z\s\-\_\.\(\)\+\=\%\$\&\#\@\!\~\`\*\"\'\|\\\:\;\?\/\>\<\,\}\{\]\[\^\０\１\２\３\４\５\６\７\８\９\Ａ\Ｂ\Ｃ\Ｄ\Ｅ\Ｆ\Ｇ\Ｈ\Ｉ\Ｊ\Ｋ\Ｌ\Ｍ\Ｎ\Ｏ\Ｐ\Ｑ\Ｒ\Ｓ\Ｔ\Ｕ\Ｖ\Ｗ\Ｘ\Ｙ\Ｚ\ａ\ｂ\ｃ\ｄ\ｅ\ｆ\ｇ\ｈ\ｉ\ｊ\ｋ\ｌ\ｍ\ｎ\ｏ\ｐ\ｑ\ｒ\ｓ\ｔ\ｕ\ｖ\ｗ\ｘ\ｙ\ｚ\（\）\〔\〕\【\】\〖\〗\“\”\‘\｛\｝\《\》\％\＋\—\－\～\：\。\、\，\、\；\？\！\…\‖\”\‘\｜\〃\ =>]+$/);
+		
+        if(result!=''&&result!=null)
+        {
+            showalertminute('无可用标签',1000,'','popupTip','TMDeleteSuccess');
+            return;
+        }
+		
+        if(content==''||content==' '||content.length<4)
+        {
+            showalertminute('无可用标签',1000,'','popupTip','TMDeleteSuccess');
+            return;
+        }
+        
+        
+        
+        $.ajax({
+            type: 'post',
+            contentType:'application/x-www-form-urlencoded',
+            url:action,
+            data:$.param({'content':editor.html(),'num':4,'json':'1'}), 
+            dataType:'json',
+            //async: false,//影响  showalert函数调用
+            success: function(data){
+                //alert(data.error);
+                if(data.error=='success')
+                {
+                    //var str='';
+                    //for(i=0;i<data.info.length;i++)
+                    //{
+                    //    str+=data.info[i]+',';
+                    // }
+				
+                    //str=str.substring(0,str.length-1);
+                    if(data.info==''||data.info==' ')
+                    {
+                        
+                        showalertminute('无可用标签',1000,'','popupTip','TMDeleteSuccess');
+                    }
+                    else
+                    {
+                        Dialog.Close();
+                        $('#tag').val(data.info);
+                    	
+                    }
+                }
+                else
+                {
+                    
+                    showalertminute('无可用标签',1000,'','popupTip','TMDeleteSuccess');
+                }
+			
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                //showalert('系统繁忙，请稍后...'+XMLHttpRequest.status+','+XMLHttpRequest.readyState+','+textStatus);
+                //showalert('系统繁忙，请稍后...');
+			
+               
+                showalertminute('系统繁忙，请稍后...',1000,'','popupTip','TMDeleteSuccess');
+			
+            }
+        });
+    }
+
+    //简易编辑器和高级编辑器内容相互同步
+    function editcontentcopy(fromid,toid)
+    {
+        if(fromid!='')
+        {
+            editor.html(editorsimple.html());
+        }
+        else
+        {
+            editorsimple.html(editor.html());
+        }
+	
+    }
+
+    $(document).ready(function(){
+        $('input[name="title"]').val('');
+        $('#sortid').load("<?php echo $baseurl;?>/ajaxsort/list/<?php echo $bloginfo['MemberID'];?>");
+        $('#LabelBar').load("<?php echo $baseurl;?>/ajaxarticletags/list");
+        $('#s_hottaglist').load("<?php echo $baseurl;?>/ajaxhottaglist/list");
+        $('#timingSaveControl').val('0');
+
+        $('#simSaveEditControl').val(0);
+        $('#simSaveEditTimeControl').val(0);
+        $('#supSaveEditControl').val(0);
+        $('#supSaveEditTimeControl').val(0);
+
+    })
+    $(document).ready(function(){
+        vifdata('sim');
+    });
+</script>
+<!--/top-->

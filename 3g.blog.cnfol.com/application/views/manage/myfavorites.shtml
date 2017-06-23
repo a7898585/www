@@ -1,0 +1,100 @@
+<?php include $commonheader;?>
+
+<nav class="Nav TextHeader">
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" class="BackPage ToBlock" ></a>
+    <h2 class="Text-title F16 Tc">收藏夹</h2>
+</nav>
+<section class="CC_module">
+    <section class="CC_ListNew" id="MyFav_Box">
+        <?php
+        if(!empty($artlist) && !empty($artlist['Record'])){
+        $artidlist = '';
+        foreach($artlist['Record'] as $art){
+        $artidlist .= ','.$art['ArticleID'];
+        $artTitle = filter($art['Title']);
+        if(strlen($artTitle) > 28){
+        $art['Title'] = utf8_str($artTitle,28);
+        }
+        ?>
+        <div class="CC_new" id="myfavor_<?php echo $art['ArticleID'];?>">
+            <h2 class="CC_tit F16 Pl10"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html"><?php echo filter_word($art['Title']); ?></a></h2>
+            <div class="CC_cnt Bai_color">
+                <time class="Fl CC_time Hui_color Pl10"><?php echo $art['AppearTime'];?></time>
+                <a href="javascript:void(0);" onclick="javascript:delArticleFavor('<?php echo $art['ArticleID']; ?>');" class="Fr DelSc Tc F12" >取消收藏</a>
+            </div>
+            <form id="article_action_form_<?php echo($art['ArticleID'])?>" name="article_action_form" method="post" target="_blank">
+                <input type="hidden" name="act" value="del"/>
+                <input type="hidden" name="id"  value="<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID']; ?>" />
+                <input type="hidden" name="memid" id="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+                <input type="hidden" name="flashCode" id="flashcode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>" />
+
+                <input type="hidden" name="ismut"  value="<?php echo $art['IsMultimedia']; ?>" />
+                <input type="hidden" name="recommend"  value="<?php echo $art['Recommend']; ?>" />
+            </form>  
+        </div>
+        <?php }
+        }?>
+    </section>
+    <a href="javascript:void(0);" class="GetMore ToBlock Wrp Tc Mt10" id="GetMore"><?php if($total>10){?>查看更多<?php }else{ ?>已经显示全部内容<?php }?></a>
+</section>
+<input type="hidden" name="currentpage" id="currentpage" value="2" />
+<input type="hidden" name="scrolltopflag" id="scrolltopflag" value="2" />
+
+<?php  include $commonfooter; ?>
+<script language="javascript">
+    var baseurl = "<?php echo $baseurl; ?>";
+    var domainname = "<?php echo($bloginfo['DomainName']);?>";
+    var oGetMore=C.G('GetMore');
+    var oLst_news=C.G('MyFav_Box')
+    var Btn=true;
+    if(Btn && oGetMore){
+        window.onscroll=function(){
+            var top=Bk.tools.getPos(oGetMore).t + oGetMore.offsetHeight;
+            var Viewh=document.documentElement.clientHeight||document.body.clientHeight;
+            var ScrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+        
+            if(top < (Viewh + ScrollTop)){    
+                var page=document.getElementById("currentpage").value;  
+                if($('#scrolltopflag').val()=='2'){
+                    $('#scrolltopflag').val('1');
+                    if(Btn && oGetMore.style.display!=='none'){    
+                        $.getJSON(baseurl+'/index.php/myblog/moreMyfavors/?domainname='+domainname+'&page='+page+'r='+new Date().getTime(), function(json){
+                            $('#scrolltopflag').val('2');
+                            if(json.page != ''){
+                                document.getElementById('currentpage').value=json.page;
+                            }
+                            if(json.data != '' && json.error == 1){
+                                $('#MyFav_Box').append(json.data);
+                            }else{
+                                oGetMore.innerHTML= '已经显示全部内容';
+                                Btn=false;
+                            }
+            
+                        });
+                    }	
+                }
+            }  
+        }
+    }
+    function delArticleFavor(id)
+    {
+        $.ajax({
+            type: 'post',
+            url: baseurl+'/index.php/article/Action/'+domainname, 
+            data: $('#article_action_form_'+id).serialize(), 
+            dataType: 'json',
+            success: function(data){
+                if(data.errno == 'failed'){
+                    alertDialog('取消收藏失败');
+                }else if(data.errno == 'success'){
+                    alertDialog('取消收藏成功');
+                    $('#myfavor_'+id).addClass('Hide');
+                }
+                
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alertDialog('发生错误，请重新提交保存'+XMLHttpRequest.status+','+XMLHttpRequest.readyState+','+textStatus);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,100 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：评论管理</div>
+    </div>
+    <div class="szym06">
+
+        <div class="wzjtym01"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo $article['ArticleID'];?>.html"><?php echo FilterJs($article['Title']);?></a></div>
+
+        <div class="wzjtym02">[  <?php echo $article['AppearTime'];?> ]</div>
+
+        <form onsubmit="return DelComment();" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/manage/comment/Action" method="post" name="formc" id="formc">
+            <input type="hidden" value="27920006" id="tableid" name="tableid">
+            <input type="hidden" value="del" name="act">
+            <table cellspacing="0" cellpadding="5" border="0" width="100%" class="bd_tab">
+                <tbody>
+                    <?php
+                    if($commentlist['RetRecords'] > 0)
+                    {
+                    if($commentlist['RetRecords'] == 1)
+                    {
+                    $commentlist['Record'] = array(0=>$commentlist['Record']);
+                    }
+                    $flashCode = getVerifyStr($article['ArticleID'].$bloginfo['UserID']);
+                    foreach($commentlist['Record'] as $comment)
+                    {
+                    ?>
+                    <tr class="sort">
+                        <td width="55%">回复人：<?php echo $comment['NickName'];?></td>
+                        <td width="35%">时间:<?php echo $comment['DataTime'];?>&nbsp;</td>
+                        <td width="10%">
+                            <span onclick="DelComment(<?php echo $comment['CommentID'].','.$article['ArticleID'].',\''.$flashCode.'\'';?>)" style="cursor: pointer;">删除</span>
+                            <input type="checkbox" value="<?php echo $comment['CommentID'];?>" id="DelId[]" name="DelId[]">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3">　　　<?php echo FilterJs($comment['Content']);?><hr></td>
+                    </tr>
+
+                    <?php
+                    }
+                    }?>
+                </tbody>
+            </table>
+            <?php
+            if($commentlist['RetRecords'] > 0)
+            {
+            ?>
+            <table cellspacing="0" cellpadding="0" border="0" width="100%" class="bd_tab">
+                <tbody><tr class="sort">
+                        <td width="67%"><?php echo $pagebar;?></td>
+                        <td width="33%"><a href="javascript:SelectAll('formc')">全选/反选</a>
+                            <input type="button" value="删除所选" class="but_1" name="Submit" onclick="DelCommentList('formc', <?php echo $article['ArticleID'].',\''.$flashCode.'\'';?>);"></td>
+                    </tr> 
+                </tbody></table></form>
+        <?php
+        }
+        else
+        {?>
+        <div class="txt">还没有网友对这篇文章做相关评论</div>
+        <?php
+        }?>
+    </div>
+</div>
+<script language="javascript">
+    var baseurl = "<?php echo $baseurl; ?>";
+    var memid = <?php echo $bloginfo['MemberID'];?>;
+    function DelComment(cid,artid,co){
+        $.post(baseurl+'/ajaxcomment/Action',{'act':'delcomment','cid':cid,'artid':artid,'flashcode':co,'memid':memid},function callback(data){
+            showalert(data.error);
+            if('succ' == data.errno){
+                setTimeout(function(){
+                    window.location.reload();
+                },2000);
+            }
+        },'json');
+        return false;    
+    }
+    function DelCommentList(formid,artid,co){
+        var comlist = '';
+        $('#'+formid+' input[type="checkbox"]').each(function(){
+            if(true == $(this).attr("checked")){
+                comlist += $(this).val()+',';
+            }
+        });
+        if(comlist == ''){
+            showalert('请选择要删除的评论选项');return;
+        }
+        $.post(baseurl+'/ajaxcomment/Action',{'act':'delcomment','cid':comlist,'artid':artid,'flashcode':co,'memid':memid},function callback(data){
+            showalert(data.error);
+            if('succ' == data.errno){
+                setTimeout(function(){
+                    window.location.reload();
+                },2000);
+            }
+        },'json');
+        return false;  
+    }
+</script>

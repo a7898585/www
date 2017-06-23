@@ -1,0 +1,40 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="javascript:;">委托{$profile['role'] ? '出售':'购买'}域名详情</a>
+    </div>
+    <div style="display:block;" class="onlineplay_c add_temp_d" id="navhljs1_c0">
+        <ul>
+            <li>
+                <p>代{$profile['role'] ? '售':'购'}域名</p>{$profile.domain}</li>
+            <li>
+                <p>预算费用</p>{$profile.pay_price}</li>
+            <li>
+                <p>手续费</p><div class="price">300元</div>
+            </li>
+            <li>
+                <p>联系人</p>{$profile.contacts} </li>
+            <li>
+                <p>手机号码</p>{$profile.mobile} </li>
+            <li>
+                <p>QQ</p>{$profile.qq}</li>
+            <li>
+                <p>邮箱</p>{$profile.email} </li>
+            <li>
+                <p>您的留言</p>{$profile.message}
+            </li>
+             <li>
+                <p>状态</p>{$profile['status']|getPurchaseParam}
+            </li>
+             <li>
+                <p>操作备注</p>{$profile['remark']}
+            </li>
+            <li>
+                <p>委托时间</p>{$profile.addtime|date="Y-m-d H:i:s",###}
+            </li>
+            <li>
+                <p>更新状态时间</p>{$profile.uptime|date="Y-m-d H:i:s",###}
+            </li>
+            <li><input type="button" class="list_submit list_submit_marg" value="返回" onclick="javascript:history.go(-1);"></li>
+        </ul>
+    </div>
+</div>

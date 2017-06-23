@@ -1,0 +1,268 @@
+<include file="Public:head" />
+<include file="Public:navi" />
+<link href="/Public/Home/new/css/up.css" rel="stylesheet" type="text/css">
+
+<div class="win" >
+    <div class="l1" id="IPhone" style="display: none">
+        <span class="img1"><img src="/Public/Home/new/images/j3.png"></span>
+    </div>
+    <div class="l1" id="Android" style="display: none">
+        <div class="b1">
+            <div class="t1"  onclick="cacle();">一键安装到手机</div>
+            <div class="t2 clearfix">
+                <span class="t2_w1">
+                    <p class="w1_p1">是否将该文件直接安装到手机？</p>
+                    <p class="w1_p2">app_download_v4.4.5...</p>
+                    <p class="w1_p3">apk大小：4.7MB</p>
+                    <p class="w1_p4">扫描右边二维码也可以直接安装</p>
+                </span>
+                <span class="t2_w2"><img src="/Public/Home/new/images/wx.png" width="114" height="115"></span>
+            </div>
+            <div class="w1_p5">
+                <a href="{$base_url}/Public/d/app-xww.apk">仅下载到电脑</a>
+                <a href="javascript:;" class="a1"> 一键安装</a>
+                <a href="javascript:cacle();">取消</a>
+            </div>
+        </div>
+    </div>
+    <div class="l2" style="display: none" id="float"></div>
+</div>
+
+<div class="banner">
+    <img src="/Public/Home/new/images/up_01.png">
+</div>
+<div class="my_up">
+    <div><img src="/Public/Home/new/images/up_03.png"></div>
+    <div class="up_btn">
+        <a href="javascript:;" id="down_iphone"><img src="/Public/Home/new/images/btn1.png"> </a>
+        <a href="javascript:;" id="down_android"><img src="/Public/Home/new/images/btn2.png"> </a>
+    </div>
+</div>
+<script class="jquery library" src="/Public/Common/js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.min.js"></script>
+<script type="text/javascript">
+    $('#IPhone').click(function(){
+        $('#IPhone').hide();
+        //                layer.msg('很抱歉,我们正在努力开发中....'); href="{$base_url}/Public/d/app-xww.apk"
+    });
+    $('#down_iphone').click(function(){
+        $('#IPhone').show();
+        //                layer.msg('很抱歉,我们正在努力开发中....'); href="{$base_url}/Public/d/app-xww.apk"
+    });
+    $('#down_android').click(function(){
+        $('#Android').show();
+    });
+    function cacle(){
+        $('#Android').hide();
+    }
+</script>
+<script type="text/javascript" src="/Public/Common/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/Public/Home/js/layer/laytpl.js"></script>
+<script type="text/javascript" src="/Public/Common/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+    //点击展开分类
+    $('a[ga_event="feed_setting"]').click(function () {
+        if ($('#pagelet-toolbar').attr('class') == '') {
+            $(this).find('i').addClass('icon-customize-up');
+            $('#pagelet-toolbar').addClass('customize');
+            $('.custom-box').show();
+        } else {
+            $(this).find('i').removeClass('icon-customize-up');
+            $('#pagelet-toolbar').removeClass('customize');
+            $('.custom-box').hide();
+        }
+    });
+    //点击头部页面关闭分类
+    $('#container,#pagelet-nav').click(function () {
+        $('a[ga_event="feed_setting"]').find('i').removeClass('icon-customize-up');
+        $('#pagelet-toolbar').removeClass('customize');
+        $('.custom-box').hide();
+    });
+
+    //重载页面
+    $('.icon-refresh').click(function () {
+        $('.alert-msg').show();
+        window.location.reload();
+    });
+
+    //点击删除
+    $("#defaultCategory li").live("click", function () {
+        if ($('.customize').length && $(this).index()) {
+            $("#otherCategory").append("<li>" + $(this).html() + "</li>");
+            $(this).remove();
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $('.ban-msg').removeClass('error').html('点击添加新闻分类');
+                sysNav();
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //点击添加
+    $("#otherCategory li").live("click", function () {
+        if ($('.customize').length) {
+            var i = $("#defaultCategory li").length;
+            if (i <= 6) {
+                $("#defaultCategory").append("<li>" + $(this).html() + "</li>");
+                $(this).remove();
+                sysNav();
+            } else {
+                $('.ban-msg').addClass('error').html('分类已满（最多7个），请先删除一些');
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    //未读新闻 点击查看
+    $('.unread').click(function () {
+        window.location.reload();
+    });
+    //点赞
+    $('a[data-node="digg"]').live('click', function () {
+        /*        var temp = is_login();
+     //        if (temp == false) return false;
+         */
+        var a = $(this).parent('span.disliked').length;
+        var b = $(this).parent('span.liked').length;
+        var gid = $(this).attr('data-groupid');
+        var c_id = $.cookie('_xw_dz' + gid);
+        if (!c_id) {
+            $.cookie('_xw_dz' + gid, gid);
+        }
+        /*无操作*/
+        if (!a && !b && !c_id) {
+            $(this).parent('span').addClass('liked');
+            var liked_num = $(this).find('.liked-num');
+            $(liked_num).html(parseInt($(liked_num).html()) + 1);
+            $(this).attr('title', '已顶');
+            $.post("/news/good", {id: gid}, function (result) {
+            });
+        }
+    });
+    //踩楼
+    $('a[data-node="bury"]').live('click', function () {
+        /*        var temp = is_login();
+     //        if (temp == false) return false;
+         */       var a = $(this).parent('span.disliked').length;
+        var b = $(this).parent('span.liked').length;
+        var gid = $(this).attr('data-groupid');
+        var c_id = $.cookie('_xw_dz' + gid);
+        if (!c_id) {
+            $.cookie('_xw_dz' + gid, gid);
+        }
+        if (!a && !b && !c_id) {
+            $(this).parent('span').addClass('disliked');
+            var disliked_num = $(this).find('.disliked-num');
+            $(disliked_num).html(parseInt($(disliked_num).html()) + 1);
+            $(this).attr('title', '已踩');
+            $.post("/news/bad", {id: gid}, function (result) {
+            });
+        }
+    });
+
+    //不喜欢此类文章
+    $('a[ga_event="feed_item_dislike"]').live('click', function () {
+        news_id = $(this).attr('data-groupid');
+        $.layer({
+            type: 1,
+            shade: [0.5, '#000'],
+            area: ['auto', 'auto'],
+            closeBtn: false,
+            shadeClose: true,
+            title: false,
+            border: [0],
+            page: {dom: '.confirm-dialog'}
+        });
+        return false;
+    });
+    //不喜欢取消
+    $('div[data-node="cancel"]').live('click', function () {
+        news_id = 0;
+        layer.closeAll();
+    });
+    //不喜欢确认
+    $('div[data-node="ok"]').live('click', function () {
+        $.ajax({
+            type: 'POST',
+            url: '/public/nolike',
+            data: {id: news_id},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.code == 200) {
+                    //成功
+                }
+            }
+        });
+        layer.closeAll();
+    });
+
+    //评论点赞
+    $('a[data-node="c_digg"]').live('click', function () {
+        /* var temp = is_login();
+     if (temp == false) return false;
+         */
+        var cid = $(this).attr('data-id');
+        var c_id = $.cookie('_cm_dz' + cid);
+        if (!c_id) {
+            $.cookie('_cm_dz' + cid, cid);
+            $.ajax({
+                type: 'POST',
+                url: '/News/usergb',
+                data: {id: cid, 'gb': 'good'},
+                dataType: 'json',
+                success: function (msg) {
+                }
+            });
+            var liked_num = $(this).find('.liked-num');
+            $(liked_num).html(parseInt($(liked_num).html()) + 1);
+        }
+    });
+    //评论下一页
+    var comment_page = 1;
+    $('a[ga_event="hotcomment_change"]').click(function () {
+        comment_page++;
+        $.ajax({
+            type: 'POST',
+            url: '/hot_comments',
+            data: {p: comment_page},
+            dataType: 'json',
+            success: function (msg) {
+                if (msg.data.data_list.length < 5) {
+                    comment_page = 1;
+                }
+                if (msg.code == 200) {
+                    laytpl($('#hot_comments').html()).render(msg.data, function (render) {
+                        $('.comment-list').html(render);
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+    window.scrollTo(0, 0);
+    function sysNav() {
+        var str = new Array();
+        $('#defaultCategory li>a').each(function (t) {
+            var k = $(this).attr('data_key');
+            var v = $(this).attr('data_value');
+            if (k)
+                str += k + '_';
+        });
+        $.ajax({
+            type: 'POST',
+            url: '/public/sysnav',
+            data: {str: str},
+            dataType: 'json',
+            success: function (msg) {
+            }
+        });
+    }
+</script>
+<include file="Public:foot" />
+
+

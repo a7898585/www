@@ -1,0 +1,14 @@
+<div class="top_menu_bar">
+    <!--<div class="top_menu_more">-->
+        <!--<div class="list_shadow"></div>-->
+        <!--<a class="more_btn" href="javascript:void(0);"></a>-->
+    <!--</div>-->
+
+    <div class="top_menu" id="top_menu">
+        <div class="top_menu_list">
+            <foreach name="nav_list" item="item" key="key">
+            <a scroll-left="" class="btn <eq name="item.pinyin" value="$nav">cur</eq>" href="{$home_url}/{$item.pinyin}">{$item.title}</a>
+            </foreach>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/wenba/wenba_type">问吧分类</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <form id="add_from" method="post" action="__SELF__">
+        <div class="am-margin">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="#tab1">基本信息</a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            标题
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="name" value="{$info.name}">
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            访问标识
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="pinyin" value="{$info.pinyin}">
+                        </div>
+                        <div class="am-u-sm-4">*必填(保存之后,请勿随意修改!)</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            排序
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="order_id" value="{$info.order_id}">
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">显示状态</div>
+                        <div class="am-u-sm-10">
+                            <div class="am-btn-group" data-am-button>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.is_hide" value="1"> am-active</eq>">
+                                <input type="radio" name="is_hide" value="1" <eq name="info.is_hide" value="1"> checked="checked"</eq> id="option1"> Yes
+                                </label>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.is_hide" value="0"> am-active</eq>">
+                                <input type="radio" name="is_hide" value="0" <eq name="info.is_hide" value="0"> checked="checked"</eq> id="option3"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="am-margin">
+                <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                <button type="button" onclick="window.history.back();" class="am-btn am-btn-primary am-btn-xs">返回</button>
+            </div>
+        </div>
+    </form>
+</div>

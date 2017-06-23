@@ -1,0 +1,202 @@
+<STYLE type=text/css>.stat TD {
+        FONT-SIZE: 12px; COLOR: #333333; LINE-HEIGHT: 22px
+    }
+    .chart {
+        BORDER-RIGHT: #b3b3dc 1px solid; BORDER-TOP: #b3b3dc 1px solid; MARGIN: 10px 0px 30px 31px; BORDER-LEFT: #b3b3dc 1px solid; BORDER-BOTTOM: #b3b3dc 1px solid; POSITION: relative
+    }
+    .chart DIV.bar {
+        BORDER-RIGHT: #b3b3dc 1px solid; BORDER-TOP: #b3b3dc 1px solid; BACKGROUND: #dcdcf4; BORDER-LEFT: #b3b3dc 1px solid; LINE-HEIGHT: 0; BORDER-BOTTOM: #b3b3dc 1px solid; POSITION: absolute
+    }
+    .chart DIV.barhl {
+        BORDER-RIGHT: #b3b3dc 1px solid; BORDER-TOP: #b3b3dc 1px solid; BACKGROUND: #dcdcf4; BORDER-LEFT: #b3b3dc 1px solid; LINE-HEIGHT: 0; BORDER-BOTTOM: #b3b3dc 1px solid; POSITION: absolute
+    }
+    .chart DIV.barhl {
+        BACKGROUND: #c2c2f4
+    }
+    .chart DIV.liney {
+        BORDER-TOP: #b9b9b9 1px dotted; LINE-HEIGHT: 0; POSITION: absolute
+    }
+    .chart DIV.titx {
+        FONT-SIZE: 9px; COLOR: #666; FONT-FAMILY: Arial; WHITE-SPACE: nowrap; POSITION: absolute; TEXT-ALIGN: center
+    }
+    .chart DIV.titxhl {
+        FONT-SIZE: 9px; COLOR: #666; FONT-FAMILY: Arial; WHITE-SPACE: nowrap; POSITION: absolute; TEXT-ALIGN: center
+    }
+    .chart DIV.tity {
+        FONT-SIZE: 9px; COLOR: #666; FONT-FAMILY: Arial; WHITE-SPACE: nowrap; POSITION: absolute; TEXT-ALIGN: center
+    }
+    .chart DIV.titxhl {
+        COLOR: #ff0000
+    }
+    .chart DIV.tity {
+        TEXT-ALIGN: right
+    }
+    .chart DIV.hit {
+        FONT-SIZE: 12px; Z-INDEX: 1000; WIDTH: 100px; COLOR: #666; FONT-FAMILY: Arial; POSITION: absolute
+    }
+    .stattop {
+        BORDER-RIGHT: #cdcdcd 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #cdcdcd 1px solid; MARGIN-TOP: 20px; PADDING-LEFT: 10px; FLOAT: left; PADDING-BOTTOM: 10px; BORDER-LEFT: #cdcdcd 1px solid; WIDTH: 220px; MARGIN-RIGHT: 12px; PADDING-TOP: 10px; BORDER-BOTTOM: #cdcdcd 1px solid
+    }
+    .stattop .list {
+        MARGIN-TOP: 6px
+    }
+    .stattop .list TD {
+        HEIGHT: 20px
+    }
+</STYLE>
+<SCRIPT language=javascript>
+    <!--
+    function ig_e(a,b){var c=document.styleSheets[0];if(c.addRule){c.addRule(a,b);}else if(c.insertRule){c.insertRule(a+" { "+b+" }",c.cssRules.length);}};
+    eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('p w(E,D,A,C,B){5.R=8.14(E);5.o=D;5.d=A;5.r=(5.e)?C:(C-2);5.q=0;5.b=B+((5.e)?0:-2);5.x=5.d[0];5.O=5.d[5.d.c-1]}w.P.y=p(B){9 A=15.16(((B-5.x)*5.b/(5.O-5.x)))+((5.e)?2:0);s(A>5.b){A=5.b}17 A};w.P.18=p(){9 A=8.i("k");A.a="1a";A.6.z=5.b+"7";5.R.j(A);9 K=8.i("k");A.j(K);K.a="1b";9 J=0;Q(9 G=0;G<5.o.c;G+=2){9 B=5.y(5.o[G]);9 I=5.o[G+1];9 F=8.i("k");A.j(F);F.a="u";F.6.n=5.r+"7";F.6.z=B+"7";F.6.m=5.b-B-1+"7";F.6.g=(J-1)+"7";F.h="&v;";F.f=K;F.T=p(){5.a="V";5.f.6.L="";5.f.h=5.t.l(3,5.t.c);5.f.6.g=5.6.g;5.f.6.m=S(5.6.m)-S(5.f.19)+"7"};F.W=p(){5.a="u";5.f.6.L="Z"};9 E=8.i("k");A.j(E);E.6.n=5.r+"7";E.6.m=(5.e)?5.b:5.b+3+"7";9 C=I.10(".");F.t="u"+I.l(0,C)+"\\11"+I.l(C+1,I.c)+"\\12&v;&v;"+5.o[G];s(G%4==0){s((I.l(C+1,I.c)=="1"||I.l(C+1,I.c)=="2")){E.a="13";E.6.g=(J-4)+"7";E.h=I}N{E.a="M";E.6.g=(J-1)+"7";E.h=I.l(C+1,I.c)}}N{E.a="M";E.6.g=(J-1)+"7";E.h=""}J+=5.r+((5.e)?-1:1)}5.q=J+((5.e)?1:-1);A.6.n=5.q+"7";Q(9 G=0;G<5.d.c;G++){9 D=5.y(5.d[G]);s(G!=0&&G!=5.d.c-1){9 H=8.i("k");A.j(H);H.a="X";H.6.n=(5.q-((5.e)?1:-1))+"7";H.6.m=(5.b-D-1)+"7"}9 E=8.i("k");A.j(E);E.a="1c";E.6.n="Y";E.6.m=(5.b-D-2)+"7";E.6.g=-U+"7";E.h=5.d[G]}};',62,75,'|||||this|style|px|document|var|className|charth|length|yl|all|ohit|left|innerHTML|createElement|appendChild|div|substring|top|width|xl|function|chartw|barw|if|id|bar|nbsp|Chart|minpv|GetPVHeight|height||||||||||||display|titx|else|maxpv|prototype|for|parent|parseInt|onmouseover|42|barhl|onmouseout|liney|35px|none|indexOf|u6708|u65e5|titxhl|getElementById|Math|round|return|Create|offsetHeight|chart|hit|tity'.split('|'),0,{}));
+    -->
+</SCRIPT>
+<STYLE type=text/css>#usrbar {
+        PADDING-RIGHT: 10px; PADDING-LEFT: 0px; FONT-SIZE: 12px; BACKGROUND: #ffffff; FILTER: alpha(opacity=65); PADDING-BOTTOM: 3px; WIDTH: 100%; COLOR: #000000; LINE-HEIGHT: 19px; PADDING-TOP: 4px; FONT-FAMILY: Arial; LETTER-SPACING: normal; HEIGHT: 19px; TEXT-ALIGN: right; moz-opacity: 0.5
+    }
+    #usrbar A {
+        COLOR: #0000cc; TEXT-DECORATION: underline
+    }
+    #usrbar A:link {
+        COLOR: #0000cc; TEXT-DECORATION: underline
+    }
+    #usrbar A:visited {
+        COLOR: #0000cc; TEXT-DECORATION: underline
+    }
+    #ft {
+        CLEAR: both; FONT-SIZE: 12px; COLOR: #666666; LINE-HEIGHT: 20px; FONT-FAMILY: Arial; HEIGHT: 20px; TEXT-ALIGN: center
+    }
+    #ft A {
+        COLOR: #7777cc; TEXT-DECORATION: underline
+    }
+    #ft A:link {
+        COLOR: #7777cc; TEXT-DECORATION: underline
+    }
+    #ft A:visited {
+        COLOR: #7777cc; TEXT-DECORATION: underline
+    }
+    #usrbar {
+        LETTER-SPACING: normal
+    }
+    #usrbar A {
+        LETTER-SPACING: normal
+    }
+    #usrbar A:link {
+        LETTER-SPACING: normal
+    }
+    #usrbar A:visited {
+        LETTER-SPACING: normal
+    }
+    #ft {
+        LETTER-SPACING: normal
+    }
+    #ft A {
+        LETTER-SPACING: normal
+    }
+    #ft A:link {
+        LETTER-SPACING: normal
+    }
+    #ft A:visited {
+        LETTER-SPACING: normal
+    }
+</STYLE>
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>访问统计</h3>
+    <div class="BgCont">
+        <h6>最近60天的访问图表：</h6> 
+        <div>图表</div> 
+        <td bgcolor="#ffffff">
+            <DIV id="chart"></DIV>
+            <SCRIPT language=javascript>
+                var k=[<?php echo $result;?>];
+                try{
+                    if(k.length==0)
+                    {
+                        k=[0];
+                    }else
+                    {
+                        var f=k.toString();
+                        if(f.charAt(f.length-1)==",")
+                        { 
+                            f=f.substring(0,f.length-1);
+                        }
+                        k=f.split(",");
+                    }
+                }catch(A)
+                {
+                }
+                //alert(k);
+                if(k.length<60)
+                {
+                    while(k.length<60)
+                    {
+                        k.push(0);
+                    }
+                }
+                var f=[];
+                for(var b=0;b<k.length;b++)
+                {
+                    f[b]=k[b];
+                }
+                f.sort(function(B,A){return parseInt(B)-parseInt(A);});//比较适合数字数组排序
+
+                var min=parseInt(f[0]);
+                var max=parseInt(f[f.length-1]);//最后一个
+                var p=[];
+                var n=6;
+                var N=Math.ceil((max-min)/(n-1));//进一法取整
+                p[0]=min;
+                for(var b=1;b<n;b++)
+                {
+                    p[b]=min+N*b;
+                }
+                var _k="<?php echo $nowdate;?>".split("-");
+                var q=new Date(parseInt(_k[0]),parseInt(_k[1])-1,parseInt(_k[2]));
+                var w=[];
+                for(var b=0;b<60;b++)
+                {  
+                    w.push((q.getMonth()+1)+"."+q.getDate());
+                    q.setDate(q.getDate()-1);
+                }
+                var x=[];
+                for(var b=60-1;b>=0;b--)
+                {
+                    x.push(k[b]);
+                    x.push(w[b]);
+                }
+                var y=p;
+                if(y.toString()==[0,0,0,0,0,0].toString())
+                {
+                    y=[0,1,2,3,4,5];
+                }
+                new Chart("chart",x,y,10,152).Create();
+            </SCRIPT>          
+        </td>   
+        <table cellspacing="0" cellpadding="0" width="95%" border="0" cellspacing="0" cellpadding="3">
+            <tr>
+                <td  valign="top" height=30>访问总计:<span id="s_mtclick"><?php echo $blogstat['Totalvisit'];?></span></td>
+                <td  valign="top" height=30>今日访问:<span  id="s_mdclick"><?php echo $blogstat['TodayVisit'];?></span></td>
+                <td  valign="top" height=30>文章总计:<?php echo $blogstat['TotalArticle'];?></td>
+                <td  valign="top" height=30>评论总计:<?php echo $blogstat['TotalComment'];?></td>
+            </tr>
+        </table>          
+
+
+
+        <h6>我最近还访问过的博客：</h6> 
+        <ul class="AddrLst"  id="nearvisitblog">
+
+        </ul>
+        <h6>我最近浏览过的文章地址：</h6> 
+        <ul class="AddrLst" id="nearvisitart">
+
+        </ul>
+    </div>
+</div>
+<div id="ajaxid"></div>
+<script language="javascript">
+    $(function(){
+        $('#nearvisitart').load("<?php echo $baseurl;?>/ajaxnearvisitto/<?php echo $user['userid'];?>/article");
+        $('#nearvisitblog').load("<?php echo $baseurl;?>/ajaxnearvisitto/<?php echo $user['userid'];?>/blog");
+        $('#ajaxid').load("<?php echo $baseurl.'/ajaxomcount/blog/'.$bloginfo['MemberID'];?>?"+new Date().getTime());
+    });
+</script>

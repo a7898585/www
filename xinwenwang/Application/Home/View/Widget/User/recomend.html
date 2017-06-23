@@ -1,0 +1,42 @@
+
+<div class="inbox_tit">
+    <h2>好友推荐</h2>
+    <a href="javascript:getUserRecomend();">换一组</a>
+</div>
+<ul class="myfavorite" >
+    <volist name="recomend" id="vo">
+        <li>
+            <span class="favatar"><img src="{:setUpUrl($vo['head_pic'])}"></span>
+            <div class="group">
+                <h2>{$vo.username}</h2>
+                <span>{$vo.singn}</span>
+            </div>
+            <a href="javascript:add_fans({$vo.id});" class="btn_friend" id="add_fans_{$vo.id}">加为好友</a>
+        </li>
+    </volist>
+</ul>
+
+<script>
+    function add_fans(fuid){
+        var temp = is_login();
+        if (temp == false)
+            return false;
+        if(fuid){
+            $.ajax({
+                type: 'POST',
+                url: '/user/add_fans',
+                data: {fuid: fuid},
+                dataType: 'json',
+                success: function (msg) {
+                    if (msg.code == 200) {
+                        layer.msg('好友添加成功', 1, 1);
+                        $('#add_fans_'+fuid).html('删除好友');
+                        $('#add_fans_'+fuid).attr('href','javascript:del_fans('+fuid+');');
+                    } else {
+                        layer.msg(msg.msg);
+                    }
+                }
+            });
+        }
+    }
+</script>

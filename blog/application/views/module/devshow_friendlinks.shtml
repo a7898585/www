@@ -1,0 +1,18 @@
+<div class="RgtBar" id="Mod_Link" rel="drag">
+    <h3>友情链接</h3>
+    <?php if(isset($dragable) && $dragable==1): ?>
+    <a style="cursor:move;" href="###" id="Mod_Link_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="NBDp4"></a><div class="NBDbx"><a class="NBDp1" href="###" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_Link_td3"></a><a class="NBDp2" href="###" onclick="clkmenu(this.id,2);return false;" style="DISPLAY: none" title="展开" id="Mod_Link_td4"></a><a class="NBDp3" href="###" onclick="removemod(this.id);setmod_input();return false;" title="删除" id="Mod_Link_td2"></a></div>
+    <?php endif; ?>  
+    <div class="modbox1">
+        <ul class="CountLst" id="Link">
+            <li>默认分类：</li>
+            <li><a target="_blank" href="http://www.baidu.com">百度</a></li>
+        </ul>
+    </div>
+</div>
+<script language="javascript">
+    $(function(){
+        $('#Link').load("<?php echo $baseurl;?>/ajaxgetflinktree/<?php echo $bloginfo['MemberID'];?>");
+    })
+
+</script>

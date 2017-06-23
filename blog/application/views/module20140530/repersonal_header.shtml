@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php
+        if($article['SysTagID']=='1453')
+        {
+        ?>
+        <meta name="Keywords" content="<?php echo isset($keywords_golden) ? strip_tags($keywords_golden) : ''; ?>" />
+        <meta name="Description" content="<?php echo isset($description) ?strip_tags($description) : ''; ?>" />
+        <title><?php echo strip_tags($title_golden);?></title>
+        <?php
+        }else{
+        ?>
+        <meta name="Keywords" content="<?php echo isset($keywords) ? strip_tags($keywords) : ''; ?>" />
+        <meta name="Description" content="<?php echo isset($description) ?strip_tags($description) : ''; ?>" />
+        <title><?php echo strip_tags($title);?></title>
+        <!--[if ie 6.0]>
+<script src="http://hs.cnfol.com/uc/Js/Finance/iepng.js" type="text/javascript"></script>
+<script type="text/javascript">
+   EvPNG.fix('.RecomLst li,.CommLst li'); 
+</script>   
+<![endif]-->
+        <?php } ?>
+        <script type="text/javascript" src="<?php echo($imgbase); ?>core/js/jquery-1.4.4.min.js" ></script>
+        <script type="text/javascript" src="<?php echo($imgbase); ?>core/js/jquery.cookie.js" ></script>
+        <script type="text/javascript" src="<?php echo($imgbase); ?>newblog/batev6.0/core/js/function.js" ></script>
+
+        <script type="text/javascript" src="<?php echo($imagesite); ?>/login_js/login_js/lrPopup.js" ></script>
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/function.js?" ></script><!-- 上线后改回 -->
+        <script>
+
+            //设置置顶
+
+            function blogtoparticle(artid, type) {
+	
+                g_pop = new Popup({contentType:3, isReloadOnClose:false, width:340, height:80});
+	
+                if(type == 1){
+                    g_pop.setContent("title", "置项文章");
+                    g_pop.setContent("confirmCon", "您确定要 置顶 此文章吗？");
+                }else if(type == 0){
+                    g_pop.setContent("title", "取消置项文章");
+                    g_pop.setContent("confirmCon", "您确定要 取消置顶 此文章吗？");
+                }
+                g_pop.setContent("callBack", delCallback);
+                g_pop.setContent("parameter", {id:artid,memid:memberid,flashCode:flashCode,act:'top',istop:type});
+                g_pop.build();
+                g_pop.show();
+	
+	
+            }
+
+            //删除访客
+            function delvisitor(articleid,userid){
+                $.get(baseurl+'/ajaxdelvisitor/'+articleid+'/'+userid,function(data){
+                    alert(data.error);
+                    location.reload();
+                },'json');
+	
+            }
+
+        </script>
+
+
+        <!--新版登陆条-->
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/newcard.v3.js"></script>
+        <script src="<?php echo($imagesite); ?>/uploads/v5.0/passportweb/script/tipswindown.js" language="javascript"></script>
+        <!--
+        <script charset="utf-8" src="<?php echo($hssite); ?>/f=Cm/Js/Base.js" type="text/javascript"></script>
+        -->
+        <link type="text/css" rel="stylesheet" href="http://img.cnfol.com/osapi/css/newcard.v3.css" />
+
+        <script charset="utf-8" src="http://hs.cnfol.com/ue/Js/NewBlog/EditQQ.js" type="text/javascript"></script>
+    </head>
+    <body>
+
+        <script type="text/javascript">
+            //doShowCard('.refid');
+                <?php if($isowner == true){ ?>
+                    function showEditCP(id){
+                    $('#'+id).show();
+                    $('#'+id+'_C').hide();
+                }
+                function hideEditCP(id){
+                    $('#'+id).hide();
+                    $('#'+id+'_C').show();
+                }
+                function saveEditValue(id){
+                    var val = $('#'+id).val();
+                    if(val == ""){
+                        return false;
+                    }
+	
+                    showloading();
+                    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+                    var action = baseuri+'/config/HeadEdit';
+                    if(id == 'Subtitle') {
+                        $.post(action,{Subtitle:val},function(data){
+                            if(data.errno == 'success'){
+                                $('#'+id).val(data.error);
+                                $('#'+id+'Load').text(data.error);
+                                showalert('博客副标题更新成功！');
+                            }else{
+                                showalert(data.error);
+                            }
+                            return false;
+                        },'json');
+                    }else{
+                        $.post(action,{BlogName:val},function(data){
+                            if(data.errno == 'success'){
+                                $('#'+id).val(data.error);
+                                $('#'+id+'Load').text(data.error);
+                                showalert('博客标题更新成功！');
+                            }else{
+                                showalert(data.error);
+                            }
+                            return false;
+                        },'json');
+                    }
+                    hideEditCP(id+'CP');
+                }
+                    <?php } ?>
+
+
+
+        </script>
+        <!-- 
+                <script charset="utf-8" src="<?php echo($hssite); ?>/f=Cm/Js/Base.js,Cm/Js/Menus.js,Cm/Js/Cleaner.js,Cm/Js/Tabs.js" type="text/javascript"></script> 
+                <-->
+
+        <script charset="utf-8" src="<?php echo($hssite); ?>/f=Cm/Js/Menus.js,Cm/Js/Cleaner.js,Cm/Js/Tabs.js" type="text/javascript"></script> 
+        <script type="text/javascript">
+
+
+            function toQzoneLogin(){
+                setTimeout(function(){
+                    var locationurl = encodeURIComponent(window.location.href);
+                    if(top.location !== self.location){ 
+                        location='https://graph.qq.com/oauth2.0/authorize?client_id=207628&redirect_uri=http%3A%2F%2Fpassport.cnfol.com%2Fmultiaccount%2Fcallback%3Ftype%3Dqq%26callback%3D'+locationurl+'&response_type=code&scope=get_user_info%2Cadd_share';
+                    }else{
+                        location='https://graph.qq.com/oauth2.0/authorize?client_id=207628&redirect_uri=http%3A%2F%2Fpassport.cnfol.com%2Fmultiaccount%2Fcallback%3Ftype%3Dqq%26callback%3D'+locationurl+'&response_type=code&scope=get_user_info%2Cadd_share';
+                        return false;
+                    }  },1000);
+  
+            }
+            function sinalogin(){ 
+                setTimeout(function(){
+                    var locationurl = encodeURIComponent(window.location.href);
+                    if(top.location !== self.location) {location='https://api.weibo.com/oauth2/authorize?client_id=2595928596&redirect_uri=http%3A%2F%2Fpassport.cnfol.com%2Fmultiaccount%2Fcallback%3Ftype%3Dtsina%26callback%3Dhttp%253A%252F%252Fpassport.cnfol.com%252F&response_type=code&scope=get_user_info%2Cadd_share';}
+                    else {
+                        location='https://api.weibo.com/oauth2/authorize?client_id=2595928596&redirect_uri=http%3A%2F%2Fpassport.cnfol.com%2Fmultiaccount%2Fcallback%3Ftype%3Dtsina%26callback%3D'+locationurl+'&response_type=code&scope=get_user_info%2Cadd_share';return false;
+                    }
+                },1000);
+            }
+
+
+
+
+            //if ( C.G("C1") ) { 
+            // Menus("Slg");
+            //Cleaner("C1","C2"); 
+            //}
+
+        </script>
+
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Skin.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css,ua/css/Public/TopBarFoot.css,uc/Css/NewBlog/EditBox.css" />
+
+        <script type="text/javascript">
+            var memberid = <?php echo $bloginfo['MemberID'];?>;
+            var flashCode = "<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>";
+            var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+            var mydomainname="<?php echo $bloginfo['DomainName']; ?>";
+            var action = baseuri+'/article/Action';
+            var editurl = baseuri+'/article/Add';
+        </script>  

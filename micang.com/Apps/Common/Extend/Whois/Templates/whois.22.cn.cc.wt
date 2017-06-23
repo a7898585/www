@@ -1,0 +1,45 @@
+Domain name: %COM_DOMAIN%
+Registrant Contact:
+ %REG_NAME%
+ %REG_ORG%
+ %REG_EMAIL%
+ tel: %REG_TEL%
+ fax: %REG_FAX%
+ %REG_ADDRESS%
+ %REG_CITY%,%REG_PROVINCE%,%REG_COUNTRY%
+ %REG_POSTCODE%
+
+Administrative Contact:
+ %ADM_NAME%
+ %ADM_ORG%
+ %ADM_EMAIL%
+ tel: %ADM_TEL%
+ fax: %ADM_FAX%
+ %ADM_ADDRESS%
+ %ADM_CITY%,%ADM_PROVINCE%,%ADM_COUNTRY%
+ %ADM_POSTCODE%
+
+Technical Contact: 
+ %TEC_NAME%
+ %TEC_ORG%
+ %TEC_EMAIL%
+ tel: %TEC_TEL%
+ fax: %TEC_FAX%
+ %TEC_ADDRESS%
+ %TEC_CITY%,%TEC_PROVINCE%,%TEC_COUNTRY%
+ %TEC_POSTCODE%
+
+Billing Contact: 
+ %BIL_NAME%
+ %BIL_ORG%
+ %BIL_EMAIL%
+ tel: %BIL_TEL%
+ fax: %BIL_FAX%
+ %BIL_ADDRESS%
+ %BIL_CITY%,%BIL_PROVINCE%,%BIL_COUNTRY%
+ %BIL_POSTCODE%
+
+Name Server:%COM_DNS1%
+Name Server:%COM_DNS2%
+Registration Date:%COM_CREATE_TIME%
+Expiration Date:%COM_EXPIRE_TIME%

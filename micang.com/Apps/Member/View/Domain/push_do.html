@@ -1,0 +1,307 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="/domain/push_do/">Push域名</a> 
+        <a class="navhl_q" href="/domain/push_from/">收到的Push</a> 
+        <a class="navhl_q" href="/domain/push_to/">Push的状态</a> 
+    </div>
+    <div style="display:block;" class="onlineplay_c3" id="navhljs1_c0">
+        <form id="form_domain_push" name="form_domain_push" action="" method="post">
+            <input type="hidden" id="member_id" value="{$memberInfo.id}" name="member_id">
+            <input type="hidden" id="member_weixin" value="{$memberInfo.weixin}">
+            <div class="pushym">
+                <div class="pushym_l">
+                    <span>请输入需要push的域名</span>
+                    <textarea id="domains" name="domains" rows="10" cols="80" placeholder="每行一个域名,最多100个域名">{$Think.get.domain}</textarea>
+                </div>
+                <div class="list_d">
+                    <ul>
+                        <li>
+                            <p>接收方ID</p>
+                            <input type="text" name="mid" id="mid" class="list_ctxt_a">
+                        </li>
+                        <li>
+                            <p>接收方邮箱</p>
+                            <input type="text" name="email" id="email" class="list_ctxt_a">
+                        </li>
+                        <li>
+                            <p>索要金额</p>
+                            <input type="text" name="money" id="money" class="list_ctxt_a" placeholder="0" value="0">
+                        </li>
+                        <li>
+                            <p>交易备注</p>
+                            <textarea class="list_ctxt_f" name="talkto"></textarea>
+                        </li>
+                        <!--                    <li>
+                                                <p>PUSH类型</p>
+                                                <input type="radio" name="1" value="1" class="list_ctxt_radio" checked="checked">
+                                                <em class="fl" style="padding-right:20px;">可提现(1%手续费) </em>
+                                                <input type="radio" name="1" value="2" class="list_ctxt_radio">
+                                                <em class="fl">免手续费</em>
+                                            </li>-->
+                        <li><input type="checkbox" name="agree" value="yes" checked class="list_ctxt_c"><div class="list_ctxt_d">我已同意米仓网服务协议</div></li>
+                        <li><input type="button" class="list_ctbtn_f" onclick="check_seccode('PushFormSubmit')"></li>
+                    </ul>
+                </div>
+                <!--<a class="doma_d_btn9" href="#"></a>-->
+            </div>
+        </form>
+        <div class="explain">
+            <div class="title_b_icon3"><i class="iconfont">&#xe619;</i></div>
+            <div class="txt_c">规则说明</div>
+            <dl>
+                <dt class="fl">1.</dt>
+                <dd>域名注册、续费、过户时间至少满60天，域名不能过期，国内域名、.wang域名离过期时间不能小于15天如未达到时间要求国际域名有可能导致用户损失最近一次续费金额；</dd>
+            </dl>
+            <dl>
+                <dt class="fl">2.</dt>
+                <dd>域名处于正常状态，本身无任何争议、纠纷或欠费情况；</dd>
+            </dl>
+            <dl>
+                <dt class="fl">3.</dt>
+                <dd>转出需提供域名所有者相关证件；</dd>
+            </dl>
+            <dl>
+                <dt class="fl">4.</dt>
+                <dd>转出前，请检查域名所有者邮箱是否可用，转移密码是发送到域名所有者邮箱；</dd>
+            </dl>
+            <dl>
+                <dt class="fl">5.</dt>
+                <dd>域名转移根据转移注册商、代理商等有所不同，请按照我司具体流程办理；</dd>
+            </dl>
+            <dl>
+                <dt class="fl">6.</dt>
+                <dd>帐号若变更了邮箱、手机，则变更7天内不能转出域名。 若重置了密保，则90天内不能转出域名；</dd>
+            </dl>
+            <dl>
+                <dt class="fl">7.</dt>
+                <dd>正在交易、拍卖中的域名不能办理转出。</dd>
+            </dl>  
+        </div>
+    </div>
+    <div style="display:none;" class="onlineplay_c3" id="navhljs1_c1">
+        <div class="list_c">
+            <ul class="ml20">
+                <li class="ml20">
+                    <span>域名</span>
+                    <input type="text" class="list_ctxt_b" name="">
+                    <span class="ml20">Push状态</span>
+                    <!--js仿表单下拉 开始-->  
+                    <div class="selectbox3">                            
+                        <div class="select_main_3 select_main_click select_main_template">
+                            <input type="text" name="template[]" readonly="readonly" value="米仓公共模板"/>
+                            <div class="select_icon"></div>
+                        </div>
+                        <ul class="option_3 option_select_template">
+                            <li>米仓公共模板1</li>
+                            <li>米仓公共模板2</li>
+                            <li>米仓公共模板3</li>
+                        </ul>
+                        <div class="select_bg_3"></div>
+                    </div>
+                    <!--js仿表单下拉 结束-->
+                    <a class="doma_d_btn6" href="#"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="height30 clear"></div>
+        <div class="airp_listc_left4">
+            <table width="864" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody><tr class="table_title">
+                        <td width="80">域名</td>
+                        <td width="80">Push方 ID</td>
+                        <td width="80">索要金额</td>
+                        <td width="80">备注</td>
+                        <td width="80">Push 状态</td>
+                        <td width="80">模版过户</td>
+                        <td width="80">接收操作</td>
+                    </tr>
+                    <tr class="table_bg_b">
+                        <td><span><input type="checkbox" name="" value="">qiche.com</span></td>
+                        <td>888088</td>
+                        <td>1500000.00 元</td>
+                        <td>汽车网</td>
+                        <td>待接收</td>
+                        <td>
+                            <!--js仿表单下拉 开始-->  
+                            <div class="selectbox3">                            
+                                <div class="select_main_3 select_main_click select_main_template">
+                                    <input type="text" name="template[]" readonly="readonly" value="国际模板"/>
+                                    <div class="select_icon"></div>
+                                </div>
+                                <ul class="option_3 option_select_template">
+                                    <li>米仓公共模板1</li>
+                                    <li>米仓公共模板2</li>
+                                    <li>米仓公共模板3</li>
+                                </ul>
+                                <div class="select_bg_3"></div>
+                            </div>
+                            <!--js仿表单下拉 结束-->
+                        </td>
+                        <td><a class="listent_d" title="" href="#">接收</a><a class="listent_d ml20" title="" href="#">拒绝</a></td>
+                    </tr> 
+                    <tr class="table_bg_a">
+                        <td><span><input type="checkbox" name="" value="">qiche.com</span></td>
+                        <td>888088</td>
+                        <td>1500000.00 元</td>
+                        <td>汽车网</td>
+                        <td>待接收</td>
+                        <td>
+                            <!--js仿表单下拉 开始-->  
+                            <div class="selectbox3">                            
+                                <div class="select_main_3 select_main_click select_main_template">
+                                    <input type="text" name="template[]" readonly="readonly" value="国际模板"/>
+                                    <div class="select_icon"></div>
+                                </div>
+                                <ul class="option_3 option_select_template">
+                                    <li>米仓公共模板1</li>
+                                    <li>米仓公共模板2</li>
+                                    <li>米仓公共模板3</li>
+                                </ul>
+                                <div class="select_bg_3"></div>
+                            </div>
+                            <!--js仿表单下拉 结束-->
+                        </td>
+                        <td><a class="listent_d" title="" href="#">接收</a><a class="listent_d ml20" title="" href="#">拒绝</a></td>
+                    </tr> 
+                    <tr class="table_bg_b">
+                        <td><span><input type="checkbox" name="" value="">qiche.com</span></td>
+                        <td>888088</td>
+                        <td>1500000.00 元</td>
+                        <td>汽车网</td>
+                        <td>待接收</td>
+                        <td>
+                            <!--js仿表单下拉 开始-->  
+                            <div class="selectbox3">                            
+                                <div class="select_main_3 select_main_click select_main_template">
+                                    <input type="text" name="template[]" readonly="readonly" value="国际模板"/>
+                                    <div class="select_icon"></div>
+                                </div>
+                                <ul class="option_3 option_select_template">
+                                    <li>米仓公共模板1</li>
+                                    <li>米仓公共模板2</li>
+                                    <li>米仓公共模板3</li>
+                                </ul>
+                                <div class="select_bg_3"></div>
+                            </div>
+                            <!--js仿表单下拉 结束-->
+                        </td>
+                        <td><a class="listent_d" title="" href="#">接收</a><a class="listent_d ml20" title="" href="#">拒绝</a></td>
+                    </tr> 
+                    <tr class="table_bg_a">
+                        <td><span><input type="checkbox" name="" value="">qiche.com</span></td>
+                        <td>888088</td>
+                        <td>1500000.00 元</td>
+                        <td>汽车网</td>
+                        <td>待接收</td>
+                        <td>
+                            <!--js仿表单下拉 开始-->  
+                            <div class="selectbox3">                            
+                                <div class="select_main_3 select_main_click select_main_template">
+                                    <input type="text" name="template[]" readonly="readonly" value="国际模板"/>
+                                    <div class="select_icon"></div>
+                                </div>
+                                <ul class="option_3 option_select_template">
+                                    <li>米仓公共模板1</li>
+                                    <li>米仓公共模板2</li>
+                                    <li>米仓公共模板3</li>
+                                </ul>
+                                <div class="select_bg_3"></div>
+                            </div>
+                            <!--js仿表单下拉 结束-->
+                        </td>
+                        <td><a class="listent_d" title="" href="#">接收</a><a class="listent_d ml20" title="" href="#">拒绝</a></td>
+                    </tr>
+                </tbody></table>
+            <div class="wrap_a_b">
+                <input type="checkbox" class="onlineplay_c3_input">
+                <span class="onlineplay_c3_xuan">全选</span>
+                <a class="doma_d_btn8" href="#"></a>
+                <a class="doma_d_btn7" href="#"></a>
+            </div>
+            <div class="explain">
+                <div class="title_b_icon3"><i class="iconfont">&#xe619;</i></div>
+                <div class="txt_c">规则说明</div>
+                <dl>
+                    <dt class="fl">1.</dt>
+                    <dd>域名注册、续费、过户时间至少满60天，域名不能过期，国内域名、.wang域名离过期时间不能小于15天如未达到时间要求国际域名有可能导致用户损失最近一次续费金额；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">2.</dt>
+                    <dd>域名处于正常状态，本身无任何争议、纠纷或欠费情况；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">3.</dt>
+                    <dd>转出需提供域名所有者相关证件；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">4.</dt>
+                    <dd>转出前，请检查域名所有者邮箱是否可用，转移密码是发送到域名所有者邮箱；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">5.</dt>
+                    <dd>域名转移根据转移注册商、代理商等有所不同，请按照我司具体流程办理；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">6.</dt>
+                    <dd>帐号若变更了邮箱、手机，则变更7天内不能转出域名。 若重置了密保，则90天内不能转出域名；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">7.</dt>
+                    <dd>正在交易、拍卖中的域名不能办理转出。</dd>
+                </dl>  
+            </div>
+        </div>
+    </div>
+    <div style="display:none;" class="onlineplay_c3" id="navhljs1_c2">
+        fdsfds
+    </div>
+</div>
+<script>
+    var code_url = '{$res.url}';
+    var code_msg = '{$res.msg}';
+    if(code_url){
+        layer.alert(code_msg, function(){location.href=code_url; });
+    }
+</script>
+<literal>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('form[name="form_domain_push"]').submit(function(){
+                if ($(':checkbox[name="agree"]').prop('checked') == false){
+                    layer.msg('您必要阅读并同同意《米仓网域名PUSH服务协议》后,方便提交PUSH请求。');
+                    return false;
+                }
+                return true;
+            });
+        });
+        function getCode(){
+            var t = '#getcode';
+            var id = $('#member_id').val();
+            var weixin = $('#member_weixin').val();
+            if(!id || !weixin){
+                return false;
+            }
+            $(t).val('发送中');
+            $.get("/oper/send_weixin_sms", { id: id,weixin:weixin} ,function(data){
+                if(data!='ok'){
+                    $(t).val('发送验证码');
+                    layer.msg(data,1,3);
+                    return false;
+                }
+                $(t).attr('disabled','true');
+                var count1 =60;
+                timer1 = setInterval(function(){
+                    count1=count1-1;
+                    $(t).val(count1+'秒后');
+                    if(count1==0){
+                        $(t).attr('disabled',false);
+                        $(t).val('重新发送');
+                        count1=60;
+                        clearInterval(timer1);
+                    }
+                },1000);
+            });
+        }
+
+    </script>
+</literal>

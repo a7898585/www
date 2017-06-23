@@ -1,0 +1,31 @@
+
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>评论列表</h3>
+    <div class="BgCont">
+        <dl class="ArtiComtLst">
+            <dt><span class="Title">评论内容</span><span class="Date">发表时间</span><span class="Mage">管理</span></dt>
+            <?php
+            if(empty($artList) || !is_array($artList))
+            {?>
+            <dd>暂无相关的博客评论文章</dd>
+            <?php 
+            }
+            else
+            {
+            foreach($artList['Record'] as $art)
+            {?>
+            <dd><a class="Title" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html"  target="_blank"><?php echo $art['Title'];?></a>
+                <span class="Date"><?php echo $art['AppearTime'];?></span>
+                <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/manage/comment/CommentList/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>" class="Mage">评论（<?php echo $art['CommentNumber'];?>）</a>
+            </dd>
+            <?php
+            }
+            }?>
+        </dl>   
+        <!--分页-->
+        <div class="Page">
+            <?php echo $pagebar;?>
+        </div>
+        <!--end 分页-->                 
+    </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_q" href="/deposit/account/">提现账户</a> 
+        <a class="navhl_h" href="/deposit/add/">添加账户</a>
+        <a class="navhl_q" href="/deposit/apply/">申请提现</a> 
+        <a class="navhl_q" href="/deposit/detail/">提现记录</a> 
+    </div>
+    <div class="onlineplay_c6" id="navhljs1_c1">
+        <ul class="txzf">
+            <li><p>米仓ID</p><span>{$Think.session.MEMBERINFO.id}</span></li>
+            <li><p>户名</p><span>{$profile.realname}</span><span style="color: Green; margin-left: 10px;">您身份证实名认证的姓名</span></li>
+            <li><p>转账类型</p><span>
+                    <label><input type="radio" name="stype" value="0" checked/> 银行汇款</label>
+                    <label><input type="radio" name="stype" value="1"/> 支付宝</label>
+                </span></li>
+            <form name="form_add_zfb" action="" method="post" data-name="zfb" style="display: none;">
+                <li><p>支付宝帐号</p><input type="text" name="account2" class="width220 ipnuttxt txzf_b"  minlength="5" maxlength="60" placeholder="请输入支付宝帐号" datatype="*" errormsg="支付宝帐号格式不正确" sucmsg=" " nullmsg="请输入支付宝帐号"></li>
+                <li><p>确认支付宝帐号</p><input type="text" class="width220 ipnuttxt txzf_b"  maxlength="60" placeholder="请再输入一次支付宝帐号" datatype="*" recheck="account2"  errormsg="两次输入的支付宝帐号不一致" sucmsg=" " nullmsg="请再输入一次支付宝帐号"></li>
+                <input name="realname" value="{$profile.realname}" type="hidden">
+                <input name="type" value="1" type="hidden">
+                <li><input type="submit" value="确认提交" class="btn_orange txzf_c"><input type="submit" value="返回" class="btn_orange txzf_e"></li>
+            </form>
+            <form name="form_add" action="" method="post" data-name="yh">
+                <li>
+                    <p>银行名称</p>
+                    <input type="text" name="bankname" class="width220 ipnuttxt txzf_b" placeholder="请输入银行名称" datatype="*" errormsg="银行名称不正确" sucmsg=" " nullmsg="请输入银行名称"><span style="color: Green; margin-left: 10px;">如XX银行</span>
+                    <!--                    <select class="select_sty txzf_a" name="bankname">
+                                            <option selected="selected" value="">请选择银行</option>
+                                            <option value="招商银行">招商银行</option>
+                                            <option value="中国银行">中国银行</option>
+                                            <option value="交通银行">交通银行</option>
+                                            <option value="兴业银行">兴业银行</option>
+                                            <option value="杭州银行">杭州银行</option>
+                                            <option value="中信银行">中信银行</option>
+                                            <option value="建设银行">建设银行</option>
+                                            <option value="农业银行">农业银行</option>
+                                            <option value="工商银行">工商银行</option>
+                                            <option value="民生银行">民生银行</option>
+                                            <option value="光大银行">光大银行</option>
+                                            <option value="华夏银行">华夏银行</option>
+                                            <option value="平安银行">平安银行</option>
+                                            <option value="广东发展银行">广东发展银行</option>
+                                            <option value="上海浦东发展银行">上海浦东发展银行</option>
+                                            <option value="农村合作银行">农村合作银行</option>
+                                            <option value="中国邮政储蓄银行">中国邮政储蓄银行</option>
+                                        </select>-->
+                </li>
+                <li><p>银行帐号</p><input type="text" name="account" class="width220 ipnuttxt txzf_b"  minlength="16" maxlength="20" placeholder="请输入银行帐号" datatype="yhzh" errormsg="银行帐号格式不正确" sucmsg=" " nullmsg="请输入银行帐号"></li>
+                <li><p>确认银行帐号</p><input type="text" class="width220 ipnuttxt txzf_b"  maxlength="20" placeholder="请再输入一次银行帐号" datatype="yhzh" recheck="account"  errormsg="两次输入的银行账号不一致" sucmsg=" " nullmsg="请再输入一次银行帐号"></li>
+                <li>
+                    <p>省份</p>
+                    <select name="province" class="select_sty txzf_a">
+                        <option value="">选择省份</option>
+                    </select>
+                    <div class="txzf_d">城市</div>
+                    <select name="city" class="select_sty txzf_a">
+                        <option value="">选择城市</option>
+                    </select>
+                </li>
+                <li><p>开户行</p><input type="text" name="address" class="width220 ipnuttxt txzf_b" placeholder="请输入开户行" datatype="*" errormsg="开户地址不正确" sucmsg=" " nullmsg="请输入开户地址"><span style="color: Green; margin-left: 10px;">如XX银行分行或支行，详细以当地开户行地址为准</span></li>
+                <input name="realname" value="{$profile.realname}" type="hidden">
+                <input name="type" value="0" type="hidden">
+                <li><input type="submit" value="确认提交" class="btn_orange txzf_c"><input type="submit" value="返回" class="btn_orange txzf_e"></li>
+            </form>
+        </ul>
+
+    </div>	
+</div>
+<script type="text/javascript" src="/Public/Common/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_Datatype.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[name=stype]').eq(0).attr("checked",'checked')
+        $('form[name="form_add"]').Validform({
+            tiptype:3,
+            datatype:{
+                "yhzh":/^(\d{16}|\d{19})$/
+            },
+            beforeSubmit: function(curform){
+                var msg ='';
+                if($('select[name="province"]').val() ==''){
+                    msg='省份不能为空';
+                }
+                if($('select[name="city"]').val() ==''){
+                    msg='城市不能为空';
+                }
+                if($('select[name="bankname"]').val() ==''){
+                    msg='开户行不能为空';
+                }
+                if(msg==''){
+                    curform.find(':submit').prop('disabled', true);
+                    $.post(curform.attr('action'), curform.serialize(), function(result){
+                        if(result.status==200){
+                            layer.alert(result.message,function(){
+                                location.href='/deposit/account/';
+                            });
+                        }else{
+                            layer.msg(result.message);
+                        }
+                        curform.find(':submit').prop('disabled', false);
+                    });
+                }else{
+                    layer.msg(msg);
+                }
+                
+                return false;
+            }
+        });
+        $('form[name="form_add_zfb"]').Validform({
+            tiptype:3,
+            beforeSubmit: function(curform){
+                curform.find(':submit').prop('disabled', true);
+                $.post(curform.attr('action'), curform.serialize(), function(result){
+                    if(result.status==200){
+                        layer.alert(result.message,function(){
+                            location.href='/deposit/account/';
+                        });
+                    }else{
+                        layer.msg(result.message);
+                    }
+                    curform.find(':submit').prop('disabled', false);
+                });
+                return false;
+            }
+        });
+        $(':input[name="province"]').change(function(){
+            area('city', this.value, '');
+        });
+        area('province', '001', '');
+        $(':input[name="stype"]').click(function () {
+            if (this.value == '1'){
+                $('[data-name="zfb"').show();
+                $('[data-name="yh"').hide();
+            }else {
+                $('[data-name="zfb"').hide();
+                $('[data-name="yh"').show();
+            }
+        })
+    })
+    
+    function area(target, parent, selected){
+        if (parent == '') return false;
+        if (target=='city' && $.inArray(parent, ['001001','001002','001003','001004'])!=-1){
+            var citys = {'001001':'北京','001002':'上海','001003':'天津','001004':'重庆'};
+            var option = '<option value="">选择城市</option>';
+            if (selected != ''){
+                option += '<option value="'+parent+'" selected>'+citys[parent]+'</option>';
+            }else{
+                option += '<option value="'+parent+'">'+citys[parent]+'</option>';
+            }
+            $(':input[name="'+target+'"]').empty().append(option);
+            $(':input[name="county"]').empty().append('<option value="">选择区县</option>');
+
+            return false;
+        }
+        $.getJSON('/public/ajax_get_area', {type:target, parent:parent}, function (result) {
+            var option = '';
+            if (target == 'province'){
+                option = '<option value="">选择省份</option>';
+            }else if (target == 'city'){
+                option = '<option value="">选择城市</option>';
+                $(':input[name="county"]').empty().append('<option value="">选择区县</option>');
+            }else if (target == 'county'){
+                option = '<option value="">选择区县</option>';
+            }
+            $.each(result, function(id, item){
+                if (selected == item['areaID']){
+                    option += '<option value="' + item['areaID'] + '" selected="selected">' + item['simple'] + '</option>';
+                }else {
+                    option += '<option value="' + item['areaID'] + '">' + item['simple'] + '</option>';
+                }
+            });
+            $(':input[name="'+target+'"]').empty().append(option);            
+        })
+    }
+</script>

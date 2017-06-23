@@ -1,0 +1,392 @@
+<?php  include $devmyblogloginheader;?>
+<!--内容-->
+<div class="Wrap Cf Mt15">
+    <!--左-->
+    <div class="MaLft MyAlbums">
+        <h3><span><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/albumlist">我的相册</a></span><em>&gt;&gt;</em>
+            <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/photolist/<?php echo $albuminfo['AlbumID'];?>"><?php echo utf8_str($albuminfo['Name'], 12, 11);?></a>
+        </h3>
+        <?php if(isset($isowner) && $isowner == true){?>　　
+        <?php if(count($photolist['list']) > 0){?>　
+        <span style="cursor: pointer;" onclick="javascript:setalbumfirst();">设置为封面</span>　
+        <span style="cursor: pointer;" onclick="javascript:editphoto();">编辑图片</span>　
+        <span style="cursor: pointer;" onclick="javascript:delphoto();">删除图片</span>
+        <?php }?>
+        <a class="UploadBtn" style="cursor: pointer;" onclick="javascript:addphoto('<?php echo $bloginfo['DomainName'];?>','<?php echo $albuminfo['AlbumID'];?>');">上传照片</a>
+        <a class="GreateBtn" style="cursor: pointer;" onclick="javascript:addalbum('<?php echo $bloginfo['DomainName'];?>');" >创建相册</a>
+        <?php }?>
+        <!--相册-->
+        <link rel="stylesheet" type="text/css" href="http://hs.cnfol.com/uc/Css/NewBlog/jQuery.ad-gallery.css">
+        <script src="<?php echo config_item('estblog');?>/js/jquery.ad-gallery.js" type="text/javascript"></script>
+        <script language="javascript">
+            var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+            var memberid="<?php echo($bloginfo['MemberID']); ?>";
+            var albumid = <?php echo $albuminfo['AlbumID'];?>;
+            var photoid = <?php echo (isset($photolist['list'][0]['PhotoID'])? $photolist['list'][0]['PhotoID']:0);?>;
+            var ocoverid= <?php echo ((intval($albuminfo['CoverID']) > 0)? $albuminfo['CoverID']:0);?>;
+            var flashcode = "<?php echo getVerifyStr($albuminfo['AlbumID'].$bloginfo['UserID']);?>";
+            var vuerblog  = "<?php echo getPrimariBlogDomain($bloglist);?>";
+            var pagesize  = <?php echo $blogconfig['CommentNumber'];?>;
+            var nowpage   = 1;
+            var isaddpage = '';
+            var photocomentpage = new Array();
+            function errhandle(id){
+                $('#limg'+id).attr('href','http://images.cnfol.com/uploads/mod_blog/1/nothing.gif');
+                $('#simg'+id).attr('src','http://images.cnfol.com/uploads/mod_blog/1/nothing.gif');
+            }
+            function fetchrealid(){
+                var pattern = /[0-9]+$/;
+                var ret = pattern.exec(photoid);
+                return ((ret != null)? ret[0]:0);
+            }
+            function setCommentPage(div, page){
+                var realphotoid = fetchrealid();
+                nowpage = page;
+                if(realphotoid < 1){
+                    $('.wangyoup11').html('暂无评论信息'); return;
+                }
+                if(photocomentpage[realphotoid] == undefined){
+                    photocomentpage[realphotoid] = new Array();
+                }
+                if(photocomentpage[realphotoid][page] == undefined){
+			   
+                    $.post(baseuri+'/photo/commentlist',{albumID:albumid, photoid:realphotoid, vCode:flashcode, Page:page, PageSize:pagesize},function(data){
+                        if(data.errno != 'succ'){
+                            var str = '<div class="PhotoComt Cf wangyoup2"><label for="">'+data.Record+'</label></div>';
+                            $('#PhotoCommentList').html(str);
+                            photocomentpage[realphotoid][page] = str;
+                            return;
+                        }
+                        $('#PhotoCommentList').html(data.Record);
+                        nowpage = data.nowpage;
+                        isaddpage = data.isaddpage;
+                        photocomentpage[realphotoid][page] = data.Record;
+                    }, 'json');
+                }else{
+                    $(div).html(photocomentpage[realphotoid][page]);
+                }
+            }
+        </script>
+        <?php
+        if(empty($photolist['list'])){ ?>
+        <p class="UpTip">您还未上传图片，点击<a href="javascript:;" onclick="javascript:addphoto('<?php echo $bloginfo['DomainName'];?>','<?php echo $albuminfo['AlbumID'];?>');" style="text-decoration:none;cursor:hand;">上传照片</a>即可上传。</p>
+        <?php } ?>
+        <div id="gallery" class="ad-gallery PicWrap">
+            <div class="ad-image-wrapper"></div>
+            <div class="ad-controls"></div>
+            <div class="ad-nav">
+                <div class="ad-thumbs">
+                    <ul class="ad-thumb-list">
+                        <?php
+                        if(isset($photolist['list']) && !empty($photolist['list']))
+                        {
+                        foreach($photolist['list'] as $photo)
+                        {
+                        ?>
+                        <li>
+                            <a href="<?php echo $photo['URL'];?>" id="limg<?php echo $photo['PhotoID'];?>" >
+                                <img src="<?php echo $photo['URL'];?>" title="<?php echo filter_word($photo['Name']); ?>" id="simg<?php echo $photo['PhotoID'];?>" onerror="errhandle(<?php echo $photo['PhotoID'];?>);" alt="<?php echo $photo['Remark'].'<br /> 时间:'.(date('Ymd',strtotime($photo['DataTime']))).' 评论:'.$photo['CommentNumber'];?>" class="image<?php echo $photo['PhotoID'];?>" width="90" height="60">
+
+                            </a>
+                            <span title="<?php echo $photo['PhotoID'];?>" ><?php echo utf8_str(filter_word($photo['Name']),10); ?></span>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                        <script type="text/javascript">
+                            function setalbumfirst(){
+                                var realphotoid = fetchrealid();
+                                if(realphotoid == ocoverid){
+                                    
+                                    showalertminute('相册封面图片设置成功',2000,'','popupTip','TMDeleteSuccess');
+                                    return;
+                                }
+                                $.post(albumaction = baseuri + '/album/Action', {albumid:albumid, coverid:realphotoid, vCode:flashcode,  act:'setphoto'}, function(data){
+                                    if(data == 'succ'){
+                                        data = '相册封面设置成功';
+                                        ocoverid = realphotoid;
+                                    }
+                                    
+                                    showalertminute(data,2000,'','popupTip','TMDeleteSuccess');
+                                });
+                            }
+                            function editphoto(){
+                                var url = baseuri+'/photoedit/'+fetchrealid()+'/'+albumid;
+                                //showiframe(url, 330, 175, '编辑图片', false);
+                                showiframe("iframeSrc","popupIframe",url,'495','170');
+                            }
+                            
+                            function delphoto(){
+                                Dialog('TMDelete');
+                            }
+                            function delphotoSure(){
+                                Dialog.Close();
+                                var realphotoid = fetchrealid();
+                                if(realphotoid < 1){
+                                    
+                                    showalertminute('请点击图片选择要删除的图片',2000,'','popupTip','TMDeleteSuccess');
+                                    return;
+                                }
+                                showalert('加载中...','popupTip','TMDeleteSuccess');
+                                $.post(albumaction = baseuri + '/photo/PhotoAction', {memberid:memberid,albumid:albumid, photoids:realphotoid, vCode:flashcode,  act:'delphoto'}, function(data){
+                                    if(data == 'succ'){
+                                        
+                                        showalertminute('相册图片删除成功',2000,'','popupTip','TMDeleteSuccess');
+                                    }else{
+                                        
+                                        showalertminute('相册图片删除失败',2000,'','popupTip','TMDeleteSuccess');
+                                    }
+                                    setTimeout(function(){ window.location.reload(); },1000);
+                                });
+                            }
+                            $(function() {
+                                $('.ad-gallery').adGallery();
+                            });
+                        </script>
+                        <input type="hidden" id="imgcount" value="<?php  echo count($photolist['list']); ?>" />
+
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="descriptions">
+        </div>
+        <!--end 相册-->
+        <!--评论-->
+        <?php if(count($photolist['list']) > 0){?>
+        <div class="CommtBar">
+            <?php
+            if(1 == $blogconfig['PhotoProperty'] )
+            {
+            ?>
+            <h3>评论</h3>
+
+            <!--评论登录-->
+            <div class="CommtLogin">
+                <?php 
+                if(empty($user))
+                {?>
+                <p class="TipLogin">您还未登录，只能匿名发表评论。或者您可以<a href="javascript:;" onclick="showiframe('iframeSrc','popupIframe','<?php echo(config_item('base_url')); ?>/index.php/widget/login','','');" >登录</a> <a href="javascript:;" onclick="showiframe('iframeSrc','popupIframe','<?php echo(config_item('base_url')); ?>/index.php/widget/login','','');">注册</a> 后发表。</p> 
+                <p class="Anonymity">用 户 名：<input type="text" id="Cusername" name="username"  value="中金在线网友" size="20" disabled><input type="hidden" name="username" value="中金在线网友"></p>
+                <?php
+                }
+                else
+                {?>
+                <p class="Anonymity"><div class="fnpl-xm03" align="left"><input name="anonymous" id="anonymous" type="checkbox" value="1" /> 我要匿名评论</div></p>
+                <?php
+                }?>
+            </div>
+            <!--end 评论登录-->
+            <!--留言框-->
+
+            <div class="LeaveCommBox">
+                <form name="myComment" id="myComment" method="post" onsubmit="return false;">
+                    <div class="TextareaBox">
+                        <textarea name="content" id="content" rows="6" cols="40" datatype="LimitB" min="1" max="3000"  msg="评论内容长度应该在1-3000个字节之内"></textarea>            
+                    </div>          
+                    <div class="SubmitBtnBox">            
+                        <p class="CodeImgBox" id="tdvalidate">
+                            <label>验证码：</label>
+                            <input class="Txt" msg="请输入四位验证码" type="text" maxlength="4" size="8" id="validate" name="validate" onkeydown="$('#spanvalidate').hide();"/>
+                            <span class="CodeImg">
+                                <img align="absmiddle" src="<?php echo $baseurl;?>/register/varify" onclick="javascript:Valipic();" style="cursor: pointer;" id="varifycode" alt="看不清？">
+                            </span>
+                            <a href="javascript:Valipic();">看不清</a>
+                            <span style="display: none; color: Red;" id="spanvalidate">验证码错误，请重新输入！</span>
+
+                        </p>
+                        <p><a class="SubmitBtn" href="javascript:;" id="commentsub">提交</a></p>
+                    </div>
+                </form>
+            </div>  
+            <script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/kindeditor-min.js"></script>
+            <script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/lang/zh_CN.js"></script>
+            <style>
+                .ke-icon-count {
+                    background-image: url(<?php echo(config_item('base_url')); ?>/ke4/themes/default/default.png);
+                    background-position: 0px -944px;
+                    width: 16px;
+                    height: 16px;
+                }
+
+                .ke-icon-quote {
+                    background-image: url(<?php echo(config_item('base_url')); ?>/ke4/themes/common/quote.gif);
+                    background-position: 0px;
+                    width: 16px;
+                    height: 16px;
+                }
+            </style>
+            <script language="javascript">
+                var Min = 3;
+                var Max = 150000;
+                var summaryMax=500;
+                var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+                var action = baseuri+"/article/Action";
+                var editor;
+	
+                KindEditor.ready(function(K) {
+                    editor = K.create('#content', {
+                        resizeType : 2,
+                        uploadJson : '<?php echo(config_item("base_url")); ?>/ajaxeditorupload/attupload/<?php echo $bloginfo['UserID']; ?>',
+                        emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+                        items: ['image', 'emoticons'],
+                        allowFlashUpload: false,
+                        allowMediaUpload: false,
+                        afterCreate : function() {
+                            K.ctrl(document, 13, function() {
+                                submitfun();
+                            });
+                            K.ctrl(this.edit.doc, 13, function() {
+                                submitfun();
+                            });
+                        }
+                    });
+	
+                });
+                $(function(){
+                    $('#commentsub').click(function(){
+                        var realphotoid = fetchrealid();
+                        if(realphotoid < 1){
+                            
+                            showalertminute('没有图片信息，无法提交评论',2000,'','popupTip','TMDeleteSuccess');
+                            return;
+                        }
+
+                        var content = editor.html();
+                        if(editor.count() < 1 || editor.count() > 3000){
+                            
+                            showalertminute('评论内容长度应该在1-3000个字节之内',2000,'','popupTip','TMDeleteSuccess');
+                            return;
+                        }
+                        var validatedata = $('#validate').val();
+                        if(! /[0-9a-z]{4}/i.test(validatedata)){
+                            $('#spanvalidate').show();$('#spanvalidate').focus(); return;
+                        }
+                        
+                        showalert('提交中...','popupTip','TMDeleteSuccess');
+                        var isanonymous = ($('#anonymous').is(':checked')) ? 1:0;
+                        $.post(baseuri+'/photo/CommentAction',{act:'addcomment',vCode:flashcode,photoid:realphotoid,albumid:albumid,ccontent:content, verifycode:validatedata, anonymous:isanonymous, udomainname:vuerblog},function(data){
+                            
+                            showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                            if(data.errno == 'succ'){
+                                delete photocomentpage[realphotoid];
+                                if(isaddpage == 'toadd'){
+                                    nowpage += 1;
+                                    isaddpage = '';
+                                }
+                                setCommentPage('#PhotoCommentList', nowpage);
+                                editor.html('');Valipic();
+                            }
+                        },'json');
+                    });
+                });
+                function gotoJump(){
+                    setCommentPage('#PhotoCommentList', $('.Inpjump').val());
+                }
+            </script>
+            <?php
+            }?>
+            <!--end 留言框--> 
+            <!--评论列表-->
+            <form id="formc" name="formc" method="post" onsubmit='return false;'>
+                <input type='hidden' name='photoid' value='859627'>
+                <input type='hidden' name='PhotoId' value='128646'>
+                <div id='PhotoCommentList'>
+                    <div class="PhotoComt Cf wangyoup2"><label for="" class="wangyoup11">评论正在加载中... </label></div>
+                </div>
+            </form>
+            <script language="javascript">
+                function DelSinglePhotoComent(cid){
+                    var realphotoid = fetchrealid();
+                    if(realphotoid < 1){
+                        
+                        showalertminute('没有图片信息，无法提交评论',2000,'','popupTip','TMDeleteSuccess');
+                        return;
+                    }
+                    $.post(baseuri+'/photo/CommentAction',{act:'delcomment',vCode:flashcode,photoid:realphotoid,albumid:albumid,commid:cid},function(data){
+                        
+                        showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                        if(data.errno == 'succ'){
+                            delete photocomentpage[realphotoid];
+                            setCommentPage('#PhotoCommentList', 1);
+                        }
+                    },'json');
+                }
+                function DelPhotoCommentlist(){
+                    var realphotoid = fetchrealid();
+                    if(realphotoid < 1){
+                        
+                        showalertminute('没有图片信息，无法提交评论',2000,'','popupTip','TMDeleteSuccess');
+                        return;
+                    }
+                    var comlist = '';
+                    $('#formc input[type="checkbox"]').each(function(){
+                        if(true == $(this).attr("checked")){
+                            comlist += $(this).val()+',';
+                        }
+                    });
+                    if(comlist == ''){
+                        
+                        showalertminute('请选择要删除的评论信息',2000,'','popupTip','TMDeleteSuccess');
+                        return;
+                    }
+                    $.post(baseuri+'/photo/CommentAction',{act:'delcomment',vCode:flashcode,photoid:realphotoid,albumid:albumid,commid:comlist},function(data){
+                        
+                        showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                        if(data.errno == 'succ'){
+                            delete photocomentpage[realphotoid];
+                            setCommentPage('#PhotoCommentList', 1);
+                        }
+                    },'json');
+                }
+            </script> 
+        </div>  
+        <?php
+        }?>
+
+        <!--end 评论-->     
+    </div>
+    <!--end 左-->
+
+    <div id="iframeSrc" class="HandIn PlusSucPop W200" >
+        <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+        <iframe id="popupIframe" name="iFrame1" width="510px"  height="280px" frameborder="0" scrolling="no"  src=""></iframe>
+    </div>
+
+
+
+    <div id="DeterminePop" class="HandIn3 PlusSucPop W200">
+        <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+        <div class="P20 Bgdfff Txtcntr">
+            <p class="CoBlack Yzxxp">是否确认删除该标签在前台的展示？</p>
+            <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="deltag();Dialog.Close();" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">取消</a></p>
+        </div>
+    </div>
+
+    <input type="hidden" id="abid" />
+    <input type="hidden" id="domain" />
+    <input type="hidden" id="co" />
+    <div id="TMDelete" class="HandIn3 PlusSucPop W200">
+        <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+        <div class="P20 Bgdfff Txtcntr">
+            <p class="CoBlack Yzxxp">您确定要删除这张图片？</p>
+            <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="delphotoSure();" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">返回</a></p>
+        </div>
+    </div>
+
+    <div id="TMDeleteSuccess" class="HandIn3 PlusSucPop W200">
+        <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+        <div class="P20 Bgdfff Txtcntr">
+            <p class="CoBlack Yzxxp" id="popupTip">删除成功</p>
+        </div>
+    </div>
+
+    <!--右-->
+
+    <div class="MaRgt">
+    <?php  include $devmyblogcommonright; ?>
+    </div>
+    <!--end 右--> 
+</div>
+<?php include $peronalfoot;?>

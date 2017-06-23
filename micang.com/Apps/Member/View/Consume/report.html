@@ -1,0 +1,98 @@
+<div class="onlineplay">
+    <div class="navhl">
+        <a class="navhl_q" href="/consume/bill/">消费明细</a>
+        <a class="navhl_q" href="/income/bill/">收入明细</a>
+        <a class="navhl_q" href="/consume/lock/">冻结明细</a>
+        <a class="navhl_h" href="/consume/report/">月度报表</a>
+    </div>
+    <div class="onlineplay_c" id="navhljs1_c2">
+        <div class="list_t">
+            <ul>
+                <li>
+                    <p>年份</p>
+                    <select class="select_sty" onchange="getYearData(this)">
+                        <for start="0" end="5">
+                            <option value="{:date('Y')-$i}" <if condition="date('Y')-$i eq $Think.get.year ">selected</if>>{:date('Y')-$i}年</option>
+                        </for>
+                    </select>
+                    <span>* 域名消费数量月度详单如下</span>
+                </li>
+            </ul>
+        </div>
+        <table width="956" cellspacing="1" cellpadding="0" border="0" height="34" align="center" style="margin:20px auto; display:inline-table;" class="tablelist1">
+            <tbody>
+                <tr class="form_title">
+                    <th class="p0">月份</th>
+                    <th>1月</th>
+                    <th>2月</th>
+                    <th>3月</th>
+                    <th>4月</th>
+                    <th>5月</th>
+                    <th>6月</th>
+                    <th>7月</th>
+                    <th>8月</th>
+                    <th>9月</th>
+                    <th>10月</th>
+                    <th>11月</th>
+                    <th>12月</th>
+                </tr>
+
+                <tr>
+                    <td class="p2">注册量</td>
+            <volist name="data.register" id="item">
+                <td>{$item.total|default=0}</td>
+            </volist>
+            </tr>
+            <tr class="p1">
+                <td class="p2">注册费</td>
+            <volist name="data.register" id="item">
+                <td>{$item.money|default=0}</td>
+            </volist>
+            </tr>
+            <tr>
+                <td class="p2">竞价量</td>
+            <volist name="data.bidding" id="item">
+                <td>{$item.total|default=0}</td>
+            </volist>
+            </tr>
+            <tr class="p1">
+                <td class="p2">竞价费</td>
+            <volist name="data.bidding" id="item">
+                <td>{$item.money|default=0}</td>
+            </volist>
+            </tr>
+            <tr>
+                <td class="p2">转入量</td>
+            <volist name="data.renew" id="item">
+                <td>{$item.toal|default=0}</td>
+            </volist>
+            </tr>
+            <tr class="p1">
+                <td class="p2">注转入量</td>
+            <volist name="data.renew" id="item">
+                <td>{$item.toal|default=0}</td>
+            </volist>
+            </tr>
+            <tr>
+                <td class="p2">总量</td>
+            <volist name="data.all_total" id="item">
+                <td>{$item|default=0}</td>
+            </volist>
+            </tr>
+            <tr class="p1">
+                <td class="p2">总消费</td>
+            <volist name="data.all_money" id="item">
+                <td>{$item|default=0}</td>
+            </volist>
+            </tr>
+            </tbody></table>
+    </div>
+
+</div>
+<script>
+    function getYearData(obj){
+        var year = $(obj).val();
+        location.href='/consume/report/?year='+year;
+    }
+</script>
+

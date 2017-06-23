@@ -1,0 +1,100 @@
+<!--面包屑 开始-->
+<div class="crumbs">
+  <em>您的位置：</em>
+  <a href="{:getDoMain()}" class="crumbs_c">首页</a>
+  <span>></span>
+  <a href="/trolldy" class="crumbs_c">购物车</a>
+  <span>></span>
+  <i>结算成功</i>
+</div>
+<!--面包屑 结束-->
+<!--主体内容 开始-->
+<div class="wrap_a">
+  <div class="wrap_a_a">
+    <div class="title_b_icon2"><i class="iconfont">&#xe610;</i></div>
+    <span>已操作成功的域名</span>
+    <img src="/Public/Home/images/lct_b.jpg" class="fr"/>
+  </div>
+  <div class="airp_listc_left4">
+    <table width="1090" height="34" cellspacing="1" cellpadding="0" border="0">
+      <tbody>
+        <tr class="table_title">
+          <td width="60">序号</td>
+          <td>域名</td>
+          <td width="80">域名类型</td>
+          <td>操作类型</td>
+          <td>模版</td>
+          <td width="80">年限</td>
+          <td>状态</td>
+        </tr>
+        <volist name="domains" id="item">
+          <tr>
+            <td>{$i}</td>
+            <td><span>{$item.domain}</span><input type="hidden" name="domain" value="{$item.domain}" data-op="{$item.type}"/></td>
+            <td><notempty name="item.idn">中文</notempty>{$item.suffix} 域名</td>
+            <td><switch name="item.type"><case value="register">域名注册</case><case value="renew">域名续费</case></switch></td>
+            <td><eq name="item.type" value="register">{$templates[$item['template']]}<else/>-</eq></td>
+            <td>{$item.age}&nbsp;年</td>
+            <td><p id="loading_{$item.domain|idn_to_ascii|str_replace='.','_',###}">待注册</p></td>
+          </tr>
+        </volist>
+      </tbody>
+    </table>
+    <div class="wrap_a_b" style="border-top: 0px; margin-top: 0px; display:none;" data-name="show_button">
+      <a class="doma_d_btn2" href="{:getDoMain('member')}"></a></div>
+  </div>
+</div>
+<!--主体内容 结束-->
+<script type="text/javascript">
+$(document).ready(function () {
+    var requests = [];
+    $(':hidden[name="domain"]').each(function(){
+        var that = this;
+        requests.push(function(){
+            var url = '{:getDoMain("member")}domain/ajax_'+$(that).data('op')+'_do?callback=?';
+            var statusObj = '#loading_'+that.value.replace(/\./g, '_');
+            $(statusObj).html('注册中&nbsp;<img src="/Public/Common/images/loading.gif" />');
+            $.getJSON(url, {domain:that.value}, function(result){
+                if (result.status==200){
+                    $(statusObj).html('<p style="color:green;">'+($(that).data('op')=='register'?'注册成功':'续费成功')+'</p>');
+                    if ($(document).queue('domains').length == 0){
+                        $('[data-name="show_button"]').show();
+                    }else {
+                        $(document).dequeue('domains');
+                    }
+                    $('#trolley_num').html(Number($('#trolley_num').html())-1);
+                }else{
+                    //如果域名不可注册,则删除购物车里对应记录
+                    if (result.message == 'System message (Domain name already registered)'){
+                        $(statusObj).html('<p style="color:red;">域名已被注册</p>');
+                        $.getJSON('/trolley/ajax_delete_by_domain', {domain:result.data});
+                        if ($(document).queue('domains').length == 0){
+                            $('[data-name="show_button"]').show();
+                        }else {
+                            $(document).dequeue('domains');
+                        }
+                    }else if (result.message == 'System message (Object exists)') {
+                        $(statusObj).html('<p style="color:red;">域名已被注册</p>');
+                        $.getJSON('/trolley/ajax_delete_by_domain', {domain: result.data});
+                        if ($(document).queue('domains').length == 0){
+                            $('[data-name="show_button"]').show();
+                        }else {
+                            $(document).dequeue('domains');
+                        }
+                    }else if (result.message == '账户资金不足，请充值'){
+                        $(statusObj).html('<p style="color:red;">'+result.message+'</p>');
+                    }else{
+                        $(statusObj).html('<p style="color:red;">'+result.message+'</p>');
+                        if ($(document).queue('domains').length == 0){
+                            $('[data-name="show_button"]').show();
+                        }else {
+                            $(document).dequeue('domains');
+                        }
+                    }
+                }
+            });
+        });
+    });
+    $(document).queue('domains', requests).dequeue('domains');
+});
+</script>

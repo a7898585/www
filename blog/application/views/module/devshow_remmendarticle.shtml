@@ -1,0 +1,16 @@
+<div class="RgtBar" id="Mod_RemmentArticle" rel="drag">
+    <h3>推荐文章</h3>
+    <?php if(isset($dragable) && $dragable==1): ?>
+    <a style="cursor:move;" href="###" id="Mod_RemmentArticle_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="NBDp4"></a><div class="NBDbx"><a class="NBDp1" href="###" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_RemmentArticle_td3"></a><a class="NBDp2" href="###" onclick="clkmenu(this.id,2);return false;" style="DISPLAY: none" title="展开" id="Mod_RemmentArticle_td4"></a><a class="NBDp3" href="###" onclick="removemod(this.id);setmod_input();return false;" title="删除" id="Mod_RemmentArticle_td2"></a></div>
+    <?php endif; ?>  
+    <div class="modbox1">
+        <ul class="RecomLst" id="selfrecommendart">
+            数据加载中...
+        </ul>
+    </div>    
+    <script language="javascript">
+        $(function(){
+            $('#selfrecommendart').load("<?php echo $baseurl?>/ajaxselfrecomentdart/<?php echo $bloginfo['MemberID'].'/'.$pagesize['recommendlist'];?>?do=<?php echo $bloginfo['DomainName'];?>");
+        })
+    </script>
+</div>

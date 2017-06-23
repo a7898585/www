@@ -1,0 +1,164 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：文章列表</div>
+    </div>
+    <div class="szym06"><table cellpadding="0" cellspacing="0" border="0" class="bd_tab" width="100%">
+            <tr>
+                <td class="bg_tab"> 文章标题</a></td>
+                <td class="bg_tab">所属分类</td>
+                <td class="bg_tab">发表时间</td>
+                <td class="bg_tab">管理选项</td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/12238282.html" target="_blank">测试</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2010-05-28 09:13:41&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',12238282);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('12238282');">删除</a>
+
+                    <a href="javascript:Show('trackback12238282','Link12238282','Manage12238282');UpdateTrackbackPage('12238282','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback12238282" style="display:none">
+                <td colspan="4"><div id="tbl12238282">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/11490632.html" target="_blank">测试2</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2010-05-07 10:29:32&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',11490632);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('11490632');">删除</a>
+
+                    <a href="javascript:Show('trackback11490632','Link11490632','Manage11490632');UpdateTrackbackPage('11490632','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback11490632" style="display:none">
+                <td colspan="4"><div id="tbl11490632">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/11490569.html" target="_blank">测试</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2010-05-07 10:27:38&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',11490569);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('11490569');">删除</a>
+
+                    <a href="javascript:Show('trackback11490569','Link11490569','Manage11490569');UpdateTrackbackPage('11490569','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback11490569" style="display:none">
+                <td colspan="4"><div id="tbl11490569">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/10955110.html" target="_blank">分享</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2010-04-16 20:16:54&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',10955110);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('10955110');">删除</a>
+
+                    <a href="javascript:Show('trackback10955110','Link10955110','Manage10955110');UpdateTrackbackPage('10955110','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback10955110" style="display:none">
+                <td colspan="4"><div id="tbl10955110">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/10148545.html" target="_blank">测试一下cache</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2010-03-19 16:55:17&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',10148545);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('10148545');">删除</a>
+
+                    <a href="javascript:Show('trackback10148545','Link10148545','Manage10148545');UpdateTrackbackPage('10148545','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback10148545" style="display:none">
+                <td colspan="4"><div id="tbl10148545">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/8592725.html" target="_blank">股票的那些事</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2009-12-28 12:41:35&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',8592725);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('8592725');">删除</a>
+
+                    <a href="javascript:Show('trackback8592725','Link8592725','Manage8592725');UpdateTrackbackPage('8592725','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback8592725" style="display:none">
+                <td colspan="4"><div id="tbl8592725">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/8592097.html" target="_blank">测试一下看看</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2009-12-28 12:26:29&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',8592097);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('8592097');">删除</a>
+
+                    <a href="javascript:Show('trackback8592097','Link8592097','Manage8592097');UpdateTrackbackPage('8592097','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback8592097" style="display:none">
+                <td colspan="4"><div id="tbl8592097">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/7006609.html" target="_blank">核生活</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2009-11-26 17:13:20&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',7006609);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('7006609');">删除</a>
+
+                    <a href="javascript:Show('trackback7006609','Link7006609','Manage7006609');UpdateTrackbackPage('7006609','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback7006609" style="display:none">
+                <td colspan="4"><div id="tbl7006609">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/7006529.html" target="_blank">核世界</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2009-11-26 17:08:59&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',7006529);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('7006529');">删除</a>
+
+                    <a href="javascript:Show('trackback7006529','Link7006529','Manage7006529');UpdateTrackbackPage('7006529','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback7006529" style="display:none">
+                <td colspan="4"><div id="tbl7006529">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td height="30"><a href="http://blog.cnfol.com/leicc/article/7005393.html" target="_blank">人人都在谈股票</a></td>
+                <td>&nbsp;<a href="http://blog.cnfol.com/leicc/manage/article/SortList/18295" >默认分类</a></td>
+                <td>2009-11-26 15:57:13&nbsp;</td>
+                <td>
+
+                    <a href="javascript:submit_form('action_form',7005393);">修改</a> <a href="javascript:void(0)" onclick="javascript:del('7005393');">删除</a>
+
+                    <a href="javascript:Show('trackback7005393','Link7005393','Manage7005393');UpdateTrackbackPage('7005393','1')">引用</a></td>
+            </tr>
+            <tr class="sort" id="trackback7005393" style="display:none">
+                <td colspan="4"><div id="tbl7005393">正在请求中。。。</div> </td>
+                </td>
+            </tr>
+            <tr class="sort">
+                <td colspan="4">(每页10条,当前页: 1/3) <img src='http://img.cnfol.com/newblog/images/pagebar/5.gif' border='0' title='首页'>&nbsp;&nbsp;<img src="http://img.cnfol.com/newblog/images/pagebar/4.gif" border="0" title="上一组">&nbsp;&nbsp;<img src='http://img.cnfol.com/newblog/images/pagebar/1.gif' border='0' title='上一页'>&nbsp;&nbsp;<span class=current><font color ='red'>&nbsp;1&nbsp;</font>&nbsp;<a href=http://blog.cnfol.com/leicc/manage/article/SortList/18295/2>2</a>&nbsp;&nbsp;<a href=http://blog.cnfol.com/leicc/manage/article/SortList/18295/3>3</a>&nbsp;</span>&nbsp;&nbsp;<a href=http://blog.cnfol.com/leicc/manage/article/SortList/18295/2><img src='http://img.cnfol.com/newblog/images/pagebar/2.gif' border='0' title='下一页'></a>&nbsp;&nbsp;<img src="http://img.cnfol.com/newblog/images/pagebar/3.gif" border="0" title="下一组">&nbsp;&nbsp;<a href=http://blog.cnfol.com/leicc/manage/article/SortList/18295/3><img src='http://img.cnfol.com/newblog/images/pagebar/6.gif' border='0' title='末页'></a>&nbsp;</td>
+                </td>
+            </tr>
+        </table>
+        <form id="action_form" name="action_form" method="post" target="_self" action="">
+            <input type="hidden" name="act" id="act" value="edit" />
+            <input type="hidden" name="articleid" id="articleid" />
+        </form>
+        <div style="clear:both;"></div>
+    </div>
+</div>

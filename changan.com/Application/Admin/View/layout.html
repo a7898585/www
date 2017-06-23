@@ -1,0 +1,168 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>常安总后台</title>
+        <meta name="description" content="常安总后台">
+        <meta name="keywords" content="常安总后台">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="icon" type="image/png" href="/Public/Admin/i/favicon.png">
+        <link rel="apple-touch-icon-precomposed" href="/Public/Admin/i/app-icon72x72@2x.png">
+        <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+        <link rel="stylesheet" href="/Public/Admin/css/amazeui.min.css"/>
+        <link rel="stylesheet" href="/Public/Admin/css/admin.css">
+        <link type="text/css" rel="stylesheet" href="/Public/Common/js/uploadify.css"/>
+
+        <!--[if lt IE 9]>
+        <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+        <script src="/Public/Admin/js/polyfill/rem.min.js"></script>
+        <script src="/Public/Admin/js/polyfill/respond.min.js"></script>
+        <script src="/Public/Admin/js/amazeui.legacy.js"></script>
+        <![endif]-->
+
+        <!--[if (gte IE 9)|!(IE)]><!-->
+        <script src="/Public/Common/js/jquery.js"></script>
+        <script src="/Public/Admin/js/amazeui.min.js"></script>
+        <!--<![endif]-->
+        <script src="/Public/Common/layer/layer.js"></script>
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+        <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+            以获得更好的体验！</p>
+        <![endif]-->
+
+        <header class="am-topbar admin-header">
+            <div class="am-topbar-brand">
+                <strong>常安保险</strong> <small>后台管理</small>
+            </div>
+
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+            <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+                <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+                    <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                            <span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <!--<li><a href="#"><span class="am-icon-user"></span> 资料</a></li>-->
+                            <!--<li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>-->
+                            <li><a href="/public/login_out"><span class="am-icon-power-off"></span> 退出</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="am-cf admin-main">
+            <!-- sidebar start -->
+            <div class="admin-sidebar">
+                <ul class="am-list admin-sidebar-list">
+                    <li><a href="/"><span class="am-icon-home"></span> 首页</a></li>
+                    <if condition="$Think.session.admin.is_root eq '1'">
+                        <li class="admin-parent">
+                            <a class="am-cf <neq name='nav' value='insurance'>am-collapsed</neq>" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-gittip"></span> 保单管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                            <ul class="am-list admin-sidebar-sub am-collapse <eq name='nav' value='insurance'>am-in</eq>" id="collapse-nav" style="<neq name='nav' value='insurance'>height: 0px;</neq>">
+                                <li><a href="/insurance" class="am-cf">保单列表<span class=""></span></a></li>
+                            </ul>
+                        </li>
+                        <li class="admin-parent">
+                            <a class="am-cf <neq name='nav' value='news'>am-collapsed</neq>" data-am-collapse="{target: '#news-nav'}"><span class="am-icon-newspaper-o"></span> 新闻管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                            <ul class="am-list admin-sidebar-sub am-collapse <eq name='nav' value='news'>am-in</eq>" id="news-nav" style="<neq name='nav' value='news'>height: 0px;</neq>">
+                                <li><a href="/news/news_type" class="am-cf">新闻分类<span class=""></span></a></li>
+                                <li><a href="/news" class="am-cf">新闻列表<span class=""></span></a></li>
+                            </ul>
+                        </li>
+                        <li class="admin-parent">
+                            <a class="am-cf <neq name='nav' value='wenba'>am-collapsed</neq>" data-am-collapse="{target: '#wenba-nav'}"><span class="am-icon-question-circle"></span> 问吧管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                            <ul class="am-list admin-sidebar-sub am-collapse <eq name='nav' value='wenba'>am-in</eq>" id="wenba-nav" style="<neq name='nav' value='wenba'>height: 0px;</neq>">
+                                <li><a href="/wenba/wenba_type" class="am-cf">问吧分类<span class=""></span></a></li>
+                                <li><a href="/wenba" class="am-cf">问吧列表<span class=""></span></a></li>
+                                <li><a href="/wenba/reply" class="am-cf">回复列表<span class=""></span></a></li>
+                            </ul>
+                        </li>
+                        <li class="admin-parent">
+                            <a class="am-cf <neq name='nav' value='agent'>am-collapsed</neq>" data-am-collapse="{target: '#agent-nav'}"><span class="am-icon-file"></span> 代理商管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                            <ul class="am-list admin-sidebar-sub am-collapse <eq name='nav' value='agent'>am-in</eq>" id="agent-nav" style="<neq name='nav' value='agent'>height: 0px;</neq>">
+                                <li><a href="/agent" class="am-cf">代理商管理<span class=""></span></a></li>
+                            </ul>
+                        </li>
+                        <li class="admin-parent">
+                            <a class="am-cf <neq name='nav' value='order'>am-collapsed</neq>" data-am-collapse="{target: '#order-nav'}"><span class="am-icon-file"></span> 订单管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                            <ul class="am-list admin-sidebar-sub am-collapse <eq name='nav' value='order'>am-in</eq>" id="order-nav" style="<neq name='nav' value='order'>height: 0px;</neq>">
+                                <li><a href="/order" class="am-cf">消费管理<span class=""></span></a></li>
+                            </ul>
+                        </li>
+                        <li class="admin-parent">
+                            <a class="am-cf <neq name='nav' value='user'>am-collapsed</neq>" data-am-collapse="{target: '#user-nav'}"><span class="am-icon-user-md"></span> 用户管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                            <ul class="am-list admin-sidebar-sub am-collapse <eq name='nav' value='user'>am-in</eq>" id="user-nav" style="<neq name='nav' value='user'>height: 0px;</neq>">
+                                <li><a href="/user/agent_daili" class="am-cf">待分配代理人<span class="am-icon-star am-fr am-margin-right admin-icon-red"></span></a></li>
+                                <li><a href="/user" class="am-cf">会员列表<span class=" am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                                <li><a href="/user/daili" class="am-cf">代理人列表<span class=" am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                                <li><a href="/user/c_daili" class="am-cf">未审核代理人<span class=" am-fr am-margin-right admin-icon-yellow"></span></a></li> 
+                                <li><a href="/user/top" class="am-cf">置顶管理<span class=" am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="/friends/all"><span class="am-icon-link"></span> 友情链接</a></li>
+                        <li class="admin-parent">
+                            <a class="am-cf <neq name='nav' value='pro'>am-collapsed</neq>" data-am-collapse="{target: '#pro-nav'}"><span class="am-icon-file"></span> 产品管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                            <ul class="am-list admin-sidebar-sub am-collapse <eq name='nav' value='pro'>am-in</eq>" id="pro-nav" style="<neq name='nav' value='pro'>height: 0px;</neq>">
+                                <li><a href="/pro" class="am-cf">产品管理<span class=""></span></a></li>
+                                <li><a href="/pro/type" class="am-cf">险种管理<span class=""></span></a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/program"><span class="am-icon-link"></span> 方案管理</a></li>
+                        <!--<li><a href="/company"><span class="am-icon-codepen"></span> 保险公司</a></li>-->
+                        <li class="admin-parent">
+                            <a class="am-cf <neq name='nav' value='company'>am-collapsed</neq>" data-am-collapse="{target: '#company-nav'}"><span class="am-icon-file"></span> 保险公司 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                            <ul class="am-list admin-sidebar-sub am-collapse <eq name='nav' value='company'>am-in</eq>" id="company-nav" style="<neq name='nav' value='company'>height: 0px;</neq>">
+                                <li><a href="/company" class="am-cf">保险公司<span class=""></span></a></li>
+                                <li><a href="/company/parent" class="am-cf">保险总公司<span class=""></span></a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/extend"><span class="am-icon-github-alt"></span> 群发推广管理</a></li>
+                        <else />
+                        <li><a href="/pro"><span class="am-icon-table"></span> 产品管理</a></li>
+                    </if>
+                    <li><a href="/public/login_out"><span class="am-icon-sign-out"></span> 注销</a></li>
+                </ul>
+
+                <div class="am-panel am-panel-default admin-sidebar-panel">
+                    <div class="am-panel-bd">
+                        <p><span class="am-icon-bookmark"></span> 公告</p>
+                        <p>时光静好，与君语；细水流年，与君同。—— 长安</p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- sidebar end -->
+
+            <!-- content start -->
+            {__CONTENT__}
+            <!-- content end -->
+
+        </div>
+
+        <footer>
+            <hr>
+            <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+        </footer>
+
+
+        <script type="text/javascript" src="/Public/Common/js/jquery.uploadify.js"></script>
+        <script src="/Public/Admin/js/app.js"></script>
+        <script src="/Public/Admin/js/main.js"></script>
+        <script type="text/javascript">
+            var up_path = "{:C('YOU_PAI_YUN')}";
+        </script>
+
+    </body>
+</html>

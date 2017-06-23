@@ -1,0 +1,72 @@
+<script type="text/javascript" src="/Public/Common/js/jquery.uploadify.js"></script>
+<script type="text/javascript" src="{$home_url}/Public/Admin/js/kindeditor/kindeditor-all-min.js"></script>
+<link type="text/css" rel="stylesheet" href="{$home_url}/Public/Admin/js/kindeditor/themes/default/default.css"/>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="content"]', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            allowImageUpload : false,
+            wyswygMode:true,
+            items:['source', '|', 'fullscreen', 'undo', 'redo', 'print', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', '|', 'selectall', '-',
+                'title', 'fontname', 'fontsize', '|', 'bold',
+                'italic', 'underline', 'strikethrough', 'removeformat', '|', 'image', 'advtable', 'hr', 'emoticons', 'link', 'unlink', '|', 'about']
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        uploadFile('photo_url','上传Logo');
+    });
+</script>
+<div class="bar_r">
+    <form method="post" enctype="multipart/form-data" action="__SELF__">
+        <div class="u_tle"><span class="side_l">添加资讯</span></div>
+        <div class="box_form">
+            <ul class="form">
+                <li><label>标题</label><input type="text" value="{$info.title}" name="title" /></li>
+                <li>
+                    <label>分类</label>
+                    <select name="type_id">
+                        <option value="0">请选择</option>
+                        <foreach name="types" item="item">
+                            <option value="{$item.id}" <eq name="info.type_id" value="$item.id"> selected</eq> >{$item.name}</option>
+                            <if condition="count($item.subs)">
+                                <foreach name="item.subs" item="temp">
+                                    <option value="{$temp.id}">--{$temp.name}</option>
+                                </foreach>
+                            </if>
+                        </foreach>
+                    </select>
+                </li>
+                <li>
+                    <label>二级站</label>
+                    <select name="city_id">
+                        <option value="0">总站</option>
+                        <foreach name="domain_list" item="item">
+                            <option value="{$item.area_id}" <eq name="info.city_id" value="$item.area_id"> selected</eq> >{$item.name_full}</option>
+                        </foreach>
+                    </select>
+                </li>
+                <li><label>关键字</label><input type="text" value="{$info.keyword}" name="keyword" maxlength="100" /></li>
+                <li><label>作者</label><input type="text" value="{$info.author}" name="author" maxlength="100" /></li>
+                <li><label>描述</label><textarea rows="4" cols="50" name="desc">{$info.desc}</textarea></li>
+                <li><label>内容</label><textarea name="content">{$info.content}</textarea></li>
+                <li><label>排序</label><input type="text" value="{:intval($info.order_id)}" name="order_id" maxlength="4" placeholder="排序" /></li>
+                <li><label>显示</label>
+                    <input type="checkbox" value="1" name="is_hide" <eq name="info.is_hide" value="1"> checked="true"</eq>/>
+                </li>
+                <li><label>最热</label>
+                    <input type="checkbox" value="1" name="is_hot" <eq name="info.is_hot" value="1"> checked="true"</eq>/>
+                </li>
+            </ul>
+            <div class="t_align_c">
+                <input type="submit" value="保 存" />
+                <a href="#">返 回</a>
+            </div>
+        </div>
+    </form>
+</div>

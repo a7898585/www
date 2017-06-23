@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `olcms_message_group`;

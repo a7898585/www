@@ -1,0 +1,315 @@
+<?php
+
+if (!defined('ROOT'))
+    exit('access deny!');
+
+//与gw交互的相关操作
+//验证请求信息的合法性
+function checkrs($data) {
+    $rs = false;
+    if (isset($data['Status']['Code']) && $data['Status']['Code'] == '00') {
+        $rs['RetRecords'] = isset($data['Status']['RetRecords']) ? $data['Status']['RetRecords'] : 0;
+        $rs['TtlRecords'] = isset($data['Status']['TtlRecords']) ? $data['Status']['TtlRecords'] : 0;
+        $rs['Record'] = isset($data['Records']['Record']) ? $data['Records']['Record'] : false;
+        $error = '';
+    } else {
+        $error = "| args:" . print_r($data['args'], true);
+    }
+    $filename = '/home/www/html/logs/3gstatnew_checkrs_' . date('Ymd') . '.log';
+    if (file_exists($filename) === false) {
+        $fp = fopen($filename, 'w+');
+        chmod($filename, 0777);
+        fclose($fp);
+    }
+    error_log(date('Y-m-d H:i:s') . " | " . __FILE__ . " | " . __FUNCTION__ . " | type:{$data['type']} | code:{$data['Status']['Code']} $error\r\n", 3, $filename);
+    return $rs;
+}
+
+//获取博客点击统计
+function getBlogStat($memberids) {
+    $memberids = is_array($memberids) ? $memberids : array(0 => $memberids);
+    $socket = new CSocket();
+    $type = 'B379';
+    $data['MemberIDs'] = join(',', $memberids);
+    $data['StartNo'] = 0;
+    $data['QryCount'] = count($memberids);
+
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+    $rs = (isset($rs['Record'])) ? $rs['Record'] : array();
+    return $rs;
+}
+
+//增修博客点击统计
+function setBlogStat($data, $isadd = 1) {
+    $socket = new CSocket();
+    $type = 'B380';
+    $data['Type'] = $isadd;
+    $data['Dates'] = date('Ymd');
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    checkrs($rs);
+    return true;
+}
+
+//更新博客访问统计
+function setBlogAccess($data) {
+    $socket = new CSocket();
+    $type = 'B341';
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    checkrs($rs);
+    return true;
+}
+
+//获取博客访客记录
+function getBlogVisitor($memberid) {
+    $socket = new CSocket();
+    $type = 'B072';
+    $data['MemberID'] = $memberid;
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+    $rs = (isset($rs['Record']) && $rs['Record'] != false) ? $rs['Record'] : array();
+    return $rs;
+}
+
+//获取博客访客记录
+function setBlogVisitor($memberid, $data) {
+    $socket = new CSocket();
+    $type = 'B073';
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+}
+
+//设置用户访问过的博客记录
+function setUserVisitorTo($data) {
+    $socket = new CSocket();
+    $type = 'B075';
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+}
+
+//获取用户访问过的博客记录
+function getUserVisitorBlogTo($userid) {
+    $socket = new CSocket();
+    $type = 'B074';
+    $data['UserID'] = $userid;
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+    $rs = (isset($rs['Record'])) ? $rs['Record'] : array();
+    return $rs;
+}
+
+//获取文章点击
+function getArticleStat($articles) {
+    $articles = is_array($articles) ? $articles : array(0 => $articles);
+    $socket = new CSocket();
+    $type = 'B382';
+    $data['ArticleIDs'] = join(',', $articles);
+    $data['StartNo'] = 0;
+    $data['QryCount'] = count($articles);
+    $time1 = microtime(true);
+    $rs = $socket->senddata($type, $data);
+    $time2 = microtime(true);
+    $time = $time2 - $time1;
+    //error_log(date('Y-m-d H:i:s').":{$time}".print_r($rs, true).PHP_EOL, 3, 'gwlog.log');
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+
+    $rs = (isset($rs['Record']) && $rs['Record'] != false) ? $rs['Record'] : array();
+
+    return $rs;
+}
+
+//获取文章转载数
+function getTransshipment($articles) {
+    $socket = new CSocket();
+    $type = ''; //接口待定
+    $data['ArticleIDs'] = trim($articles);
+    $data['StartNo'] = 0;
+    //$data['QryCount']	= count($articles);
+
+    $rs = $socket->senddata($type, $data);
+    $rs = checkrs($rs);
+
+    $rs = (isset($rs['Record']) && $rs['Record'] != false) ? $rs['Record'] : false;
+
+    return $rs;
+}
+
+//获取文章收藏数
+function getCollect($articles) {
+    $socket = new CSocket();
+    $type = ''; //接口待定
+    $data['ArticleIDs'] = trim($articles);
+    $data['StartNo'] = 0;
+    //$data['QryCount']	= count($articles);
+
+    $rs = $socket->senddata($type, $data);
+    $rs = checkrs($rs);
+
+    $rs = (isset($rs['Record']) && $rs['Record'] != false) ? $rs['Record'] : false;
+
+    return $rs;
+}
+
+//增修博客点击统计
+function setArticleStat($data, $isadd = 1) {
+    $socket = new CSocket();
+    $type = 'B383';
+    $data['Type'] = $isadd;
+    $data['Dates'] = date('Ymd');
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+    return true;
+}
+
+//获取文章访客记录
+function getArticleVisitor($articleid) {
+    if (!is_numeric($articleid)) {
+        return false;
+    }
+    $socket = new CSocket();
+    $type = 'B375';
+    $data['ArticleIDs'] = $articleid;
+    $data['StartNo'] = 0;
+    $data['QryCount'] = 1;
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+    //error_log(print_r($data,true).'|'.print_r($rs,true).'\r\n', 3, '/home/httpd/logs/ady2.log');
+    $rs = (isset($rs['Record']) && $rs['Record'] != false) ? $rs['Record'] : array();
+    return $rs;
+}
+
+//新增博客文章访客记录
+function setArticleVisitor($data) {
+    $socket = new CSocket();
+    $type = 'B376';
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    checkrs($rs);
+    return true;
+}
+
+//更新用户最近访问过的文章
+function setNearViewArticle($data) {
+    $socket = new CSocket();
+    $type = 'B378';
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    checkrs($rs);
+    return $rs;
+}
+
+//获取用户访问过的文章记录
+function getUserVisitorArticleTo($userid) {
+    $socket = new CSocket();
+    $type = 'B377';
+    $data['StartNo'] = 0;
+    $data['QryCount'] = 1;
+    $data['UserIDs'] = $userid;
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+    $rs = (isset($rs['Record'])) ? $rs['Record'] : array();
+    return $rs;
+}
+
+//设置博客投票记录
+function setArticleVote($data) {
+    $socket = new CSocket();
+    $type = 'B361';
+
+    $data['VoteID'] = 0;
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    if (checkrs($rs) != false) {
+        return (isset($rs['Status']['TtlRecords']) && $rs['Status']['TtlRecords'] == 1) ? true : false;
+    }
+    return false;
+}
+
+//浏览过该文章的人还浏览过用（验证是否是记录采用组、高手看盘、名家看市组的用户）
+function checkGuestEverBrowse($uid) {
+
+    if (empty($uid)) {
+        return false;
+    }
+
+    $blogConfig = $this->getBlogListByUidFirst($uid);
+    //return $blogConfig;
+    //用户组信息的处理
+    $groups = trim($blogConfig['GroupID'], ',');
+
+    $isVIP = false;
+    if ($groups != "") {
+        $recommend = config_item('recommendgroupshow');
+        $groups = explode(',', $groups);
+        $groups = (is_string($groups)) ? array(0 => $groups) : $groups;
+
+        foreach ($groups as $grp) {
+            if (isset($recommend[$grp])) {
+                $isVIP = true;
+            }
+        }
+    }
+
+    if ($isVIP === false) {
+        return false;
+    }
+    return true;
+}
+
+//获取个人博客列表中第一个正常博客
+function getBlogListByUidFirst($uid = 0) {
+    //获取个人博客列表	
+    $data['QryData'] = ($uid == 0) ? $this->_getUserID() : $uid;
+    $data['StartNo'] = 0;
+    $data['QryCount'] = 10;
+
+    $socket = new CSocket();
+    $type = 'B050';
+    $rs = $socket->senddata($type, $data);
+    $rs['type'] = $type;
+    $rs['args'] = $data;
+    $rs = checkrs($rs);
+
+    if (!$rs) {
+        return false;
+    }
+
+    if ($rs['RetRecords'] == 1) {
+        $rs['Record'] = array($rs['Record']);
+    }
+
+    foreach ($rs['Record'] as $value) {
+        if ($value['Status'] == 0) {
+            return $value;
+        }
+    }
+
+    return false;
+}
+
+?>

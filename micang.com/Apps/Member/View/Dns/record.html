@@ -1,0 +1,170 @@
+<!--左侧缩展导航 结束-->
+<div class="onlineplay ymxx">
+  <div class="ymxx_title"><span>域名：</span><em> {$Think.get.domain} 的相关信息</em></div>
+  <div class="navhl">
+    <a class="navhl_h" href="/dns/record?domain={$Think.get.domain}">域名解析</a>
+    <a class="navhl_q" href="/dns/server?domain={$Think.get.domain}">DNS设置</a>
+  </div>
+  <div class="onlineplay_c4">
+    <div class="airp_listc_left4">
+      <table width="954" height="34" cellspacing="1" cellpadding="0" border="0" data-name="dns_records">
+        <tbody>
+        <tr class="table_title">
+          <td>主机记录</td>
+          <td width="100">记录类型</td>
+          <td width="100">线路</td>
+          <td width="200">IP地址/主机名</td>
+          <td width="100">MX</td>
+          <td width="140">操作</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="hidden" name="id" value="">
+            <input type="hidden" name="domain" value="{$Think.get.domain}">
+            <input type="text" name="host" value="" class="list_ctxt_h" placeholder="主机头">
+            <div class="zjjl">.{$Think.get.domain}</div>
+          </td>
+          <td>
+            <select class="select_sty" name="type">
+              <option value="A" selected>A记录</option>
+              <option value="CNAME">CNAME</option>
+              <option value="MX">MX</option>
+              <option value="TXT">TXT</option>
+              <option value="AAAA">AAAA</option>
+            </select>
+          </td>
+          <td>
+            <select class="select_sty" name="route">
+              <option value="0" selected>默认</option>
+              <option value="286736640">电信</option>
+              <option value="286736896">联通</option>
+              <option value="286737408">移动</option>
+              <option value="286737664">铁通</option>
+              <option value="286737152">教育网</option>
+              <option value="286737920">鹏博士</option>
+            </select>
+          </td>
+          <td><input type="text" name="value" class="list_ctxt_i" placeholder="IP地址/主机名"></td>
+          <td><input type="text" name="mx" class="list_ctxt_h" placeholder="1-255，默认10"></td>
+          <td><a href="javascript:void(0);" class="oper_btn" style="margin-left:5px;" data-btn="btn_record_save">添加记录</a></td>
+        </tr>
+        <volist name="dnsRecords" id="item">
+          <tr data-id="{$item.id}" data-domain="{$item.domain}">
+            <td>{$item.host}.{$item.domain}</td>
+            <td><switch name="item.type">
+              <case value="A">A记录</case>
+              <case value="CNAME">CNAME</case>
+              <case value="MX">MX</case>
+              <case value="TXT">TXT</case>
+              <case value="AAAA">AAAA</case>
+            </switch></td>
+            <td><switch name="item.route">
+              <case value="0">默认</case>
+              <case value="286736640">电信</case>
+              <case value="286736896">联通</case>
+              <case value="286737408">移动</case>
+              <case value="286737664">铁通</case>
+              <case value="286737152">教育网</case>
+              <case value="286737920">鹏博士</case>
+            </switch></td>
+            <td>{$item.value}</td>
+            <td><eq name="item.type" value="MX">{$item.mx}<else/> - </eq></td>
+            <td>
+              <a href="javascript:void(0);" class="oper_btn" style="margin-left:5px;" data-btn="btn_record_edit">修改</a>
+              <a href="javascript:void(0);" class="oper_btn" style="margin-left:5px;" data-btn="btn_record_delete">删除</a>
+            </td>
+          </tr>
+        </volist>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/Public/Common/js/layer/layer.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  var routes = {
+    '0':'默认',
+    '286736640':'电信',
+    '286736896':'联通',
+    '286737408':'移动',
+    '286737664':'铁通',
+    '286737152':'教育网',
+    '286737920':'鹏博士'
+  };
+  //保存
+  $('[data-btn="btn_record_save"]').click(function (e) {
+    e.preventDefault();
+    var data = {};
+    data.id = $(':input[name="id"]').val();
+    data.domain = $.trim($(':input[name="domain"]').val());
+    data.host = $.trim($(':input[name="host"]').val());
+    data.type = $(':input[name="type"]').val();
+    data.route = $(':input[name="route"]').val();
+    data.value = $.trim($(':input[name="value"]').val());
+    data.mx = $(':input[name="mx"]').val();
+    if (data.domain=='' || data.host=='' || data.value==''){
+      layer.alert('主机头、IP地址/主机名不能为空。');
+      return false;
+    }
+    $.post('/dns/ajax_record_save', data, function(result){
+      if (result.status == 500){
+        layer.msg(result.message);
+        return false;
+      }
+      //是否修改操作，如果是，则删除修改的那一行
+      var recordId = result.message.id;
+      if ($('[data-id="'+recordId+'"]').length > 0){
+        $('[data-id="'+recordId+'"]').remove();
+      }
+      //添加新行
+      var tr = '<tr data-id="'+result.message.id+'" data-domain="'+result.message.domain+'">';
+      tr += '<td>'+result.message.host+'.'+result.message.domain+'</td>';
+      tr += '<td>'+(result.message.type=='A'?'A记录':result.message.type)+'</td>';
+      tr += '<td>'+routes[result.message.route]+'</td>';
+      tr += '<td>'+result.message.value+'</td>';
+      tr += '<td>'+(result.message.type=='MX'?result.message.mx:' - ')+'</td>';
+      tr += '<td><a href="javascript:void(0);" class="oper_btn" style="margin-left:5px;" data-btn="btn_record_edit">修改</a>';
+      tr += '<a href="javascript:void(0);" class="oper_btn" style="margin-left:5px;" data-btn="btn_record_delete">删除</a></td>';
+      tr += '</tr>';
+      $('[data-name="dns_records"] tr').last().after(tr);
+      //重置首行文本框
+      $('[data-name="dns_records"] tr').eq(1).find('td>:input').each(function(){
+        if ($(this).is(':text') || $(this).is(':hidden')){
+          $(this).val('');
+        }else{
+          $(this).val($(this).find('option').eq(0).val());
+        }
+      });
+    });
+  });
+  $(document).on('click', '[data-btn="btn_record_edit"]', function(e){
+    e.preventDefault();
+    var recordId = $(this).parents('tr').data('id');
+    var recordDomain = $(this).parents('tr').data('domain');
+    $.getJSON('/dns/ajax_get_record', {id:recordId, domain:recordDomain}, function(result){
+      $('[data-name="dns_records"] tr').eq(1).find('td>:input').each(function(){
+        if ($(this).attr('name')=='mx' && result.message.type!='MX'){
+          $(this).val('');
+        }else {
+          $(this).val(result['message'][$(this).attr('name')]);
+        }
+      });
+      $('[data-btn="btn_record_save"]').text('保存修改');
+      $('[data-name="dns_records"] tr').eq(1).find('td>:input:text').eq(0).focus();
+    });
+  });
+  $(document).on('click', '[data-btn="btn_record_delete"]', function (e) {
+    e.preventDefault();
+    var recordId = $(this).parents('tr').data('id');
+    var recordDomain = $(this).parents('tr').data('domain');
+    $.getJSON('/dns/ajax_delete_record', {id:recordId, domain:recordDomain}, function(result){
+      if (result.status == 200) {
+        $('[data-id="' + recordId + '"]').remove();
+      }else{
+        layer.msg(result.message);
+      }
+    });
+  });
+});
+</script>

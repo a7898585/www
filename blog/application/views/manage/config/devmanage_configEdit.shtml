@@ -1,0 +1,97 @@
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>博客设置</h3>
+    <div class="BgCont">
+        <form name="popFormSubmit" class="Fmsec Mt15" id="popFormSubmit" method="post" onsubmit="return false;">
+            <input type="hidden" name="oldname" value="<?php echo $bloginfo['BlogName'];?>" />
+            <input type="hidden" name="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid'].$bloginfo['IsPrimary'].$bloginfo['BlogName']);?>" />
+            <input type="hidden" name="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="hidden" name="oldPrimary" value="<?php echo $bloginfo['IsPrimary'];?>" />
+            <label for=""><i>博客名：</i>
+                <input class="W400 Ml2" id="blogname" name="name" type="text" value="<?php echo $bloginfo['BlogName'];?>" size="40" Preset="Rqd"/>
+                <var class="Spremind">博客名信息长度应在1-30个字符之间</var>
+            </label>
+
+            <label class="Mt15 H102" for=""><i class="Vetop">博客描述：</i>
+                <textarea class="W400 H100 Ml2" id="subtitle" name="subtitle"><?php echo $blogconfig['Subtitle'];?></textarea></label>
+            <label class="Pl70 Spremind">博客描述信息长度应该在1-200个字符以内！</label>
+            <label for="" style="display:none;"><span class="Spfm">文章显示方式：</span>
+                <input type="radio" name="showMode" value="0" <?php if($blogconfig['ShowMode']==0) echo 'checked';?>>标题
+                       <input class="Ml25" type="radio" name="showMode" value="1" <?php if($blogconfig['ShowMode']==1) echo 'checked';?>>标题+摘要
+            </label>
+            <label class="Mt15 LabSlc">
+                <i>每页文章数：</i>
+                <select name="displayNumber" id="displayNumber" class="SlLW SlcWrp"> 
+                    <option value="5" <?php if($blogconfig['DisplayNumber']==5) echo 'selected';?>>5条</option>
+                    <option value="10" <?php if($blogconfig['DisplayNumber']==10) echo 'selected';?>>10条</option>
+                    <option value="15" <?php if($blogconfig['DisplayNumber']==15) echo 'selected';?>>15条</option>
+                </select> 
+            </label>
+            <label class="Mt15 LabSlc">
+                <i>每页评论数：</i>
+                <select name="commentNumber" id="commentNumber" class="SlLW SlcWrp"> 
+                    <option value="5" <?php if($blogconfig['CommentNumber']==5) echo 'selected';?>>5条</option>
+                    <option value="10" <?php if($blogconfig['CommentNumber']==10) echo 'selected';?>>10条</option>
+                    <option value="15" <?php if($blogconfig['CommentNumber']==15) echo 'selected';?>>15条</option>
+                    <option value="20" <?php if($blogconfig['CommentNumber']==20) echo 'selected';?>>20条</option>
+                </select>
+            </label>
+            <label class="Mt15 LabSlc">
+                <i>推荐文章数：</i>
+                <select name="recommendNumber" id="commentNumber" class="SlLW SlcWrp"> 
+                    <option value="5" <?php if($blogconfig['RecommendNumber']==5) echo 'selected';?>>5条</option>
+                    <option value="10" <?php if($blogconfig['RecommendNumber']==10) echo 'selected';?>>10条</option>
+                    <option value="15" <?php if($blogconfig['RecommendNumber']==15) echo 'selected';?>>15条</option>
+                </select>
+            </label>
+            <label class="Mt15 LabSlc">
+                <i>文章评论设置：</i>
+                <select name="allowComment" class="SlLW SlcWrp">
+                    <option value="1" <?php if($blogconfig['AllowComment']==1) echo 'selected';?>>允许所有用户评论</option>
+                    <option value="2" <?php if($blogconfig['AllowComment']==2) echo 'selected';?>>不允许未登录用户或匿名用户评论</option>
+                    <option value="0" <?php if($blogconfig['AllowComment']==0) echo 'selected';?>>不允许评论</option>
+                </select>
+            </label>
+            <label class="Mt15 LabSlc">
+                <i>相册评论设置：</i>
+                <select name="photoProperty" class="SlLW SlcWrp">
+                    <option value="1" <?php if($blogconfig['PhotoProperty']==1) echo 'selected';?>>允许评论</option>
+                    <option value="0" <?php if($blogconfig['PhotoProperty']==0) echo 'selected';?>>不允许评论</option>
+                </select>
+            </label>               
+            <label class="Mt15 Pl70">
+                <a href="javascript:savesetup();" class="Azdtq Ml2">保存设置</a>
+                <a href="javascript:location.reload();" class="BtnB Ml10">取消</a></label>
+        </form>            
+    </div>
+</div>
+<script language="javascript">
+    actionurl = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/config/Action";
+    var pop = null;
+    function savesetup(){
+        
+        
+        if(mb_strlen($('#blogname').val())>30 || mb_strlen($('#blogname').val())<1){
+            showalertminute('博客名称长度应该在1-30个字节之间',2000,'','popupTip','TMDeleteSuccess');
+            return;
+        }
+        else if(mb_strlen($('#subtitle').val())>42){
+            showalertminute('博客副标题长度应该在42个字节以内',2000,'','popupTip','TMDeleteSuccess');
+            return;
+        }else{
+            $.post(actionurl,$('#popFormSubmit').serialize(),function(data){
+                $('input[name=oldname]').val($('#blogname').val());
+                $('input[name=flashCode]').val(data.code);
+                showalertminute(data.error,2000,'','popupTip','TMDeleteSuccess');
+                return;
+            },'json');
+            
+        }
+    }
+</script>
+
+<div id="TMDeleteSuccess" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp" id="popupTip">删除成功</p>
+    </div>
+</div>

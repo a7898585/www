@@ -1,0 +1,33 @@
+{php $m = getboxname('12','type_id');}
+{php $rg = getboxname('12','region');}
+<style>
+.jq {
+	height:25px;
+}
+.jq h3{
+	height:20px;
+}
+</style>
+<div class="x_nav1">
+    	<div class="jq"><h3>地  区：</h3>
+			{loop $rg $n $l}
+					<a href="/mh_diqu{$n}/" >{$l}</a>&nbsp;|
+			{/loop}
+		</div>
+		<div class="jq"><h3>类  型：</h3>
+			<a href="/lianzai" style="color:#FF0000">热门连载</a>&nbsp;|
+			<a href="/wanjie"  style="color:#FF0000">完结漫画</a>&nbsp;|
+			{loop $m $n $l}
+				{if !in_array($n,dexplode(NOT_ALLOW))}
+					<a href="/type{$n}/" >{$l}</a>&nbsp;|
+				{/if}
+			{/loop}
+		</div>
+    	<div class="jq"><h3>字母索引：</h3>
+			{php $Q=NULL;}
+			{php for ($i=65; $i<=90; $i++) $Q[]=chr($i);}
+			{loop $Q $r}
+				<a href="/index{$r}/">{$r}</a>&nbsp;|
+			{/loop}
+		</div>
+</div>

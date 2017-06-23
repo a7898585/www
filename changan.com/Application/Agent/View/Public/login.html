@@ -1,0 +1,151 @@
+{__NOLAYOUT__}
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>代理商登录_常安保险</title>
+        <meta name="keywords" content="{$seo.keywords}">
+        <meta name="description" content="{$seo.description}">
+        <link type="text/css" rel="stylesheet" href="/Public/Home/css/login.css" />
+        <script type="text/javascript" src="/Public/Home/js/jquery.js"></script>
+
+    </head>
+    <body>
+        <div class="header">
+            <div class="top">
+                <a href="{:getDoMain('www')}" title="专业的第三方平台！"><div class="logo"><span style="margin-left: 215px;font: 300 24px/58px 黑体 ;">代理商登录</span></div></a>
+            </div>
+        </div>
+        <div class="w_login">
+            <div class="wrap">
+                <div class="wrapbg">
+                    <div class="right">
+                        <div class="login_box" id="login_box">
+                            <form method="post" action="{$base_url}login/denglu" id="login_form">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                                    <tr>
+                                        <th>账号：</th>
+                                        <td><input type="hidden" id="referUrl" name="referUrl" value="{$Think.server.HTTP_REFERER}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2"><input class="text01" name="username" id="username" size="30" type="text"></th>
+                                    </tr>
+                                    <tr>
+                                        <th>密码：</th>
+                                        <td><a tabindex="-1" href="{$base_url}login/getPassword">忘记密码？</a></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2"><input class="text01" name="password" id="password" size="30" type="password"></th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2"><label>
+                                                <input name="" type="checkbox" value="" class="checkbox" checked/>
+                                                下次自动登录</label></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="ta_cent" colspan="2"><input type="button" class="btn1"  name="" value="登 录" id="login"></th>
+                                    </tr>
+                                    <tr>
+                                        <!--<th><a href="" class="ico ico_sina">微博登录</a></th>-->
+                                        <!--<td><a href="{$base_url}signup/" class="ico ico_reg">免费注册</a></td>-->
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function(){
+                $login_box = $("#login_box");
+                $(document).bind("keydown",function(event){
+                    var event=window.event?window.event:event;
+                    var code = event.keyCode||event.which;
+                    if(code==13){
+                        $("#login").trigger("click");
+                    }
+                });
+
+                $("#username").bind("blur",function(){
+                    var username=$("#username").val();
+                    if(username==""){
+                        $("#username").next("span.tip").remove();
+                        $("#username").after('<span class="tip"><i></i>请输入帐号</span>');
+                    }
+                    else{
+                        $("#username").next("span.tip").remove();
+                    }
+                })
+                $("#password").bind("blur",function(){
+                    var password = $("#password").val();
+                    if(password.length<6){
+                        $("#password").next("span.tip").remove();
+                        $("#password").after('<span class="tip"><i></i>您输入密码有误</span>');
+                    }
+                    else{
+                        $("#password").next("span.tip").remove();
+                    }
+                })
+                $("#login").bind("click",function(){
+                    layer.load('登录中...',3);
+                    var isRight=1;
+                    var username=$("#username").val();
+                    if(username==""){
+                        layer.msg('您输入帐号有误',3,1);
+                        return false;
+                    }
+                    var password = $("#password").val();
+                    if(password.length<6){
+                        layer.msg('您输入密码有误',3,1);
+                        return false;
+                    }
+                    if(!isRight){
+                        return false;
+                    }
+                    $.ajax({
+                        type: "post",
+                        url: "/public/login/",
+                        dataType:"json",
+                        data: "username="+username+"&password="+password,
+                        success: function(data){
+                            if(data.s==1){
+                                layer.msg('登录成功,跳转中...',0,1)
+                                window.location.href = '/';
+                            }else{
+                                layer.msg(data.m,2);
+                                return;
+                            }
+                        }
+                    });
+                });
+
+            });
+        </script>
+        <script type="text/javascript" src="/Public/Home/js/layer/layer.min.js"></script>
+        <script type="text/javascript" src="/Public/Home/js/jquery.cookie.js"></script>
+
+        <div class="m_copy">
+            <p>
+                <a href="{$base_url}about/">关于我们</a>|
+                <a href="{$base_url}chanpin/0_0_1003_1001">意外险</a>|
+                <a href="{$base_url}chanpin/0_0_1003_1003">人寿保险</a>|
+                <a href="{$base_url}chanpin/0_0_1003_1008">汽车保险</a>|
+                <a href="{$base_url}dailiren/">保险代理人</a>|
+                <a href="{$base_url}wenba/">保险问答</a>|
+                <a href="{$base_url}vip/">会员服务</a>|
+                <a href="{$base_url}about/disclaimer/">免责声明</a>|
+                <a href="{$base_url}about/contact/">联系我们</a>
+            </p>
+            <div>
+                <p>Copyright&copy;2008-2014 常安保险 厦门保啦网络科技有限公司版权所有</p>
+                <p>增值电信业务经营许可证(ISP/ICP) 闽ICP备15000619号-2 客服热线：4006-258-258</p>
+            </div>
+            <div>
+                <img src="/Public/Home/images/chengxin.png">
+                <img src="/Public/Home/images/dianziyingye.png">
+                <img src="/Public/Home/images/wangluo.png">
+            </div>
+        </div>
+    </body>
+</html>

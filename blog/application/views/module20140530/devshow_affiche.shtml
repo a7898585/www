@@ -1,0 +1,15 @@
+<div class="RgtBar">
+    <h3>公告</h3>
+    <p class="Bulletin">
+    <div class="modbox">	
+        <div id="s_affiche" style="word-wrap: break-word;overflow:hidden;" class="gonggaocz00 Bulletin">数据加载中...</div>
+        <div class="gonggaocz01"></div>		
+    </div>
+</p>
+<script language="javascript">
+    $(function(){
+        $('#s_affiche').load("<?php echo $baseurl.'/ajaxgetmemberaffche/'.$bloginfo['MemberID'].'/'.time();?>");
+
+    });
+</script>     
+</div>

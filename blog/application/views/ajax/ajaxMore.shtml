@@ -1,0 +1,58 @@
+<?php
+if(!empty($artlist) && !empty($artlist['Record']))
+{
+$artidlist = '';
+$addClick='1';
+foreach($artlist['Record'] as $key => $art)
+{
+$artidlist .= ','.$art['ArticleID'];
+
+?>    
+<!--置顶博文-->
+<div class="ArticleBox">
+
+
+    <!--操作-->
+    <div class="HandleBtn">				
+        <?php
+        if($isowner == true)
+        {
+        $addClick='2';
+        ?>
+        <span onclick="javascript:submit_form('action_form','<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>');" style="cursor: pointer;">编辑</span> |  <span onclick="javascript:del('<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>');" style="cursor: pointer;">删除</span> 
+        <?php
+        }
+        ?>
+    </div>
+    <!--end 操作-->
+    <h2>			
+        <?php if($art['Recommend'] == 2 || $art['Recommend'] == 3 || $art['IsUsed'] == 1) {?>
+        <i class="Recom">荐</i>		
+        <?php }?>
+        <a href="<?php echo $urlprefix;?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html"><?php echo $art['IsTop']==1 ? '<i class="Top">置顶</i>'.filter_word($art['Title']):filter_word($art['Title']);?></a>		
+    </h2>	
+    <!--<i class="Top">置顶</i><a href="#">张国荣，娱乐圈贵族</a></h2>  -->
+    <!--博文内容-->
+    <div class="ArticleCont">
+        <div class="half">	
+            <?php if(preg_match("/<img(.*)src=\"([^\"]+)\"[^>]+>/isU",$articleContent[$key]['Content'], $out)) {?>
+            <a class="Pic" href="#"><?php echo($out[0]); ?></a>    
+            <?php } ?>
+            <div class="strContent"  style="display:block"><?php echo filter($art['Summary']);?>...<input type="hidden" value="<?php echo $ajaxlmcount.'duid='.$art['UserID'].'&mid='.$bloginfo['MemberID'].'&dom='.$bloginfo['DomainName'].'&aid='.$art['ArticleID'].'&vuid='.$bloginfo['UserID'].'&un='.$bloginfo['UserName'].'&nn='.$bloginfo['NickName']; ?>" class="viewUrl"><a class="spread" onclick="spread2(this,'<?php echo($bloginfo['MemberID']); ?>','<?php echo($art["ArticleID"]); ?>','<?php echo($art["AppearTime"]); ?>','<?php echo($addClick); ?>','intact_');">【展开全部】</a><a href="<?php echo $urlprefix;?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html">【阅读全文】</a></div>
+
+        </div>       
+
+        <div class="all" style="display:none"><div id="intact_<?php echo($art['ArticleID']); ?>"></div><a class="packUp">【收起】</span><a href="<?php echo $urlprefix;?>/article/<?php echo strtotime($art['AppearTime']).'-'.$art['ArticleID'];?>.html">【阅读全文】</a></div>
+    </div>
+    <!--end 博文内容-->
+    <!--功能-->
+    <div class="FuncBox">
+        <div class="TimeBox"><span class="Time"><?php echo timeop($art['AppearTime']);?></span>|<span id="atonclick_<?php echo $art['ArticleID'];?>" class="Times">0</span>次浏览</div>
+        <div class="HandleBox"><a href="#">举报</a>|<a href="#">收藏（0）</a>|<a class="Support" href="#">（10）</a>|<a href="#">分享</a>|<a href="#">转载（7）</a>|<a href="#">评论</a></div>
+    </div>
+    <input type='hidden' class='time_<?php echo $key; ?>' value="<?php echo substr(($art['AppearTime']),0, -15);?>">
+    <!--end 功能-->
+</div>
+<?php
+}
+}?>

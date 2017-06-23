@@ -1,0 +1,33 @@
+<nav class="Nav">
+    <?php if(!empty($moreName)){?>
+    <a href="#" class="Cnfol_Bk ToBlock Fl Tc Fb16"><?php echo $moreName;?></a>
+    <?php }else{ ?>
+    <?php if(!empty($userid)){?>
+    <a href="<?php echo $baseurl.'/my/'.$bloginfo['DomainName'].''; ?>" class="<?php echo $blogpagename == 'myindex' ? 'Red_color' : ''; ?> Dongtai ToBlock Fl Tc Fb16">动&nbsp;&nbsp;态</a>
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'';?>" class="<?php echo $blogpagename == 'myblog' ? 'Red_color' : ''; ?> MyBk ToBlock Fl Tc Fb16">我的博客</a>
+    <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/article/Add';?>" class="Write ToBlock Fl Tc Fb16">写博客</a>
+    <?php } ?>
+    <?php } ?>
+    <div href="#" class="More Fr" id="More">
+        <h2 class="M_title Fb16 Wrp" id="M_title">更多</h2>
+        <div class="M_cnt Hide" id="M_cnt">
+            <div class="M_jt"></div>
+            <div class="M_clses F14">
+                <a href="<?php echo $baseurl.'/more/masterHand'; ?>" class="Fl Tc">名家高手</a>
+                <a href="<?php echo $baseurl.'/more/hjby'; ?>" class="Fl Tc">黄金白银</a>
+                <a href="<?php echo $baseurl.'/more/cjzt'; ?>" class="Fl Tc">财经杂谈</a>
+                <a href="<?php echo $baseurl.'/more/gsjs'; ?>" class="Fl Tc">股市精萃</a>
+                <a href="<?php echo $baseurl.'/more/jjwh'; ?>" class="Fl Tc">基金外汇</a>
+                <a href="<?php echo $baseurl.'/more/xflc'; ?>" class="Fl Tc">消费理财</a>
+                <a href="<?php echo $baseurl.'/more/yhbx'; ?>" class="Fl Tc">银行保险</a>
+                <a href="<?php echo $baseurl.'/more/ggqh'; ?>" class="Fl Tc">港股期货</a>
+                <a href="<?php echo $baseurl.'/more/other'; ?>" class="Fl Tc">其   他</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<script type="text/javascript">
+    window.onload=function(){
+        Bk.app.toMore();
+    }
+</script>

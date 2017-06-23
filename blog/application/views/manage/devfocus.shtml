@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery.cookie.js" ></script>
+        <script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/core/js/function.js" ></script>
+        <script type="text/javascript" src="http://images.cnfol.com/login_js/login_js/lrPopup.js" ></script> 
+        <script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/js/popup.js" ></script>
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/function.js" ></script>	
+    </head>
+    <body>
+        <div style="width:440px;height:307px">
+            <div style="color:#444;width:100%;height:30px"></div>
+            <div>为<span style="font-weight:bolder"><?php echo $blogname;?></span>选择分组11</div>
+
+            <div style="width:400px;height:170px;" id="selectGroup">
+                <input type="radio" value="0">朋友11
+                <a href="javascript:addAjax('<?php echo $userid;?>')">创建新分组</a><input type="text" value="新分组">
+                <input type="button" value="保存">
+            </div>
+        </div>
+    </body>
+
+</html>
+
+<script>
+    $.ajax({
+        url:"/index.php/devblog/ajaxAdd",
+        dataType:'json',
+        success:function(json){
+            if(json.erron == '01')
+            {
+				
+            }
+			
+        }
+		
+    })
+    function ajaxTagList()
+    {
+        $.ajax({
+            url:"/index.php/devblog/ajaxTagList",
+            dataType:'json',
+            success:function(json){
+                if(json.erron == '01')
+                {
+                    $('#selectGroup').html(json.error);
+                }
+                else
+                {
+                    alert("标签列表获取失败");
+                }
+				
+            }
+			
+        })		
+    }
+</script>

@@ -1,0 +1,155 @@
+<link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,ua/css/Public/TopBarFoot.css,uj/Css/Jqita/BlogH.css" />
+<div class="RgtCont Bdreb R W760 Mt15">
+    <div>
+        <h3>文章分类设置</h3>
+        <div class="BgCont">
+            <form id="addSortName" method="post" class="Fmsz">
+                <label><i>创建新分类：</i>
+                    <input type="hidden" name="flashCode"  value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>" />
+                    <input type="hidden" name="act" value="addsort" />
+                    <input type="hidden" name="return" value="1" />
+                    <input type="hidden" name="memid" value="<?php echo $bloginfo['MemberID'];?>" />
+                    <input id="C1" class="W200 addName" type="text" name="name"  value="" /></label>
+                <label class="Pl80 Mt10">
+                    <a href="javascript:;" class="Mr10 CoWht BtnA" href="javascript:;" onclick="addSortName('addSortName','addName','<?php echo($bloginfo['DomainName']); ?>','<?php echo $bloginfo['MemberID'];?>');">创建</a><a href="javascript:;" id="Cncle" class="Co666 BtnB" style="display:none;">取消</a>
+                </label>
+            </form>
+
+            <form id="editSort" name="editSort" method="post">
+                <input type="hidden" name="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+                <input type="hidden" name="sortnum" id="sortnum" value="<?php echo $sortlist['RetRecords'];?>" />
+                <ul class="MageLst">
+                    <?php 
+                    if($sortlist['RetRecords'] > 0)
+                    {
+                    $sortlist['Record'] = ($sortlist['RetRecords'] == 1)? array(0=>$sortlist['Record']):$sortlist['Record'];
+                    foreach($sortlist['Record'] as $val)
+                    {
+                    ?>
+                    <li class="sort <?php if($val['SortID'] != $default['articlesort'][0]&&$val['SortID'] != $default['articlemycollect'][0]){echo 'signSort';} ?>" id="sort<?php echo $val['SortID'];?>" name="<?php echo $val['Rank'];?>">
+                        <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/sort/<?php echo $val['SortID'];?>" id="editName_<?php echo $val['SortID'];?>" class="Title" ><?php echo $val['Name'];?></a>
+                        <input type="hidden" name="RankValue_<?php echo $val['SortID'];?>" id="Rank_sort<?php echo $val['SortID'];?>" value="<?php echo $val['Rank'];?>" />
+                        <span class="Handle">
+                            <?php 
+                            if($val['SortID'] != $default['articlesort'][0]&&$val['SortID'] != $default['articlemycollect'][0])
+                            {?>
+                            <input type="hidden" name="SortIDValue[]" class="SortIDValue" value="<?php echo $val['SortID'];?>" /><input type="hidden" class="RankValue" value="<?php echo $val['Rank'];?>" /><input type="hidden" name="NameValue_<?php echo $val['SortID'];?>" class="NameValue" value="<?php echo $val['Name'];?>" />
+                            <a href="javascript:DialogSort('DeterminePop','<?php echo $val['SortID'];?>','editName_<?php echo $val['SortID'];?>');Dialog('Update');">[编辑]</a> <a href="javascript:void(0)" onclick="javascript:Dialog('Confirm');setSortID('<?php echo $val['SortID'];?>');">[删除]</a>&nbsp;&nbsp;<a href="javascript:void(0)" class="upMove Up" name="upMove" onclick="javascript:movesort('up',this);"></a>&nbsp;&nbsp;<a href="javascript:void(0)" class="downMove Down" name="downMove" onclick="javascript:movesort('down',this);"></a>
+                            <?php
+                            }
+                            else
+                            {?>
+                            不可更改
+                            <?php
+                            }?>
+                        </span>
+                    </li>
+                    <?php
+                    }
+                    }
+                    else
+                    {
+                    ?>
+                    <li>
+                        <a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/article/SortList/<?php echo $default['articlesort'][0];?>" class="Title" target="_blank"><?php echo $default['articlesort'][1];?>&nbsp;</a>
+                        <a height="30">0&nbsp;</a>
+                        <span class="Handle">不可更改</span>
+                    </li>
+                    <?php
+                    }?>
+                </ul>
+            </form>
+            <p class="SetBtnWrap"><a class="SetSave" href="javascript:;" onclick="saveSort();">保存设置</a></p>
+        </div>
+    </div>
+
+    <form id="action_form" name="action_form" method="post" target="_self" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articlesort/Edit">
+        <input type="hidden" name="act" id="act" value="updsort" />
+        <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$bloginfo['UserID']);?>" />
+        <input type="hidden" name="memberid" id="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+        <input type="hidden" name="sortid" id="sortid" />
+    </form>
+    <form id="page_form" name="pageform" method="post" target="_self" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articlesort/List">
+        <input type="hidden" name="page" id="page" />
+    </form>
+</div>
+<!--弹出窗-->
+<div class="SetPop" id="Update">
+    <span class="Close" onClick="Dialog.Close();"></span>
+    <h5>修改分类名称</h5>
+    <div class="Cont">
+        <form id="editSortName" method="post">
+            <input type="hidden" name="act" value="updsort" />
+            <input type="hidden" name="check" value="1" />
+            <input type="hidden" name="sortid" id="alertSortID" value="" />
+            <input type="hidden" name="memid" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="text" name="name" class="Txt" id="alertName" value="" /></p>
+            <p class="SetBtnWrap Mt15"><a class="Mr10 SetSubmit" href="javascript:;" onclick="editSortName('editSortName','alertName');">确定</a><a class="SetCancel" onClick="Dialog.Close();" href="javascript:;">取消</a></p>
+        </form>
+    </div>
+</div>
+
+
+
+<div id="Confirm" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">确定删除这个分类吗？</p>
+        <input type="hidden" id="setSortID" value="" />
+        <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="delSortID('setSortID');Dialog.Close();" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">取消</a></p>
+    </div>
+</div>
+
+<!--end 弹出窗-->
+<script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Cleaner.js,ui/Js/Select/Select.js,uj/Js/Reg/TreeMenu.js,Cm/Js/Dialog.js" type="text/javascript"></script>
+<script type="text/javascript">
+    //Cleaner("C1");
+    //Selects('SlctFrst');
+    //TreeMenu("Tre");
+    //document.getElementById("Cncle").onclick=function(){
+    //    document.getElementById("C1").value="";
+    //}
+</script>
+<!--<script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,ua/js/Public/Base64.js,ua/js/Public/Login.js"></script>
+<script type="text/javascript">
+    Tn.TopLogin();
+    function ChangeTitle(){
+        
+    }
+</script>-->
+
+<script language="javascript">
+    var actdel = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articlesort/Action";
+    function submit_form(target,sortid){
+        $('#sortid').val(sortid);
+        $('#'+target).submit();
+    }
+    function setSortID(SortID)
+    {
+        $('#setSortID').val(SortID);
+    }
+    function delSortID(id){
+        var sortid=$('#'+id).val();
+        $.post(actdel,{act:'delsort',flashCode:$('#flashCode').val(), memid:$('#memberid').val(),SortID:sortid},function(data){
+            
+            showalertminute(data.error,1000,'','popupTip','TMDeleteSuccess');
+            if(data.errno == 'success')
+            { 
+                $('#sort'+sortid).remove();
+                //$('a[class=upMove]').css('color','#661212');
+                //$('a[class=downMove]').css('color','#661212');
+                //$('.signSort').first().find('a[class=upMove]').css('color','#666666');
+                //$('.signSort').last().find('a[class=downMove]').css('color','#666666');
+            }
+        },'json');
+    }
+    function gotopage(page){
+        $("#page").val(page);
+        $("#page_form").submit();
+    }
+
+    //$(document).ready(function(){
+    //$('.signSort').first().find('a[name="upMove"]').css('color','#666666');
+    //$('.signSort').last().find('a[name="downMove"]').css('color','#666666');
+    //})
+</script>

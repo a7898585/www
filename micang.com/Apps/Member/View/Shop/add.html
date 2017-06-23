@@ -1,0 +1,139 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_h" href="kavascript:;">我的米铺</a>
+    </div>
+    <div class="add_temp" id="navhljs1_c1">
+        <form name="form_shop" action="" method="post">
+            <input name="id" value="{$membersShop.id}" type="hidden">
+            <div class="add_temp_b">
+                <ul>
+                    <li>
+                        <p>米铺名称：</p>
+                        <input type="text" class="list_ctxt_a" size="30" name="title" value="{$membersShop.title}" maxlength="32" placeholder="请输入米铺名称" datatype="*" errormsg="米铺名称不正确" sucmsg=" " nullmsg="请输入米铺名称" />
+
+                    </li>
+                    <li>
+                        <p>米铺的地址：</p>{:getDoMain('www')}shop/{$nId}/
+                    </li>
+                    <li> <p>米铺LOGO：</p>
+                        <input id="photo_url" type="file" value="上传" class="file_btn"/><br>
+                        <div id="idcard_pic" class="id_cont">
+                            <if condition="$membersShop.logo neq '' ">
+                                <span><img class="sfz" src="{$membersShop.logo}" /><input type="hidden" name="logo" value="{$membersShop.logo}">&nbsp;<a onclick="$(this).parents('span').remove()" href="javascript:;">删除</a>
+                                </span>
+                            </if>
+                        </div>
+
+                    </li>
+                    <li>
+                        <p>主营类目：</p>
+                        <textarea name="main_category">{$membersShop.main_category}</textarea>
+                    </li>
+                    <li>
+                        <p>联系邮箱：</p>
+                        <input type="text" class="list_ctxt_a" size="30" name="email" value="{$membersShop.email}" maxlength="32" placeholder="请输入邮箱地址" datatype="e" errormsg="邮箱格式不正确" sucmsg=" " nullmsg="请输入邮箱地址" />
+                    </li>
+                    <li>
+                        <p>QQ号码：</p>
+                        <input type="text" class="list_ctxt_a" size="30" name="qq" value="{$membersShop.qq}" placeholder="请输入QQ" datatype="n" errormsg="QQ号码格式不正确" sucmsg=" " nullmsg="请输入QQ号码" />
+                    </li>
+                    <li>
+                        <p>手机号码：</p>
+                        <input type="text" class="list_ctxt_a" size="30" name="mobile" value="{$membersShop.mobile}" placeholder="请输入手机号码" datatype="m" errormsg="手机号码格式不正确" sucmsg=" " nullmsg="请输入手机号码"  />
+                    </li>
+                    <li>
+                        <p>开启店铺：</p>
+                        <label><input type="radio" name="status" value="0" <eq name="membersShop.status" value="0">checked</eq> /> 关闭  &nbsp;&nbsp;
+                        </label>    <label>  <input type="radio" name="status" value="1" <eq name="membersShop.status" value="1">checked</eq>/> 启用
+                        </label>    
+                    </li>
+                    <li>
+                        <input type="submit" value="确定提交" class="list_submit">
+                    </li>
+                </ul>
+            </div>    
+        </form>
+    </div>
+</div>     
+<link type="text/css" rel="stylesheet" href="/Public/Common/js/uploadify/uploadify.css"/>
+<style>
+    .id_cont{margin-left: 140px;}
+    .swfupload{margin-left: -120px;}
+    .uploadify-button-text {
+        background: #ff993d none repeat scroll 0 0;
+        border: medium none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        height: 30px;
+        margin: 20px 0 0;
+        width: 90px;
+    }
+    .add_temp_b ul li p {width: 120px;}
+     .Validform_checktip.Validform_wrong{color:red; margin-left:100px;padding:0px;}
+
+</style>
+<script type="text/javascript" src="/Public/Common/js/uploadify/jquery.uploadify.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/Public/Common/js/Validform_Datatype.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        uploadFile('photo_url','上传头像');
+        $('form[name="form_shop"]').Validform({
+            tiptype:3,
+            beforeSubmit: function(curform){
+                curform.find(':submit').prop('disabled', true);
+                $.post(curform.attr('action'), curform.serialize(), function(result){
+                    layer.msg(result.message);
+                    curform.find(':submit').prop('disabled', false);
+                });
+                return false;
+            }
+        });
+    });
+    
+    function uploadFile(id,buttonText){
+        $('#'+id).uploadify({
+            auto: true,
+            swf:'/Public/Common/js/uploadify/uploadify.swf',
+            uploader: '{$Think.config.UPAIYUN_CONFIG.UPYUN_UPLOAD_URL}',
+            buttonText: '选择文件并上传',
+            width: '200',
+            height: '32',
+            fileTypeDesc: '图片文件',
+            fileTypeExts: '*.jpg;*.png;*.gif',
+            fileSizeLimit: '1MB',
+            fileObjName: 'file',
+            removeTimeout: 0,
+            formData: {
+                policy: '{$policy}',
+                signature: '{$sign}'
+            },
+            overrideEvents: [ 'onDialogClose', 'onUploadError', 'onSelectError' ],
+            onSelectError: function(file, errorCode, errorMsg){
+                switch(errorCode) {
+                    case -100:
+                        layer.msg("上传的文件数量已经超出系统限制的"+$('#'+id).uploadify('settings','queueSizeLimit')+"个文件！");
+                        break;
+                    case -110:
+                        layer.msg("文件 ["+file.name+"] 大小超出系统限制的"+$('#'+id).uploadify('settings','fileSizeLimit')+"大小！");
+                        break;
+                    case -120:
+                        layer.msg("文件 ["+file.name+"] 大小异常！");
+                        break;
+                    case -130:
+                        layer.msg("文件 ["+file.name+"] 类型不正确！");
+                        break;
+                }
+            },
+            onUploadSuccess: function(file, data, response){
+                result = $.parseJSON(data); 
+                //                console.log(result);
+                $('#idcard_pic').html('<span><img class="sfz" src="{$Think.config.UPAIYUN_CONFIG.UPYUN_URL}'+result.url+'" /><input type="hidden" name="logo" value="{$Think.config.UPAIYUN_CONFIG.UPYUN_URL}'+result.url+'">&nbsp;<a onclick="$(this).parents(\'span\').remove()" href="javascript:;">删除</a></span>');
+            },
+            onUploadError: function(file, errorCode, errorMsg, errorString){
+                layer.msg('上传失败，请检查上传文件是否符合要求。1MB，jpg/gif/png');
+            }
+        });
+    }
+</script>

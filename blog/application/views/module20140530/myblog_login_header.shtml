@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link type="text/css" rel="stylesheet" href="http://img.cnfol.com/osapi/css/newcard.v3.css" />
+        <!-- 法律声明 -->
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/uh/Css/Cms/BlogNav.css" />
+        <!-- 法律声明 -->
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css,ua/css/Public/TopBarFoot.css" />
+        <script src="http://passport.cnfol.com/getOnline.php?type=jsvar&t=uid&d=<?php echo $bloginfo['UserID'];?>" language="javascript"></script>
+        <!--<script src='http://blog.cnfol.com/myblog_files/data.js'></script>导致ie出错-->
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery.cookie.js" ></script>
+        <script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/core/js/function.js" ></script>
+        <script type="text/javascript" src="http://images.cnfol.com/login_js/login_js/lrPopup.js" ></script> 
+        <!--<script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/js/popup.js" ></script>-->
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/function.js" ></script>
+        <!--<script type="text/javascript" src="http://img.cnfol.com/osapi/js/newcard.v3.js"></script>-->
+
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/newcard.v3.js" ></script>
+        <script src="http://images.cnfol.com/uploads/v5.0/passportweb/script/tipswindown.js" language="javascript"></script>
+        <script charset="utf-8" src="http://hs.cnfol.com/f=Cm/Js/Base.js" type="text/javascript"></script>
+        <script charset="utf-8" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,Cm/Js/Cleaner.js,Cm/Js/Tabs.js" type="text/javascript"></script> 
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/Functioner.js"></script><!--上线后改回-->
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/function.js?" ></script><!-- 上线后改回 -->
+
+        <script charset="utf-8" src="http://hs.cnfol.com/ue/Js/NewBlog/EditQQ.js" type="text/javascript"></script>
+        <meta name="Keywords" content="<?php echo isset($keywords2) ? strip_tags($keywords2) : $keywords; ?>" />
+        <meta name="Description" content="<?php echo isset($description) ?strip_tags($description) : ''; ?>" />
+        <title><?php echo $title; ?></title>
+        <!--[if ie 6.0]>
+        <script src="http://hs.cnfol.com/uc/Js/Finance/iepng.js" type="text/javascript"></script>
+        <script type="text/javascript">
+           EvPNG.fix('.RecomLst li,.CommLst li'); 
+        </script>   
+        <![endif]-->
+    </head>
+
+    <body>
+        <?php  include $logintool; ?>
+        <!--end 顶部-->
+        <!--博主主页信息-->
+        <div class="Wrap Cf BloggerWrap">
+            <!--博主头像-->
+            <div class="BloggerPicBox">
+                <div class="BloggerPic"><img src="<?php echo getUserHeadbig($bloginfo['UserID'],192);?>"/></div>
+                <ul class="BloggerAtten">
+                    <li>
+                        <a href="<?php echo $baseurl.'/'.$cuttrent_domainname.'/myfocus/friend'; ?>" target="_blank" style="text-decoration:none;cursor:hand;">
+                            <p><?php echo substr($friendsnumber['FollowingNum'],0,8); ?></p>
+                            <p>关注</p>
+                        </a>
+                    </li>
+                    <li class="Fans">  
+                        <a href="<?php echo $baseurl.'/'.$cuttrent_domainname.'/myfocused/friend'; ?>" target="_blank" style="text-decoration:none;cursor:hand;">
+                            <p><?php echo substr($friendsnumber['FllowerNum'],0,8); ?></p>
+                            <p>粉丝</p>
+                        </a>
+                    </li>
+                    <li>  
+                        <a href="<?php echo $baseurl.'/'.$cuttrent_domainname.'/articlelist/alist'; ?>" target="_blank" style="text-decoration:none;cursor:hand;">
+                            <p><?php echo $TotalArticle; ?></p>
+                            <p>文章</p>
+                        </a>
+                    </li>
+                </ul>
+                <!--认证图标-->
+                <?php if($auth!=2&&$auth){?>
+                <i class="ApproveIco"></i>
+                <?php } ?>
+                <!--end 认证图标-->
+            </div>
+            <!--end 博主头像-->
+            <!--博主信息-->
+            <div class="BloggerInfo">
+                <div class="BloggerName"><strong><?php echo $bloginfo['NickName'];?></strong>
+                    <i class="<?php echo $userinfo['user_gender']=='0'?'OffMale':'OffFemale';?>" id="onlinediv"></i>
+                    <div class="focus">   
+                        <?php  if(isset($isowner) && $isowner==true){?>
+                        <?php } else {?>
+                        <?php if($isFrends == 0 || $isFrends == 2){ ?>
+                        <!--<a href="javascript:Open('1','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['UserID'];?>')">加关注</a>-->
+                        <?php if($isFrends!=''){ ?>
+                        <a class="Plus" href="javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','add') ;">加关注</a>
+                        <?php }else{ ?>
+                        <a class="Plus" href="javascript:;" onclick="showiframe('iframeSrc','popupIframe','<?php echo(config_item('base_url')); ?>/index.php/widget/login','','');">加关注</a>
+                        <?php }}else{ ?>
+                        <a class="HasPlus" href="javascript:delAttention('<?php echo $bloginfo['UserID']; ?>','del');">取消关注</a>
+                        <?php } ?>
+                        <?php } ?>
+                    </div>
+                </div>
+                <div id="BlogNameCP_C">
+                    <p class="BlogName">
+                        <a id="BlogNameLoad" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>" target="_blank" title="<?php echo filter_word(strip_tags($bloginfo['BlogName'])); ?>" style="cursor:hand;">
+                            <?php
+                            if (utf8_strlen($bloginfo['BlogName']) > 30) {
+                            echo filter_word(utf8_str(strip_tags($bloginfo['BlogName']),30,'false')).'...';
+                            }
+                            else
+                            {
+                            echo filter_word(strip_tags($bloginfo['BlogName']));
+                            }
+                            ?>
+                        </a>    
+                        <?php if($isconfig != 1&&$isowner == true) {?>
+                        <a href="javascript:;" onclick="showEditCP('BlogNameCP')">[编辑]</a>
+                        <?php } ?>
+                    </p>
+                </div>
+                <?php if($isconfig != 1&&$isowner == true) {?>
+                <div id="BlogNameCP" style="display:none">
+                    <input type="text" name="BlogName" id="BlogName" class="input" size="40" value="<?php echo filter_word($bloginfo['BlogName']);?>" /><input type="button" value="保存" onclick="saveEditValue('BlogName')" /><input type="button" value="取消" onclick="hideEditCP('BlogNameCP')"/>
+                </div>
+                <?php }?>       		
+                <div class="BlogDesc">   
+                    <div id="SubtitleCP_C">
+                        <a href="javascript:;" id="SubtitleLoad" style="color:rgb(237, 106, 0);cursor:hand;" title="
+                           <?php
+                           if($blogconfig['Subtitle'] !='')
+                           {
+                           echo filter_word(strip_tags($blogconfig['Subtitle']));
+                           }
+                           else
+                           {
+                           echo '中金博客，最专业的财经博客';
+                           }
+                           ?>
+                           ">
+                            <?php
+                            if($blogconfig['Subtitle'] !='')
+                            {
+                            if (utf8_strlen($blogconfig['Subtitle']) > 36) {
+                            echo filter_word(utf8_str(strip_tags($blogconfig['Subtitle']),36,'false')).'...';
+                            }
+                            else
+                            {
+                            echo filter_word(strip_tags($blogconfig['Subtitle']));
+                            }
+                            }
+                            else
+                            {
+                            echo '中金博客，最专业的财经博客';
+                            }
+                            ?>
+                        </a>&nbsp;
+                        <?php if($isconfig != 1&&$isowner == true) {?>   
+                        <span style="font-size:12px;"><a href="javascript:;" onclick="showEditCP('SubtitleCP')">[编辑]</a></span>
+                        <?php }?>
+                    </div>			 
+                    <?php if($isconfig != 1&&$isowner == true) {?>
+                    <div id="SubtitleCP" style="display:none">
+                        <input type="text" name="Subtitle" id="Subtitle" class="input" size="40" value="<?php if($blogconfig['Subtitle'] !='') echo filter_word($blogconfig['Subtitle']); else echo '中金博客，最专业的财经博客';?>"/><input type="button" value="保存" onclick="saveEditValue('Subtitle')"/><input type="button" value="取消" onclick="hideEditCP('SubtitleCP')"/>
+                    </div>
+                    <?php }?>	    
+                </div>
+                <ul class="BloggerHandle">
+                    <?php if(isset($isowner) && $isowner==true): ?>
+                    <li><a href="<?php echo($baseurl.'/'.$bloginfo['DomainName'].'/article/Add');?>">写博</a></li>
+                    <?php endif; ?>
+                    <li><a href="<?php echo($baseurl.'/'.$bloginfo['DomainName'].'/leaveme/message');?>">留言</a></li>
+                    <li>		
+                        <?php if(isset($isowner) && $isowner==true): ?>
+                        <a target="_blank" href="http://passport.cnfol.com/giftmall">我的礼物</a>
+                        <?php else: ?> 
+                        <a onclick="tipsWindown('我要给<?php echo $bloginfo['NickName'];?>送鲜花', 'ToUserID=<?php echo $bloginfo['UserID']?>&GiftID=1&SourceURL=<?php echo $baseurl.'/'.$bloginfo['DomainName']; ?>&SourceTypeID=1&SourceTypeDesc=blog&SourceTabID=0',320,200,'true','','false','');return false;" href="javascript:;" title="我要给<?php echo $bloginfo['NickName'];?>送鲜花" class="sendgift">鲜花</a>
+                        <?php endif; ?>
+                    </li>
+                    <li>		
+                        <?php if(isset($isowner) && $isowner==true): ?>
+                        <a href="http://passport.cnfol.com/v7/assistant/messageman">消息管理</a>
+                        <?php else: ?> 
+                        <a href="javascript:OpenMessage('2','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['NickName'];?>','<?php echo $bloginfo['UserID'];?>')">发消息</a>
+                        <?php endif; ?>
+                    </li>
+                </ul>       
+            </div>
+            <!--end 博主信息-->
+            <!--认证博主-->
+            <?php if($auth!=2&&$auth){?>
+            <div class="BloggerTitle">
+                <p class="VipBlogger">认证博主</p>
+                <?php
+
+                if (strlen($auth['Record']['Remark']) > 50) {
+
+                $auth['Record']['Remark']=utf8_str($auth['Record']['Remark'],50,'false').'...';
+                }
+                ?>
+                <p class="Title"><?php echo $auth['Record']['Remark']; ?></p>
+            </div>
+            <?php } ?>
+            <!--end 认证博主-->
+        </div>
+        <!--end 博主主页信息-->
+        <!--导航-->
+        <div class="Wrap Nav NewNav">
+            <?php if(isset($isowner) && $isowner==true) {?>
+            <a class="AHome Mr30" href="<?php echo $baseurl.'/my/'.$bloginfo['DomainName'];?>">我的首页</a>
+            <a class="ABlog <?php if($navConfig=='myblog') {?>ANowbg<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>">我的博客</a>
+            <a class="APhoto <?php if($navConfig=='album') {?>ANowph<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/albumlist' ?>" >相 册</a>
+            <a class="ASet ANow" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/config/Edit'?>" >设 置</a>
+            <?php }else{ ?>
+            <!--a class="AHome Mr30" href="<?php echo $baseurl.'/my/'.$bloginfo['DomainName'];?>" target="_blank">首页</a>-->
+            <a class="ABlog <?php if($navConfig=='myblog') {?>ANowbg<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>">博 客</a>
+            <a class="APhoto <?php if($navConfig=='album') {?>ANowph<?php } ?>" href="<?php echo $baseurl.'/'.$bloginfo['DomainName'].'/albumlist' ?>">相 册</a>
+            <?php } ?>
+
+            <script src="http://he.js.cnfol.com/index_8.php/id=312&amp;charset=utf8"></script>
+            <?php if(isset($isowner) && $isowner==true) {?><?php }else{ ?>
+            <script src="http://he.js.cnfol.com/index_8.php/id=313&amp;charset=utf8"></script>
+            <?php } ?>
+        </div>
+        <!--end 导航-->

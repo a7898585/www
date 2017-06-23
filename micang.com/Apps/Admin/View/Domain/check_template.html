@@ -1,0 +1,380 @@
+{__NOLAYOUT__}
+<div class="col-lg-12">
+    <form method="post" action="" role="form" class="form-horizontal" name="add_form">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h6 class="panel-title">模板信息</h6>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1 control-label text-nowrap">用户名：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$username}</p>
+            </div>
+            <label class="col-sm-2 control-label text-nowrap">模板名称：</label>
+            <div class="col-sm-5">
+                <p class="form-control-static">{$templates['title']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名所有人的类型：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">
+                <if condition="$templates.reg_contact_type eq '0' ">个人
+                    <elseif condition="$templates.reg_contact_type eq '1'"/>组织
+                </if>
+                </p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">姓名或单位名称：</label>
+            <div class="col-sm-4">
+                <p class="form-control-static">{$templates['cn_reg_company']}</p></div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名所有人的姓名：</label>
+            <div class="col-sm-2"><p class="form-control-static">{$templates['cn_reg_firstname']}{$templates['cn_reg_lastname']}</p></div>
+            <label class="col-sm-4 control-label text-nowrap">域名所有人的国别缩写：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_reg_country']}</p></div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名所有人所属的省份城市：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_reg_province_zh']}{$templates['cn_reg_city_zh']}</p>
+            </div>
+            <label class="col-sm-4 control-label text-nowrap">域名所有人所属地区的邮编：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_reg_postcode']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名所有人的电话号码：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_reg_telephone']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名所有人的传真：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_reg_fax']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名所有人的邮箱：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_reg_email']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名所有人的出生日期：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_reg_birthday']}</p>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名所有人的身份证号码：</label>
+            <div class="col-sm-4">
+                <p class="form-control-static">{$templates['cn_reg_idcard']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名管理人的类型：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['adm_contact_type'] ? '组织':'个人'}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">姓名或单位名称：</label>
+            <div class="col-sm-4">
+                <p class="form-control-static">{$templates['cn_adm_company']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名管理员的姓名：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_adm_firstname']} {$templates['cn_adm_lastname']}</p>
+            </div>
+            <label class="col-sm-4 control-label text-nowrap">域名管理员的国别缩写：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_adm_country']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名管理员所属的省份城市：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_adm_province_zh']} {$templates['cn_adm_city_zh']}</p>
+            </div>
+            <label class="col-sm-4 control-label text-nowrap">域名管理员所属地区的邮编：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_adm_postcode']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名管理员的详细地址：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['cn_adm_address']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名管理员的电话号码：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_adm_telephone']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名管理员的传真：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_adm_fax']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名管理员的邮箱：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_adm_email']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名管理员的出生日期：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_adm_birthday']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名管理员的身份证号码：</label>
+            <div class="col-sm-4">
+                <p class="form-control-static">{$templates['cn_adm_idcard']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名技术人的类型：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['tec_contact_type'] ?'组织':'个人'}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">姓名或单位名称：</label>
+            <div class="col-sm-4">
+                <p class="form-control-static"> {$templates['cn_tec_company']}</p>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名技术员的姓名：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_tec_firstname']}{$templates['cn_tec_lastname']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名技术员的国别缩写：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_tec_country']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名技术员所属的省份城市：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_tec_province_zh']}{$templates['cn_tec_city_zh']}</p>
+            </div>
+
+            <label class="col-sm-4 control-label text-nowrap">域名技术员所属地区的邮编：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_tec_postcode']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名技术员的详细地址：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['cn_tec_address']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名技术员的电话号码：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_tec_telephone']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名技术员的传真：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_tec_fax']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名技术员的邮箱：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_tec_email']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名技术员的出生日期：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_tec_birthday']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名技术员的身份证号码：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['cn_tec_idcard']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的类型：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['bil_contact_type']?'组织':'个人'}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">姓名或单位名称：</label>
+            <div class="col-sm-4">
+                <p class="form-control-static">{$templates['cn_bil_company']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的姓名：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_bil_firstname']} {$templates['cn_bil_lastname']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的国别缩：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_bil_country']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名缴费人所属的省份城市：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_bil_province_zh']}   {$templates['cn_bil_city_zh']}</p>
+            </div>
+            <label class="col-sm-4 control-label text-nowrap">域名缴费人所属地区的邮编：</label>
+            <div class="col-sm-2">
+                <p class="form-control-static">{$templates['cn_bil_postcode']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的详细地址：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['cn_bil_address']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的电话号码：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_bil_telephone']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的传真：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_bil_fax']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的邮箱：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_bil_email']}</p>
+            </div>
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的出生日期：</label>
+            <div class="col-sm-3">
+                <p class="form-control-static">{$templates['cn_bil_birthday']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名缴费人的身份证号码：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['cn_bil_idcard']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名所有人的姓名或单位名称：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_reg_company']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名所有人的姓名：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static"> {$templates['en_reg_firstname']} {$templates['en_reg_lastname']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名所有人的详细地址：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_reg_address']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名所有人所属的省份城市：</label>
+            <div class="col-sm-4">
+                <p class="form-control-static">{$templates['en_reg_province']} {$templates['en_reg_city']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名管理员的姓名或单位名称：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_adm_company']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名管理员的姓名：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_adm_firstname']}{$templates['en_adm_lastname']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名管理员的详细地址：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_adm_address']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名技术员的姓名或单位名称：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_tec_company']}</p>
+            </div>
+            </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名技术员的姓名：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_tec_firstname']} {$templates['en_tec_lastname']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名技术员的详细地址：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_tec_address']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名缴费人的姓名或单位名称：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_bil_company']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的姓名：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_bil_firstname']}{$templates['en_bil_lastname']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label text-nowrap">域名缴费人的详细地址：</label>
+            <div class="col-sm-8">
+                <p class="form-control-static">{$templates['en_bil_address']}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label text-nowrap">域名缴费人所属的省份城市：</label>
+            <div class="col-sm-5">
+                <p class="form-control-static">{$templates['en_bil_province']} {$templates['en_bil_city']}</p>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h6 class="panel-title">实名认证状态</h6>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">姓名：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{$profile['realname']}</p></div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">身份证：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">{$profile['idcard']}</p></div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">身份证图片：</label>
+            <div class="col-sm-10">
+                <volist name="profile['pic']" id="vo">
+                    &nbsp;&nbsp;<img style="width:200px;height: 165px" src="{$vo}" />
+                </volist>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label text-nowrap">审核操作：</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    <label><input type="radio" name="status" value="1" <eq name="templates.status" value="1">checked</eq> /> 通过<input type="radio" name="status" value="2" <eq name="templates.status" value="2">checked</eq>/> 未通过</label>
+                </p>
+            </div>
+        </div>
+    </form>
+</div>

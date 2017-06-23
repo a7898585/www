@@ -1,0 +1,102 @@
+<ol class="breadcrumb" style="border-radius: 0px;">
+	<li><i class="fa fa-home fa-fw"></i> 当前位置：总管理后台</li>
+	<li>统计报表</li>
+	<li class="active">充值统计</li>
+</ol>
+<div class="page-content">
+	<div class="row">
+		<div class="col-lg-12">
+      <div class="panel panel-info">
+        <div class="panel-heading"><h6 class="panel-title">30天充值金额</h6></div>
+        <div class="panel-body">
+          <div id="echart_day30" style="height: 300px;"></div>
+        </div>
+      </div>
+      <div class="panel panel-info">
+        <div class="panel-heading"><h6 class="panel-title">每周充值金额</h6></div>
+        <div class="panel-body">
+          <div id="echart_week" style="height: 300px;"></div>
+        </div>
+      </div>
+      <div class="panel panel-info">
+        <div class="panel-heading"><h6 class="panel-title">每月充值金额</h6></div>
+        <div class="panel-body">
+          <div id="echart_month" style="height: 300px;"></div>
+        </div>
+      </div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/Public/Common/js/echarts/echarts.js"></script>
+<script type="text/javascript">
+  require.config({
+    paths: {
+      echarts: '/Public/Common/js/echarts'
+    }
+  });
+  require(
+      ['echarts', 'echarts/chart/bar'],
+      function (ec) {
+        //30天域名注册数
+        var echartDay30 = ec.init(document.getElementById('echart_day30'));
+        var echartDay30Option = {
+          tooltip: {trigger: 'axis'},
+          xAxis : [{type:'category', data:{$day30key|json_encode}}],
+          yAxis : [{type : 'value'}],
+          series : [{
+            "name":"充值金额",
+            "type":"bar",
+            "data":{$day30value|json_encode},
+            "markPoint" : {
+              data : [
+                <volist name="day30value" id="item">
+                {value : {$item}, xAxis: {$key}, yAxis: {$item}},
+                </volist>
+              ]
+            }
+          }]
+        };
+        echartDay30.setOption(echartDay30Option);
+        //每周域名注册数
+        var echartWeek = ec.init(document.getElementById('echart_week'));
+        var echartWeekOption = {
+          tooltip: {trigger: 'axis'},
+          xAxis : [{type:'category', data:{$weekkey|json_encode}}],
+          yAxis : [{type : 'value'}],
+          series : [{
+            "name":"充值金额",
+            "type":"bar",
+            "data":{$weekvalue|json_encode},
+            "markPoint" : {
+              data : [
+                <volist name="weekvalue" id="item">
+                {value : {$item}, xAxis: {$key}, yAxis: {$item}},
+                </volist>
+              ]
+            }
+          }]
+        };
+        echartWeek.setOption(echartWeekOption);
+        //每月域名注册数
+        var echartMonth = ec.init(document.getElementById('echart_month'));
+        var echartMonthOption = {
+          tooltip: {trigger: 'axis'},
+          xAxis : [{type:'category', data:{$monthkey|json_encode}}],
+          yAxis : [{type : 'value'}],
+          series : [{
+            "name":"充值金额",
+            "type":"bar",
+            "data":{$monthvalue|json_encode},
+            "markPoint" : {
+              data : [
+                <volist name="monthvalue" id="item">
+                {value : {$item}, xAxis: {$key}, yAxis: {$item}},
+                </volist>
+              ]
+            }
+          }]
+        };
+        echartMonth.setOption(echartMonthOption);
+      }
+  );
+</script>

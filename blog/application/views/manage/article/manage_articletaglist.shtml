@@ -1,0 +1,219 @@
+<div class="RgtCont Bdreb R W760 Mt15">
+    <h3>
+        <span class="R Spsrch">
+            <a href="javascript:Dialog('TMDelete');" class="CoWht BtnC R Mr10 Mt2">删除</a>
+            <form action="" method="get" name="frm">
+                <input type="text" class="InpSrch" id="C3" value="输入关键字查找" name="tagName" maxlength="50">
+                <input type="hidden" id="C4" value="0">
+                <input type="hidden" name="act" value="search">	                
+                <a href="javascript:;" class="Abtnsr" onclick="document.frm.submit()"></a>            	
+            </form>
+        </span>
+        标签管理
+    </h3>
+    <div class="BgCont">
+        <table cellspacing="0" cellpadding="0" border="0" class="Tblike" id="Fa1">
+            <thead>
+                <tr>
+                    <th class="Tbtdw50 Talgn"><label class="Ca" for="Ca"><input type="checkbox" id="Ca" class="Chk" /></label></th>
+                    <th class="Talgn">标签名称</th>
+                    <th>排序</th>
+                    <th>使用次数</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                if($tempList['RetRecords'] > 1)
+                {
+                $Rank=1;
+                foreach($tempList['Record'] as $val)
+                {
+                ?>                
+
+                <tr id="tag<?php echo $val['TagID'];?>">
+                    <td class="Talgn"><input type="checkbox" class="Chk" name="tagCheck[]" value="<?php echo $val['TagID'];?>"/></td>
+                    <td class="Talgn"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/tag/<?php echo $val['TagID'];?>" target="_blank"><?php echo $val['Name'];?>&nbsp;</a></td>
+                    <td><?php echo $Rank;?></td>
+                    <td><?php echo $val['Count'];?></td>
+                    <td><a href="javascript:;" class="Aclk" onclick="javascript:checkbox(this);Dialog('TMDelete');">删除</a></td>
+                </tr>
+
+                <?php
+                $Rank++;
+                }
+                ?>
+                <?php } else if($tempList['RetRecords'] == 1) {?>
+
+
+
+                <tr id="tag<?php echo $tempList['Record']['TagID'];?>">
+                    <td class="Talgn"><input type="checkbox" class="Chk" name="tagCheck[]"  value="<?php echo $tempList['Record']['TagID'];?>"/></td>
+                    <td class="Talgn"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/tag/<?php echo $tempList['Record']['TagID'];?>" target="_blank"><?php echo $tempList['Record']['Name'];?>&nbsp;</a></td>
+                    <td>1</td>
+                    <td><?php echo $tempList['Record']['Count'];?></td>
+                    <td><a href="javascript:void(0)" onclick="javascript:checkbox(this);Dialog('TMDelete');">删除</a></td>
+                </tr>		  
+
+
+
+
+                <?php
+                } 
+                else
+                {?>
+                <tr class="sort">
+                    <td height="30" colspan="2">暂无标签记录</td>
+                </tr>
+                <?php
+                }
+                ?>   
+            </tbody>
+        </table>            
+        <div class="Page Mt15">
+            <?php echo $pagebar;?>
+        </div>
+        <form id="action_form" name="action_form" method="post" target="_self" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articletag/Edit">
+            <input type="hidden" name="tag" id="tag" value="">
+            <input type="hidden" name="act" id="act" value="edit" />
+            <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" />
+            <input type="hidden" name="memberid" id="memberid" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="hidden" name="tagid" id="tagid" />
+        </form>   
+    </div>        
+</div>
+
+
+<div id="TMDelete" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">您确定要删除这条信息？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="del()" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">返回</a></p>
+    </div>
+</div>     
+
+<div id="TMTip" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">还没有选择</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="Dialog.Close();" class="Mr10 CoWht BtnA">关闭</a></p>
+    </div>
+</div>   
+
+<script language="javascript">
+
+    var actdel = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/articletag/Action";
+
+
+    /*
+     *  跳转页面
+     */
+    function jump($url)
+    {	
+        if($(".Inpjump").val()=="")
+        {
+            return false;
+        }
+        var url = $url+$(".Inpjump").val();
+        window.location.href = url;		
+    }
+    function enterPress($url,e)
+    {
+        var e = e || window.event;
+        if(e.keyCode==13) {
+            jump($url);
+        }
+    }
+    /*
+     *   点删除按钮，复选框选中
+     */
+    function checkbox(obj)
+    {
+        $('input[type="checkbox"]').attr('checked',false);
+        $(obj).parent().parent().find("td").eq(0).find('input').attr('checked',true);
+    }
+
+    /*
+     * 删除
+     */
+    function del(){
+        var str = "";
+        var i = 0;
+        Dialog.Close();
+        $("input[name='tagCheck[]']:checked").each(function(){
+            i++;
+            if(i==1)
+            {
+                str += $(this).val();		
+            }
+            else
+            {
+                str +=','+$(this).val();			
+            }					
+        })
+        if(i==0)
+        {
+            Dialog('TMTip');
+            setTimeout(function(){Dialog.Close()}, 1000)
+            return;
+        }
+        $.post(actdel,{act:'deltag',flashCode:$('#flashCode').val(), memid:$('#memberid').val(),TagID:str},function(data){
+            if(data.errno == 'success'){
+                if(i==1)
+                {
+                    $('#tag'+str).remove();
+                }
+                else
+                {
+                    window.location.reload();
+                    $("input[name='tagCheck[]']").each(function() {
+                        $(this).attr('checked', false)
+                    })				
+                }
+            }
+            else 
+            {
+                alert("失败，请稍后再试");
+            }
+        },'json');
+    }
+    
+    
+    $('#Ca').live('click',function(){
+        if($(this).attr('checked')==true)
+        {
+            $('input[name="tagCheck[]"]').attr('checked',true);
+        }
+        else
+        {
+            $('input[name="tagCheck[]"]').attr('checked',false);
+        }
+    });
+    
+    var searchDefault='输入关键字查找';
+    
+    $('#C3').live('blur',function(){
+        var searchValue=$(this).val();
+        searchValue=searchValue.replace(/^\s*|\s*$/g,'');
+        if(searchValue=='')
+        {
+            $(this).val(searchDefault);
+            $('#C4').val('0');
+    		
+        }
+        else
+        {
+            $('#C4').val('1');
+        }
+    });
+    
+    $('#C3').live('focus',function(){
+        if($('#C4').val()=='0')
+        {
+            $(this).val('');
+        }
+    });
+    $('#C4').val('0');
+    
+    
+</script>

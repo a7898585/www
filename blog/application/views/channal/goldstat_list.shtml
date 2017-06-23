@@ -1,0 +1,92 @@
+<div class="MetalRank">
+    <h3>本期集赞排行榜<span>(排名实时更新，按本月博文被赞数，从大到小一次排列)</span><a href="<?php echo config_item('base_url').'/stat/hislist';?>" target="_blank">往期排行</a></h3>
+    <?php if (isMobile()) {
+    $base_url = 'http://3g.blog.cnfol.com/';
+    } else {
+    $base_url = config_item('base_url');
+    }
+    ?>
+    <?php if($page == 1){?>
+    <div class="Mterm">
+        <?php if(!empty($list_1)){
+        foreach($list_1 as $k=>$art){
+        $url = $base_url.'/'.$art['DomainName'].'/article/'.strtotime($art['AppearTime']).'-'.$art['ArticleID'].'.html';
+        ?>
+        <div class="MRankTop3 <?php if($k==2){?>MPast<?php }?>">
+            <span class="MRankNum <?php echo $k==0 ? 'Mgold': ($k==1 ? 'Msilver':'Mcopper');?>">&nbsp;</span>
+            <a target="_blank" href="<?php echo $base_url.'/'.$art['DomainName'];?>" class="MRankImg"><img src="<?php echo getUserHead($art['UserID'],96);?>" title="" /></a>
+            <a target="_blank" href="<?php echo $url;?>" class="MRankTitle"><?php echo $art['Title'];?></a>
+            <?php if ($_COOKIE['blogartvote' . $art['ArticleID']] == 1) {?>
+            <a href="<?php echo $url;?>#ding" target="_blank" class="MRankGood ready" id="ding_<?php echo($art["ArticleID"]); ?>"><?php echo $art['ClickSum'];?></a>
+            <?php }else{?>
+            <a href="<?php echo $url;?>#ding" target="_blank" class="MRankGood" id="ding_<?php echo($art["ArticleID"]); ?>" onclick="submitvote('<?php echo($art["ArticleID"]); ?>','<?php echo $art['MemberID'];?>','<?php echo getVerifyStr($art['ArticleID']);?>','<?php echo($UserID); ?>','<?php echo strtotime($art['AppearTime']);?>','<?php echo $art['DomainName'];?>')"><?php echo $art['ClickSum'];?></a>
+            <?php }?>
+        </div>
+        <?php }
+        }else{?>
+        暂无内容
+        <?php }?>
+    </div>
+    <?php if(!empty($list_2)){?>
+    <div class="Mterm">
+        <?php 
+        $i2 = 4;
+        foreach($list_2 as $k=>$art){
+        $url = $base_url.'/'.$art['DomainName'].'/article/'.strtotime($art['AppearTime']).'-'.$art['ArticleID'].'.html';
+        ?>
+        <div class="MRankTop10">
+            <span class="MRankNum"><?php echo $i2++;?>.</span>
+            <a target="_blank" href="<?php echo $base_url.'/'.$art['DomainName'];?>" class="MRankImg"><img src="<?php echo getUserHead($art['UserID']);?>" title="" /></a>
+            <a target="_blank" href="<?php echo $url;?>" class="MRankTitle"><?php echo $art['Title'];?></a>
+            <?php if ($_COOKIE['blogartvote' . $art['ArticleID']] == 1) {?>
+            <a href="<?php echo $url;?>#ding" target="_blank" class="MRankGood ready" id="ding_<?php echo($art["ArticleID"]); ?>"><?php echo $art['ClickSum'];?></a>
+            <?php }else{?>
+            <a href="<?php echo $url;?>#ding" target="_blank" class="MRankGood" id="ding_<?php echo($art["ArticleID"]); ?>" onclick="submitvote('<?php echo($art["ArticleID"]); ?>','<?php echo $art['MemberID'];?>','<?php echo getVerifyStr($art['ArticleID']);?>','<?php echo($UserID); ?>','<?php echo strtotime($art['AppearTime']);?>','<?php echo $art['DomainName'];?>')"><?php echo $art['ClickSum'];?></a>
+            <?php }?>
+        </div>
+        <?php }}?>
+    </div>
+    <?php if(!empty($list_3)){?>
+    <div class="Mterm">
+        <?php 
+        $i3 = 11;
+        foreach($list_3 as $k=>$art){
+        $url = $base_url.'/'.$art['DomainName'].'/article/'.strtotime($art['AppearTime']).'-'.$art['ArticleID'].'.html';
+        ?>
+        <div class="MRankTli">
+            <span class="MRankNum"><?php echo $i3++;?>.</span>
+            <a target="_blank" href="<?php echo $url;?>" class="MRankTitle"><?php echo $art['Title'];?></a>
+            <?php if ($_COOKIE['blogartvote' . $art['ArticleID']] == 1) {?>
+            <a href="<?php echo $url;?>#ding" target="_blank" class="MRankGood ready" id="ding_<?php echo($art["ArticleID"]); ?>"><?php echo $art['ClickSum'];?></a>
+            <?php }else{?>
+            <a href="<?php echo $url;?>#ding" target="_blank" class="MRankGood" id="ding_<?php echo($art["ArticleID"]); ?>" onclick="submitvote('<?php echo($art["ArticleID"]); ?>','<?php echo $art['MemberID'];?>','<?php echo getVerifyStr($art['ArticleID']);?>','<?php echo($UserID); ?>','<?php echo strtotime($art['AppearTime']);?>','<?php echo $art['DomainName'];?>')"><?php echo $art['ClickSum'];?></a>
+            <?php }?>
+        </div>
+        <?php }}?>
+    </div>
+    <?php }else{?>
+    <?php if(!empty($list)){?>
+    <div class="Mterm">
+        <?php 
+        $i = ($page-1)*$pageSize+1;
+        foreach($list as $k=>$art){
+        $url = $base_url.'/'.$art['DomainName'].'/article/'.strtotime($art['AppearTime']).'-'.$art['ArticleID'].'.html';
+        ?>
+        <div class="MRankTli">
+            <span class="MRankNum"><?php echo $i++;?>.</span>
+            <a target="_blank" href="<?php echo $url;?>" class="MRankTitle"><?php echo $art['Title'];?></a>
+            <?php if ($_COOKIE['blogartvote' . $art['ArticleID']] == 1) {?>
+            <a href="<?php echo $url;?>#ding" target="_blank" class="MRankGood ready" id="ding_<?php echo($art["ArticleID"]); ?>"><?php echo $art['ClickSum'];?></a>
+            <?php }else{?>
+            <a href="<?php echo $url;?>#ding" target="_blank" class="MRankGood" id="ding_<?php echo($art["ArticleID"]); ?>" onclick="submitvote('<?php echo($art["ArticleID"]); ?>','<?php echo $art['MemberID'];?>','<?php echo getVerifyStr($art['ArticleID']);?>','<?php echo($UserID); ?>','<?php echo strtotime($art['AppearTime']);?>','<?php echo $art['DomainName'];?>')"><?php echo $art['ClickSum'];?></a>
+            <?php }?>
+        </div>
+        <?php }}?>
+    </div>
+    <?php }?>
+</div>
+<?php if($total>$pageSize){?>
+<div class="MatelPage">
+    <?php echo $pageStr;?>
+</div>
+<?php }?>

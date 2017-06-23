@@ -1,0 +1,191 @@
+<ol class="breadcrumb" style="border-radius: 0px;">
+	<li><i class="fa fa-home fa-fw"></i> 当前位置：总管理后台</li>
+	<li>管理员管理</li>
+	<li class="active">帐号管理</li>
+</ol>
+<div class="page-content">
+	<div class="row">
+		<div class="col-lg-12">
+      <div class="panel panel-info">
+        <div class="panel-heading"><h6 class="panel-title">筛选</h6></div>
+        <div class="panel-body">
+          <form method="get" action="" role="form" class="form-inline" name="filter_form">
+            <div class="form-group">
+              <label>用户名：</label>
+              <input type="text" name="account" class="form-control" placeholder="用户名" value="{$Think.get.account}" />
+            </div>
+            <div class="form-group">
+              <label>姓名：</label>
+              <input type="text" name="realname" class="form-control" placeholder="姓名" value="{$Think.get.realname}" />
+            </div>
+            <div class="form-group">
+              <label>角色：</label>
+              <select name="group_id" class="form-control">
+                <option value="0" <empty name="Think.get.group_id">selected</empty>>不限制</option>
+                <volist name="group" id="group_name">
+                  <option value="{$key}" <eq name="Think.get.group_id" value="$key">selected</eq>>{$group_name}</option>
+                </volist>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-search fa-fw"></i>&nbsp;搜 索</button>
+            <a href="{:U('Administrator/account_add')}" class="btn btn-success btn-sm" data-btn="btn_account_add"><i class="fa fa-user-plus fa-fw"></i> 创建管理员</a>
+          </form>
+        </div>
+      </div>
+      <table class="table table-striped table-bordered table-hover table-responsive">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>帐号</th>
+          <th>联系方式</th>
+          <th>所属角色</th>
+          <th width="130">添加时间</th>
+          <th>最近登录</th>
+          <th width="50">状态</th>
+          <th width="120">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="page.data" id="item">
+          <tr>
+            <td>{$item.id}</td>
+            <td>用户名：{$item.account}<br/>姓名：{$item.realname}</td>
+            <td>手机：{$item.mobile}<br/>邮箱：{$item.email}</td>
+            <td>{$item.group_name}</td>
+            <td>{$item.create_time|date='Y-m-d H:i',###}</td>
+            <td><empty name="item.login_time">从未登录过<else/>{$item.login_ip}<br/>{$item.login_time|date="Y-m-d H:i",###}</empty></td>
+            <td>
+              <switch name="item.status">
+                <case value="0"><a href="{:U('Administrator/account_status')}&uid={$item.id}&status=1" title="启用帐号" data-btn="btn_status_edit"><i class="fa fa-times-circle fa-fw"></i></a></case>
+                <case value="1"><a href="{:U('Administrator/account_status')}&uid={$item.id}&status=0" title="禁用帐号" data-btn="btn_status_edit"><i class="fa fa-check-circle fa-fw"></i></a></case>
+              </switch>
+            </td>
+            <td>
+              <a href="{:U('Administrator/account_group_change')}&uid={$item.id}" title="变更用户组" data-btn="btn_group_change"><i class="fa fa-users fa-fw"></i></a>&nbsp;
+              <a href="{:U('Administrator/account_delete')}&uid={$item.id}" title="删除帐号" data-btn="btn_delete"><i class="fa fa-user-times fa-fw"></i></a>&nbsp;
+            </td>
+          </tr>
+        </volist>
+        </tbody>
+      </table>
+      <nav class="text-right">{$page.html}</nav>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    //筛选
+    $('form[name="filter_form"]').on('submit', function(e){
+        e.preventDefault();
+        var query = '{:U("Administrator/accounts")}';
+        if ($(':input[name="account"]').val() != ''){
+            query += '&account=' + $(':input[name="account"]').val();
+        }
+        if ($(':input[name="realname"]').val() != ''){
+            query += '&realname=' + encodeURI($(':input[name="realname"]').val());
+        }
+        if ($(':input[name="group_id"]').val() != '0'){
+            query += '&group_id=' + $(':input[name="group_id"]').val();
+        }
+        window.location = query;
+        return false;
+    });
+    //创建管理员
+    $('a[data-btn="btn_account_add"]').on('click', function(e){
+        var that = this;
+        e.preventDefault();
+        BootstrapDialog.show({
+          draggable: true,
+          title: '创建管理员',
+          message: function(dialog){
+            return $('<div></div>').addClass('row').load($(that).attr('href'));
+          },
+          buttons: [{
+            label: BootstrapDialog.DEFAULT_TEXTS.OK,
+            action: function(dialog) {
+              var validation = $('form[name="add_form"]').data('formValidation').validate();
+              if (validation.isValid() == false)  return false;
+              //发送ajax请求
+              $.post($(that).attr('href'), $('form[name="add_form"]').serialize(), function(result){
+                if (result.status != 200){
+                  BootstrapDialog.alert(result.message);
+                }else{
+                  window.location.reload(true);
+                }
+              });
+            }
+          }]
+        });
+        return false;
+    });
+    //启用、禁用帐号
+    $('a[data-btn="btn_status_edit"]').on('click', function(e){
+        e.preventDefault();
+        var that = this;
+        BootstrapDialog.confirm('确认执行此操作吗？', function(result){
+            if (result == true){
+                $.getJSON($(that).attr('href'), function(data){
+                    if (data.status == 500){
+                        BootstrapDialog.alert(data.message);
+                    }else if (data.status == 200){
+                        window.location.reload(true);
+                    }
+                });
+            }
+        });
+        return false;
+    });
+    //删除帐号
+    $('a[data-btn="btn_delete"]').on('click', function(e){
+        e.preventDefault();
+        var that = this;
+        BootstrapDialog.confirm('确认删除此帐号吗？此操作不可恢复！', function(result){
+            if (result == true){
+                $.getJSON($(that).attr('href'), function(data){
+                    if (data.status == 500){
+                        BootstrapDialog.alert(data.message);
+                    }else if (data.status == 200){
+                        window.location.reload(true);
+                    }
+                });
+            }
+        });
+        return false;
+    });
+    //变更用户组
+    $('a[data-btn="btn_group_change"]').on('click', function(e){
+        var that = this;
+        e.preventDefault();
+        BootstrapDialog.show({
+            draggable: true,
+            title: '变更用户组',
+            size: BootstrapDialog.SIZE_SMALL,
+            message: function(dialog){
+                var input = '<div class="col-lg-12"><div class="form-group"><label>请选择要变更至分组：</label>';
+                input += '<select name="change_to_groupid" class="form-control">';
+                <volist name="group" id="group_name">
+                  input += '<option value="{$key}">{$group_name}</option>';
+                </volist>
+                input += '</select></div></div>';
+                return $('<div></div>').addClass('row').append(input);
+            },
+            buttons: [{
+                label: BootstrapDialog.DEFAULT_TEXTS.OK,
+                action: function(dialog) {
+                    //取新的分组ID
+                    var newGroupId = $(':input[name="change_to_groupid"]', dialog.getModalBody()).val();
+                    //发送ajax请求
+                    $.getJSON($(that).attr('href'), {group_id:newGroupId}, function(result){
+                      if (result.status != 200){
+                        BootstrapDialog.alert(result.message);
+                      }else{
+                        window.location.reload(true);
+                      }
+                    });
+                }
+            }]
+        });
+        return false;
+    });
+});
+</script>

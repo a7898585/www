@@ -1,0 +1,268 @@
+<script type="text/javascript" src="/Public/Common/js/kindeditor/kindeditor-all-min.js"></script>
+<link type="text/css" rel="stylesheet" href="/Public/Common/js/kindeditor/themes/default/default.css"/>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor =K.create('textarea[edit="true"]', {
+            autoHeightMode : true,
+            allowPreviewEmoticons : false,
+            urlType : 'absolute',
+            allowUpload : false, //允许上传图片
+            uploadJson : '/public/upload_img',
+            filterMode:false,
+            afterCreate : function() {
+                this.loadPlugin('autoheight');
+            }
+        });
+    });
+    function insertImage(url){
+        editor.insertHtml('<img src="'+up_path+url+'" />');
+    }
+    function uploadFile(id,buttonText){
+        $('#'+id).uploadify({
+            'buttonClass' : 'am-btn am-btn-default',
+            'swf'      : '/Public/Common/js/uploadify/uploadify.swf',
+            'uploader' : '/public/upload_photo',
+            'fileSizeLimit':'2MB',
+            'fileTypeExts' : '*.gif; *.jpg; *.png',
+            'fileTypeDesc': 'image files',
+            'onUploadProgress' : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                progress = parseInt(totalBytesUploaded / totalBytesTotal * 100, 10);
+                progress = progress>100?100:progress;
+                if(progress>0&&progress<=100){
+                    $('#progress').css('width',progress+'%');
+                    if(progress<=100){
+                        setTimeout(function(){$('#progress').parent().hide();},1800);
+                    }
+                }
+            },
+            'onUploadSuccess' : function(file, data, response) {
+                console.log(data);
+                data = eval('(' + data + ')');
+                addImg(data.url);
+                //                $('#'+id+'_val').val(data.url);
+                //                $('#'+id+'_show').attr('src',up_path+data.url).show();
+                //                $('#'+id+'_show').parent().show();
+                //                $('#'+id+'_progress_value').hide();
+
+            },
+            'onUploadStart' : function(file) {
+                $('#progress').css('width','0%');
+                $('#progress').parent().show();
+            },
+            'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+                alert('文件： '+file.name+' 文件失败，请刷新页面后重试。');
+            }
+        });
+    }
+    function addImg(img_url){
+        var str = '<li>'+
+            '<div class="am-gallery-item">'+
+            '<input type="hidden" name="img_list[]" value="'+img_url+'" />'+
+            '<img src="'+up_path+img_url+'!100x65" style="width:100px;height: 65px"/>'+
+            '<h3 class="am-gallery-title">'+
+            '<div><a class="am-fl" onclick="insertImage(\''+img_url+'\')">插入</a><a class="am-fr" onclick="$(this).parents(\'li\').remove()">删除</a></div></h3></div></li>';
+        $('#img_list').prepend(str);
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        uploadFile('photo_url','上传Logo');
+    });
+</script>
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/news/news_list">新闻内容</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <form id="add_from" method="post" action="__SELF__">
+        <div class="am-margin">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="#tab1">基本信息</a></li>
+            </ul>
+            <input type="hidden" value="{$info.id}" name="id">
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            标题
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="title" value="{$info.title}">
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            分类
+                        </div>
+                        <div class="am-u-sm-6">
+                            <!--                            <input id="search" type="text" name="type_id" list="searchlist" class="am-form-field am-input-sm" value="{$info.type_name}+{$info.type_id}" required />
+                                                        <datalist id="searchlist">
+                                                            <foreach name="type_list" item="item">
+                                                                <option value="{$item.title}+{$item.id}" label="{$item.title}+{$item.id}" />
+                                                            </foreach>
+                                                        </datalist>-->
+                            <select name="type_id" class="am-form-field am-input-sm">
+                                <option value="0">请选择</option>
+                                <foreach name="type_list" item="item">
+                                    <option value="{$item.title}+{$item.id}" <eq name="item.id" value="$info.type_id"> selected</eq> >{$item.title}+{$item.id}</option>
+                                    <!--<option value="{$item.title}+{$item.id}" label="{$item.title}+{$item.id}" <eq name="key" value="$info.show_type"> selected</eq> />-->
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            专题分类
+                        </div>
+                        <div class="am-u-sm-6">
+                            <select name="subject_id" class="am-form-field am-input-sm">
+                                <option value="0">请选择</option>
+                                <foreach name="subject_type_list" item="item">
+                                    <option value="{$item.id}" <eq name="item.id" value="$info.subject_id"> selected</eq> >{$item.title}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            关键词
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="keyword" value="{$info.keyword}">
+                        </div>
+                        <div class="am-u-sm-4"></div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            来源网站名称
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="source_name" value="{$info.source_name}">
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            来源地址
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input type="text" class="am-form-field am-input-sm" name="source_url" value="{$info.source_url}">
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            图片展示类型
+                        </div>
+                        <div class="am-u-sm-6">
+                            <select name="show_type" class="am-form-field am-input-sm">
+                                <option value="0">请选择</option>
+                                <foreach name="show_type" item="item">
+                                    <option value="{$key}" <eq name="key" value="$info.show_type"> selected</eq> >{$item}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="am-u-sm-4"></div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            图片上传
+                        </div>
+                        <div class="am-u-sm-6">
+                            <input id="photo_url" type="file" class="btn_pic" value="上传" />
+                            <div class="am-progress" style="display: none;">
+                                <div class="am-progress-bar" id="progress" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="am-u-sm-4">*必填</div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            &nbsp;
+                        </div>
+                        <div class="am-u-sm-6">
+                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
+                                am-avg-md-3 am-avg-lg-4 am-gallery-imgbordered" data-am-gallery="{  }" id="img_list">
+                                <foreach name="info.img_list" item="item">
+                                    <li>
+                                        <div class="am-gallery-item">
+                                            <input type="hidden" name="img_list[]" value="{$item}" />
+                                            <img src="{$item}!100x65" style="width:100px;height: 65px"/>
+                                            <h3 class="am-gallery-title">
+                                                <div><a class="am-fl" onclick="insertImage('{$item}')">插入</a><a class="am-fr" onclick="$(this).parents('li').remove()">删除</a></div></h3>
+                                        </div>
+                                    </li>
+                                </foreach>
+                            </ul>
+
+                        </div>
+                        <div class="am-u-sm-4"></div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            内容
+                        </div>
+                        <div class="am-u-sm-10">
+                            <textarea name="html" edit="true" id="aaaa" class="am-form-field">{$info.html}</textarea>
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">显示状态</div>
+                        <div class="am-u-sm-10">
+                            <div class="am-btn-group" data-am-button>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.is_show" value="1"> am-active</eq>">
+                                    <input type="radio" name="is_show" value="1" <eq name="info.is_show" value="1"> checked="checked"</eq> id="option1"> Yes
+                                </label>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.is_show" value="0"> am-active</eq>">
+                                    <input type="radio" name="is_show" value="0" <eq name="info.is_show" value="0"> checked="checked"</eq> id="option3"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">最热</div>
+                        <div class="am-u-sm-10">
+                            <div class="am-btn-group" data-am-button>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.is_hot" value="1"> am-active</eq>">
+                                    <input type="radio" name="is_hot" value="1" <eq name="info.is_hot" value="1"> checked="checked"</eq> id="option1"> Yes
+                                </label>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.is_hot" value="0"> am-active</eq>">
+                                    <input type="radio" name="is_hot" value="0" <eq name="info.is_hot" value="0"> checked="checked"</eq> id="option3"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">推荐</div>
+                        <div class="am-u-sm-10">
+                            <div class="am-btn-group" data-am-button>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.is_tuijian" value="1"> am-active</eq>">
+                                    <input type="radio" name="is_tuijian" value="1" <eq name="info.is_tuijian" value="1"> checked="checked"</eq> id="option1"> Yes
+                                </label>
+                                <label class="am-btn am-btn-default am-btn-xs <eq name="info.is_tuijian" value="0"> am-active</eq>">
+                                    <input type="radio" name="is_tuijian" value="0" <eq name="info.is_tuijian" value="0"> checked="checked"</eq> id="option3"> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="am-margin">
+                <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                <button type="button" onclick="window.history.back();" class="am-btn am-btn-primary am-btn-xs">返回</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+

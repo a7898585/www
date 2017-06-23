@@ -1,0 +1,203 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/user">会员信息</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <form id="add_from" method="post" action="__SELF__" enctype="multipart/form-data">
+        <input type="hidden" class="am-form-field am-input-sm" name="id" value="{$info.id}">
+        <div class="am-margin">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="#tab1">基本信息</a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            姓名
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['name']}<if condition="$info.vip eq '1' "><i style="background: none repeat scroll 0 0 #f00;border-radius: 5px;color: #fff; display: inline-block;font: bold 12px/19px 'arial'; margin: 10px 0 0 10px;padding: 0 10px;">VIP</i></if>
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            账号
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['mail']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            昵称
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['nickname']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            性别
+                        </div>
+                        <div class="am-u-sm-6">{$info['sex']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            生日
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['birth']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            所在地
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info.area_id|getAreaName}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            详细地址
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info.address}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">
+                <li class="am-active"><a href="#tab1">联系信息 </a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        电话
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.tel}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        手机
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.phone}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        qq
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.qq}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        微信
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.weixin}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        邮箱
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.mail}
+                    </div>
+                </div>
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">          
+                <li class="am-active"><a href="#tab1">其他信息   </a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        生日
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.birth}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        婚否
+                    </div>
+                    <div class="am-u-sm-6">
+                        <if condition="$info.is_married eq 1 ">  未婚
+                            <elseif condition="$info.is_married eq 2"/>已婚
+                            <else /> 保密
+                        </if>
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        保障需求
+                    </div>
+                    <div class="am-u-sm-6">
+                        <volist name=":getConcept()" id="vo">
+                            <label class="k_100"><input type="checkbox" name="concept" value="{$key}" <if condition="in_array($key,explode(',',$info.concept))">checked="checked"</if>/><b>{$vo}</b></label>
+                        </volist>
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        月收入
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.income}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        月支出
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.expend}
+                    </div>
+                </div>
+            </div>
+            <div class="am-margin">
+                <!--                <if condition="$info['check_status'] eq 1">
+                                    <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="check('{$info.uid}','0')">审核不通过</button>
+                                      <else/>
+                                    <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="check('{$info.uid}','1')">审核通过</button>
+                                    
+                                </if>-->
+                <button type="button" onclick="window.history.back();" class="am-btn am-btn-primary am-btn-xs">返回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function check(id,s){
+        //        var id = $(t).attr('data-id');
+        var msg = "确认审核?";
+
+        if(confirm(msg)){
+            $.ajax({
+                type: 'POST',
+                url: '/user/daili_shenhe' ,
+                data: {id:id,status:s} ,
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==200){
+                        layer.msg('操作成功!!!',2,1);location.reload();
+                    }else{
+                        layer.msg('操作失败!');
+                    }
+                }
+            });
+        }
+    }
+    
+</script>

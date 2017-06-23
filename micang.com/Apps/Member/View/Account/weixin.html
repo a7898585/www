@@ -1,0 +1,54 @@
+<div class="onlineplay">
+    <div class="navhl">
+        <a class="navhl_h" href="javascript:;">微信号绑定</a> 
+    </div>
+    <div style="display:block;" class="onlineplay_c" id="navhljs1_c0">
+        <div class="add_temp_b">
+            <ul>
+                <li id="wx1" <empty name="weixinInfo">style="display: none;"</empty>>&nbsp;&nbsp;<a href="/account/password">点击启用微信验证</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:;" onclick="code_show();">更换绑定微信号</a>
+                </li>
+                <empty name="weixinInfo">
+                    <li id="code_show" >
+                        <label>扫描二维码绑定您的微信</label>
+                        <img src="{$weixin_url}" width="250" height="250">
+                    </li>
+                    <li id="weixin_bink"></li>
+                    <else /> 
+                    <br>
+                    <br><br>
+                    <li style="display: none;" id="code_show">
+                        <label>扫描二维码绑定您的微信</label>
+                        <img src="{$weixin_url}" width="250" height="250"><br>
+                    </li>
+                    <li id="weixin_bink">您已经绑定微信号<img src="{$weixinInfo.headimgurl|substr=0,-1}64">，昵称：{$weixinInfo.nickname}</li>
+                    <br>
+                </empty>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function code_show(){
+        $('#code_show').toggle();
+        $('#weixin_bink').toggle(); 
+    }
+    var wx = '{$memberInfo.weixin}';
+    if(!wx){
+        var timer = setInterval("getWinxinInfo()",1000);
+    }
+   
+    function getWinxinInfo(){
+        $.post("/public/ajax_get_member_winxin", { r: Math.random()} ,function(result){
+            if(result.status=='200'){
+                $('#wx1').show();
+                $('#code_show').hide(); 
+                $('#weixin_bink').html('您已经绑定微信号<img src="'+result.data.headimgurl+'">，昵称：'+result.data.nickname);
+                clearInterval(timer);
+                return false;
+            }
+            return true;
+        });
+    }
+</script>
+

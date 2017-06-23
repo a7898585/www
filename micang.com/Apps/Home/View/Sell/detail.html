@@ -1,0 +1,59 @@
+<div class="posi">您当前的位置：<a href="/">首页</a> &raquo; <a href="/Sell">域名交易</a> &raquo; {$detail.domain}</div>
+<!--detail-->
+<table width="100%">
+					<colgroup>
+						<col>
+						<col width="230">
+					</colgroup>
+					<tbody>
+						<tr class="bg_blue">
+							<td class="bid_domain">{$detail.domain}</td>
+							<td>
+								<div class="bid_detail clearfix" style="_width: 210px;">
+									<a href="http://www.cxw.com/domain/searchdomain?domainName={$detail.domain}" class="right" target="_blank">域名历史</a>
+									<a href="https://www.google.com.hk/search?q={$detail.base}" class="right" target="_blank">Google</a>
+									<a href="http://www.baidu.com/s?wd={$detail.base}" class="right" target="_blank">百度</a>
+									<a href="http://whois.ename.net/{$detail.domain}" class="right" target="_blank">whois</a></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+<table width="100%">
+  <colgroup>
+  <col width="20%">
+  <col>
+  </colgroup>
+  <tbody>
+    <tr>
+      <td class="align_right">域名简介</td>
+      <td>{$detail.summary}<span class="c_gray"> (简介仅供参考，<a href="#" target="_blank">违规</a> 请 <a class="ajaxDesReport cboxElement" href="#">举报</a>)</span> 
+       </td>
+    </tr>
+    <tr>
+      <td class="align_right">注册商</td>
+      <td>米仓</td>
+    </tr>
+    <tr>
+      <td class="align_right">交易类型</td>
+      <td> <eq name="detail.type" value="1">一口价</eq>
+              <eq name="detail.type" value="2">拍卖</eq>
+              <eq name="detail.type" value="3">买方出价</eq> </td>
+    </tr>
+    <eq name="detail.type" value="1">
+    <tr>
+      <td class="align_right"> 一口价</td>
+      <td><span id="askingPrice">{$detail.seller_price}</span>元</td>
+    </tr>
+    </eq>
+    <tr>
+      <td class="align_right">周期</td>
+      <td><span id="transCycle">2015-11-22 15:43 - 2015-11-23 11:46</span></td>
+    </tr>
+    <tr class="last">
+      <td class="align_right">剩余时间</td>
+      <td><span id="leftTime">42秒</span></td>
+    </tr>
+  </tbody>
+</table>
+<!--detail-->
+<div class="clear"></div>

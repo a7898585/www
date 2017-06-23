@@ -1,0 +1,401 @@
+<div class="admin-content">
+    <ol class="am-breadcrumb am-breadcrumb-slash" style="padding-bottom: 0;">
+        <li><a href="/" class="am-icon-home">首页</a></li>
+        <li><a href="/user">代理人审核</a></li>
+        <li class="am-active">详情</li>
+    </ol>
+    <form id="add_from" method="post" action="__SELF__" enctype="multipart/form-data">
+        <input type="hidden" class="am-form-field am-input-sm" name="id" value="{$info.id}">
+        <div class="am-margin">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li class="am-active"><a href="#tab1">基本信息</a></li>
+            </ul>
+
+            <div class="am-tabs-bd">
+                <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            姓名
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['name']}<if condition="$info.vip eq '1' "><i style="background: none repeat scroll 0 0 #f00;border-radius: 5px;color: #fff; display: inline-block;font: bold 12px/19px 'arial'; margin: 10px 0 0 10px;padding: 0 10px;">VIP</i></if>
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            账号
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['mail']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            昵称
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['nickname']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            性别
+                        </div>
+                        <div class="am-u-sm-6">{$info['sex']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            生日
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info['birth']}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            所在地
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info.area_id|getAreaName}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            详细地址
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info.address}
+                        </div>
+                    </div>
+                    <div class="am-g am-margin-top">
+                        <div class="am-u-sm-2 am-text-right">
+                            从业时间
+                        </div>
+                        <div class="am-u-sm-6">
+                            {$info.business_show}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">
+                <li class="am-active"><a href="#tab1">联系信息 </a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        电话
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.phone}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        手机
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.phone}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        qq
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.qq}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        微信
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.weixin}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        邮箱
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.mail}
+                    </div>
+                </div>
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">          
+                <li class="am-active"><a href="#tab1">所在公司   </a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        公司名称
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.company_id|getUserCompany}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        所在地区
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.area_id|getAreaName}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        公司类别
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.company_id|getCompanyTypeName}
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-right">
+                        主营业务
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info.main_concept}
+                    </div>
+                </div>
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">          
+                <li class="am-active"><a href="#tab1">资质认证   </a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                        身份证号码
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$data['idcard']['number']}，有效期至：{$data['idcard']['validity']|msubstr=0,4}年{$data['idcard']['validity']|msubstr=4,1}月</div>
+                    <div class="am-u-sm-6">
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                    </div>
+                    <div class="am-u-sm-6">
+                        <notempty name="data.idcard.thumb_a">
+                            正面：<img src ="{$Think.config.YOU_PAI_YUN}{$data.idcard.thumb_a}?r={:time()}" width="120" height="80">&nbsp;&nbsp;
+                        </notempty>
+                        <notempty name="data.idcard.thumb_b">
+                            反面：<img src ="{$Think.config.YOU_PAI_YUN}{$data.idcard.thumb_b}?r={:time()}" width="120" height="80">
+                        </notempty>  
+                    </div>
+                    <div class="am-u-sm-6">
+                        <label>
+                            <input type="radio" name="c[idcard][value]" value="1" <eq name="data.idcard.status" value="1"> checked="checked"</eq> id="option11"> 通过
+                        </label>&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="c[idcard][value]" value="2" <eq name="data.idcard.status" value="2"> checked="checked"</eq> id="option12"> 未通过
+                        </label>
+                        <input type="hidden" name="c[idcard][id]" value="{$data.idcard.id}">
+                        <input type="text" name="c[idcard][refuse]" class="am-form-field am-input-sm" value="{$data.idcard.refuse}" placeholder="未通过理由">
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                        资格证书号
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$data['quality']['number']}</div> <div class="am-u-sm-6">
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                    </div>
+                    <div class="am-u-sm-6">
+                        <notempty name="data.quality.thumb_a"><img src ="{$Think.config.YOU_PAI_YUN}{$data.quality.thumb_a}"  width="120" height="80"></notempty>          
+                    </div>
+                    <div class="am-u-sm-6">
+                        <label>
+                            <input type="radio" name="c[quality][value]" value="1" <eq name="data.quality.status" value="1"> checked="checked"</eq> id="option21"> 通过
+                        </label>&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="c[quality][value]" value="2" <eq name="data.quality.status" value="2"> checked="checked"</eq> id="option22"> 未通过
+                        </label>
+                        <input type="hidden" name="c[quality][id]" value="{$data.quality.id}">
+                        <input type="text" name="c[quality][refuse]" class="am-form-field am-input-sm" value="{$data.quality.refuse}" placeholder="未通过理由">
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-5 am-text-left">
+                        展业证号
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$data['industry']['number']}</div> <div class="am-u-sm-6">
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                    </div>
+                    <div class="am-u-sm-6">
+                        <notempty name="data.industry.thumb_a"><img src ="{$Think.config.YOU_PAI_YUN}{$data.industry.thumb_a}"  width="120" height="80"></notempty>          
+                    </div>
+                    <div class="am-u-sm-6">
+                        <label>
+                            <input type="radio" name="c[industry][value]" value="1" <eq name="data.industry.status" value="1"> checked="checked"</eq> id="option31"> 通过
+                        </label>&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="c[industry][value]" value="2" <eq name="data.industry.status" value="2"> checked="checked"</eq> id="option32"> 未通过
+                        </label>
+                        <input type="hidden" name="c[industry][id]" value="{$data.industry.id}">
+                        <input type="text" name="c[industry][refuse]" class="am-form-field am-input-sm" value="{$data.industry.refuse}" placeholder="未通过理由">
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                        执业证
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$data['practice']['number']}</div> <div class="am-u-sm-6">
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                    </div>
+                    <div class="am-u-sm-6">
+                        <notempty name="data.practice.thumb_a"><img src ="{$Think.config.YOU_PAI_YUN}{$data.practice.thumb_a}"  width="120" height="80"></notempty>          
+                    </div>
+                    <div class="am-u-sm-6">
+                        <label>
+                            <input type="radio" name="c[practice][value]" value="1" <eq name="data.practice.status" value="1"> checked="checked"</eq> id="option41"> 通过
+                        </label>&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="c[practice][value]" value="2" <eq name="data.practice.status" value="2"> checked="checked"</eq> id="option42"> 未通过
+                        </label>
+                        <input type="hidden" name="c[practice][id]" value="{$data.practice.id}">
+                        <input type="text" name="c[practice][refuse]" class="am-form-field am-input-sm" value="{$data.practice.refuse}" placeholder="未通过理由">
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                        其他证书
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$data['other']['number']}</div> <div class="am-u-sm-6">
+                    </div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                    </div>
+                    <div class="am-u-sm-6">
+                        <notempty name="data.other.thumb_a"><img src ="{$Think.config.YOU_PAI_YUN}{$data.other.thumb_a}"  width="120" height="80"></notempty>          
+                    </div>
+                    <div class="am-u-sm-6">
+                        <label>
+                            <input type="radio" name="c[other][value]" value="1" <eq name="data.other.status" value="1"> checked="checked"</eq> id="option51"> 通过
+                        </label>&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="c[other][value]" value="2" <eq name="data.other.status" value="2"> checked="checked"</eq> id="option52"> 未通过
+                        </label>
+                        <input type="hidden" name="c[other][id]" value="{$data.other.id}">
+                        <input type="text" name="c[other][refuse]" class="am-form-field am-input-sm" value="{$data.other.refuse}" placeholder="未通过理由">
+                    </div>
+                </div> 
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">          
+                <li class="am-active"><a href="#tab1">认证情况   </a></li>
+            </ul>
+            <div class="am-tabs-bd" style="clear: both;margin-bottom: 20px;">
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-2 am-text-left">
+                        等级
+                    </div>
+                    <div class="am-u-sm-2">
+                        <select id="rank">
+                            <option value="保险专家" <if condition="$info.rank eq '保险专家' ">selected="selected"</if>>保险专家</option>
+                            <option value="保险规划师" <if condition="$info.rank eq '保险规划师' ">selected="selected"</if>>保险规划师</option>
+                            <option value="保险分析师" <if condition="$info.rank eq '保险分析师' ">selected="selected"</if>>保险分析师</option>
+                            <option value="保险顾问" <if condition="$info.rank eq '保险顾问' ">selected="selected"</if>>保险顾问</option>
+                            <option value="保险会员" <if condition="$info.rank eq '保险会员' ">selected="selected"</if>>保险会员</option>
+                        </select>
+                    </div><div class="am-u-sm-6"></div>
+
+                </div>
+            </div>
+            <ul class="am-tabs-nav am-nav am-nav-tabs" style="clear: both;margin-top: 20px;">          
+                <li class="am-active"><a href="#tab1">账务情况   </a></li>
+            </ul>
+            <div class="am-tabs-bd">
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-5 am-text-left">
+                        可用积分
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info[score]}&nbsp;&nbsp;&nbsp;<a href="/integral/jifen/?id={$info.uid}">查看明细</a></div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-5 am-text-left">
+                        经验值
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info[exp]}&nbsp;&nbsp;&nbsp;<a href="/integral/?id={$info.uid}">查看明细</a></div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-5 am-text-left">
+                        成为VIP日期
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info[buy_time]|date="Y-m-d",###}</div>
+                </div>
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-5 am-text-left">
+                        VIP到期日期
+                    </div>
+                    <div class="am-u-sm-6">
+                        {$info[over_time]|date="Y-m-d",###}</div>
+                </div>
+
+            </div>
+            <div class="am-margin">
+                <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="check('{$info.uid}','1')">审核通过</button>
+                <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="check('{$info.uid}','0')">审核不通过</button>
+
+                <!--<if condition="$info['check_status'] eq 1">-->
+                <!--                    <else/>
+              
+            </if>-->
+                <button type="button" onclick="window.history.back();" class="am-btn am-btn-primary am-btn-xs">返回</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function check(id,s){
+        //        var id = $(t).attr('data-id');
+        var msg = "确认审核?";
+
+        if(confirm(msg)){
+            certify();
+            $.ajax({
+                type: 'POST',
+                url: '/user/daili_shenhe' ,
+                data: {id:id,status:s,rank:$('#rank').val()} ,
+                dataType: 'json',
+                success: function(data){
+                    if(data.code==200){
+                        layer.msg('操作成功!!!',2,1);
+                        location.reload();
+                    }else{
+                        layer.msg('操作失败!');
+                    }
+                }
+            });
+        }
+    }
+    function certify(){
+        $.ajax({
+            type: 'POST',
+            url: '/user/certify' ,
+            data: $('#add_from').serialize(),
+            dataType: 'json',
+            success: function(data){
+                
+            }
+        });
+    }
+</script>

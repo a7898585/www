@@ -1,0 +1,38 @@
+<div rel="drag" id="Mod_ArchiveList" class="wzgdsz-ztdiv">
+    <div id="Mod_ArchiveList_t" class="wzgdsz-top01">
+        <div class="wzgdsz-top02"></div>
+        <div class="wzgdsz-top03">文章存档</div>
+        <?php if(isset($dragable) && $dragable==1)
+        {?>
+        <div class="gjsz01"><a href="#" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_ArchiveList_td3"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz12.gif"></a><a href="#" onclick="clkmenu(this.id,2);return false;" style="display: none;" title="展开" id="Mod_ArchiveList_td4"><img border="0" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz15.gif"></a><a href="#" onclick="removemod(this.id);return false;" title="删除" id="Mod_ArchiveList_td2"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz14.gif"></a></div>
+        <div style="cursor: move;" id="Mod_ArchiveList_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="gjsz02"><img height="16" width="33" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz11.gif"></div>
+        <?php
+        }?>
+    </div>
+    <div class="wzgdsz">
+        <div class="modbox">
+            <div class="wzgdsz01" id="articlearchive" >数据加载中...</div>
+        </div>
+    </div>
+</div>
+<script language="javascript">
+    $(function(){
+        $('#articlearchive').load("<?php echo $baseurl?>/ajaxgetarticlearchivelist/<?php echo $bloginfo['MemberID'];?>/<?php echo $bloginfo['DomainName'];?>");
+    });
+
+    function toggleFun(obj){
+        var f = $(obj).attr('rel');
+        if(f == '1'){
+            $('#archiveDiv').css({ 'height': ''});
+            $(obj).html('点击收起<img border=0 src=http://img.cnfol.com/newblog/batev6.0/images/c.gif />');
+            $(obj).attr('rel','2');
+        }else{
+            $('#archiveDiv').css({ 'height': '300px'});
+            $(obj).html('点击展开<img border=0 src=http://img.cnfol.com/newblog/batev6.0/images/o.gif />');
+            $(obj).attr('rel','1');
+        }
+    }
+</script>
+<style>
+</style>
+

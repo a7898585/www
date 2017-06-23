@@ -1,0 +1,615 @@
+@charset "utf-8";
+/* CSS Document */
+* { margin:0 ; padding:0;}
+body,td,th { font-size: 12px; }
+body{
+	font-size: 12px;
+	color: #222;
+}
+img { border: 0;}
+
+.center { margin: 0 auto; }
+.clearall {clear:both;height:0;font-size:1px;line-height:0px; }
+ul,li{list-style-type:none;}
+.font14 {font-size: 14px; }
+.font11 { font-size: 11px; }
+.fontbold { font-weight: bold; }
+a:link { color: #4B7503; text-decoration: none; }
+a:visited { color: #4B7503; text-decoration: none; }
+a:hover { text-decoration: underline; color: #ca4846; }
+.gray { color: #5e5d5d; }
+.gray a:link { color: #5e5d5d; text-decoration: none; }
+.gray a:visited { color: #5e5d5d; text-decoration: none; }
+.gray a:hover { text-decoration: underline!important; color: #5e5d5d; }
+.red { color: #ca4846; }
+.red a:link { color: #ca4846; text-decoration: none; }
+.red a:visited { color: #ca4846; text-decoration: none; }
+.red a:hover { text-decoration: underline; color: #5e5d5d; }
+.blue { color: #4B7503; }
+.blue a:link { color: #4B7503; text-decoration: none; }
+.blue a:visited { color: #4B7503; text-decoration: none; }
+.blue a:hover { text-decoration: underline; color: #ca4846; }
+.blue002{ height:19px; overflow:hidden; width:220px;}
+.white { color:#ffffff; }
+.white a:link { color: #ffffff; text-decoration: none; }
+.white a:visited { color: #ffffff; text-decoration: none; }
+.white a:hover { text-decoration: none; color: #fcfcda; }
+h1 { font-size: 14px; font-weight: bold; }
+h2 { font-size: 12px; font-weight: bold; }
+.allfloatleft { float: left; }
+.allfloatright { float: right; }
+.margintop { margin-top: 10px; }
+.blueline { background:url(http://static.bengou.com/images2/blue_line.gif) no-repeat; }
+.padding { padding-left: 10px; }
+.paddinga { padding-top: 6px; *padding-top: 7px; _padding-top: 7px; }
+.paddingb { padding-top: 3px; *padding-top: 0; _padding-top: 0; }
+.paddingc { padding-top:3px;*padding-top:5px;_padding-top:5px; }
+.paddingd { padding-top:0px;*padding-top:2px;_padding-top:2px; }
+
+/*----------按钮----------*/
+.button { text-decoration: none; margin-top:5px; background: url(http://static.bengou.com/images2/page.png) no-repeat -408px -389px; float: left; width: 53px; height: 17px; *height: 16px; _height: 16px; padding: 3px 0 0 5px; *padding: 4px 0 0 5px; _padding: 4px 0 0 5px; display:block; color:#ca4846!important; cursor:pointer; }
+.button:hover {	text-decoration: none;	background: url(http://static.bengou.com/images2/page.png) no-repeat -727px -389px; float: left; width: 53px; height: 17px; *height: 16px; _height: 16px; padding: 3px 0 0 5px; *padding: 4px 0 0 5px; _padding: 4px 0 0 5px; display:block; color:#4B7503!important; cursor:pointer; }
+
+.buttona { text-decoration: none; background: url(http://static.bengou.com/images2/page.png) no-repeat -727px -389px; width: 53px; height: 20px; padding: 0px 0 0 5px; display:block;color:#4B7503!important; cursor:pointer; }
+.buttona:hover { text-decoration: none;	background: url(http://static.bengou.com/images2/page.png) no-repeat -408px -389px; width: 53px; height: 20px; padding: 0px 0 0 5px; display:block; color:#ca4846!important; cursor:pointer; }
+
+.buttongo { width: 35px; height: 18px; text-decoration: none; background: url(http://static.bengou.com/images2/page.png) no-repeat -768px -72px; padding: 2px 10px 2px 8px;color:#ca4846!important; cursor:pointer; }
+.buttongo:hover { width: 35px; height: 18px; text-decoration: none; padding: 2px 10px 2px 8px; color:#4B7503!important; cursor:pointer; }
+
+.buttoncopy { width: 34px; height: 17px; *height: 15px; _height: 15px; background:url(http://static.bengou.com/images2/page.png) no-repeat -808px -72px; text-decoration: none; display:block; padding: 2px 0 0 10px;*padding: 4px 0 0 10px; _padding: 4px 0 0 10px; margin-right:5px; color:#fbe3b8!important; cursor:pointer; }
+.buttoncopy:hover { width: 34px; height: 17px; *height: 15px; _height: 15px; background:url(http://static.bengou.com/images2/page.png) no-repeat -857px -72px; text-decoration: none; display:block; padding: 2px 0 0 10px;*padding: 4px 0 0 10px; _padding: 4px 0 0 10px; margin-right:5px;color:#4B7503!important; cursor:pointer; }
+
+.buttontop { width: 43px; *width: 41px; _width: 46px; height: 18px;background:url(http://static.bengou.com/images2/page.png) no-repeat -768px -46px;text-decoration: none; display:block; padding: 3px 0 0 8px;*padding: 3px 0 0 10px;_padding: 3px 0 0 5px; color:#ca4846!important; cursor:pointer; }
+.buttontop:hover { width: 43px; *width: 41px; _width: 46px; height: 18px; background:url(http://static.bengou.com/images2/page.png) no-repeat -823px -46px; text-decoration: none;display:block; color:#4B7503!important; cursor:pointer; }
+
+.buttonbc { width: 34px; height: 18px; background:url(http://static.bengou.com/images2/page.png) no-repeat -932px -45px;text-decoration: none; display:block; padding: 3px 0 0 19px;*padding: 5px 0 0 19px;_padding: 5px 0 0 19px; color:#ca4846!important; cursor:pointer; }
+.buttonbc:hover { width: 34px; height: 21px; background:url(http://static.bengou.com/images2/page.png) no-repeat -877px -46px; text-decoration: none;display:block; color:#4B7503!important; cursor:pointer; }
+
+.buttonpl { width: 34px; height: 18px; background:url(http://static.bengou.com/images2/page.png) no-repeat -823px -94px;text-decoration: none; display:block; padding: 3px 0 0 19px;*padding: 5px 0 0 19px;_padding: 5px 0 0 19px; color:#ca4846!important; cursor:pointer; }
+.buttonpl:hover { width: 34px; height: 21px; background:url(http://static.bengou.com/images2/page.png) no-repeat -768px -94px; text-decoration: none;display:block; color:#4B7503!important; cursor:pointer; }
+
+.buttonallmessage { width: 79px; height: 21px; background:url(http://static.bengou.com/images2/page.png) no-repeat -636px -389px;text-decoration: none; display:block; padding: 3px 0 0 7px;*padding: 5px 0 0 7px;_padding: 5px 0 0 7px; color:#ca4846!important; cursor:pointer; }
+.buttonallmessage:hover { width: 79px; height: 21px; background:url(http://static.bengou.com/images2/page.png) no-repeat -546px -389px; text-decoration: none;display:block; color:#4B7503!important; cursor:pointer; }
+
+.buttonwrong { width: 100px; height: 29px; *height: 27px; _height: 27px;background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -388px;text-decoration: none; display:block; padding: 10px 0 0 25px;*padding: 12px 0 0 25px;_padding: 12px 0 0 25px; font-size: 18px; font-weight:bold; color:#ca4846!important; cursor:pointer; }
+.buttonwrong:hover { width: 100px; height: 29px; *height: 27px; _height: 27px;background:url(http://static.bengou.com/images2/page.png) no-repeat -139px -388px; text-decoration: none;display:block; font-size: 18px; font-weight:bold; color:#4B7503!important; cursor:pointer; }
+
+.buttonnext { text-decoration: none; background: url(http://static.bengou.com/images2/page.png) no-repeat -333px -389px; float: left; width: 55px; height: 20px; *height: 19px; _height: 19px; padding: 7px 0 0 15px; *padding: 8px 0 0 15px; _padding: 8px 0 0 15px; display:block; font-weight:bold; color:#ca4846!important; cursor:pointer; }
+.buttonnext:hover {	text-decoration: none;	background: url(http://static.bengou.com/images2/page.png) no-repeat -471px -388px; float: left; width: 55px; height: 20px; *height: 19px; _height: 19px; padding: 7px 0 0 15px; *padding: 8px 0 0 15px; _padding: 8px 0 0 15px; display:block;font-weight:bold; color:#4B7503!important; cursor:pointer; }
+
+
+.wrappera { width: 960px;}/*----------页面整体----------*/
+.wrapper { width: 960px; }/*----------页面整体----------*/
+.header { width: 958px; height:85px; border: 1px solid #b2d0ea; }/*----------头部----------*/
+.headerbg { width: 956px; height:83px; background: #ecf7ff; border: 1px solid #FFF; position:relative; }
+.logo { float: left; width: 217px; padding: 0px 0 0 10px; }
+.merry_logo { width: 207px; height: 94px; position:absolute; left: 10px; top:-11px; }
+
+/*----------菜单----------*/
+.menuleft { float: left; width: 5px; height: 33px; background:url(http://static.bengou.com/images2/index.png) no-repeat -10px -10px; }
+.menuright { float: right; width: 5px; height: 33px; background:url(http://static.bengou.com/images2/index.png) no-repeat -20px -10px; }
+.menu_class li { float: left; width: 89px; height: 33px; line-height:33px; background: url(http://static.bengou.com/images2/index.png) no-repeat -29px -10px; text-align: center; color: #ffffff }
+.menu_class li a{ text-decoration:none; color:#ffffff!important; display:block;}
+.menu_class li a:hover { text-decoration:none; color:#ffffff!important; display:block;}
+
+.submenu { float: right; padding-right:20px; height:18px; }
+.submenu ul li { float: left; width: 69px; height: 10px; *height: 12px; _height: 12px; line-height: 10px; *line-height: 13px; _line-height: 10px;text-align: center; padding-top:2px; margin:5px 0 5px 0; border-right: 1px solid #5e5d5d; }
+
+/*----------字母索引----------*/
+.lettersbox { width: 958px; height: 30px; border: 1px solid #F8F8F8; }
+.letters {  height: 25px;background:#F8F8F8; color:#E7E7E7; letter-spacing: 1px; text-align: center; padding-top: 4px; }
+.letters a{ color:#222; text-decoration: none; padding:0 1px;}
+.letters a:hover{ color:#ffffff; text-decoration: none; background:#ca4846; clear:both; }
+
+/*----------广告----------*/
+.banner { margin-top: 10px; }
+
+/*----------导航----------*/
+.nav { width: 958px; height: 30px; line-height: 30px; background:#F8F8F8;  }
+.navleft { margin-left: 14px; *margin-left: 14px; _margin-left: 7px; float: left; text-align:left; }
+.navright { margin-right: 14px;  *margin-right: 14px; _margin-right: 7px; float: right; text-align: right; }
+
+/*----------右边----------*/
+.right { width: 216px; float: right; }
+.rightlist { width: 214px; border: 1px solid #DADADD; }
+
+/*----------栏目标题----------*/
+.columntitle { width: 202px; height: 27px; *height:25px;_height:25px; background:url(http://static.bengou.com/images2/index.png) no-repeat -535px -117px; padding: 6px 6px 0 6px;/*FIREFOX*/ *padding:8px 6px 0 6px;/*IE7*/ _padding:8px 6px 0 6px;/*IE6*/ }
+.columntitlemore { float: right; padding-top:3px; }
+
+/*----------漫画切换----------*/
+.images_ad{ width:214px; border: 1px #DADADD solid; margin-top: 10px; }
+.images_1{ width:212px; border:1px #ffffff solid; }
+.images_1 .normal{ display:none; }
+.images_1 .current { display:block; }
+.images_2{ height:24px;}
+.images_2 h3{ width:70px; float:left;text-align:center; height: 26px; line-height:26px; font-weight:normal; cursor:pointer;}
+.images_2 h3 a{display:block; font-family:Verdana, "宋体"; font-size: 12px; color:#4B7503;}
+.images_2 h3 a:hover{color:#ca4846;}
+
+/*----------热门漫画----------*/
+.hotcomicconten { width: 201px; margin-top: 5px; }
+.hotcomicconten li { float: left; width: 194px; height: 22px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -267px; padding-left: 7px; }
+.rss { padding-left: 3px; }
+
+/*----------更新漫画----------*/
+.updateconten { width: 201px; margin-bottom: 10px; }
+.updateconten li { float: left; width: 201px; height: 19px; background:url(http://static.bengou.com/images2/blue_line.gif) no-repeat bottom; padding-top: 5px; }
+.bluepoint { float: left; width: 3px; height: 33px;  padding-right:4px;} 
+
+/*----------左边----------*/
+.left { width: 202px; float: left; }
+.leftlist { width: 200px; border: 1px solid #ebc18f; margin-top: 10px; background: #fffcf7; }
+
+/*----------浏览历史选项卡----------*/
+.mark { width: 200px; }
+.markheader { height: 33px; line-height: 33px; background:url(http://static.bengou.com/images2/index.png) no-repeat -222px -10px; }
+.markheader h3 {margin-top:4px;float:left; width:67px; height: 29px; background:url(http://static.bengou.com/images2/index.png) no-repeat; text-align:center; line-height:29px; font-weight:normal; cursor:pointer; margin-left: 5px; }
+.markheader h3 a{ display:block; width:100%;color:#ca4846; font-family:Verdana, "宋体";;font-size: 12px; }
+.markheader h3 a:link { color: #ca4846; text-decoration: none; }
+.markheader h3 a:visited { color: #ca4846; text-decoration: none; }
+.markheader h3 a:hover{ color:#ca4846; text-decoration:none;}
+
+.markheader span { margin-right:6px;}
+.markheader .normal{ background-position: -82px -195px;  }
+.markheader .current{ background-position: -10px -193px; font-weight:bold; }
+
+.marktext{ width: 186px; }
+.marktext .normal { display:none; }
+.marktext .current { display:block; }
+.marklist { width: 186px; margin-top: 7px; }
+.marklist li { float: left; width: 179px; height: 20px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -267px; padding-left: 7px;}
+.marklist li span{ width: 165px; overflow:hidden; height:16px; }
+
+/*----------历史记录选项卡----------*/
+.historycontent { width: 186px; margin-top: 7px; }
+.historycontent p{ line-height:20px; overflow:hidden; }
+.historycontenta { width: 174px; line-height:20px; background:#fffcf5; border: 1px solid #f1ca9b; padding: 0 5px 0 5px; margin: 5px 0 5px 0;}
+.historycontenta li { height: 20px; line-height: 20px; }
+.historylist { width: 186px; background:url(http://static.bengou.com/images2/orange_line.gif) no-repeat top; padding-top:5px; }
+.historylist li { height: 20px; line-height: 20px; }
+
+/*----------左边列表----------*/
+.leftlista { width: 200px; border: 1px solid #f6b051; margin-top: 10px; }
+.leftcolumntitlea { width: 188px; height: 27px; *height:25px;_height:25px; background:url(http://static.bengou.com/images2/index.png) no-repeat -427px -10px; padding: 6px 6px 0 6px;/*FIREFOX*/ *padding:8px 6px 0 6px;/*IE7*/ _padding:8px 6px 0 6px;/*IE6*/ }
+
+.leftlistb { width: 200px; border: 1px solid #DADADD; margin-top: 10px; }
+.leftcolumntitleb { width: 188px; height: 27px; *height:25px;_height:25px; background:url(http://static.bengou.com/images2/index.png) no-repeat -632px -10px; padding: 6px 6px 0 6px;/*FIREFOX*/ *padding:8px 6px 0 6px;/*IE7*/ _padding:8px 6px 0 6px;/*IE6*/ }
+
+/*----------标题外框----------*/
+.titletxt { width: 88px; height:20px; line-height:20px; text-align:center; overflow: hidden; }
+.titletxta { width: 116px; height:20px; line-height:20px; text-align:center; overflow: hidden; }
+.titletxtb { width: 108px; height:20px; line-height:20px; text-align:center; overflow: hidden;  }
+.titletxtc { width: 228px; height:20px; line-height:20px; text-align:center; overflow: hidden; }
+.titletxtd { width: 202px; height:20px; line-height:20px; text-align:center; overflow: hidden; }
+.titletxte { width: 124px; height:20px; line-height:20px; text-align:center; overflow: hidden; }
+.titletxtf { width: 95px; height:20px; line-height:20px; text-align:center; overflow: hidden; }
+.titletxtg { width: 147px; height:20px; line-height:20px; text-align:center; overflow: hidden; }
+.titletxth { width: 408px; height:20px; line-height:20px; text-align:center; overflow: hidden; }
+.titletxti { width: 80px; height:28px; line-height:28px; text-align:center; overflow: hidden; }
+
+/*----------搜索----------*/
+.searchbox { width: 186px; height: 34px; }
+.searchtextbox { width: 158px; height: 18px; background-color:#fffcf5; border: 1px solid #f1ca9b; background:url(http://static.bengou.com/images2/index.png) no-repeat -977px -10px; padding: 3px 0 0 26px; font-family:Verdana, "宋体"; font-size:12px; }
+.searchkeyworld { width: 186px; }
+.searchkeyworld h2{ width: 186px; height: 26px; color: #4B7503; }
+.searchkeyworld li{width: 58px; height: 22px; line-height: 22px; float:left; overflow:hidden; margin-left:3px; }
+.onlinelook { width: 181px; height: 22px; line-height: 22px; background: #fffcf5; border: 1px solid #f1ca9b; margin-bottom: 10px; padding-left: 5px; overflow:hidden;}
+
+/*----------漫画排行选项卡----------*/
+.tab { width: 186px; }
+.tab_header { width: 186px; height: 26px; line-height: 26px; background:url(http://static.bengou.com/images2/bgx.png) repeat-x 0 -378px; }
+.tab_header h3 { float:left; width:27px;background:url(http://static.bengou.com/images2/page.png) no-repeat; text-align:center; line-height:26px; font-weight:normal; cursor:pointer; margin-left: 5px; }
+.tab_header h3 a{ display:block; width:100%;color:#5e5d5d; font-family:Verdana, "宋体";;font-size: 12px; }
+.tab_header h3 a:hover{ color:#ca4846; text-decoration:none; }
+.tab_header span { margin-right:23px; }
+.tab_header .normal{ background-position: -301px -388px; }
+.tab_header .current{ background-position: -269px -388px; }
+
+.tab_text{ width: 186px; }
+.tab_text .normal { display:none; }
+.tab_text .current { display:block; }
+
+/*----------排行榜----------*/
+.listone { width: 186px; height: 129px; margin-top: 8px; }
+.listonepic { float: left; width: 96px; height: 120px; }
+/*.listonepic:hover{ border: 1px #f6b051 solid;background-color:#fffcf5;}*/
+.listonetxt { float: left; width: 85px; margin-left: 5px; }
+.listonetxt h2{ width: 67px; height: 14px; *height: 12px; _height: 12px; line-height:14px; background:url(http://static.bengou.com/images2/index.png) no-repeat -989px -32px; padding: 0px 0 0 18px;/*FIREFOX*/ *padding:2px 0 0 18px;/*IE7*/ _padding:0px 0 0 18px;/*IE6*/  }
+.listonetxt p{ width: 85px; height: 105px; line-height: 18px; margin-top:5px; overflow:hidden; }
+
+.listclass{ width:186px; margin-bottom:10px; }
+.listclass ul{ background:url(http://static.bengou.com/images2/index.png) no-repeat -987px -50px; overflow:hidden;}
+.listclass ul li{ height:22px;  *height:20px; _height:20px; line-height:20px;overflow:hidden; }
+.listclass ul li a:hover{ text-decoration:underline;}
+.listclassa { color:#4080bd; padding:3px 0 0 21px; *padding:2px 0 0 21px; _padding:3px 0 0 21px; display:block; float:left; }
+
+.columnlist { width: 186px; padding-top: 6px; background:url(http://static.bengou.com/images2/blue_line.gif) no-repeat top; margin-bottom: 3px; }
+.columnlisttitle { width: 164px; height: 22px; line-height:22px; background:url(http://static.bengou.com/images2/index.png) no-repeat -30px -83px; padding: 2px 5px 0 17px; }
+
+.columnlistcontent { width: 186px; margin-top:2px; }
+.columnlistcontent li { float: left; width: 83px; height: 17px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -262px; padding: 6px 3px 0 7px; overflow:hidden; }
+.columnlistcontenta { width: 186px; margin-top:2px; }
+.columnlistcontenta li { float: left; width: 176px; height: 17px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -262px; padding: 6px 3px 0 7px; overflow:hidden; }
+.columnlistpic { width: 186px; margin-top: 3px;  }
+.columnlistphoto { width: 186px; margin-top: 6px; }
+.columnlistphoto li{ float: left; width: 76px; height: 96px; margin:0 8px 5px 8px; *margin:0 8px 5px 8px; _margin:0 6px 5px 6px;}
+.columnlistphotoa { width: 186px; margin-top: 6px; }
+.columnlistphotoa li{ width: 76px; float: left; height: 96px;  margin:0 8px 5px 8px; *margin:0 8px 5px 8px; _margin:0 6px 5px 6px; }
+.columnlistmore { float: left; width: 186px; height: 23px; line-height: 23px; background:url(http://static.bengou.com/images2/blue_line.gif) no-repeat top; padding-top:3px; text-align:right; }
+
+/*----------图片外框效果----------*/
+.picbox { width: 76px; height: 81px; margin: 0 auto; display: block; padding-bottom:2px; }
+/*a.picbox:hover{ width: 70px; height: 70px; padding:2px; border: 1px #f6b051 solid; background-color:#fffcf5; display: block; }*/
+a.piceffects { border: 1px solid #fff; padding:2px; display: block; background:#ffffff; text-align:center; }
+a.piceffects img{ display: block; }
+/*#infolistb_4 a.piceffects img{ width: 70px; height: 70px; display: block; }*/
+a.piceffects:hover{border: 1px #fff solid; background-color:#fffcf5; display: block; }
+a.piceffectstxt { display: block; text-align:center; height:18px; line-height:20px; color:#4B7503; overflow:hidden;}
+a.piceffectstxt:hover{ color:#fff; text-decoration:underline; }
+
+/*----------火热排行----------*/
+.hotlist { width: 186px; margin-bottom: 10px; }
+.hotlist li { float: left; width: 186px; height: 126px; background:url(http://static.bengou.com/images2/blue_line.gif) no-repeat bottom; padding: 10px 0 10px 0; }
+.hotlisttxt { float: left; width: 85px; height: 126px; margin-left:5px; }
+.hotlisttxt h2{ width: 85px; height: auto; line-height:16px; padding-bottom:4px; overflow:hidden; }
+.hotlisttxt p{ width: 85px; height: 16px; }
+.hotlisttitle { float:left; width: 85px; height: 20px; line-height: 20px; overflow:hidden; }
+.hotlistproperty { width: 49px; height: 20px; line-height: 20px; }
+
+/*----------中间----------*/
+.middle { width: 522px; float: left; margin: 10px 0 0 10px; }
+
+/*----------中间漫画选项卡----------*/
+.comicswitch { width: 520px; height:259px; *height:260px; _height:259px; border: 2px solid #9CBC4F; background: #B2E15D; }
+.comicswitchheader { height: 29px; line-height: 29px; background:url(http://static.bengou.com/images2/bgx.png) repeat-x 0 -405px;  }
+/*.comicswitchheader h3 { float:left; width:129px; height: 29px; background:url(http://static.bengou.com/images2/index.png) no-repeat; text-align:center; line-height:29px; font-weight:normal; cursor:pointer; }*/
+.comicswitchheader h3 { float:left; width:130px; height: 29px; background:url(http://static.bengou.com/images2/index.png) no-repeat; text-align:center; line-height:29px; font-weight:normal; cursor:pointer; border-left:1px solid #b2d0ea;margin-left:-1px;}
+.comicswitchheader h3 a{ display:block; width:100%;color:#4B7503;font-family:Verdana, "宋体";;font-size: 12px; }
+.comicswitchheader h3 a:hover{ color:#4B7503; text-decoration:none;}
+.comicswitchheader span { margin-right:6px;}
+.comicswitchheader .normal{ background-position: -357px -83px; }
+.comicswitchheader .current{ background-position: -223px -83px; font-weight:bold; }
+
+.comicswitchtext .normal { display:none; }
+.comicswitchtext .current { display:block; }
+.comicswitchtext { width: 520px; margin: 14px 0 0 0; }
+.comicswitchtext li { float: left; width: 104px; }
+.comicswitchlist { width: 92px; height: 96px;margin: 0 6px 12px 6px; }
+/*.comicswitchlist  p{ width: 76px; height: 76px; margin: 0 auto;}*/
+
+/*----------漫画推荐----------*/
+.recommended { width: 520px; border: 1px solid #DADADD; }
+.recommendedtitle { width: 509px; height: 29px; *height:25px; _height: 25px; background:url(http://static.bengou.com/images2/index.png) no-repeat -10px -117px; padding: 6px 5px 0 6px; *padding: 8px 5px 0 6px; _padding: 8px 5px 0 6px; }
+.recommendedcontent  { width: 248px; float: left; padding: 8px 0 8px 8px; }
+.recommendedpic { width: 126px; height: 166px; }
+.recommendedtxt { width: 118px; }
+.recommendedtxt h1{width: 80px; height: 16px; overflow:hidden; float:left; }
+.recommendedproperty { float: left; width: 110px; line-height: 19px; overflow:hidden; padding-top:3px; }
+.recommendedpropertya { float: left; width: 110px; height:90px; line-height: 19px; overflow:hidden; padding-top:3px; }
+.recommendedpropertyb { float: left; width: 110px; height:86px; *height:87px; _height:87px; line-height: 17px; *line-height: 18px; _line-height: 18px;overflow:hidden; padding:3px 0 -19px 0; margin-bottom:3px; overflow:hidden; }
+.recommendedlist { width: 505px; background:url(http://static.bengou.com/images2/blue_line.gif) no-repeat top; margin-bottom:9px; padding-top:3px; }
+.recommendedlist li{ width: 505px; height:33px; line-height:33px; border-bottom: 1px solid #F8F8F8; /*background:url(http://static.bengou.com/images2/blue_line.gif) no-repeat bottom;*/ }
+.recommendedname { width: 85px; height:33px; line-height:33px;overflow:hidden; }
+.recommendednamea { width: 65px; overflow:hidden; }
+.recommendedinfo { width: 410px; height:32px; overflow:hidden; }
+.recommendedinfoa { width: 430px; height: 32px; overflow:hidden; }
+.recommendedinfoa a{ margin-left:13px; overflow:hidden; }
+
+/*----------漫画分类----------*/
+.comicclass { width: 505px; margin-top: 7px; *margin-top: 8px; _margin-top: 11px; }
+.comicclass li { width: 250px; float:left; }
+.comicclasslist { width: 250px; margin-bottom: 17px; *margin-bottom: 10px; _margin-bottom: 10px; }
+.comicclasspic { width: 76px; height: 76px; float:left; }
+.comicclassinfo { width: 174px; float:right; }
+.comicclassinfo li { width: 78px; height: 24px; line-height:24px; float: left; padding-left:7px; overflow: hidden; }
+
+/*----------字母索引----------*/
+.digit { width: 746px; margin-top:100px;float: left; border: 1px solid #ebc18f; }
+.digittitle { width: 735px; height: 29px; *height:25px; _height: 25px; background:url(http://static.bengou.com/images2/index.png) no-repeat -10px -155px; padding: 6px 5px 0 6px; *padding: 8px 5px 0 6px; _padding: 8px 5px 0 6px; }
+.digirsy { letter-spacing: 1px; width: 636px; text-align: center; float:right; color:#ca4846; }
+.digirsy a{ width:15px; height: 15px; float:left; color:#ca4846!important; text-decoration: none; margin-left:9px; display:block; }
+.digirsy a:hover{ width:15px; height: 15px; float:left; color:#ffffff!important; text-decoration: none; background:#ca4846; display:block; }
+
+.digitcontent { float: left; width: 746px; height: 114px; background:url(http://static.bengou.com/images2/orange_line.gif) no-repeat bottom ;}
+.digitcontenta { float: left; width: 746px; height: 114px; background:url(http://static.bengou.com/images2/orange_line.gif) no-repeat bottom #fefaf2; }
+.digitno { float: left; width: 26px; height: 27px; background:url(http://static.bengou.com/images2/index.png) no-repeat -154px -193px; margin: 40px 22px 25px 15px; font-size: 18px; padding: 5px 0 0 10px;}
+.digitlist { width: 596px; float:left; margin: 21px 0 21px 0; }
+.digitlist li { width: 140px; float: left; height: 24px; line-height: 24px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -263px; padding-left:8px; }
+.digitmore { float: right; width: 60px; height: 66px; background:url(http://static.bengou.com/images2/index.png) no-repeat -885px -151px; margin-top:20px; cursor:pointer; text-decoration: none; }
+.digitmore:hover{ float: right; width: 60px; height: 66px; background:url(http://static.bengou.com/images2/index.png) no-repeat -885px -235px; margin-top:35px; cursor:pointer; text-decoration: none; }
+
+/*----------友情连接----------*/
+.links { width: 958px; border: 1px solid #B2D0EA; }
+.linkstitle { width: 958px; height: 33px; background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -8px; }
+.linkstxt { width: 938px; text-align: center; line-height: 22px; padding: 10px 5px 10px 5px; letter-spacing:1px; }
+
+/*----------底部----------*/
+.footer { width: 960px; position:relative; z-index: 0;}
+.footerleft { width: 3px; height: 110px; background:url(http://static.bengou.com/images2/index.png) no-repeat -828px -83px; }
+.footerright { width: 3px; height: 110px; background:url(http://static.bengou.com/images2/index.png) no-repeat -836px -83px; }
+.footerinfo { width: 954px; height: 110px; background:url(http://static.bengou.com/images2/bgx.png) repeat-x 0 -28px; }
+.footerlogo { margin: 19px 0 0 109px; *margin: 19px 0 0 106px; _margin: 19px 0 0 52px;}
+.footerline { width: 3px; height: 110px; background:url(http://static.bengou.com/images2/index.png) no-repeat -820px -83px; margin: 0px 12px 0 12px; }
+.footercopy { width: 500px; line-height: 20px; margin-top: 15px; }
+.qq { float: right; padding:7px; }
+
+.wj2 { width: 50px;	height: 32px; position:absolute; left:680px; top: 60px; }
+.wj { width: 50px; height: 32px; position:absolute;	left:3px; top: 0px;	z-index: 1; }
+.wj3 { width: 50px;	height: 32px; position:absolute; left:893px; top: 0px; z-index: 1; }
+
+/*----------内页CSS----------*/
+
+/*----------内页960导航----------*/
+.website { width: 958px; border: 1px solid #f1d6b5; }
+.websitebg { width: 956px; height: 28px; line-height: 28px; border: 1px solid #ffffff; background:url(http://static.bengou.com/images2/bgx.png) repeat-x 0 -435px; }
+
+/*----------漫画排行----------*/
+.comicranking .pages{ width:960px; }
+.comicranking li { width:480px; float:left;}
+.ranking { width: 473px; border: 1px solid #b2d0ea; }
+.rankingtitle { width: 461px; height: 27px; *height:25px;_height:25px; background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -201px; padding: 6px 6px 0 6px;/*FIREFOX*/ *padding:8px 6px 0 6px;/*IE7*/ _padding:8px 6px 0 6px;/*IE6*/ }
+.rankinga { width: 473px; border: 1px solid #ebc18f; }
+.rankingtitlea { width: 461px; height: 27px; *height:25px;_height:25px; background:url(http://static.bengou.com/images2/page.png) no-repeat -488px -201px; padding: 6px 6px 0 6px;/*FIREFOX*/ *padding:8px 6px 0 6px;/*IE7*/ _padding:8px 6px 0 6px;/*IE6*/ }
+.rankingtop { width: 457px; height: 128px; margin: 8px; }
+.rankingtoptxt { width: 352px; margin-left: 8px; height: 115px; }
+.rankingtoptxt h2{ width: 334px; height: 16px; *height: 16px; _height: 18px; line-height:16px; background:url(http://static.bengou.com/images2/index.png) no-repeat -989px -32px; padding: 0px 0 0 18px;/*FIREFOX*/ *padding:2px 0 0 18px;/*IE7*/ _padding:0px 0 0 18px;/*IE6*/  }
+.rankingtoptxt p{ width: 352px; line-height: 20px; overflow:hidden; }
+.rankingtopabout { width: 352px; height:40px; line-height:20px; overflow:hidden; /*white-space:nowrap; text-overflow:ellipsis; */}
+.rankinglist { line-height: 24px; border-collapse:collapse; }
+.rankinglist td { padding-left: 5px; }
+
+/*----------作者外框----------*/
+.author { width: 76px; float:left; }
+
+/*----------内页右边----------*/
+.insideright { float: right; width: 748px; }
+.insidesite { width: 746px; height: 30px; border: 1px solid #f1d6b5; }
+.insidesitebg { width: 744px; height: 28px; line-height: 28px; border: 1px solid #ffffff; background:url(http://static.bengou.com/images2/bgx.png) repeat-x 0 -435px; }
+
+/*----------更多人看过----------*/
+.morelook { width: 746px; border: 1px solid #b2d0ea; padding-bottom:10px;}
+.morelooktitle { width: 746px; height: 33px; background:url(http://static.bengou.com/images2/page.png) no-repeat -16px -46px; }
+.titlepadding { padding:6px 6px 0 6px; *padding:8px 6px 0 6px;/*IE7*/ _padding:8px 6px 0 6px;/*IE6*/  }
+
+.morelookcontent { width: 732px; margin: 7px 7px 0 7px; }
+.morelookcontent li{ width: 244px; float: left; }
+.morelookcontenta { width: 944px; height: 175px; *height: 175px; _height: 155px; padding: 10px 5px 0px 5px; }
+.morelookcontenta li{ width: 236px; float: left; }
+.morelooktxt p{ width: 103px; height:20px; line-height: 20px; float:left; overflow:hidden; word-break:keep-all; }
+.morelooktxt div{ width: 103px; }
+.morelooktxt { width: 103px; padding:0 1px 0 6px; }
+.morelooktxta p{ width: 216px; line-height: 20px; float:left; display:block; overflow:hidden; word-break:keep-all; }
+.morelooktxta { width: 220px; padding:0 1px 0 8px; }
+
+.bluebox { width: 958px; border: 1px solid #b2d0ea; }
+.morelooktitlea { width: 946px; height: 27px; *height:25px;_height:25px; background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -123px; padding: 6px 6px 0 6px;/*FIREFOX*/ *padding:8px 6px 0 6px;/*IE7*/ _padding:8px 6px 0 6px;/*IE6*/ }
+
+/*----------作者内容----------*/
+.authorcontent { width: 714px; margin: 7px 16px 10px 16px; }
+.authorabout { width: 620px; margin-left: 17px; line-height: 24px; }
+
+.authorworks { width: 746px; }
+.authorworkspic { width: 734px; padding: 17px 0 10px 3px;  }
+.authorworkspic li { width: 131px; float:left; padding-left: 14px; text-align:center; margin-bottom:10px; }
+.workstitle { width: 723px; height: 24px; *height:22px;_height:22px; background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -84px; padding: 8px 5px 0 18px;/*FIREFOX*/ *padding:10px 5px 0 18px;/*IE7*/ _padding:10px 5px 0 18px;/*IE6*/ }
+.workstitlea { width: 935px; height: 24px; *height:22px;_height:22px; background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -432px; padding: 8px 5px 0 18px;/*FIREFOX*/ *padding:10px 5px 0 18px;/*IE7*/ _padding:10px 5px 0 18px;/*IE6*/ }
+
+.authorworkstxt { width: 692px; margin: 0 0 10px 20px; background: #f8fcff; border: 1px solid #cae0f7; padding:6px; }
+.authorworkstxt li { width: 130px; float: left; height: 22px; line-height: 22px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -265px; padding-left:8px; }
+
+/*----------字母索引----------*/
+.orangebox { width: 958px; border: 1px solid #ebc18f; }
+.letterlisttitle { width: 946px; height: 27px; *height:25px;_height:25px; background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -162px; padding: 6px 6px 0 6px;/*FIREFOX*/ *padding:8px 6px 0 6px;/*IE7*/ _padding:8px 6px 0 6px;/*IE6*/ }
+
+.quicknav { width: 940px; height: 28px; background:#fefaf2; border: 1px solid #f7cf9e; line-height: 28px; text-align: center; }
+.quicknav span {float:left; margin-left: 78px; }
+.quicknav a{ color:#ca4846; text-decoration: none;margin-left:10px; width:18px; height: 18px; line-height:18px; float:left; display:block; margin-top:5px;}
+.quicknav a:hover{ color:#ffffff; text-decoration: none; background:#ca4846;  width:18px; height: 18px;line-height:18px; float:left; display:block;}
+.quicknava { width: 940px; height: 28px; background:#fefaf2; border: 1px solid #f7cf9e; line-height: 28px; text-align: center; }
+.quicknava span {float:left; margin-left: 250px; }
+.quicknava a{ color:#ca4846; text-decoration: none;margin-left:10px; width:86px; height: 20px; line-height:20px; float:left; display:block; margin-top:4px;}
+.quicknava a:hover{ color:#ffffff; text-decoration: none; background:#ca4846;  width:86px; height: 20px;line-height:20px; float:left; display:block;}
+.letterps { width: 748px; height: 22px; padding-top: 8px; text-align:center; background:url(http://static.bengou.com/images2/orange_line.gif) repeat-x bottom; }
+
+.lettercontent { float: left; width: 958px; height: 114px; background:url(http://static.bengou.com/images2/orange_line.gif) no-repeat bottom ;}
+.lettercontenta { float: left; width: 958px; height: 114px; background:url(http://static.bengou.com/images2/orange_line.gif) no-repeat bottom #fefaf2; }
+.letterno { float: left; width: 26px; height: 27px; background:url(http://static.bengou.com/images2/index.png) no-repeat -154px -193px; margin: 40px 35px 25px 35px; *margin: 40px 35px 25px 35px; _margin: 40px 35px 25px 18px; font-size: 18px; padding: 5px 0 0 10px;}
+.letterlist { width: 780px; float:left; margin: 21px 0 21px 0; }
+.letterlist li { width: 142px; float: left; height: 24px; line-height: 24px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -263px; padding:0 5px 0 8px; overflow:hidden;}
+.letterlist li img{ padding-top:0px; *padding-top:0px; _padding-top: 4px; }
+.lettermore { float: right; width: 60px; height: 66px; background:url(http://static.bengou.com/images2/index.png) no-repeat -885px -151px; margin-top:20px; cursor:pointer;  text-decoration: none; }
+.lettermore:hover{ float: right; width: 60px; height: 66px; background:url(http://static.bengou.com/images2/index.png) no-repeat -885px -235px; margin-top:35px; cursor:pointer; text-decoration: none; }
+.letternoa { float: left; width: 86px; height: 30px; background:url(http://static.bengou.com/images2/page.png) no-repeat -789px -389px; margin: 27px 35px 25px 35px; *margin: 27px 35px 25px 35px; _margin: 27px 35px 25px 18px; font-size: 14px; padding: 2px 0 0 2px; }
+.letterlistb { width: 768px; float:left; margin: 21px 0 21px 0; }
+.letterlistb li.blank{background:none;width:100%;padding:0;height:20px;}
+.letterlistb li { width: 145px; float: left; height: 24px; line-height: 24px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -263px; padding-left:8px; }
+.letternob { float: left; width: 86px; height: 30px; background:url(http://static.bengou.com/images2/page.png) no-repeat -789px -389px; margin: 27px 15px 25px 15px; *margin: 27px 15px 25px 15px; _margin: 27px 15px 25px 8px; font-size: 14px; padding: 2px 0 0 2px; }
+.letterlistb li img{ padding-top:0px; *padding-top:0px; _padding-top: 4px; }
+.lettermoreb { float: right; width: 60px; height: 66px; background:url(http://static.bengou.com/images2/index.png) no-repeat -885px -151px; margin-top:12px; cursor:pointer; text-decoration: none; }
+.lettermoreb:hover{ float: right; width: 60px; height: 66px; background:url(http://static.bengou.com/images2/index.png) no-repeat -885px -235px; margin-top:27px; cursor:pointer; text-decoration: none; }
+
+/*----------完结漫画----------*/
+.endcomicstitle  { width: 746px; height: 33px;background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -239px;  }
+.paging { width: 728px; *width: 726px; _width: 728px;height: 29px; *height: 32px; _height: 29px; line-height: 28px; border: 1px solid #c9e1f7; background: #f8fcff; margin-top: 7px; text-align: center; }
+.paginga { width: 100%; height: 29px; *height: 32px; _height: 29px; line-height: 28px; border: 1px solid #c9e1f7; background: #f8fcff; margin-top: 7px; text-align: center; }
+.allpaging { width: 420px; text-align: center; color: #4B7503; }
+.allpaging a { border: #9aafe5 1px solid; padding: 2px 5px 2px 5px; color: #2e6ab1; margin-right: 5px; text-decoration: none; background: #FFF; }
+.allpaging a:hover { border: #ebc18f 1px solid; color: #ca4846; background: #ffe5c1;}
+.pagination a:active { border: #ffffff 1px solid; color: #ca4846; background: #ffe5c1; }
+.allpaging span.current { border: #ebc18f 1px solid; padding: 2px 5px 2px 5px; color:#ca4846; background: #ffe5c1; margin-right:5px;}
+.allpaging span.disabled { border: #ebc18f 1px solid; padding: 2px 5px 2px 5px;  color: #929292; margin-right: 2px;;}
+.pagingbox { width: 35px; height: 17px; border: 1px solid #b5d7f4; background:#ffffff; margin:3px 5px 0 5px; *margin-top:1px 5px 0 5px; _margin-top:3px 5px 0 5px; }
+
+.endcomicscontent { width: 730px; margin-bottom: 10px; }
+.endcomicscontent li { width: 365px; height: 168px;  float: left; background:url(http://static.bengou.com/images2/blue_line.gif) repeat-x bottom; padding:10px 0 10px 0; }
+
+/*----------最终列表页----------*/
+.authorrelated { width: 186px; padding: 7px 0 5px 0;}
+.authorrelated h2{padding-left:5px; }
+.authorrelated p { width: 186px; height: 16px; padding-top:7px; float:left; color: #5e5d5d; }
+.authorrelated span{ width: 186px; height: 130px; overflow:hidden; line-height:22px; float:left; padding-top:10px; }
+
+.section { width: 730px; }
+.sectioninfo { width: 193px; padding-left: 10px; padding-right: 2px; }
+.sectioninfo p{ height: 21px; line-height:21px; overflow:hidden; }
+.sectioninfoa { width: 155px; padding-right: 10px; line-height:21px; }
+.sectionabout { width: 730px; background:url(http://static.bengou.com/images2/blue_line.gif) repeat-x top; padding-top: 10px; line-height: 22px; }
+
+.subscribe { width: 746px; border: 1px solid #ebc18f; }
+.subscribebg { width: 715px; height: 24px; background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -277px; color: #ca4846; padding:4px 0 0 31px; }
+.subscribeboxa { width: 173px;}
+.subscribebox { width: 163px; height: 18px; background:#ffffff; border: 1px solid #ebc18f; margin: 0 5px 0 5px; }
+.subscribebg span{ float: left;}
+.subscribea {padding-top: 3px; }
+.icobutton { padding: 4px 6px 0 0; }
+.icobutton a{ margin-left: 7px; float:left; }
+
+/*----------显示方式----------*/
+.pagemore { padding: 9px 6px 0 0; float: right; }
+.pagemorea { padding: 6px 6px 0 0; float: right; }
+.pagemorea a{ margin-left: 5px; }
+.indicate { width: 718px; height: 28px; line-height:28px; border: 1px solid #C8E1F7; background:#F7FCFF; padding-left: 12px; }
+.subsrbelist { width: 730px; background:url(http://static.bengou.com/images2/bgline.png) repeat-y; }
+.subsrbelist li { width: 228px; float: left; height: 28px; line-height: 28px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -260px; padding-left:8px; margin-left:5px; overflow:hidden;}
+.subsrbelist li img{ padding-top:0px; *padding-top:0px; _padding-top: 8px; }
+.icorss { width: 748px; height: 30px; _height: 25px; line-height: 30px; _padding-top:5px }
+.readallmes { width: 728px; height: 30px; }
+
+/*----------评论----------*/
+.message { width: 728px; }
+.messageall { width: 936px; }
+.messagetips { width: 100%; height:28px; line-height: 28px; }
+.hotmestitle { width: 100%; height: 32px; line-height: 32px; background:url(http://static.bengou.com/images2/bgx.png) repeat-x 0 -312px; }
+.hotmes { width: 100%; line-height: 28px; background:url(http://static.bengou.com/images2/blue_line.gif) no-repeat bottom; }
+.hotmes a{ margin-left: 15px; float:right;}
+.hotmestxt { width: 100%; line-height: 28px; }
+.hotmessage { width:auto; height:auto; line-height:24px; background:#f8fcff;margin:0 auto 10px auto;padding:5px;border:1px solid #c9e1f7;} 
+.hotmesanswer { width:auto; height:auto; border:1px solid #c9e1f7; padding:5px; background:#f8fcff; }
+.house { text-align:right; color: #ca4846; font-size:11px; }
+
+.mesboxform { width: 726px; height: 154px; background:#ffffff; border: 1px solid #c9e1f7; }
+.mesboxforma { width: 936px; height: 154px; background:#ffffff; border: 1px solid #c9e1f7; }
+.sendmeg { width:auto; height:30px; padding:0 10px 0 5px; }
+.position { position:relative; left:0px; top:7px; *top:3px; _top:3px; bottom: 15px; }
+.positiona { position:relative; left:0px; top:2px; *top:0px; _top:0px; bottom: 15px; }
+.yzmbox { width: 63px; height: 19px; background:#ffffff;  border: 1px solid #c9e1f7; margin-right: 5px; }
+.namebox { width: 113px; height: 19px; background:#ffffff;  border: 1px solid #c9e1f7; margin-right: 5px; }
+.sendmeg span { margin: 0 5px 0 3px; }
+
+.terms { width: 598px; line-height: 22px; padding: 25px 0 0 10px; float:left; margin-bottom:10px; }
+.terms p { width: 590px; float: left; height: 22px; line-height: 22px; background:url(http://static.bengou.com/images2/index.png) no-repeat -1000px -264px; padding-left:8px; }
+.buttonbigbc { float: right; padding: 85px 10px 0 0;  }
+
+/*----------作者列表----------*/
+.authorlist { width: 944px; padding: 10px 5px 10px 5px; }
+.authorlist li{ width: 188px; float: left; }
+.authorlisttxt p{ width: 100px; line-height: 20px; float:left; display:block; }
+.authorlisttxt { width: 100px; padding:0 1px 0 6px; }
+.letterpsa { width: 958px; height: 36px; padding-top: 12px; text-align:center; background:url(http://static.bengou.com/images2/orange_line.gif) repeat-x bottom; }
+.authorsearch { width: 570px; }
+.searchtextboxa { width: 349px; height: 17px; background-color:#ffffff; border: 1px solid #abadb3; background:url(http://static.bengou.com/images2/index.png) no-repeat -977px -10px; padding: 3px 0 0 26px; font-family:Verdana, "宋体"; font-size:12px; }
+.searchtextboxab { width: 375px; }
+.authorcontents { float: left; width: 958px; background:url(http://static.bengou.com/images2/orange_line.gif) no-repeat bottom; }
+.authorcontentsa { float: left; width: 958px; background:url(http://static.bengou.com/images2/orange_line.gif) no-repeat bottom #fefaf2; }
+.authorbg { background:#fcff00; }
+.authorbga { background:#none; }
+
+/*----------首页字母索引----------*/
+.reminder { width: 746px; border: 1px solid #b2d0ea; }
+.reminderbg { width: 744px; height:auto; border: 1px solid #ffffff; background:url(http://static.bengou.com/images2/bgx.png) repeat-x 0 -521px; }
+.remindertab { width: 732px; line-height: 19px; background:url(http://static.bengou.com/images2/blue_line.gif) repeat-x bottom; padding-top:3px; }
+.remindertab p{ height:31px; line-height:31px; }
+.remindertab a{ padding-right: 10px; }
+.remindertab li{ width: 122px; float:left; padding-bottom:3px; }
+
+.remindertitle { width: 746px; height: 33px; background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -310px; }
+.reminderindex { width: 728px; }
+.reminderindex li{ float:left; width: 182px; height: 261px; margin: 10px 0 0px 0; background:url(http://static.bengou.com/images2/blue_line.gif) repeat-x bottom; }
+.reminderphoto { width: 728px; }
+.reminderphoto li{ float:left; width: 728px; height: 200px; margin: 10px 0 0px 0; background:url(http://static.bengou.com/images2/blue_line.gif) repeat-x bottom; }
+.reminderbox { width: 160px; height: 227px; background:#f8fcff; border: 1px solid #c9e1f7; text-align:center; padding: 10px 5px 10px 5px; }
+.reminderphotobox { width: 706px; height: 166px; border: 1px solid #c9e1f7; padding: 10px; }
+.reminderbox span{ width:155px; height: 15px; float:left; padding-top:5px; overflow:hidden; }
+.reminderguild { width: 728px; height:20px; line-height:20px; text-align: center; padding-top:3px; }
+
+.reminderphototxt { width: 570px; margin-left:10px; }
+.reminderphototxt p{ width:570px; height: 30px; background:url(http://static.bengou.com/images2/blue_line.gif) repeat-x bottom; }
+.reminderphototxt span{ margin: 0 5px 0 0px; }
+.reminderphototxtabout { width:570px; height: 75px;line-height: 20px; padding: 5px 0 5px 0; overflow: hidden; }
+.reminderphototxtinfo { width:570px; height: 25px; line-height: 22px; background:url(http://static.bengou.com/images2/blue_line.gif) repeat-x bottom;}
+.remindertxt { line-height: 30px; }
+
+/*----------搜索页面----------*/
+.searcherror { width: 500px; height:88px; background:url(http://static.bengou.com/images2/wrong.gif) no-repeat; margin: 20px 0 20px 0; }
+.searcherror p{ width: 300px; height:30px; padding: 60px 0 20px 90px; font-size:14px; }
+.searchinfo { line-height: 26px; background:url(http://static.bengou.com/images2/blue_line.gif) repeat-x top; padding-top: 10px;}
+
+
+/*----------三天一百部----------*/
+.recently { width: 940px; margin-bottom:10px; }
+.recently li{ float:left; width: 188px; height: 261px; margin: 10px 0 0px 0; background:url(http://static.bengou.com/images2/blue_line.gif) repeat-x bottom; }
+
+
+/*----------图库----------*/
+.tk { width: 746px; float: right; border: 1px solid #b2d0ea; }
+.tk_list { float:left; width: 746px; height: 158px; padding: 7px 0 0 0; }
+.tk_list li{ float: left; width: 174px; height: 123px; margin-left: 10px; _margin-left: 7px;}
+.tk_nav{ padding:8px 0 0 5px;}
+.tk_nav a{ margin:0 8px;}
+
+/*新增样式*/
+.subnav{ height:68px;}
+.subnav ul li{ width:205px; text-align:center; float:left; margin:5px 0 0 18px; display:inline; border-right:1px dotted #a9a66b; height:60px; overflow:hidden;}
+.subnav ul li span{ float:left; line-height:22px;}
+.subnav ul li span.subleft{ width:100px; display:inline-block;}
+.subnav ul li span.subright{ width:72px; word-spacing:normal; text-align:center; padding:7px 0 0 7px; font-size:13px; line-height:23px;}
+.subnav ul li.liwidth{ width:220px;}
+.subnav ul li.liwidth span.imgwidth{ width:115px;}
+.subnav ul li.liwidth span.imgwidth a{ color:#ff0000;}
+.subnav ul li.subtxt{ width:250px; border-right: 0 none; *margin-left:12px;*width:255px;}
+.subnav ul li.subtxt span.subleft{ text-align:left; color:#004bab; padding-top:5px; width:70px;}
+.subnav ul li h3{line-height:16px!important; font-size:16px;}
+.subnav ul li.subtxt h3{ font-size:16px; line-height:26px!important;}
+.subnav ul li.subtxt span.subright{ width:160px; text-align:left; line-height:26px; padding-top:6px;*width:165px;}
+.subnav ul li h3{line-height:16px!important; font-size:16px;}
+
+/*rss 样式*/
+.morelooktitle span.rss02 a{ width:78px; height:20px; display:block; float:left; margin-top:6px;background:url(http://static.bengou.com/images2/page.png) no-repeat -131px -529px; padding-left:23px; text-align:left; line-height:20px; color:#c05608;}
+.morelooktitle span.rss02 a:hover{background:url(http://static.bengou.com/images2/page.png) no-repeat -10px -529px; color:#4B7503;}
+/*收藏样式*/
+.morelooktitle span.add02 a {background: url(http://static.bengou.com/images2/page.png) no-repeat  -10px -572px;color:#6f88e1;display:block;float:left;height:20px;line-height:20px;margin-top:6px;padding-left:23px;text-align:left;width:78px;}
+
+.morelooktitle span.add02 a:hover {background: url(http://static.bengou.com/images2/page.png) no-repeat  -131px -572px;color:#bfb231;}
+
+/*同一话不同版本弹窗*/
+.popupmenu_div{ width:230px; height:55px;overflow-y:hidden; background:#f4faff url('你的背景图片') repeat-x left top; border:solid 3px #1aa130; position:absolute; left:0; top:0; z-index:3000}
+.popupmenu_div dl{ padding:0px 0 0 0px; clear:both;}
+.popupmenu_div dl dt{ color:#666; padding-left:5px;}
+.popupmenu_div dl dd{ padding-left:25px;}
+.popupmenu_div dl dt a{ color:#666;}
+.popupmenu_div dl dt a:hover{ color:#666; text-decoration:underline;}
+.popupmenu_div dl dd a{ color:#0058A6;}
+.popupmenu_div dl dd a:hover{ color:#0058A6; text-decoration:underline;}
+
+/*周更新样式*/
+.wd01{  float:left!important; width:960px;}
+.wd02{ width:958px;}
+.wd03{ width:956px;}
+.weekblock{ width:130px; border:1px solid #b2d0ea; float:left; overflow:hidden; margin-right:5px; display:inline;}
+.weektitile{ width:130px; height:35px; background:url(http://static.bengou.com/images2/weeklist.png) no-repeat -8px -8px; text-align:center; line-height:35px; font-weight:bold; padding-top:2px;}
+.weekblock ul li{ height:45px; line-height:22px;background:url(http://static.bengou.com/images2/weeklist.png) no-repeat -475px -7px; padding-left:15px; margin:5px 0;}
+.weekblock ul li a{ text-decoration:underline!important;height:22px;overflow:hidden;}
+.weekblock ul li p.gray{height:22px;overflow:hidden;}
+.week_datebox{border:1px solid #EBC18F;float:left;width:746px; margin-left:10px; padding-bottom:20px;}
+.weekdate_title{background:url(http://static.bengou.com/images2/weeklist.png) no-repeat -8px -86px; height:33px; width:746px;}
+.weekdate_title ul li{ float:left; width:91px; height:24px;background:url(http://static.bengou.com/images2/weeklist.png) no-repeat -8px -189px; margin:4px 0 0 5px; display:inline; text-align:center; font-weight:bold; line-height:24px; cursor:pointer; display:block;}
+.weekdate_title ul li.hover{background:url(http://static.bengou.com/images2/weeklist.png) no-repeat -8px -144px; height:29px; color:#ca4846;}
+.weekcomic_pic li{ width:100px; height:174px; float:left; overflow:hidden; margin:10px 12px 0 12px; display:inline;}
+.weekcomic_pic li img{ width:90px; height:120px; padding:2px; margin-bottom:2px;}
+.weekcomic_pic li p{ height:22px; line-height:22px; text-align:center;overflow:hidden;}
+.block{ display:block;}
+.none{ display:none;}
+.weekblock ul li .bgray{ height:22px; line-height:22px; overflow:hidden; width:110px; display:block;}
+.weekblock ul li{ overflow:hidden;}
+.webgame_link{border:1px solid #B2D0EA;width:948px; height:22px; line-height:22px; padding:5px; text-align:center;}

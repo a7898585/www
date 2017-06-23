@@ -1,0 +1,99 @@
+{__NOLAYOUT__}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#pic_btn').uploadify({
+            'buttonClass' : 'am-btn am-btn-default',
+            'swf'      : '/Public/Common/js/uploadify/uploadify.swf',
+            'uploader' : '/public/upload_photo',
+            'fileSizeLimit':'2MB',
+            'fileTypeExts' : '*.gif; *.jpg; *.png',
+            'fileTypeDesc': 'image files',
+            'onUploadProgress' : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                progress = parseInt(totalBytesUploaded / totalBytesTotal * 100, 10);
+                progress = progress>100?100:progress;
+                if(progress>0&&progress<=100){
+                    $('#progress').css('width',progress+'%');
+                    if(progress<=100){
+                        setTimeout(function(){$('#progress').parent().hide();},1800);
+                    }
+                }
+            },
+            'onUploadSuccess' : function(file, data, response) {
+                console.log(data);
+                data = eval('(' + data + ')');
+//                addImg(data.url);
+                $('#pic').val(data.url);
+                $('#pic_show').attr('src',up_path+data.url+'!100x65').show();
+            },
+            'onUploadStart' : function(file) {
+                $('#progress').css('width','0%');
+                $('#progress').parent().show();
+            },
+            'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+                alert('文件： '+file.name+' 文件失败，请刷新页面后重试。');
+            }
+        });
+    });
+</script>
+<form action="__SELF__" class="am-form am-text-left" method="post" data-am-validator>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">用户名</div>
+        <div class="am-u-sm-6">
+            <input type="text" class="am-input-sm" name="username" value="{$info.username}" placeholder="名称" required/>
+        </div>
+        <div class="am-u-sm-3"></div>
+    </div>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">密码</div>
+        <div class="am-u-sm-6">
+            <input type="text" class="am-input-sm" name="password" value="" placeholder="输入则变为更改密码" maxlength="12" />
+        </div>
+        <div class="am-u-sm-3"></div>
+    </div>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">邮件</div>
+        <div class="am-u-sm-6">
+            <input type="text" class="am-input-sm" name="email" placeholder="邮件" value="{$info.email}"/>
+        </div>
+        <div class="am-u-sm-3"></div>
+    </div>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">签名</div>
+        <div class="am-u-sm-6">
+            <textarea name="singn" placeholder="签名">{$info.singn}</textarea>
+        </div>
+        <div class="am-u-sm-3"></div>
+    </div>
+
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">头像</div>
+        <div class="am-u-sm-6">
+            <input id="pic_btn" type="file" class="btn_pic" value="上传" />
+            <input type="hidden" name="head_pic" id="pic" value="{$info.head_pic}" />
+            <div class="am-progress" style="display: none;">
+                <div class="am-progress-bar" id="progress" style="width: 0%"></div>
+            </div>
+        </div>
+        <div class="am-u-sm-3 am-text-right"><img id="pic_show" src="{$info.head_pic|setUpUrl=###}!100x65" style="<empty name='info.head_pic'>display: none;</empty>"/></div>
+    </div>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">显示</div>
+        <div class="am-u-sm-6">
+            <div class="am-btn-group" data-am-button>
+                <label class="am-btn am-btn-default am-btn-xs <eq name='info.status' value='0'> am-active</eq>">
+                    <input type="radio" name="status" value="0" id="option3" <eq name='info.status' value='0'> checked="true"</eq>> 禁用
+                </label>
+                <label class="am-btn am-btn-default am-btn-xs <eq name='info.status' value='1'> am-active</eq>">
+                    <input type="radio" name="status" value="1" id="option4" <eq name='info.status' value='1'> checked="true"</eq>> 启用
+                </label>
+            </div>
+        </div>
+        <div class="am-u-sm-3"></div>
+    </div>
+    <div class="am-g am-margin-top ">
+        <div class="am-u-sm-12">
+            <button type="submit" class="am-btn am-btn-primary am-center" style="width: 60%;">提交</button>
+        </div>
+    </div>
+</form>
+

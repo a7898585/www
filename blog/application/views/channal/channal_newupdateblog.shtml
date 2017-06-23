@@ -1,0 +1,14 @@
+<?php include $header;?>
+<div id="Content">
+
+    <div class="AllNav">
+        <!--加内容的地方-->
+        <div class="lmtsz">
+            <div class="lmtsz01">最新更新200名博客</div>
+        </div>
+        <table cellspacing="1" cellpadding="5" border="0" bgcolor="#cccccc" width="960" class="m_t7">
+            <tbody>
+                <?php include $shtml.'runcront_blognewupdate_200.shtml';?>
+            </tbody>
+        </table>
+        <?php include $footer;?>

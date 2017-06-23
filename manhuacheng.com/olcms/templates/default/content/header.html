@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="x-ua-compatible" content="ie=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+        <meta name="keywords" content="{$SEO['keyword']}">
+            <meta name="description" content="{$SEO['description']}">
+                {mobile_agent()}
+                <link href="{CSS_PATH}css.css" rel="stylesheet" type="text/css" />
+                <script type="text/javascript" src="{JS_PATH}jquery.min.js"></script>
+                <script type="text/javascript" src="{JS_PATH}jquery.sGallery.js"></script>
+                <script type="text/javascript" src="{JS_PATH}search_common.js"></script>
+                <script type="text/javascript" src="{JS_PATH}change_tag.js"></script>
+                <meta name="baidu_union_verify" content="795e9d13a40af895676c5bb907490857">
+                    <meta name="baidu-site-verification" content="WIAY03iL2t" />
+                </head>
+                <body>
+                    <div class="main">
+                        <div class="top">
+                            <div class="logo"><a href="/"><img src="{IMG_PATH}img/logo.gif" /></a></div>
+                            <div class="language">
+                                <div class="language_tit">
+                                    <!-- <a target="_blank" href="#">登陆</a>&nbsp;|&nbsp;<a target="_blank" href="#">免费注册</a>&nbsp;|&nbsp; --><a href="javascript:window.external.AddFavorite('http://www.manhuacheng.com/', '看漫画软件-漫画城')" target="_self">收藏本站</a>&nbsp;<a href="/index.php?m=feedback" target="_blank">用户反馈</a>
+                                </div>
+
+                                <div class="headinfo">
+                                    <div class="search_content">					
+                                        <form  type="get" name="searchform" id="searchform" action="/index.php">
+                                            <input type="hidden" value="search" name="m">
+                                                <input type="hidden" value="index" name="c">
+                                                    <input type="hidden" value="init" name="a">
+                                                        <input type="hidden" value="0" id="search_type" name="search_type">
+                                                            <!-- <input type="hidden" id="typeid" value="18" name="typeid"> -->
+                                                            <input type="text" value="{if empty($q)}请输入关键字{else}{$q}{/if}" onmouseover="javascript:if(this.value=='请输入关键字'){this.value='';this.select();}" name="q" id="q">
+
+                                                                <a id="search_submit" href="javascript:void(0)" onclick="document.getElementById('search_type').value='1';document.getElementById('searchform').submit();" style="right: 85px;">搜名称</a>
+                                                                <a id="search_submit" href="javascript:void(0)" onclick="document.getElementById('search_type').value='2';document.getElementById('searchform').submit();">搜作者</a>
+
+                                                                <!-- <a id="search_submit" href="javascript:;">搜作者</a> -->
+                                                                </form>
+                                                                </div>				
+                                                                <div class="">
+                                                                </div>
+                                                                </div>
+                                                                </div>
+                                                                <div style="background:none;" class="mainborder">
+                                                                    <div class="menu">    	
+                                                                        {pc:content action="category" catid="0" num="25" order="listorder ASC"}
+                                                                        <ul class="nav-site">
+                                                                            <li {if $_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/index.php'}class="on"{/if}><a href="{siteurl()}"><span>首页</span></a></li>
+                                                                            {loop $data $r}
+                                                                            <li {if $catid == $r[catid] || $top_catid == $r[catid] || $top_parentid == $r[catid]}class="on"{/if}><a href="{$r[url]}"><span>{$r[catname]}</span></a></li>
+                                                                            {/loop}
+                                                                        </ul>
+                                                                        {/pc}
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                                {if $catid==19 || $top_parentid ==19 || $top_catid ==19}
+                                                                <div class="nav_list">
+                                                                    {loop subcat(19) $v}
+                                                                    {php if($v['type']!=0) continue;}
+                                                                    <a href="{$v[url]}">{$v[catname]}</a>
+                                                                    {/loop}
+                                                                </div>
+                                                                {/if}
+
+                                                                <script>
+                                                                    function tosubmit(){
+                                                                        var myform=document.getElementByIdx("searchform");
+                                                                        myform.submit();
+                                                                    }
+                                                                </script>
+                                                                <!-- <div class="left c666" style="padding-top:5px;">您现在的位置：&nbsp;<a class="LinkPath" href="{siteurl()}">首页</a>{if !empty($catid) && empty($manhua)}&nbsp;&gt;&nbsp;{catpos($catid)}{/if}{if !empty($manhua)}&nbsp;&gt;&nbsp;{$manhua}{/if}
+                                                                -->
+                                                                
+                                                                

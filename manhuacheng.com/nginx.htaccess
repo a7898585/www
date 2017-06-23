@@ -1,0 +1,47 @@
+rewrite "^/download/(|\/)$" /index.php?m=content&c=index&a=show&catid=1&id=1 last;
+if (!-e $request_filename)
+{
+	rewrite "^/download/(|\/)$" /index.php?m=content&c=index&a=show&catid=1 last;
+	rewrite "^/news/([0-9]+)(|\/)$" /index.php?m=content&c=index&a=show&catid=2&id=$1 last;
+	rewrite "^/qna/([0-9]+)(|\/)$" /index.php?m=content&c=index&a=show&catid=5&id=$1 last;
+	rewrite "^/safeuninstall(|\/)$" /index.php?m=safeuninstall last;
+	rewrite "^/manhua(|\/)$" /index.php?m=content&c=index&a=lists&catdir=manhua last;
+	rewrite "^/manhua([0-9]+)(|\/)$" /index.php?m=content&c=index&a=show&catid=13&id=$1 last;
+	rewrite "^/manhuajia([0-9]+)(|\/)$" /index.php?m=content&c=index&a=lists&catdir=manhuajia&d=$1 last;
+        rewrite "^/dongman(|\/)$" /index.php?m=content&c=index&a=lists&catdir=dongman last;
+	rewrite "^/dongman([0-9]+)(|\/)$" /index.php?m=content&c=index&a=show&catid=32&modelid=17&id=$1 last;
+	rewrite "^/dongman([0-9]+)-([0-9]+)(|\/)$" /index.php?m=content&c=index&a=view&catid=32&modelid=17&id=$1&vid=$2 last;
+	rewrite "^/dongman([0-9]+)_([0-9]+)(|\/)$" /index.php?m=content&c=index&a=show&catid=32&modelid=17&id=$1&page=$2 last;
+
+	rewrite "^/diqu_([^/x00-xff]+)(|\/)$" /index.php?m=content&c=index&a=lists&catid=32&modelid=17&area=$1 last;
+	rewrite "^/diqu_([^/x00-xff]+)_([0-9]+)(|\/)$" /index.php?m=content&c=index&a=lists&catid=32&modelid=17&area=$1&page=$2 last;
+	
+	rewrite "^/dm_diqu([0-9]+)(|\/)$" /index.php?m=content&c=manhuaapi&a=dm_area&modelid=17&area=$1 last;
+	rewrite "^/mh_diqu([0-9]+)(|\/)$" /index.php?m=content&c=manhuaapi&a=mh_area&modelid=12&area=$1 last;
+
+	rewrite "^/dm_lianzai(|\/)$" /index.php?m=content&c=manhuaapi&a=dm_status&modelid=17&state=0 last;
+	rewrite "^/dm_wanjie(|\/)$" /index.php?m=content&c=manhuaapi&a=dm_status&modelid=17&state=1 last;
+	
+	rewrite "^/rank(|\/)$" /index.php?m=content&c=manhuaapi&a=rank&modelid=12 last;
+	rewrite "^/rank([0-9]+)(|\/)$" /index.php?m=content&c=manhuaapi&a=rank&modelid=12&type=$1&page=1 last;
+
+	rewrite "^/([a-zA-Z]+)_([0-9]+)(|\/)$" /index.php?m=content&c=index&a=lists&catdir=$1&page=$2 last;
+	rewrite "^/top(|\/)$" /index.php?m=content&c=manhuaapi&a=type&modelid=12&type=11 last;
+	rewrite "^/cartoondetail(|\/)$" /index.php?m=content&c=index&a=lists&catdir=manhua last;
+	rewrite "^/cartoondetail([0-9]+)(|\/)$" /index.php?m=content&c=index&a=show&catid=14&id=$1 last;
+	rewrite "^/zixun([0-9]+)(|\/)$" /index.php?m=content&c=index&a=show&catid=19&id=$1 last;
+	rewrite "^/jiebao([0-9]+)(|\/)$" /index.php?m=content&c=index&a=show&catid=55&id=$1 last;
+
+	
+	rewrite "^/index([A-Z]+)(|\/)$" /index.php?m=content&c=manhuaapi&a=charIndex&modelid=12&letter=$1&page=1 last;
+	rewrite "^/lianzai(|\/)$" /index.php?m=content&c=manhuaapi&a=status&modelid=12&state=0 last;
+	rewrite "^/wanjie(|\/)$" /index.php?m=content&c=manhuaapi&a=status&modelid=12&state=1 last;
+	rewrite "^/type([0-9]+)(|\/)$" /index.php?m=content&c=manhuaapi&a=type&modelid=12&type=$1&page=1 last;
+	rewrite "^/link(|\/)$" /index.php?m=link&c=index&a=list_type&type_id=14 last;
+
+	rewrite "^/invit(|\/)$" /index.php?m=content&c=MHapi&a=InvitedUserRegistration last;
+	rewrite "^/invit/([0-9]+)$" /index.php?m=content&c=MHapi&a=InvitedUserRegistration&u=$1 last;
+	rewrite "^/([a-z]+)/([0-9]+)/$" /index.php?m=content&c=index&a=show&catdir=$1&id=$2 last;
+	rewrite "^/([a-z]+)(|\/)$" /index.php?m=content&c=index&a=lists&catdir=$1 last;
+
+}

@@ -1,0 +1,10 @@
+<div class="RgtBar">
+    <dl class="FansLst" id="M1fans">
+        <dt><a href="javascript:;">我的粉丝</a><i>|</i><a href="javascript:;">我的关注</a></dt>
+    </dl>
+</div>
+<script language="javascript">
+    $(function(){
+        $("#M1fans").load("<?php echo BLOG_FANS_LIST.'/'.$bloginfo['DomainName']; ?>");    
+    })
+</script>

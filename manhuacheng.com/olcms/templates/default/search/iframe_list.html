@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+<meta name="keywords" content="{$SEO['keyword']}">
+<meta name="description" content="{$SEO['description']}">
+<link href="{CSS_PATH}css.css" rel="stylesheet" type="text/css" />
+
+<style>
+body{background:none;}
+.middle_div1_le {border:none}
+.middle_div1_le .xg_mh .xg_mh_txt .mh_copy {border:none}
+.middle_div1_le .xg_dm .xg_dm_txt .dm_copy {border:none}
+</style>
+</head>
+<body>
+
+<div class ="middle_div1_le" >
+
+{if $typeid == 18}
+	<div class ="xg_mh">
+		<div class ="xg_mh_txt">
+			<div class="mh_copy">
+				<ul>
+					{loop $data $i $r}
+					<li>
+						<a title="{strip_tags($r[title])}" href="manhua{$r[id]}" target="_blank"><img src="{$r[thumb]}" width="100" height="120"></a>
+						<a title="{strip_tags($r[title])}" href="manhua{$r[id]}" target="_blank">{$r[title]}{if $r['posids']}<img src="/statics/images/icon/small_elite.gif" title="推荐">{/if}</a>
+					</li>
+					{/loop}
+					{if empty($data)}未找到结果{/if}
+				</ul>
+			</div>
+		</div>  
+	</div>
+{elseif $typeid == 21}
+	<div class ="xg_dm">
+		<div class ="xg_dm_txt">
+			<div class="dm_copy">
+				<ul>
+					{loop $data $i $r}
+					<li>
+						<a title="{strip_tags($r[title])}" href="dongman{$r[id]}" target="_blank"><img src="{$r[thumb]}" width="120" height="90"></a>
+						<a title="{strip_tags($r[title])}" href="dongman{$r[id]}" target="_blank">{$r[title]}{if $r['posids']}<img src="/statics/images/icon/small_elite.gif" title="推荐">{/if}</a>
+					</li>
+					{/loop}	
+					{if empty($data)}未找到结果{/if}
+				</ul>
+			</div>
+
+		</div>  
+	</div>
+{elseif $typeid == 24}
+	<div class ="xg_dm">
+		<div class ="zx">
+			<div class ="zx_copy">
+				<div class="zx_copy_txt">
+					<ul>
+						{loop $data $i $r}
+						<li><a title="{strip_tags($r[title])}" href="{$r[url]}" target="_blank">{$r[title]}</a></li>
+						{/loop}
+						{if empty($data)}未找到结果{/if}
+					</ul>
+				</div>
+			</div>  
+		</div>
+	</div>
+{/if}
+
+	<div class="ad02 page" id="search_fy"> 
+		{$pages}
+	</div>
+</div>                       
+</body>
+</html>

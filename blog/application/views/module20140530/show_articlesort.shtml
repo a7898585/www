@@ -1,0 +1,24 @@
+<div rel="drag" id="Mod_ArticleSort" class="wzflsz-ztdiv">
+    <div id="Mod_ArticleSort_t" class="wzflsz-top01">
+        <div class="wzflsz-top02"></div>
+        <div class="wzflsz-top03">文章分类</div>
+        <?php if(isset($dragable) && $dragable==1)
+        {?>
+        <div class="gjsz01"><a href="#" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_ArticleSort_td3"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz12.gif"></a><a href="#" onclick="clkmenu(this.id,2);return false;" style="display: none;" title="展开" id="Mod_ArticleSort_td4"><img border="0" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz15.gif"></a><a href="#" onclick="removemod(this.id);return false;" title="删除" id="Mod_ArticleSort_td2"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz14.gif"></a></div>
+        <div style="cursor: move;" id="Mod_ArticleSort_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="gjsz02"><img height="16" width="33" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz11.gif"></div>
+        <?php
+        }?>
+    </div>
+    <div class="wzflsz">
+        <div class="modbox">
+            <div class="wzflsz00" id="blogarticlesort">
+                数据加载中...
+            </div>			
+        </div>
+    </div>
+</div>
+<script language="javascript">
+    $(function(){
+        $('#blogarticlesort').load("<?php echo $baseurl.'/ajaxgetarticlesortstat/'.$bloginfo['MemberID'].'?do='.$bloginfo['DomainName'];?>");
+    })
+</script>

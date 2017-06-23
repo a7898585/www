@@ -1,0 +1,329 @@
+<?php include $reperonalhead;?>
+<!--顶部start-->
+<?php  include $devpersonallogin; ?>	
+<!--顶部end-->
+
+
+<!--内容-->
+<div class="Wrap Cf Mt15">
+    <!--左-->
+    <div class="MaLft">
+        <!--编辑框-->
+        <div class="EditBox indMain" id="editBox">
+            <?php include $tmp_editor;?>
+        </div>
+        <!--end 编辑框-->
+
+        <div id="newlistBtn" style="display:none;" >
+            <a href="" class="notInd" style="display:none;">有<span class="coSmart"><strong><?php echo $count; ?></strong></span>条内容，点击查看!</a>
+        </div>
+
+
+        <!--存我的首页所有显示的articleid-->
+        <input type="hidden"  id="allMyArtid" value="" />
+        <!--存我的首页所有显示的articleid-->
+
+
+        <div id="artlistMain">
+            正在为您加载数据...	
+        </div>
+
+        <!--正在加载-->
+        <div class="LoadingBox" style="display:none;">正在加载更多 请稍后…</div>
+        <!--end 正在加载-->        
+    </div>
+    <!--end 左-->
+    <!--右-->
+    <div class="MaRgt">
+
+        <!--公告-->
+        <?php include $showAffiche; ?>
+        <!--end 公告-->
+        <!--推荐文章-->
+        <?php include $recommend; ?>
+        <!--end 推荐文章-->
+        <!--我的标签-->
+        <?php include $tmp_taglist; ?>
+        <!--end 我的标签-->    
+
+        <!--我的粉丝-->
+        <?php include $blocks['fanslist']; ?>
+        <!--end 我的粉丝-->
+        <!--访问统计-->
+        <?php include $showStat; ?>
+        <!--end 访问统计-->
+        <!--最近访客-->
+        <?php include $show_renewvisitor; ?>
+        <!--end 最近访客-->
+        <!--最新评论-->
+        <?php include $show_newestcomment; ?>
+        <!--end 最新评论-->
+    </div>
+    <!--end 右-->
+</div>
+<!--end 内容-->
+
+<!--============= 弹窗 ================-->
+<!--删除标签后提示框-->
+
+<div id="iframeSrc" class="HandIn PlusSucPop W200" >
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <iframe id="popupIframe" name="iFrame1" width="100%"  height="260px" frameborder="0" scrolling="no"  src=""></iframe>
+</div>
+
+<div id="DeterminePop" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">是否确认删除该标签在前台的展示？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="deltag();Dialog.Close();" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">取消</a></p>
+    </div>
+</div>
+<!--end 删除标签后提示框-->
+<!--删除博文后提示框-->
+<div class="DeterminePop" id="DelBlogPop">
+    <a class="Close" href="javascript:;" onClick="Dialog.Close();"></a>
+    <p class="Tip">是否确认删除这篇文章？</p>
+    <p class="BtnBox"><a class="SubmitBtn" href="#">确认</a><a class="CancelBtn" href="javascript:;" onClick="Dialog.Close();">取消</a></p>
+</div>
+<!--end -删除博文后提示框-->
+
+<div class="DeterminePop" id="inloading">
+    <a class="Close" href="javascript:;" onClick="Dialog.Close();"></a>
+    <p class="Tip">加载中...</p>
+    <p class="BtnBox"></p>
+</div>
+
+
+<input type="hidden" id="delArtId" />
+<input type="hidden" id="deldomainname" />
+<div id="TMDelete" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp">您确定要删除这条信息？</p>
+        <p class="Mt10 Yzxxp"><a href="javascript:;" onClick="delSure();" class="Mr10 CoWht BtnA">确认</a><a href="javascript:;" class="Co666 BtnB" onClick="Dialog.Close();">返回</a></p>
+    </div>
+</div>
+
+<div id="TMDeleteSuccess" class="HandIn3 PlusSucPop W200">
+    <h3 class="Pl20"><a class="Close" href="javascript:;" onclick="Dialog.Close();"></a></h3>
+    <div class="P20 Bgdfff Txtcntr">
+        <p class="CoBlack Yzxxp" id="popupTip">删除成功</p>
+    </div>
+</div>
+
+<!--============= end 弹窗 ================-->  
+<script src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Tabs.js,Cm/Js/Dialog.js,ui/Js/Select/Select.js,Cm/Js/Cleaner.js" type="text/javascript"></script>
+<script type="text/javascript">
+    //new Tabs("C1fans");	
+    //Selects('TitleCate','BlogCate','SlctFrst');
+    //Cleaner("Ctitle","Ccont","Cnum");
+</script> 
+<script type="text/javascript" src="http://hs.cnfol.com/f=Cm/Js/Base.js,Cm/Js/Menus.js,ua/js/Public/Base64.js,ua/js/Public/Login.js"></script>
+<div id="ajaxdiv"></div>
+<div id="ajaxdiv2"></div>
+<div id="ajaxdiv3"></div>
+<div id="transshipmentdiv"></div>
+<form id="action_form" name="action_form" method="post" target="_self" action="">
+    <input type="hidden" name="act" id="act" value="edit" />
+    <input type="hidden" name="articleid" id="articleid" />
+</form>
+<input type="hidden" name="scrolltopflag" id="scrolltopflag" value="2" />
+<input type="hidden" name="currentpage" id="currentpage" value="2" />
+
+<input type="hidden" name="newart" id="newart" value="0" />
+
+
+<script type="text/javascript">
+
+    var baseurl="<?php echo $baseurl; ?>";
+    var ding1 = "<?php echo $baseurl;?>/shtml/hotvotearticle,24.html";
+
+    $(document).ready(function(){
+        $('#artlistMain').load("<?php echo(config_item('base_url')); ?>/index.php/news/newlist?limit=<?php echo($limit); ?>&page=<?php echo($page); ?>&type=index&currentid=<?php echo($bloginfo['UserID']); ?>&domainname=<?php echo($bloginfo['DomainName']); ?>&rtime=2&r="+new Date().getTime());
+	
+        $("#M1fans").load("<?php echo BLOG_FANS_LIST.'/'.$bloginfo['DomainName']; ?>");
+        
+	
+        $(window).bind("scroll",function() {
+		
+            // 然后判断窗口的滚动条是否接近页面底部，这里的20可以自定义
+            if ($(document).scrollTop() + $(window).height() > $(document).height() - 20) {
+        	
+                if($('#scrolltopflag').val()=='2')
+                {
+                    $('#scrolltopflag').val('1');
+                    $('.LoadingBox').css('display','');
+                	
+                    //$('#moreartlistMain').load("http://blog.cnfol.com/index.php/news/morenewlist?limit=<?php echo($limit); ?>&page=<?php echo($page+1); ?>&type=index&currentid=<?php echo($bloginfo['UserID']); ?>&domainname=<?php echo($bloginfo['DomainName']); ?>&showpage=1&r="+new Date().getTime());
+                    var page=$('#currentpage').val();
+                	
+                    $.getJSON(baseurl+"/index.php/news/morenewlist?limit=<?php echo($limit); ?>&page="+page+"&currentid=<?php echo($bloginfo['UserID']); ?>&domainname=<?php echo($bloginfo['DomainName']); ?>&showpage=1&r="+new Date().getTime(), function(json) {
+                        if(json.data != ''){
+                        	
+                            $('#artlistMain').append(json.data);
+                        }
+                    });
+                
+                }
+            }
+        })
+    });
+
+
+    
+    
+    setInterval(function(){
+	
+        if($('#newart').val()=='0')//增加文章时暂时不定时取动态
+        {
+    	
+            $.getJSON(baseurl+'/index.php/mybloglist/getMsg?domainname=<?php echo($bloginfo["DomainName"]); ?>&r='+new Date().getTime(), function(json) {
+                if(json.dyData != ''){
+                    //$('#newlistBtn').html(json.dyData);
+                    //$('.notInd').click();
+                
+                    $.get(json.dyData+"&r="+new Date().getTime(), function(result){
+					
+					
+                        //避免同一篇文章重复显示
+                        var artids=$('#allMyArtid').val()+',';
+                        var showid=result.artid;
+        		    
+                        showid=showid.split(',');
+        		   
+                        for(i=0;i<showid.length;i++)
+                        {
+        				
+                            if(artids.indexOf(','+showid[i]+',')>=0)
+                            {
+                                return;
+                            }
+                        }
+                        //避免同一篇文章重复显示
+        			
+                        if($('#newart').val()=='0')//增加文章时暂时不定时取动态
+                        {
+                            if(result.data!=''){
+                                addmyblog(result.data,result.num);
+                                //避免同一篇文章重复显示
+                                $('#allMyArtid').val($('#allMyArtid').val()+','+result.artid);
+                                //避免同一篇文章重复显示
+        				
+                            }
+                            else
+                            {
+        				
+                            }
+                        }
+                    }, 'json');
+                
+                
+                }else{
+                
+                }
+            });
+        }
+    },30000);
+    
+
+    function afterSubmit()
+    {
+    	
+        $('#newart').val('1');
+    	
+        $.getJSON(baseurl+'/index.php/mybloglist/getMsg?domainname=<?php echo($bloginfo["DomainName"]); ?>&r='+new Date().getTime(), function(json) {
+        	
+        	
+            if(json.dyData == '')
+            {
+                json.dyData=baseurl+'/index.php/news/newlist?limit=1&domainname=<?php echo($bloginfo["DomainName"]); ?>&rtime=1';
+            }
+            if(json.dyData != ''){
+            	
+                //$('#newlistBtn').html(json.dyData);
+                //$('.notInd').click();
+                
+                $.get(json.dyData+"&my=1&r="+new Date().getTime(), function(result){
+        			
+                    //避免同一篇文章重复显示
+                    var artids=$('#allMyArtid').val()+',';
+                    var showid=result.artid;
+        		    
+                    showid=showid.split(',');
+        		    
+                    for(i=0;i<showid.length;i++)
+                    {
+        				
+                        if(artids.indexOf(','+showid[i]+',')>=0)
+                        {
+        					
+                            $('#newart').val('0');
+                            return;
+                        }
+                    }
+                    //避免同一篇文章重复显示
+        			
+        			
+                    if(result.data!=''){
+                        addmyblog(result.data,result.num);
+        				
+                        //避免同一篇文章重复显示
+                        $('#allMyArtid').val($('#allMyArtid').val()+','+result.artid);
+                        //避免同一篇文章重复显示
+        				
+                    } else{
+        				
+                    }
+                }, 'json');
+                
+                
+                
+                $('#newart').val('0');
+            }
+        });
+    }
+   
+ 
+   
+</script>  
+
+<!--点击统计-->
+<script type="text/javascript" src="<?php echo $viewurl;?>"></script>
+<script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/forArticle.js" ></script><!-- 上线后改回 -->
+
+<!--
+<script type="text/javascript">
+$(document).ready(function(){
+                var passUrl="<?php echo(config_item('pass_base_url')); ?>";
+                
+                $.post(passUrl,function(result){
+            //alert(result.data);
+        },'json');
+                
+        
+});
+</script>
+-->
+
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+    _atrk_opts = { atrk_acct:"miaPi1a8Dy00w2", domain:"cnfol.com",dynamic: true};
+    (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=miaPi1a8Dy00w2" style="display:none" height="1" width="1" alt="" /></noscript>
+<!-- End Alexa Certify Javascript -->
+
+<!--百度统计-->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc378c4854ec370c1c8438f72e19b7170' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- End of LogMicroscope Code --> 
+<DIV style="DISPLAY: none"><!-- START AIYA Site Stat. -->
+    <SCRIPT language=JavaScript type="text/javascript" src="http://s.cnfolimg.com/v5.0/js/stat01-min.js"></SCRIPT>
+    <NOSCRIPT><img src="http://logs.cnfol.com/a?ci=cnfol" alt=""></NOSCRIPT><!-- END AIYA Site Stat. -->
+</DIV> 
+
+</body>
+</html>

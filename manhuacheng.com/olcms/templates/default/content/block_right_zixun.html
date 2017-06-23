@@ -1,0 +1,130 @@
+<div class="middle_div1_ri">
+    <div class="phb">
+        <div class="rs_dm_tit">
+            <h3>排行榜</h3>
+        </div>
+        <div class="phb_txt">
+            <ul>
+                {pc:content action="lists" catid="$top_parentid" num="10" order="views DESC"}
+                {php $i=1;}
+                {loop $data $r}
+                {if $i < 4}
+                <li>
+                    <i class="first2">{$i}</i>
+                    <a href="/zixun{$r['id']}/" title="{$r['title']}" target="_blank" class="phb_txtc">{str_cut($r['title'],40,'')}</a>
+                    <span class="phb_txt_hs">{$r['views']}</span>
+                </li> 
+                {else}
+                <li>
+                    <i class="first3">{$i}</i>
+                    <a href="/zixun{$r['id']}/" title="{$r['title']}" target="_blank" class="phb_txtc">{str_cut($r['title'],40,'')}</a>
+                    <span class="phb_txt_hs">{$r['views']}</span>
+                </li> 
+                {/if}
+                {if $i == 1}
+                <li>
+                    <div class="phb_img">
+                        <a title="{$r['title']}" target="_blank" href="/zixun{$r['id']}/"><img src="{thumb($r['thumb'],110,80)}" /></a>
+                        <div class="phb_img_kj"><span>NO.{$i}</span></div>
+                    </div>								
+                </li>
+                {/if}
+                {php $i++;}
+                {/loop}
+                {/pc}
+            </ul>                          
+        </div>
+    </div>
+
+    <div style="margin-bottom:10px;">{GetAd(3)}</div>
+    <!-- <div class="phb2">
+            <div class="rs_dm_tit">
+                    <h3>热门标签</h3>
+            </div>
+<div class="phb_txt2">
+<a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c2">雷人</a>  
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c1">雷人</a> 
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c2">雷人</a> 
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c2">雷人</a>  
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c1">雷人</a> 
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c2">雷人</a> 
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c2">雷人</a>  
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c1">雷人</a> 
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c2">雷人</a> 
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c2">雷人</a>  
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c1">雷人</a> 
+                    <a href="#" class="pt2c1">感动</a>
+                <a href="#" class="pt2c2">雷人</a>                 
+</div>
+</div> -->
+
+    <div class="phb2" style="margin-bottom:10px;">
+        <div class="rs_dm_tit">
+            <h3>热门动画</h3>
+        </div>
+        <div class="phb_txt">
+            <ul class="phb_txt_bj">
+                {pc:content action="lists" catid="32" num="10" order="views DESC"}
+                {php $i=1;}
+                {loop $data $r}
+                <li>
+                    <i class="{if $i < 4 }first2{else}first3{/if}">{$i}</i>
+                    <a href="/dongman{$r['id']}" title="{$r['title']}" target="_blank" class="phb_txtc">{str_cut($r['title'],40,'')}</a>
+                    <span class="phb_txt_hs">{$r['views']}</span>
+                </li>
+                {php $i++}
+                {/loop}
+                {/pc}
+
+            </ul>                          
+        </div>
+    </div>
+    <div style="margin-bottom:10px;">{GetAd(3)}</div>
+    <div class="xh_man">
+        <div class="rs_dm_tit">
+            <h3>动漫推荐</h3>
+        </div>
+        <div class="mhtj">
+            <ul>
+                {pc:content action="position" posid="16" order="updatetime DESC" sort="desc" num="6"}
+                {loop $data $r}
+                <li>
+                    <a title="{$r['title']}" target="_blank" href="/dongman{$r['id']}"><img width=98 height=112 src="{$r['thumb']}" /></a>
+                    <div class="mhtj_c"><a title="{$r['title']}" target="_blank" href="/dongman{$r['id']}">{str_cut($r[title],22,'')}</a></div>
+                </li>
+                {/loop}
+                {/pc}
+            </ul>
+        </div>
+    </div>
+
+    <div class="xh_man">
+        <div class="rs_dm_tit">
+            <h3>漫画推荐</h3>
+        </div>
+        <div class="xh_man_txt">
+            <ul>
+                {pc:content action="position" posid="14" order="updatetime DESC" sort="desc" num="6"}
+                {loop $data $r}
+                <li>
+                    <a href="/manhua{$r[id]}" title ="{$r[title]}" target="_blank"><img width=80 height=115 src="{$r[thumb]}"></a>
+                    <a href="/manhua{$r[id]}" title ="{$r[title]}" target="_blank">{str_cut($r[title],15,'')}</a>
+                </li>
+                {/loop}
+                {/pc}
+
+            </ul>
+        </div>
+    </div>
+</div>

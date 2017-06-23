@@ -1,0 +1,57 @@
+{__NOLAYOUT__}
+<form action="__SELF__" class="am-form am-text-left" method="post" data-am-validator>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">名称</div>
+        <div class="am-u-sm-9">
+            <input type="text" class="am-input-sm" name="title" value="{$info.title}" placeholder="名称" required/>
+        </div>
+    </div>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">展示方式</div>
+        <div class="am-u-sm-9">
+            <select class="am-input-sm" name="show_type">
+                <option value="1" <eq name="info.show_type" value="1"> selected</eq> >新闻</option>
+                <option value="2" <eq name="info.show_type" value="2"> selected</eq>>美图</option>
+                <option value="3" <eq name="info.show_type" value="3"> selected</eq>>笑话</option>
+            </select>
+        </div>
+    </div>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">排序</div>
+        <div class="am-u-sm-9">
+            <input type="text" class="am-input-sm" name="order_id" placeholder="排序,从大到小" value="{$info.order_id}"/>
+        </div>
+    </div>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">显示状态</div>
+        <div class="am-u-sm-9">
+            <div class="am-btn-group" data-am-button>
+                <label class="am-btn am-btn-default am-btn-xs <eq name='info.is_show' value='1'> am-active</eq>">
+                    <input type="radio" name="is_show" value="1" id="option1"  <eq name='info.is_show' value='1'> checked="true"</eq>> 正常
+                </label>
+                <label class="am-btn am-btn-default am-btn-xs <eq name='info.is_show' value='0'> am-active</eq>">
+                    <input type="radio" name="is_show" value="0"  id="option2" <eq name='info.is_show' value='0'> checked="true"</eq>> 不显示
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-3 am-text-right">默认状态</div>
+        <div class="am-u-sm-9">
+            <div class="am-btn-group" data-am-button>
+                <label class="am-btn am-btn-default am-btn-xs <eq name='info.is_default' value='1'> am-active</eq>">
+                    <input type="radio" name="is_default" value="1" id="option4" <eq name='info.is_default' value='1'> checked="true"</eq>> 是
+                </label>
+                <label class="am-btn am-btn-default am-btn-xs <eq name='info.is_default' value='0'> am-active</eq>">
+                    <input type="radio" name="is_default" value="0" id="option3" <eq name='info.is_default' value='0'> checked="true"</eq>> 否
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="am-g am-margin-top ">
+        <div class="am-u-sm-10 ">
+            <button type="submit" class="am-btn am-btn-primary am-center" style="width: 60%;">提交</button>
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,891 @@
+{template "content","header"}
+<!--main-->
+{php $where = "status = '99' AND type_id NOT IN(".dimplode(dexplode(NOT_ALLOW)).")";}	
+{php $footer_txt = "漫画城网为您提供在线漫画阅读、动漫观看，还有最新的漫画资讯、漫画捷报和最齐全的漫画排行榜，并且还为您提供漫画下载器——漫画城软件的下载，是您轻松快速体验高清漫画、动漫的最好选择。";}
+{php $m= getboxname('12','type_id'); } 
+{php $region= getboxname('12','region');} 
+	<script src="{JS_PATH}dww3.min.js"></script>
+    <div class="content">
+    	<div class="home_banner">
+        	<div class="home_banner_le">
+				<!-- 幻灯片 -->
+				<div id="slider" class="mod-slide-s4">
+					{pc:content action="lists" catid="75" order="updatetime DESC" num="4" cache="3600" }
+					<ul class="mod-slide-content J_content">
+						{php $i = 1;}
+						{loop $data $r}
+							<li {if $i > 1}style="display: none;"{else}style="display: block;"{/if}>
+							<a href="{$r['url']}" title="{$r['title']}" target="_blank"><img alt="{$r['title']}" src="{$r['thumb']}" class="big_img"></a>
+							<div><h2>{$r['title']}</h2>{str_cut($r[description],80,'...')}</div>
+						</li>
+						{php $i++;}
+						{/loop}
+					</ul>
+					<ul class="mod-slide-trigger J_nav">
+						{php $i = 1;}
+						{loop $data $r}
+						<li {if $i == 1}class="hover"{/if}>
+							<a href="{$r['url']}" title="{$r['title']}" target="_blank"><img src="{$r['thumb']}" class="thumb_img"></a>
+						</li>
+						{php $i++;}
+						{/loop}
+					</ul>
+					{/pc}
+				</div>
+				<script>
+					KISSDW.slide("#slider");
+				</script>
+				<!-- 幻灯片end -->
+                <!--原生广告-->
+                
+                <!--原生广告-->
+                
+			</div>
+			<div class="home_banner_ri">
+            	<div class="xl">
+                	<div class="xl_t">
+                    	<h3><a target="_blank" href="/manhua">漫画城  &gt;&gt;</a></h3>
+                        <p class="rm">
+                        	<a href="/lianzai" target="_blank" style="color:#FF0000;">热门连载</a>	<a href="/wanjie" target="_blank" style="color:#FF0000;">完结漫画</a>	
+							{loop $m $n $l}
+								{if !in_array($n,dexplode(NOT_ALLOW))}
+									<a href="/type{$n}/" target="_blank">{$l}</a>
+								{/if}
+							{/loop}
+                        </p>
+                        <p class="dq">地区：
+							{loop $region $n $l}
+								<a href="/mh_diqu{$n}/" target="_blank">{$l}</a>
+							{/loop}
+                        </p>
+                        <p class="zm">字母索引：
+                        	{php $Q=NULL;}
+							{php for ($i=65; $i<=90; $i++) $Q[]=chr($i);}
+							{loop $Q $r}
+								<a href="/index{$r}/">{$r}</a>
+							{/loop}
+                        </p>
+                    </div>
+                    <div class="xl_t">
+                    	<h3><a target="_blank" href="/dongman">动漫城  &gt;&gt;</a></h3>
+                        <p class="rm1">
+							{pc:content action="category" catid="32" order="listorder ASC"}
+							  {loop $data $r}
+								<a href="{$r[url]}" target="_blank">{$r[catname]}</a>
+							  {/loop}
+							{/pc}
+                        </p>
+                        <p class="dq">
+							{php $sql = "select linkageid,name from tt_linkage where keyid=3360 order by listorder desc";}
+							{pc:get sql="$sql" cache="3600" }
+								{loop $data $r}
+									<a target="_blank" href="/dm_diqu{$r[linkageid]}">{$r[name]}</a>
+								{/loop}
+							 {/pc}
+                        </p>
+                    </div>
+                </div><!--原生广告-->
+            
+		    <!--原生广告-->
+   			</div>
+            
+			</div>
+        </div>
+        <div class="clear1"></div>
+        <div class="zuijin">
+        	<div class="zuijin_tit">
+            	<i class="icon"></i>
+            	<h3>最近更新</h3>
+                <span><a href="/manhua" target="_blank">更多>></a></span> 
+                <ul>
+					{loop $m $n $l}
+						{if !in_array($n,dexplode(NOT_ALLOW))}
+							<li><a href="/type{$n}/" target="_blank">{$l}</a></li>
+						{/if}
+					{/loop}
+                </ul>    
+                           
+            </div>
+            <div class="zuijin_txt">
+            	<ul class="mod-pic">
+					{php $sql = "select cd.id,c.title as c_title,c.thumb,cd.title,cd.manhuaid from (select * from tt_CartoonDetail where manhuaid != 0 order by id desc limit 150) as cd LEFT JOIN tt_Cartoon as c ON cd.manhuaid = c.id where cd.catid = '14'  AND c.status = '99' AND c.type_id NOT IN(".dimplode(dexplode(NOT_ALLOW)).")";}
+					{pc:get sql="$sql" num="7" cache="3600" }
+					   {loop $data $r}
+						<li><a target="_blank" title="{$r['c_title']}-{$r['title']}" href="/cartoondetail{$r[id]}"><img width="105" height="150" src="{$r[thumb]}"><span>{$r['title']}</span><em>{str_cut($r[c_title],25,'')}</em></a></li>
+					   {/loop}
+					{/pc}
+                   
+                </ul>
+            </div>
+        </div>
+        <div class="middle_div">
+        	<div class="middle_div_le">
+                <div class="today">
+                	<div  class="today_tit">
+                    	 <span><a href="/manhua">更多>></a></span>
+                    	<ul id="tab_a">                
+                        	<li onmouseover="secBoard('tab_a','infolist_a',1,'on','');" class="on"><strong>今日漫画</strong></li> <li onmouseover="secBoard('tab_a','infolist_a',2,'on','');" class=""><strong>最新章节</strong></li>  
+                                 
+                        </ul>
+                    </div>
+                    <div class="today_txt">
+                    	<ul id="infolist_a_1" style="display:block">
+						{pc:content action="position" posid="14" order="updatetime DESC" sort="desc" num="10"}
+						{loop $data $r}
+                       		<li>
+                            	<a target="_blank" title="{$r['title']}" href="/manhua{$r[id]}"><img  width='115' height='130' src="{$r[thumb]}"></a>
+                                <a target="_blank"  title="{$r['title']}" href="/manhua{$r[id]}">{str_cut($r[title],25,'')}</a>
+                            </li>
+						{/loop}
+						{/pc}
+                        </ul>
+                        <ul id="infolist_a_2" style="display:none">
+					{pc:get sql="$sql" num="10" cache="3600" }
+					   {loop $data $r}
+						<li>
+                            <a target="_blank"  title="{$r['c_title']}-{$r['title']}"  href="/cartoondetail{$r[id]}"><img width='115' height='130' src="{$r[thumb]}"></a>
+                            <a target="_blank"  title="{$r['c_title']}-{$r['title']}"  href="/cartoondetail{$r[id]}">{str_cut($r[c_title],25,'')}</a>
+                        </li>
+					   {/loop}
+					{/pc}
+						</ul>
+                    </div>
+                </div>
+                <div class="today1">
+                	<div class="today1_tit">
+                    	<span><a href="/manhua">更多>></a></span>  
+                    	<ul id= "tab_b">                
+                        	<li onmouseover="secBoard('tab_b','infolist_b',1,'on','');" class="on"><strong>完结漫画</strong></li>                
+							<li onmouseover="secBoard('tab_b','infolist_b',2,'on','');" ><strong>连载漫画</strong></li>     
+                        </ul>
+                    </div>
+                    <div class="today1_txt">
+						<div id="infolist_b_1" style="display:block" >
+							<ul class="today1_txt1">
+							{php $where_wanjie = $where." AND state = 1";}		
+							{pc:content action="table_list" table="Cartoon" where="$where_wanjie" order="updatetime DESC" num="15" cache="3600" }
+							{php $i = 1;}
+							  {loop $data $r}
+								{if $i <= 5}
+								<li>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+								</li>
+								{/if}
+							{if $i == 5}</ul><ul class="today1_txt2">{/if}
+								{if $i > 5}
+								<li><span>{date('Y-m-d',$r[updatetime])}</span><a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],50,'')}</a></li>
+								{/if}
+							 {php $i++;}
+							 {/loop}
+							{/pc}
+							</ul>
+						</div>
+						<div id="infolist_b_2" style="display:none">
+							<ul class="today1_txt1">
+							{php $where_lianzai = $where." AND state = 0";}		
+							{pc:content action="table_list" table="Cartoon" where="$where_lianzai" order="updatetime DESC" num="15" cache="3600" }
+							{php $i = 1;}
+							  {loop $data $r}
+								{if $i <= 5}
+								<li>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+								</li>
+								{/if}
+							{if $i == 5}</ul><ul class="today1_txt2">{/if}
+								{if $i > 5}
+								<li><span>{date('Y-m-d',$r[updatetime])}</span><a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],50,'')}</a></li>
+								{/if}
+							 {php $i++;}
+							 {/loop}
+							{/pc}
+							</ul>
+						</div>
+
+                    </div>
+                </div>
+
+                <!-- <div class="today1">
+                	<div class="today1_tit">
+                    	<span><a href="/manhua">更多>></a></span>  
+                    	<ul id= "tab_b">                
+                        	<li onmouseover="secBoard('tab_c','infolist_c',1,'on','');" class="on"><strong>国产动漫</strong></li>                
+							<li onmouseover="secBoard('tab_c','infolist_c',2,'on','');" ><strong>港台动漫</strong></li>  
+							<li onmouseover="secBoard('tab_c','infolist_c',3,'on','');" ><strong>日韩动漫</strong></li>                
+							<li onmouseover="secBoard('tab_c','infolist_c',4,'on','');" ><strong>欧美动漫</strong></li>   
+                        </ul>
+                    </div>
+                    <div class="today1_txt">
+						<div id="infolist_c_1" style="display:block" >
+							<ul class="today1_txt1">
+							{php $where_wanjie = $where." AND state = 1";}		
+							{pc:content action="table_list" table="Cartoon" where="$where_wanjie" order="updatetime DESC" num="15" cache="3600" }
+							{php $i = 1;}
+							  {loop $data $r}
+								{if $i <= 5}
+								<li>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+								</li>
+								{/if}
+							{if $i == 5}</ul><ul class="today1_txt2">{/if}
+								{if $i > 5}
+								<li><span>{date('Y-m-d',$r[updatetime])}</span><a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],50,'')}</a></li>
+								{/if}
+							 {php $i++;}
+							 {/loop}
+							{/pc}
+							</ul>
+						</div>
+						<div id="infolist_c_2" style="display:none">
+							<ul class="today1_txt1">
+							{php $where_lianzai = $where." AND state = 0";}		
+							{pc:content action="table_list" table="Cartoon" where="$where_lianzai" order="updatetime DESC" num="15" cache="3600" }
+							{php $i = 1;}
+							  {loop $data $r}
+								{if $i <= 5}
+								<li>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+								</li>
+								{/if}
+							{if $i == 5}</ul><ul class="today1_txt2">{/if}
+								{if $i > 5}
+								<li><span>{date('Y-m-d',$r[updatetime])}</span><a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],50,'')}</a></li>
+								{/if}
+							 {php $i++;}
+							 {/loop}
+							{/pc}
+							</ul>
+						</div>
+                        <div id="infolist_c_3" style="display:none" >
+							<ul class="today1_txt1">
+							{php $where_wanjie = $where." AND state = 1";}		
+							{pc:content action="table_list" table="Cartoon" where="$where_wanjie" order="updatetime DESC" num="15" cache="3600" }
+							{php $i = 1;}
+							  {loop $data $r}
+								{if $i <= 5}
+								<li>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+								</li>
+								{/if}
+							{if $i == 5}</ul><ul class="today1_txt2">{/if}
+								{if $i > 5}
+								<li><span>{date('Y-m-d',$r[updatetime])}</span><a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],50,'')}</a></li>
+								{/if}
+							 {php $i++;}
+							 {/loop}
+							{/pc}
+							</ul>
+						</div>
+						<div id="infolist_c_4" style="display:none">
+							<ul class="today1_txt1">
+							{php $where_lianzai = $where." AND state = 0";}		
+							{pc:content action="table_list" table="Cartoon" where="$where_lianzai" order="updatetime DESC" num="15" cache="3600" }
+							{php $i = 1;}
+							  {loop $data $r}
+								{if $i <= 5}
+								<li>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+									<a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+								</li>
+								{/if}
+							{if $i == 5}</ul><ul class="today1_txt2">{/if}
+								{if $i > 5}
+								<li><span>{date('Y-m-d',$r[updatetime])}</span><a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],50,'')}</a></li>
+								{/if}
+							 {php $i++;}
+							 {/loop}
+							{/pc}
+							</ul>
+						</div>
+                    </div>
+                </div> -->
+            <div class="dongman">
+                	<div class="dongman_tit">
+                    	<span><a href="/dongman">更多&gt;&gt;</a></span>  
+                    	<ul id ="tab_c">                
+                        	<li class="on" onmouseover="secBoard('tab_c','infolist_c',1,'on','');"><strong>国产动漫</strong></li>                
+							<li onmouseover="secBoard('tab_c','infolist_c',2,'on','');"><strong>港台动漫</strong></li>                
+							<li onmouseover="secBoard('tab_c','infolist_c',3,'on','');"><strong>日韩动漫</strong></li>                
+							<li onmouseover="secBoard('tab_c','infolist_c',4,'on','');"><strong>欧美动漫</strong></li>  
+                        </ul>
+                    </div>
+                    <div class="dongman_txt">
+                    	<div id="infolist_c_1" style="display:block">
+	                    	<ul class="dongman_txt1">
+							{php $where1 = " status = 99 AND CartoonArea = 3364";}
+	                        {pc:content action="table_list" table="dongman" where="$where1" order="updatetime DESC" num="5" cache="3600" }
+							  {loop $data $r}
+								<li>
+									<a href="/dongman{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+									<a href="/dongman{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+								</li>
+							  {/loop}
+							{/pc}
+	                        </ul>
+	                        <ul class="today1_txt2">{/if}
+									{if $i > 5}
+									<li><span>{date('Y-m-d',$r[updatetime])}</span><a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],50,'')}</a></li>
+									{/if}
+								 {php $i++;}
+								 {/loop}
+								{/pc}
+								</ul>
+						</div>
+						<div id="infolist_c_2" style="display:none">
+							<ul class="dongman_txt1" id="infolist_c_2" style="display:none">
+							{php $where1 = " status = 99 AND CartoonArea = 3362";}
+	                        {pc:content action="table_list" table="dongman" where="$where1" order="updatetime DESC" num="5" cache="3600" }
+							  {loop $data $r}
+								<li>
+									<a href="/dongman{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+									<a href="/dongman{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+								</li>
+							  {/loop}
+							{/pc}
+	                        </ul>
+                        	<ul class="today1_txt2">{/if}
+									{if $i > 5}
+									<li><span>{date('Y-m-d',$r[updatetime])}</span><a href="/manhua{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],50,'')}</a></li>
+									{/if}
+								 {php $i++;}
+								 {/loop}
+								{/pc}
+								</ul>
+						</div>
+						
+						<ul class="dongman_txt1" id="infolist_c_3" style="display:none">
+						{php $where1 = " status = 99 AND CartoonArea = 3361";}
+                        {pc:content action="table_list" table="dongman" where="$where1" order="updatetime DESC" num="5" cache="3600" }
+						  {loop $data $r}
+							<li>
+								<a href="/dongman{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+								<a href="/dongman{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+							</li>
+						  {/loop}
+						{/pc}
+                        </ul>
+						<ul class="dongman_txt1" id="infolist_c_4" style="display:none">
+						{php $where1 = " status = 99 AND CartoonArea = 3363";}
+                        {pc:content action="table_list" table="dongman" where="$where1" order="updatetime DESC" num="5" cache="3600" }
+						  {loop $data $r}
+							<li>
+								<a href="/dongman{$r[id]}" title = '{$r[title]}' target="_blank"><img width='115' height='130' src="{$r[thumb]}"/></a>
+								<a href="/dongman{$r[id]}" title = '{$r[title]}' target="_blank">{str_cut($r[title],25,'')}</a>
+							</li>
+						  {/loop}
+						{/pc}
+                        </ul>
+                    </div>
+            </div>
+
+            </div>
+            <div class="middle_div_ri">
+            	<div class="manhua" style="margin-bottom:10px;">
+                    <div class="jiebao_txt">
+                    	<ul>
+							<li><a target="_blank" href="/jiebao33328/" title="噬神者动漫最新跟新第一集预告">噬神者动漫最新跟新第一集预告</a></li>
+							<li><a target="_blank" href="/jiebao33327/" title="监狱学园 栗原千代">监狱学园 栗原千代</a></li>
+							<li><a target="_blank" href="/jiebao33326/" title="终物语最新消息 将于2015年内播出">终物语最新消息 将于2015年内播出</a></li>
+							<li><a target="_blank" href="/jiebao33157/" title="吸血鬼图书馆可以看了。喜欢吸血鬼的戳进来！">吸血鬼图书馆可以看了。喜欢吸血..</a></li>
+							<li><a target="_blank" href="/jiebao33075/" title="终结的炽天使红莲身份是好人还是坏人，真相大白">终结的炽天使红莲身份是好人还是..</a></li>
+							<li><a target="_blank" href="/jiebao33119/" title="龙珠 超，官方漫画将由Gogeta Jr执笔创作">龙珠 超，官方漫画将由Gogeta J..</a></li>
+							<li><a target="_blank" href="/jiebao33058/" title="《魔法科高校的劣等生第16卷》司波达也与妹妹在一起了">《魔法科高校的劣等生第16卷》司..</a></li>
+							<li><a target="_blank" href="/jiebao33038/" title="【路人女主的养成方法,英梨梨手办原型公开 加藤惠制作决定">【路人女主的养成方法,英梨梨手办..</a></li>
+							<li><a target="_blank" href="/jiebao33153/" title="金木（佐佐木绯世）恢复记忆">金木（佐佐木绯世）恢复记忆</a></li>
+							<li><a target="_blank" href="/jiebao33117/" title="海贼王路飞VS明哥">海贼王路飞VS明哥</a></li>
+						</ul>
+                    </div>
+            	</div>
+
+            	<div class="manhua">
+                	<div class="manhua_tit"><h3>漫画热门榜</h3></div>
+                    <div class="manhua_txt">
+                    <!-- 
+                      <ul class="tang-title" id="tab_e">
+                      
+                        <li onmouseover="secBoard('tab_e','infolist_e',1,'tang-title-item tang-title-item-selected','tang-title-item first');"  class="tang-title-item tang-title-item-selected">
+							<a hidefocus="true" href="javascript:;">全部</a>
+							<div class="jiantou"></div>
+						</li>
+			
+						<li onmouseover="secBoard('tab_e','infolist_e',2,'tang-title-item tang-title-item-selected','tang-title-item first');" class="tang-title-item first">
+							<a hidefocus="true" href="javascript:;">今日</a>
+							<div class="jiantou"></div>
+						</li>
+						<li onmouseover="secBoard('tab_e','infolist_e',3,'tang-title-item tang-title-item-selected','tang-title-item first');" class="tang-title-item first">
+							<a hidefocus="true" href="javascript:;">本周</a>
+							<div class="jiantou">
+						</div>
+						</li>
+						<li onmouseover="secBoard('tab_e','infolist_e',4,'tang-title-item tang-title-item-selected','tang-title-item first');" class="tang-title-item first">
+							<a hidefocus="true" href="javascript:;">本月</a>
+							<div class="jiantou"></div>
+						</li>	
+			 			
+					</ul>-->	
+                    <div class="tang-body-item tang-body-item-selected">
+				
+		<ol id="infolist_e_1" class="top-list-all" style="display:block">
+		
+		{php $i=1;}
+		{pc:content action="hits1" catid="13" num="10" where="$where" order="views DESC" }
+		{loop $manhua $r}
+			{if $i==1}
+				<li class="poster">
+				<dl>
+					<dt>
+						<a target="_blank" href="/manhua{$r[id]}">
+							<img width='116' height='65' src="{$r[thumb]}">
+							<span class="poster-no"></span>
+						</a>
+					</dt>
+					<dd class="poster-title">
+						<a title="{$r[title]}" target="_blank" href="/manhua{$r[id]}">{str_cut($r[title],25,"")}</a>
+					</dd>
+					<dd class="poster-brief">{str_cut(strip_tags($r[description]),50,"...")}</dd>
+					<dd class="poster-info" style="float: right;padding-right: 10px;line-height: 3px;">{$r[views]}次</dd>
+				</dl>
+			</li>
+			{else}
+				<li class="list  list-2">
+				<a title="{$r[title]}" target="_blank" href="/manhua{$r[id]}">
+					<span class="list-no topthree">{$i}</span>
+					<span class="list-title">{str_cut($r[title],40,"")}</span>
+					<span class="list-info">{$r[views]}次</span>
+				</a>
+			</li>
+			{/if}
+			{php $i++}
+		{/loop} 
+		</ol>
+		
+		<ol id="infolist_e_2" class="top-list-all" style="display:none">
+		{php $i=1;}
+		{pc:content action="hits1" catid="13" num="10" where="$where" order="views DESC" }
+		{loop $data $r}
+			{if $i ==1}
+				<li class="poster">
+				<dl>
+					<dt>
+						<a target="_blank" href="/manhua{$r[id]}">
+							<img width='116' height='65' src="{$r[thumb]}">
+							<span class="poster-no"></span>
+						</a>
+					</dt>
+					<dd class="poster-title">
+						<a title="{$r[title]}" target="_blank" href="/manhua{$r[id]}">{str_cut($r[title],25,"")}</a>
+					</dd>
+					<dd class="poster-brief">{str_cut(strip_tags($r[description]),50,"...")}</dd>
+					<dd class="poster-info" style="float: right;padding-right: 10px;line-height: 3px;">{$r[views]}次</dd>
+				</dl>
+			</li>
+			{else}
+				<li class="list  list-2">
+				<a title="{$r[title]}" target="_blank" href="/manhua{$r[id]}">
+					<span class="list-no topthree">{$i}</span>
+					<span class="list-title">{str_cut($r[title],40,"")}</span>
+					<span class="list-info">{$r[views]}次</span>
+				</a>
+			</li>
+			{/if}
+			{php $i++}
+		{/loop}
+		{/pc}
+		</ol>
+		
+		
+		<ol id="infolist_e_3" class="top-list-all" style="display:none">
+		{php $i=1;}
+		{pc:content action="hits1" catid="13" num="10" where="$where" order="views DESC" }
+		{loop $data $r}
+			{if $i ==1}
+				<li class="poster">
+				<dl>
+					<dt>
+						<a target="_blank" href="/manhua{$r[id]}">
+							<img width='116' height='65' src="{$r[thumb]}">
+							<span class="poster-no"></span>
+						</a>
+					</dt>
+					<dd class="poster-title">
+						<a title="{$r[title]}" target="_blank" href="/manhua{$r[id]}">{str_cut($r[title],25,"")}</a>
+					</dd>
+					<dd class="poster-brief">{str_cut(strip_tags($r[description]),50,"...")}</dd>
+					<dd class="poster-info" style="float: right;padding-right: 10px;line-height: 3px;">{$r[views]}次</dd>
+				</dl>
+			</li>
+			{else}
+				<li class="list  list-2">
+				<a title="{$r[title]}" target="_blank" href="/manhua{$r[id]}">
+					<span class="list-no topthree">{$i}</span>
+					<span class="list-title">{str_cut($r[title],40,"")}</span>
+					<span class="list-info">{$r[views]}次</span>
+				</a>
+			</li>
+			{/if}
+			{php $i++}
+		{/loop}
+		{/pc}
+		</ol>
+		
+
+		<ol id="infolist_e_4" class="top-list-all" style="display:none">
+		{php $i=1;}
+		{pc:content action="hits1" catid="13" num="10" where="$where" order="views DESC" }
+		{loop $data $r}
+			{if $i ==1}
+				<li class="poster">
+				<dl>
+					<dt>
+						<a target="_blank" href="/manhua{$r[id]}">
+							<img width='116' height='65' src="{$r[thumb]}">
+							<span class="poster-no"></span>
+						</a>
+					</dt>
+					<dd class="poster-title">
+						<a title="{$r[title]}" target="_blank" href="/manhua{$r[id]}">{str_cut($r[title],25,"")}</a>
+					</dd>
+					<dd class="poster-brief">{str_cut(strip_tags($r[description]),50,"...")}</dd>
+					<dd class="poster-info" style="float: right;padding-right: 10px;line-height: 3px;">{$r[views]}次</dd>
+				</dl>
+			</li>
+			{else}
+				<li class="list  list-2">
+				<a title="{$r[title]}" target="_blank" href="/manhua{$r[id]}">
+					<span class="list-no topthree">{$i}</span>
+					<span class="list-title">{str_cut($r[title],40,"")}</span>
+					<span class="list-info">{$r[views]}次</span>
+				</a>
+			</li>
+			{/if}
+			{php $i++}
+		{/loop}
+		{/pc}
+		</ol>
+	
+	</div>
+   </div>
+  </div>				
+            	<div class="manhua" style="margin-top:10px;">
+                	<div class="manhua_tit"><h3>动漫热门榜</h3></div>
+                    <div class="manhua_txt">
+                    <!-- 
+                      <ul class="tang-title" id="tab_f">
+                      
+                        <li onmouseover="secBoard('tab_f','infolist_f',1,'tang-title-item tang-title-item-selected','tang-title-item first');"  class="tang-title-item tang-title-item-selected">
+							<a hidefocus="true" href="javascript:;">全部</a>
+							<div class="jiantou"></div>
+						</li>
+					
+						<li onmouseover="secBoard('tab_f','infolist_f',2,'tang-title-item tang-title-item-selected','tang-title-item first');" class="tang-title-item first">
+							<a hidefocus="true" href="javascript:;">今日</a>
+							<div class="jiantou"></div>
+						</li>
+						<li onmouseover="secBoard('tab_f','infolist_f',3,'tang-title-item tang-title-item-selected','tang-title-item first');" class="tang-title-item first">
+							<a hidefocus="true" href="javascript:;">本周</a>
+							<div class="jiantou">
+						</div>
+						</li>
+						<li onmouseover="secBoard('tab_f','infolist_f',4,'tang-title-item tang-title-item-selected','tang-title-item first');" class="tang-title-item first">
+							<a hidefocus="true" href="javascript:;">本月</a>
+							<div class="jiantou"></div>
+						</li>	
+					 -->				
+					</ul>
+                    <div class="tang-body-item tang-body-item-selected">
+				
+		<ol id="infolist_f_1" class="top-list-all" style="display:block">
+
+         <!--  
+		{php $i=1;}
+		{pc:content action="hits1" catid="32" num="10" order="views DESC" }  -->
+		{loop $dongman $r}
+			{if $i ==1}
+				<li class="poster">
+				<dl>
+					<dt>
+						<a target="_blank" href="/dongman{$r[id]}">
+							<img width='116' height='65' src="{$r[thumb]}">
+							<span class="poster-no"></span>
+						</a>
+					</dt>
+					<dd class="poster-title">
+						<a title="{$r[title]}" target="_blank" href="/dongman{$r[id]}">{str_cut($r[title],25,"")}</a>
+					</dd>
+					<dd class="poster-brief">{str_cut(strip_tags($r[description]),50,"...")}</dd>
+					<dd class="poster-info" style="float: right;padding-right: 10px;line-height: 3px;">{$r[views]}次</dd>
+				</dl>
+			</li>
+			{else}
+				<li class="list  list-2">
+				<a title="{$r[title]}" target="_blank" href="/dongman{$r[id]}">
+					<span class="list-no topthree">{$i}</span>
+					<span class="list-title">{str_cut($r[title],40,"")}</span>
+					<span class="list-info">{$r[views]}次</span>
+				</a>
+			</li>
+			{/if}
+			{php $i++}
+		{/loop}
+		</ol>
+
+        <!-- 
+		<ol id="infolist_f_2" class="top-list-all" style="display:none">
+		{php $i=1;}
+		{pc:content action="hits1" catid="32" num="10" order="views DESC" }
+		{loop $data $r}
+			{if $i ==1}
+				<li class="poster">
+				<dl>
+					<dt>
+						<a target="_blank" href="/dongman{$r[id]}">
+							<img width='116' height='65' src="{$r[thumb]}">
+							<span class="poster-no"></span>
+						</a>
+					</dt>
+					<dd class="poster-title">
+						<a title="{$r[title]}" target="_blank" href="/dongman{$r[id]}">{str_cut($r[title],25,"")}</a>
+					</dd>
+					<dd class="poster-brief">{str_cut(strip_tags($r[description]),50,"...")}</dd>
+					<dd class="poster-info" style="float: right;padding-right: 10px;line-height: 3px;">{$r[views]}次</dd>
+				</dl>
+			</li>
+			{else}
+				<li class="list  list-2">
+				<a title="{$r[title]}" target="_blank" href="/dongman{$r[id]}">
+					<span class="list-no topthree">{$i}</span>
+					<span class="list-title">{str_cut($r[title],40,"")}</span>
+					<span class="list-info">{$r[views]}次</span>
+				</a>
+			</li>
+			{/if}
+			{php $i++}
+		{/loop}
+		{/pc}
+		</ol>
+		
+		
+		<ol id="infolist_f_3" class="top-list-all" style="display:none">
+		{php $i=1;}
+		{pc:content action="hits1" catid="32" num="10" order="views DESC" }
+		{loop $data $r}
+			{if $i ==1}
+				<li class="poster">
+				<dl>
+					<dt>
+						<a target="_blank" href="/dongman{$r[id]}">
+							<img width='116' height='65' src="{$r[thumb]}">
+							<span class="poster-no"></span>
+						</a>
+					</dt>
+					<dd class="poster-title">
+						<a title="{$r[title]}" target="_blank" href="/dongman{$r[id]}">{str_cut($r[title],25,"")}</a>
+					</dd>
+					<dd class="poster-brief">{str_cut(strip_tags($r[description]),50,"...")}</dd>
+					<dd class="poster-info" style="float: right;padding-right: 10px;line-height: 3px;">{$r[views]}次</dd>
+				</dl>
+			</li>
+			{else}
+				<li class="list  list-2">
+				<a title="{$r[title]}" target="_blank" href="/dongman{$r[id]}">
+					<span class="list-no topthree">{$i}</span>
+					<span class="list-title">{str_cut($r[title],40,"")}</span>
+					<span class="list-info">{$r[views]}次</span>
+				</a>
+			</li>
+			{/if}
+			{php $i++}
+		{/loop}
+		{/pc}
+		</ol>
+		
+
+		<ol id="infolist_f_4" class="top-list-all" style="display:none">
+		{php $i=1;}
+		{pc:content action="hits1" catid="32" num="10" order="views DESC" }
+		{loop $data $r}
+			{if $i ==1}
+				<li class="poster">
+				<dl>
+					<dt>
+						<a target="_blank" href="/dongman{$r[id]}">
+							<img width='116' height='65' src="{$r[thumb]}">
+							<span class="poster-no"></span>
+						</a>
+					</dt>
+					<dd class="poster-title">
+						<a title="{$r[title]}" target="_blank" href="/dongman{$r[id]}">{str_cut($r[title],25,"")}</a>
+					</dd>
+					<dd class="poster-brief">{str_cut(strip_tags($r[description]),50,"...")}</dd>
+					<dd class="poster-info" style="float: right;padding-right: 10px;line-height: 3px;">{$r[views]}次</dd>
+				</dl>
+			</li>
+			{else}
+				<li class="list  list-2">
+				<a title="{$r[title]}" target="_blank" href="/dongman{$r[id]}">
+					<span class="list-no topthree">{$i}</span>
+					<span class="list-title">{str_cut($r[title],40,"")}</span>
+					<span class="list-info">{$r[views]}次</span>
+				</a>
+			</li>
+			{/if}
+			{php $i++}
+		{/loop}
+		{/pc}
+		</ol>
+         -->
+	
+	</div>
+   </div>
+  </div>
+  
+  
+  <div class="clear1"></div>
+                <div class="manhua" style="margin-top:10px;">
+                	<div class="manhua_tit"><h3>最新专题</h3></div>
+                    <div class="manhua_txt">
+                    	<div class="txt_pic">
+                    	    <a href="#"><img src="/statics/images/img/logo.gif"></a>
+                    	    <a href="#"><img src="/statics/images/img/logo.gif"></a>
+                    	    <a href="#"><img src="/statics/images/img/logo.gif"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="jiebao">
+                	<div class="jiebao_tit">  
+                        <span><a href="/jiebao">更多&gt;&gt;</a></span>
+                    	<ul id="tab_d">                
+                        	<li class="on" onmouseover="secBoard('tab_d','infolist_d',1,'on','');"><strong>漫画捷报</strong></li>                
+							<li class="" onmouseover="secBoard('tab_d','infolist_d',2,'on','');"><strong>漫画资讯</strong></li>      
+                        </ul>
+                    </div>
+                    <div class="jiebao_txt">
+                    	<ul id="infolist_d_1" style="display:block">
+						{pc:content action="lists" catid="55" order="updatetime DESC" num="10" cache="3600" }
+							{loop $data $r}
+								<li><a target="_blank" href="{$r[url]}" title= "{$r[title]}">{str_cut($r[title],50,'..')}</a></li>
+							{/loop}
+						{/pc}
+						</ul>
+						<ul id="infolist_d_2" style="display:none">
+						{pc:content action="lists" catid="19"  order="updatetime DESC" num="10" cache="3600" }
+							{loop $data $r}
+								<li><a target="_blank" href="{$r[url]}" title= "{$r[title]}">{str_cut($r[title],50,'..')}</a></li>
+							{/loop}
+						{/pc}
+						</ul>
+                    </div>
+                </div>
+
+                <div class="manhua" style="margin-top:10px;">
+                	<a href="#"><img src="/statics/images/img/manhua_down.jpg"></a>
+                </div>
+
+            </div><div class="clear1"></div>
+		<div class="comics_img">
+			<a href="/dongman3550" title="越狱兔" target="_blank">
+				<img src="/uploadfile/20150620/s20150620011243518.jpg">
+			</a>
+			<a href="/dongman2925" title="阿U" target="_blank">
+				<img width="115" height="130" src="/uploadfile/cover/20130522/201305221838576.jpg">
+			</a>
+			<a href="/dongman3550" title="越狱兔" target="_blank">
+				<img src="/uploadfile/20150620/s20150620011243518.jpg">
+			</a>
+			<a href="/dongman2925" title="阿U" target="_blank">
+				<img width="115" height="130" src="/uploadfile/cover/20130522/201305221838576.jpg">
+			</a>
+			<a href="/dongman3550" title="越狱兔" target="_blank">
+				<img src="/uploadfile/20150620/s20150620011243518.jpg">
+			</a>
+			<a href="/dongman2925" title="阿U" target="_blank">
+				<img width="115" height="130" src="/uploadfile/cover/20130522/201305221838576.jpg">
+			</a>
+			<a href="/dongman3550" title="越狱兔" target="_blank">
+				<img src="/uploadfile/20150620/s20150620011243518.jpg">
+			</a>
+		</div>
+		</div><div class="clear1"></div>
+        
+        <div class="tjmh">
+        <script type="text/javascript">
+    /*漫画城首页推荐漫画上1000*70 创建于 2015-05-29*/
+    var cpro_id = "u2127076";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+        	<div class="tjmh_tit">
+            	<i class="icon"></i>
+                <h3>推荐漫画</h3> <div style="padding-top:10px"><script type="text/javascript">
+    /*漫画城首页推荐漫画小标签750*22 创建于 2015-05-29*/
+    var cpro_id = "u2127071";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+                <div class="clear"></div></div>
+                <ul id="tab_h">
+					{php $i=1;}
+					{loop $m $n $l}
+						{if !in_array($n,dexplode(NOT_ALLOW))}
+							<li {if $i == 1}class="hover"{/if} onmouseover="secBoard('tab_h','infolist_h',{$i},'hover','');" >{$l}</li>
+							{php $i++;}
+						{/if}
+					{/loop}
+                </ul>
+            </div>
+			{php $k=1;}
+			{loop $m $n $l}
+            <div class="tjmh_txt" style="{if $k != 1}display:none{/if}" id="infolist_h_{$k}">
+            	<ol class="top-list">
+					{php $type_sql = "status = 99 AND type_id = $n";}		
+					{php $j = 1;}
+					{pc:content action="table_list" table="Cartoon" where="$type_sql" order="views DESC" num="50" cache="3600" }
+					  {loop $data $r}
+						<li>
+							<span>{$j}</span>
+							<a target="_blank" title="{$r[title]}" href="manhua{$r[id]}">{str_cut($r[title],30,'')}</a>
+						</li>
+						{if $j%10 == 0}</ol><ol class="top-list">{/if}
+						{php $j++;}
+					  {/loop}
+					{/pc}
+				</ol>
+            </div>
+			{php $k++;}
+			{/loop}
+        </div>
+
+		</div>
+		<div class="lianjie">
+        	<div class="lianjie_tit">
+				<span><a href="/link">更多&gt;&gt;</a></span>
+				<ul id="tab_g">                
+					<li class="on" onmouseover="secBoard('tab_g','infolist_g',1,'on','');"><strong>友情链接</strong></li>                
+					<li class="" onmouseover="secBoard('tab_g','infolist_g',2,'on','');"><strong>网址导航</strong></li>      
+					<li class="" onmouseover="secBoard('tab_g','infolist_g',3,'on','');"><strong>合作伙伴</strong></li>      
+				</ul>
+			</div>
+            <div class="lianjie_txt" id="infolist_g_1">
+            {loop $link $v}
+				 <a href="{$v['url']}" title="{$v['name']}"  target="_blank">{$v['name']} </a> 
+		    {/loop}
+					 									            </div>
+			<div class="lianjie_txt" id="infolist_g_2" style="display:none">
+			{loop $daohang $v}
+				 <a href="{$v['url']}" title="{$v['name']}"  target="_blank">{$v['name']} </a> 
+		    {/loop}
+		    </div>
+			<div class="lianjie_txt" id="infolist_g_3" style="display:none">
+			{loop $hezuo $v}
+				 <a href="{$v['url']}" title="{$v['name']}"  target="_blank">{$v['name']} </a> 
+		    {/loop}
+													            </div>
+        </div>
+    </div>
+<div class="clear1"></div>
+{template "content","footer"}
+</body>
+</html>

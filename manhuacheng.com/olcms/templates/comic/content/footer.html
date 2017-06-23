@@ -1,0 +1,67 @@
+  <div class="clear1"></div>
+  <div class="footer">
+	<div class="footernew">
+    	<div class="footerbox_1">
+        		<div class="footerbox_1a">网站导航</div>
+                <div class="footerbox_1b">
+				{pc:content action="category" catid="0" num="25" order="listorder ASC"}
+					{loop $data $r}
+						<a href="{$r[url]}">{$r[catname]}</a><br>
+					{/loop}
+				{/pc}
+                </div>
+        </div>
+        <div class="footerbox_1">
+			<div class="footerbox_1a">关于我们</div>
+			<div class="footerbox_1b">
+			{pc:content action="category" catid="20" num="15" order="listorder ASC"}
+				{loop $data $r}
+					<a href="{$r[url]}">{$r[catname]}</a><br>
+				{/loop}
+			{/pc}
+			</div>
+        </div>
+        <div class="footerbox_3">
+        		<div class="footerbox_3a">漫画城</div>
+                <div class="footerbox_3b">
+                    <div class="image">
+                    	<div class="imagebox"><a href="#"><img src="{IMG_PATH}img/u269_normal.png"></a></div>
+                        <div class="textbox">新浪微博</div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="imagetext">扫描二维码，关注漫画城</div>
+                </div>
+        </div>
+        <div class="footerbox_1">
+        		<div class="footerbox_1a">动漫交流</div>
+                <div class="footerbox_1b">
+					<a>动漫爱好者交流群</a><br>
+					<a>动漫网站交流群</a><br>
+                </div>
+        </div>
+        <div class="footerbox_1" >
+        		<div class="footerbox_1a">更多</div>
+                <div class="footerbox_1b" style="border-right:none;">
+					{pc:content action="category" catid="25" num="15" order="listorder ASC"}
+						{loop $data $r}
+							<a href="{$r[url]}">{$r[catname]}</a><br>
+						{/loop}
+					{/pc}
+                </div>
+        </div>
+    <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div class="footerheight">
+      <p>{COPYRIGHT}</p>
+      <p><a href="{siteurl()}">{$SEO[site_name]}</a>&nbsp;|&nbsp;<a href="#" style="padding-right:20px;">推荐给朋友</a>{COMPANY}<a href="http://www.miibeian.gov.cn/" target="_blank" style="padding-left:20px;">{MIIBEIAN}</a></p>
+    </div>
+    <div style="display:none">
+ <script src="http://js.users.51.la/4887501.js" type="text/javascript" language="javascript"></script><a target="_blank" href="http://www.51.la/?4887501"><img style="border:none" src="http://icon.ajiang.net/icon_0.gif" alt="51.la 专业、免费、强健的访问统计"></a>
+<img src="http://web2.51.la:82/go2.asp?svid=4&amp;id=4887501&amp;tpages=1&amp;ttimes=1&amp;tzone=8&amp;tcolor=24&amp;sSize=1280,1024&amp;referrer=&amp;vpage=http%3A//www.fc.com/" style="width:0px;height:0px">
+<noscript>&lt;a href="http://www.51.la/?4887501" target="_blank"&gt;&lt;img alt="&amp;#x6211;&amp;#x8981;&amp;#x5566;&amp;#x514D;&amp;#x8D39;&amp;#x7EDF;&amp;#x8BA1;" src="http://img.users.51.la/4887501.asp" style="border:none" /&gt;&lt;/a&gt;</noscript>
+</div>
+</div>
+</div>
+</body>
+</html>

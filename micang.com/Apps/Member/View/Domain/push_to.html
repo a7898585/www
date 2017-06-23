@@ -1,0 +1,127 @@
+<div class="onlineplay">
+    <div id="navhljs1" class="navhl">
+        <a class="navhl_q" href="/domain/push_do/">Push域名</a> 
+        <a class="navhl_q" href="/domain/push_from/">收到的Push</a> 
+        <a class="navhl_h" href="/domain/push_to/">Push的状态</a> 
+    </div>
+    <div class="onlineplay_c3" id="navhljs1_c1">
+        <div class="list_c">
+            <ul class="ml20">
+                <form name="form_domain_push" action="" method="post">
+                    <li class="ml20">
+                        <span>域名</span>
+                        <input type="text" class="list_ctxt_b" name="domains">
+                        <span class="ml20">Push状态</span>
+                        <!--js仿表单下拉 开始-->  
+                        <div class="selectbox3">                            
+                            <div class="select_main_3 select_main_click select_main_template">
+                                <input type="hidden" name="status" readonly="readonly" value=""/>
+                                <input type="text" readonly="readonly" value="请选择"/>
+                                <div class="select_icon"></div>
+                            </div>
+                            <ul class="option_3 option_select_template">
+                                <li tid="0">待接收</li>
+                                <li tid="1">对方已接收</li>
+                                <li tid="2">对方已拒绝</li>
+                                <li tid="3">主动撤回</li>
+                            </ul>
+                            <div class="select_bg_3"></div>
+                        </div>
+                        <!--js仿表单下拉 结束-->
+                        <a class="doma_d_btn6" href="javascript:;"></a>
+                    </li>
+                </form>
+            </ul>
+        </div>
+        <div class="height30 clear"></div>
+        <div class="airp_listc_left4">
+            <table width="100%" height="34" cellspacing="1" cellpadding="0" border="0">
+                <tbody><tr class="table_title">
+                        <td width="80">类型</td>
+                        <td width="80">域名</td>
+                        <td width="80">接收 ID</td>
+                        <td width="80">索要金额</td>
+                        <td width="80">备注</td>
+                        <td width="80">发起时间</td>
+                        <td width="80">Push 状态</td>
+                        <td width="80">接收操作</td>
+                    </tr>
+                <volist name="lists" id="item">
+                    <tr class="table_bg_a">
+                        <td><span>{$item.title}</span></td>
+                        <td style="line-height: 16px;">{$item.domains|nl2br}</td>
+                        <td>{$item.mid_from}</td>
+                        <td>{$item.money}</td>
+                        <td>{$item.talkto}</td>
+                        <td>{$item.create_time|date='Y-m-d H:i:s',###}</td>
+                        <td><switch name="item.status">
+                    <case value="0">待接收</case>
+                    <case value="1">对方已接收</case>
+                    <case value="2">对方已拒绝</case>
+                    <case value="3">主动撤回</case>
+                    </switch></td>
+                    <td>
+                        <eq name="item.status" value="0"><a href="javascript:check_seccode('PushCanel','{$item.id}');">撤回</a></eq>
+                    </td>
+                    </tr>
+                </volist>
+                <tr>
+                    <td colspan="8">{$pager}
+                    </td>
+                </tr>
+                </tbody></table>
+            <div class="wrap_a_b">
+            </div>
+            <div class="explain">
+                <div class="title_b_icon3"><i class="iconfont">&#xe619;</i></div>
+                <div class="txt_c">规则说明</div>
+                <dl>
+                    <dt class="fl">1.</dt>
+                    <dd>域名注册、续费、过户时间至少满60天，域名不能过期，国内域名、.wang域名离过期时间不能小于15天如未达到时间要求国际域名有可能导致用户损失最近一次续费金额；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">2.</dt>
+                    <dd>域名处于正常状态，本身无任何争议、纠纷或欠费情况；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">3.</dt>
+                    <dd>转出需提供域名所有者相关证件；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">4.</dt>
+                    <dd>转出前，请检查域名所有者邮箱是否可用，转移密码是发送到域名所有者邮箱；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">5.</dt>
+                    <dd>域名转移根据转移注册商、代理商等有所不同，请按照我司具体流程办理；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">6.</dt>
+                    <dd>帐号若变更了邮箱、手机，则变更7天内不能转出域名。 若重置了密保，则90天内不能转出域名；</dd>
+                </dl>
+                <dl>
+                    <dt class="fl">7.</dt>
+                    <dd>正在交易、拍卖中的域名不能办理转出。</dd>
+                </dl>  
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('a[data-btn="btn_push_cancel"]').click(function(){
+            return window.confirm('确认撤回域名PUSH吗？')?true:false;
+        });
+        $('.option_select_template li').click(function(){
+            $(this).parent().prev().find('input').eq(0).val($(this).attr('tid'));
+            $(this).parent().prev().find('input').eq(1).val($(this).html());
+            $(this).parent().toggle();
+            $(this).parent().next().toggle();
+        });
+        $('.doma_d_btn6').click(function(){
+            $('form[name=form_domain_push]').submit();
+        });
+        
+    });
+</script>

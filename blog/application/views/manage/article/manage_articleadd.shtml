@@ -1,0 +1,392 @@
+
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03">当前位置：发表文章</div>
+    </div>
+    <div class="szym06">
+
+        <form name="popFormSubmit" id="popFormSubmit" method="post" onSubmit="">
+            <input type="hidden" name="memid" id="memid" value="<?php echo $bloginfo['MemberID'];?>" />
+            <input type="hidden" name="act" id="act" value="add" />
+            <input type="hidden" name="groupStr" value="<?php echo trim($bloginfo['GroupID'],',');?>" />
+            <input type="hidden" name="blogName" value="<?php echo $bloginfo['BlogName'];?>" />
+            <input type="hidden" name="flashCode" id="flashCode" value="<?php echo getVerifyStr($bloginfo['MemberID'].$user['userid']);?>" />
+            <!--标题-->
+            <div class="szym-nr01">
+                <div class="szym-nr02">文章标题：</div>
+                <div class="szym-nr03">
+                    <input  name="title" type="text" id="title" size="40" class="input_title" onkeyup="$('#titleErr').html('');">（文章标题长度应该在1-99个字节之内）
+                    <span id="titleErr" style="color: red;"></span>
+                </div>
+            </div>
+            <!--标签-->
+            <div class="szym-nr01">
+                <div class="szym-nr02">标　　签：</div>
+                <div class="szym-nr03"><input name="tag" type="text"  class="input_title" id="tag" size="40" id="articletag" onkeyup="value=value.replace(/[，]/g,',');value=value.replace(/[\s]/g,'');"><span onclick="javascript:ShowOther('showtag','commsetpress');" style="cursor:pointer"><img src="http://img.cnfol.com/blog/image/mb1_icon_add.gif"  alt="点击这里，选您已有的标签" name="commsetpress" width="9" height="9" border="0" id="commsetpress" />　选择您已有的标签</span><span id='tagerr'></span><br />
+　　　</div>
+            </div>
+            <div class="szym-nr01" style="display:none" id="showtag">
+                <div class="szym-nr02">已有标签：</div>
+                <div class="szym-nr03" id='tagdiv'></div>
+            </div>
+            <div class="txt">
+                <div class="szym-nr02"></div>
+                <div class="szym-nr03" style="color:#999">多个标签用逗号分隔，添加标签将在中金在线博客首面获得更多的展示机会，单个标签最大长度30个字节</div>
+            </div>
+
+　　<!--文章分类-->
+            <div class="szym-nr01">
+                <div class="szym-nr02">文章分类：</div>
+                <div class="szym-nr03"><select name="tagId" id="tagId" class="choose" onchange="$('#systagErr').html('');"> 
+                        <option value="0">选择分类</option>
+                        <?php
+                        foreach($systaglist as $tagid => $tag)
+                        {?>
+                        <option value="<?php echo $tagid;?>" ><?php echo $tag;?></option>
+                        <?php
+                        }?>
+                    </select> 
+                    <span class="remark" style="color:red">(*必选)</span><span id="systagErr" style="color: red;"></span></div>
+            </div>
+
+            <div class="txt">
+                <div class="szym-nr02">摘　　要：</div>
+                <div class="szym-nr03"><textarea name="summary" class="textarea" cols="46" rows="2"  id="summary" require="false" dataType="LimitB" min="-1" max="3000"  msg="文章摘要长度应该在-1-3000个字节之内"></textarea></div>
+            </div>
+            <div class="szym-nr01" style="clear:both;">
+                <div class="szym-nr02"></div>
+                <div class="szym-nr03"><input type="button" name="button" onclick="CutSummary()" style="cursor: hand"  class="but_1" value="自动截取" /> <span class="remark">（摘要是对该文章主要内容的精炼概括，只支持文本格式分类）</span></div>
+            </div>
+
+            <!--内容-->
+            <div class="txt" align="left" style="padding-left:50px;">
+                <textarea id="content" name="content" style="width:650px;height:350px;visibility:hidden;"></textarea>
+                <span id="contentErr" style="color:#FF0000"></span>
+            </div>
+
+
+            <!--个人分类-->
+            <div class="szym-nr01">
+                <div class="szym-nr02">个人分类：</div>
+                <div class="szym-nr03">
+                    <select name="sortId" id="sortId">
+                        <option value="18295"  >默认分类</option>
+                    </select>
+                    <span class="remark">(中金在线个人用户对自己发布的文章进行分类)</span></div>
+            </div>
+
+            <!--赠送鲜花-->
+            <script src="http://img.cnfol.com/newblog/js/flowers.js" charset="utf-8"></script>
+            <div class="szym-nr01">
+                <div class="szym-nr02"><input type="checkbox" id="cnfolck" value="" name="cnfolck"></div>
+                <div class="szym-nr03">
+                    用户需要赠送 <input type="text" value="0" name="GiftPrice" id="cnfoltt" size="10" /> 朵鲜花才可查看该篇文章（1朵鲜花=0.1元人民币）
+                </div>
+            </div>
+            <div class="szym-nr01">
+                <div class="szym-nr02"></div>
+                <div class="szym-nr03">
+                    <span><a target="_blank" href="http://passport.cnfol.com/giftmall/exchange/">兑换鲜花&gt;&gt;</a>（当前鲜花数大于10000朵即可将其兑换成人民币）</span>
+                </div>
+            </div>
+
+
+            <!--高级选项-->
+            <div class="szym-nr01">
+                <div class="szym-nr02"></div>
+                <span onclick="javaScript:ShowOther('option','HighOption');" style="cursor:pointer"><img src="http://img.cnfol.com/blog/image/mb1_icon_add.gif" alt="点击这里，显示更多高级选项" name="commsetpress" width="9" height="9" border="0" id="HighOption" />　高级选项</span>
+                <div class="szym-nr03"></a> (点击这里显示更多的选项)</div>
+            </div>
+
+            <!--高级选项的隐藏部分-->
+            <div id="option" style="display:none;height:200px" > 
+                <div class="szym-nr01">
+                    <div class="szym-nr02">阅读对象：</div>
+                    <div class="szym-nr03">
+                        <select name="readStatus" id="readStatus">
+                            <option value="0">所有人</option>
+                            <option value="1">注册用户</option>
+                            <option value="3">不公开</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="szym-nr01" style="display:none">
+                    <div class="szym-nr02">博 客 链：</div>
+                    <div class="szym-nr03"><input class="input" name="joinLink" type="radio" value="0" checked="checked" />否
+                        <input class="input" type="radio" name="joinLink" value="1"/>是</div>
+                </div>
+
+                <!--是否推荐-->
+                <div class="szym-nr01">
+                    <div class="szym-nr02">是否推荐：</div>
+                    <div class="szym-nr03"><input class="input" name="memberRecommend" type="radio" value="0" checked="checked" />否
+                        <input class="input" type="radio" name="memberRecommend" value="1" />是</div>
+                </div>
+
+                <!--引用通告-->
+                <div class="szym-nr01">
+                    <div class="szym-nr02">引用通告：</div>
+                    <div class="szym-nr03"><input name="trackback" type="text" id="trackback" size="40" class="form" onkeyup="value=value.replace(/[，,\s]/g,';');"/></div>
+                </div>
+                <div class="txt" style="padding-left:40px;">要引用另一个用户的网络日志项，请输入以上网络日志项的引用通告地址。用分号分隔多个地址。<br />例如：http://blog.cnfol.com/1373/1049126d04.trackback;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://blog.cnfol.com/1373/1049126d04.trackback</div>
+            </div>
+            <?php if($isvalidate){?>
+            <div class="szym-nr01">
+                <div class="szym-nr02">验证码：</div>
+                <div class="fnpl-xm03" id="tdvalidate">
+                    <input name="validate" type="text" id="validate" size="8" maxlength="8" msg="请输入验证码"/>
+                    <img alt="看不清？" id="varifycode" style="cursor: pointer" align="absmiddle" onclick="javascript:vifdata();" src="<?php echo $baseurl;?>/register/varify?t=1"/>
+                    <a href="javascript:vifdata();"> 看不清楚？</a>
+                    <span id="spanvalidate" style="display:none;color:Red;" >验证码错误，请重新输入！</span>
+                </div>
+            </div>
+            <?php }?>
+            <!--提交-->
+            <div class="txt" align="center">
+                <input class="but_1" type="button" name="sub" value="提 交(Ctrl+Enter)" id="submitform" onClick="submitfun()" />
+                <input class="but_1"  type="reset" name="Submit2" value="重 置" />
+                <input class="but_1"  type="button" name="privewbutton" value="预 览" onClick="privew()" />
+            </div>
+
+        </form>
+        <div style="clear:both;"></div>
+    </div>
+</div>
+<link rel="stylesheet" href="<?php echo $baseurl; ?>/ke4/themes/default/default.css" />
+<script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/kindeditor-min.js"></script>
+<script charset="utf-8" src="<?php echo $baseurl; ?>/ke4/lang/zh_CN.js"></script>
+<style>
+    .ke-icon-count {
+        background-image: url(http://blog.cnfol.com/ke4/themes/default/default.png);
+        background-position: 0px -944px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .ke-icon-quote {
+        background-image: url(http://blog.cnfol.com/ke4/themes/common/quote.gif);
+        background-position: 0px;
+        width: 16px;
+        height: 16px;
+    }
+</style>
+<script language="javascript">
+    var Min = 3;
+    var Max = 150000;
+    var summaryMax=500;
+    var baseuri = "<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>";
+    var action = baseuri+"/article/Action";
+    var editor;
+
+    KindEditor.ready(function(K) {
+        editor = K.create('#content', {
+            resizeType : 2,
+            uploadJson : 'http://blog.cnfol.com/ajaxeditorupload/attupload/<?php echo $bloginfo['UserID']; ?>',
+            emoticonsPath: 'http://img.cnfol.com/newblog/emoticons/',
+            items: ['source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                'flash', 'media', 'table', 'hr', 'emoticons', 'code', 'link', 'unlink','|','quote','count','|','about'],
+            allowFlashUpload: false,
+            allowMediaUpload: false,
+            afterCreate : function() {
+                K.ctrl(document, 13, function() {
+                    submitfun();
+                });
+                K.ctrl(this.edit.doc, 13, function() {
+                    submitfun();
+                });
+            }
+        });
+
+    });
+    function replacetag(v){
+        var reg =    /\s+/g;
+        var v   = v.replace(reg,    ",");
+        reg =    /(，)+/g;
+        v   = v.replace(reg,    ","); 
+        reg =    /(,)+/g;
+        $('tag').value = v.replace(reg,    ","); 
+    }
+    function checktag(str){  
+        TagArray = str.split(',');
+        count = TagArray.length;
+        return count;
+    }
+    function GetContents(){	
+	
+        return editor.html();
+    }
+    function privew(){
+        replacetag($('#tag').val());
+        if(editor.html()==''||editor.count()<Min || editor.count()>Max){
+            showalert('*文章内容长度应该在'+Min+'-'+Max+'个字节之间');
+            return false;
+        }else{
+            $('#spancontent').html('');
+        }
+        if(checktag($('#tag').val()) > 5){
+            showalert("每篇文章最多设置5个标签");
+            return false;
+        }
+        $('#content').val(editor.html());
+        $('#popFormSubmit').attr('action', baseuri+"/article/0.html");
+        $('#popFormSubmit').attr('target','_blank');
+        $('#popFormSubmit').submit();
+    }
+
+
+    function ShowTag(tagname){
+        var tag = $.trim($('#tag').val());
+        if(tag.indexOf(tagname) != -1){
+            return;
+        }
+        if(tag == ""){
+            tag = tagname;
+        }else{
+            tag = tag+','+tagname;
+        }
+        $('#tag').val(tag);
+    }
+    function ShowOther(id,imgid){
+        if($('#'+id).is(':hidden')){
+            $('#'+id).show();
+            $('#'+imgid).attr('src','<?php echo $imgsite?>/blog/image/mb1_icon_plus.gif');
+        }else{
+            $('#'+id).hide();
+            $('#'+imgid).attr('src','<?php echo $imgsite?>/blog/image/mb1_icon_add.gif');
+        }	
+    }
+    function htmlTag(htmlCode){
+        re = /<(\/\s*)?((\w+:)?\w+)(\w+(\s*=\s*((["'])(\\["'tbnr]|[^\7])*?\7|\w+)|.{0})|\s)*?(\/\s*)?>/ig
+        htmlCode=htmlCode.replace(re,'');
+        htmlCode=htmlCode.replace(new RegExp("&lt;","gm"),"<");
+        htmlCode=htmlCode.replace(new RegExp("&gt;","gm"),">");
+        htmlCode=htmlCode.replace(new RegExp("&nbsp;","gm")," ");
+        htmlCode=htmlCode.replace(new RegExp("nbsp;","gm")," ");
+        htmlCode=htmlCode.replace(new RegExp("&amp;","gm")," ");
+        htmlCode=htmlCode.replace(new RegExp("&quot;","gm"),'"');
+        htmlCode=htmlCode.replace(new RegExp("&middot;","gm"),"·");
+        htmlCode=htmlCode.replace(new RegExp("ldquo;","gm"),"");
+        return htmlCode;
+    }
+
+    function CutSummary(){	
+        var contentvalue=htmlTag(GetContents());
+        var summaryMax1=summaryMax;
+        if(contentvalue==''){
+            $('#spancontent').html('*文章内容长度应该在1-150000个字节之内');
+        }else{
+            $('#spancontent').html('');
+            for(var i=0; i<=summaryMax; i++)
+            {
+                txt=contentvalue.substring(i,i+1);
+                var   re=/[^\x00-\xff]/g;  
+                if(re.test(txt)){
+                    summaryMax1--;
+                }
+            }
+            summary=contentvalue.substring(0,summaryMax1);
+            $('#summary').val(summary);
+        }
+    }
+
+    function ShowHtmlString(strHtml, nwidth, nheight)
+    {
+        if(g_pop){ g_pop.close();}
+        g_pop=new Popup({ contentType:2,isReloadOnClose:false,width:nwidth,height:nheight});
+        g_pop.setContent("contentHtml",strHtml);
+        g_pop.setContent("title","消息提示");
+        g_pop.build();
+        g_pop.show();
+    }
+
+    function countDown(url,secs){
+
+        $('#secs').text(secs);
+        if(--secs >= 0){
+            setTimeout( "countDown('"+url+"',"+secs+")" ,1400);
+        }else{
+            window.location.href = url;
+        }
+    }
+
+    $(function(){
+        $('#sortId').load("<?php echo $baseurl;?>/ajaxsort/list/<?php echo $bloginfo['MemberID'];?>");
+        $('#tagdiv').load("<?php echo $baseurl;?>/ajaxarticletags/list");
+
+    });
+    function submitfun(){
+        var tags = $('#tag').val().split(',');
+        if(tags.length > 5){
+            showalert("每篇文章最多设置5个标签");
+        }else if(mb_strlen($('#title').val()) > 99 || mb_strlen($('#title').val()) < 1){
+            $('#titleErr').html('<br>*文章标题长度应该在1-99个字节之内'); $("#title").focus();return false;
+        }else if($('#tagId').val() == 0){
+            $('#systagErr').html('<br>*请选择文章分类');  $("#tagId").focus(); return false;
+        }else if(editor.count() > 150000 || editor.count() < 3){
+            $('#contentErr').html('*文章内容长度应该在3-150000个字节之内'); return false;
+        }else{
+            editor.sync();showloading();
+            $.ajax({
+                type: 'post',
+                contentType:'application/x-www-form-urlencoded',
+                url: action, 
+                data: $('#popFormSubmit').serialize(), 
+                dataType: 'json',
+                success: function(data){
+                    if(data.errno == 'success' || data.errno == '200036' || data.errno == '200037'){
+                        var basruri = "<?php echo $baseurl;?>";
+                        var blogurl = basruri + "/<?php echo $bloginfo['DomainName'];?>";
+                        var arturl  = blogurl + "/article/" +data.appeartime+"-"+data.articleid+".html";
+
+                        var strHtml = '\
+                                        <div style="padding:10px;">\
+                                                <div style="background: none repeat scroll 0 0 rgb(239,243,195);text-align:left;height:45px;padding:5px 0px 5px 10px;">\
+                                                        <b style="font-size:16px">'+data.error+'</b><br />系统将在 <span id="secs">3</span> 秒钟后自动跳转\
+                                                </div>\
+                                                <div style="padding-left:10px;padding-top:5px">\
+                                                        <div style="float:left;">我们推荐您：<br />或者您可以：</div>\
+                                                        <div style="float:left;padding:0px;margin:0px;">\
+                                                                <ul>\
+                                                                        <li><a target="_blank" href="http://t.cnfol.com"><b>逛逛微博</b></a>、<a target="_blank" href="http://bbs.cnfol.com"><b>逛逛论坛</b></a>、<a target="_blank" href="http://g.cnfol.com"><b>逛逛圈子</b></a></li>\
+                                                                        <li><a href="'+arturl+'" target="_blank">查看刚才发表的文章</a></li>\
+                                                                        <li><a href="'+blogurl+'/article/Add" target="_blank">撰写一篇新博文</a></li>\
+                                                                        <li><a href="'+blogurl+'/manage/article/List" target="_blank">查看文章列表</a></li>\
+                                                                        <li><a href="'+blogurl+'" target="_blank">查看我的博客首页</a></li>\
+                                                                        <li><a href="'+basruri+'" target="_blank">查看中金博客首页</a></li>\
+                                                                </ul>\
+                                                        </div>\
+                                                </div>\
+                                        </div>';
+
+                        ShowHtmlString(strHtml, 370, 150);
+                        if(data.errno == '200036' || data.errno == '200037' || data.isdel > 0){
+                            countDown(blogurl+"/list", 3);
+                        }else{
+                            countDown(arturl, 3);
+                        }
+                    }else{
+                        showalert(data.error);vifdata();
+                    }
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    showalert('发生错误，请重新提交保存('+XMLHttpRequest.status+','+XMLHttpRequest.readyState+','+textStatus+')');
+                    vifdata();
+                }
+            });
+        }
+    }
+
+    function vifdata(){
+        var Now = new Date();
+        $('#varifycode').attr('src','<?php echo $baseurl;?>/register/varify?t=1&r='+Now.getTime());
+        $('#validate').val('');
+    }
+</script>

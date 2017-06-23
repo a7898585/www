@@ -1,0 +1,44 @@
+<?php include $peronalhead; ?>
+<div class="W960">
+    <?php  include $block; ?>
+    <div class="Contlft W180 Mt15 L">
+        <ul class="TreMenus" id="Tre">
+            <li>
+                <h2 class="Pl15"><span>个人设置</span></h2>
+                <ul class="BdBt61 Pb5">
+                    <li><a href="" target="Ifr">博客设置</a></li>
+                    <li><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/userset/editRealuser" target="Ifr">实名信息</a></li>
+                    <li><a href="" target="Ifr">公告管理</a></li>
+                    <li><a href="" target="Ifr">选择模版</a></li>
+                    <li><a href="" target="Ifr">高级设置</a></li>
+                    <li><a href="" target="Ifr">分组管理</a></li>
+                    <li><a href="" target="Ifr">访问统计</a></li>
+                    <li><a href="" target="Ifr">黑名单管理</a></li>
+                    <li><a href="" target="Ifr">自定义模版</a></li>
+                </ul>
+            </li>
+            <li>
+                <h2 class="Pl15 BdTpwh"><span>文章管理</span></h2>
+                <ul class="BdBt61 Pb5">
+                    <li><a href="" target="Ifr">发表文章</a></li>
+                    <li><a href="" target="Ifr">草稿箱</a></li>
+                    <li><a href="" target="Ifr">文章列表</a></li>
+                    <li><a href="" target="Ifr">栏目管理</a></li>
+                    <li><a href="" target="Ifr">标签管理</a></li>
+                    <li><a href="" target="Ifr">评论管理</a></li>
+                </ul>
+            </li>
+            <li>
+                <h2 class="Pl15 BdTpwh"><span>链接管理</span></h2>
+                <ul class="Pb5">
+                    <li><a href="" target="Ifr">链接管理</a></li>
+                    <li><a href="" target="Ifr">分裂管理</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<?php include $peronalfoot;?>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<div rel="drag" id="Mod_NearVisitor" class="zjfksz-ztdiv">
+    <div id="Mod_NearVisitor_t" class="zjfksz-top01">
+        <div class="zjfksz-top02"></div>
+        <div class="zjfksz-top03">最近访客</div>
+        <?php if(isset($dragable) && $dragable==1)
+        {?>
+        <div class="gjsz01"><a href="#" onclick="clkmenu(this.id,1);return false;" title="收起" id="Mod_NearVisitor_td3"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz12.gif"></a><a href="#" onclick="clkmenu(this.id,2);return false;" style="display: none;" title="展开" id="Mod_NearVisitor_td4"><img border="0" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz15.gif"></a><a href="#" onclick="removemod(this.id);return false;" title="删除" id="Mod_NearVisitor_td2"><img height="16" border="0" width="18" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz14.gif"></a></div>
+        <div style="cursor: move;" id="Mod_NearVisitor_td1" onmousedown="dragit(this.id,event);" title="点住鼠标左键不放，可移动该模块" class="gjsz02"><img height="16" width="33" src="http://images.cnfol.com/uploads/mod_blog/1/bkmb-gjsz11.gif"></div>
+        <?php
+        }?>
+    </div>	
+
+    <div class="tjwzcz">
+        <div id="BlogNearVisitor" class="modbox">正在加载中...</div>
+    </div>
+</div>
+<style>.p_wrap{position:static;}</style>
+<script language="javascript">
+    $(function(){
+        $('#BlogNearVisitor').load("<?php echo $baseurl;?>/ajaxblogvisitor/<?php echo $bloginfo['MemberID'];?>");
+        doShowCard('.refid');
+    });
+</script>

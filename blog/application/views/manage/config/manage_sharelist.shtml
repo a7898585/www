@@ -1,0 +1,48 @@
+<div class="szym-ztdiv">
+    <div class="szym01">
+        <div class="szym02"></div>
+        <div class="szym03" style="width:160px;">当前位置：我共享的样式</div>
+    </div>
+    <div class="szym06">
+        <div class="szym-nr01"><a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/template/Add">马上创建</a>　　<a href="<?php echo $baseurl;?>/ShareCssList,domain=<?php echo $bloginfo['DomainName'];?>" target='_blank'>系统共享列表</a>　　<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/template/ShareList">查看我共享的样式</a>　　<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/template/Define">我的自定义列表</a></div>
+        <hr/>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0"> 
+            <tr>
+                <?php
+                if(isset($usercsslist['Record']) && is_array($usercsslist['Record']))
+                {
+                $i = 1;
+                foreach($usercsslist['Record'] as $stys)
+                {
+                ?>
+                <td>
+                    <table border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td  align="center"><img src="<?php echo getCssImg($stys['StyleID']);?>"  onerror="getCssimg(this,'','');error=null;"  onload="this.style.display=''" style="display:none"  border="0"   alt="<?php echo $stys['Name'];?>" width="150" height="150" /></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><strong><?php echo $stys['Name'];?></strong> <br>人气:<?php echo $stys['Clicked'];?> 　<a href="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/preview/<?php echo $stys['StyleID'];?>" target="_blank">预览</a><br>分类:<a href="<?php echo $baseurl;?>/ShareCssList,FSort=<?php echo $stys['FirstSortID'];?>&domain=<?php echo $bloginfo['DomainName'];?>"><?php echo $sortlist[$stys['FirstSortID']];?></a></td>
+                        </tr>
+                        <tr>
+                            <td align="center">&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+                <?php		
+                if(($i % 3) == 0)
+                {
+                echo ' </tr><tr>';
+                }
+                $i += 1;
+                }
+                }?>
+            </tr>
+            <tr ><td colspan="3" class="critical"></td><tr>
+        </table>
+        <form id="submitform" name="submitform" method="post">
+            <input type='hidden' name='templateID' id='templateID'>
+            <input type='hidden' name='StyleName' id='StyleName'>
+            <input type='hidden' name='act' id='act'>
+        </form>
+    </div>
+</div>

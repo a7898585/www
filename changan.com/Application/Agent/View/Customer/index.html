@@ -1,0 +1,227 @@
+<div class="bar_r">
+    <div class="u_tle"><span class="side_l">我的客户</span></div>
+    <div class="box_deta">
+        <div class="search">
+            <label>
+                <span>查询</span>
+                <select id="type" name="type">
+                    <option value="name">姓名</option>
+                    <option value="phone">手机</option>
+                </select>
+            </label>
+            <label>
+                <!--<span>姓名</span>-->
+                <input type="text" value="" name="k" placeholder="姓名/手机"/>
+            </label>
+            <input class="u_btn" type="button" value="查找" id="search"/>
+        </div>
+        <table class="detail" cellpadding="0" cellspacing="0">
+            <tr>
+                <th width="70px">代理人ID</th>
+                <th width="70px">姓名</th>
+                <th width="100px">电话</th>
+                <th width="60px">区域</th>
+                <th width="60px">状态</th>
+                <th width="40px">VIP</th>
+                <th width="50px">审核</th>
+                <th width="80px">认证等级</th>
+                <th width="130px">注册时间</th>
+                <th width="60px">操作</th>
+            </tr>
+            <volist name="data['list']" id="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.name}</td>
+                    <td>{$vo.phone}</td>
+                    <td>{$vo.area_id|getAreaName}</td>
+                    <td>{$vo['vip']?'下单':'未下单'}</td>
+                    <td>{$vo['vip']?'是':'否'}</td>
+                    <td>{$vo['check_status']?'通过':'未通过'}</td>
+                    <td>{$vo['rank']}</td>
+                    <td>{$vo['ctime']}</td>
+                    <td>
+                <if condition="$vo['vip'] eq '1' && $vo['buy_type'] gt 0 ">已经下单
+                    <else /> <a href="javascript:go_to_buy('{$vo.id}','{$vo.name}','{$vo.phone}');">下单</a>
+                </if>
+                </td>
+                </tr>
+            </volist>
+        </table>
+        <div class="clear" style="margin-top: 20px;"></div>
+        {$data['pagehtml']}
+    </div>
+</div>
+<div class="box_popup box_popup2" style="display: none" id="popbox_one">
+    <div class="tite"><b>用户下单</b><span class="tite_ops" onclick="close_pop('popbox_one')">x</span></div>
+    <div class="bd small_wind">
+        <input name='id' value="" id="uid" type="hidden">
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th>姓名：</th>
+                <td id="buy_name">张先生</td>
+            </tr>
+            <tr>
+                <th>电话：</th>
+                <td id="buy_phone">139 8888 9999</td>
+            </tr>
+            <tr>
+                <th>选择要产品：</th>
+                <td>
+                    <select name="class">
+                        <volist name="project" id="vo">
+                            <option value="{$vo.id}" id="s_class_{$vo.id}" price="{$vo.agentBuyPrice}">{$vo.versionName}￥ {$vo.agentBuyPrice}元</option>
+                        </volist>   
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>购买年限：</th>
+                <td>
+                    <select name="year" id="year">
+                        <option value="1" id="s_year_1">1年</option>
+                        <option value="2" id="s_year_2">2年</option>
+                        <option value="3" id="s_year_3">3年</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="btnbox"><a href="javascript:commit();" class="adminbtn">提交订单</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="box_popup box_popup2"  style="display:none;" id="popbox_two">
+    <div class="tite"><b>用户下单</b><span class="tite_ops" onclick="close_pop('popbox_two')">x</span></div>
+    <div class="bd small_wind textcen">
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td>您确认要为 <span id="buy_name_show">张先生</span>（手机<span id="buy_phone_show">张先生</span>）</td>
+            </tr>
+            <tr>
+                <td>购买 <span id="s_class_show">套餐1（很多产品）</span></td>
+            </tr>
+            <tr>
+                <td>价格<span id="s_price_show">100000元/1年</span>的产品</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="btnbox"><a href="javascript:commitBuy();" class="adminbtn">确定 购买</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="box_popup box_popup2"  style="display:none;" id="popbox_three">
+    <div class="tite"><b>用户下单</b><span class="tite_ops" onclick="close_pop('popbox_three')">x</span></div>
+    <div class="bd small_wind textcen">
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td>恭喜您，下单成功！</td>
+            </tr>
+            <tr>
+                <td>已从您的账户扣款<span id="k_money"></span>元
+                    ，您的账户余额<span id="t_money"></span>元。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="btnbox"><a href="javascript:;" onclick="close_pop('popbox_three')" class="adminbtn">关闭</a>
+                    <a href="{$base_url}customer/pay/" class="adminbtn" target="_blank">充值</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>  
+
+<div class="box_popup box_popup2"  style="display:none;" id="popbox_four">
+    <div class="tite"><b>余额不足</b><span class="tite_ops" onclick="close_pop('popbox_four')">x</span></div>
+    <div class="bd small_wind textcen">
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td>很抱歉，扣款失败，</td>
+            </tr>
+            <tr>
+                <td>您的余额不足，当前可用余额<span id="four_money"></span>元，还差<span id="dis_money"></span>元，请充值！</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="btnbox">
+                    <a href="{$base_url}customer/pay/" class="adminbtn" target="_blank">充值</a>
+                    <a href="javascript:;" onclick="close_pop('popbox_four')" class="adminbtn">关闭</a></td>
+            </tr>
+        </table>
+    </div>
+</div>  
+
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+        $('#search').click(function(e){
+            if($(':input[name="k"]').val()){
+                window.location = '{$base_url}customer/?type='+$('#type').val()+'&k='+encodeURI($(':input[name="k"]').val());
+            }
+        });
+    });
+    function getYear(id){
+        $.ajax({
+            type: "post",
+            url: "/customer/getYearPrice?id="+id,
+            dataType:"json",
+            success: function(data){
+                $('#year').html('');
+                $.each(data,function(i,t){
+                    $('#year').append('<option value="'+i+'" id="s_year_'+i+'">'+t+'/'+i+'年</option>');
+                });
+            }
+        });
+    }
+    function close_pop(id){
+        $('#'+id).toggle();
+        location.reload();
+    }
+    function go_to_buy(id,name,phone){
+        $('#popbox_one').toggle();
+        $('#uid').val(id);
+        $('#buy_name').html(name);
+        $('#buy_phone').html(phone);
+    }
+    function commit(){
+        var class_v = $('select[name=class]').val();
+        var year = $('select[name=year]').val();
+        $('#popbox_one').toggle();
+        $('#buy_name_show').html($('#buy_name').html());
+        $('#buy_phone_show').html($('#buy_phone').html());
+        $('#s_class_show').html($('#s_class_'+class_v).html());
+        $('#s_price_show').html($('#s_year_'+year).html());
+        $('#popbox_two').toggle();
+    }
+    
+    function commitBuy(){
+        var uid =$('#uid').val();
+        var class_v = $('select[name=class]').val();
+        var year = $('select[name=year]').val();
+        var price = $('#s_class_'+class_v).attr('price');
+        layer.load('下单中...');
+        if(uid){
+            $.ajax({
+                type: "post",
+                url: "/customer/buy",
+                data:{uid:uid,class_v:class_v,year:year,price:price},
+                dataType:"json",
+                success: function(data){
+                    if(data.s=="-1"){
+                        layer.msg(data.m, 1, 3);
+                    } if(data.s=="-2"){
+                        layer.msg(data.m,1,3);
+                        $('#popbox_two').toggle();
+                        $('#popbox_four').toggle();
+                        $('#four_money').html(data.data.money);
+                        $('#dis_money').html(data.data.price);
+                    }else{
+                        layer.msg(data.m,1,1);
+                        $('#popbox_two').toggle();
+                        $('#popbox_three').toggle();
+                        $('#k_money').html(data.data.price);
+                        $('#t_money').html(data.data.money);
+                    }
+                }
+            });
+        }
+    }
+</script>

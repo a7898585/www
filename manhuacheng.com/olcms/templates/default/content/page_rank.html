@@ -1,0 +1,111 @@
+{php $m= getboxname('12','type_id'); } 
+{if empty($typeid)}
+	{php $SEO['title']="漫画排行榜_漫画人气排行榜-漫画城";}
+	{php $SEO['keyword']="漫画排行榜，漫画人气排行榜，热门漫画，最新漫画排行榜";}
+	{php $SEO['description']="漫画城漫画排行榜提供最新最热门的漫画排行、漫画人气排行榜、动漫排行榜，是最权威的漫画排行榜。";}
+{else}
+	{php $SEO['title']=$m[$typeid]."漫画排行榜_".$m[$typeid]."漫画人气排行榜-漫画城";}
+	{php $SEO['keyword']=$m[$typeid]."漫画排行榜，最新".$m[$typeid]."漫画排行榜，热门".$m[$typeid]."漫画排行榜";}
+	{php $SEO['description']="漫画城".$m[$typeid]."漫画排行榜提供最新最热门的".$m[$typeid]."漫画排行，是最权威的".$m[$typeid]."漫画排行榜。";}
+{/if}
+{template "content","header"}
+    <div class="middle_div6">
+    	<div class="middle_div6_le">
+        	<div class="phdh">
+            	<div class="phdh_tit"><h3>排行导航</h3></div>
+                <div class="phdh_txt">
+                	<ul>	
+						<li {if empty($typeid)}class="o"{/if}><a href="/rank">全部漫画排行榜</a></li>
+						{loop $m $n $l}
+								{if !in_array($n,dexplode(NOT_ALLOW))}
+									<li {if $typeid == $n}class="o"{/if}><a href="/rank{$n}">{$l}漫画排行榜</a></li>
+								{/if}
+						{/loop}
+                    </ul>
+                </div>
+            </div>
+			
+
+
+
+
+        </div>
+        <div class="middle_div6_ri">
+        	<div class="phb">
+            	<div class="phb_tit">
+                	<ul id = 'tab_a'>                
+						<li onmouseover="secBoard('tab_a','infolist_a',1,'on','');" class="on"><strong>全 部</strong></li>
+						<li onmouseover="secBoard('tab_a','infolist_a',2,'on','');" class=""><strong>日 榜</strong></li>   
+						<li onmouseover="secBoard('tab_a','infolist_a',3,'on','');" class=""><strong>周 榜</strong></li>                
+						<li onmouseover="secBoard('tab_a','infolist_a',4,'on','');" class=""><strong>月 榜</strong></li>   
+                    </ul>
+                </div>
+                <div style="display:block;" class="phb_txt">
+                	<div class="px">
+                    	<span style="padding-left:45px; padding-right:45px;">类 型</span>
+						<span style="padding-right:120px;padding-left: 50px;">漫画名称</span>
+						<span>浏览次数</span>
+						<span style="padding-right:0px;">更新时间</span>
+                    </div>
+                    <div class="px_n">
+                    	<ul id = 'infolist_a_1' style="display:block">
+						{php $i=1;}
+						{pc:content action="hits2" catid="13" num="20" where="$wherearr[1]" order="views DESC" cache="3600"}
+						{loop $data $r}
+                        	<li>
+								<span style="width: 170px;">{$i}、<a href="/type{$r[type_id]}">[{$m[$r[type_id]]}]</a></span>
+								<span style="width: 180px;"><a href="/manhua{$r[id]}">{str_cut($r[title],30,'..')}</a></span>
+								<span style="width: 200px;">{$r[views]}人看过</span>
+								<span>{date('Y-m-d',$r[updatetime])}</span>
+							</li>
+						{php $i++;}
+						{/loop}
+                        </ul>
+						
+						<ul id = 'infolist_a_2' style="display:none">
+						{php $i=1;}
+						{pc:content action="hits2" catid="13" num="20" where="$wherearr[1]" order="dayviews DESC" cache="3600"}
+						{loop $data $r}
+                        	<li>
+								<span style="width: 170px;">{$i}、<a href="/type{$r[type_id]}">[{$m[$r[type_id]]}]</a></span>
+								<span style="width: 180px;"><a href="/manhua{$r[id]}">{str_cut($r[title],30,'..')}</a></span>
+								<span style="width: 200px;">{$r[dayviews]}人看过</span>
+								<span>{date('Y-m-d',$r[updatetime])}</span>
+							</li>
+						{php $i++;}
+						{/loop}
+                        </ul>
+						
+						<ul id = 'infolist_a_3' style="display:none">
+						{php $i=1;}
+						{pc:content action="hits2" catid="13" num="20" where="$wherearr[1]" order="weekviews DESC" cache="3600"}
+						{loop $data $r}
+                        	<li>
+								<span style="width: 170px;">{$i}、<a href="/type{$r[type_id]}">[{$m[$r[type_id]]}]</a></span>
+								<span style="width: 180px;"><a href="/manhua{$r[id]}">{str_cut($r[title],30,'..')}</a></span>
+								<span style="width: 200px;">{$r[weekviews]}人看过</span>
+								<span>{date('Y-m-d',$r[updatetime])}</span>
+							</li>
+						{php $i++;}
+						{/loop}
+                        </ul>
+						
+						<ul id = 'infolist_a_4' style="display:none">
+						{php $i=1;}
+						{pc:content action="hits2" catid="13" num="20" where="$wherearr[1]" order="monthviews DESC" cache="3600"}
+						{loop $data $r}
+                        	<li>
+								<span style="width: 170px;">{$i}、<a href="/type{$r[type_id]}">[{$m[$r[type_id]]}]</a></span>
+								<span style="width: 180px;"><a href="/manhua{$r[id]}">{str_cut($r[title],30,'..')}</a></span>
+								<span style="width: 200px;">{$r[monthviews]}人看过</span>
+								<span>{date('Y-m-d',$r[updatetime])}</span>
+							</li>
+						{php $i++;}
+						{/loop}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{template "content","footer"}

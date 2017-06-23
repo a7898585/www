@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><?php echo $bloginfo['BlogName'];?>添加相册</title>
+        <link type="text/css" rel="stylesheet" href="http://hs.cnfol.com/f=ub/Css/Modules/Basis.css,uc/Css/NewBlog/Skin.css,uc/Css/NewBlog/Blog.css,uj/Css/Jqita/BlogH.css,ua/css/Public/TopBarFoot.css" />
+        <script type="text/javascript" src="http://img.cnfol.com/core/js/jquery-1.4.4.min.js" ></script>
+        <script type="text/javascript" src="http://img.cnfol.com/newblog/batev6.0/js/popup.js" ></script>
+        <script type="text/javascript" src="<?php echo(config_item('js_base_url')); ?>/application/views/module/function.js?" ></script>
+        <script>
+        	
+            function $(d){
+                return document.getElementById(d);
+            }
+            function getdata(form)
+            {
+                var fname = $('filename').value;
+                if(fname.length < 2 || fname.length > 200){
+                    $('errorfilename').innerHTML = '<br>图片名应该在2-200字节';  return false;
+                }
+                var remark = $('remark').value;
+                if(fname.length < 0 || fname.length > 200){
+                    $('errorfilename').innerHTML = '<br>描述应该是0-200字节';  return false;
+                }
+                if(!chang()){
+                    return false;
+                }
+                var b=$('sub');
+                b.disabled=true;
+                return true;
+            }
+            function chang(){
+                var img= $('uploadimage');
+                if(img.value=='' || !img.value){
+                    $('errortype').innerHTML = "<br>*请选择要上传的图片!"; return false;
+                }
+                var patn = /\.jpg$|\.jpeg$|\.gif|\.png$/i; 
+                if(!patn.test(img.value)){ 
+                    $('errortype').innerHTML = "<br>*您选择的图片格式错误!"; return false;
+                }
+                $('errortype').innerHTML = '';
+                return true;
+            }
+            
+            function addShowAlbum(name){
+                parent.Dialog.Close();
+                //parent.addalbum(name);
+            }
+        </script>
+    </head>
+    <body>
+        <div class="AlbumsPop" id="UploadPhoto" style="display: block;width:495px !important;">
+            <div class="Cont">
+                <form class="Fmsec" method="post" enctype="multipart/form-data" name="form1" id="form1" action="<?php echo $baseurl.'/'.$bloginfo['DomainName'];?>/photo/PhotoAction" onSubmit="return getdata(this)">
+
+                    <label class="Mt10 LabSlc">
+                        <i>选择相册：</i>
+                        <input type="hidden" name="memberID" id="memberID" value="<?php echo $bloginfo['MemberID'];?>">
+                            <input name="act" type="hidden" id="act" value="uploadphoto" />
+                            <select name="albumID" id='albumID'>    
+                                <?php 
+                                if(!empty($album['list']))
+                                {
+                                foreach($album['list'] as $v)
+                                {?>
+                                <option value="<?php echo $v['AlbumID'];?>" ><?php echo $v['Name'];?></option>
+                                <?php
+                                }
+                                }
+                                else
+                                {?>
+                                <option value="0" >默认相册</option>
+                                <?php
+                                }?>
+                            </select>
+                            <a class="Create" href="javascript:void();" onclick="javascript:addShowAlbum('<?php echo $bloginfo['DomainName'];?>');" style="display:none;">创建相册</a>
+                    </label>
+                    <label class="Mt10"><i>添加照片：</i><input class="UpFile" name="uploadimage" type="file" id="uploadimage" onchange="chang();"/><span id="errortype" style="color: red;"></span></label>
+                    <label class="Mt10"><i>照片名称：</i><input class="Txt" name="filename" type="text"><span id="errorfilename" style="color: red;"></span></label>
+                    <label class="Mt10"><i class="Vetop">照片描述：</i><textarea class="PhotoIntro" name="remark"></textarea><span id="errorremark" style="color: red;"></span></label>
+                    <p class="SetBtnWrap Mt15">
+                        <a class="Mr10 SetSubmit" href="javascript:this.form1.submit();">上传</a>
+                        <a class="SetCancel"  href="javascript:this.form1.reset();">取消</a></p>
+                </form>  
+            </div>
+        </div>
+        <script>
+        
+            if(<?php echo($AlbumID); ?>!='0')
+            {
+                document.getElementById('albumID').value=<?php echo($AlbumID); ?>;
+                //$('#albumID').val(<?php echo($AlbumID); ?>);
+            }
+        </script>
+    </body>
+</html>
+
